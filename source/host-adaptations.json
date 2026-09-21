@@ -1,0 +1,2858 @@
+[
+  {
+    "path": "store/p0035/LICENSE",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "cce03ce1786be1452536b618e3c202c31d7c41a54519ad93f39fe67a8ac80d3e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/README.md",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "0d65d721e9f39d91a8798e24a9fab29f3cafbbfc20606350f7ea2eaa7dbff5b0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/README.zh.md",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "981a7f6d5b0dc63c5848291724d03fc4878b2bf87ed80190ab58a71d4b63d979",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/index.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "4cb8ee7871797e9b50d6e396277d6573be8e7fe292ce45ebead37ec5e9320c0f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "4a98c6ff095763e5e95475909e6cc72e3d1ab164626f23aeb21062ab1690a3db",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/invariant.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "07115d27886f3bccf0802cee309b21836ac5fd2696bd83817bb3e0277ad6875d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/invariant.js.map",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "b307e6a6a043c79b7295c095b61ce5bc488ec27bea76783e6dc85ddc6d344b74",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "9cac39f4af00ab89fad96157525a897e3c8a391e7cf3d833d7ea1bb9426df0cc",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "e83d40cb44b25d9b681df052065b0de94198ec981689bc0dd12b86cc7ba7c7ad",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/invariant.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "b08e959d6880608834cddbba11092f037818395d3bbd35612124cbf6239bdcac",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/invariant.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "c875d042fcd662577dfc48e75c6c0ca1014503fd579b4670e840c28b98c3418b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/known-event-types.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "ada45f2dbe42b2dc0031e6535ff18b10d96b5d8f238c445545dec5ca45cae330",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/known-event-types.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "daba175e81153ae3c5b30830468676cb331664cc18bba22ba7ca0eb4f5943271",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/preparation.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "de7e63725939d31ddfda7aa38cb9cba8d6d71a1653b34ba784a7d66bb45cb43f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/preparation.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "78dea29f5e11a4d220945a572b3eb26cb66460e6a368a423bf597c3ef05a5faa",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/repair.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "97d48d7e667fd8ef259ab08687a4c851b1d61c150dca676cf57dd92bc6ff202f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/repair.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "1a09af77bedab8c38b43886355bd532362ba5df8f4081641998e2e2d232fba55",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/request-header.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "4220ce437a955b509d9faab7946effbd436ad0d14e8580e14783f99e5e0c4c02",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/request-header.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "3f73ee59af794df50df159a9c45c606f0fbce364c482b371831d1e8f26b87aea",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/seq-ranges.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "144ac638deb06f3e11b5354e7334c4e6f163e966259d13eae3bbdc2f8c1f5181",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/seq-ranges.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "68a127c76affa98edeeb50e302eb43f154f4d24f7d04cb95ba8b323e88f3d09e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/surface.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "1eb21ac23aebeec6ddbc66660c39b3c571768199975ce58fc01510694bce0002",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/surface.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "37ecbb9fb780b012c9620ab670cea76968a50cb40a33c9cdfc5361e743ebbffe",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "60cb2f05fce6a22adaa307e5c4557c3ed18ac43a691fcf9ff12944e2bf75c30e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "27de3ecc17fe395856b6182362ecfbe7f7b83a90238bbd09ccfa55c007193725",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0035/package.json",
+    "package": "@deepseek-ai/dsh-session",
+    "afterSha256": "6aab0eb5b300c59cbce696c972f9e0742f1dc5ed1a2c8093f8b2fcd79c481ece",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/LICENSE",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "125b70ea697a36a233307daa2324c0a3d6ca1e2b197b71e0dd44f3c497ace973",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/README.md",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "088efe36109c532f8715a59bc78c0eadaa8ae01bbfcb4a5ae8ba78fe856b11e3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/README.zh.md",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "49600a884dbd446cd9358705fd0f89d6eb2ef4d7777eb879901012775bfdef12",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/index.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "f32ebab8b11de6583f8d8593ae90d57a07dbf8930fb85742be1ed898d6a4fa55",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "cf9632c0b669b0f9b7fa5332c7ab04a79916a9c3aaad9fff97795a9f45e88389",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/breakdown-projection.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "8fd2953dade5a845d7cfa351532a99e3fe7b8312003f42b8ad4dcc8fc55941d5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/breakdown-projection.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "34b6bf20fdecfa78781c653d75d6ebb13b9daf897853e42188661391f6cdcc17",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/client.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "b64a3bb8a1c2dfdae0457683aad657720c2dafd69c4e96fa79349f36e40218b9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/client.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "79f8481851ed25977ee6a89c855c2f88ee6975e880b5394b678e7e6473761bc8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/estimate.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "526d18932aea0301beb1a8c3fd8a731800077441ed19cbfad6c64a4aa823b2f6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/estimate.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "e3d5e7388f0f83ece8f01ab9613b09031f6c1d41d513aa54a8df427d390c5c2a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "ccf6f2ecfd65c787c7ac0f495305a8cccd51b79add2338b7a3930ce5b3ab969a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "1dc529ef01743d1881772456c873358e770eb6505bd701924905abf26e284f51",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/projection.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "25db19c7b9e5fd4aec685f58195a0782460a989ee4df9a2643b418b8e01b637f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/projection.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "cb8f44d6ae7581f69351f90d5245baca905aca5b06478b3786e906dd94c1e9be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/route-pricing.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "674d04372d1f8d0479f20ba0332112781412503d07794729bfd06b4f08a15291",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/route-pricing.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "ee99f7e720b9caa2c03eaddfcd2d4d04928529dcb58a60caa5834a55d7ac2ecd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/surface-fold.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "a077bc2370cb8491159dd774ac51407027e9c67abd79c7768ac5665904fe51ba",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/surface-fold.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "34a972aa21a1b3e4ce650ed2ff1534fb523767dfa455fa169cef78d3ef680c9c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/surface-projection.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "71bd13cf448508609d8ac72d3b670a7dfca535174aa6a1ce30581d61906ad1d0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/surface-projection.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "a921a3136e24f0169ba7cf67c841c57b1433f531eb19505110a44b9fcb2428b3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/turn-usage.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "ce3b4543b86f231ad1255e738780b372995c0bec1f4f7626a180881117abc0d4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/turn-usage.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "6cee2c03747d47abdc191568a445efe128a85a1b06f86c8be7a9d55b94d3d9b8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "237ef6d32d1bf1a94a6ef0c434b35af42e0d18f701a97157ba7481fee8ed06d2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "942e21682aea77b266bc4f6b4aed77495d5c1f4f11aef9bee6c899964ba3686e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/usage-projection.d.ts",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "3ff202c4101b84446d3b69c5bc21f9780652f0fb6ac4ab1b7faf075a6248acbb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/lib/types/usage-projection.js",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "30a766b7b43553dc0dce46a38bdb2c87ca06bad46af86b39fa42eaa2cfe8871b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0062/package.json",
+    "package": "@deepseek-ai/dsh-token-meter",
+    "afterSha256": "3318173250ff1d036758de3f1f5c6e1e1b02dd39efefdba594a54110d9db5ed4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/LICENSE",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "b08fcb7d666ff50fe00093faa558a63e78670f193d9fa9b244fc2fa98afb70de",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/README.md",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "b290d1e24602b3a28d9f52345b9c65257a1ac35db315605d548edbba8fc59e7d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/README.zh.md",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "3eda536a3ea442c59e8378d0f5cd32488d33a2dab324e4fe70b87ab522ef5747",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/index.js",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "50b6d3c8af73e0931f80b2943bb8159c6bbbe01287495d1e786f554a8a05929a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "fcba03f7674d3ce13e4423cfee05cc903e81016528f95c47e6680081441c26b4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/invariant.js",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "7e8305c2c53cc84e307a858b5d7b1ea34f0cd39bc654f93446524cbeb37192e6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/invariant.js.map",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "9739abbcdf604e0c25dad8296ffe6196f8807e6fc4fe9b0f694c7ee73c366acb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "a78ad008f441470e3e5c9f80a3f6414f7c2f419d3ea91d3ff6296b65a5706912",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/types/invariant.d.ts",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "133d16cd2b94d876118cdf9ec512a158482e7fe0ce25e6eae878d0737d13e234",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "a3e611912d1de79348561a3c38d8db1994d7b1d2a69dfd1a77225a101d829c3b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0070/package.json",
+    "package": "@deepseek-ai/dsh-fs",
+    "afterSha256": "7037e8883fb54c06125c7af02942e429924be237b2329cb4555c84b774ddb134",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/LICENSE",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "c9ceaf7ed4fec2f5907a117a059dc072d3e03250432303a9d1fd4620dad88917",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/README.md",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "c794b7050ae3b045080d4dc8fb51ba6565540f16120d9d0aef2e00b58cf4e8e5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/README.zh.md",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "305dd00177cf2ed14538c22d28a975100596c9a2b6e7e3639f511af12ea6042e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/index.js",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "7092eb9fa3ada9bba8dc552af2ef472040d0f6f91f3cce1531a499fbce50b704",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "9e8199ed571ae57a66a5e33796277aceb036fe5b3e8c0059bf27afab28115d26",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/types/fsio.d.ts",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "e1d8da5285384eca7bad5cee1cb0b133df8aa79d515d69617a909f51c9e071d1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "8ecfa0553a79cc0e1344bd787fcb85b9adf4fe732e21b7a41ed49f452afe066e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/types/protected-win32.d.ts",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "99c3bd840fc2812661745bd0d8a4fdef312212f34743342c6f7a3ab341f32463",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/types/recovery.d.ts",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "b41ba8b26ff5c017a9c5d7947e3b15ad5d94cb043b246e6abb9c8b29d1a5a416",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/lib/types/win32.d.ts",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "0df26f9005ddea13bad4d7971460d0fd06f1f002dee7ab27501e831d3b17be98",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0106/package.json",
+    "package": "@deepseek-ai/dsh-fs-local",
+    "afterSha256": "33424f4e146afc7640403ba508d54c8def0e1e4d2a7ba3ce36ef47a736bc6842",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/LICENSE",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "55dca14fe7073120278df13eb28d055a22de155447cec76ed19603943a377b18",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/README.md",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "9014aa7e2e86c7f53a7d4d8919364b23d42b49967baa582cc695263b092d6c6c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/README.zh.md",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "42fe96e9ad30f81cc51b67a7215e45a114e94551cbd0c3d1bfd64f697218c129",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/lib/index.js",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "d31fbbf485b0fc01adfa63b86d29deaa93332c500f3becc3b411069a4d33a84f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "8bde523ef2ee7139ecb8a1fab69e93f1b75b93e3db3201e24c474719047b7f41",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/lib/types/containment.d.ts",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "3be81cd81b2b02f72e3726e31f05c16eea8be7a7f21e60ee17a939a6f133ae56",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "af579ceb6ff5b93ff0b449a66fa8aa941ba00f2a6d50b5632e60e1730803519c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0110/package.json",
+    "package": "@deepseek-ai/dsh-fs-sandbox",
+    "afterSha256": "cf6ea2fbf2e779d39ae56448032afb7c23795626db3d04ed3fd6c14fe652de2d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/LICENSE",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "4918db8e64d224bf74fd1cea20a8ad1dd7ecf296190b167cb3e957791191c439",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/README.md",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "9bb1c78e9e83e8fa127717db088d9e72d0865c4096ef14daaf4b2f078674e60c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/README.zh.md",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "71cf0f6d2d5d93130a7ed1a57b06545ad97272a110209eb5f2d6347e8b590cbb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/lib/index.js",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "4d29af76d47d8821e37a3201e5da2c9226888cbde085f792bcd4ae391f971da5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "cf6ae1150d9d55858bcac286f2b6bc4b46e972da6f2a4da840cc39e580a8d171",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "043445908392c9b13f0f70947a5db1b9f1d81edaacc4963518eb807f8e29365c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0113/package.json",
+    "package": "@deepseek-ai/dsh-jobs-local",
+    "afterSha256": "01135971cc45b58d8104addea9b936282811bb917793b2c1ad8f2a54b3344ed4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/LICENSE",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "099b97ff16cf93b014c95f611402b4a5e5ff31c15bceba7fea2e273310147575",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/README.md",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "245ee6d39cc3d6ec85938957cd4464b945722805172c05107215be79ae19fd1e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/README.zh.md",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "1debb67640e3bf4c96cc5a087fb195720e30ef606fc2825497e4d5854f14b456",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/index.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "e126de875a2553b6dbedf67454e51bacb88dcf7f3f03ff7890f7b137045368bd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/typert.host.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "5e2d26ee86d0fe170dac8cd3f5854e67bdea334c57f40a5766ace57b8304c17d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/typert.host.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "f24692a02b9c7ea648bed7d53428a3bcb98195d7f7377b3da8b2d25cc136326a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/typert.remote-client.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "d844a12bd773bc2371d6cb167ba5bad624445ff4e162bfca2e6764dc8ffdb504",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/typert.remote-client.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "7fdb5962f3be2834e0490123ed2b079d3376aaf2aaa0a0c7e3edebfa5b03ea3c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/build-approval.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "d47767df3a9a8fbfe086c3f545a08dbfa9bd64d2c57b331a25f214479e1c67e7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/build-approval.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "a94c5e9217cf7c94af97e73910a292e63a9b54bd2a2bff44739f616c792394c4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/failure.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "5785bbf3065c2410d62c42220f3e987e2c1a699c27f60d6a07d17769f642303d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/failure.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "a1add4e78e24e91940fe76b130c943a69e09d6467f0ca8d870c92299babc1980",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "d924017f41d1e34d91f10df569fc744cb799f31490df3dda9b9b09b98b8763d9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "f0003ed20cd30e19adbfbd1e5dc3040617dafbd394862e3890df105b08ac0b0c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/install-failure.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "9f491ee904dc64fcf1161cfa024cda385db6f9b546baa82f155c3dab2fcf81af",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/install-failure.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "223c1228f0190534fc26a500a8d59ae02c48331f1050fb523a2c3eda0d07256b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/install-spec.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "9f765d0a79497f4e6a07f34bf5d8808ace464be9fe323c58ecc01ff123eff394",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/install-spec.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "92c05dd3fafbd5c8e675501d830364626434cda45bcc955e019aa56858d75aed",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/operations.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "9741154f65dffb93916b40897e7ae690280fc81d8ec0547caca7881896560978",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/operations.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "85231dd641823e34e2836697ef2fce06dfae13f11407574122580f407160cb88",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/patch.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "247b6c2d08170852bef6dc65abceb248ef3ddba2ac5c1fefdb93e20bc940207c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/patch.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "cc014a3a09880220026a22792d49628e484edfe99ba4e03658b64891816adfb5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/tools.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "f4921c761745c348022fb617349da8ec7724ee8140bd0c73d1288d3195717dbf",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/tools.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "4e55dc8ccf15f85c52cdec4ed307fb08c67c1767ec5b8a247c2b6edf34526b1c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "d77330e20642cb1d48ec4d7e34c7c7717a49dd8f520f44fa80a51c0b9c4d99e5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "01ae2a5b120382f9a648ced7ee8507493a134f216d100fc61600c6c9738235d2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0211/package.json",
+    "package": "@deepseek-ai/dsh-plugin-manager",
+    "afterSha256": "71bde99e03f29e8e502528e113e991cb1f604db6a8423b86759bf33bfcb43bc0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/LICENSE",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "551df2b90fa9e429872a31e72f2c827d6adedc3ac76748c7518b2ed4927f7a0e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/README.md",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "81958553297fc1175475d18435f2e363ef53682ab02b59175f84a07a143bc06b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/README.zh.md",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "6e84d7f92c7b7d67989ffb656cf3f140081c71d9fe5408653ef54dc1c75f789b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/index.js",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "be7e36cee6d4443c08846bf85093cb6b518ea933c9c94048c2e035bc98d88837",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "96bd08cf5fd70929df8aa751339bfc3550ce8a629cc2b255f4d97a76cd5a86c7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/abi.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "c7ced31b1890cd3b9e33465e3c22ba1e55ee673ed2cdd894220c3e160931fd86",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/control-stdio.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "48414c6bc13d74f969e96d851a248ab13f45cf8cda2379dabc82a2c2437b7344",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/errors.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "1f8ca2203a12849f4533a18223dbf5b37fa6e0e627016f9c1251244e479cf7b8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/ffi.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "97b655f4772634e9a081f17eb35bcbd1c0e0c60dbb633388a59bfd75a730a456",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "d8f59e65d406d13d66b90cbe1c6cf73536b89a43166186890c8ac16fab6d09b8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/koffi.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "e42544841f7ef5a39de8cfa949e468e73af665d27c56f79e9e157bcedf588679",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/lib/types/process.d.ts",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "61e308e9ca2b8dc572af4a232037eefd5a95c0099886212b788eb24a27e0d811",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0239/package.json",
+    "package": "@deepseek-ai/dsh-win32-process",
+    "afterSha256": "bef12f1000f5bfc861466f2b74847854ae7575736f4fbb97358e50368d858701",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/LICENSE",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "9fa12092d4308338879887189080ddc5324b774743024a2e7e3a511e18490cf0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/README.md",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "531198c7735d19c2c7a96d0a3f225ddc01429e47a2d742e2ee501cd84e67ef7b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/README.zh.md",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "b96fc5c128e534c0718e13a3d6d024d67f85225a062771968cad9aa483d0a918",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/index.js",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "6822fffe1068f735b9aaed6cdb15468a45f9c07435cd01a07d25255271ddf10d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "230603706ceba7039fda67bd080119649fd3fe1853428a68d25636653b45e389",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/format.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "703a93fa29cb7bb2c5d14dbf1f2660e8016215c562a4b692e2d64c1f19e89517",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/generation.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "6d6c376cc357bfa7832f12afc3e279acefcda21949266ae8bf25bdcb41eb6ba9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "d703aa460509d002319d0a7abecf12568d38c4f2dbe457ea1095d36c54344418",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/lease.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "db6b191103c9453d26fb069f5c27caec53e20187d4a461fba2c63fc71cd62c91",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/migration-verifier.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "2134056b0d58a3873003fbdaeadc0dc183d227f709190e7450d77ca1f9821ce7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/storage.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "8ec2e6280aebd1e4a880ca6264306b212f77f8b6bdb1bd996fca0f2f4bb6d87b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/testing/generation.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "1da765e30572ce0f285798831ec8d3dbc3ecadd6f7a797a4fd735254d1ea06c5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/win32.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "bf5f07c35c759607d1c6294f6d93ebeb5b10fc817a851783a91c41716073f5b4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/worker.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "31b66ee58ecf78c8f3ca920919d5fb1226d4bd4056e0c10d2040a13082067d85",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/zstd-private-decoder.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "362157869558b2ac651cd51118e7ea0b5a2782a780bedbe9cb17980884dff8f6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/zstd-public-decoder.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "4e8bf8998b64dfff7bd7dbc20552478b1406fc2a29da5d0560b463d7ce9cdb7e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/types/zstd.d.ts",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "161de398caeead83dedc9cc7c95c84ccbaf77282f8d81bd24b5ef05ba5e8627e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/lib/worker.cjs",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "df6ec2eb203eeb0afee885a5d5edd22f1ab0713f04aca8c14b0c2c40bea91b9b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0243/package.json",
+    "package": "@deepseek-ai/dsh-session-persistence-jsonl",
+    "afterSha256": "6f7b125eded3413c9c75cc32d91dd46ca8c143f3ab304715a73d2c2e6f44b5bf",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/LICENSE",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "4c2303767fa72f0e982eac0a27e9e463aa10643914557d912173048d19a9d686",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/README.md",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "87976e7338858ac1d5917ac9ae796f121ff9b99878582693a58a4c5470af35c6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/README.zh.md",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "6fc8bff808ae85c00c9005f4c83c7ef6e1afc5dbd726ecca2d38e3b4ef8e658c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/index.js",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "b84d6b8aceca3326f9b96bcad2a013e1b777f6f632adc0e6484dceb653e90010",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "28afdfe6028f2dc6dd3607614cf6df5ad776182c459120f66a8dcc31fdb1acdc",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/current.d.ts",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "69654c4e6642af5f9514ec283e5da1df0d88f80a93f8dd63289ecd43ba90f03b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/current.js",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "1b2bb5e114000cbe0ecac717787e0f749ba0bd5773ff076690fdcb40ad09e8b5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/generated.d.ts",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "f66aa59f48dcbf9f6c7d1cd5bf28535136b8bd27c1018a6feb25a47c0a0f77c7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/generated.js",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "531d67db3d1878fd4a38b24f8792b6c495e8eef4748b86acf67ce0502e72f00f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "c84d05daa6000baaa9a61ce52921c98b4a92acc01285527d4a532aef92235381",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "b2b4dea3759e3695ff3985fc4c6ce7f163eb8dc4ab30665ec232b9999e9edef1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/local-admission.d.ts",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "184cc3d2a21c20b4b56a20dc072f75ee811f218a50bff24053bdf3c58d961af8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/message-projections.d.ts",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "f6ae8302c14fad6147204a59663d46fc9bfec64136f46d23ab26f996b2e712c3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/lib/types/message-projections.js",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "c63245bf0c22fbb6bca4de7029437611bac766ca2527e89012f9a6a42c4f907d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0245/package.json",
+    "package": "@deepseek-ai/dsh-session-format-catalog",
+    "afterSha256": "edb6a24793bf5739dd2cf89eea29a4ebf759745a1514417f874b09f802bd148e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/LICENSE",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "23e1b590c7db6826c6fa866ffeef1906a4698fae1ca058eb4d7508fbc0bc4c7a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/README.md",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "e22f0152014c167fea74b2d47e0228c942d16ec60579daa1d8bf3d583958f0eb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/README.zh.md",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "8065bb55b59bbbc5bd295eb0bc5c72b35e4d01e4fe9c423914bd197d78e9018a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/index.js",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "f88167f3316360c2f04e5f0879ca8ecbfa41d257f22d8912318776e086afe610",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "d0e4d0593227c9cd3fe712edb0ccd42839ad29aa191686a84b0065e5de07e812",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/types/atomic.d.ts",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "6e26c51b4d0a4e0e6f7a9ebd3ac2314f88e99734748fd915f20955c5281c29a0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/types/format.d.ts",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "1b3da51795a97ab271c6d5bcf0359edaccd55e79de88c197a2faa74bb87c9a95",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "a91adaf1e3bd7e3a7a3f169827ebb23d98055c5fc93732c2361da085942bd030",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/types/per-record-unit.d.ts",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "afd8d0ae787f9dfc2771a25cc3f0d0721af21720ecfff30a5aaac3642288f497",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/lib/types/single-unit.d.ts",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "c9816d583c005d389de0a0fc92ff3a50f2b78df6156b6116c6a47c64b0194b2e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0285/package.json",
+    "package": "@deepseek-ai/dsh-storage-json",
+    "afterSha256": "8ebb84190f17010a19bf0775021e8966d70faf5c9fd4d434ae845cc74bdbbb18",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/LICENSE",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "349c95ea0585014ebb28d9be24fb03e7a89874c8cc5d72741b61c31ce20255b6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/README.md",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "b58abcf72d9624c55eabb40ec771ad2541d29c1ff88a13d59a544b9d6b6cb855",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/README.zh.md",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "3ccdb6e99353ba67dc9a4ee47a13537d48bcb94c42064b6e50cec367fb0222f8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/index.js",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "8b840d670b4e0ba5d7e2b2a99069048bff50c43bf0d18d8090c2a48f76037a63",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "5b50a5b1ad77a0dc8ccf56b4bb92d32ba3e9cfdbb1a9972e9b0ccb3b29e3fa1f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/output.js",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "cabec8ede72fedd66884c6001db33d7e525c82f7714457d68c792ff015d85e8f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/runner-launch-DGV26RBf.js",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "f32b1df32ae1418e8ac858640c7ef22cdc6564edd67a6f6433f33679bede268c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/runner.js",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "33846f0142e21643eb2401d15f3b01d405b38e4402bb19c4800595583ff954c0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/runner.js.map",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "4a2be5d0e2fdb2200b0661bb1b216863b687176652a48c2ee3284e15a15f930b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/bin.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "da66652fbef2bbd57b20551684c146a564c7eb824872a4d7823706243f113809",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/control-spawn.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "e3a254c042189df55ef4a232768f80f6416bb8f5d5e744480b14c8a2ab67ae7a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "4dc5c081ac90a5301190157d5968bf98f956dd7ef17e65a8d12d9948bec3b7e3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/linux-execve.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "21d221b52a2d2e451f4aef7c48a658dcb8f6a62940c32712d6754296afd87cd8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/linux-scope.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "24b9356e3d50b82a62c3adf836256cfa840fd034ed63b4ac51c115a6ee8060d6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/managed-owner.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "476e186c6d335cf292e9442ef315d6619368103cb04f5fe5eea479454b0b8b3a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/output.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "d775591f549e46af377343f3eeb9af44e7e49664dde38d86ea3ccb11e597d2d6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/process-inspector.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "1abc758254d61dc09383e0f50e8a39d24ace0ebb9273c7066f738c74abf0f07d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/runner-launch.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "3691dfcf26b402cec01a506d1c4ddbb3f6ce457ae07aa2aab31154a74eef5ce0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/runner-protocol.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "6b1b15d9784d8497ae5f8bf638868e04c31375b3f92230c71754f0a4822062c0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/shell-activity.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "86b46c87007b8693a0834a16b4024996f1ee5a89ae310914bea13f183f4610b7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/spawn-runner.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "e28cbc01b73407985b3640a96ae64a1a43d47763578ed776115c1dc84d1e1623",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/spawn.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "8f9e65b3b4c3d9f3b32d0f55845320c94ad07825aab67ad65d85f362282571ab",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/terminal.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "3bd0763b93854af19fcf76b60d838c354c65754dd843e5229f31d8c4cd1104d4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/windows-inspector.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "cade2ff31be3a1cd2bbd75baa3a6529bbc0a3121d3cf88b4571b4a35b1cd1d4d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/lib/types/windows-job.d.ts",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "e4c2d5f449b3c47b68da9672b33f95f53a67cfd2f7f1842e9a365466f26115aa",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/package.json",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "4e64b8bc49e21ca0824c460c3261843e3d161556480794f73327738534c6efef",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0292/scripts/ensure-spawn-helper.mjs",
+    "package": "@deepseek-ai/dsh-subprocess-local",
+    "afterSha256": "ca5509febf1e6ec1356df121835ebe5ed2f9cace4bdc2ba6d83d41c7e45e0f1b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/LICENSE",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "a32585007526bcef895ae8bcfb51d3d171009bd0f536817c151e01510fc141a2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/README.md",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "6229b33ea2e35d56d00d73153e3289256b9c825623829fa134bfb60870dee28a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/README.zh.md",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "4978294cc1ff838c9bcab336deaeae41e22d17331390849bb3109fe355fcb6f1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/diff-worker.js",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "802285b42f28394b4503efeec35ea279a38e46f3645c552d52484868d2c9a619",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/diff-worker.js.map",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "d578a620e9f58c871f8f84e8e3a30febd26edbe33c10e47752c73e2411a4fedd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/index.js",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "ec62c32be2b8e652fba153ffa73dddfa8fdfe2244980d27441d41a4d5cc872e3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "20764fcd6785ddde14e230a28e715d85e00f4d3d944b322624fa7772c6379528",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/diff-presentation.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "268ef5b765fa143a8aa5ee07faea489a7b8f31a8f55a4a62d2bed8b42e176a49",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/diff-worker.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "8d37a292971ade8ac3dbe52b0f58d17222c0cae9cf81299edff710ccc9f26242",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/diff.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "0d79ed93e30a9d10ee1b405f894153d78f512c95f4ea0373d19b64f971d88303",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/edit.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "2e4b6e7b65cc47dba30a6922bb5cc67148c51608d58e2fe0c4ad323a3d5040e0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/error.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "13db86efea9082cc03cfb1d3e4c92c4f4181144ad2268f01250dc06ee85f5412",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "0ea3dabef623c2b8384156ba08d57f6b14ae7c8e99c66ede134222dc652273ab",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/manage.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "9a86648b9e89d441c0811ee5471e9df7f6d23a63f429199343a2121e59b47269",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/read-image.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "14254aad03226b2b992b9e8460c8642b9bb0d1c7992342f68a800a350e94b1dc",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/read-render.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "62088ce3102fa72041f685c85b3ff9ca1ce226e36e4a0c80046b7ed360265fe1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/read-target.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "b8fd47f17421f2da961a31f988e39ac02316031776282e7e9b6b64ea90c14cc3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/read.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "2bf9b0613990b3ee596f4be3dc17fa781a0e40951406522ea01fe9ba88f2fd01",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/sandbox.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "231f8332613d5139a4f19ea0fd1ae5cac46afce6caf15f6c7b706d87a36c8ee2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/session-cwd.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "b09f81deeedab74e66c7e3a91963618aa83645ca07bf0215592ea036e91c672d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/lib/types/write.d.ts",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "37f2905a7981d5e5b966b1a6db9425b1f3823d627f64917cc60de05b75fdcc59",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0297/package.json",
+    "package": "@deepseek-ai/dsh-tool-fs",
+    "afterSha256": "a99b5127f57746bb1c19f07e413a1cccdcd7190c9607b5cc75dd400e79b881a7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/LICENSE",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "12bc09eb9d847f57980f2805db3be6623e7e37ee7ef43408de9d8a61e8eb85b1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/README.md",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "95ff6f53bdf1f9fb346876366ba563b448e6c8e569c113cd409fb908c069d501",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/README.zh.md",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "297e079b1a75281f4a29f6f20f6f71c1b283b003554119add754372b30b285ff",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/index.js",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "174d091fc48acd1bd3c423dcff32c551204593f1d5aab3b648a5045b27eb1899",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "917568164805a72743d7243bc9f2c71193f1d4bd7dd48eb0d8d43ca3d191df78",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/render-worker.js",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "4b82f5d145262eee87912cab8cc23081941b5086b0a4032b3bd89bd3f1d3e998",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/render-worker.js.map",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "f406ba1b420e44c480687f083727b8347a61d63f4a737fff599badad3b80e46c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/types/fetch.d.ts",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "eae8131e8184ddc9c377563014f69f1f59c330e072095fb64625b9fce9b2a18a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "e8e454fe819db2aa3b51e23e4406034626dc58bc55e77b8f19d6a5f2fafc1cdb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/types/search.d.ts",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "344a557911bfb5f4cd4e1133ac90e75982c540372b631d7103d291dc914ebcec",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/lib/types/trust.d.ts",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "cb5cf504f0a992cc426d9260c8eb7ca5a531d65c85f23e3f62216653c5b729ea",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0311/package.json",
+    "package": "@deepseek-ai/dsh-tool-web",
+    "afterSha256": "86ca255c9536302eedb5191851a0fe140e28696ad886a310f051e2717e9b58c2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/LICENSE",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "e727b02f4a2855b3b6692e19b63c8b2ec46a45554541e3248a52edddb6dc1258",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/README.md",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "a7f15a5df63ef54daf198c9f3e4155a77d687e223915075e446fa209f8fccae7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/README.zh.md",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "77a8b9cec70f4c6345609b598ea029ccc3e1a3b8c03c2d8cca8ef21a02a1f9a8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/client.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "fb5b6ce9b113448e4b1d0da401c3d9d26a0f0f8580604b9df0729c99fd602c17",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/index.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "679afcc5d98a284711b08ba8655717203b4ad3ddabc7e55ff39c231ee41fa648",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/client/index.d.ts",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "71f714e4db7e2d1994befdf5648044f9b6640e7447ed92acfea170fdd0bcc0bb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/client/index.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "e18d68e5a2d546edd6d1d73dd97376d226ea39db392bf7425e6ecf58280a8fd2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "defef2b5508361c76484ee00e9311df398c16f8bf693939e1508fb1299cb8e66",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "4d9a253a535ec3d7e8ae62dcb85585730e0b4e5fbdd7da3d7519c532fcf0e6d9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/remote-events.d.ts",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "de05eca55dff1b1de143a65711fce9fdb9354066dcb55d74c30538671ab04d85",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/remote-events.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "d6a3a4838bfda8d5f1843fe598711219804c8ea71bea5fad4af0e687c0b1279c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "c1569edc742e2f04b10fca5ab23efdfc7fe37ec2325ac1b617a8bf7a57a9cc5c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "7cf83ec39be43ae8312f590fc0b4aedb1833ea4c6fe6fcb3202320d792b41412",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0331/package.json",
+    "package": "@deepseek-ai/dsh-api-remotes",
+    "afterSha256": "d3b6fb2a2428e68e5e331124025ed8b8950329e1c547786acee23a2a1920e199",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/LICENSE",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "bdf609b0ec18d39bf2883f974988e7cb5a0022be2bc39242746e0ad9bc3d78f6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/README.md",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "a6dda91b8d39fb7c8fbb42382f974ab8d0ebbb8be08715180e70efcb2298eece",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/README.zh.md",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "a95af21dffe28c1f459ff0330073f7d86124529903357d7e357dfdf826dab25c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/client.js",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "2ae9bba70673d799896ef9dc05dab49ac24f443137d7eacdcdf0ae7878322555",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/index.js",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "24505f629d074fdd65f2ab4a4e39c0623de2b601536f661db1779c4d8d4021e9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "e0364e34ea44c1f19734c6b7e9505425fbba3d51ad144582c233249399886722",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/api-path.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "86aa0e5a8daedfeb9e9151de07c692c754aa0b27223a8267715b25cf3b02d360",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/api-request-trust.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "e9864aaeb55df80d8abc6553e465bfef3136ebf1e52d7729fa2fc2bddca4459b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/browser-auth.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "2ee063e8d6b89514e935e6d0ec1891d523631f2a780782f4b6a649e5f6fa6c27",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/client/api.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "2dd7587ded0b995036fcb05f0065e9121e1cdb89ad545d856768d8bc28b84411",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/client/connection.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "85cc887caeae60ab13bd91f627ce793a42402d8f880c2af0f3f1fc0d256509d0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/client/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "5bcacf56ca3c3fb26256a6ee3aff980a399dcf4901d594b034d960ae04bd2f8d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/client/random-uuid.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "cefe0ac6d56946945557b175e51c825ebcaf1c55da8b34b721b3fd583d634e1d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/client/rpc.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "59275c00db19bc2cbbc50857288f72417422667bf53d73fface271eca02528e9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/http-bridge.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "02b45acd8e38b7b40dc9fd6f05635e74c544e7b8da9f0f0680b85bc8f7bb57d0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "e1661cc634bd91883add27c3f2cc8e464256452a24880f5b58726a3f5e0914a4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/loopback-hostname.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "1db0f673ea202f9f06afd5c1ca17e6f49d31816be6e3b868814afe44b4979ef1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/recovery-config.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "b49e25ced9314e78c85877ede26bdb5eac20ac46368e7d987a0a5c669f127efc",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/rpc-host.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "5eaf133c827a04496616a1f33a16c975e7d8dadd9815f40abb6cbacdc717a2c2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/rpc-schema.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "8db81ae0ad2c1b863b9d71abe547dcb2e7b6a3b49f86a2f945567ea0a42ef4d1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/lib/types/rpc.d.ts",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "a167a580ea46ef2078d9d424a0361489f7b0401f6892b0005b9198d02aa3df7c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0333/package.json",
+    "package": "@deepseek-ai/dsh-client-connection",
+    "afterSha256": "878c2eb967574adc1f27d34e60ec7d39201ee6f6340b5c4ca0fb792b383ede92",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/LICENSE",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "71b873b389ea3e89439f496235693f16701363ab30599ca9cabcf8c32d215de4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/README.md",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "b6a0c72e3806e689233a7b8e778f27b557a0b6d320fa604354587010104d0890",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/README.zh.md",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "757488074b0f81b197e4275062d86067d0392e13fd4113df07284b27597eb0cf",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/index.js",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "9061a1656697425f46275c53c9fbdfb4753e52fd4ffeb2c4e15efd115d564286",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "6236bd7027ddfd10e88dd6402e1602c9cb30a303b2356458c1b18b2bdc6c3073",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/api-catalog.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "1fbbdabcb24701b85ebb0c3e353c24aebb349dad3c0a5fceb1f8342d1c74ee91",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/fiber-state.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "69201354a76ecc7bf52f45b53e1a817e49a91d06a52f944aa8e9d073513a2e2b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "f3b7ae67aabc483c809aae58cecfa2d518cd536763c5f865086a90048cf124c3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/persistence.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "3ac6ef243757aa0d5bef43bc0e085a6a7772f2e2b9330085d506b9d13d5450f3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/present.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "e9c61255ec040dd3bbd81f68bc24a7bfab431b84315e64c421d0442da423240a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/prompt.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "c70339b1cee13912a2bd367ab9be2228b2856d51f4b65a1a78828de92ce0a28f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/providers.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "1fd31188beef6248c3fdcaf2ae1b6281885bdf22ee586a687acd3ea8cbb7b727",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/sep-dynamic-inspect.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "f52d8a6243b3361412014fb3da67a8c0b8178e8e538ecff86817c3966f7ec9bf",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/sep-dynamic-present.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "8f0b433ec40c00ecbc1da120ebfa5322ff802a93fa7ae7e643c613991243e0da",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/sep-dynamic-prompt.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "a60aa2f2c663353d1cf1bf0800a1e734e030e39ffa3bb5205f13379f8d633743",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/lib/types/sep-dynamic.d.ts",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "fc64fb8c30d97ed929ef26692e9ffe64fc061af47d1bd2d6da375064f13b4a1d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0367/package.json",
+    "package": "@deepseek-ai/dsh-tool-cordis",
+    "afterSha256": "cfb59a66864d69733f56027c6e804a344c98a5af4e7066478a419f78de426cf0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/LICENSE",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "109cd8f068d23dbdfaf9e3a9e028dc2394dfbef8717fefc6dd0d59939da66613",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/README.md",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "bb98800d0e9e05770626811f50d322c52a90907676add0857c91c07121c1f480",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/README.zh.md",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "a64963aa55d135dc6902a02004092cfb80e630dd4196fb51cd95086dffd2c2b4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/index.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "016151caf074bac23a81fede23b2117cc63614d3190dfd6d5b4751360f2934ab",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "15b035e6b7b8a36f0e0f541599df2489457151bc9d60f73d1682d9b99dd78456",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/typert.host.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "5e2d26ee86d0fe170dac8cd3f5854e67bdea334c57f40a5766ace57b8304c17d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/typert.host.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "452e3e5d46f1f3ed333079628a6ed01e0903db265567daace6102bf411c42394",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/typert.remote-client.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "6873cd930dd7493a4fe32d09374c2d0f4514893568f131aecab914bd14f1c32f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/typert.remote-client.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "112aedb6f3e94c3c571a9c552729020eb3d155320363a66c2965a2a52ae7044f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/guard.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "6a073b5f00d49afeb2e1afce0e451d090733ae9b80b3cdaed46f7e6ebdbe4077",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/guard.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "3a436d4731fc683920571732c3371e23a5b60b395ea3521cb839eb701adfb05a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "0792b687eee1a4bae9d546a8e85d4cb3d47a43a6eb1d21e23f11d70da3f800c5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "0bbccd9a4eb6120656aa7ddd95ced83b6a20c2a064536327e7cce160a25d2231",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/inspect-registry.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "b04e5b0b26d33f58f21fd67daf7bad69d085f9dae58df4e19a6e30e3c5945868",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/inspect-registry.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "0abddf219865d07243d039d9e2c7240507afcce6a27d5c35f240620d08b31345",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/lifecycle.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "5c1d7f8f38f44342b330978f39a17536e08708282d5f8782853761ffc4a57d70",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/lifecycle.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "ce0ce21e0ce3ce098f18be19a151db549d4135dff277b7aa13ade0224a4eb5b1",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/persistence-types.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "1f703ac31fdd4ad3cd1c9fb74ed1f2457a319789e5590e05e203fc6354b14556",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/persistence.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "a50911ef9034f84addddf1861e6d2dac75e2063678cb563a8e56855c83d512bd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/registry.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "17e9b4c61fa26b3dc07940cdc0d94a92a11d8ee1b6a5ed45843a30b69ae67087",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/registry.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "88875ebc14a1b61f8e461c66ba6ab77cfa41d7599a30b5740f3795d9c2204c84",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/sandbox.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "ba6d3debe7940f3363bd21e392f4c48eddec78bc9c2c6e95710a2908f9f88773",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/sandbox.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "ad8e7022a3bbe1c4ad5e04d1d1c3970548dfc066b32f13f4d4e73e3820c5df16",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "4e181bd9fd98fb07211723e0128c0483171c0b1ba5a4d8584d8319440fe901b5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "5bfbd3b61ca6427bf0efd55024d7a7e06bbc4435eb3a1346e6ce89d048bd18bb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0368/package.json",
+    "package": "@deepseek-ai/dsh-cordis-host-runner",
+    "afterSha256": "272853b5fe15d79a28f20dadfa49d4f8172c95603866bbc08f90f0f9888543c9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/LICENSE",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "0f2f997a642f8acad34d3044994a6bc782e56dcf6058d9a638411623e0de9512",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/README.md",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "252a39c09b03a1758b7ded1e1b9d1c43ab1b55cce323dadb55cb1873eb534159",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/README.zh.md",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "87d3cac66807fa9e059af244eca6c99585abbf49faf839b4ff171994d87b1e75",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/client.js",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "c36671ba690ebc98454c21e674a35461ce28c2d6b7d01ccf5ee2fe3d46feccb6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/client.pdf.js",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "7781d7a18a1b52136906ab915dcd591da34197fed7dff277d50472f911b1743e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/index.js",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "e8e5e2446478b9c3b9a20ee2d499b22d97875cb6b53a9a4bdf0418aa574184e9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/LoadingIndicator.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "17832a18272f17ba77cdbb27fd8571d0e9c658be621ba6ac7f925ba5f834d813",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/TextPreview.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "d4a12f1607df7a87a4c16fb3b676016b203c18477aa56a9ab10e30bdd6047a68",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/TextTitle.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "4bc518dcd79638ecf4621989a4e60adfb1001d60449358601378c07baf9d7327",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/code/CodeBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "cfb84954cd4725ef7faabbfc21c94d3c6bf94c7815ff3f76ae12c1302bbf0d34",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/code/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ae02221b6ce308d9fa8886697d263e35850a955df4bf0f50a39dadf7ed8e1e07",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/code/languages.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "a25475da283951d0198b2828f191e4db89bf29ab7d2ce62597eaec7bc7aa7d14",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/code/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "849a42ab124818fe3088d0a3d423c2c9fa78c4222488c17f3cc7c2f1a924077a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/definition.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "bb72ad790d6c440492f42ec68da41efd1d39e232affef5adf1794797bb414b62",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/document/contract.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "2c8548ec25679e45a5b2e37a53505fe1c2a0316f708e8bdf6df6106df8f4afa7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/document/registry.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "c6e1ca35a39797cdd0d8cc921e0d096397320f564a2d490d8fe0278901f4a504",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/document/suffix.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "dd819ddc7cee99f9d8d803e0c737d992b4c41dc67c89156934e82b179b3dc348",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/document/tab-lifetime.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "8283bfd54611cd6b21d164059c1e737bd525ae916e87ad33e631bab823368fdb",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/document/unviewable.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "d1d7502c1cd4a3e2785036176ed715c34e3ec536935c2304ba93a0d0431eb30c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/face.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "27da4c05eb70022039393dc45aa7ee0d2d747bd48d5ff9e7a79aaa3681bfff1a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/failure-line.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "adbc57db29787621bbf9054042fc2c94e225efa44cfde7d0d716a5a5447f36b7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/HtmlBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "3036ce755eedd4383676298c27390a9276d0c1637cd897b80488dc956975864c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/bootstrap.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "11b50f4e925f761463c2ec441ae4788bdc6287f630085274eed85131c905f9e7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/bytes.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "72341d8fc302f70f4c4142eafcc06cb587eb279064571a61fcf5cb69219f19df",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "eab3e1059da58c2b18113174f5e794f2aa00d165bf2c5a55eb99c6549442dacd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "2c2e9663d87099c64ac34a27c6e16bf14e49b9efc7c45438ef65170594d3afc7",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/pack.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "2a833431da4e27a02cad0dd7a13573fa2412714f85498943cec538964d2ec12a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/html/read-relative.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "10b982c2181e82d5b2057b5f61bfbd3caa20e0c78382229e34d57ab22ccd8e3e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/icons.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "91ab4692245d55c51f4d8aec5838b528e5dbbc87ae3f379e70913de9c98af119",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/image/ImageBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "65d568a2ddc35c1675c2bd3ac37436b7facb95aa9579c0ecae7825ab7492b392",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/image/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "fc09a312437d9016023b81c7a79b581bab4a8633ae63d43c5b5f5bad0a9512f9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/image/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "e9c2f2fa2f08943b4de597608cc6e06c5f412d3caf25c49decba5e0f8059e36f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "c7c1f2223e55f91b222a988c38b03ca860c5ffe671320a59ee82f04d5b68e0df",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "9906b46101f293ff0cf09704e7cb0641497870189bd0a07d00d1ec44656ab155",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/markdown/MarkdownBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "73846704b22567bf78f2bea27bcb13577e94c6c7f64347a3bacb076244880618",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/markdown/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "682508b3e0ced33b97afd267f58e03380064b44997c61db93f649daf3360db56",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/markdown/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "fdfba8437e133c54534850d9d660a230001c26846e611bb9c0b59bf1f4816bbe",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/FontNotice.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "629158eb98ee1758de7e5debad226bfdec613f1671e4ee7e389e3fa447914d7a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/OfficeBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "4d13e5d00e7e9f666616138e9630a56bd11d0fdc8f162bdc2ce70f4643198c64",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/cache.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "f4297239dd7f250ec255b5984628e12ff4048cf34d7370282adeff7d2410eb39",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ab57b5b859fb93c5a1ca8cf1638eb200c05314b9982a1f70a2c15404f8ef94f8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ee33c69ee2cd9ea5b2d54907638646b6ad1a26f2bc1bed31b802cae86aefe6f5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/office/store.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "8d05d7a337eee05e58fd9a84301aebc93c4a0d3302c0f028a2403fa1990acefe",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/LazyPdfBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "47a974e53b98b1e8bee2761411bf023fd0f4bc8c39f32dc9fcaba5ff09801566",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/assets.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "9f4b999b694e8d0cdd691b8fb45cfd1cc70574c65934efc98c7fdc270da03367",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/document.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "a07be33465d38316fa14a09da3ea983da3779232c85b4b70c4919aa386ff2d24",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/errors.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ea0f9e7ec08e5197f4c4f34e42464b7e09fd794707f29420946deee58b14129b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "37681ae11154b3b5690d96093dcb85c975a809cee6664b82c59febf97093e146",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/locales.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "7daf039f2ab0d9ec30e84ff8058d3eb98991c4c7dce0f571cc8e0eaedf42e08a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/pdf.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "d047fb2fb4a453564c5642eda6c3c3f4883ea784513798bef8d15141480dd2b0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/runtime.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "9a9eec2bedc6c4f07dbb518d5c4f87ad631b207015eea76f1f73388f4fd6c790",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/store.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "92d851787310537546f44146b8e73cb23955e599a0d9ddcc24284bd350bab2a9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/pdf/text.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "a2d94332d2bb4af3fdd2eec70c52c8acabe32ee1066724e4d78cdf7a316dad50",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/rpc.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "6b9ed130bea9b60f8d97824a2a91e3c0e18eb5c20d8ae12fbac02c5921c6c8e4",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/store.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "be138e9f2d1430ab93c7cb0faf76d00e827f6477aae7a9ef21fe2ed96999f392",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/text/TextBody.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "7f82902a1dfeeddb06a933ed4d28aad27f68fe01aa78a032bf52b8d584dcfc26",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/text/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "7d9ac4d525731c7261fab95d0d6ba72afb2d15f7139eea9d1370cddc3a8ad8f9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/client/text/lines.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "4ad30617855a8727fd82e6718ad4ae90d647de9af3507385bb9ae58640e81069",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/config.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "ec412c3c9c02a4ceccab4640d8bf39e1558d93a0e6a0a327c81476e9f3e65785",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "2901cb61b8bb03a726440ada922dd8128f8a220397ed4b5478e68b03049a611c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0408/package.json",
+    "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+    "afterSha256": "4447c0449025e8601e35980b3b5c3a4a2a13cd5d5dcfe818efee7e72d422fd4b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/LICENSE",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "54a823123dc902608333a897bcf3f05ba9169eced8ca8c3283cb98941902229e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/README.md",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "d29a29a3e3ac45a7cf7deaad4c5ca5a35f9249c1a6c4f961929c88463e88ef29",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/README.zh.md",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "d29a29a3e3ac45a7cf7deaad4c5ca5a35f9249c1a6c4f961929c88463e88ef29",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/index.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "956e96a7f88d13190ca14e52d75f3854c9880c64580eae70447921988c476dab",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/typert.host.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "5e2d26ee86d0fe170dac8cd3f5854e67bdea334c57f40a5766ace57b8304c17d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/typert.host.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "eaffbb4e3dc855bd4b0b7fe626f199b50343fff8f5b9b28e0977797fde8200da",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/typert.remote-client.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "19a1b0a9e466093a6299168a974ae8f315137e53be38837129186ca2cfb54534",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/typert.remote-client.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "37b73c667375aa8e0158ae99db8f0dfcda7ff7783a524f766a29be7cc13b7e80",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/errors.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "a3ae2939369043daa03d51121ee7e9b6152b8b970cbb109484b98b5665f62e11",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/errors.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "244d7922820f1a130a00a89920f978ac9910c79af8ffc3d5fb7a3781e071ef2b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/identity.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "18e22e32cb3a9b797eca0edee9b783382c75a02e16fac79e73225c52cbf71fd0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/identity.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "ee583eb6b7c590fd29cc1039cca5b29974a9c4d038ad809c94ae41616fb8db77",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "ed21b59c09ed1dc46083e9a0cea6a1102d632fb3561a778828885b5acc21cfb8",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "4fd760e2b999c8b324dd02946d5f896c3933daa128429272423436cd6296366f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/output.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "476ffc3e140db18daf5f17fdfbe2846c601d00ac11ecca246bad260252cce5ed",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/output.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "d3bfc7657a25de6b1ec3867c2d2c5b70efda6d39f799de73be8fb3befa4d36f9",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/queue.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "bc6528e40737b1c1b96a8b8d1b3fc81bc0dba76f70624d3ec378355a3f34f11b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/queue.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "bcf69d84c98d61e0e05b697d714374fce8572f95a3372c4e92460e098e54a93e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "5f8f296d428bfff3d4877242a6edce2ddbd319b594edd40765db3ef36cb04efa",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "01ae2a5b120382f9a648ced7ee8507493a134f216d100fc61600c6c9738235d2",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0437/package.json",
+    "package": "@deepseek-ai/dsh-office-to-pdf",
+    "afterSha256": "a499307a96319aa8a3958a1c62a87380a3abe548ace4755d1ec6b18969bd1414",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/LICENSE",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "d955a2d4351a93e444a19c3ff68510eade11f08a7d089e49c2578c775076c758",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/README.md",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "99c99a70ee9d6a12cb69bc3e30e3b7aba202eba617b317f42dd90babfc0a428e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/README.zh.md",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "b08e3ce8773005386351b4b1bbb2d9e4bc00766bb42906357b817899553138e5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/index.js",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "0d188d77dc6ab0221d8fd718b0ac3e5053202605fe69958df89126031e39532b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/index.js.map",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "a3151a4edcd0a84129edd27978beef167a5c037e4aef47245c346c486ca6532c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/client.d.ts",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "a68f057f8c3028e1837d3f955c8d2be898c975517ce860e6f550d3825e31b89d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/client.js",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "1158b2799b3f9b806e9144892f8f408f871671057edb6fdc4ad1924fa664648c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/index.d.ts",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "f8ec24629d0f07e4df1aa242f247c3a971dde7080a9c113fcd15a45901107340",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/index.js",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "916f88ba9903a350434acdfbf0993f8492d588f9a62c70a04b27bfb3c12c89c0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/projection.d.ts",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "d66d9a61e492c11ce76c678096a7c3490049d25d8e34c28beb7d4436aab3837a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/projection.js",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "2e5ad32cf5375816e95a0bcaaa84130c3d2580f3f8c7022c8cd61b1dd038e445",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/types.d.ts",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "80f34725d2296faf80d299117bdf9cfcd3bdd22853079f5c1d14f6103ff3011a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/lib/types/types.js",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "ebc62528ce40615e54d5c6c725d3dbc22b70ead4210849b51d1e73c167d7edf0",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0456/package.json",
+    "package": "@deepseek-ai/dsh-session-stats",
+    "afterSha256": "521af8a5c92dcf232e6c6697583d138a1905d0fc5617c0f0fb1c1a27de6f2432",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/LICENSE-PROVENANCE.json",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "42ac6fac6dc45969cb66f7f38321306813c877e20833e06b83fa8b411959983b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/LICENSE-SEP-SUPPLEMENT.txt",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/README.i18n.yaml",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "b02e672c16a1ef992146ded4433cc466d606ebf2b14daa9f5f9c22bb78da0813",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/README.md",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "f5964a736866c31b1661c50c461c5c59e4d7a71dc9f60aaf1df1bbd437e6cfea",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/README.zh.md",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "e0ab3d971afd1656cca0898f2bd81acb320b501940fe0039228b6520a25dda2c",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/main.js",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "b2b6ed6d7eae78e053b0b3f90d5c084e89829ee987d25d6b9b7d4963565fef7a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/main.js.map",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "360458cbc60d9d502c9050eb4b81727845762ca0ed1c185c2a030d6206bb6e05",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-app.cjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "281f044cea16b551b9274e52d1397304bab721d23ab43a8aa1ffd19eb1fc6994",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-app.cjs.map",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "aa7043de7ca41a28b418d129de8a1f66c41b86e005d3ed369339781c18775e3b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-mandatory.cjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "fea9629049f9a63b10c8939d03fe1229cf2fa0b3a484bbf801be3dd3ec1384b5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-mandatory.cjs.map",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "179709be9ae419b90cb4751172db181fdd539227103765364d3c8bfd991d5d09",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-update-dialog.cjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "516eaeaf404e721bfacb8f075e0ce8ec4bf93dff6b758f46a82344b0197eb13d",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/preload-update-dialog.cjs.map",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "8298639b792a29365f449eb23369173a4e8c09ee1f1a0e392c9fedb7eb1829ad",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-background.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "6270a2637d97710a2048bcbf54c018da1650e66c1e02418497aee0df4caf108b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-managed-host.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "fa70c2861fbfe0ace3accd674f08a8eb5257b38ece3cec81989b69d1204d766b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-admission.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "c49bcd2393cf44fdd8f831fc5df0dba82bafde7800adfa98e18fd21111096a66",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-core.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "f8dd9883b3015f62ba8e12ef8235f30be732cf17c0ef4e05eae106b6fe38301f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-desktop.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "8b6fea845686efadab1f5ee9f2aa1de0fef3ac9bfa55f8e652fa76a789e89d2a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-inventory.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "b4bf9786ff39e93abcd0db1daf69baa91dd2470b970051789e9b616f9197b24f",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-p2.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "a384d6437d4d9ac270a1833df385da1b45b21459c4a037e16a4cdb6bef9cf403",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-process.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "152ca41c6f161dfed1a123558b3e065b33349e1cc64a53d16e1068a80d772e07",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-transaction.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "f3356ea0184a1fc4e043d3d59e300f2c5ab352164e5fce0fdb01eb71341a2b21",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/lib/sep-update/update-worker.mjs",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "436abbd46ee37330f2c845ceeb7ec65389dea68a8628b358b011aa757427599b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/package.json",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "4dafab1497ba19f2d8270a18c3282ebd081c86fd889e7ecf9dbdb0d63024937b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/mandatory-update.css",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "fba2b7bb37811f3120419ef73038e328a189434261632ac46d15834fd3767321",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/mandatory-update.html",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "e49e0ea753fa90d8734ff9ff60318d128f2accd4dec5257486d6e1a19c947243",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/mandatory-update.js",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "484e38dc93b6821686a398e9b8a9a90daf413f1d444824d1078d09d9c3b7f9fe",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/policy-login-loading.html",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "5129e856f96a21a29adfa96f393c98087c120cdd6f65ca0adaf7b17ae5b381f6",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/update-close.svg",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "1a1931528c542a460d1db6fde84d82d1a03a06155485265d43634031273b20d5",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/update-dialog.css",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "9e991d2e374bd55367672b5865e4d41e9ef5f783ee68cb3a19023f7692d38957",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/update-dialog.html",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "17809b2d23d7c092384a39ca05cd86d535be6a1cb8181b432a4bca0be72bb90e",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/renderer/update-dialog.js",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "c4527ae50c013a9400f847cc77f0965842d4d813fdc8a7f2d2f17d329a672bf3",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon-macos.png",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "28a14336e024c1bb4e94d6e74fd23810dac2b737dfd1b8da6b24482e0191abec",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon-macos.svg",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "6ea87fbbb2daeb6aba30ed07ed1e9059e0c2a39a3778d98a475b0ab05034f091",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon-windows.png",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "d054052563a8600105ed72cac7ec1c3ee863dd193bf9c032b84fc612a69ed87a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon-windows.svg",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "2d6685a28bbb9041d5ddce91ddb74c57efcb2d01384c8f28d5db2bf6fb117b4b",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon.png",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "982c2859568d83d2576110a527c545f04641f4008bdb2cfeb6758f333c0fb07a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0485/resources/icon.svg",
+    "package": "@deepseek-ai/dsh-desktop",
+    "afterSha256": "0458ed5e4825846a6560e90d3e4de767cd75842f7eb53539dc87a5db380d9146",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0498/LICENSE-PROVENANCE.json",
+    "package": "@deepseek-ai/dsh-desktop-host",
+    "afterSha256": "30a86f681e303849ba74d2d3956159b677ed2a6ec843f5fd61b2c51b94d6ea18",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0498/LICENSE-SEP-SUPPLEMENT.txt",
+    "package": "@deepseek-ai/dsh-desktop-host",
+    "afterSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0498/lib/index.js",
+    "package": "@deepseek-ai/dsh-desktop-host",
+    "afterSha256": "62b5da1902662cfb436545592949ccd57a0030cc9ad805185429a883bbbe1fcd",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0498/lib/sep-policy.json",
+    "package": "@deepseek-ai/dsh-desktop-host",
+    "afterSha256": "868d88bdcaa2ecc5db4a2c55fa4c7b7cb59da631d4746f23ec806190d1f2b11a",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  },
+  {
+    "path": "store/p0498/package.json",
+    "package": "@deepseek-ai/dsh-desktop-host",
+    "afterSha256": "aa30b8af49820dd101461c48b7a3e5e337a373f493dafef130640c7156e828df",
+    "scope": "exact alpha.2 adaptation payload; unchanged donor bytes must match graph"
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "name": "@dsh-sep/office-converter",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@dsh-sep/libreoffice-runtime": "26.8.0-3.sep.1",
+    "saxes": "6.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "os": [
+    "win32"
+  ],
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "errors.js",
+    "native-process.js",
+    "owned-files.js",
+    "archive.js",
+    "bridge.ps1",
+    "JobBridge.cs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

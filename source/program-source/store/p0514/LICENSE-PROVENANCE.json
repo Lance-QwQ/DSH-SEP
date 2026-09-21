@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "package": "@deepseek-ai/dsh-task-checkpoint",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "packageId": "p0514",
+  "baselineManifestSha256": "09313b3d630a57bafb21cb15e2573bfbdd74470505fc58857e75ad018519463d",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "prior-MIT-declaration-with-standard-terms",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "MIT",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-MIT.txt",
+    "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+      "directory": "packages/session/task-checkpoint"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "evidenceBoundary": "Prior MIT manifest grant retained. Generic MIT template copied separately; no copyright year or holder has been invented from the package namespace or DSH source-base metadata. Original source comments and manifest remain available."
+}

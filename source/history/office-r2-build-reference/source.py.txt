@@ -1,0 +1,96 @@
+"""Create a fresh graph-bound editable-source snapshot, without private Git history."""
+from integrate import ROOT,WORK,OUT,BASE,readj,write,writej,files,rel,digest,win,REV
+from pathlib import Path
+import hashlib,json,re,zipfile
+
+OLD_HASH='0fa30a5778feaf32247071b3ea85942a4df33978173dab675ab057bd880eccce'
+NEW_IDS={'p0331','p0367','p0408','p0437','p0438'}
+SOURCE=OUT/'DSH-SEP-Source'
+full=OUT/'DSH-SEP-Full';graph=readj(full/'graph.json');gh=digest(full/'graph.json')
+byfile={x['path']:x for x in graph['files']};bypkg={p['id']:p for p in graph['packages']}
+assert not SOURCE.exists(),'Create-only source snapshot'
+archive=BASE/'DSH-SEP-Source-20260921.zip';assert digest(archive)==OLD_HASH
+pending={};entries=[]
+
+def add(path,data,role,graphpath=None,**extra):
+    assert path and '\\' not in path and not path.startswith('/') and '..' not in path.split('/')
+    assert len(data)<100*1024*1024 and '.git' not in path.split('/') and Path(path).name!='.env'
+    assert path not in pending,path
+    scanned=data.replace(b'\0',b'')
+    assert not re.search(rb'[A-Za-z]:[\\/]+Users[\\/]+[^\\/\r\n\x00"<> ]+',scanned,re.I),'Personal path: '+path
+    assert not re.search(rb'sk-[A-Za-z0-9_-]{24,}',scanned),'Possible credential: '+path
+    h=hashlib.sha256(data).hexdigest()
+    if graphpath:assert byfile[graphpath]['sha256']==h and byfile[graphpath]['size']==len(data),graphpath
+    pending[path]=data
+    entries.append({'path':path,'bytes':len(data),'sha256':h,'role':role,'graphPath':graphpath,
+                    'graphMatch':True if graphpath else None,**extra})
+
+with zipfile.ZipFile(archive) as z:
+    old= json.loads(z.read('SOURCE_FILES.json'))
+    for row in old['files']:
+        if row['moduleId'] in NEW_IDS:continue
+        data=z.read(row['path']);assert hashlib.sha256(data).hexdigest()==row['sha256']
+        gp=row.get('graphPath') if row['role']=='exact-release-file' else None
+        add(row['path'],data,row['role'],gp,moduleId=row['moduleId'])
+
+for row in graph['files']:
+    path=row['path'];module=path.split('/')[1]
+    selected=module in NEW_IDS
+    if module=='p0439':
+        within='/'.join(path.split('/')[2:])
+        selected=within in ['package.json','SOURCE-ACCESS.md','ENGINE-PROVENANCE.json','LICENSE.html','license.txt','NOTICE'] or within.startswith('source-provenance/')
+    if selected:
+        assert Path(path).suffix.lower() not in ['.dll','.exe','.com','.bin','.msi','.pyc','.node'],path
+        add('program-source/'+path,win(full/'payload'/path).read_bytes(),'exact-release-file',path,moduleId=module)
+
+for f in files(WORK/'adapter/test'):
+    r=rel(f,WORK/'adapter/test')
+    if f.suffix.lower() not in ('.mjs','.js','.cs','.ps1','.json','.md'):continue
+    add('program-source/store/p0438/test/'+r,f.read_bytes(),'supplemental-test-source',moduleId='p0438')
+for filename in ['interface-wire.test.mjs','patch-consumers.py','patch-notice-style.py','integrate.py','archive.py','support.py','source.py','metadata.py','stage.py','extras.py']:
+    p=WORK/'packaging'/filename
+    add('packaging/'+filename,p.read_bytes(),'supplemental-build-or-test-source')
+
+SOURCE.mkdir()
+for path,data in pending.items():write(SOURCE/path,data)
+write(SOURCE/'graph.json',(full/'graph.json').read_bytes())
+write(SOURCE/'host-adaptations.json',(full/'host-adaptations.json').read_bytes())
+write(SOURCE/'LICENSE',(full/'LICENSE').read_bytes())
+summary={'graphSha256':gh,'files':len(entries),'exactReleaseFiles':sum(x['role']=='exact-release-file' for x in entries),
+         'supplementalFiles':sum(x['role']!='exact-release-file' for x in entries),'bytes':sum(x['bytes'] for x in entries)}
+writej(SOURCE/'SOURCE_FILES.json',{'schema':1,'distribution':REV,'files':entries,'summary':summary})
+writej(SOURCE/'SOURCE-PROVENANCE.json',{'schema':1,'distribution':REV,'graphSha256':gh,
+    'scope':'Graph-matching editable release files for SEP/adapted host modules, full authored Office adapter including C# bridge, supplemental tests and fixed official LibreOffice source-access records.',
+    'upstreamDsh':{'version':'0.1.6-alpha.2','commit':'ddefc45fbc7f8e46dd73185e68295696d1297887'},
+    'office':{'adapter':'@dsh-sep/office-converter@0.1.0','runtime':'LibreOffice 26.8.0.3',
+      'sourceAccess':'program-source/store/p0439/SOURCE-ACCESS.md','obsoleteKitIncluded':False},
+    'historicalSourceSnapshotSha256':OLD_HASH,'sourceFilesManifestSha256':digest(SOURCE/'SOURCE_FILES.json'),
+    'reproducibleBuildClaim':False,'allTransitiveBinarySourcesIncluded':False,
+    'privateGitHistoryIncluded':False,'privateDataIncluded':False,
+    'licenseScope':'New SEP Office adapter uses the project-approved custom license. Modified DSH MIT files and all third-party terms remain unchanged.'})
+write(SOURCE/'README.md',f'''# DSH SEP 可审阅源码 — Office 替代版
+
+分发修订 `{REV}`；程序图 `{gh}`。
+
+本快照包含与本次程序图逐字节对应的 SEP、适配宿主可编辑文件，以及自有 Office 转换适配器的完整 JavaScript / PowerShell / C# 编写源。SOURCE_FILES.json 单列发布文件与补充测试/构建源；不是整个私人工作区或 Git 历史，也不是全部第三方二进制的本地重建认证。
+
+入口：program-source/store/p0438/index.js；Windows 进程所有权桥为 JobBridge.cs 和 bridge.ps1；测试位于同模块 test/。原 DSH 转换服务适配位于 p0437，通信与界面适配位于 p0331/p0367/p0408。原缺源码的 Kit 与其 native 包不再分发。
+
+官方 LibreOffice 26.8.0.3 的四份匹配源归档下载地址、哈希、取得步骤见 program-source/store/p0439/SOURCE-ACCESS.md。它们已完整下载核对；本源码 ZIP 不重复内置 654MB 第三方源档和 1.58GB 引擎二进制。
+
+源条款见各模块 LICENSE / LICENSE-SCOPE 与根 LICENSE。新 SEP 原创适配器沿用项目所有者确定的商业分发限制；已有 MIT 与其他第三方条款不被替换。历史启动异常仍未归因；源码交付不等于公开发布全部门槛已通过。
+'''.encode())
+write(SOURCE/'BUILD.md','''# 审阅与验证
+
+1. 使用本快照 graph.json 与同图 Full 包核对身份。SOURCE_FILES.json 的 exact-release-file 每项必须匹配图中相应 store 路径。
+2. Office adapter 为直接运行的可编辑 JavaScript；C# Job Object 桥的编写源也随包提供，由 Windows PowerShell 在运行时加载。不要从缺源码的旧 Kit 复制实现。
+3. 可在同图 Full 的独立安装中运行 adapter 的 test/*.test.mjs；真实引擎路径及测试参数以模块 README 为准。补充测试与构建脚本不代表用户私有状态或运行日志。
+4. 核对 Office adapter 的 README、官方 runtime 的 SOURCE-ACCESS.md 与 source-provenance。上游 Windows 构建配置和精确外部依赖下载列表一并提供；本项目未将官方 LibreOffice 二进制重新编译，也未证明整套 DSH 的可重复构建。
+5. 修改应进入新的隔离候选并重新封装图，不能直接覆盖受管日常实例。这里的 Python 封包脚本记录本轮构造方式，其父目录约定属于项目构建工作区；不是脱离来源包的一键重建全部软件承诺。
+
+本快照不含真实 Key、私人会话、记忆库或原 Git 历史。第三方完整来源和许可义务由对应组件材料说明，不因本快照的范围说明减少。
+'''.encode())
+rows=[(rel(f,SOURCE),digest(f)) for f in files(SOURCE)]
+write(SOURCE/'SHA256SUMS.txt',''.join(h+'  '+p+'\n' for p,h in rows).encode())
+writej(WORK/'packaging/source-delivery.json',{'status':'pass',**summary,'sourceFilesManifestSha256':digest(SOURCE/'SOURCE_FILES.json')})
+print(json.dumps(summary),flush=True)

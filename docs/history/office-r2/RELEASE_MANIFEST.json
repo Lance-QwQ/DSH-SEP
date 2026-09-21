@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "documentRevision": "20260921-docs-r5",
+  "date": "2026-09-21",
+  "product": {
+    "name": "DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE",
+    "shortName": "DSH SEP",
+    "chineseName": "DSH系统增强套件",
+    "platform": "Windows x64"
+  },
+  "capabilityBaseline": {
+    "releaseId": "sep-alpha2-stability-20260921",
+    "dshVersion": "0.1.6-alpha.2",
+    "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
+    "graphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+    "graphPackages": 527,
+    "manifestFiles": 27159,
+    "scope": "verified-program-and-controlled-daily-deployment",
+    "onlyArchive": null,
+    "fullArchive": null,
+    "sourceGitCommit": null,
+    "sourceBinding": "program graph plus verified local patch manifests; release source snapshot/commit pending"
+  },
+  "existingArchives": [
+    {
+      "filename": "DSH-SEP-Only-Windows-x64.zip",
+      "bytes": 228802366,
+      "sha256": "7dbddeaf867ded6a5afcf2771d40af4132bbcdf175e8691fa036cdf11ca3d9d0",
+      "distribution": "20260920-r2-sanitized",
+      "graphSha256": "e57816d02de36eefbcc0942ef9a644ce3e3ebbab47e303db1ab0b00278667ec5",
+      "latestFourFixesIncluded": false,
+      "purpose": "historical-artifact-identification",
+      "publicDownloadUrl": null
+    },
+    {
+      "filename": "DSH-SEP-Full-Windows-x64.zip",
+      "bytes": 517113251,
+      "sha256": "6a773b516a7a4723b8bb2f6aa959a98a9b3c788f254322e679b8e9553a66d46a",
+      "distribution": "20260920-r2-sanitized",
+      "graphSha256": "e57816d02de36eefbcc0942ef9a644ce3e3ebbab47e303db1ab0b00278667ec5",
+      "latestFourFixesIncluded": false,
+      "purpose": "historical-artifact-identification",
+      "publicDownloadUrl": null
+    }
+  ],
+  "publicRelease": {
+    "authorizedLicense": "DSH SEP Limited Commercial Distribution License 1.0",
+    "currentSourceLicense": "527 个包均有许可声明，624 个许可/来源索引项。旧 Kit 与 native 包已移除；新适配器完整源码及官方 LibreOffice 匹配来源单列。原 MIT 与第三方权利保留。",
+    "status": "github_repository_not_created",
+    "latestArchivesReady": false,
+    "downloadUrl": null,
+    "supportUrl": null,
+    "securityContact": null,
+    "requestedRights": [
+      "personal-use",
+      "enterprise-internal-use",
+      "copy",
+      "modify",
+      "free-redistribution",
+      "create-and-publish-derivatives"
+    ],
+    "pendingConditions": [],
+    "licenseDecisionRecord": "LICENSING.md",
+    "licenseFile": "LICENSE",
+    "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "frozenProgramLicenseState": "Historical daily graph and archives unchanged; this release has separately recorded license coverage.",
+    "commercialDistribution": "separate authorization required for software and derivatives",
+    "derivativeRestriction": "same commercial-distribution restriction",
+    "thirdPartyLicenses": "unchanged",
+    "channel": "GitHub"
+  },
+  "checksums": {
+    "SHA256SUMS.txt": "documentation files only; excludes itself",
+    "softwareArchives": "This release: external SHA256SUMS.txt. existingArchives records retain historical artifact identities."
+  },
+  "notes": [
+    "Historical source and distribution evidence remains bound to original bytes.",
+    "Current archive checksums are external to avoid self-reference.",
+    "Pending archive validation does not inherit a pass from daily deployment."
+  ],
+  "distribution": {
+    "releaseId": "20260921-office-r2",
+    "status": "pass",
+    "scope": "Program graph and source binding; final archives verified separately",
+    "graphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "sourceBinding": {
+      "snapshot": "DSH-SEP-Source-20260921-office-r2.zip",
+      "status": "pass",
+      "graphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+      "files": 881,
+      "exactReleaseFiles": 843,
+      "supplementalFiles": 38,
+      "bytes": 21299493,
+      "sourceFilesManifestSha256": "77a3bfa6c2f599e2bc28234118a048e16487389ee883703306a55083d677983e"
+    },
+    "archives": [
+      {
+        "kind": "only",
+        "filename": "DSH-SEP-Only-Windows-x64.zip"
+      },
+      {
+        "kind": "full",
+        "filename": "DSH-SEP-Full-Windows-x64.zip"
+      }
+    ],
+    "artifactChecksums": "External SHA256SUMS.txt and DELIVERY-REPORT.json; no containing archive hash embedded."
+  },
+  "localAcceptanceStatus": "pass",
+  "publicReleaseReady": false,
+  "publicationBlockers": [
+    "HOST_STARTUP_UNATTRIBUTED"
+  ],
+  "localAcceptanceScope": "Current Office replacement graph functional/integration validation only; historical startup failure remains unresolved. Final archive checks recorded externally."
+}

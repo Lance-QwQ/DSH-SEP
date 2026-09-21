@@ -1,0 +1,1351 @@
+{
+  "schema": 1,
+  "date": "2026-09-21",
+  "kind": "licensing-overlay-not-applied",
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "customLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+  "baselineLocalModuleFilesVerified": 318,
+  "programOverlay": "overlay",
+  "supportOverlay": "support-overlay",
+  "entries": [
+    {
+      "area": "program",
+      "path": "store/p0108/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
+      "bytes": 1117,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "programPath": "store/p0107/LICENSE.txt",
+        "sha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
+        "relationship": "same-version koffi 3.3.0 parent package; not binary-to-source verification"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0108/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "d41d6f6735c943adb839192a0437a271d2acf93837f7f30a9363c78d13efe3ef",
+      "bytes": 2683,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "programPath": "store/p0107/LICENSE.txt",
+        "sha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
+        "relationship": "same-version koffi 3.3.0 parent package; not binary-to-source verification"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0118/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
+      "bytes": 1069,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+        "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+        "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0118/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "4e39fe7ab978e7d945cdba5c7a291bc4fafbe28e2ad280f463148649e03b8d32",
+      "bytes": 1942,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+        "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+        "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0123/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27",
+      "bytes": 1088,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/standard-webhooks/standard-webhooks/b4d2c14fc5b4ccff3ff271e3b087dff812254c59/libraries/LICENSE",
+        "commit": "b4d2c14fc5b4ccff3ff271e3b087dff812254c59",
+        "sha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0123/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "5ca19bb5c463feebebf912dc7a711347197b9745f36c315bdce79c864018c7fd",
+      "bytes": 1879,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/standard-webhooks/standard-webhooks/b4d2c14fc5b4ccff3ff271e3b087dff812254c59/libraries/LICENSE",
+        "commit": "b4d2c14fc5b4ccff3ff271e3b087dff812254c59",
+        "sha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0146/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+      "bytes": 10280,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0146/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "b217f82157abd5285ccf2dd3f141f50a1b4e167ab775e2d023c4a941bcdf2efc",
+      "bytes": 3642,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0150/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+      "bytes": 10280,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0150/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "777beadbb49529d701e2a017089eb4607af59aca2547957d758b42ddcca7a34d",
+      "bytes": 3653,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0151/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+      "bytes": 10280,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0151/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "360decb0ca2e0f9a008125ad1e89a828411529b71f5e75d59b0374e20b39f551",
+      "bytes": 3506,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "Apache-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-Apache-2.0.txt",
+        "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0163/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
+      "bytes": 1069,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+        "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+        "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0163/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "d72b0921de685bc74b19cb023f9f83fee39d763f6a9ea678700f0fbe179478b6",
+      "bytes": 1983,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+        "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+        "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0360/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+      "bytes": 1261,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+        "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+        "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0360/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "fa397cf620a0e1a03bd0626d300ca104d253a039a28545f8676d6fc7fe7ce911",
+      "bytes": 1792,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+        "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+        "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0373/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+      "bytes": 1261,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+        "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+        "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0373/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "66ebca90344dd4bd66e797e10e73ed19a4dbd558ccbc984de8ca006d76d087db",
+      "bytes": 1941,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+        "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+        "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0441/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0441/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "33403c16365ff4ac9c71675d80de118500df7d66751dd4c4e25f6df7bf23b7a3",
+      "bytes": 3149,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0443/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0443/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "6c2a9e8286ed933fc85357de4a1f1aa3ce50ed6ebb627759b9d8c52753ce81d9",
+      "bytes": 3172,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0445/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0445/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "cc4c353a0cdcece497088360e178b96d15f07c0dc5109b52e06fa5a0e0006db4",
+      "bytes": 3139,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0452/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e",
+      "bytes": 3011,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://raw.githubusercontent.com/lddubeau/saxes/211fa0ebec9b628affc09219199639887174bfc3/LICENSE",
+        "commit": "211fa0ebec9b628affc09219199639887174bfc3",
+        "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0452/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "795c009eb6890a5a0bbb4bfe8e079a5261b44284cd740d1c2d31b4b016c943d3",
+      "bytes": 1791,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://raw.githubusercontent.com/lddubeau/saxes/211fa0ebec9b628affc09219199639887174bfc3/LICENSE",
+        "commit": "211fa0ebec9b628affc09219199639887174bfc3",
+        "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0493/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0493/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "bed68a3095d8f44f66536ec2474bf51fc6ad6aa7c6e9d209f1ecec8ca5a0b464",
+      "bytes": 3056,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0521/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+      "bytes": 1267,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "BSD-2-Clause",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/BSD-2-Clause.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-BSD-2-Clause.txt",
+        "sha256": "f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0521/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "ab4fb3254c70dede6acca5d7d0c37a2de6f00dd9a2818bc1921848040b9b3915",
+      "bytes": 3204,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "BSD-2-Clause",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/BSD-2-Clause.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-BSD-2-Clause.txt",
+        "sha256": "f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0485/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0485/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "42ac6fac6dc45969cb66f7f38321306813c877e20833e06b83fa8b411959983b",
+      "bytes": 906,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0498/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0498/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "30a86f681e303849ba74d2d3956159b677ed2a6ec843f5fd61b2c51b94d6ea18",
+      "bytes": 911,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0176/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "3072ef4a004c4f92b37eae61cdc3e27225c0a7d2f5e144700e40b9c5a5a7a9b9",
+      "bytes": 1108,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "programPath": "store/p0176/README.md",
+        "sha256": "a7cc4332acfa1f9b6530e01aac77fefe74f2efa32579215fddaa473013f9a25c",
+        "extraction": "From (The MIT License) to immediately before [rfc] footnote; original bytes retained including escaped author email"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0176/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "f9fce18a1105b57bd5c1502bc984e245e39c965afe2e0a90b52b3f5c62f74c55",
+      "bytes": 1054,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "programPath": "store/p0176/README.md",
+        "sha256": "a7cc4332acfa1f9b6530e01aac77fefe74f2efa32579215fddaa473013f9a25c",
+        "extraction": "From (The MIT License) to immediately before [rfc] footnote; original bytes retained including escaped author email"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0503/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "bytes": 1075,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "programPath": "store/p0501/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+        "sha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+        "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0503/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "0830cf1b7045cdd7e188eb0661bebbbc9bbe5296c0c3f71a67c4ee9fb2334fa0",
+      "bytes": 1057,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "programPath": "store/p0501/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+        "sha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+        "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0505/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "bytes": 1064,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "programPath": "store/p0501/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+        "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+        "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0505/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "a8c22f1703442d53e14d6caae7b0719e48f52027bc48c52bdeb0c0e5a185ccb7",
+      "bytes": 1065,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "programPath": "store/p0501/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+        "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+        "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0514/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0514/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "b1c54a8c78e169d84c519a58f3e4e6a187e26c6cc533d661e18ef428cfcef4cc",
+      "bytes": 1588,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0515/LICENSE-SEP-SUPPLEMENT.txt",
+      "oldSha256": null,
+      "newSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "bytes": 1078,
+      "reason": "Supplement license material; original package code and attribution retained",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0515/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "687d6668efb2cd10e572a87039d66cfc84ad48f34643325ff90fdbaf2e6a443d",
+      "bytes": 1419,
+      "reason": "License source and evidence boundary",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MIT",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MIT.txt",
+        "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0500/LICENSE",
+      "oldSha256": null,
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0500/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "00d137be7beae67022cb585639a2d5330a52eabf362dd7cae1d0f9f519c3b805",
+      "bytes": 4932,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0500/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "bbd81f51c3a18960c03a1ca1eaacddcc32988ed69dac2d15ded73c68ae7df64d",
+      "bytes": 774,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0501/LICENSE",
+      "oldSha256": "14c05fccab671a43614626f8c370444db17e8de5ea243bb68101134d0b9d02c9",
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0501/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "5b3324964ff5cb1ea411c85d1612107fc66caa72632aebc0328cfb04ed218edf",
+      "bytes": 12273,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0501/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "4cb769725c5298e535e045d258ff2141d5951b0a9838790a3c53e428b05ad86a",
+      "bytes": 867,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0516/LICENSE",
+      "oldSha256": null,
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0516/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "3fc429597729d9ee991526fed33f2afa701c8cf7d0121fb11023dd250fd08709",
+      "bytes": 1391,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0516/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "d54a32d72163b43ab5366433416e26a5fa6835f1d4d9bbf8a9574aefd82aafc4",
+      "bytes": 781,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0517/LICENSE",
+      "oldSha256": null,
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0517/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "bc44cf8a1a1c7a7463915a941a12d50ceacef1fd64f03d556c5f0e99195d91a1",
+      "bytes": 3287,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0517/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "e835a4236f2317d535792fd6e5eba63a6476b5c1b11ad2343794b8b34a5757e4",
+      "bytes": 808,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0518/LICENSE",
+      "oldSha256": null,
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0518/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "5fe6203573e3bf970f46cb1497a6eb8657a11917d0c360b63383d895412eea88",
+      "bytes": 3573,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0518/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "005e9b87337a8a213ebf07e5b2430ff7feda59b106a2960dcb6d7e77ce2d6651",
+      "bytes": 794,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0519/LICENSE",
+      "oldSha256": null,
+      "newSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+      "bytes": 2908,
+      "reason": "Approved custom license only for listed local-original files; third-party and prior grants excluded",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0519/LICENSE-SCOPE.json",
+      "oldSha256": null,
+      "newSha256": "8fb7e300915c0f65d9117f681dfc0c491376077b33a371073c116ee55ba49981",
+      "bytes": 1850,
+      "reason": "Exact local source scope and baseline hash binding",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0519/LICENSE-SCOPE.md",
+      "oldSha256": null,
+      "newSha256": "286939b8b9dac3aaca4b1db1f67f93a26439a5e15518581f3890bb34244a4375",
+      "bytes": 786,
+      "reason": "Human-readable exclusion and prior-grant rules",
+      "source": {
+        "licenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+        "licenseName": "DSH SEP Limited Commercial Distribution License 1.0",
+        "date": "2026-09-21"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/SOURCE-ACCESS.md",
+      "oldSha256": null,
+      "newSha256": "c90ba64123bef35450623e94482d67d059ba8714947465cd8e94029f9d98beeb",
+      "bytes": 2925,
+      "reason": "Document verified fixed native source chain and remaining validation limits",
+      "source": {
+        "sourcePin": "6e5971d333377743163edc3ad9e5d0b897abcbc9",
+        "status": "fixed-chain-verified-with-stated-limits"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/SOURCE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "67b4f28e176644821bc9367da9cafee0ed0d28fd8c8752bccf1b0a2d75768342",
+      "bytes": 13274,
+      "reason": "Bind DLL byte equality to exact upstream registry identity and fixed build source",
+      "source": {
+        "sourcePin": "6e5971d333377743163edc3ad9e5d0b897abcbc9",
+        "libvipsDllSha256": "e6cc51bbc763e7deda536c6f56ce96b4c51ea769690ce4f4ed07607527b81dae"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/licenses/LGPL-3.0-or-later.txt",
+      "oldSha256": null,
+      "newSha256": "996af0513df21f7496288951c41428a03c174e9e4a9d63665c57d670f845ccb1",
+      "bytes": 42098,
+      "reason": "Additional standard copyleft terms; no existing license overwritten",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "LGPL-3.0-or-later",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/LGPL-3.0-or-later.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-LGPL-3.0-or-later.txt",
+        "sha256": "996af0513df21f7496288951c41428a03c174e9e4a9d63665c57d670f845ccb1",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/licenses/GPL-3.0-or-later.txt",
+      "oldSha256": null,
+      "newSha256": "fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0",
+      "bytes": 34674,
+      "reason": "Additional standard copyleft terms; no existing license overwritten",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "GPL-3.0-or-later",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/GPL-3.0-or-later.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-GPL-3.0-or-later.txt",
+        "sha256": "fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/licenses/MPL-2.0.txt",
+      "oldSha256": null,
+      "newSha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172",
+      "bytes": 16727,
+      "reason": "Additional standard copyleft terms; no existing license overwritten",
+      "source": {
+        "kind": "standard-license-text-not-project-original",
+        "spdx": "MPL-2.0",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MPL-2.0.txt",
+        "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+        "file": "standard-MPL-2.0.txt",
+        "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172",
+        "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0438/SOURCE-ACCESS.md",
+      "oldSha256": null,
+      "newSha256": "31507e19cc425efee7a0634ee5746c40315f50cdf4f8e0ec211c6a9abf3ac0ea",
+      "bytes": 1777,
+      "reason": "Preserve MPL source access records and explicit unavailable Node API preferred source",
+      "source": {
+        "sourceCommit": "7f7a6ab99d36c24a31c2de6e9996a71297ab700c",
+        "publicProbeStatus": 404,
+        "status": "public-distribution-blocker"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0439/SOURCE-ACCESS.md",
+      "oldSha256": null,
+      "newSha256": "31507e19cc425efee7a0634ee5746c40315f50cdf4f8e0ec211c6a9abf3ac0ea",
+      "bytes": 1777,
+      "reason": "Preserve MPL source access records and explicit unavailable Node API preferred source",
+      "source": {
+        "sourceCommit": "7f7a6ab99d36c24a31c2de6e9996a71297ab700c",
+        "publicProbeStatus": 404,
+        "status": "public-distribution-blocker"
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0089/package.json",
+      "oldSha256": "b4fc98ec709b31a80e8450259c3d5ed2fc1e2b8f8355ced4bfd4d75db45f8a87",
+      "newSha256": "ce1dac3ea92ac3b8b27081351f6380149c94833740544b75a353248dd1bf3963",
+      "bytes": 1005,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "b4fc98ec709b31a80e8450259c3d5ed2fc1e2b8f8355ced4bfd4d75db45f8a87",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0118/package.json",
+      "oldSha256": "b54df5a36d523febdeebfc5682dc4faed101fee10aba913d5f3679582f018da3",
+      "newSha256": "51700b61040d7445bee0e14b5ed9342a0fa080671992c763f167ddde6c1e3763",
+      "bytes": 2966,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "b54df5a36d523febdeebfc5682dc4faed101fee10aba913d5f3679582f018da3",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0123/package.json",
+      "oldSha256": "686397f0f0202e0b693cfd3f6241d7a8da3df326f9642867a484fbbd295690b6",
+      "newSha256": "cc0d5528d7c538e17aa4b701dedc4e230be0b89e0d964a5f86037e0f4b782471",
+      "bytes": 1098,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "686397f0f0202e0b693cfd3f6241d7a8da3df326f9642867a484fbbd295690b6",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0146/package.json",
+      "oldSha256": "053a07f9837ab56732facd808e115f12410ee118f60732ccb591be0258e6cb46",
+      "newSha256": "6fd0d9a3b4305d98ca225c38c93fc52557fad4db0d87526bd4ce11b8155c807a",
+      "bytes": 2475,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "053a07f9837ab56732facd808e115f12410ee118f60732ccb591be0258e6cb46",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0150/package.json",
+      "oldSha256": "d1a6cbfc0477ab590ba4656917d1d9da02ffe28b635db579ad5c407dac54b156",
+      "newSha256": "bc36368578c485431d12eeb0dc1f3df7083f69ec9f1824b497b9966c3a7c5a9c",
+      "bytes": 2040,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "d1a6cbfc0477ab590ba4656917d1d9da02ffe28b635db579ad5c407dac54b156",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0151/package.json",
+      "oldSha256": "032d9e44c92d97643efc9ec1df81a76b535fe804d956ac70632edf27f5a95d2c",
+      "newSha256": "079c6604d215ad86af1258a8590e02dae1c0200894de3f5e409b66198722c8c0",
+      "bytes": 4484,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "032d9e44c92d97643efc9ec1df81a76b535fe804d956ac70632edf27f5a95d2c",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0163/package.json",
+      "oldSha256": "ef1fd481ce3c32458a6f4b41cf20dadf99765e9cbd31f44cc5a9ceabe4af8fcf",
+      "newSha256": "167af7140f24501b7783dea85a587e0e1e11181019202829440d03cefcca4f3d",
+      "bytes": 1133,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "ef1fd481ce3c32458a6f4b41cf20dadf99765e9cbd31f44cc5a9ceabe4af8fcf",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0176/package.json",
+      "oldSha256": "ad4f90a737ab5d8af4dad265e9218456e3779ca5beb70df38dd5feecf80121dd",
+      "newSha256": "07e12b137cd79e990ca8369cbf95f99035491b1e13651e54588379859e081122",
+      "bytes": 1415,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "ad4f90a737ab5d8af4dad265e9218456e3779ca5beb70df38dd5feecf80121dd",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0438/package.json",
+      "oldSha256": "813706254b14b922f510ddd09c999d5426ec717fe6ac055ef86de912a5d2df6e",
+      "newSha256": "edd75ce83c46ddb470632f76257f3d35824aee910e1e708f9a7e71c45999ada3",
+      "bytes": 1197,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "813706254b14b922f510ddd09c999d5426ec717fe6ac055ef86de912a5d2df6e",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0439/package.json",
+      "oldSha256": "4989f2a76bd18b17a9a454e3f2b49f2ff76392afcf82638f050913ddcba428e9",
+      "newSha256": "2ad2a9c69331304697faab667ab9e1ef2802ff415f1eead0f84c8faf60fca67a",
+      "bytes": 792,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "4989f2a76bd18b17a9a454e3f2b49f2ff76392afcf82638f050913ddcba428e9",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0441/package.json",
+      "oldSha256": "49c60605b92316a5d5fe57b9a3bca8950ad9a8beab1cb633d6f29862d1bd163d",
+      "newSha256": "01f693023a8b8034ac24789dfce20eb6c6428813132079020de6e35684548d52",
+      "bytes": 2497,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "49c60605b92316a5d5fe57b9a3bca8950ad9a8beab1cb633d6f29862d1bd163d",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0445/package.json",
+      "oldSha256": "96c0ce3cc17b34aabd58fd442157766d9e244cba735e54ee4fe10d7841f0460c",
+      "newSha256": "d5d9e389b2f1a6e64906715141a7fd59dc5debd9680e39c9e8c72ee3869066ee",
+      "bytes": 1043,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "96c0ce3cc17b34aabd58fd442157766d9e244cba735e54ee4fe10d7841f0460c",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0493/package.json",
+      "oldSha256": "a5096f95098452cf6fe5c8ac9be8f13f59ab7c9f605ba5ef92c91b2c505744f0",
+      "newSha256": "bcf7cd0391898921061e1d12f22d2f17750cec743725c0d00e1970b4c4570359",
+      "bytes": 556,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "a5096f95098452cf6fe5c8ac9be8f13f59ab7c9f605ba5ef92c91b2c505744f0",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0498/package.json",
+      "oldSha256": "305d36387b0ac66084734b45b5dfe2394cb9baef7089ea8f1eec0ba666fe6294",
+      "newSha256": "aa30b8af49820dd101461c48b7a3e5e337a373f493dafef130640c7156e828df",
+      "bytes": 946,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "305d36387b0ac66084734b45b5dfe2394cb9baef7089ea8f1eec0ba666fe6294",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0500/package.json",
+      "oldSha256": "59f8892381f1578a8e6c664ab05743ea5b778cd35b87431a9398b0520dd2c83f",
+      "newSha256": "cd0da5e69fa63e983cd86930e3d50c4de280e78caaa56923708ae2bb7becd98c",
+      "bytes": 1333,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "59f8892381f1578a8e6c664ab05743ea5b778cd35b87431a9398b0520dd2c83f",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0501/package.json",
+      "oldSha256": "7a22e0da64bfe53a5e961d8b7aa9bc3303719e31ead4e485028d5a18342a0e1d",
+      "newSha256": "073bf29c9c5f6950441abfc54710a4470d151c6c56a793c2049726b6c8cb6575",
+      "bytes": 2354,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "7a22e0da64bfe53a5e961d8b7aa9bc3303719e31ead4e485028d5a18342a0e1d",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0503/package.json",
+      "oldSha256": "b05f2990b9c81d70382eb22970e47e39c96d0c0211889bd9f6efbd322e63bb0f",
+      "newSha256": "d3438b36eebb763d5ff94bab8da54b680f244f92f9e6581d8100d536af1c8705",
+      "bytes": 876,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "b05f2990b9c81d70382eb22970e47e39c96d0c0211889bd9f6efbd322e63bb0f",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0505/package.json",
+      "oldSha256": "548526ce0e1cad9ffe904fba19067013c9fea336eafd3cd52a337ec44406c9ed",
+      "newSha256": "70ee8be02ca1ff645a4d8ad6596c76376078da124614d8293a18ad26d400d7cf",
+      "bytes": 1336,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "548526ce0e1cad9ffe904fba19067013c9fea336eafd3cd52a337ec44406c9ed",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0514/package.json",
+      "oldSha256": "09313b3d630a57bafb21cb15e2573bfbdd74470505fc58857e75ad018519463d",
+      "newSha256": "f4c7c16525c01f6646fcccb0ac9795493760a968d86e9b3634cfc16038698e20",
+      "bytes": 2980,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "09313b3d630a57bafb21cb15e2573bfbdd74470505fc58857e75ad018519463d",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0515/package.json",
+      "oldSha256": "29cc8b5b5c02062a62601a1f1d8173034bbdcd5c1f9f11ae73a76d21a544775d",
+      "newSha256": "e567a2f023580c16961e61e5defbca9c84691ea312628d1a55d8dcbd2939f87e",
+      "bytes": 1008,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "29cc8b5b5c02062a62601a1f1d8173034bbdcd5c1f9f11ae73a76d21a544775d",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0516/package.json",
+      "oldSha256": "1bede77865d1cf1b7f186c6f9ccfd24d0328ea8a18b27dd0c665f6341a03cc6e",
+      "newSha256": "6218477454c14a9633f7581efe492c0e327dc5b724ca029071d9972ab0ca9a41",
+      "bytes": 796,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "1bede77865d1cf1b7f186c6f9ccfd24d0328ea8a18b27dd0c665f6341a03cc6e",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0517/package.json",
+      "oldSha256": "5a878bd334ee49bdfeee74cadda0909451ae24b1d12e37e8f34461e6ed6434b9",
+      "newSha256": "9a37b285427a31cc83130b6cdbb7cd0ef1cc59d91ed3a82f1071b23300b4cef6",
+      "bytes": 1434,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "5a878bd334ee49bdfeee74cadda0909451ae24b1d12e37e8f34461e6ed6434b9",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0518/package.json",
+      "oldSha256": "33b3adbacdaa2df6b1d8513281327deef9ceed73a6d9b66fe02218541c6ed146",
+      "newSha256": "5d53a12317f62fb08a7fa4157a973c5b8beacbb93a41288dcc5f1b25b92c0264",
+      "bytes": 809,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "33b3adbacdaa2df6b1d8513281327deef9ceed73a6d9b66fe02218541c6ed146",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0519/package.json",
+      "oldSha256": "a520e5ac81e69a37d849743bb59a949095a5811f8a7976ba19e5b697c14ad1e6",
+      "newSha256": "9139a3b479e0aad4313014b3786691a410a60f622fad2c136b60e8b1b5245509",
+      "bytes": 1133,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "a520e5ac81e69a37d849743bb59a949095a5811f8a7976ba19e5b697c14ad1e6",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0521/package.json",
+      "oldSha256": "438071218e7acba31a460d5c8ebb9a7dc4a8ce5c0cb05f9c706f5b4e1323884c",
+      "newSha256": "d9a2e4ad214d1cdab96a55c2f6acafedf5111fee99a63e42b81b2cf89ab1ee8e",
+      "bytes": 2160,
+      "reason": "Add license metadata and additive package inclusion entries only",
+      "source": {
+        "baselineManifestSha256": "438071218e7acba31a460d5c8ebb9a7dc4a8ce5c0cb05f9c706f5b4e1323884c",
+        "implementationChanged": false
+      }
+    },
+    {
+      "area": "program",
+      "path": "store/p0513/package.json",
+      "oldSha256": "f7bcb6981aa0c7951ec78020f820ddb4e4803eaf01c50f4568d5cd3efcc62fa7",
+      "newSha256": "efc552a0aaab1dab4bdd54b427f25fbb3e72f0a9cac09a24223a7a737bfe3bab",
+      "bytes": 982,
+      "reason": "Declare existing DeepSeek MIT; original LICENSE/vendor text unchanged",
+      "source": {
+        "programPath": "store/p0513/LICENSE",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "support",
+      "path": "runtime/office-skills/LICENSE",
+      "oldSha256": null,
+      "newSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "reason": "Retain fixed DSH MIT for byte-matched upstream office skills",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    },
+    {
+      "area": "support",
+      "path": "runtime/office-skills/LICENSE-PROVENANCE.json",
+      "oldSha256": null,
+      "newSha256": "c7122f8ab921101213251b2261343f840140234818602b7db57e669fd062d119",
+      "bytes": 2652,
+      "reason": "Record equality of four public upstream skill assets",
+      "source": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+        "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+        "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      }
+    }
+  ],
+  "originalMissingDeclarationsResolved": 7,
+  "customLicenseLocalModules": [
+    "p0500",
+    "p0501",
+    "p0516",
+    "p0517",
+    "p0518",
+    "p0519"
+  ],
+  "note": "Source implementation bytes remain unchanged. Candidate graph must be resealed after application; baseline hash is not the new graph hash. This is not legal certification.",
+  "remainingDistributionGaps": [
+    "LibreOffice Kit Node API preferred source unavailable at declared fixed source commit",
+    "sharp fixed libvips DLL source chain established, but complete per-static-component source delivery/relink verification remains outside this audit"
+  ]
+}

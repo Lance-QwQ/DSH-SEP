@@ -1,0 +1,66 @@
+{
+  "name": "@deepseek-ai/dsh-client-ui-settings-memory",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "description": "DSH SEP project automatic memory controls in native Settings",
+  "type": "module",
+  "private": true,
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-connection"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-client-connection": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-client-locale": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-client-ui-settings": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-invariants": "0.1.6-alpha.2",
+    "react": "18.3.1"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "3.18.2"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/client.js.map",
+    "lib/types/**/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "dshSepSourceBase": {
+    "version": "0.1.5-rc.2-local.sep-memory.1"
+  },
+  "dshLocalBuild": {
+    "kind": "private-isolated-component-candidate",
+    "upstreamVersion": "0.1.6-alpha.2",
+    "upstreamCommit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "label": "sep-alpha2-1",
+    "dailyDeployment": false
+  }
+}

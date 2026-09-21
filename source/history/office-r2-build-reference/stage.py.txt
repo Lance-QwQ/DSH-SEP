@@ -1,0 +1,56 @@
+"""Create an isolated candidate from pinned archives; never alter a sealed release."""
+from pathlib import Path, PurePosixPath
+import hashlib, json, os, zipfile
+
+ROOT = Path(__file__).resolve().parents[3]
+BASE = ROOT / 'deliverables/DSH-SEP-alpha2-20260921'
+OUT = ROOT / 'deliverables/DSH-SEP-alpha2-20260921-office-r2'
+WORK = ROOT / 'work/office-fallback-20260921'
+PINS = {
+    'DSH-SEP-Only': '2b294bf512eb58c6416ab6062c7a2c22f3cdcaf06543063fa4e4e8527b14e831',
+    'DSH-SEP-Full': 'b42d1216949338a95e333cf23b0bcc5212ea1daaa5834c8ad7b8757af147742e',
+}
+SKIP = ('payload/store/p0438/', 'payload/store/p0439/',
+        'docs/licenses/graph/p0438/', 'docs/licenses/graph/p0439/')
+
+def digest(path):
+    with path.open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+def long(path):
+    return Path('\\\\?\\' + str(path.resolve())) if os.name == 'nt' else path
+
+def main():
+    assert not OUT.exists(), 'Create-only candidate directory already exists'
+    for name, pin in PINS.items():
+        assert digest(BASE / (name + '-Windows-x64.zip')) == pin
+    OUT.mkdir()
+    rows = []
+    for name, pin in PINS.items():
+        dest = OUT / name
+        dest.mkdir()
+        count = skipped = 0
+        with zipfile.ZipFile(BASE / (name + '-Windows-x64.zip')) as archive:
+            for info in archive.infolist():
+                rel = PurePosixPath(info.filename)
+                assert not info.is_dir() and not rel.is_absolute() and '..' not in rel.parts
+                assert '\\' not in info.filename
+                if info.filename.startswith(SKIP):
+                    skipped += 1
+                    continue
+                path = long(dest / info.filename)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                with archive.open(info) as src, path.open('xb') as output:
+                    while block := src.read(1024 * 1024):
+                        output.write(block)
+                count += 1
+        rows.append({'name': name, 'baseArchiveSha256': pin, 'copied': count,
+                     'excludedOldKitFilesAndNotices': skipped})
+        print(json.dumps(rows[-1]), flush=True)
+    evidence = WORK / 'packaging/stage.json'
+    evidence.write_text(json.dumps({'status': 'pass', 'stage': 'unsealed-not-installable',
+        'purpose': 'Old Kit/native payload and associated graph notices excluded; new implementation not sealed yet',
+        'bundles': rows}, indent=2) + '\n', encoding='utf-8')
+
+if __name__ == '__main__':
+    main()

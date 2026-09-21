@@ -1,0 +1,23 @@
+{
+  "kind": "source references for local synthetic adaptation; not original benchmark execution",
+  "sources": [
+    {
+      "task": "task_csv_cities_filter",
+      "path": "vendor/pinchbench/tasks/task_csv_cities_filter.md",
+      "sha256": "fa674cffb51a6cd944e332994c83c7e1e3f7ffe05a2ded8767a400a0c2c74488",
+      "upstream": "https://github.com/pinchbench/skill/blob/819384ae830492365b8363fc26bc2602e73f216d/tasks/task_csv_cities_filter.md"
+    },
+    {
+      "task": "task_sanity",
+      "path": "vendor/pinchbench/tasks/task_sanity.md",
+      "sha256": "a6912dc746a88faba7557266da7ccd55fb5b02313701c276dffe6ff9e6e9059c",
+      "upstream": "https://github.com/pinchbench/skill/blob/819384ae830492365b8363fc26bc2602e73f216d/tasks/task_sanity.md"
+    },
+    {
+      "task": "task_summary",
+      "path": "vendor/pinchbench/tasks/task_summary.md",
+      "sha256": "4b708aad0439834a514e5ccb4c424c22c2ff29a4a4f2cc2013b3cfbc837b52f2",
+      "upstream": "https://github.com/pinchbench/skill/blob/819384ae830492365b8363fc26bc2602e73f216d/tasks/task_summary.md"
+    }
+  ]
+}

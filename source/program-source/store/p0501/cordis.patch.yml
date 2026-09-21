@@ -1,0 +1,9 @@
+- insert:
+    - id: dsh-system-enhancement-package
+      name: dsh-system-enhancement-package
+      config:
+        enabled: false
+    - id: sep-memory-settings
+      name: '@deepseek-ai/dsh-client-ui-settings-memory'
+      config:
+        enabled: true

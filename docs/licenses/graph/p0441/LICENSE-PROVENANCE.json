@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "package": "fontkit",
+  "version": "2.0.4",
+  "packageId": "p0441",
+  "baselineManifestSha256": "49c60605b92316a5d5fe57b9a3bca8950ad9a8beab1cb633d6f29862d1bd163d",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "MIT",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-MIT.txt",
+    "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": "Devon Govett <devongovett@gmail.com>",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/foliojs/fontkit.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/fontkit/2.0.4",
+    "responseSha256": "9ea7331f4966d58d4e22ce978f7c665a7715c2e45e023a758a20a98dfd2c5493",
+    "gitHead": "fbf3b9ef21eebd219eb73e666faed573af0fba09",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/fontkit/-/fontkit-2.0.4.tgz",
+      "integrity": "sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g==",
+      "shasum": "4765d664c68b49b5d6feb6bd1051ee49d8ec5ab0"
+    },
+    "repository": {
+      "url": "git://github.com/foliojs/fontkit.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "f686a9515af33fce16ab4bffe50570728197e53165068548c6f75a1793797a08",
+    "bytes": 1172861,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0441",
+    "name": "fontkit",
+    "version": "2.0.4",
+    "license": "MIT",
+    "author": {
+      "name": "Devon Govett",
+      "email": "devongovett@gmail.com"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git://github.com/foliojs/fontkit.git",
+      "type": "git"
+    },
+    "gitHead": "fbf3b9ef21eebd219eb73e666faed573af0fba09",
+    "metadataUrl": "https://registry.npmjs.org/fontkit/2.0.4",
+    "tarball": "https://registry.npmjs.org/fontkit/-/fontkit-2.0.4.tgz",
+    "integrity": "sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

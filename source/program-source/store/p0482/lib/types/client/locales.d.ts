@@ -1,0 +1,30 @@
+/** Product-owned Chinese and English copy; fixed keys keep both dictionaries complete. */
+export declare const zh: {
+    readonly title: "记忆增强";
+    readonly master: "自动记忆增强";
+    readonly capture: "自动学习新信息";
+    readonly recall: "自动引用已有记忆";
+    readonly project: "项目";
+    readonly refresh: "刷新";
+    readonly scope: "项目级设置：影响所选项目的会话，可与标准、PTC、创造、极简模式组合。";
+    readonly masterHelp: "主开关开启两项，关闭暂停两项；也可分别调整，只开启需要的一项。";
+    readonly noDelete: "关闭不会删除已有记忆，不影响手动查询、编辑、删除与到期治理；已经进入当前对话的信息不会因此移除。";
+    readonly stored: "已保存";
+    readonly readAt: "上次确认";
+    readonly on: "开";
+    readonly off: "关";
+    readonly effective: "已生效";
+    readonly paused: "已暂停";
+    readonly capped: "受宿主配置限制";
+    readonly ineffective: "当前未生效";
+    readonly loading: "正在读取项目记忆设置…";
+    readonly saving: "等待当前记忆处理结束，保存后生效；请勿重复提交。";
+    readonly freshness: "显示上次读取的状态；其他会话可能更改设置，可点击刷新。变更从下一次记忆操作生效。";
+    readonly readError: "无法读取记忆设置，请刷新后重试。";
+    readonly unavailable: "记忆服务或已配置项目当前不可用，无法确认开关状态。";
+    readonly unconfirmed: "保存结果未确认，已尝试重新读取当前状态；不会自动重复提交。";
+    readonly conflict: "设置已被其他操作更改，已重新读取。请核对后再调整。";
+    readonly runtimeUnavailable: "记忆运行状态异常：";
+};
+export type MemoryLocaleKey = keyof typeof zh;
+export declare const en: Record<MemoryLocaleKey, string>;

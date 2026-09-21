@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "package": "@earendil-works/pi-telemetry",
+  "version": "0.85.1",
+  "packageId": "p0163",
+  "baselineManifestSha256": "ef1fd481ce3c32458a6f4b41cf20dadf99765e9cbd31f44cc5a9ceabe4af8fcf",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+    "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+    "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+  },
+  "originalAttributionFields": {
+    "author": "Mario Zechner",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/earendil-works/pi.git",
+      "directory": "packages/telemetry"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40earendil-works%2Fpi-telemetry/0.85.1",
+    "responseSha256": "f3e8ad6d89ace2ef991945f437dcc29c63d34b23c6b105c26b25ac870ef47fc9",
+    "gitHead": "d981de1229ef899957bbe968bc8dcda02a21f477",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-telemetry/-/pi-telemetry-0.85.1.tgz",
+      "integrity": "sha512-Bg/YN6kA7Swja/NQxka8xFdecb4E/auIEGF2G5A25EaQXhRnPj300/7/KpgsDDMYUzHTDAv4RyUxaQPJKW81Rw==",
+      "shasum": "b4dbe9155fff8aedb3ff752e7a954b9c7201ddf1"
+    },
+    "repository": {
+      "url": "git+https://github.com/earendil-works/pi.git",
+      "type": "git",
+      "directory": "packages/telemetry"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "22103a32c657ab1f0ca8dd0b3adab48924c56636a5a9ab8b89a43559fb201310",
+    "bytes": 27323,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "package": "@napi-rs/canvas-win32-x64-msvc",
+  "version": "1.0.8",
+  "packageId": "p0503",
+  "baselineManifestSha256": "b05f2990b9c81d70382eb22970e47e39c96d0c0211889bd9f6efbd322e63bb0f",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "previously-collected-upstream-supplement",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "programPath": "store/p0501/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+    "sha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+    "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+  },
+  "originalAttributionFields": {
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Brooooooklyn/canvas.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license."
+}

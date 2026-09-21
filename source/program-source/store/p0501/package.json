@@ -1,0 +1,85 @@
+{
+  "name": "dsh-system-enhancement-package",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "private": true,
+  "description": "DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE (DSH SEP) — DSH系统增强套件: governed memory, retrieval and DeepSeek V4 understanding for DSH.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "STATUS.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "THIRD_PARTY_RESEARCH.md",
+    "licenses",
+    "docs",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@11.19.0",
+  "dependencies": {
+    "@deepseek-ai/dsh-client-ui-settings-memory": "0.1.0-alpha.15.dsh-alpha2.1",
+    "@napi-rs/canvas": "1.0.8",
+    "fflate": "0.8.3",
+    "fast-xml-parser": "5.11.1",
+    "pdfjs-dist": "6.2.108",
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-fs": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-storage-domain": "0.1.6-alpha.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-fs": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-storage-domain": {
+      "optional": true
+    }
+  },
+  "dshSuiteMaintenanceProtocol": 1,
+  "dshSuiteAdoptionProtocol": 1,
+  "dshSuiteDocumentDeletionProtocol": 1,
+  "dshLocalBuild": {
+    "kind": "private-isolated-component-candidate",
+    "upstreamVersion": "0.1.6-alpha.2",
+    "upstreamCommit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "label": "sep-alpha2-1",
+    "dailyDeployment": false
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-alpha.14.rc2-flow.1",
+    "build": {
+      "kind": "private-isolated-component-candidate",
+      "upstreamVersion": "0.1.5-rc.2",
+      "upstreamCommit": "fb2c4b9e698e30edb738bca4cf0618587db7d203",
+      "label": "sep-session-1",
+      "scope": "session-migration-task-checkpoint-memory",
+      "dailyDeployment": false
+    }
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}

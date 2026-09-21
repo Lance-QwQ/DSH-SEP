@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "package": "brotli",
+  "version": "1.3.3",
+  "packageId": "p0443",
+  "baselineManifestSha256": "387b47d00ea96cab9b4c521629fbcdc7621053ac061812526f3c69700924cef5",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "MIT",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-MIT.txt",
+    "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": "Devon Govett <devongovett@gmail.com>",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/devongovett/brotli.js.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/brotli/1.3.3",
+    "responseSha256": "03215eaf7ebdddf56c0e58a673dee6323dadd502977ba68e259e3787a68d71d1",
+    "gitHead": "e36051345f6d27a56e5f39ea70d2f789b8574046",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz",
+      "integrity": "sha512-oTKjJdShmDuGW94SyyaoQvAjf30dZaHnjJ8uAF+u2/vGJkJbJPJAT1gDiOJP5v1Zb6f9KEyW/1HpuaWIXtGHPg==",
+      "shasum": "7365d8cc00f12cf765d2b2c898716bcf4b604d48"
+    },
+    "repository": {
+      "url": "git+https://github.com/devongovett/brotli.js.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "3c7c260f6263df95fee49a9119e9fd21227d628b6c9d99080a75edfd9e2bdb24",
+    "bytes": 416657,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0443",
+    "name": "brotli",
+    "version": "1.3.3",
+    "license": "MIT",
+    "author": {
+      "name": "Devon Govett",
+      "email": "devongovett@gmail.com"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/devongovett/brotli.js.git",
+      "type": "git"
+    },
+    "gitHead": "e36051345f6d27a56e5f39ea70d2f789b8574046",
+    "metadataUrl": "https://registry.npmjs.org/brotli/1.3.3",
+    "tarball": "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz",
+    "integrity": "sha512-oTKjJdShmDuGW94SyyaoQvAjf30dZaHnjJ8uAF+u2/vGJkJbJPJAT1gDiOJP5v1Zb6f9KEyW/1HpuaWIXtGHPg=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

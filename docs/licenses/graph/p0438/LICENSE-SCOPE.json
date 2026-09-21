@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "package": "@dsh-sep/office-converter",
+  "version": "0.1.0",
+  "license": "MIT",
+  "includePatterns": [
+    "*.js",
+    "*.cs",
+    "*.ps1",
+    "*.d.ts",
+    "README.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+  "originalFiles": [
+    {
+      "path": "JobBridge.cs",
+      "baselineSha256": "f09fa63a230611f6789b7bbb2685652120378fbc308c4ff4d2de267865fed32e",
+      "bytes": 11666
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "3b3917045aff38fb2d260ad30680a862a1b75da1a13c0d4865a0a4d6d547ff61",
+      "bytes": 8164
+    },
+    {
+      "path": "archive.js",
+      "baselineSha256": "35e20cc2e4db910889b4ea0493600ab53e1d121fde10d815ccc55eb58deb3c79",
+      "bytes": 9548
+    },
+    {
+      "path": "bridge.ps1",
+      "baselineSha256": "b1d077422d1f54b7dcf9616e9534e82f7b449b08eaa18ab111e2fffe8c066690",
+      "bytes": 817
+    },
+    {
+      "path": "errors.js",
+      "baselineSha256": "b7dea0a3b3f45ece3cfde92180ea8c4ad22fb86ab5d2c6865d665cbb9077ecee",
+      "bytes": 163
+    },
+    {
+      "path": "index.d.ts",
+      "baselineSha256": "96606dc4207ce09cb00bac6fc540796c4a1a502bb70d3cc6df5bd3b76d56d096",
+      "bytes": 2070
+    },
+    {
+      "path": "index.js",
+      "baselineSha256": "e8b1bd93eba492f2d3f02971d419255856eedff0a390b99dac3adcf8789990b2",
+      "bytes": 14384
+    },
+    {
+      "path": "native-process.js",
+      "baselineSha256": "13476073d8cca483b8b91dc03b6d1ccc4477d7f58353d0385b5f721dc9364628",
+      "bytes": 3616
+    },
+    {
+      "path": "owned-files.js",
+      "baselineSha256": "8aca67dfef038070f06e02ba9dd7b733616fc15a85f3f7a284edec2c365a2eae",
+      "bytes": 835
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "eaf8041165aedfcf8ff212456d672f3b481094a9889bdb414c88e8bddbc01368",
+      "bytes": 641
+    }
+  ],
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "dsh-sep-context-preparation",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "context_resolver.py",
+    "README.md",
+    "LICENSE",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2"
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-isolated.1"
+  },
+  "dshLocalBuild": {
+    "kind": "private-isolated-component-candidate",
+    "upstreamVersion": "0.1.6-alpha.2",
+    "upstreamCommit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "label": "sep-alpha2-1",
+    "dailyDeployment": false
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}

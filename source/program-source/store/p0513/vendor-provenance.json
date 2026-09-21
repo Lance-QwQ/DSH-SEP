@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "upstreamCommit": "fb2c4b9e698e30edb738bca4cf0618587db7d203",
+  "files": [
+    {
+      "package": "@deepseek-ai/dsh-session-format-v0-to-v1",
+      "version": "0.1.5-rc.2",
+      "from": "upstream:@deepseek-ai/dsh-session-format-v0-to-v1@0.1.5-rc.2/lib/index.js",
+      "sourceSha256": "15ae26b90310d83b1b90a5e7cad9e2f34282fddaba2f19f2fd2232382065603d",
+      "output": "src/vendor/v0-v1.mjs",
+      "outputSha256": "7930a62f26369cb0c4a19b0c885f6d91a955ae0700297380b9aaca199be31935",
+      "license": "MIT",
+      "changes": "Local explicit event inventory, admission and task intent references; v1-v2 includes diagnostic stream provenance. All other upstream strict migration behavior retained."
+    },
+    {
+      "package": "@deepseek-ai/dsh-session-format-v1-to-v2",
+      "version": "0.1.5-rc.2",
+      "from": "upstream:@deepseek-ai/dsh-session-format-v1-to-v2@0.1.5-rc.2/lib/index.js",
+      "sourceSha256": "23950e7d0366d1bf5f46c9db69cbbfc64c0cfaab786147bdd40d044cefc74584",
+      "output": "src/vendor/v1-v2.mjs",
+      "outputSha256": "b5363da32888d5ab00b3820b2cf6ee342c1b5dfa535a404f70ce8d3778c63b6b",
+      "license": "MIT",
+      "changes": "Local explicit event inventory, admission and task intent references; v1-v2 includes diagnostic stream provenance. All other upstream strict migration behavior retained."
+    },
+    {
+      "package": "@deepseek-ai/dsh-session-format-v2-to-v3",
+      "version": "0.1.5-rc.2",
+      "from": "upstream:@deepseek-ai/dsh-session-format-v2-to-v3@0.1.5-rc.2/lib/index.js",
+      "sourceSha256": "2d35e1e0ed497af569d5735fc590187de1568489cfe60d070b5f61330cd5a338",
+      "output": "src/vendor/v2-v3.mjs",
+      "outputSha256": "c5085d40cd3eae39982a7a1c799998dbea7da90254a63d16ed4571d2e6e14c5f",
+      "license": "MIT",
+      "changes": "Local explicit event inventory, admission and task intent references; v1-v2 includes diagnostic stream provenance. All other upstream strict migration behavior retained."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "package": "data-uri-to-buffer",
+  "version": "4.0.1",
+  "packageId": "p0176",
+  "baselineManifestSha256": "ad4f90a737ab5d8af4dad265e9218456e3779ca5beb70df38dd5feecf80121dd",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "verbatim-license-from-packaged-README",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "programPath": "store/p0176/README.md",
+    "sha256": "a7cc4332acfa1f9b6530e01aac77fefe74f2efa32579215fddaa473013f9a25c",
+    "extraction": "From (The MIT License) to immediately before [rfc] footnote; original bytes retained including escaped author email"
+  },
+  "originalAttributionFields": {
+    "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/TooTallNate/node-data-uri-to-buffer.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license."
+}

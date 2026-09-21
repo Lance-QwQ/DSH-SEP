@@ -1,0 +1,13 @@
+"""Bind public support files to the current candidate manifest; excludes private state."""
+from integrate import OUT, NAMES, readj, writej, files, rel, digest
+for name in NAMES:
+    root=OUT/name
+    rows=[]
+    for f in files(root):
+        r=rel(f,root)
+        if r.startswith('payload/') or r in ['manifest.json','graph.json']:continue
+        assert not f.is_symlink() and f.stat().st_nlink==1
+        assert '.git' not in r.split('/') and not f.name.startswith('.env')
+        rows.append({'path':r,'size':f.stat().st_size,'sha256':digest(f)})
+    m=readj(root/'manifest.json');m['support']=rows;writej(root/'manifest.json',m)
+    print(name, 'support', len(rows), flush=True)

@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "kind": "dsh-sep-distribution-source-provenance",
+  "distribution": "20260921-office-r2",
+  "packageKind": "full",
+  "publicReleaseReady": false,
+  "dshVersion": "0.1.6-alpha.2",
+  "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
+  "baseGraphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "distributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+  "distributionGraphState": "sealed",
+  "upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "tag": "dsh-v0.1.6-alpha.2",
+    "meaning": "Upstream base only; local SEP adaptations are identified by the final graph, not this upstream commit."
+  },
+  "sourceDelivery": {
+    "status": "pass",
+    "scope": "Graph-matching editable SEP/adapted host files and full authored Office bridge source; separate supplemental tests/build scripts; official LibreOffice source-access records.",
+    "sourceFiles": 881,
+    "exactReleaseFiles": 843,
+    "supplementalAuthoringFiles": 38,
+    "sourceFilesManifestSha256": "77a3bfa6c2f599e2bc28234118a048e16487389ee883703306a55083d677983e",
+    "snapshot": "DSH-SEP-Source-20260921-office-r2.zip",
+    "manifest": "SOURCE_FILES.json",
+    "reproducibleBuildClaim": false,
+    "allTransitiveBinarySourcesIncluded": false,
+    "privateDataIncluded": false,
+    "gitHistoryIncluded": false
+  },
+  "sourceAccess": {
+    "status": "pass",
+    "scope": "Replacement Office adapter preferred source and matching official LibreOffice source-access identity verified; not a full legal or reproducible-build certification.",
+    "blockers": [],
+    "resolvedByReplacement": [
+      {
+        "code": "LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE",
+        "oldComponents": [
+          "@deepseek-ai/libreoffice-kit@0.0.1",
+          "@deepseek-ai/libreoffice-kit-win32-x64@0.0.1"
+        ],
+        "resolution": "Both old packages removed. Authored @dsh-sep/office-converter source and official LibreOffice runtime replace them. The old Kit repository has not become accessible."
+      }
+    ],
+    "office": {
+      "adapter": "@dsh-sep/office-converter@0.1.0",
+      "runtime": "LibreOffice 26.8.0.3",
+      "preferredSource": "DSH-SEP-Source-20260921-office-r2.zip",
+      "officialSourceAccess": "payload/store/p0439/SOURCE-ACCESS.md",
+      "officialSourceArchiveCount": 4,
+      "officialSourceArchiveTotalBytes": 654222716
+    },
+    "additionalReview": [
+      {
+        "code": "SHARP_NATIVE_CORRESPONDING_SOURCE_SCOPE",
+        "component": "@img/sharp-win32-x64@0.35.4",
+        "graphPackageId": "p0089",
+        "status": "pass",
+        "scope": "Fixed source chain and main libvips DLL correspondence verified; not complete static-component source delivery, second C++ DLL audit, relinking validation, or reproducible-build verification.",
+        "confirmedBlocker": false,
+        "remainingVerification": [
+          "all embedded static components source archives",
+          "second C++ DLL correspondence",
+          "relinking materials and reproducible builds"
+        ]
+      }
+    ]
+  },
+  "license": {
+    "status": "pass",
+    "coverage": {
+      "packages": 527,
+      "noticeEntries": 624,
+      "missingLicenseDeclarations": 0
+    },
+    "evidence": "docs/licenses/release/LICENSE-SYNCHRONIZATION.md",
+    "approvedSepLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "policy": "Apply approved terms only to mapped local originals; preserve existing MIT grants and all third-party terms.",
+    "scope": "Notice identity and explicit declaration inventory; not full legal certification."
+  },
+  "publication": {
+    "channel": "GitHub",
+    "repositoryCreated": false,
+    "uploaded": false,
+    "repositoryUrl": null,
+    "downloadUrl": null,
+    "supportUrl": null,
+    "securityContact": null
+  },
+  "archiveChecksums": "External release checksum list; no self-reference."
+}

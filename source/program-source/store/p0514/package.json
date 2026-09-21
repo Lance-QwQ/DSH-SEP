@@ -1,0 +1,92 @@
+{
+  "name": "@deepseek-ai/dsh-task-checkpoint",
+  "description": "Explicit bounded task checkpoints and conservative recovery over durable session events",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/session/task-checkpoint"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./fold": {
+      "types": "./lib/types/fold.d.ts",
+      "default": "./lib/fold.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/fold.js",
+    "lib/chunk-*.js",
+    "lib/fold-*.js",
+    "lib/types/**/*.d.ts",
+    "LICENSE-SEP-SUPPLEMENT.txt",
+    "LICENSE-PROVENANCE.json"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@deepseek-ai/schemastery": "3.18.2",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-brand": "0.1.6-alpha.2",
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-agent": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-fs": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-invariants": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-llm": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session-persistence": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-brand": "0.1.6-alpha.2",
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-agent": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-fs": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-invariants": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-llm": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session-persistence": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-agent-loop": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-fs-local": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session-persistence-jsonl": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-system-prompt": "0.1.6-alpha.2"
+  },
+  "private": true,
+  "dshLocalBuild": {
+    "kind": "private-isolated-component-candidate",
+    "upstreamVersion": "0.1.6-alpha.2",
+    "upstreamCommit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "label": "sep-alpha2-1",
+    "dailyDeployment": false
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.5-rc.2-local.sep-session.1",
+    "build": {
+      "kind": "private-isolated-component-candidate",
+      "upstreamVersion": "0.1.5-rc.2",
+      "upstreamCommit": "fb2c4b9e698e30edb738bca4cf0618587db7d203",
+      "label": "sep-session-1",
+      "scope": "session-migration-task-checkpoint-memory",
+      "dailyDeployment": false
+    }
+  }
+}

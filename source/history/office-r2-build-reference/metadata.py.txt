@@ -1,0 +1,88 @@
+"""Refresh public metadata from this graph, preserving r1 records verbatim."""
+from integrate import ROOT,WORK,OUT,BASE,REV,NAMES,readj,write,writej,files,rel,digest,win,copy
+import json,sys
+
+full=OUT/'DSH-SEP-Full';g=readj(full/'graph.json');gh=digest(full/'graph.json')
+summary=readj(WORK/'packaging/public-validation.json')
+assert summary['graphSha256']==gh and summary['status']=='pass'
+source=readj(WORK/'packaging/source-delivery.json')
+assert source['graphSha256']==gh
+oldstatus=readj(BASE/'DSH-SEP-Full/RELEASE-STATUS.json')
+oldsource=readj(BASE/'DSH-SEP-Full/SOURCE-PROVENANCE.json')
+additional=oldstatus['sourceAccess']['additionalReview']
+source_access={'status':'pass','scope':'Replacement Office adapter preferred source and matching official LibreOffice source-access identity verified; not a full legal or reproducible-build certification.',
+ 'blockers':[], 'resolvedByReplacement':[{'code':'LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE','oldComponents':['@deepseek-ai/libreoffice-kit@0.0.1','@deepseek-ai/libreoffice-kit-win32-x64@0.0.1'],
+ 'resolution':'Both old packages removed. Authored @dsh-sep/office-converter source and official LibreOffice runtime replace them. The old Kit repository has not become accessible.'}],
+ 'office':{'adapter':'@dsh-sep/office-converter@0.1.0','runtime':'LibreOffice 26.8.0.3','preferredSource':'DSH-SEP-Source-20260921-office-r2.zip',
+ 'officialSourceAccess':'payload/store/p0439/SOURCE-ACCESS.md','officialSourceArchiveCount':4,'officialSourceArchiveTotalBytes':654222716},'additionalReview':additional}
+blockers=[{'code':'HOST_STARTUP_UNATTRIBUTED','status':'blocked','reason':'Historical r1 Only host exited before ready; original stderr body was unavailable. Ten later historical-graph starts and current graph checks do not prove that historical cause fixed.'}]
+copydoc=WORK/'documentation'
+for name in NAMES:
+ root=OUT/name;docs=root/'docs';history=docs/'history/r1'
+ oldstatus=readj(BASE/name/'RELEASE-STATUS.json')
+ oldsource=readj(BASE/name/'SOURCE-PROVENANCE.json')
+ # Preserve old status/dependency identities separately. Do not rewrite sealed sources.
+ for src,dest in [(BASE/name/'RELEASE-STATUS.json',history/'RELEASE-STATUS.json'),(BASE/name/'SOURCE-PROVENANCE.json',history/'SOURCE-PROVENANCE.json'),
+                  (BASE/name/'docs/RELEASE_MANIFEST.json',history/'RELEASE_MANIFEST.json'),(BASE/name/'docs/DEPENDENCIES.json',history/'DEPENDENCIES.json')]:
+  data=win(src).read_bytes()
+  if win(dest).exists():assert win(dest).read_bytes()==data
+  else:write(dest,data)
+ for f in files(copydoc/'docs'):
+  target=docs/rel(f,copydoc/'docs');data=f.read_bytes()
+  if 'history/' not in rel(f,copydoc/'docs'):
+   data=data.replace(b'@GRAPH_SHA256@',gh.encode()).replace(b'@OFFICE_VALIDATION_SUMMARY@',summary['displaySummary'].encode())
+  write(target,data)
+ write(root/'README.md',(copydoc/(('Full' if name.endswith('Full') else 'Only')+'-README.md')).read_bytes().replace(b'@GRAPH_SHA256@',gh.encode()).replace(b'@OFFICE_VALIDATION_SUMMARY@',summary['displaySummary'].encode()))
+ write(root/'LICENSING.md',('# DSH SEP 许可说明\n\nSEP 相应原创部分适用[根许可](LICENSE)：允许个人与企业内部使用、修改、免费转发和制作衍生版；软件及衍生版的商业分发须另获授权。已有 MIT 与其他第三方许可保持有效。\n\n详见[完整许可说明](docs/LICENSING.md)和[第三方声明](docs/THIRD_PARTY_NOTICES.md)。\n').encode())
+ write(root/'THIRD_PARTY_NOTICES.md',('# 第三方许可与来源\n\n完整清单见[第三方声明](docs/THIRD_PARTY_NOTICES.md)、[依赖清单](docs/DEPENDENCIES.json)与[Office 替换说明](docs/OFFICE_CONVERTER.md)。\n\n本版移除旧 LibreOffice Kit 及其 native 包，改用 SEP 原创 CLI 适配器和官方 LibreOffice；这不表示此前返回 404 的旧仓库恢复可用。官方引擎及其他第三方条款独立保留。\n').encode())
+ index=readj(BASE/name/'docs/licenses/index.json')
+ entries=[r for r in index['entries'] if not any('/'+x+'/' in r['file'] for x in ['p0438','p0439'])]
+ # Existing other-package notices must still identify the exact release bytes.
+ for row in entries:assert digest(docs/row['file'])==row['sha256'],row['file']
+ for module in ['p0438','p0439']:
+  source_root=full/'payload/store'/module
+  chosen=['LICENSE'] if module=='p0438' else ['LICENSE.html','license.txt','NOTICE','SOURCE-ACCESS.md','ENGINE-PROVENANCE.json']
+  if module=='p0439':chosen += [rel(f,source_root) for f in files(source_root/'source-provenance')]
+  for within in chosen:
+   src=source_root/within;relative='licenses/graph/'+module+'/'+within;data=win(src).read_bytes();write(docs/relative,data)
+   entries.append({'source':'program/store/'+module+'/'+within,'file':relative,'sha256':digest(src),'size':len(data)})
+ index.update(graphSha256=gh,entries=entries,extractionRule='Current graph notices and Office preferred-source/access records. Historical r1 license overlays retain their original identity. Inventory is not legal certification.')
+ writej(docs/'licenses/index.json',index)
+ inventory=readj(BASE/name/'docs/DEPENDENCIES.json');byid={r['id']:r for r in inventory['packages']}
+ for p in g['packages']:
+  row=byid[p['id']];pm_path=full/'payload/store'/p['id']/'package.json';pm=readj(pm_path)
+  row.update(name=p['name'],version=p['version'],scope=REV+'-distribution-program-graph',manifestSha256=digest(pm_path),licenseDeclaration=pm.get('license'),
+   private=pm.get('private',False),repository=pm.get('repository'),dependencies=p['dependencies'],omittedOptional=p.get('omittedOptional',[]),
+   noticeFiles=[{'file':n['file'],'sha256':n['sha256']} for n in entries if n['file'].startswith('licenses/graph/'+p['id']+'/')])
+  if p['id'] in ['p0438','p0439']:
+   row.update(sourceCommit=None,sourceBaseCommit=None,sourceCommitNote='Authored source files bound by graph' if p['id']=='p0438' else 'Official binary/source version 26.8.0.3; source archive identities recorded in SOURCE-ACCESS.md',
+    localModifications='New SEP-authored CLI adapter' if p['id']=='p0438' else 'Unmodified official files, app-local copies of official VC runtime files, added provenance and package metadata')
+ inventory.update(documentSet='20260921-docs-r5',checkedOn='2026-09-21',baseline={'release':REV,'graphSha256':gh,'hostVersion':'0.1.6-alpha.2','sepVersion':'0.1.0-alpha.15.dsh-alpha2.1'})
+ inventory['counts']={'graphPackages':len(g['packages']),'graphNoticeFiles':sum(e['file'].startswith('licenses/graph/') for e in entries),'supplementalNoticeFiles':sum(not e['file'].startswith('licenses/graph/') for e in entries),'packagesWithoutLicenseDeclaration':sum(not r.get('licenseDeclaration') for r in inventory['packages'])}
+ assert inventory['counts']['packagesWithoutLicenseDeclaration']==0
+ inventory['scope']['publicationState']='Office replacement candidates; historical startup cause unresolved; not uploaded to GitHub.'
+ writej(docs/'DEPENDENCIES.json',inventory)
+ license_sync={**oldstatus['licenseSynchronization'],'status':'pass','scope':'Notice identity and explicit declaration inventory; not full legal certification.',
+  'coverage':{'packages':len(g['packages']),'noticeEntries':len(entries),'missingLicenseDeclarations':0},'evidence':'docs/licenses/release/LICENSE-SYNCHRONIZATION.md'}
+ status={**oldstatus,'distribution':REV,'status':'blocked','stage':'office-replacement-verified-historical-startup-condition-retained',
+  'graphSha256':gh,'baseGraphSha256':digest(BASE/name/'graph.json'),'publicReleaseReady':False,
+  'finalGraphBinding':{'status':'pass','packages':len(g['packages']),'files':len(g['files']),'scope':'New Office adapter/runtime, provider, wire schemas and preview notice; remaining program bytes inherit fixed r1 graph.','sealRequired':False},
+  'currentPackageValidation':{'status':'pass','phase':'graph-bound-program-and-installed-integration','graphSha256':gh,'evidence':'docs/evidence/office-validation.json','scope':'See fixed tests and failures in evidence. Final immutable ZIP byte verification and installation are separately bound in the external delivery report.'},
+  'sourceAccess':source_access,'licenseSynchronization':license_sync,'validationBlockers':blockers,'onlineModelCalls':0}
+ writej(root/'RELEASE-STATUS.json',status)
+ provenance={**oldsource,'distribution':REV,'baseGraphSha256':digest(BASE/name/'graph.json'),'distributionGraphSha256':gh,'sourceAccess':source_access,'license':license_sync,
+  'sourceDelivery':{'status':'pass','scope':'Graph-matching editable SEP/adapted host files and full authored Office bridge source; separate supplemental tests/build scripts; official LibreOffice source-access records.',
+   'sourceFiles':source['files'],'exactReleaseFiles':source['exactReleaseFiles'],'supplementalAuthoringFiles':source['supplementalFiles'],'sourceFilesManifestSha256':source['sourceFilesManifestSha256'],
+   'snapshot':'DSH-SEP-Source-20260921-office-r2.zip','manifest':'SOURCE_FILES.json','reproducibleBuildClaim':False,'allTransitiveBinarySourcesIncluded':False,'privateDataIncluded':False,'gitHistoryIncluded':False}}
+ writej(root/'SOURCE-PROVENANCE.json',provenance)
+ rm=readj(BASE/name/'docs/RELEASE_MANIFEST.json');rm.update(documentRevision='20260921-docs-r5',date='2026-09-21',localAcceptanceStatus='pass',publicReleaseReady=False,publicationBlockers=['HOST_STARTUP_UNATTRIBUTED'])
+ rm['localAcceptanceScope']='Current Office replacement graph functional/integration validation only; historical startup failure remains unresolved. Final archive checks recorded externally.'
+ rm['publicRelease']['currentSourceLicense']=f"{len(g['packages'])} 个包均有许可声明，{len(entries)} 个许可/来源索引项。旧 Kit 与 native 包已移除；新适配器完整源码及官方 LibreOffice 匹配来源单列。原 MIT 与第三方权利保留。"
+ rm['distribution']={'releaseId':REV,'status':'pass','scope':'Program graph and source binding; final archives verified separately','graphSha256':gh,
+  'sourceBinding':{'snapshot':'DSH-SEP-Source-20260921-office-r2.zip',**source},'archives':[{'kind':'only','filename':'DSH-SEP-Only-Windows-x64.zip'},{'kind':'full','filename':'DSH-SEP-Full-Windows-x64.zip'}],
+  'artifactChecksums':'External SHA256SUMS.txt and DELIVERY-REPORT.json; no containing archive hash embedded.'}
+ writej(docs/'RELEASE_MANIFEST.json',rm)
+ writej(docs/'evidence/office-validation.json',summary)
+ # The prior evidence summaries are intentionally retained with their old graph/hash.
+ write(docs/'SHA256SUMS.txt',''.join(digest(f)+'  '+rel(f,docs)+'\n' for f in files(docs) if rel(f,docs)!='SHA256SUMS.txt').encode())
+ print(json.dumps({'package':name,'graphSha256':gh,'noticeEntries':len(entries),'documents':len(files(docs))}),flush=True)

@@ -1,0 +1,21 @@
+{
+  "name": "@dsh-sep/libreoffice-runtime",
+  "version": "26.8.0-3.sep.1",
+  "private": true,
+  "description": "Official LibreOffice Windows x64 administrative extraction with app-local VC runtime and source-access records",
+  "license": "SEE LICENSE IN LICENSE.html",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "upstream": {
+    "version": "26.8.0.3",
+    "buildId": "bce0998afefdbc355585ca324285661a2170ba77",
+    "msiSha256": "4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95"
+  }
+}

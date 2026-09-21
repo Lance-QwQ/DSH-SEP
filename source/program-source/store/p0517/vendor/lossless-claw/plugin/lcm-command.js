@@ -1,0 +1,2481 @@
+import { existsSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { DatabaseSync } from "node:sqlite";
+import packageJson from "../../package.json" with { type: "json" };
+import { formatTimestamp } from "../compaction.js";
+import { resolveOpenclawStateDir } from "../db/config.js";
+import { runDelegatedFocusBrief, runDelegatedRefocusBrief } from "../focus-briefs.js";
+import { applyScopedDoctorRepair } from "./lcm-doctor-apply.js";
+import { createLcmDatabaseBackup } from "./lcm-db-backup.js";
+import { describeLogError } from "../lcm-log.js";
+import { listConfiguredAgentIds } from "./openclaw-agent-ids.js";
+import { applyDoctorCleaners, getDoctorCleanerApplyUnavailableReason, getDoctorCleanerFilterIds, scanDoctorCleaners, } from "./lcm-doctor-cleaners.js";
+import { detectDoctorMarker, getDoctorSummaryStats, } from "./lcm-doctor-shared.js";
+import { applyRolloverSplitRepair, scanRolloverSplits, } from "./lcm-doctor-rollover-splits.js";
+import { closeInactiveCompactionMaintenanceDebt, scanCompactionMaintenanceDebt, } from "./lcm-doctor-maintenance.js";
+import { scanLcmVersionCopies } from "./lcm-version-doctor.js";
+import { CompactionMaintenanceStore, } from "../store/compaction-maintenance-store.js";
+import { FocusBriefStore, hashFocusSourceContext } from "../store/focus-brief-store.js";
+const VISIBLE_COMMAND = "/lossless";
+const HIDDEN_ALIAS = "/lcm";
+const LOSSLESS_PLUGIN_ID = "lossless-claw";
+const LOSSLESS_NPM_PACKAGE = "@martian-engineering/lossless-claw";
+const INSTALLED_PLUGIN_INDEX_KEY = "installed-plugin-index";
+const DOCTOR_APPLY_LARGE_TARGET_THRESHOLD = 25;
+const DOCTOR_APPLY_BUDGET_PRESSURE_RATIO = 0.75;
+/** Error thrown when a host requests a control operation that cannot run safely. */
+export class LcmProgrammaticControlUnavailableError extends Error {
+    operation;
+    reasonCode;
+    constructor(operation, reasonCode, message = "Lossless Claw control operation is unavailable.") {
+        super(message);
+        this.operation = operation;
+        this.reasonCode = reasonCode;
+        this.name = "LcmProgrammaticControlUnavailableError";
+    }
+}
+/** Error thrown when a supported control operation fails after starting. */
+export class LcmProgrammaticControlFailedError extends Error {
+    operation;
+    reasonCode;
+    constructor(operation, reasonCode, message = "Lossless Claw control operation failed.") {
+        super(message);
+        this.operation = operation;
+        this.reasonCode = reasonCode;
+        this.name = "LcmProgrammaticControlFailedError";
+    }
+}
+const DOCTOR_CLEANER_IDS = new Set(getDoctorCleanerFilterIds());
+function asRecord(value) {
+    return value && typeof value === "object" && !Array.isArray(value)
+        ? value
+        : undefined;
+}
+function readCommandRuntimeContext(ctx) {
+    return asRecord(asRecord(ctx)?.runtimeContext);
+}
+function formatBoolean(value) {
+    return value ? "yes" : "no";
+}
+function formatNumber(value) {
+    return new Intl.NumberFormat("en-US").format(value);
+}
+function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes < 0) {
+        return "unknown";
+    }
+    if (bytes < 1024) {
+        return `${bytes} B`;
+    }
+    const units = ["KB", "MB", "GB", "TB"];
+    let value = bytes / 1024;
+    let unitIndex = 0;
+    while (value >= 1024 && unitIndex < units.length - 1) {
+        value /= 1024;
+        unitIndex += 1;
+    }
+    const precision = value >= 100 ? 0 : value >= 10 ? 1 : 2;
+    return `${value.toFixed(precision)} ${units[unitIndex]}`;
+}
+function formatCommand(command) {
+    return `\`${command}\``;
+}
+function buildHeaderLines() {
+    return [
+        `**🦀 Lossless Claw v${packageJson.version}**`,
+        `Help: ${formatCommand(`${VISIBLE_COMMAND} help`)} · Alias: ${formatCommand(HIDDEN_ALIAS)}`,
+    ];
+}
+function buildSection(title, lines) {
+    return [`**${title}**`, ...lines.map((line) => `  ${line}`)].join("\n");
+}
+function buildStatLine(label, value) {
+    return `${label}: ${value}`;
+}
+function formatFailureReason(error) {
+    const message = describeLogError(error).trim();
+    return message || "Unknown error";
+}
+function readStringField(record, key) {
+    const value = record?.[key];
+    return typeof value === "string" ? value.trim() : "";
+}
+function listConfigCandidates(ctx, fallbackConfig) {
+    const candidates = [];
+    if (ctx.config !== undefined) {
+        candidates.push(ctx.config);
+    }
+    if (fallbackConfig !== undefined && fallbackConfig !== ctx.config) {
+        candidates.push(fallbackConfig);
+    }
+    return candidates;
+}
+function readEffectiveSelectionConfig(ctx, fallbackConfig) {
+    return ctx.config ?? fallbackConfig;
+}
+function parseJsonRecord(value) {
+    if (!value) {
+        return undefined;
+    }
+    try {
+        return asRecord(JSON.parse(value));
+    }
+    catch {
+        return undefined;
+    }
+}
+function resolveOpenClawStateSqlitePath() {
+    if (process.env.VITEST && !process.env.OPENCLAW_STATE_DIR?.trim()) {
+        return undefined;
+    }
+    return join(resolveOpenclawStateDir(), "state", "openclaw.sqlite");
+}
+/** Read the host's durable install metadata when OpenClaw has not exposed it on command config. */
+function readPersistedOpenClawInstallRecords() {
+    const dbPath = resolveOpenClawStateSqlitePath();
+    if (!dbPath || !existsSync(dbPath)) {
+        return undefined;
+    }
+    let db;
+    try {
+        db = new DatabaseSync(dbPath, { readOnly: true });
+        const row = db.prepare(`SELECT install_records_json
+         FROM installed_plugin_index
+        WHERE index_key = ?`).get(INSTALLED_PLUGIN_INDEX_KEY);
+        return parseJsonRecord(row?.install_records_json);
+    }
+    catch {
+        return undefined;
+    }
+    finally {
+        db?.close();
+    }
+}
+function readPersistedOpenClawInstallRecordsConfig() {
+    const installRecords = readPersistedOpenClawInstallRecords();
+    return installRecords ? { plugins: { installs: installRecords } } : undefined;
+}
+function normalizeLosslessInstallRecord(value) {
+    const record = asRecord(value);
+    if (!record) {
+        return undefined;
+    }
+    const id = readStringField(record, "id") || readStringField(record, "pluginId");
+    const name = readStringField(record, "name") || readStringField(record, "packageName");
+    const spec = readStringField(record, "spec")
+        || readStringField(record, "installSpec")
+        || readStringField(record, "packageSpec")
+        || readStringField(record, "resolvedSpec");
+    if ((id && id !== LOSSLESS_PLUGIN_ID)
+        || (name && name !== LOSSLESS_PLUGIN_ID && name !== LOSSLESS_NPM_PACKAGE)) {
+        return undefined;
+    }
+    if (!id && !name && spec && !spec.includes(LOSSLESS_NPM_PACKAGE)) {
+        return undefined;
+    }
+    return record;
+}
+function collectLosslessInstallRecords(config) {
+    const root = asRecord(config);
+    const plugins = asRecord(root?.plugins);
+    const entries = asRecord(plugins?.entries);
+    const entry = asRecord(entries?.[LOSSLESS_PLUGIN_ID]);
+    const records = [];
+    const pushRecord = (value) => {
+        const record = normalizeLosslessInstallRecord(value);
+        if (record) {
+            records.push(record);
+        }
+    };
+    pushRecord(entry);
+    for (const container of [
+        asRecord(plugins?.installs),
+        asRecord(plugins?.installed),
+        asRecord(plugins?.registry),
+        asRecord(root?.pluginInstalls),
+    ]) {
+        pushRecord(container?.[LOSSLESS_PLUGIN_ID]);
+        pushRecord(container?.[LOSSLESS_NPM_PACKAGE]);
+    }
+    for (const list of [plugins?.installs, plugins?.installed, root?.pluginInstalls]) {
+        if (Array.isArray(list)) {
+            for (const item of list) {
+                pushRecord(item);
+            }
+        }
+    }
+    return records;
+}
+function parseExactLosslessPackageVersion(spec) {
+    const trimmed = spec.trim();
+    if (!trimmed.startsWith(`${LOSSLESS_NPM_PACKAGE}@`)) {
+        return null;
+    }
+    const version = trimmed.slice(LOSSLESS_NPM_PACKAGE.length + 1).trim();
+    return /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version)
+        ? version
+        : null;
+}
+function detectLcmInstallTrackWarning(params) {
+    const selectionConfig = readEffectiveSelectionConfig(params.ctx, params.fallbackConfig);
+    if (!resolvePluginEnabled(selectionConfig) || !resolvePluginSelected(selectionConfig)) {
+        return null;
+    }
+    for (const config of [
+        ...listConfigCandidates(params.ctx, params.fallbackConfig),
+        readPersistedOpenClawInstallRecordsConfig(),
+    ]) {
+        for (const record of collectLosslessInstallRecords(config)) {
+            const source = readStringField(record, "source") || readStringField(record, "type");
+            if (source && source !== "npm") {
+                continue;
+            }
+            const spec = readStringField(record, "spec")
+                || readStringField(record, "installSpec")
+                || readStringField(record, "packageSpec")
+                || readStringField(record, "resolvedSpec");
+            if (spec.trim() === `${LOSSLESS_NPM_PACKAGE}@beta`) {
+                return { kind: "wrong-channel", spec };
+            }
+            const version = parseExactLosslessPackageVersion(spec);
+            if (version) {
+                return { kind: "exact-pinned", spec };
+            }
+        }
+    }
+    return null;
+}
+/** Format the update-track warning and the command that restores the stable channel. */
+function buildInstallTrackWarningSection(warning) {
+    const impact = warning.kind === "wrong-channel"
+        ? "OpenClaw plugin update sync will follow Lossless Claw prereleases instead of stable releases."
+        : "OpenClaw plugin update sync will keep this exact version and will not follow new LCM releases.";
+    return buildSection("⚠️ Update track", [
+        buildStatLine("status", warning.kind),
+        buildStatLine("installed spec", formatCommand(warning.spec)),
+        buildStatLine("impact", impact),
+        buildStatLine("repair", formatCommand(`openclaw plugins update ${LOSSLESS_NPM_PACKAGE}@latest`)),
+    ]);
+}
+/** Format the active package identity and every distinct copy discovered by doctor. */
+function buildVersionDoctorSection(scan) {
+    const lines = [
+        buildStatLine("active version", scan.active.version),
+        buildStatLine("active path", formatCommand(scan.active.path)),
+        ...scan.shadows.map((copy) => buildStatLine(`shadow copy (${copy.kind})`, `${formatCommand(copy.path)} (v${copy.version})`)),
+    ];
+    if (scan.shadows.length === 0) {
+        lines.push(buildStatLine("shadow copies", "none found"));
+    }
+    if (scan.split) {
+        lines.push(buildStatLine("impact", "A generated or live copy differs from the active Lossless Claw copy; update the active path above before restarting OpenClaw."));
+    }
+    return buildSection(scan.split ? "⚠️ Version split" : "🧩 Installed copies", lines);
+}
+function getAnchorTrustAuditStats(db) {
+    const stats = {
+        verified: 0,
+        repaired: 0,
+        suspect: 0,
+        legacyPrefix: 0,
+        unproven: 0,
+        epochVerified: 0,
+        epochRepairable: 0,
+        epochLegacyPrefix: 0,
+        epochCorrupt: 0,
+    };
+    const trustRows = db
+        .prepare(`SELECT trust_state, COUNT(*) AS count
+       FROM message_transcript_anchor_trust
+       GROUP BY trust_state`)
+        .all();
+    for (const row of trustRows) {
+        if (row.trust_state === "verified")
+            stats.verified = row.count;
+        if (row.trust_state === "repaired")
+            stats.repaired = row.count;
+        if (row.trust_state === "suspect")
+            stats.suspect = row.count;
+        if (row.trust_state === "legacy_prefix")
+            stats.legacyPrefix = row.count;
+        if (row.trust_state === "unproven")
+            stats.unproven = row.count;
+    }
+    const epochRows = db
+        .prepare(`SELECT migration_mode, COUNT(*) AS count
+       FROM conversation_transcript_epochs
+       GROUP BY migration_mode`)
+        .all();
+    for (const row of epochRows) {
+        if (row.migration_mode === "verified")
+            stats.epochVerified = row.count;
+        if (row.migration_mode === "repairable")
+            stats.epochRepairable = row.count;
+        if (row.migration_mode === "legacy_prefix")
+            stats.epochLegacyPrefix = row.count;
+        if (row.migration_mode === "corrupt")
+            stats.epochCorrupt = row.count;
+    }
+    return stats;
+}
+function buildAnchorTrustAuditText(db) {
+    const stats = getAnchorTrustAuditStats(db);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Anchor Audit",
+        "",
+        buildSection("🔗 Message anchors", [
+            buildStatLine("verified", formatNumber(stats.verified)),
+            buildStatLine("repaired", formatNumber(stats.repaired)),
+            buildStatLine("suspect", formatNumber(stats.suspect)),
+            buildStatLine("legacy-prefix", formatNumber(stats.legacyPrefix)),
+            buildStatLine("unproven", formatNumber(stats.unproven)),
+        ]),
+        "",
+        buildSection("🧱 Transcript epochs", [
+            buildStatLine("verified", formatNumber(stats.epochVerified)),
+            buildStatLine("repairable", formatNumber(stats.epochRepairable)),
+            buildStatLine("legacy-prefix", formatNumber(stats.epochLegacyPrefix)),
+            buildStatLine("corrupt", formatNumber(stats.epochCorrupt)),
+        ]),
+    ];
+    if (stats.suspect > 0 || stats.epochLegacyPrefix > 0) {
+        lines.push("", buildSection("⚠️ Continuity", [
+            buildStatLine("status", "preserved with ignored legacy anchors"),
+            buildStatLine("action", "none required"),
+        ]));
+    }
+    return lines.join("\n");
+}
+function formatCompressionRatio(contextTokens, compressedTokens) {
+    if (!Number.isFinite(contextTokens) ||
+        contextTokens <= 0 ||
+        !Number.isFinite(compressedTokens) ||
+        compressedTokens <= 0) {
+        return "n/a";
+    }
+    const ratio = Math.max(1, Math.round(compressedTokens / contextTokens));
+    return `1:${formatNumber(ratio)}`;
+}
+function truncateMiddle(value, maxChars) {
+    if (value.length <= maxChars) {
+        return value;
+    }
+    if (maxChars <= 3) {
+        return value.slice(0, maxChars);
+    }
+    const head = Math.ceil((maxChars - 1) / 2);
+    const tail = Math.floor((maxChars - 1) / 2);
+    return `${value.slice(0, head)}…${value.slice(value.length - tail)}`;
+}
+function splitArgs(rawArgs) {
+    return (rawArgs ?? "")
+        .trim()
+        .split(/\s+/)
+        .map((token) => token.trim())
+        .filter(Boolean);
+}
+function parseDoctorCleanerApplyArgs(tokens) {
+    let filterId;
+    let vacuum = false;
+    for (const token of tokens) {
+        const normalized = token.toLowerCase();
+        if (normalized === "vacuum") {
+            vacuum = true;
+            continue;
+        }
+        if (DOCTOR_CLEANER_IDS.has(normalized) && !filterId) {
+            filterId = normalized;
+            continue;
+        }
+        return {
+            ok: false,
+            error: `\`${VISIBLE_COMMAND} doctor clean apply\` accepts at most one filter id (\`${getDoctorCleanerFilterIds().join("`, `")}\`) plus optional \`vacuum\`.`,
+        };
+    }
+    return { ok: true, filterId, vacuum };
+}
+function parseDoctorApplyArgs(tokens) {
+    if (tokens.length === 0) {
+        return { ok: true, options: { confirmOffline: false } };
+    }
+    let confirmOffline = false;
+    let explicitConfirmOffline = false;
+    let conversationId;
+    for (const token of tokens) {
+        const normalized = token.toLowerCase();
+        if (normalized === "confirm-offline") {
+            confirmOffline = true;
+            explicitConfirmOffline = true;
+            continue;
+        }
+        if (normalized === "confirm-large" ||
+            normalized === "offline" ||
+            normalized === "--offline" ||
+            normalized === "--confirm-large") {
+            confirmOffline = true;
+            continue;
+        }
+        const parsedId = Number(token);
+        if (!Number.isNaN(parsedId) &&
+            Number.isSafeInteger(parsedId) &&
+            parsedId > 0 &&
+            String(parsedId) === token) {
+            if (conversationId !== undefined) {
+                return {
+                    ok: false,
+                    error: `\`${VISIBLE_COMMAND} doctor apply\` accepts at most one conversation id.`,
+                };
+            }
+            conversationId = parsedId;
+            continue;
+        }
+        return {
+            ok: false,
+            error: `\`${VISIBLE_COMMAND} doctor apply\` accepts optional \`confirm-offline\` for the current conversation or \`<conversation-id> confirm-offline\` for targeted repair.`,
+        };
+    }
+    if (conversationId !== undefined && confirmOffline && !explicitConfirmOffline) {
+        return {
+            ok: false,
+            error: `\`${VISIBLE_COMMAND} doctor apply <conversation-id>\` requires explicit \`confirm-offline\`; other offline aliases apply only to current-conversation repair.`,
+        };
+    }
+    return {
+        ok: true,
+        options: {
+            confirmOffline,
+            ...(conversationId !== undefined ? { conversationId } : {}),
+        },
+    };
+}
+function parseRolloverSplitApplyArgs(tokens) {
+    if (tokens.length === 0) {
+        return { ok: true, options: { confirm: false } };
+    }
+    if (tokens.length === 1 && tokens[0]?.toLowerCase() === "confirm") {
+        return { ok: true, options: { confirm: true } };
+    }
+    return {
+        ok: false,
+        error: `\`${VISIBLE_COMMAND} doctor apply rollover-splits\` accepts optional \`confirm\`.`,
+    };
+}
+function parseMaintenanceApplyArgs(tokens) {
+    const conversationId = Number(tokens[0]);
+    const validConversationId = tokens[0] !== undefined &&
+        Number.isSafeInteger(conversationId) &&
+        conversationId > 0 &&
+        String(conversationId) === tokens[0];
+    const validConfirmation = tokens.length === 1 ||
+        (tokens.length === 2 && tokens[1] === "confirm-inactive");
+    if (!validConversationId || !validConfirmation) {
+        return {
+            ok: false,
+            error: `\`${VISIBLE_COMMAND} doctor apply maintenance\` requires a positive conversation id followed by optional exact \`confirm-inactive\`.`,
+        };
+    }
+    return {
+        ok: true,
+        conversationId,
+        confirmed: tokens.length === 2,
+    };
+}
+function parseLcmCommand(rawArgs) {
+    const raw = (rawArgs ?? "").trim();
+    if (raw === "") {
+        return { kind: "status" };
+    }
+    const focusMatch = raw.match(/^focus(?:\s+([\s\S]*))?$/i);
+    if (focusMatch) {
+        const prompt = focusMatch[1]?.trim() ?? "";
+        return prompt ? { kind: "focus_generate", prompt } : { kind: "focus_status" };
+    }
+    if (/^refocus$/i.test(raw)) {
+        return { kind: "refocus" };
+    }
+    if (/^unfocus$/i.test(raw)) {
+        return { kind: "unfocus" };
+    }
+    const tokens = splitArgs(rawArgs);
+    if (tokens.length === 0) {
+        return { kind: "status" };
+    }
+    const [head, ...rest] = tokens;
+    switch (head.toLowerCase()) {
+        case "status":
+            return rest.length === 0
+                ? { kind: "status" }
+                : {
+                    kind: "help",
+                    error: `\`${VISIBLE_COMMAND} status\` does not accept extra arguments.`,
+                };
+        case "backup":
+            return rest.length === 0
+                ? { kind: "backup" }
+                : {
+                    kind: "help",
+                    error: `\`${VISIBLE_COMMAND} backup\` does not accept extra arguments.`,
+                };
+        case "doctor":
+            if (rest.length === 0) {
+                return { kind: "doctor", apply: false };
+            }
+            if (rest.length === 1 && rest[0]?.toLowerCase() === "clean") {
+                return { kind: "doctor_cleaners", apply: false, vacuum: false };
+            }
+            if (rest.length === 1 && rest[0]?.toLowerCase() === "rollover-splits") {
+                return { kind: "doctor_rollover_splits", apply: false };
+            }
+            if (rest.length === 1 && rest[0]?.toLowerCase() === "anchors") {
+                return { kind: "doctor_anchors" };
+            }
+            if (rest.length === 1 && rest[0]?.toLowerCase() === "maintenance") {
+                return { kind: "doctor_maintenance", apply: false };
+            }
+            if (rest[0]?.toLowerCase() === "clean" && rest[1]?.toLowerCase() === "apply") {
+                const parsedApply = parseDoctorCleanerApplyArgs(rest.slice(2));
+                return parsedApply.ok
+                    ? {
+                        kind: "doctor_cleaners",
+                        apply: true,
+                        filterId: parsedApply.filterId,
+                        vacuum: parsedApply.vacuum,
+                    }
+                    : { kind: "help", error: parsedApply.error };
+            }
+            if (rest[0]?.toLowerCase() === "apply" && rest[1]?.toLowerCase() === "rollover-splits") {
+                const parsedApply = parseRolloverSplitApplyArgs(rest.slice(2));
+                return parsedApply.ok
+                    ? {
+                        kind: "doctor_rollover_splits",
+                        apply: true,
+                        applyOptions: parsedApply.options,
+                    }
+                    : { kind: "help", error: parsedApply.error };
+            }
+            if (rest[0]?.toLowerCase() === "apply" && rest[1]?.toLowerCase() === "maintenance") {
+                const parsedApply = parseMaintenanceApplyArgs(rest.slice(2));
+                return parsedApply.ok
+                    ? {
+                        kind: "doctor_maintenance",
+                        apply: true,
+                        conversationId: parsedApply.conversationId,
+                        confirmed: parsedApply.confirmed,
+                    }
+                    : { kind: "help", error: parsedApply.error };
+            }
+            if (rest[0]?.toLowerCase() === "apply") {
+                const parsedApply = parseDoctorApplyArgs(rest.slice(1));
+                return parsedApply.ok
+                    ? { kind: "doctor", apply: true, applyOptions: parsedApply.options }
+                    : { kind: "help", error: parsedApply.error };
+            }
+            return {
+                kind: "help",
+                error: `\`${VISIBLE_COMMAND} doctor\` accepts no arguments, \`anchors\` for transcript anchor diagnostics, \`maintenance\` for compaction-debt diagnostics, \`apply maintenance <conversation-id> confirm-inactive\` for audited inactive-debt closure, \`rollover-splits\` for global rollover diagnostics, \`apply rollover-splits [confirm]\` for backup-first split repair, \`clean\` for global high-confidence junk diagnostics, \`clean apply [filter-id] [vacuum]\` for cleanup, \`apply [confirm-offline]\` for current-conversation repair, or \`apply <conversation-id> confirm-offline\` for targeted repair.`,
+            };
+        case "help":
+            return { kind: "help" };
+        default:
+            return {
+                kind: "help",
+                error: `Unknown subcommand \`${head}\`. Supported: status, focus, refocus, unfocus, backup, doctor, doctor clean, doctor apply, help.`,
+            };
+    }
+}
+function getLcmStatusStats(db) {
+    const row = db
+        .prepare(`SELECT
+         COALESCE((SELECT COUNT(*) FROM conversations), 0) AS conversation_count,
+         COALESCE(COUNT(*), 0) AS summary_count,
+         COALESCE(SUM(token_count), 0) AS stored_summary_tokens,
+         COALESCE(SUM(CASE WHEN kind = 'leaf' THEN source_message_token_count ELSE 0 END), 0) AS summarized_source_tokens,
+         COALESCE(SUM(CASE WHEN kind = 'leaf' THEN 1 ELSE 0 END), 0) AS leaf_summary_count,
+         COALESCE(SUM(CASE WHEN kind = 'condensed' THEN 1 ELSE 0 END), 0) AS condensed_summary_count
+       FROM summaries`)
+        .get();
+    return {
+        conversationCount: row?.conversation_count ?? 0,
+        summaryCount: row?.summary_count ?? 0,
+        storedSummaryTokens: row?.stored_summary_tokens ?? 0,
+        summarizedSourceTokens: row?.summarized_source_tokens ?? 0,
+        leafSummaryCount: row?.leaf_summary_count ?? 0,
+        condensedSummaryCount: row?.condensed_summary_count ?? 0,
+    };
+}
+function getConversationStatusStats(db, conversationId) {
+    const row = db
+        .prepare(`SELECT
+         c.conversation_id,
+         c.session_id,
+         c.session_key,
+         COALESCE((SELECT COUNT(*) FROM messages WHERE conversation_id = c.conversation_id), 0) AS message_count,
+         COALESCE((SELECT COUNT(*) FROM summaries WHERE conversation_id = c.conversation_id), 0) AS summary_count,
+         COALESCE((SELECT SUM(token_count) FROM summaries WHERE conversation_id = c.conversation_id), 0) AS stored_summary_tokens,
+         COALESCE((SELECT SUM(CASE WHEN kind = 'leaf' THEN source_message_token_count ELSE 0 END) FROM summaries WHERE conversation_id = c.conversation_id), 0) AS summarized_source_tokens,
+         COALESCE((
+           SELECT SUM(token_count)
+           FROM (
+             SELECT m.token_count AS token_count
+             FROM context_items ci
+             JOIN messages m ON m.message_id = ci.message_id
+             WHERE ci.conversation_id = c.conversation_id
+               AND ci.item_type = 'message'
+             UNION ALL
+             SELECT s.token_count AS token_count
+             FROM context_items ci
+             JOIN summaries s ON s.summary_id = ci.summary_id
+             WHERE ci.conversation_id = c.conversation_id
+               AND ci.item_type = 'summary'
+           ) context_token_rows
+         ), 0) AS context_token_count,
+         COALESCE((
+           SELECT SUM(COALESCE(s.source_message_token_count, 0) + COALESCE(s.descendant_token_count, 0))
+           FROM context_items ci
+           JOIN summaries s ON s.summary_id = ci.summary_id
+           WHERE ci.conversation_id = c.conversation_id
+             AND ci.item_type = 'summary'
+         ), 0) AS compressed_token_count,
+         COALESCE((SELECT SUM(CASE WHEN kind = 'leaf' THEN 1 ELSE 0 END) FROM summaries WHERE conversation_id = c.conversation_id), 0) AS leaf_summary_count,
+         COALESCE((SELECT SUM(CASE WHEN kind = 'condensed' THEN 1 ELSE 0 END) FROM summaries WHERE conversation_id = c.conversation_id), 0) AS condensed_summary_count
+       FROM conversations c
+       WHERE c.conversation_id = ?`)
+        .get(conversationId);
+    if (!row) {
+        return null;
+    }
+    return {
+        conversationId: row.conversation_id,
+        sessionId: row.session_id,
+        sessionKey: row.session_key,
+        messageCount: row.message_count,
+        summaryCount: row.summary_count,
+        storedSummaryTokens: row.stored_summary_tokens,
+        summarizedSourceTokens: row.summarized_source_tokens,
+        contextTokenCount: row.context_token_count,
+        compressedTokenCount: row.compressed_token_count,
+        leafSummaryCount: row.leaf_summary_count,
+        condensedSummaryCount: row.condensed_summary_count,
+    };
+}
+function normalizeIdentity(value) {
+    const normalized = value?.trim();
+    return normalized ? normalized : undefined;
+}
+function getConversationStatusBySessionKey(db, sessionKey) {
+    const row = db
+        .prepare(`SELECT conversation_id
+       FROM conversations
+       WHERE session_key = ?
+       ORDER BY active DESC, created_at DESC
+       LIMIT 1`)
+        .get(sessionKey);
+    if (!row) {
+        return null;
+    }
+    return getConversationStatusStats(db, row.conversation_id);
+}
+function getConversationStatusBySessionId(db, sessionId) {
+    const row = db
+        .prepare(`SELECT conversation_id
+       FROM conversations
+       WHERE session_id = ?
+       ORDER BY active DESC, created_at DESC
+       LIMIT 1`)
+        .get(sessionId);
+    if (!row) {
+        return null;
+    }
+    return getConversationStatusStats(db, row.conversation_id);
+}
+async function getConversationCompactionMaintenanceByConversationId(db, conversationId) {
+    return await new CompactionMaintenanceStore(db).getConversationCompactionMaintenance(conversationId);
+}
+async function resolveCurrentConversation(params) {
+    const sessionKey = normalizeIdentity(params.ctx.sessionKey);
+    const sessionId = normalizeIdentity(params.ctx.sessionId);
+    if (sessionKey) {
+        const bySessionKey = getConversationStatusBySessionKey(params.db, sessionKey);
+        if (bySessionKey) {
+            return { kind: "resolved", source: "session_key", stats: bySessionKey };
+        }
+        if (sessionId) {
+            const bySessionId = getConversationStatusBySessionId(params.db, sessionId);
+            if (bySessionId) {
+                if (!bySessionId.sessionKey || bySessionId.sessionKey === sessionKey) {
+                    return {
+                        kind: "resolved",
+                        source: "session_key_via_session_id",
+                        stats: bySessionId,
+                    };
+                }
+                return {
+                    kind: "unavailable",
+                    reason: `Active session key ${formatCommand(sessionKey)} is not stored in LCM yet. Session id fallback found conversation #${formatNumber(bySessionId.conversationId)}, but it is bound to ${formatCommand(bySessionId.sessionKey)}, so Global stats are safer.`,
+                };
+            }
+        }
+        return {
+            kind: "unavailable",
+            reason: sessionId
+                ? `No LCM conversation is stored yet for active session key ${formatCommand(sessionKey)} or active session id ${formatCommand(sessionId)}.`
+                : `No LCM conversation is stored yet for active session key ${formatCommand(sessionKey)}.`,
+        };
+    }
+    if (sessionId) {
+        const bySessionId = getConversationStatusBySessionId(params.db, sessionId);
+        if (bySessionId) {
+            return { kind: "resolved", source: "session_id", stats: bySessionId };
+        }
+        return {
+            kind: "unavailable",
+            reason: `OpenClaw did not expose an active session key here. Tried active session id ${formatCommand(sessionId)}, but no stored LCM conversation matched it.`,
+        };
+    }
+    return {
+        kind: "unavailable",
+        reason: "OpenClaw did not expose an active session key or session id here, so only GLOBAL stats are available.",
+    };
+}
+async function resolveDoctorApplyConversationById(db, conversationId) {
+    const stats = getConversationStatusStats(db, conversationId);
+    if (!stats) {
+        return {
+            kind: "unavailable",
+            reason: `No LCM conversation found with id ${formatNumber(conversationId)}.`,
+        };
+    }
+    return { kind: "resolved", source: "conversation_id", stats };
+}
+async function resolveRuntimeSessionId(params) {
+    const directSessionId = normalizeIdentity(params.ctx.sessionId);
+    if (directSessionId) {
+        return directSessionId;
+    }
+    return normalizeIdentity(params.current.stats.sessionId);
+}
+function normalizePositiveInteger(value) {
+    return typeof value === "number" && Number.isFinite(value) && value > 0
+        ? Math.floor(value)
+        : null;
+}
+function resolveLifecycleCompactionTokenBudget(config) {
+    return normalizePositiveInteger(config.maxAssemblyTokenBudget) ?? 128_000;
+}
+function resolveStatusAssemblyTokenBudget(config, maintenance) {
+    return (normalizePositiveInteger(config.maxAssemblyTokenBudget)
+        ?? normalizePositiveInteger(maintenance?.tokenBudget)
+        ?? 128_000);
+}
+function buildTargetSummaryValuesSql(summaryIds) {
+    return summaryIds.map(() => "(?)").join(", ");
+}
+function loadDoctorApplyRepairMetrics(db, doctor) {
+    const summaryIds = [...new Set(doctor.candidates.map((candidate) => candidate.summaryId))];
+    if (summaryIds.length === 0) {
+        return {
+            repairInputTokenCount: 0,
+            repairTargetSourceTokenCount: 0,
+        };
+    }
+    const targetValuesSql = buildTargetSummaryValuesSql(summaryIds);
+    // Repair input mirrors lcm-doctor-apply: leaf targets read linked messages,
+    // while condensed targets read their immediate child summaries.
+    const repairInputRow = db
+        .prepare(`WITH target_summaries(summary_id) AS (VALUES ${targetValuesSql})
+       SELECT COALESCE(SUM(input_tokens), 0) AS token_count
+       FROM (
+         SELECT t.summary_id, COALESCE(SUM(m.token_count), 0) AS input_tokens
+         FROM target_summaries t
+         JOIN summaries target ON target.summary_id = t.summary_id
+         JOIN summary_messages sm ON sm.summary_id = t.summary_id
+         JOIN messages m ON m.message_id = sm.message_id
+         WHERE target.kind = 'leaf' OR COALESCE(target.depth, 0) = 0
+         GROUP BY t.summary_id
+         UNION ALL
+         SELECT t.summary_id, COALESCE(SUM(child.token_count), 0) AS input_tokens
+         FROM target_summaries t
+         JOIN summaries target ON target.summary_id = t.summary_id
+         JOIN summary_parents sp ON sp.summary_id = t.summary_id
+         JOIN summaries child ON child.summary_id = sp.parent_summary_id
+         WHERE NOT (target.kind = 'leaf' OR COALESCE(target.depth, 0) = 0)
+         GROUP BY t.summary_id
+       ) repair_inputs`)
+        .get(...summaryIds);
+    // Source coverage expands each target's summary tree to linked raw messages
+    // and deduplicates messages shared by multiple target roots.
+    const sourceCoverageRow = db
+        .prepare(`WITH RECURSIVE
+       target_summaries(summary_id) AS (VALUES ${targetValuesSql}),
+       target_tree(summary_id) AS (
+         SELECT summary_id FROM target_summaries
+         UNION
+         SELECT sp.parent_summary_id
+         FROM target_tree tree
+         JOIN summary_parents sp ON sp.summary_id = tree.summary_id
+       ),
+       covered_messages AS (
+         SELECT DISTINCT sm.message_id
+         FROM target_tree tree
+         JOIN summary_messages sm ON sm.summary_id = tree.summary_id
+       )
+       SELECT COALESCE(SUM(m.token_count), 0) AS token_count
+       FROM covered_messages covered
+       JOIN messages m ON m.message_id = covered.message_id`)
+        .get(...summaryIds);
+    return {
+        repairInputTokenCount: Math.max(0, Math.floor(repairInputRow?.token_count ?? 0)),
+        repairTargetSourceTokenCount: Math.max(0, Math.floor(sourceCoverageRow?.token_count ?? 0)),
+    };
+}
+function buildDoctorApplySafetyPreflight(params) {
+    const tokenBudget = resolveLifecycleCompactionTokenBudget(params.config);
+    const tokenThreshold = Math.floor(tokenBudget * DOCTOR_APPLY_BUDGET_PRESSURE_RATIO);
+    const reasons = [];
+    if (params.doctor.total > DOCTOR_APPLY_LARGE_TARGET_THRESHOLD) {
+        reasons.push(`doctor target count ${formatNumber(params.doctor.total)} exceeds safe inline limit ${formatNumber(DOCTOR_APPLY_LARGE_TARGET_THRESHOLD)}`);
+    }
+    if (params.repairMetrics.repairInputTokenCount > tokenThreshold) {
+        reasons.push(`repair input token count ${formatNumber(params.repairMetrics.repairInputTokenCount)} exceeds ${formatNumber(Math.round(DOCTOR_APPLY_BUDGET_PRESSURE_RATIO * 100))}% of repair budget ${formatNumber(tokenBudget)}`);
+    }
+    if (params.maintenance?.pending) {
+        reasons.push(`compaction maintenance is pending (${params.maintenance.reason ?? "reason unknown"})`);
+    }
+    if (params.maintenance?.running) {
+        reasons.push("compaction maintenance is already running");
+    }
+    return {
+        blocked: reasons.length > 0,
+        reasons,
+        tokenBudget,
+        tokenThreshold,
+    };
+}
+function buildLcmHealthSummary(params) {
+    const tokenBudget = resolveStatusAssemblyTokenBudget(params.config, params.maintenance);
+    const warningThreshold = Math.floor(tokenBudget * DOCTOR_APPLY_BUDGET_PRESSURE_RATIO);
+    const activeMaintenance = params.maintenance?.pending || params.maintenance?.running;
+    const assemblyObservedTokens = Math.max(params.stats.contextTokenCount, activeMaintenance ? params.maintenance?.currentTokenCount ?? 0 : 0, activeMaintenance ? params.maintenance?.projectedTokenCount ?? 0 : 0);
+    const degradedReasons = [];
+    const warningReasons = [];
+    if (params.maintenance?.running) {
+        degradedReasons.push("compaction maintenance is running");
+    }
+    if (params.maintenance?.pending) {
+        degradedReasons.push(`compaction maintenance is pending (${params.maintenance.reason ?? "reason unknown"})`);
+    }
+    if (assemblyObservedTokens > tokenBudget) {
+        degradedReasons.push(`observed token count ${formatNumber(assemblyObservedTokens)} exceeds assembly budget ${formatNumber(tokenBudget)}`);
+    }
+    else if (assemblyObservedTokens > warningThreshold) {
+        warningReasons.push(`observed token count ${formatNumber(assemblyObservedTokens)} exceeds ${formatNumber(Math.round(DOCTOR_APPLY_BUDGET_PRESSURE_RATIO * 100))}% of assembly budget ${formatNumber(tokenBudget)}`);
+    }
+    if (params.maintenance?.lastFailureSummary) {
+        warningReasons.push(`last maintenance failure: ${params.maintenance.lastFailureSummary}`);
+    }
+    if (degradedReasons.length > 0) {
+        return { state: "degraded", reasons: [...degradedReasons, ...warningReasons] };
+    }
+    if (warningReasons.length > 0) {
+        return { state: "warning", reasons: warningReasons };
+    }
+    return { state: "healthy", reasons: [] };
+}
+function getMaintenanceState(maintenance) {
+    if (maintenance?.pending)
+        return "pending";
+    if (maintenance?.running)
+        return "running";
+    return "idle";
+}
+// Keep default status focused on operator action: active work, failure state, or
+// the last successful budget. Detailed token-pressure and cache telemetry stay in
+// logs and maintenance internals instead of the chat command surface.
+function buildMaintenanceSummaryLines(params) {
+    const maintenance = params.maintenance;
+    const state = getMaintenanceState(maintenance);
+    const lines = [buildStatLine("state", state)];
+    if (!maintenance) {
+        return lines;
+    }
+    const active = state === "pending" || state === "running";
+    const failed = Boolean(maintenance.lastFailureSummary);
+    if (active || failed) {
+        if (maintenance.reason)
+            lines.push(buildStatLine("reason", maintenance.reason));
+        if (active && maintenance.requestedAt) {
+            lines.push(buildStatLine("requested at", params.formatTime(maintenance.requestedAt)));
+        }
+        if (maintenance.lastStartedAt) {
+            lines.push(buildStatLine("last started", params.formatTime(maintenance.lastStartedAt)));
+        }
+        if (maintenance.lastFinishedAt && state !== "running") {
+            lines.push(buildStatLine("last finished", params.formatTime(maintenance.lastFinishedAt)));
+        }
+        if (maintenance.lastFailureSummary) {
+            lines.push(buildStatLine("last failure", maintenance.lastFailureSummary));
+        }
+        if (maintenance.nextAttemptAfter) {
+            lines.push(buildStatLine("next retry", params.formatTime(maintenance.nextAttemptAfter)));
+        }
+    }
+    else if (maintenance.lastFinishedAt) {
+        lines.push(buildStatLine("last finished", params.formatTime(maintenance.lastFinishedAt)));
+    }
+    if (maintenance.tokenBudget != null) {
+        lines.push(buildStatLine("budget", formatNumber(maintenance.tokenBudget)));
+    }
+    return lines;
+}
+// Run the cache-aware focus lifecycle sweep. Focus and unfocus both mutate the
+// prompt prefix, so they explicitly take the manual full-sweep path and bypass
+// threshold skips instead of leaving compaction to normal background policy.
+async function runFocusLifecycleCompaction(params) {
+    if (!params.deps || !params.getLcm) {
+        return {
+            status: "unavailable",
+            reason: "Focus lifecycle compaction requires the runtime-backed LCM engine.",
+        };
+    }
+    const sessionKey = params.sessionKey ?? normalizeIdentity(params.ctx.sessionKey);
+    const sessionId = await resolveRuntimeSessionId({
+        ctx: params.ctx,
+        current: params.current,
+    });
+    if (!sessionId) {
+        return {
+            status: "unavailable",
+            reason: "Lossless Claw resolved the active conversation, but OpenClaw did not expose or resolve a runtime session id for compaction.",
+        };
+    }
+    const engine = await params.getLcm();
+    if (typeof engine.compact !== "function") {
+        return {
+            status: "unavailable",
+            reason: "The runtime-backed LCM engine does not expose compaction to commands.",
+        };
+    }
+    const tokenBudget = resolveLifecycleCompactionTokenBudget(params.config);
+    try {
+        const result = await engine.compact({
+            sessionId,
+            sessionKey,
+            sessionFile: "",
+            tokenBudget,
+            currentTokenCount: params.current.stats.contextTokenCount,
+            compactionTarget: "threshold",
+            runtimeContext: {
+                manualCompaction: true,
+                tokenBudget,
+                currentTokenCount: params.current.stats.contextTokenCount,
+            },
+            force: true,
+        });
+        return result.ok
+            ? { status: "ok", sessionId, result }
+            : {
+                status: "failed",
+                reason: result.reason ?? result.error ?? "focus lifecycle compaction failed",
+            };
+    }
+    catch (error) {
+        return { status: "failed", reason: formatFailureReason(error) };
+    }
+}
+function resolvePluginEnabled(config) {
+    const root = asRecord(config);
+    const plugins = asRecord(root?.plugins);
+    const entries = asRecord(plugins?.entries);
+    const entry = asRecord(entries?.["lossless-claw"]);
+    if (typeof entry?.enabled === "boolean") {
+        return entry.enabled;
+    }
+    return true;
+}
+function resolveContextEngineSlot(config) {
+    const root = asRecord(config);
+    const plugins = asRecord(root?.plugins);
+    const slots = asRecord(plugins?.slots);
+    return typeof slots?.contextEngine === "string" ? slots.contextEngine.trim() : "";
+}
+function resolvePluginSelected(config) {
+    const slot = resolveContextEngineSlot(config);
+    return slot === "" || slot === "lossless-claw";
+}
+function resolveDbSizeLabel(dbPath) {
+    if (typeof dbPath !== "string")
+        return "unknown";
+    const trimmed = dbPath.trim();
+    if (!trimmed || trimmed === ":memory:" || trimmed.startsWith("file::memory:")) {
+        return "in-memory";
+    }
+    try {
+        return formatBytes(statSync(trimmed).size);
+    }
+    catch {
+        return "missing";
+    }
+}
+function buildHelpText(error) {
+    const lines = [
+        ...(error ? [`⚠️ ${error}`, ""] : []),
+        ...buildHeaderLines(),
+        "",
+        buildSection("📘 Commands", [
+            buildStatLine(formatCommand(VISIBLE_COMMAND), "Show compact status output."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} status`), "Show plugin, Global, current-conversation, and compaction-maintenance status."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} backup`), "Create a timestamped backup of the current LCM database."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} focus <prompt>`), "Generate an active focus brief with a delegated recall sub-agent."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} focus`), "Show the latest focus brief for the current conversation."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} refocus`), "Refresh the active focus brief from post-focus summary deltas."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} unfocus`), "Deactivate the active focus overlay without deleting focus history."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor`), "Scan for broken or truncated summaries."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor anchors`), "Report transcript anchor trust and legacy-prefix epoch counts."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor maintenance`), "Report active actionable and inactive historical compaction debt without writing."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor apply maintenance <conversation-id> confirm-inactive`), "Administratively close eligible inactive debt after creating a DB backup; recall data is preserved."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor rollover-splits`), "Report whole-DB fresh-transcript rollover split memory."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor apply rollover-splits confirm`), "Repair all safe rollover split memory groups after creating a DB backup."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor clean`), "Report global high-confidence junk candidates without deleting anything."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor clean apply`), "Delete approved high-confidence cleaner matches after creating a DB backup."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor apply`), "Repair broken summaries in the current conversation."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor apply <conversation-id> confirm-offline`), "Repair a specific conversation by id after isolating its active channel path."),
+            buildStatLine(formatCommand(`${VISIBLE_COMMAND} doctor apply confirm-offline`), "Override large/hot-session repair preflight after isolating the active channel path."),
+        ]),
+        "",
+        buildSection("🧭 Notes", [
+            buildStatLine("subcommands", `Discover them with ${formatCommand(`${VISIBLE_COMMAND} help`)}.`),
+            buildStatLine("alias", `${formatCommand(HIDDEN_ALIAS)} is accepted as a shorter alias.`),
+            buildStatLine("current conversation", "Uses the active LCM session when the host exposes session identity."),
+            buildStatLine("`/new`", "Prunes context for the current LCM conversation. It does not split storage."),
+            buildStatLine("`/reset`", "Resets OpenClaw session flow."),
+        ]),
+    ];
+    return lines.join("\n");
+}
+function buildDoctorCleanerExampleLine(params) {
+    const sessionKey = params.sessionKey ? formatCommand(truncateMiddle(params.sessionKey, 44)) : "missing";
+    const preview = params.firstMessagePreview ? ` · first: ${JSON.stringify(params.firstMessagePreview)}` : "";
+    return `conv ${formatNumber(params.conversationId)} · session key ${sessionKey} · messages ${formatNumber(params.messageCount)}${preview}`;
+}
+async function buildStatusText(params) {
+    const status = getLcmStatusStats(params.db);
+    const doctor = getDoctorSummaryStats(params.db);
+    const rolloverSplits = scanRolloverSplits(params.db);
+    const enabled = resolvePluginEnabled(params.ctx.config);
+    const selected = resolvePluginSelected(params.ctx.config);
+    const slot = resolveContextEngineSlot(params.ctx.config);
+    const dbSize = resolveDbSizeLabel(params.config.databasePath);
+    const installTrackWarning = detectLcmInstallTrackWarning({
+        ctx: params.ctx,
+        fallbackConfig: params.openClawConfig,
+    });
+    const current = await resolveCurrentConversation({
+        ctx: params.ctx,
+        db: params.db,
+    });
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        buildSection("🧩 Plugin", [
+            buildStatLine("enabled", formatBoolean(enabled)),
+            buildStatLine("selected", `${formatBoolean(selected)}${slot ? ` (slot=${slot})` : " (slot=unset)"}`),
+            buildStatLine("db path", params.config.databasePath),
+            buildStatLine("db size", dbSize),
+        ]),
+        "",
+    ];
+    if (installTrackWarning) {
+        lines.push(buildInstallTrackWarningSection(installTrackWarning), "");
+    }
+    lines.push(buildSection("🌐 Global", [
+        buildStatLine("conversations", formatNumber(status.conversationCount)),
+        buildStatLine("summaries", `${formatNumber(status.summaryCount)} (${formatNumber(status.leafSummaryCount)} leaf, ${formatNumber(status.condensedSummaryCount)} condensed)`),
+        buildStatLine("stored summary tokens", formatNumber(status.storedSummaryTokens)),
+        buildStatLine("summarized source tokens", formatNumber(status.summarizedSourceTokens)),
+    ]), "");
+    if (rolloverSplits.safe.length > 0 || rolloverSplits.needsReview.length > 0) {
+        lines.push(buildRolloverSplitScanSection(rolloverSplits), "");
+    }
+    if (current.kind === "resolved") {
+        const conversationDoctor = doctor.byConversation.get(current.stats.conversationId) ?? {
+            total: 0,
+            old: 0,
+            truncated: 0,
+            fallback: 0,
+            emergency: 0,
+        };
+        const maintenance = await getConversationCompactionMaintenanceByConversationId(params.db, current.stats.conversationId);
+        const lcmHealth = buildLcmHealthSummary({
+            config: params.config,
+            stats: current.stats,
+            maintenance,
+        });
+        const focusLines = await buildFocusSummaryLines({
+            store: new FocusBriefStore(params.db),
+            conversationId: current.stats.conversationId,
+            timezone: params.config.timezone,
+        });
+        const formatMaintenanceTime = (value) => value ? formatTimestamp(value, params.config.timezone) : "never";
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+            buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+            buildStatLine("messages", formatNumber(current.stats.messageCount)),
+            buildStatLine("summaries", `${formatNumber(current.stats.summaryCount)} (${formatNumber(current.stats.leafSummaryCount)} leaf, ${formatNumber(current.stats.condensedSummaryCount)} condensed)`),
+            buildStatLine("stored summary tokens", formatNumber(current.stats.storedSummaryTokens)),
+            buildStatLine("summarized source tokens", formatNumber(current.stats.summarizedSourceTokens)),
+            buildStatLine("LCM frontier tokens", formatNumber(current.stats.contextTokenCount)),
+            buildStatLine("compression ratio", formatCompressionRatio(current.stats.contextTokenCount, current.stats.compressedTokenCount)),
+            buildStatLine("lcm health", lcmHealth.state),
+            buildStatLine("transport health", "not assessed by Lossless Claw"),
+            ...lcmHealth.reasons.map((reason) => buildStatLine("lcm reason", reason)),
+            buildStatLine("doctor", conversationDoctor.total > 0
+                ? `${formatNumber(conversationDoctor.total)} issue(s) in this conversation`
+                : "clean"),
+        ]));
+        lines.push("", buildSection("🎯 Focus", focusLines));
+        lines.push("", buildSection("🛠️ Maintenance", buildMaintenanceSummaryLines({ maintenance, formatTime: formatMaintenanceTime })));
+    }
+    else {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+            buildStatLine("fallback", "Showing Global stats only."),
+        ]));
+    }
+    return lines.join("\n");
+}
+async function buildDoctorText(params) {
+    const rolloverSplits = scanRolloverSplits(params.db);
+    const installTrackWarning = detectLcmInstallTrackWarning({
+        ctx: params.ctx,
+        fallbackConfig: params.openClawConfig,
+    });
+    const current = await resolveCurrentConversation(params);
+    const versionScan = params.activeSourcePath
+        ? scanLcmVersionCopies({
+            activeSourcePath: params.activeSourcePath,
+            activeVersion: packageJson.version,
+            stateDir: resolveOpenclawStateDir(),
+        })
+        : null;
+    if (current.kind === "unavailable") {
+        const lines = [
+            ...buildHeaderLines(),
+            "",
+            "🩺 Lossless Claw Doctor",
+            "",
+        ];
+        if (installTrackWarning) {
+            lines.push(buildInstallTrackWarningSection(installTrackWarning), "");
+        }
+        if (versionScan) {
+            lines.push(buildVersionDoctorSection(versionScan), "");
+        }
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+            buildStatLine("fallback", "Summary doctor is conversation-scoped."),
+        ]), "", buildRolloverSplitScanSection(rolloverSplits));
+        return lines.join("\n");
+    }
+    const stats = getDoctorSummaryStats(params.db, current.stats.conversationId);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Doctor",
+        "",
+    ];
+    if (installTrackWarning) {
+        lines.push(buildInstallTrackWarningSection(installTrackWarning), "");
+    }
+    if (versionScan) {
+        lines.push(buildVersionDoctorSection(versionScan), "");
+    }
+    lines.push(buildSection("📍 Current conversation", [
+        buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+        buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+        buildStatLine("scope", "this conversation only"),
+    ]), "", buildSection("🧪 Scan", [
+        buildStatLine("detected summaries", formatNumber(stats.total)),
+        buildStatLine("old-marker summaries", formatNumber(stats.old)),
+        buildStatLine("truncated-marker summaries", formatNumber(stats.truncated)),
+        buildStatLine("fallback-marker summaries", formatNumber(stats.fallback)),
+        buildStatLine("emergency-fallback summaries", formatNumber(stats.emergency)),
+        buildStatLine("result", stats.total === 0 ? "clean" : "issues found"),
+    ]), "", buildRolloverSplitScanSection(rolloverSplits));
+    if (stats.total > 0) {
+        const summaryList = stats.candidates
+            .slice()
+            .sort((left, right) => left.summaryId.localeCompare(right.summaryId))
+            .map((candidate) => `${candidate.summaryId} (${candidate.markerKind})`)
+            .join(", ");
+        lines.push("", buildSection("🧷 Affected summaries", [summaryList]), "", buildSection("🛠️ Next step", [
+            `${formatCommand(`${VISIBLE_COMMAND} doctor apply`)} repairs these in place for the current conversation. ` +
+                `Use ${formatCommand(`${VISIBLE_COMMAND} doctor apply <conversation-id> confirm-offline`)} to target a different conversation after isolating its active channel path.`,
+        ]));
+    }
+    return lines.join("\n");
+}
+function buildMaintenanceDoctorText(db) {
+    const scan = scanCompactionMaintenanceDebt(db);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Maintenance Doctor",
+        "",
+        buildSection("📊 Pending compaction debt", [
+            buildStatLine("active actionable debt", formatNumber(scan.activeCount)),
+            buildStatLine("inactive historical debt", formatNumber(scan.inactiveCount)),
+            buildStatLine("mode", "read-only scan; no maintenance state changed"),
+        ]),
+    ];
+    if (scan.reasonCounts.length > 0) {
+        lines.push("", buildSection("🧭 By state and reason", scan.reasonCounts.map((entry) => `${entry.active ? "active" : "inactive"} / ${entry.reason}: ${formatNumber(entry.count)}`)));
+    }
+    if (scan.inactiveExamples.length > 0) {
+        const examples = scan.inactiveExamples.map((example) => {
+            const sessionKey = example.sessionKey
+                ? formatCommand(truncateMiddle(example.sessionKey, 44))
+                : "missing";
+            const requestedAt = example.requestedAt?.toISOString() ?? "unknown";
+            return `conversation ${formatNumber(example.conversationId)} · ${example.reason} · requested ${requestedAt} · session key ${sessionKey}`;
+        });
+        if (scan.inactiveExamplesOmitted > 0) {
+            examples.push(`... ${formatNumber(scan.inactiveExamplesOmitted)} more inactive row(s)`);
+        }
+        lines.push("", buildSection("🧷 Inactive examples", examples));
+    }
+    if (scan.inactiveCount > 0) {
+        lines.push("", buildSection("🛠️ Administrative close", [
+            `${formatCommand(`${VISIBLE_COMMAND} doctor apply maintenance <conversation-id> confirm-inactive`)} closes one eligible inactive debt row after creating a database backup.`,
+            "This records an operator-ignored resolution; it does not claim compaction completed and does not compact or delete recall data.",
+        ]));
+    }
+    return lines.join("\n");
+}
+function describeMaintenanceCloseRefusal(result) {
+    switch (result.reason) {
+        case "missing-confirmation":
+            return "The close requires exact `confirm-inactive`; no backup or write ran.";
+        case "active-conversation":
+            return "Refused because the conversation is active; active debt remains actionable.";
+        case "running":
+            return "Refused because maintenance is running; no maintenance state changed.";
+        case "conversation-not-found":
+            return "Refused because the conversation was not found; no maintenance state changed.";
+        case "already-resolved":
+            return "The maintenance debt is already resolved; no work performed and no backup created.";
+        case "not-pending":
+            return "Refused because the conversation has no pending maintenance debt; no work performed.";
+        case "backup-unavailable":
+            return "Refused because a successful backup requires a file-backed SQLite database.";
+        case "backup-failed":
+            return `Refused because the database backup failed: ${result.error ?? "unknown error"}`;
+        case "state-changed":
+            return "Refused because maintenance or conversation state changed before the guarded close; no maintenance row was changed.";
+        case "close-failed":
+            return `Refused because the guarded maintenance close failed: ${result.error ?? "unknown error"}`;
+    }
+}
+async function buildMaintenanceDoctorApplyText(params) {
+    const result = await closeInactiveCompactionMaintenanceDebt({
+        db: params.db,
+        databasePath: params.config.databasePath,
+        conversationId: params.conversationId,
+        confirmed: params.confirmed,
+    });
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Maintenance Close",
+        "",
+    ];
+    if (result.kind === "refused") {
+        lines.push(buildSection("⛔ Result", [
+            buildStatLine("status", "read-only refusal"),
+            buildStatLine("conversation", formatNumber(params.conversationId)),
+            buildStatLine("reason", describeMaintenanceCloseRefusal(result)),
+            ...(result.backupPath ? [buildStatLine("backup path", result.backupPath)] : []),
+        ]));
+        return lines.join("\n");
+    }
+    lines.push(buildSection("✅ Result", [
+        buildStatLine("status", "administratively closed"),
+        buildStatLine("conversation", formatNumber(result.conversationId)),
+        buildStatLine("resolution", "operator-ignored"),
+        buildStatLine("resolved at", result.resolvedAt.toISOString()),
+        buildStatLine("backup path", result.backupPath),
+        buildStatLine("recall data", "preserved; this did not compact or delete recall data"),
+    ]));
+    return lines.join("\n");
+}
+function formatRolloverCounts(counts) {
+    const parts = [
+        `${formatNumber(counts.messages)} messages`,
+        `${formatNumber(counts.summaries)} summaries`,
+        `${formatNumber(counts.contextItems)} context items`,
+        `${formatNumber(counts.largeFiles)} large files`,
+        `${formatNumber(counts.focusBriefs)} focus briefs`,
+    ];
+    return parts.join(" · ");
+}
+function formatRolloverExample(example) {
+    const sources = example.sourceConversationIds.map((id) => formatNumber(id)).join(",");
+    return [
+        `${truncateMiddle(example.sessionKey, 44)}: conv ${sources} -> ${formatNumber(example.targetConversationId)}`,
+        formatRolloverCounts(example),
+    ].join(", ");
+}
+function buildRolloverSplitScanSection(scan) {
+    if (scan.safe.length === 0 && scan.needsReview.length === 0) {
+        return buildSection("✅ Rollover split memory", [
+            buildStatLine("result", "clean"),
+            buildStatLine("safe lanes", "0"),
+            buildStatLine("needs review", "0"),
+        ]);
+    }
+    const lines = [
+        buildStatLine("result", scan.safe.length > 0 ? "safe repairs available" : "review needed"),
+        buildStatLine("affected safe lanes", formatNumber(scan.totals.safeLanes)),
+        buildStatLine("stranded", formatRolloverCounts(scan.totals)),
+        buildStatLine("needs review", formatNumber(scan.totals.needsReviewLanes)),
+        buildStatLine("repair", formatCommand(`${VISIBLE_COMMAND} doctor apply rollover-splits confirm`)),
+    ];
+    for (const example of scan.safe.slice(0, 3)) {
+        lines.push(`- ${formatRolloverExample(example)}`);
+    }
+    if (scan.safe.length > 3) {
+        lines.push(`- ... ${formatNumber(scan.safe.length - 3)} more safe lane(s)`);
+    }
+    if (scan.needsReview.length > 0) {
+        lines.push(buildStatLine("skipped", `${formatNumber(scan.needsReview.length)} lane(s) require manual review before repair`));
+    }
+    return buildSection("⚠️ Rollover split memory", lines);
+}
+async function buildDoctorCleanersText(params) {
+    const scan = scanDoctorCleaners(params.db, undefined, params.agentIds);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Doctor Clean",
+        "",
+        buildSection("🌐 Global scan", [
+            buildStatLine("filters", formatNumber(scan.filters.length)),
+            buildStatLine("matched conversations", formatNumber(scan.totalDistinctConversations)),
+            buildStatLine("matched messages", formatNumber(scan.totalDistinctMessages)),
+            buildStatLine("mode", "read-only diagnostics"),
+        ]),
+    ];
+    if (scan.filters.every((filter) => filter.conversationCount === 0)) {
+        lines.push("", buildSection("✅ Result", ["No high-confidence cleaner candidates detected."]));
+        return lines.join("\n");
+    }
+    for (const filter of scan.filters) {
+        lines.push("", buildSection(`🧹 ${filter.label}`, [
+            buildStatLine("filter id", formatCommand(filter.id)),
+            buildStatLine("description", filter.description),
+            buildStatLine("matched conversations", formatNumber(filter.conversationCount)),
+            buildStatLine("matched messages", formatNumber(filter.messageCount)),
+        ]));
+        if (filter.examples.length > 0) {
+            lines.push("", buildSection("🧷 Examples", filter.examples.map((example) => buildDoctorCleanerExampleLine(example))));
+        }
+    }
+    lines.push("", buildSection("🛠️ Next step", [
+        `Review the examples, then run ${formatCommand(`${VISIBLE_COMMAND} doctor clean apply`)} to delete approved matches after Lossless Claw creates a backup.`,
+    ]));
+    return lines.join("\n");
+}
+function runQuickCheck(db) {
+    const rows = db.prepare(`PRAGMA quick_check`).all();
+    const results = rows
+        .map((row) => row.quick_check)
+        .filter((value) => typeof value === "string" && value.length > 0);
+    if (results.length === 0) {
+        return "unknown";
+    }
+    if (results.length === 1 && results[0] === "ok") {
+        return "ok";
+    }
+    return results.join("; ");
+}
+function isPassingQuickCheck(result) {
+    return result === "ok";
+}
+function getLcmBackupUnavailableReason(databasePath) {
+    if (typeof databasePath !== "string")
+        return "Invalid database path.";
+    const trimmed = databasePath.trim();
+    if (!trimmed || trimmed === ":memory:" || trimmed.startsWith("file::memory:")) {
+        return "Backup requires a file-backed SQLite database.";
+    }
+    return null;
+}
+async function buildBackupText(params) {
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "💾 Lossless Claw Backup",
+        "",
+    ];
+    const unavailableReason = getLcmBackupUnavailableReason(params.config.databasePath);
+    if (unavailableReason) {
+        lines.push(buildSection("🛠️ Backup", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", unavailableReason),
+        ]));
+        return lines.join("\n");
+    }
+    let backupPath;
+    try {
+        backupPath = createLcmDatabaseBackup(params.db, {
+            databasePath: params.config.databasePath,
+            label: "backup",
+        });
+    }
+    catch (error) {
+        lines.push(buildSection("🛠️ Backup", [
+            buildStatLine("status", "failed"),
+            buildStatLine("reason", formatFailureReason(error)),
+        ]));
+        return lines.join("\n");
+    }
+    if (!backupPath) {
+        lines.push(buildSection("🛠️ Backup", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "Lossless Claw could not determine a backup path."),
+        ]));
+        return lines.join("\n");
+    }
+    lines.push(buildSection("🛠️ Backup", [
+        buildStatLine("status", "created"),
+        buildStatLine("db path", params.config.databasePath),
+        buildStatLine("backup path", backupPath),
+    ]));
+    return lines.join("\n");
+}
+export function getLcmProgrammaticControlCapabilities(_params) {
+    return {
+        status: true,
+        doctor: true,
+        rotate: false,
+    };
+}
+function normalizeControlOperation(operation) {
+    if (operation === "status" || operation === "doctor") {
+        return operation;
+    }
+    throw new LcmProgrammaticControlUnavailableError(typeof operation === "string" ? operation : "unknown", "unsupported_operation");
+}
+function buildProgrammaticDoctorWarnings(stats) {
+    const warnings = [];
+    if (stats.total > 0) {
+        warnings.push(`${stats.total} summary issue(s) detected`);
+    }
+    if (stats.old > 0) {
+        warnings.push(`${stats.old} old-marker summary issue(s) detected`);
+    }
+    if (stats.truncated > 0) {
+        warnings.push(`${stats.truncated} truncated-marker summary issue(s) detected`);
+    }
+    if (stats.fallback > 0) {
+        warnings.push(`${stats.fallback} fallback-marker summary issue(s) detected`);
+    }
+    if (stats.emergency > 0) {
+        warnings.push(`${stats.emergency} emergency-fallback summary issue(s) detected`);
+    }
+    return warnings.slice(0, 10);
+}
+export async function runLcmProgrammaticControl(params) {
+    const operation = normalizeControlOperation(params.operation);
+    const current = await resolveCurrentConversation({
+        ctx: params.ctx,
+        db: params.db,
+    });
+    if (operation === "status") {
+        return {
+            operation: "status",
+            active: current.kind === "resolved",
+            messageCount: current.kind === "resolved" ? current.stats.messageCount : 0,
+        };
+    }
+    if (current.kind === "unavailable") {
+        return {
+            operation: "doctor",
+            ok: false,
+            warnings: ["current conversation unavailable"],
+        };
+    }
+    const stats = getDoctorSummaryStats(params.db, current.stats.conversationId);
+    const warnings = buildProgrammaticDoctorWarnings(stats);
+    return {
+        operation: "doctor",
+        ok: warnings.length === 0,
+        warnings,
+    };
+}
+function formatFocusPreview(content, maxChars = 1200) {
+    const trimmed = content.trim();
+    if (trimmed.length <= maxChars) {
+        return trimmed;
+    }
+    return `${trimmed.slice(0, Math.max(0, maxChars - 3)).trimEnd()}...`;
+}
+function formatFocusBriefTime(value, timezone) {
+    return value ? formatTimestamp(value, timezone) : "unknown";
+}
+function formatFocusDelta(diagnostics) {
+    return [
+        `${formatNumber(diagnostics.postFocusMessageCount)} messages`,
+        `${formatNumber(diagnostics.postFocusSummaryCount)} summaries`,
+        `~${formatNumber(diagnostics.postFocusTokenCount)} tokens`,
+    ].join(", ");
+}
+async function buildFocusSummaryLines(params) {
+    const active = await params.store.getActiveFocusBrief(params.conversationId);
+    const latest = await params.store.getLatestFocusBrief(params.conversationId);
+    if (!active) {
+        return [
+            buildStatLine("status", "none"),
+            ...(latest
+                ? [
+                    buildStatLine("latest generation", latest.status),
+                    buildStatLine("latest brief id", formatCommand(latest.briefId)),
+                ]
+                : []),
+        ];
+    }
+    const diagnostics = await params.store.getFocusBriefDiagnostics(active);
+    const lines = [
+        buildStatLine("status", "active"),
+        buildStatLine("brief id", formatCommand(active.briefId)),
+        buildStatLine("created", formatFocusBriefTime(active.createdAt, params.timezone)),
+        buildStatLine("prompt", JSON.stringify(formatFocusPreview(active.prompt, 160))),
+        buildStatLine("tokens", `${formatNumber(active.tokenCount)} / ${formatNumber(active.targetTokens)}`),
+        buildStatLine("delta since focus", formatFocusDelta(diagnostics)),
+        buildStatLine("stale", formatBoolean(diagnostics.stale)),
+        buildStatLine("truncated", formatBoolean(diagnostics.truncated)),
+        buildStatLine("source snapshot", diagnostics.sourceContextChanged ? "obsolete" : "current"),
+    ];
+    if (latest && latest.briefId !== active.briefId) {
+        lines.push(buildStatLine("latest generation", latest.status));
+        if (latest.error) {
+            lines.push(buildStatLine("latest error", latest.error));
+        }
+    }
+    return lines;
+}
+// Build the read-only status response for the current conversation's latest focus brief.
+async function buildFocusStatusText(params) {
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🎯 Lossless Claw Focus",
+        "",
+    ];
+    const current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const store = new FocusBriefStore(params.db);
+    const active = await store.getActiveFocusBrief(current.stats.conversationId);
+    const latest = await store.getLatestFocusBrief(current.stats.conversationId);
+    lines.push(buildSection("📍 Current conversation", [
+        buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+        buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+    ]), "");
+    if (!active && !latest) {
+        lines.push(buildSection("🎯 Focus", [
+            buildStatLine("status", "none"),
+            buildStatLine("usage", formatCommand(`${VISIBLE_COMMAND} focus <prompt>`)),
+            buildStatLine("behavior", "generates an active focus brief overlay"),
+        ]));
+        return lines.join("\n");
+    }
+    const primary = active ?? latest;
+    if (!primary) {
+        return lines.join("\n");
+    }
+    const sources = await store.getFocusBriefSources(primary.briefId);
+    const cited = sources.filter((source) => source.role === "cited").map((source) => source.summaryId);
+    const diagnostics = await store.getFocusBriefDiagnostics(primary);
+    lines.push(buildSection(active ? "🎯 Active focus brief" : "🎯 Latest focus brief", [
+        buildStatLine("brief id", formatCommand(primary.briefId)),
+        buildStatLine("status", primary.status),
+        buildStatLine("created", formatFocusBriefTime(primary.createdAt, params.config.timezone)),
+        buildStatLine("prompt", JSON.stringify(formatFocusPreview(primary.prompt, 240))),
+        buildStatLine("tokens", formatNumber(primary.tokenCount)),
+        buildStatLine("target tokens", formatNumber(primary.targetTokens)),
+        buildStatLine("source summaries", formatNumber(sources.filter((source) => source.role === "active_input").length)),
+        buildStatLine("cited summaries", cited.length > 0 ? cited.slice(0, 8).join(", ") : "none"),
+        buildStatLine("generator run", primary.generatorRunId ?? "unknown"),
+        buildStatLine("delta since focus", formatFocusDelta(diagnostics)),
+        buildStatLine("stale", formatBoolean(diagnostics.stale)),
+        buildStatLine("truncated", formatBoolean(diagnostics.truncated)),
+        buildStatLine("source snapshot", diagnostics.sourceContextChanged ? "obsolete" : "current"),
+    ]));
+    if (latest && active && latest.briefId !== active.briefId) {
+        lines.push("", buildSection("⚠️ Latest generation", [
+            buildStatLine("latest generation", latest.status),
+            buildStatLine("brief id", formatCommand(latest.briefId)),
+            ...(latest.error ? [buildStatLine("error", latest.error)] : []),
+        ]));
+    }
+    else if (primary.error) {
+        lines.push("", buildSection("⚠️ Error", [primary.error]));
+    }
+    if (primary.content.trim()) {
+        lines.push("", buildSection("📝 Preview", [formatFocusPreview(primary.content)]));
+    }
+    return lines.join("\n");
+}
+// Generate an active focus brief through a delegated subagent and persist the result.
+async function buildFocusGenerateText(params) {
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🎯 Lossless Claw Focus",
+        "",
+    ];
+    if (!params.deps || !params.getLcm) {
+        lines.push(buildSection("🛠️ Focus", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "Focus generation requires runtime dependencies for pre-focus compaction and delegated subagents."),
+        ]));
+        return lines.join("\n");
+    }
+    const requesterSessionKey = normalizeIdentity(params.ctx.sessionKey);
+    if (!requesterSessionKey) {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "OpenClaw must expose the active session key for Lossless Claw to spawn a focus subagent."),
+        ]));
+        return lines.join("\n");
+    }
+    let current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const preFocusCompaction = await runFocusLifecycleCompaction({
+        ctx: params.ctx,
+        deps: params.deps,
+        getLcm: params.getLcm,
+        config: params.config,
+        current,
+        sessionKey: requesterSessionKey,
+    });
+    if (preFocusCompaction.status !== "ok") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+            buildStatLine("session key", formatCommand(truncateMiddle(requesterSessionKey, 44))),
+        ]), "", buildSection("🧹 Pre-focus compaction", [
+            buildStatLine("status", preFocusCompaction.status),
+            buildStatLine("reason", preFocusCompaction.reason),
+        ]));
+        return lines.join("\n");
+    }
+    current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("🧹 Pre-focus compaction", [
+            buildStatLine("status", "completed"),
+            buildStatLine("result", preFocusCompaction.result.reason ?? "done"),
+        ]), "", buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const store = new FocusBriefStore(params.db);
+    const summaries = await store.getActiveContextSummaries(current.stats.conversationId);
+    if (summaries.length === 0) {
+        lines.push(buildSection("🎯 Focus", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "The current conversation has no active summary context items to focus."),
+        ]));
+        return lines.join("\n");
+    }
+    const sourceContextHash = hashFocusSourceContext(summaries);
+    const watermark = await store.getCoveredWatermark(current.stats.conversationId);
+    const generation = await runDelegatedFocusBrief({
+        deps: params.deps,
+        requesterSessionKey,
+        conversationId: current.stats.conversationId,
+        focusPrompt: params.prompt,
+        summaries,
+    });
+    const ordinalBySummaryId = new Map(summaries.map((summary) => [summary.summaryId, summary.ordinal]));
+    const sources = [
+        ...summaries.map((summary) => ({
+            summaryId: summary.summaryId,
+            ordinal: summary.ordinal,
+            role: "active_input",
+        })),
+        ...generation.citedSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "cited",
+        })),
+        ...generation.expandedSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "expanded",
+        })),
+        ...generation.irrelevantSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "irrelevant",
+        })),
+    ];
+    const ok = generation.status === "ok";
+    const brief = await store.createFocusBrief({
+        conversationId: current.stats.conversationId,
+        sessionKey: requesterSessionKey,
+        prompt: params.prompt,
+        content: ok ? generation.briefMarkdown : "",
+        status: ok ? "active" : "failed",
+        tokenCount: generation.tokenCount,
+        targetTokens: generation.targetTokens,
+        coveredLatestAt: watermark.coveredLatestAt,
+        coveredMessageSeq: watermark.coveredMessageSeq,
+        sourceContextHash,
+        generatorRunId: generation.runId,
+        generatorSessionKey: generation.childSessionKey,
+        rawResultJson: generation.rawResultJson ??
+            JSON.stringify({
+                status: generation.status,
+                error: generation.error,
+                rawReply: generation.rawReply,
+            }),
+        error: generation.error ?? null,
+        sources,
+        supersedeCurrentDrafts: ok,
+    });
+    lines.push(buildSection("📍 Current conversation", [
+        buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+        buildStatLine("session key", formatCommand(truncateMiddle(requesterSessionKey, 44))),
+        buildStatLine("source summaries", formatNumber(summaries.length)),
+        buildStatLine("source context hash", sourceContextHash.slice(0, 16)),
+    ]), "", buildSection("🧹 Pre-focus compaction", [
+        buildStatLine("status", "completed"),
+        buildStatLine("compacted", formatBoolean(preFocusCompaction.result.compacted)),
+        buildStatLine("result", preFocusCompaction.result.reason ?? "done"),
+    ]), "", buildSection("🎯 Focus brief", [
+        buildStatLine("brief id", formatCommand(brief.briefId)),
+        buildStatLine("status", brief.status),
+        buildStatLine("prompt", JSON.stringify(formatFocusPreview(params.prompt, 240))),
+        buildStatLine("tokens", formatNumber(brief.tokenCount)),
+        buildStatLine("target tokens", formatNumber(brief.targetTokens)),
+        buildStatLine("generator run", generation.runId),
+        buildStatLine("generator session", truncateMiddle(generation.childSessionKey, 60)),
+        buildStatLine("truncated", formatBoolean(generation.truncated)),
+    ]));
+    if (generation.warning) {
+        lines.push("", buildSection("⚠️ Generation warning", [generation.warning]));
+    }
+    if (!ok) {
+        lines.push("", buildSection("⚠️ Generation failed", [
+            generation.error ?? "Focus brief generation failed without a specific error.",
+        ]));
+        return lines.join("\n");
+    }
+    lines.push("", buildSection("📝 Preview", [formatFocusPreview(generation.briefMarkdown)]));
+    return lines.join("\n");
+}
+function isSummaryAfterFocusWatermark(summary, brief) {
+    if (brief.coveredMessageSeq != null && summary.maxSourceSeq != null) {
+        return summary.maxSourceSeq > brief.coveredMessageSeq;
+    }
+    if (!brief.coveredLatestAt) {
+        return true;
+    }
+    const timestamp = summary.latestAt ?? summary.createdAt;
+    const parsed = Date.parse(timestamp);
+    if (!Number.isFinite(parsed)) {
+        return true;
+    }
+    return parsed > brief.coveredLatestAt.getTime();
+}
+// Refresh the active focus brief by merging relevant post-focus summary deltas
+// into the existing brief. The old active brief is superseded only after a new
+// active replacement is generated and persisted successfully.
+async function buildRefocusText(params) {
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🎯 Lossless Claw Refocus",
+        "",
+    ];
+    if (!params.deps || !params.getLcm) {
+        lines.push(buildSection("🛠️ Refocus", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "Refocus requires runtime dependencies for pre-refocus compaction and delegated subagents."),
+        ]));
+        return lines.join("\n");
+    }
+    const requesterSessionKey = normalizeIdentity(params.ctx.sessionKey);
+    if (!requesterSessionKey) {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "OpenClaw must expose the active session key for Lossless Claw to refocus."),
+        ]));
+        return lines.join("\n");
+    }
+    let current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const store = new FocusBriefStore(params.db);
+    const active = await store.getActiveFocusBrief(current.stats.conversationId);
+    if (!active?.content.trim()) {
+        lines.push(buildSection("🎯 Refocus", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", "The current conversation has no active focus brief to refresh."),
+        ]));
+        return lines.join("\n");
+    }
+    const preRefocusCompaction = await runFocusLifecycleCompaction({
+        ctx: params.ctx,
+        deps: params.deps,
+        getLcm: params.getLcm,
+        config: params.config,
+        current,
+        sessionKey: requesterSessionKey,
+    });
+    if (preRefocusCompaction.status !== "ok") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+            buildStatLine("session key", formatCommand(truncateMiddle(requesterSessionKey, 44))),
+        ]), "", buildSection("🧹 Pre-refocus compaction", [
+            buildStatLine("status", preRefocusCompaction.status),
+            buildStatLine("reason", preRefocusCompaction.reason),
+        ]));
+        return lines.join("\n");
+    }
+    current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("🧹 Pre-refocus compaction", [
+            buildStatLine("status", "completed"),
+            buildStatLine("result", preRefocusCompaction.result.reason ?? "done"),
+        ]), "", buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const activeSummaries = await store.getActiveContextSummaries(current.stats.conversationId);
+    const deltaSummaries = activeSummaries.filter((summary) => isSummaryAfterFocusWatermark(summary, active));
+    if (deltaSummaries.length === 0) {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+            buildStatLine("session key", formatCommand(truncateMiddle(requesterSessionKey, 44))),
+        ]), "", buildSection("🧹 Pre-refocus compaction", [
+            buildStatLine("status", "completed"),
+            buildStatLine("compacted", formatBoolean(preRefocusCompaction.result.compacted)),
+            buildStatLine("result", preRefocusCompaction.result.reason ?? "done"),
+        ]), "", buildSection("🎯 Refocus", [
+            buildStatLine("status", "already current"),
+            buildStatLine("active brief", formatCommand(active.briefId)),
+            buildStatLine("delta summaries", "0"),
+        ]));
+        return lines.join("\n");
+    }
+    const sourceContextHash = hashFocusSourceContext(activeSummaries);
+    const watermark = await store.getCoveredWatermark(current.stats.conversationId);
+    const generation = await runDelegatedRefocusBrief({
+        deps: params.deps,
+        requesterSessionKey,
+        conversationId: current.stats.conversationId,
+        focusPrompt: active.prompt,
+        existingBriefMarkdown: active.content,
+        deltaSummaries,
+    });
+    const ordinalBySummaryId = new Map(activeSummaries.map((summary) => [summary.summaryId, summary.ordinal]));
+    const sources = [
+        ...deltaSummaries.map((summary) => ({
+            summaryId: summary.summaryId,
+            ordinal: summary.ordinal,
+            role: "active_input",
+        })),
+        ...generation.citedSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "cited",
+        })),
+        ...generation.expandedSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "expanded",
+        })),
+        ...generation.irrelevantSummaryIds.map((summaryId) => ({
+            summaryId,
+            ordinal: ordinalBySummaryId.get(summaryId) ?? null,
+            role: "irrelevant",
+        })),
+    ];
+    const ok = generation.status === "ok";
+    const brief = await store.createFocusBrief({
+        conversationId: current.stats.conversationId,
+        sessionKey: requesterSessionKey,
+        prompt: active.prompt,
+        content: ok ? generation.briefMarkdown : "",
+        status: ok ? "active" : "failed",
+        tokenCount: generation.tokenCount,
+        targetTokens: generation.targetTokens,
+        coveredLatestAt: watermark.coveredLatestAt,
+        coveredMessageSeq: watermark.coveredMessageSeq,
+        sourceContextHash,
+        generatorRunId: generation.runId,
+        generatorSessionKey: generation.childSessionKey,
+        rawResultJson: generation.rawResultJson ??
+            JSON.stringify({
+                status: generation.status,
+                error: generation.error,
+                rawReply: generation.rawReply,
+            }),
+        error: generation.error ?? null,
+        sources,
+        supersedeCurrentDrafts: ok,
+    });
+    lines.push(buildSection("📍 Current conversation", [
+        buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+        buildStatLine("session key", formatCommand(truncateMiddle(requesterSessionKey, 44))),
+        buildStatLine("active brief", formatCommand(active.briefId)),
+        buildStatLine("delta summaries", formatNumber(deltaSummaries.length)),
+        buildStatLine("source context hash", sourceContextHash.slice(0, 16)),
+    ]), "", buildSection("🧹 Pre-refocus compaction", [
+        buildStatLine("status", "completed"),
+        buildStatLine("compacted", formatBoolean(preRefocusCompaction.result.compacted)),
+        buildStatLine("result", preRefocusCompaction.result.reason ?? "done"),
+    ]), "", buildSection("🎯 Focus brief", [
+        buildStatLine("brief id", formatCommand(brief.briefId)),
+        buildStatLine("status", brief.status),
+        buildStatLine("prompt", JSON.stringify(formatFocusPreview(active.prompt, 240))),
+        buildStatLine("tokens", formatNumber(brief.tokenCount)),
+        buildStatLine("target tokens", formatNumber(brief.targetTokens)),
+        buildStatLine("generator run", generation.runId),
+        buildStatLine("generator session", truncateMiddle(generation.childSessionKey, 60)),
+        buildStatLine("truncated", formatBoolean(generation.truncated)),
+    ]));
+    if (generation.warning) {
+        lines.push("", buildSection("⚠️ Generation warning", [generation.warning]));
+    }
+    if (!ok) {
+        lines.push("", buildSection("⚠️ Generation failed", [
+            generation.error ?? "Refocus brief generation failed without a specific error.",
+        ]));
+        return lines.join("\n");
+    }
+    lines.push("", buildSection("📝 Preview", [formatFocusPreview(generation.briefMarkdown)]));
+    return lines.join("\n");
+}
+// Deactivate the current focus overlay without deleting focus history.
+async function buildUnfocusText(params) {
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🎯 Lossless Claw Focus",
+        "",
+    ];
+    const current = await resolveCurrentConversation({ ctx: params.ctx, db: params.db });
+    if (current.kind === "unavailable") {
+        lines.push(buildSection("📍 Current conversation", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", current.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const store = new FocusBriefStore(params.db);
+    const active = await store.getActiveFocusBrief(current.stats.conversationId);
+    if (!active) {
+        lines.push(buildSection("🎯 Focus", [
+            buildStatLine("status", "none active"),
+            buildStatLine("deactivated briefs", "0"),
+        ]));
+        return lines.join("\n");
+    }
+    const deactivated = await store.deactivateActiveFocusBriefs(current.stats.conversationId);
+    const postUnfocusCompaction = await runFocusLifecycleCompaction({
+        ctx: params.ctx,
+        deps: params.deps,
+        getLcm: params.getLcm,
+        config: params.config,
+        current,
+        sessionKey: normalizeIdentity(params.ctx.sessionKey) ??
+            normalizeIdentity(current.stats.sessionKey ?? undefined),
+    });
+    lines.push(buildSection("🎯 Focus", [
+        buildStatLine("status", deactivated > 0 ? "inactive" : "none active"),
+        buildStatLine("deactivated briefs", formatNumber(deactivated)),
+    ]));
+    lines.push("", buildSection("🧹 Post-unfocus compaction", [
+        buildStatLine("status", postUnfocusCompaction.status === "ok" ? "completed" : postUnfocusCompaction.status),
+        ...(postUnfocusCompaction.status === "ok"
+            ? [
+                buildStatLine("compacted", formatBoolean(postUnfocusCompaction.result.compacted)),
+                buildStatLine("result", postUnfocusCompaction.result.reason ?? "done"),
+            ]
+            : [buildStatLine("reason", postUnfocusCompaction.reason)]),
+    ]));
+    return lines.join("\n");
+}
+async function buildDoctorCleanersApplyText(params) {
+    const filterIds = params.filterId ? [params.filterId] : undefined;
+    const unavailableReason = getDoctorCleanerApplyUnavailableReason(params.config.databasePath);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Doctor Clean Apply",
+        "",
+        buildSection("🌐 Cleaner scope", [
+            buildStatLine("filters", filterIds && filterIds.length > 0
+                ? filterIds.map((filter) => formatCommand(filter)).join(", ")
+                : "all approved cleaner filters"),
+            buildStatLine("vacuum requested", formatBoolean(params.vacuum)),
+        ]),
+        "",
+    ];
+    if (unavailableReason) {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", unavailableReason),
+        ]));
+        return lines.join("\n");
+    }
+    const before = scanDoctorCleaners(params.db, filterIds, params.agentIds);
+    lines.splice(lines.length - 1, 0, buildSection("📊 Current matches", [
+        buildStatLine("matched conversations before apply", formatNumber(before.totalDistinctConversations)),
+        buildStatLine("matched messages before apply", formatNumber(before.totalDistinctMessages)),
+    ]), "");
+    if (before.totalDistinctConversations === 0) {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "completed"),
+            buildStatLine("backup path", "skipped (no matches)"),
+            buildStatLine("deleted conversations", "0"),
+            buildStatLine("deleted messages", "0"),
+            buildStatLine("vacuumed", "no"),
+            buildStatLine("quick_check", "not run (no writes)"),
+            buildStatLine("result", "clean; no deletes ran"),
+        ]));
+        return lines.join("\n");
+    }
+    let result;
+    try {
+        result = applyDoctorCleaners(params.db, {
+            databasePath: params.config.databasePath,
+            filterIds,
+            agentIds: params.agentIds,
+            vacuum: params.vacuum,
+        });
+    }
+    catch (error) {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "failed"),
+            buildStatLine("reason", error instanceof Error ? error.message : "unknown cleaner apply failure"),
+        ]));
+        return lines.join("\n");
+    }
+    if (result.kind === "unavailable") {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", result.reason),
+        ]));
+        return lines.join("\n");
+    }
+    const quickCheck = runQuickCheck(params.db);
+    const quickCheckPassed = isPassingQuickCheck(quickCheck);
+    lines.push(buildSection("🛠️ Apply", [
+        buildStatLine("status", quickCheckPassed ? "completed" : "warning"),
+        buildStatLine("backup path", result.backupPath),
+        buildStatLine("deleted conversations", formatNumber(result.deletedConversations)),
+        buildStatLine("deleted messages", formatNumber(result.deletedMessages)),
+        buildStatLine("vacuumed", formatBoolean(result.vacuumed)),
+        buildStatLine("quick_check", quickCheck),
+        buildStatLine("result", quickCheckPassed
+            ? result.deletedConversations > 0
+                ? `removed ${formatNumber(result.deletedConversations)} conversation(s)`
+                : "clean; no deletes ran"
+            : "writes committed, but SQLite integrity verification reported problems; inspect the database or restore from the backup before continuing"),
+    ]));
+    return lines.join("\n");
+}
+async function buildRolloverSplitApplyText(params) {
+    const scan = scanRolloverSplits(params.db);
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Rollover Split Repair",
+        "",
+        buildSection("🌐 Repair scope", [
+            buildStatLine("safe lanes", formatNumber(scan.totals.safeLanes)),
+            buildStatLine("needs review", formatNumber(scan.totals.needsReviewLanes)),
+            buildStatLine("stranded", formatRolloverCounts(scan.totals)),
+        ]),
+        "",
+    ];
+    if (scan.safe.length > 0 && params.options?.confirm !== true) {
+        lines.push(buildSection("🧯 Safety preflight", [
+            buildStatLine("status", "blocked"),
+            buildStatLine("mode", "read-only; no rollover split repair ran"),
+            buildStatLine("reason", "confirmation word required"),
+        ]), "", buildSection("🛠️ Next step", [
+            `Run ${formatCommand(`${VISIBLE_COMMAND} doctor apply rollover-splits confirm`)} to create a backup and repair all safe rollover split groups.`,
+        ]));
+        return lines.join("\n");
+    }
+    let result;
+    try {
+        result = await applyRolloverSplitRepair({
+            db: params.db,
+            databasePath: params.config.databasePath,
+        });
+    }
+    catch (error) {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "failed"),
+            buildStatLine("reason", error instanceof Error ? error.message : "unknown rollover split repair failure"),
+        ]));
+        return lines.join("\n");
+    }
+    if (result.kind === "unavailable") {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", result.reason),
+        ]));
+        return lines.join("\n");
+    }
+    lines.push(buildSection("🛠️ Apply", [
+        buildStatLine("status", "completed"),
+        buildStatLine("backup path", result.backupPath),
+        buildStatLine("repaired lanes", formatNumber(result.repairedLanes)),
+        buildStatLine("skipped for review", formatNumber(result.skippedReviewLanes)),
+        buildStatLine("merged", formatRolloverCounts(result.totals)),
+        buildStatLine("integrity", result.verification.integrity),
+        buildStatLine("foreign keys", result.verification.foreignKeys),
+        buildStatLine("result", result.repairedLanes > 0
+            ? `repaired ${formatNumber(result.repairedLanes)} rollover split lane(s)`
+            : "clean; no writes ran"),
+    ]));
+    return lines.join("\n");
+}
+async function buildDoctorApplyText(params) {
+    const requestedConversationId = params.options?.conversationId;
+    const confirmOffline = params.options?.confirmOffline === true;
+    const nextStepCommand = requestedConversationId !== undefined
+        ? `${VISIBLE_COMMAND} doctor apply ${String(requestedConversationId)} confirm-offline`
+        : `${VISIBLE_COMMAND} doctor apply confirm-offline`;
+    const targetSectionLabel = requestedConversationId !== undefined
+        ? "📍 Target conversation"
+        : "📍 Current conversation";
+    const current = requestedConversationId !== undefined
+        ? await resolveDoctorApplyConversationById(params.db, requestedConversationId)
+        : await resolveCurrentConversation(params);
+    if (current.kind === "unavailable") {
+        return [
+            ...buildHeaderLines(),
+            "",
+            "🩺 Lossless Claw Doctor Apply",
+            "",
+            buildSection(targetSectionLabel, [
+                buildStatLine("status", "unavailable"),
+                buildStatLine("reason", current.reason),
+                buildStatLine("fallback", "Doctor apply is conversation-scoped, so no global repair ran."),
+            ]),
+        ].join("\n");
+    }
+    const stats = getDoctorSummaryStats(params.db, current.stats.conversationId);
+    const maintenance = await getConversationCompactionMaintenanceByConversationId(params.db, current.stats.conversationId);
+    const skipRepairMetrics = !confirmOffline && stats.total > DOCTOR_APPLY_LARGE_TARGET_THRESHOLD;
+    const repairMetrics = skipRepairMetrics
+        ? null
+        : loadDoctorApplyRepairMetrics(params.db, stats);
+    const preflight = buildDoctorApplySafetyPreflight({
+        config: params.config,
+        doctor: stats,
+        repairMetrics: repairMetrics ?? {
+            repairInputTokenCount: 0,
+            repairTargetSourceTokenCount: 0,
+        },
+        maintenance,
+    });
+    const targetedConfirmationReason = requestedConversationId !== undefined && !confirmOffline
+        ? "explicit conversation-id targeting requires `confirm-offline`"
+        : null;
+    if ((preflight.blocked || targetedConfirmationReason !== null) && !confirmOffline) {
+        return [
+            ...buildHeaderLines(),
+            "",
+            "🩺 Lossless Claw Doctor Apply",
+            "",
+            buildSection(targetSectionLabel, [
+                buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+                buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+                buildStatLine("scope", "this conversation only"),
+            ]),
+            "",
+            buildSection("🧯 Safety preflight", [
+                buildStatLine("status", "blocked"),
+                buildStatLine("mode", "read-only; no summary rewrites ran"),
+                buildStatLine("LCM frontier tokens", formatNumber(current.stats.contextTokenCount)),
+                buildStatLine("repair targets", formatNumber(stats.total)),
+                ...(repairMetrics
+                    ? [
+                        buildStatLine("repair input tokens", formatNumber(repairMetrics.repairInputTokenCount)),
+                        buildStatLine("repair target source tokens", formatNumber(repairMetrics.repairTargetSourceTokenCount)),
+                    ]
+                    : []),
+                buildStatLine("token threshold", formatNumber(preflight.tokenThreshold)),
+                ...(targetedConfirmationReason
+                    ? [buildStatLine("reason", targetedConfirmationReason)]
+                    : []),
+                ...preflight.reasons.map((reason) => buildStatLine("reason", reason)),
+            ]),
+            "",
+            buildSection("🛠️ Next step", [
+                `Run ${formatCommand(nextStepCommand)} only from an isolated/offline maintenance lane after active channel delivery is paused or moved away from this conversation.`,
+            ]),
+        ].join("\n");
+    }
+    let result;
+    try {
+        result = await applyScopedDoctorRepair({
+            db: params.db,
+            config: params.config,
+            conversationId: current.stats.conversationId,
+            deps: params.deps,
+            summarize: params.summarize,
+            runtimeConfig: params.ctx.config,
+            runtimeContext: readCommandRuntimeContext(params.ctx),
+            sessionKey: current.stats.sessionKey ?? normalizeIdentity(params.ctx.sessionKey),
+        });
+    }
+    catch (error) {
+        return [
+            ...buildHeaderLines(),
+            "",
+            "🩺 Lossless Claw Doctor Apply",
+            "",
+            buildSection(targetSectionLabel, [
+                buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+                buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+                buildStatLine("scope", "this conversation only"),
+            ]),
+            "",
+            buildSection("🛠️ Apply", [
+                buildStatLine("mode", "in-place summary rewrite"),
+                buildStatLine("status", "failed"),
+                buildStatLine("reason", error instanceof Error ? error.message : "unknown repair failure"),
+            ]),
+        ].join("\n");
+    }
+    const lines = [
+        ...buildHeaderLines(),
+        "",
+        "🩺 Lossless Claw Doctor Apply",
+        "",
+        buildSection(targetSectionLabel, [
+            buildStatLine("conversation id", formatNumber(current.stats.conversationId)),
+            buildStatLine("session key", current.stats.sessionKey ? formatCommand(truncateMiddle(current.stats.sessionKey, 44)) : "missing"),
+            buildStatLine("scope", "this conversation only"),
+        ]),
+        "",
+    ];
+    if (result.kind === "unavailable") {
+        lines.push(buildSection("🛠️ Apply", [
+            buildStatLine("mode", "in-place summary rewrite"),
+            buildStatLine("status", "unavailable"),
+            buildStatLine("reason", result.reason),
+        ]));
+        return lines.join("\n");
+    }
+    lines.push(buildSection("🛠️ Apply", [
+        buildStatLine("mode", "in-place summary rewrite"),
+        ...(confirmOffline
+            ? [buildStatLine("safety override", "confirm-offline")]
+            : []),
+        buildStatLine("repair targets", formatNumber(stats.total)),
+        buildStatLine("old-marker summaries", formatNumber(stats.old)),
+        buildStatLine("truncated-marker summaries", formatNumber(stats.truncated)),
+        buildStatLine("fallback-marker summaries", formatNumber(stats.fallback)),
+        buildStatLine("emergency-fallback summaries", formatNumber(stats.emergency)),
+        buildStatLine("repaired summaries", formatNumber(result.repaired)),
+        buildStatLine("unchanged summaries", formatNumber(result.unchanged)),
+        buildStatLine("skipped summaries", formatNumber(result.skipped.length)),
+        buildStatLine("result", stats.total === 0
+            ? "clean; no writes ran"
+            : result.repaired > 0
+                ? `repaired ${formatNumber(result.repaired)} summary(s) in place`
+                : "no repairs applied"),
+    ]));
+    if (result.repairedSummaryIds.length > 0) {
+        lines.push("", buildSection("🧷 Repaired summaries", [result.repairedSummaryIds.join(", ")]));
+    }
+    if (result.skipped.length > 0) {
+        lines.push("", buildSection("⚠️ Deferred", result.skipped.map((item) => `${item.summaryId}: ${item.reason}`)));
+    }
+    return lines.join("\n");
+}
+export function createLcmCommand(params) {
+    const getDb = async () => typeof params.db === "function" ? await params.db() : params.db;
+    return {
+        name: "lcm",
+        nativeNames: {
+            default: "lossless",
+        },
+        nativeProgressMessages: {
+            telegram: "Lossless Claw is working...",
+        },
+        description: "Lossless Claw health, backups, compaction, junk review, and doctor tools.",
+        acceptsArgs: true,
+        handler: async (ctx) => {
+            const parsed = parseLcmCommand(ctx.args);
+            const doctorCleanerAgentIds = listConfiguredAgentIds(asRecord(ctx)?.config, params.openClawConfig);
+            switch (parsed.kind) {
+                case "status":
+                    return {
+                        text: await buildStatusText({
+                            ctx,
+                            db: await getDb(),
+                            config: params.config,
+                            openClawConfig: params.openClawConfig,
+                        }),
+                    };
+                case "backup":
+                    return {
+                        text: await buildBackupText({
+                            db: await getDb(),
+                            config: params.config,
+                        }),
+                    };
+                case "focus_status":
+                    return { text: await buildFocusStatusText({ ctx, db: await getDb(), config: params.config }) };
+                case "focus_generate":
+                    return {
+                        text: await buildFocusGenerateText({
+                            ctx,
+                            db: await getDb(),
+                            config: params.config,
+                            deps: params.deps,
+                            getLcm: params.getLcm,
+                            prompt: parsed.prompt,
+                        }),
+                    };
+                case "refocus":
+                    return {
+                        text: await buildRefocusText({
+                            ctx,
+                            db: await getDb(),
+                            config: params.config,
+                            deps: params.deps,
+                            getLcm: params.getLcm,
+                        }),
+                    };
+                case "unfocus":
+                    return {
+                        text: await buildUnfocusText({
+                            ctx,
+                            db: await getDb(),
+                            config: params.config,
+                            deps: params.deps,
+                            getLcm: params.getLcm,
+                        }),
+                    };
+                case "doctor":
+                    return parsed.apply
+                        ? {
+                            text: await buildDoctorApplyText({
+                                ctx,
+                                db: await getDb(),
+                                config: params.config,
+                                deps: params.deps,
+                                summarize: params.summarize,
+                                options: parsed.applyOptions,
+                            }),
+                        }
+                        : {
+                            text: await buildDoctorText({
+                                ctx,
+                                db: await getDb(),
+                                openClawConfig: params.openClawConfig,
+                                activeSourcePath: params.activeSourcePath,
+                            }),
+                        };
+                case "doctor_maintenance":
+                    return parsed.apply
+                        ? {
+                            text: await buildMaintenanceDoctorApplyText({
+                                db: await getDb(),
+                                config: params.config,
+                                conversationId: parsed.conversationId,
+                                confirmed: parsed.confirmed,
+                            }),
+                        }
+                        : { text: buildMaintenanceDoctorText(await getDb()) };
+                case "doctor_rollover_splits":
+                    return parsed.apply
+                        ? {
+                            text: await buildRolloverSplitApplyText({
+                                db: await getDb(),
+                                config: params.config,
+                                options: parsed.applyOptions,
+                            }),
+                        }
+                        : {
+                            text: [
+                                ...buildHeaderLines(),
+                                "",
+                                "🩺 Lossless Claw Rollover Splits",
+                                "",
+                                buildRolloverSplitScanSection(scanRolloverSplits(await getDb())),
+                            ].join("\n"),
+                        };
+                case "doctor_anchors":
+                    return { text: buildAnchorTrustAuditText(await getDb()) };
+                case "doctor_cleaners":
+                    return parsed.apply
+                        ? {
+                            text: await buildDoctorCleanersApplyText({
+                                db: await getDb(),
+                                config: params.config,
+                                agentIds: doctorCleanerAgentIds,
+                                filterId: parsed.filterId,
+                                vacuum: parsed.vacuum,
+                            }),
+                        }
+                        : {
+                            text: await buildDoctorCleanersText({
+                                db: await getDb(),
+                                agentIds: doctorCleanerAgentIds,
+                            }),
+                        };
+                case "help":
+                    return { text: buildHelpText(parsed.error) };
+            }
+        },
+    };
+}
+export const __testing = {
+    parseLcmCommand,
+    detectDoctorMarker,
+    getDoctorSummaryStats,
+    getLcmStatusStats,
+    getConversationStatusStats,
+    scanDoctorCleaners,
+    resolveCurrentConversation,
+    resolveContextEngineSlot,
+    resolvePluginEnabled,
+    resolvePluginSelected,
+};

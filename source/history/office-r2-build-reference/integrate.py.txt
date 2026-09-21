@@ -1,0 +1,98 @@
+"""Assemble the two create-only Office replacement candidates and bind every byte."""
+from pathlib import Path
+import hashlib, json, os, shutil, sys
+
+ROOT=Path(__file__).resolve().parents[3]
+WORK=ROOT/'work/office-fallback-20260921'
+OUT=ROOT/'deliverables/DSH-SEP-alpha2-20260921-office-r2'
+BASE=ROOT/'deliverables/DSH-SEP-alpha2-20260921'
+NAMES=['DSH-SEP-Full','DSH-SEP-Only']
+IDS={'p0331','p0367','p0408','p0437','p0438','p0439'}
+REV='20260921-office-r2'
+
+def win(p):
+    return Path('\\\\?\\'+str(p.resolve())) if os.name=='nt' and not str(p).startswith('\\\\?\\') else p
+def readj(p):return json.loads(win(p).read_text(encoding='utf-8-sig'))
+def write(p,b):
+    p=win(p);p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b)
+def writej(p,x):write(p,(json.dumps(x,ensure_ascii=False,indent=2)+'\n').encode())
+def digest(p):
+    with win(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+def files(p):return sorted((f for f in win(p).rglob('*') if f.is_file()),key=lambda f:f.as_posix())
+def rel(f,p):return f.relative_to(win(p)).as_posix()
+def copy(a,b):
+    assert not a.is_symlink() and a.stat().st_nlink==1
+    b=win(b);b.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(a,b)
+
+def engine():
+    source=WORK/'engine/runtime'
+    allfiles=files(source)
+    assert all(f.suffix.lower() not in ('.pyc','.pyo','.msi') for f in allfiles), 'Engine tree must be finalized without generated caches or administrative installer'
+    assert (source/'SOURCE-ACCESS.md').is_file()
+    pkg={'name':'@dsh-sep/libreoffice-runtime','version':'26.8.0-3.sep.1','private':True,
+         'description':'Official LibreOffice Windows x64 administrative extraction with app-local VC runtime and source-access records',
+         'license':'SEE LICENSE IN LICENSE.html','os':['win32'],'cpu':['x64'],
+         'exports':{'./package.json':'./package.json'},
+         'upstream':{'version':'26.8.0.3','buildId':'bce0998afefdbc355585ca324285661a2170ba77',
+          'msiSha256':'4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95'}}
+    for name in NAMES:
+        target=OUT/name/'payload/store/p0439';assert not target.exists(), 'Runtime assembly is create-only'
+        for f in allfiles:copy(f,target/rel(f,source))
+        writej(target/'package.json',pkg)
+        print(json.dumps({'kind':name,'runtimeFiles':len(allfiles)+1,'bytes':sum(f.stat().st_size for f in allfiles)}),flush=True)
+    writej(WORK/'packaging/engine-copy.json',{'status':'pass','files':[{'path':rel(f,source),'size':f.stat().st_size,'sha256':digest(f)} for f in allfiles]})
+
+def adapter():
+    source=WORK/'adapter';pkg=readj(source/'package.json')
+    assert pkg['name']=='@dsh-sep/office-converter' and pkg['version']=='0.1.0'
+    for name in NAMES:
+        target=OUT/name/'payload/store/p0438'
+        assert not target.exists(), 'Adapter assembly is create-only'
+        for f in files(source):
+            r=rel(f,source)
+            if r.startswith(('evidence/','node_modules/','.git/','test/')):continue
+            assert f.suffix not in ('.pyc','.log','.exe','.dll'),r
+            copy(f,target/r)
+        assert (target/'index.d.ts').is_file() and (target/'LICENSE').is_file()
+    print('Adapter copied to both packages',flush=True)
+
+def seal():
+    full=OUT/'DSH-SEP-Full';old=readj(BASE/'DSH-SEP-Full/graph.json');g=readj(BASE/'DSH-SEP-Full/graph.json')
+    byid={p['id']:p for p in g['packages']}
+    deps=byid['p0437']['dependencies'];assert deps.pop('@deepseek-ai/libreoffice-kit')=='p0438';deps['@dsh-sep/office-converter']='p0438'
+    pm=readj(full/'payload/store/p0438/package.json')
+    depmap={p['name']:p['id'] for p in g['packages']}
+    depmap['@dsh-sep/libreoffice-runtime']='p0439'
+    adeps={k:depmap[k] for k in pm.get('dependencies',{})}
+    assert '@dsh-sep/libreoffice-runtime' in adeps
+    byid['p0438'].update(name=pm['name'],version=pm['version'],dependencies=adeps,omittedOptional=[])
+    rp=readj(full/'payload/store/p0439/package.json')
+    byid['p0439'].update(name=rp['name'],version=rp['version'],dependencies={},omittedOptional=[])
+    g['roots'].pop('@deepseek-ai/libreoffice-kit',None);g['roots'].pop('@deepseek-ai/libreoffice-kit-win32-x64',None)
+    g['roots']['@dsh-sep/office-converter']='p0438';g['roots']['@dsh-sep/libreoffice-runtime']='p0439'
+    rows=[]
+    for f in files(full/'payload'):
+        r=rel(f,full/'payload');assert r.startswith('store/') and f.stat().st_nlink==1 and not f.is_symlink()
+        rows.append({'path':r,'size':f.stat().st_size,'sha256':digest(f)})
+    assert len(rows)==len({x['path'].lower() for x in rows}), 'Case-colliding program paths'
+    g['files']=sorted(rows,key=lambda x:x['path']);gb=(json.dumps(g,ensure_ascii=False,indent=2)+'\n').encode();gh=hashlib.sha256(gb).hexdigest()
+    selected=set(readj(BASE/'DSH-SEP-Only/manifest.json')['payload'])
+    selected={r['path'] for r in rows if r['path'] in selected or r['path'].split('/')[1] in IDS}
+    # Copy complete changed host modules for the SEP-only adaptation payload.
+    for row in rows:
+        if row['path'] in selected:
+            p=OUT/'DSH-SEP-Only/payload'/row['path']
+            if not win(p).is_file() or digest(p)!=row['sha256']:copy(win(full/'payload'/row['path']),p)
+    oldrows={f['path']:f for f in old['files']};newrows={f['path']:f for f in rows}
+    changes=[{'path':p,'before':oldrows.get(p),'after':newrows.get(p)} for p in sorted(oldrows.keys()|newrows.keys()) if oldrows.get(p)!=newrows.get(p)]
+    for name in NAMES:
+        root=OUT/name;write(root/'graph.json',gb);m=readj(root/'manifest.json');m['graph']={'size':len(gb),'sha256':gh};m['distributionRevision']=REV
+        m['payload']=[] if m['kind']=='full' else sorted(selected)
+        prior=readj(root/'host-adaptations.json');hostids={x['path'].split('/')[1] for x in prior}|(IDS-{'p0438','p0439'})
+        adaptations=[{'path':f['path'],'package':byid[f['path'].split('/')[1]]['name'],'afterSha256':f['sha256'],'scope':'exact alpha.2 adaptation payload; unchanged donor bytes must match graph'} for f in rows if f['path'].split('/')[1] in hostids]
+        writej(root/'host-adaptations.json',adaptations);writej(root/'manifest.json',m)
+    writej(WORK/'packaging/sealed-program.json',{'status':'pass','distribution':REV,'baseGraphSha256':hashlib.sha256((BASE/'DSH-SEP-Full/graph.json').read_bytes()).hexdigest(),'graphSha256':gh,'files':len(rows),'packages':len(g['packages']),'changedModules':sorted(IDS),'changes':changes})
+    print(json.dumps({'graphSha256':gh,'files':len(rows),'programBytes':sum(x['size'] for x in rows),'changedFiles':len(changes)}),flush=True)
+
+if __name__=='__main__':
+    {'engine':engine,'adapter':adapter,'seal':seal}[sys.argv[1]]()

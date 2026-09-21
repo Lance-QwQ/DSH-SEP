@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "package": "@electron-internal/extract-zip",
+  "version": "1.0.5",
+  "packageId": "p0521",
+  "baselineManifestSha256": "438071218e7acba31a460d5c8ebb9a7dc4a8ce5c0cb05f9c706f5b4e1323884c",
+  "baselineLicenseDeclaration": "BSD-2-Clause",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "BSD-2-Clause",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/BSD-2-Clause.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-BSD-2-Clause.txt",
+    "sha256": "f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "https://github.com/electron/extract-zip"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40electron-internal%2Fextract-zip/1.0.5",
+    "responseSha256": "8fe6811fc810a4b65bbaaf3ab5da78cdce0ea6c82343acd2b55c9bc4f19b1f05",
+    "gitHead": "b83e459fd04c53b0a1c8438a6792df8f64be47fc",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@electron-internal/extract-zip/-/extract-zip-1.0.5.tgz",
+      "integrity": "sha512-+bqFCP98pLI0Tt0XQo1TmlXtwjWchISndDOxCkEcIuUgXWpBnLyRI+2DU+mesvnMMX6L1XDqYNA0lXNDHd/yiA==",
+      "shasum": "6782c0f6066e60b7fd286fe7a5c7600f7650d420"
+    },
+    "repository": {
+      "url": "git+https://github.com/electron/extract-zip.git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "939b4462974f8fa1b339dd4f420c62787ddf06903cc9c61f1f0661f096f5370b",
+    "bytes": 3719435,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0521",
+    "name": "@electron-internal/extract-zip",
+    "version": "1.0.5",
+    "license": "BSD-2-Clause",
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/electron/extract-zip.git"
+    },
+    "gitHead": "b83e459fd04c53b0a1c8438a6792df8f64be47fc",
+    "metadataUrl": "https://registry.npmjs.org/%40electron-internal%2Fextract-zip/1.0.5",
+    "tarball": "https://registry.npmjs.org/@electron-internal/extract-zip/-/extract-zip-1.0.5.tgz",
+    "integrity": "sha512-+bqFCP98pLI0Tt0XQo1TmlXtwjWchISndDOxCkEcIuUgXWpBnLyRI+2DU+mesvnMMX6L1XDqYNA0lXNDHd/yiA=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

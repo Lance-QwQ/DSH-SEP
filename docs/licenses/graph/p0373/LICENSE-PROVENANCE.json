@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "package": "@xterm/addon-serialize",
+  "version": "0.14.0",
+  "packageId": "p0373",
+  "baselineManifestSha256": "48b1c275c67f141828765fbf188457c430827c333dba069fe4520cbedb729763",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+    "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+    "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+  },
+  "originalAttributionFields": {
+    "author": {
+      "name": "The xterm.js authors",
+      "url": "https://xtermjs.org/"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": "https://github.com/xtermjs/xterm.js/tree/master/addons/addon-serialize"
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40xterm%2Faddon-serialize/0.14.0",
+    "responseSha256": "d26349e260a6998e44352694c857f7faf1de43ba36690427d00eced0cfa8985d",
+    "gitHead": "f447274f430fd22513f6adbf9862d19524471c04",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@xterm/addon-serialize/-/addon-serialize-0.14.0.tgz",
+      "integrity": "sha512-uteyTU1EkrQa2Ux6P/uFl2fzmXI46jy5uoQMKEOM0fKTyiW7cSn0WrFenHm5vO5uEXX/GpwW/FgILvv3r0WbkA==",
+      "shasum": "70c9f6dcd4632b086a0aa0deafd0e26e7482843b"
+    },
+    "repository": {
+      "url": "git+https://github.com/xtermjs/xterm.js.git#master",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "f9a290923dc9c6178446e3fc082c29812a7096a1664fd7bf904022c141c5bbfb",
+    "bytes": 54965,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

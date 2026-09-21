@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "documentRevision": "20260921-docs-r4",
+  "releaseId": "20260921-r1",
+  "releaseState": "candidate_pending_validation",
+  "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "buildSummary": "两份预验证 ZIP 已实际安装并通过逐文件校验。438 项补跑通过；首轮 424/438（14 个旧夹具元数据不匹配）保留。桌面首试第1轮自动化点击超时后停止；聚焦补跑前2轮通过，第3轮Only宿主ready前code1退出，原因未确定。官方合成首试缺运行时资源，补齐夹具后3轮结果单列。不得宣称桌面3轮全通过或公开就绪。最终归档另行实装核验并由包外交付报告绑定。公开上传仍被 LibreOffice Kit Node API 首选源码缺口阻塞。",
+  "sourceBinding": "DSH-SEP-Source-20260921.zip：10 个 SEP 和 20 个适配宿主模块，716 个发布文件及 20 个补充编写源；SOURCE_FILES.json SHA256 f73379afbe9dc74be924b981ee1ef3f6301c09940d1e6eff0ab1ab76a70a6683。这不是完整传递原生依赖源码或可重复构建认证。",
+  "archives": [
+    {
+      "kind": "only",
+      "filename": "DSH-SEP-Only-Windows-x64.zip"
+    },
+    {
+      "kind": "full",
+      "filename": "DSH-SEP-Full-Windows-x64.zip"
+    }
+  ],
+  "tests": [
+    {
+      "name": "预验证归档实际安装与完整性",
+      "status": "pass",
+      "scope": "Only/Full 各27227程序文件、2640内部链接；5768个Only来源文件前后不变。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "固定438项回归首轮",
+      "status": "fail",
+      "required": false,
+      "scope": "424 pass /14 fail；旧测试package.json与本次许可元数据不同；完整结果保留。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "元数据对齐后的独立补跑",
+      "status": "pass",
+      "scope": "438/438；51文件原有断言不变，产品图未改。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "桌面首试",
+      "status": "fail",
+      "required": false,
+      "scope": "计划3轮，第1轮自动化等待按钮稳定超时后停止；后2轮未执行。失败后的正常app.quit及runtime.close后资源清点为空。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "Only/Full 桌面与恢复补跑",
+      "status": "fail",
+      "scope": "计划3轮：前2轮通过，第3轮Only宿主在ready前code1退出（GUARDIAN_NOT_READY）；原stderr正文未持久化，原因未确定。新诊断通过不能反推已修复。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "官方合成首试",
+      "status": "fail",
+      "required": false,
+      "scope": "第1轮因测试夹具缺office-skills/primary-runtime资源退出；保留失败记录，补齐测试资源后另立三轮。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "官方合成第二次夹具运行",
+      "status": "fail",
+      "required": false,
+      "scope": "官方正常初始化将简略空配置规范化，引起before哈希误报；保留原结果，最终夹具使用官方已规范化的空模板，之后仍严格核对配置及插件。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "官方合成实例并存最终固定三轮",
+      "status": "pass",
+      "scope": "3 /3轮已执行；官方alpha.2桌面/宿主源码副本＋已记录依赖池（含部分SEP适配），不是官方签名安装器完整证明。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "全量隐私模式扫描",
+      "status": "pass",
+      "scope": "两个预验证ZIP全部成员；私人路径、密钥模式、Git和私人配置未检出。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "内置运行环境及源码",
+      "status": "pass",
+      "scope": "两包Python文档/表格/图片、pnpm及8入口；744源码快照文件逐项核验。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "真实模型、连续三小时、官方签名安装器完整共存",
+      "status": "not_run",
+      "required": false,
+      "scope": "不属于本轮新增验证。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "公开软件上传",
+      "status": "blocked",
+      "required": false,
+      "scope": "LibreOffice Kit Node API首选源码访问未建立，另有未归因宿主启动失败；GitHub仓库尚未创建。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    },
+    {
+      "name": "追加有界启动诊断",
+      "status": "pass",
+      "scope": "单次诊断及另5次连续启动/正常退出均未复现；5次stderr均0，不证明此前启动失败已修复。",
+      "evidence": "evidence/package-prevalidation.json",
+      "evidenceSha256": "bb0c8ce162c3153b1e35a4b9c776b2bc8c0f1dbdb750239be7ab6a5f037012a7"
+    }
+  ],
+  "licenseCoverage": {
+    "status": "reviewed_with_scope",
+    "summary": "95 个程序许可/来源文件及 2 个 Office 支持文件已合并，527 包均有明确声明，613 份许可/来源索引项。原 MIT 与其他第三方权利保留；通用补充条款与上游原许可分别标识。详见 licenses/release/LICENSE-SYNCHRONIZATION.md。",
+    "remaining": [
+      "公开上传阻塞：LibreOffice Kit Node API 首选源码固定仓库/提交返回 404；打包 JS、原生 helper 或 LibreOffice core 来源不能替代该源码。",
+      "sharp/libvips 主 DLL 对应固定来源已验证；完整内嵌库源码交付、重链接与所有二进制可重复构建没有全部验证。",
+      "GitHub 仓库尚未创建；本地完成不表示已经公开发布。"
+    ]
+  },
+  "archiveChecksums": "external SHA256SUMS.txt",
+  "publication": {
+    "channel": "GitHub",
+    "repositoryCreated": false,
+    "uploaded": false
+  }
+}

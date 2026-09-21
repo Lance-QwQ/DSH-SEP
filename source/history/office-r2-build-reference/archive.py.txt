@@ -1,0 +1,32 @@
+"""Create immutable, manifest-exact ZIPs and read back every archived byte."""
+from integrate import OUT,NAMES,WORK,readj,win,digest,writej
+from pathlib import PurePosixPath
+import hashlib,json,zipfile
+
+reports=[]
+for name in NAMES:
+    root=OUT/name;m=readj(root/'manifest.json');g=readj(root/'graph.json')
+    assert digest(root/'graph.json')==m['graph']['sha256']
+    selected=set(m['payload'])
+    rows=m['support']+[dict(f,path='payload/'+f['path']) for f in g['files'] if m['kind']=='full' or f['path'] in selected]
+    mapping={r['path']:r for r in rows};assert len(mapping)==len(rows)
+    paths=['manifest.json','graph.json']+sorted(mapping)
+    archive=OUT/(name+'-Windows-x64.zip')
+    assert not archive.exists(),'Never overwrite a sealed archive'
+    with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
+        for rel in paths:
+            assert not PurePosixPath(rel).is_absolute() and '..' not in PurePosixPath(rel).parts and '\\' not in rel
+            p=win(root/rel);assert p.is_file() and not p.is_symlink()
+            if rel in mapping:
+                assert p.stat().st_size==mapping[rel]['size'] and digest(p)==mapping[rel]['sha256'],rel
+            z.write(p,rel)
+    with zipfile.ZipFile(archive) as z:
+        assert len(z.namelist())==len(set(z.namelist()))==len(paths) and set(z.namelist())==set(paths)
+        for rel,row in mapping.items():
+            h=hashlib.sha256();size=0
+            with z.open(rel) as f:
+                while b:=f.read(1024*1024):h.update(b);size+=len(b)
+            assert h.hexdigest()==row['sha256'] and size==row['size'],rel
+    result={'kind':m['kind'],'status':'pass','filename':archive.name,'bytes':archive.stat().st_size,'sha256':digest(archive),'graphSha256':m['graph']['sha256'],'files':len(paths)}
+    reports.append(result);print(json.dumps(result),flush=True)
+writej(WORK/'packaging/final-archives.json',reports)

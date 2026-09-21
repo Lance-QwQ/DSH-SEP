@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "kind": "fixed-source-link-and-dll-correspondence",
+  "sourceAccessStatus": "fixed-chain-verified-with-stated-limits",
+  "registry": {
+    "url": "https://registry.npmjs.org/%40img%2Fsharp-libvips-win32-x64/1.3.3",
+    "status": 200,
+    "name": "@img/sharp-libvips-win32-x64",
+    "version": "1.3.3",
+    "gitHead": "6e5971d333377743163edc3ad9e5d0b897abcbc9",
+    "repository": {
+      "url": "git+https://github.com/lovell/sharp-libvips.git",
+      "type": "git",
+      "directory": "npm/win32-x64"
+    },
+    "license": "LGPL-3.0-or-later",
+    "dist": {
+      "shasum": "548c919c5d912f4a5964d675487f0a0b1fc08cc8",
+      "tarball": "https://registry.npmjs.org/@img/sharp-libvips-win32-x64/-/sharp-libvips-win32-x64-1.3.3.tgz",
+      "fileCount": 7,
+      "integrity": "sha512-+fifUVFjUSDG0J9GU4oGHVy2XkzPQr4ho0IyWGqn9UVwi087zMjiq8vknVjg09cybjgrVWsFsajUJCe4Wmf0hA==",
+      "signatures": [
+        {
+          "sig": "MEQCIG9rDoayk7d2F+6R15xpQijNK7es0qxpzxl/QxSNRkL/AiBXSPxZsVt26vFGA2QCgIXfnNwkfSudPo3arIxqMc2O5A==",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        }
+      ],
+      "attestations": {
+        "url": "https://registry.npmjs.org/-/npm/v1/attestations/@img%2fsharp-libvips-win32-x64@1.3.3",
+        "provenance": {
+          "predicateType": "https://slsa.dev/provenance/v1"
+        }
+      },
+      "unpackedSize": 19364454
+    }
+  },
+  "payloadCorrespondence": {
+    "tarballSha256": "ae360c56bb0ffd8dce48b74624e1ffe1d71867b892629c21cc16dd3ab8084f60",
+    "integrityVerifiedBy": "check-sharp-libvips-payload.mjs",
+    "members": [
+      {
+        "tarMember": "package/lib/libvips-42.dll",
+        "bytes": 18614784,
+        "sha256": "e6cc51bbc763e7deda536c6f56ce96b4c51ea769690ce4f4ed07607527b81dae",
+        "programPath": "store/p0089/lib/libvips-42.dll",
+        "programSha256": "e6cc51bbc763e7deda536c6f56ce96b4c51ea769690ce4f4ed07607527b81dae",
+        "exactMatch": true
+      },
+      {
+        "tarMember": "package/lib/glib-2.0/include/glibconfig.h",
+        "bytes": 6061,
+        "sha256": "0957430c1ee0a49df7795a9dd0d4e20ac2a5d79c8811a20d241545fcbc2e768a"
+      },
+      {
+        "tarMember": "package/lib/index.js",
+        "bytes": 28,
+        "sha256": "516a08c06660cddb50d5f30ccac29a0514b05724956a11e8a7e6b799f2e1ab72"
+      },
+      {
+        "tarMember": "package/package.json",
+        "bytes": 759,
+        "sha256": "c8c63ed3675a85d618b20ee3d35aacb8bd5ddfe93d08dfcf8ba2696943b013c8",
+        "programPath": "store/p0089/package.json",
+        "programSha256": "b4fc98ec709b31a80e8450259c3d5ed2fc1e2b8f8355ced4bfd4d75db45f8a87",
+        "exactMatch": false,
+        "retainedMetadataFile": "sharp-libvips-1.3.3-package.json"
+      },
+      {
+        "tarMember": "package/versions.json",
+        "bytes": 597,
+        "sha256": "d551c859958f06b8088957f679c29be1ff53760191f7401e8183460fc5f58cf4",
+        "programPath": "store/p0089/versions.json",
+        "programSha256": "d551c859958f06b8088957f679c29be1ff53760191f7401e8183460fc5f58cf4",
+        "exactMatch": true,
+        "retainedMetadataFile": "sharp-libvips-1.3.3-versions.json"
+      },
+      {
+        "tarMember": "package/lib/libvips.lib",
+        "bytes": 737900,
+        "sha256": "0c8d5cdb143ca1603799ef741faa17f514a0d03041eb04ee8e9fbeb0df65f31d"
+      },
+      {
+        "tarMember": "package/README.md",
+        "bytes": 4325,
+        "sha256": "2e0c8f7a76703d04ce7afdbbf3ea07fc013b7b1b8920d6214774a641acb6199f",
+        "programPath": "store/p0089/README.md",
+        "programSha256": "280e7d164420cfc1a1b192a582bf53e3dba97b86a5c3575f878b674ad1d41e13",
+        "exactMatch": false,
+        "retainedMetadataFile": "sharp-libvips-1.3.3-README.md"
+      }
+    ]
+  },
+  "sharpBuildDependencies": {
+    "url": "https://raw.githubusercontent.com/lovell/sharp/7f1a0a22cc285fe180766f4935d50b55af6e8432/package.json",
+    "status": 200,
+    "config": {
+      "libvips": ">=8.18.6"
+    },
+    "dependencies": [
+      [
+        "@img/sharp-libvips-dev",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-dev-wasm32",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-win32-arm64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-win32-ia32",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-win32-x64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-darwin-arm64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-darwin-x64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-arm",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-arm64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-ppc64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-riscv64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-s390x",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linux-x64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linuxmusl-arm64",
+        "1.3.3"
+      ],
+      [
+        "@img/sharp-libvips-linuxmusl-x64",
+        "1.3.3"
+      ]
+    ]
+  },
+  "sourcePin": {
+    "url": "https://api.github.com/repos/lovell/sharp-libvips/commits/6e5971d333377743163edc3ad9e5d0b897abcbc9",
+    "status": 200,
+    "commit": "6e5971d333377743163edc3ad9e5d0b897abcbc9"
+  },
+  "recipeFiles": [
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/LICENSE",
+      "status": 200,
+      "path": "LICENSE",
+      "file": "sharp-libvips-source-LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "bytes": 11357
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/build.sh",
+      "status": 200,
+      "path": "build.sh",
+      "file": "sharp-libvips-source-build.sh",
+      "sha256": "f32e344b1355b6bcf3836e7f25e2c2de7f25eefeb8c96d02711ad3fcea487488",
+      "bytes": 2804
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/build/win.sh",
+      "status": 200,
+      "path": "build/win.sh",
+      "file": "sharp-libvips-source-build-win.sh",
+      "sha256": "52f2d9d76b07d4b4ad1720659b1e9bbc76121b85f21d9d084a85af28014473f3",
+      "bytes": 1262
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/versions.properties",
+      "status": 200,
+      "path": "versions.properties",
+      "file": "sharp-libvips-source-versions.properties",
+      "sha256": "02253a2d39a6b1cfd2c1deacb0947f7d2a3398a522236f7efc4d57e82cbfe980",
+      "bytes": 595
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/platforms/win32/Dockerfile",
+      "status": 200,
+      "path": "platforms/win32/Dockerfile",
+      "file": "sharp-libvips-source-platforms-win32-Dockerfile",
+      "sha256": "df5597d18b29e900e4c87f77fe1781f4632ac548fa5057873f506c9007a1e499",
+      "bytes": 286
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lovell/sharp-libvips/6e5971d333377743163edc3ad9e5d0b897abcbc9/populate-npm-workspace.sh",
+      "status": 200,
+      "path": "populate-npm-workspace.sh",
+      "file": "sharp-libvips-source-populate-npm-workspace.sh",
+      "sha256": "a960e41223db945832cd63f92ed38e9c297f58a5f72c6f4adea80f805fc12589",
+      "bytes": 2628
+    }
+  ],
+  "windowsRecipeRelease": [
+    {
+      "url": "https://api.github.com/repos/libvips/build-win64-mxe/releases/tags/v8.18.6",
+      "status": 200,
+      "commit": null,
+      "tag": "v8.18.6",
+      "target": "master",
+      "body": "Release 8.18.6\r\n\r\n- Update dependencies to latest where possible.\r\n\r\nPDBs can be found here:\r\nhttps://libvips-packaging.s3.amazonaws.com/pdb/index.html",
+      "assets": [
+        {
+          "name": "vips-dev-arm64-all-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-arm64-all-8.18.6.zip",
+          "size": 17992378,
+          "digest": "sha256:1248317fc7e4933191b308846186342a5fdccdba757dc4c8c00eb25fdea43ea1"
+        },
+        {
+          "name": "vips-dev-arm64-web-8.18.6-static-ffi.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-arm64-web-8.18.6-static-ffi.zip",
+          "size": 8579036,
+          "digest": "sha256:93b2a8e9819ea59001be4261312445772976dbe0dfa239657b563da9606eb6f0"
+        },
+        {
+          "name": "vips-dev-arm64-web-8.18.6-static.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-arm64-web-8.18.6-static.zip",
+          "size": 8576948,
+          "digest": "sha256:3bb6bca62475d7401effdcd4c081692bb5958e9a01e92e7010bb50a7adfb38e2"
+        },
+        {
+          "name": "vips-dev-arm64-web-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-arm64-web-8.18.6.zip",
+          "size": 10521647,
+          "digest": "sha256:020a3086b0cf95f0f58c637630a3f22f20efb6fc9ee38dd717d9b8d7cfa9e9e7"
+        },
+        {
+          "name": "vips-dev-x64-all-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x64-all-8.18.6.zip",
+          "size": 19746903,
+          "digest": "sha256:e36b34f9c955e66fa47ec7c02b756026fad5560c5db6ff7884123be04792f89c"
+        },
+        {
+          "name": "vips-dev-x64-web-8.18.6-static-ffi.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x64-web-8.18.6-static-ffi.zip",
+          "size": 9322857,
+          "digest": "sha256:a3dfe94d2a954dd6145cea6ffd6282cb41cbef90b542b29c641cd531c115de0f"
+        },
+        {
+          "name": "vips-dev-x64-web-8.18.6-static.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x64-web-8.18.6-static.zip",
+          "size": 9322134,
+          "digest": "sha256:42ceea0c2f53d1244f3cb54c059881487b37452ee46c1c98c0d4b47480b20588"
+        },
+        {
+          "name": "vips-dev-x64-web-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x64-web-8.18.6.zip",
+          "size": 11340052,
+          "digest": "sha256:10086f2ccc8e2a861831facabab75fa1b80b4bd03f0a8447623ec581002aa4b2"
+        },
+        {
+          "name": "vips-dev-x86-all-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x86-all-8.18.6.zip",
+          "size": 19657123,
+          "digest": "sha256:8335e90da4b993fb1d506184870fa02082befeed4419d7c63b2cf90ec47604a9"
+        },
+        {
+          "name": "vips-dev-x86-web-8.18.6-static-ffi.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x86-web-8.18.6-static-ffi.zip",
+          "size": 9430733,
+          "digest": "sha256:f0b48acd53855cb7ea190b812504ecacc07ce4928dd038a38a30fb00401adeb3"
+        },
+        {
+          "name": "vips-dev-x86-web-8.18.6-static.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x86-web-8.18.6-static.zip",
+          "size": 9452769,
+          "digest": "sha256:8f4da66a1288da59a5a7dbb99366d9142ac887d4303cfcf4c6b8290c8daa883e"
+        },
+        {
+          "name": "vips-dev-x86-web-8.18.6.zip",
+          "url": "https://github.com/libvips/build-win64-mxe/releases/download/v8.18.6/vips-dev-x86-web-8.18.6.zip",
+          "size": 11353723,
+          "digest": "sha256:2b7e0d0455df5a30df30d7b9ade507821034b23a25edf6d748a448591bb08d4f"
+        }
+      ]
+    },
+    {
+      "url": "https://api.github.com/repos/libvips/build-win64-mxe/commits/v8.18.6",
+      "status": 200,
+      "commit": "09cfccf20b91b441fbe97fa7a7ed8a597e55e830",
+      "tag": null,
+      "target": null,
+      "body": null,
+      "assets": null
+    }
+  ],
+  "windowsRecipeFiles": [
+    {
+      "url": "https://raw.githubusercontent.com/libvips/build-win64-mxe/09cfccf20b91b441fbe97fa7a7ed8a597e55e830/README.md",
+      "status": 200,
+      "file": "libvips-win-fixed-README.md",
+      "sha256": "b8497d90d55fe7b053e7e290ca80aeafbb811fd347dee7c61b6b8b60fc6b67f9",
+      "bytes": 11708
+    },
+    {
+      "url": "https://raw.githubusercontent.com/libvips/build-win64-mxe/09cfccf20b91b441fbe97fa7a7ed8a597e55e830/LICENSE",
+      "status": 404,
+      "file": null,
+      "sha256": null,
+      "bytes": 14
+    },
+    {
+      "url": "https://raw.githubusercontent.com/libvips/build-win64-mxe/09cfccf20b91b441fbe97fa7a7ed8a597e55e830/build.sh",
+      "status": 200,
+      "file": "libvips-win-fixed-build.sh",
+      "sha256": "21f8ae16447d9987493519ac33d91344ffc7783eb70dc64965eea926f7d64cfa",
+      "bytes": 7471
+    },
+    {
+      "url": "https://raw.githubusercontent.com/libvips/build-win64-mxe/09cfccf20b91b441fbe97fa7a7ed8a597e55e830/.gitmodules",
+      "status": 404,
+      "file": null,
+      "sha256": null,
+      "bytes": 14
+    }
+  ],
+  "boundary": "Exact libvips-42.dll match and fixed source/build entry points verified; no binary rebuild or full per-static-component/relink audit. Metadata was inspected; downloaded code was not executed."
+}

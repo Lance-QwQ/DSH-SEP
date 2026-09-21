@@ -1,0 +1,15 @@
+"""Create separate source/docs delivery archives from finalized public trees."""
+from integrate import ROOT,WORK,OUT,REV,readj,write,writej,files,rel,digest,win
+import zipfile,hashlib
+
+rows=[]
+for folder,name in [(OUT/'DSH-SEP-Source','DSH-SEP-Source-20260921-office-r2.zip'),(OUT/'DSH-SEP-Full/docs','DSH-SEP-Release-Docs-20260921-r5.zip')]:
+ archive=OUT/name;entries=files(folder);expected={rel(f,folder):digest(f) for f in entries}
+ with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
+  for f in entries:z.write(f,rel(f,folder))
+ with zipfile.ZipFile(archive) as z:
+  assert set(z.namelist())==set(expected)
+  for member in z.namelist():assert hashlib.sha256(z.read(member)).hexdigest()==expected[member],member
+ row={'filename':name,'bytes':archive.stat().st_size,'sha256':digest(archive),'files':len(entries),'status':'pass'}
+ rows.append(row);print(row,flush=True)
+writej(WORK/'packaging/extra-archives.json',{'status':'pass','archives':rows})

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "package": "@aws-sdk/nested-clients",
+  "version": "3.997.45",
+  "packageId": "p0151",
+  "baselineManifestSha256": "032d9e44c92d97643efc9ec1df81a76b535fe804d956ac70632edf27f5a95d2c",
+  "baselineLicenseDeclaration": "Apache-2.0",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "Apache-2.0",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-Apache-2.0.txt",
+    "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": {
+      "name": "AWS SDK for JavaScript Team",
+      "url": "https://aws.amazon.com/sdk-for-javascript/"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/aws/aws-sdk-js-v3.git",
+      "directory": "packages/nested-clients"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40aws-sdk%2Fnested-clients/3.997.45",
+    "responseSha256": "7fcf67c6f2f6604ae29030c7f5d9512f2443a8238af5a38b639057d2b22fc8b5",
+    "gitHead": null,
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@aws-sdk/nested-clients/-/nested-clients-3.997.45.tgz",
+      "integrity": "sha512-mooq9Q+jLa18VoM7HouczmslZU60iiB0aKc/Ztnq/luIL1ud0z4DnYprLR/ZO1gp331S9tJctM1HZr7u6YKBXQ==",
+      "shasum": "3ed0e5fcd25c889025b2379a9434594fe7056a4a"
+    },
+    "repository": {
+      "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+      "type": "git",
+      "directory": "packages/nested-clients"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "051527c74948bfe8b249b8353d929d5188e7ab0d733e98084f89598b4b140a81",
+    "bytes": 90933,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0151",
+    "name": "@aws-sdk/nested-clients",
+    "version": "3.997.45",
+    "license": "Apache-2.0",
+    "author": {
+      "url": "https://aws.amazon.com/sdk-for-javascript/",
+      "name": "AWS SDK for JavaScript Team"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+      "type": "git",
+      "directory": "packages/nested-clients"
+    },
+    "gitHead": null,
+    "metadataUrl": "https://registry.npmjs.org/%40aws-sdk%2Fnested-clients/3.997.45",
+    "tarball": "https://registry.npmjs.org/@aws-sdk/nested-clients/-/nested-clients-3.997.45.tgz",
+    "integrity": "sha512-mooq9Q+jLa18VoM7HouczmslZU60iiB0aKc/Ztnq/luIL1ud0z4DnYprLR/ZO1gp331S9tJctM1HZr7u6YKBXQ=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

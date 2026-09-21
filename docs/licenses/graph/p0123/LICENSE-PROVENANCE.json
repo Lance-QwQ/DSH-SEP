@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "package": "standardwebhooks",
+  "version": "1.1.1",
+  "packageId": "p0123",
+  "baselineManifestSha256": "686397f0f0202e0b693cfd3f6241d7a8da3df326f9642867a484fbbd295690b6",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/standard-webhooks/standard-webhooks/b4d2c14fc5b4ccff3ff271e3b087dff812254c59/libraries/LICENSE",
+    "commit": "b4d2c14fc5b4ccff3ff271e3b087dff812254c59",
+    "sha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27"
+  },
+  "originalAttributionFields": {
+    "author": "Standard Webhooks",
+    "contributors": null,
+    "copyright": null,
+    "repository": "https://github.com/standard-webhooks/standard-webhooks"
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/standardwebhooks/1.1.1",
+    "responseSha256": "99d04c194edcd30c91b31b8a10e983bed938f27d1becbf45af4a9eb3e84cc27c",
+    "gitHead": "b4d2c14fc5b4ccff3ff271e3b087dff812254c59",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/standardwebhooks/-/standardwebhooks-1.1.1.tgz",
+      "integrity": "sha512-bCbX9ZEyFkWPsRz7Bl3NuQUJohmwGSev/yhr7vhaGPlc4AfIrspIRa6cPTBuI1ItmrTDJ4d/S2hCsfe4+vQGnQ==",
+      "shasum": "25b98fa2bbe4edad7b42778135c923563e3d5e2f"
+    },
+    "repository": {
+      "url": "git+https://github.com/standard-webhooks/standard-webhooks.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "d0bc8fec280c9e30ea3cbc876f44fe71d56f443aeca2bd2bdf745718308d4aed",
+    "bytes": 4109,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

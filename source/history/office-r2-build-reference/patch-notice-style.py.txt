@@ -1,0 +1,18 @@
+"""Fix the verified preview notice contrast in the two unsealed candidates."""
+from integrate import WORK,OUT,NAMES,readj,write,writej,digest,win
+import hashlib
+
+relative='store/p0408/lib/client.js'
+before='style: { margin: "8px 12px", fontSize: "12px" }, children: t("fontDiagnosticsUnavailable")'
+after='style: { margin: "8px 12px", padding: "8px 12px", fontSize: "12px", lineHeight: 1.5, borderRadius: "6px", color: "var(--dsw-alias-label-primary, #1f2937)", backgroundColor: "var(--dsw-alias-bg-layer-2, #ffffff)" }, children: t("fontDiagnosticsUnavailable")'
+oldgraph=OUT/'DSH-SEP-Full/graph.json';assert digest(oldgraph)=='39f0d92b3bbf6b2ca5edff3913416bb2336a5ceba5099aee2c3fa900ebd70a94'
+write(WORK/'packaging/v2-before-style-graph.json',oldgraph.read_bytes())
+write(WORK/'packaging/v2-before-style-sealed.json',(WORK/'packaging/sealed-program.json').read_bytes())
+rows=[]
+for name in NAMES:
+ p=OUT/name/'payload'/relative;data=p.read_bytes();text=data.decode();assert text.count(before)==1
+ changed=text.replace(before,after).encode();write(p,changed)
+ rows.append({'package':name,'path':relative,'beforeSha256':hashlib.sha256(data).hexdigest(),'afterSha256':digest(p)})
+writej(WORK/'packaging/style-change.json',{'status':'applied-awaiting-local-ui-verification','changes':rows,
+ 'scope':'Font diagnostic notice foreground/background and spacing only; all converter/provider/wire implementation bytes unchanged.'})
+print(rows,flush=True)

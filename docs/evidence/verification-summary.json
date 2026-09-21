@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "documentRevision": "20260921-docs-r3",
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "environment": {
+    "os": "Windows 11",
+    "architecture": "x64",
+    "version": "10.0.26200",
+    "scope": "single controlled environment, not all Windows builds"
+  },
+  "evidence": [
+    {
+      "id": "final-core",
+      "sourceEvidenceSha256": "ef13d9836d7912077205956802ea20180c6a7bce3aaa13bae8edd193a18127b1",
+      "sourceEvidenceBytes": 242,
+      "result": {
+        "status": "pass",
+        "graphHash": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+        "tests": 438,
+        "pass": 438,
+        "fail": 0,
+        "skipped": 0,
+        "modelCalls": 0
+      }
+    },
+    {
+      "id": "capture-backup",
+      "sourceEvidenceSha256": "8ca0465582714b60c909843568757545ca3c2a5143354475a612d97e172abe00",
+      "sourceEvidenceBytes": 1700,
+      "result": {
+        "status": "pass",
+        "counts": {
+          "regression": 10,
+          "backup": 20,
+          "total": 30,
+          "pass": 30,
+          "fail": 0
+        },
+        "modelCalls": 0
+      }
+    },
+    {
+      "id": "desktop-recovery-component",
+      "sourceEvidenceSha256": "4a4eb5170825a87773e77cffc80f688ae0b139bcba4b793aa08f08262c422bbc",
+      "sourceEvidenceBytes": 1866,
+      "result": {
+        "status": "pass",
+        "counts": {
+          "pass": 10,
+          "fail": 0
+        },
+        "scope": "10 component/HTTP-carrier contracts; desktop integration pending parent validation",
+        "modelCalls": 0
+      },
+      "stageAtCapture": "component tests completed before final desktop integration",
+      "laterEvidence": "desktop-three-rounds: final integration passed on the same final graph; the quoted earlier scope is historical."
+    },
+    {
+      "id": "updater",
+      "sourceEvidenceSha256": "b5fa4aef64987e58c03b71948dd998793299a7127ebe1cbd60f8cba7b5d9d9af",
+      "sourceEvidenceBytes": 4428,
+      "result": {
+        "status": "pass",
+        "sourceHash": "ca85528fe381f4451d1f51c1b50c6607384049a6e303fa48dd63d68bf1de8bff",
+        "tests": 83,
+        "fail": 0,
+        "electronScenarios": 3,
+        "modelCalls": 0
+      }
+    },
+    {
+      "id": "desktop-three-rounds",
+      "sourceEvidenceSha256": "9efbb23db49711eaf04fc4d7d2518a54902404558cf864134192baf4c8f6d602",
+      "sourceEvidenceBytes": 27936,
+      "result": {
+        "status": "pass",
+        "graphHash": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+        "planned": 3,
+        "completed": 3,
+        "rounds": [
+          {
+            "round": 1,
+            "status": "pass",
+            "recoveryMs": 6560,
+            "newNavigation": 1,
+            "readonlyRpc": true,
+            "cleanQuit": true,
+            "backgroundPreserved": true
+          },
+          {
+            "round": 2,
+            "status": "pass",
+            "recoveryMs": 5050,
+            "newNavigation": 1,
+            "readonlyRpc": true,
+            "cleanQuit": true,
+            "backgroundPreserved": true
+          },
+          {
+            "round": 3,
+            "status": "pass",
+            "recoveryMs": 4382,
+            "newNavigation": 1,
+            "readonlyRpc": true,
+            "cleanQuit": true,
+            "backgroundPreserved": true
+          }
+        ],
+        "modelCalls": 0
+      }
+    },
+    {
+      "id": "program-integrity",
+      "sourceEvidenceSha256": "32922c080901c5b789f1368d6159c3e8dc3bfc37dd3888e041d025662011f7da",
+      "sourceEvidenceBytes": 176,
+      "result": {
+        "status": "pass",
+        "files": 27159,
+        "links": 2640,
+        "graphHash": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c"
+      }
+    },
+    {
+      "id": "daily-deployment",
+      "sourceEvidenceSha256": "9aaed71bdb7c6c70597c1477c5ea66297e355694b32d6b888ad5b96821816ed9",
+      "sourceEvidenceBytes": 746,
+      "result": {
+        "status": "pass",
+        "graphHash": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+        "committedBeforeBusinessOpen": true,
+        "dataUnchanged": true,
+        "credentialsUnchanged": true,
+        "budgetValuesUnchanged": true,
+        "settingsUnchanged": true,
+        "suiteConfigUnchanged": true,
+        "memoryAvailable": true,
+        "shortcutReusesHost": true,
+        "modelCalls": 0
+      }
+    },
+    {
+      "id": "historical-zip-sanitization",
+      "sourceEvidenceSha256": "d73d94ca865cf7c45f7f252c48a34b92ee97402da7978dffe97bc12d0d506974",
+      "sourceEvidenceBytes": 9092,
+      "result": {
+        "status": "pass",
+        "scope": "sanitization, new installation, Python/pnpm runtime, three two-instance desktop rounds, final ZIP hashes and privacy pattern scan; not all stable admission criteria",
+        "distribution": "20260920-r2-sanitized",
+        "graphSha256": "e57816d02de36eefbcc0942ef9a644ce3e3ebbab47e303db1ab0b00278667ec5"
+      }
+    },
+    {
+      "id": "earlier-defect-discovery",
+      "sourceEvidenceSha256": "8e2df01625c7126f43e546cef9d523f12d38108f5d5db1fe1cfc6463a42d27ab",
+      "sourceEvidenceBytes": 41385,
+      "result": {
+        "status": "fail",
+        "note": "T01-T04 found in historical e578 distribution; original fail retained."
+      }
+    }
+  ],
+  "privacy": "Curated aggregate only. Original logs, local paths, credentials, personal context, session identifiers, private data hashes and endpoint tokens are omitted.",
+  "limitations": [
+    "No repetition totals presented as unique scenario counts.",
+    "No arbitrary future-version/third-party-plugin guarantee.",
+    "Historical unresolved prework sample not reclassified as fixed.",
+    "Private raw evidence is retained separately; source hash is an integrity anchor, not independent audit certification."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "package": "@xterm/headless",
+  "version": "6.0.0",
+  "packageId": "p0360",
+  "baselineManifestSha256": "6c39530ee759998113bd8bcc306d1b725c0b1d5b0cdc04e071f6945a5f5edf1a",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+    "commit": "f447274f430fd22513f6adbf9862d19524471c04",
+    "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+  },
+  "originalAttributionFields": {
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": "https://github.com/xtermjs/xterm.js"
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40xterm%2Fheadless/6.0.0",
+    "responseSha256": "54ef43808ce64110a42beeb87edd7f28e17cbe9164b0e32f3243e3f5250ae229",
+    "gitHead": "f447274f430fd22513f6adbf9862d19524471c04",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@xterm/headless/-/headless-6.0.0.tgz",
+      "integrity": "sha512-5Yj1QINYCyzrZtf8OFIHi47iQtI+0qYFPHmouEfG8dHNxbZ9Tb9YGSuLcsEwj9Z+OL75GJqPyJbyoFer80a2Hw==",
+      "shasum": "a839dee397c49834bb220fa5951d60f4b7f0aa11"
+    },
+    "repository": {
+      "url": "git+https://github.com/xtermjs/xterm.js.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "07e4970b1674e7ef6cbd57c8c17746eaadcd41aa7df5b33695fd649e6ec4d78a",
+    "bytes": 477641,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "kind": "dsh-sep-distribution-source-provenance",
+  "distribution": "20260921-r1",
+  "packageKind": "full",
+  "publicReleaseReady": false,
+  "dshVersion": "0.1.6-alpha.2",
+  "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
+  "baseGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "distributionGraphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "distributionGraphState": "sealed",
+  "upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "tag": "dsh-v0.1.6-alpha.2",
+    "meaning": "Upstream base only; local SEP adaptations are identified by the final graph, not this upstream commit."
+  },
+  "sourceDelivery": {
+    "status": "local-snapshot-generated-and-verified",
+    "intendedScope": "Exact published editable files for 10 mapped SEP modules and 20 adapted host modules; supplemental preferred TypeScript/CSS for p0482/p0514/p0515.",
+    "graphPathLayout": "program-source/store/<package-id>/<relative-file>",
+    "manifest": "SOURCE_FILES.json in separately delivered source snapshot",
+    "reproducibleBuildClaim": false,
+    "allTransitiveBinarySourcesIncluded": false,
+    "privateDataIncluded": false,
+    "gitHistoryIncluded": false,
+    "sourceFiles": 736,
+    "exactReleaseFiles": 716,
+    "supplementalAuthoringFiles": 20,
+    "sourceFilesManifestSha256": "f73379afbe9dc74be924b981ee1ef3f6301c09940d1e6eff0ab1ab76a70a6683"
+  },
+  "sourceAccess": {
+    "status": "blocked",
+    "blockers": [
+      {
+        "code": "LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE",
+        "component": "@deepseek-ai/libreoffice-kit@0.0.1",
+        "graphPackageId": "p0438",
+        "status": "blocked",
+        "reason": "Recorded preferred Node API source repository/commit returned 404 during source-access verification; matching preferred source access has not been established.",
+        "resolution": "Obtain and verify corresponding preferred Node API source or a valid source-access path. Do not confuse the separate LibreOffice core source material with this Node API source."
+      }
+    ],
+    "additionalReview": [
+      {
+        "code": "SHARP_NATIVE_CORRESPONDING_SOURCE_SCOPE",
+        "component": "@img/sharp-win32-x64@0.35.4",
+        "graphPackageId": "p0089",
+        "status": "pass",
+        "scope": "Fixed source chain and main libvips DLL correspondence verified; not complete static-component source delivery, second C++ DLL audit, relinking validation, or reproducible-build verification.",
+        "confirmedBlocker": false,
+        "remainingVerification": [
+          "all embedded static components source archives",
+          "second C++ DLL correspondence",
+          "relinking materials and reproducible builds"
+        ]
+      }
+    ],
+    "note": "These are source-access/evidence conditions; no complete legal compliance certification is made."
+  },
+  "license": {
+    "status": "reviewed_with_scope",
+    "coverage": {
+      "packages": 527,
+      "noticeEntries": 613,
+      "missingLicenseDeclarations": 0
+    },
+    "evidence": "licenses/release/LICENSE-SYNCHRONIZATION.md in release documentation",
+    "approvedSepLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "policy": "Apply approved terms only to mapped local originals; preserve existing MIT grants and all third-party terms."
+  },
+  "publication": {
+    "channel": "GitHub",
+    "repositoryCreated": false,
+    "uploaded": false,
+    "repositoryUrl": null,
+    "downloadUrl": null,
+    "supportUrl": null,
+    "securityContact": null
+  },
+  "archiveChecksums": "External release checksum list; no self-reference."
+}

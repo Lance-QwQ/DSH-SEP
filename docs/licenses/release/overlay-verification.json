@@ -1,0 +1,172 @@
+{
+  "passed": true,
+  "overlayManifestSha256": "7871673343f884f95a6bc927b7a20e421bd30ccb2690a61cf755fb280afc996e",
+  "overlayFileCount": 97,
+  "programCount": 95,
+  "supportCount": 2,
+  "baselineGraphUnchanged": true,
+  "baselineLocalModuleFilesUnchanged": 318,
+  "missing7ManifestDeclarationsPresent": true,
+  "original26HaveExplicitSupplementOrSelectedCustomScope": true,
+  "covered26": [
+    {
+      "id": "p0108",
+      "name": "@koromix/koffi-win32-x64",
+      "version": "3.3.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0118",
+      "name": "@earendil-works/pi-ai",
+      "version": "0.85.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0123",
+      "name": "standardwebhooks",
+      "version": "1.1.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0146",
+      "name": "@aws-sdk/credential-provider-http",
+      "version": "3.972.73",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0150",
+      "name": "@aws-sdk/credential-provider-login",
+      "version": "3.972.78",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0151",
+      "name": "@aws-sdk/nested-clients",
+      "version": "3.997.45",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0163",
+      "name": "@earendil-works/pi-telemetry",
+      "version": "0.85.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0176",
+      "name": "data-uri-to-buffer",
+      "version": "4.0.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0360",
+      "name": "@xterm/headless",
+      "version": "6.0.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0373",
+      "name": "@xterm/addon-serialize",
+      "version": "0.14.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0441",
+      "name": "fontkit",
+      "version": "2.0.4",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0443",
+      "name": "brotli",
+      "version": "1.3.3",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0445",
+      "name": "dfa",
+      "version": "1.2.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0452",
+      "name": "saxes",
+      "version": "6.0.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0485",
+      "name": "@deepseek-ai/dsh-desktop",
+      "version": "0.1.6-alpha.2",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0493",
+      "name": "lazy-val",
+      "version": "1.0.5",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0498",
+      "name": "@deepseek-ai/dsh-desktop-host",
+      "version": "0.1.6-alpha.2",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0500",
+      "name": "@deepseek-ai/dsh-recovery",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE + LICENSE-SCOPE"
+    },
+    {
+      "id": "p0503",
+      "name": "@napi-rs/canvas-win32-x64-msvc",
+      "version": "1.0.8",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0505",
+      "name": "@nodable/entities",
+      "version": "3.0.0",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0514",
+      "name": "@deepseek-ai/dsh-task-checkpoint",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0515",
+      "name": "dsh-sep-brand",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    },
+    {
+      "id": "p0516",
+      "name": "dsh-sep-context-preparation",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE + LICENSE-SCOPE"
+    },
+    {
+      "id": "p0518",
+      "name": "dsh-sep-trusted-evaluation-entry",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE + LICENSE-SCOPE"
+    },
+    {
+      "id": "p0519",
+      "name": "dsh-tool-worker",
+      "version": "0.1.0-alpha.15.dsh-alpha2.1",
+      "overlayMaterial": "LICENSE + LICENSE-SCOPE"
+    },
+    {
+      "id": "p0521",
+      "name": "@electron-internal/extract-zip",
+      "version": "1.0.5",
+      "overlayMaterial": "LICENSE-SEP-SUPPLEMENT + LICENSE-PROVENANCE"
+    }
+  ],
+  "developerAbsoluteUserPaths": 0,
+  "isFullLegalAudit": false,
+  "isCompleteSBOM": false
+}

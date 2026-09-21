@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "upstreamVersion": "26.8.0.3",
+  "upstreamBuildId": "bce0998afefdbc355585ca324285661a2170ba77",
+  "checkedAt": "2026-09-21T03:54:19.584156+00:00",
+  "archives": [
+    {
+      "name": "libreoffice-26.8.0.3.tar.xz",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-26.8.0.3.tar.xz",
+      "sha256Url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-26.8.0.3.tar.xz.sha256",
+      "sha256": "42116e256933aa575974e420ffa04f7cd7096f4b7ca5d0907ddeaf2a07f68f94",
+      "size": 302243792,
+      "checksumHttpStatus": 200,
+      "mirrorlistHttpStatus": 200,
+      "checkedAt": "2026-09-21T03:50:53.3670203Z",
+      "downloadVerified": true,
+      "localFile": "downloads/libreoffice-26.8.0.3.tar.xz",
+      "downloadHttpReceipt": "200 https://mirror.freedif.org/TDF/libreoffice/src/26.8.0/libreoffice-26.8.0.3.tar.xz 302243792 23.760549",
+      "selectedSourceFiles": [
+        {
+          "path": "source-provenance/download.lst",
+          "archiveMember": "libreoffice-26.8.0.3/download.lst",
+          "bytes": 33420,
+          "sha256": "cf38c8d828d8ac1cdf7f06f037118f272ad700e46507f7f05f82d50d2ad3d812"
+        },
+        {
+          "path": "source-provenance/distro-configs/LibreOfficeWin64.conf",
+          "archiveMember": "libreoffice-26.8.0.3/distro-configs/LibreOfficeWin64.conf",
+          "bytes": 394,
+          "sha256": "6690a7fd243dc2cf65d68157c96d5bb909ee2d4e8ea1b82bd93ec8aa1c68d884"
+        },
+        {
+          "path": "source-provenance/configure.ac",
+          "archiveMember": "libreoffice-26.8.0.3/configure.ac",
+          "bytes": 606697,
+          "sha256": "b4e22e64ef9ce6a7819d48ccde62a9f81951a1d0b671305216390bf464db24fd"
+        },
+        {
+          "path": "source-provenance/autogen.sh",
+          "archiveMember": "libreoffice-26.8.0.3/autogen.sh",
+          "bytes": 11790,
+          "sha256": "a79875cdff86bde59f8ab4c60b6da73cd9be82bf32cbdbb07262b9a712d69ca8"
+        },
+        {
+          "path": "source-provenance/README.md",
+          "archiveMember": "libreoffice-26.8.0.3/README.md",
+          "bytes": 7066,
+          "sha256": "5613c7d727910f7f9f71203d2df850d8d44e50059b69ff21f1d3b0c2a60ece58"
+        },
+        {
+          "path": "source-provenance/COPYING.MPL",
+          "archiveMember": "libreoffice-26.8.0.3/COPYING.MPL",
+          "bytes": 16725,
+          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+        },
+        {
+          "path": "source-provenance/COPYING.LGPL",
+          "archiveMember": "libreoffice-26.8.0.3/COPYING.LGPL",
+          "bytes": 7639,
+          "sha256": "a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c"
+        },
+        {
+          "path": "source-provenance/COPYING",
+          "archiveMember": "libreoffice-26.8.0.3/COPYING",
+          "bytes": 35147,
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+        }
+      ]
+    },
+    {
+      "name": "libreoffice-dictionaries-26.8.0.3.tar.xz",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-dictionaries-26.8.0.3.tar.xz",
+      "sha256Url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-dictionaries-26.8.0.3.tar.xz.sha256",
+      "sha256": "4849ca14733cf4d5896a2f5bb6db87ffade9d1fbeab92e63153dc79630995a60",
+      "size": 62312712,
+      "checksumHttpStatus": 200,
+      "mirrorlistHttpStatus": 200,
+      "checkedAt": "2026-09-21T03:50:55.5124923Z",
+      "downloadVerified": true,
+      "localFile": "downloads/libreoffice-dictionaries-26.8.0.3.tar.xz",
+      "downloadHttpReceipt": "200 https://mirror.freedif.org/TDF/libreoffice/src/26.8.0/libreoffice-dictionaries-26.8.0.3.tar.xz 62312712 4.883931",
+      "selectedSourceFiles": []
+    },
+    {
+      "name": "libreoffice-help-26.8.0.3.tar.xz",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-help-26.8.0.3.tar.xz",
+      "sha256Url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-help-26.8.0.3.tar.xz.sha256",
+      "sha256": "8443f21b7127cbd084b472c01ff494ec6a31814f0b1b382004b68103ece90e35",
+      "size": 53512616,
+      "checksumHttpStatus": 200,
+      "mirrorlistHttpStatus": 200,
+      "checkedAt": "2026-09-21T03:51:06.5763547Z",
+      "downloadVerified": true,
+      "localFile": "downloads/libreoffice-help-26.8.0.3.tar.xz",
+      "downloadHttpReceipt": "200 https://mirror.freedif.org/TDF/libreoffice/src/26.8.0/libreoffice-help-26.8.0.3.tar.xz 53512616 3.346392",
+      "selectedSourceFiles": []
+    },
+    {
+      "name": "libreoffice-translations-26.8.0.3.tar.xz",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-translations-26.8.0.3.tar.xz",
+      "sha256Url": "https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-translations-26.8.0.3.tar.xz.sha256",
+      "sha256": "dc1419fc6f02840735b01f28b1cd453885e50fad2b2b2f5e6beab93868bf82a4",
+      "size": 236153596,
+      "checksumHttpStatus": 200,
+      "mirrorlistHttpStatus": 200,
+      "checkedAt": "2026-09-21T03:51:08.0181619Z",
+      "downloadVerified": true,
+      "localFile": "downloads/libreoffice-translations-26.8.0.3.tar.xz",
+      "downloadHttpReceipt": "200 https://mirror.freedif.org/TDF/libreoffice/src/26.8.0/libreoffice-translations-26.8.0.3.tar.xz 236153596 20.668977",
+      "selectedSourceFiles": []
+    }
+  ],
+  "scope": "All four matching official source archives downloaded and SHA-256 checked; selected provenance/build files extracted without modification. This is source access evidence, not a claim that all optional third-party source archives have been collected or that a local binary rebuild has been performed."
+}

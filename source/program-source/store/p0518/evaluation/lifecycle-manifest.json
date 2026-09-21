@@ -1,0 +1,11 @@
+{
+  "admission.py": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+  "compile_patch.py": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+  "deadline.py": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+  "evaluation.py": "8556ea13291f2718baab030895c0b7e23027fb3b51459dbcb9ec734bdad19a24",
+  "grade_worker.py": "d051be7bc14c037684d7241801d34dbfc65898e647fda963a1c2d86e6a63b3c8",
+  "lifecycle.py": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+  "lifecycle_worker.py": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+  "official.py": "40244b074a173338599624724af0b36aa969271e1264b1d70b2a1f54cc319f40",
+  "supervisor.py": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b"
+}

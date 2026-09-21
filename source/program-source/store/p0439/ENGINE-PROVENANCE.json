@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "component": "Official LibreOffice Windows x64 runtime",
+  "version": "26.8.0.3",
+  "releaseLabel": "26.8.0",
+  "buildId": "bce0998afefdbc355585ca324285661a2170ba77",
+  "msi": {
+    "url": "https://download.documentfoundation.org/libreoffice/stable/26.8.0/win/x86_64/LibreOffice_26.8.0_Win_x86-64.msi",
+    "sha256Url": "https://download.documentfoundation.org/libreoffice/stable/26.8.0/win/x86_64/LibreOffice_26.8.0_Win_x86-64.msi.sha256",
+    "sha256": "4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95",
+    "bytes": 374906880,
+    "authenticode": {
+      "status": "Valid",
+      "statusMessage": "Signature verified.",
+      "signerSubject": "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE",
+      "signerThumbprint": "6480532A562B36D1BFFFC5B5EACF7C31E74E9B28",
+      "timeStamperSubject": "CN=Certum Timestamp 2026, O=Asseco Data Systems S.A., C=PL",
+      "timestampThumbprint": "571468410CA85AF3424EF9164A513610F4D38D98",
+      "sha256": "4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95",
+      "bytes": 374906880,
+      "checkedAt": "2026-09-21T03:50:02.8914575Z"
+    }
+  },
+  "sourceIndex": "source-provenance/source-index.json",
+  "portableLayout": "source-provenance/portable-layout.json",
+  "sourceAccess": "SOURCE-ACCESS.md",
+  "upstreamNotices": [
+    "LICENSE.html",
+    "license.txt",
+    "NOTICE",
+    "CREDITS.fodt"
+  ],
+  "environmentRequirement": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "runtimeProgram": "program/soffice.com",
+  "platformScope": "Windows 10/11 x64",
+  "transformation": "Administrative extraction, ten byte-identical System64 DLLs copied into program, administrative MSI excluded, generated synthetic-test Python bytecode excluded; original runtime source/binary files otherwise retained.",
+  "sourceScope": "Four official corresponding source archives downloaded and SHA-256 verified; external dependency versions/checksums and build instructions supplied by official core sources. No local rebuild or complete optional external-source collection is claimed."
+}

@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "package": "lazy-val",
+  "version": "1.0.5",
+  "packageId": "p0493",
+  "baselineManifestSha256": "a5096f95098452cf6fe5c8ac9be8f13f59ab7c9f605ba5ef92c91b2c505744f0",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "MIT",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-MIT.txt",
+    "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": "Vladimir Krivosheev",
+    "contributors": null,
+    "copyright": null,
+    "repository": "develar/lazy-val"
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/lazy-val/1.0.5",
+    "responseSha256": "b89c1fd70f2fdef869138eaa43addcc73719738762bb84cd6a1bbd3d776b841f",
+    "gitHead": "b69ad4119f1b19bdab13c61ee2fcc88d46b89071",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/lazy-val/-/lazy-val-1.0.5.tgz",
+      "integrity": "sha512-0/BnGCCfyUMkBpeDgWihanIAF9JmZhHBgUhEqzvf+adhNGLoP6TaiI5oF8oyb3I45P+PcnrqihSf01M0l0G5+Q==",
+      "shasum": "6cf3b9f5bc31cee7ee3e369c0832b7583dcd923d"
+    },
+    "repository": {
+      "url": "git+https://github.com/develar/lazy-val.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "7d8602ad98db3d19fbd5b46fbf3831dd996197a013ef1ff7badc205e41435372",
+    "bytes": 1182,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0493",
+    "name": "lazy-val",
+    "version": "1.0.5",
+    "license": "MIT",
+    "author": {
+      "name": "Vladimir Krivosheev"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/develar/lazy-val.git",
+      "type": "git"
+    },
+    "gitHead": "b69ad4119f1b19bdab13c61ee2fcc88d46b89071",
+    "metadataUrl": "https://registry.npmjs.org/lazy-val/1.0.5",
+    "tarball": "https://registry.npmjs.org/lazy-val/-/lazy-val-1.0.5.tgz",
+    "integrity": "sha512-0/BnGCCfyUMkBpeDgWihanIAF9JmZhHBgUhEqzvf+adhNGLoP6TaiI5oF8oyb3I45P+PcnrqihSf01M0l0G5+Q=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

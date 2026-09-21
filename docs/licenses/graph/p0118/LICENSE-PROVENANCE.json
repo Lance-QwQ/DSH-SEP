@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "package": "@earendil-works/pi-ai",
+  "version": "0.85.1",
+  "packageId": "p0118",
+  "baselineManifestSha256": "b54df5a36d523febdeebfc5682dc4faed101fee10aba913d5f3679582f018da3",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/earendil-works/pi/d981de1229ef899957bbe968bc8dcda02a21f477/LICENSE",
+    "commit": "d981de1229ef899957bbe968bc8dcda02a21f477",
+    "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48"
+  },
+  "originalAttributionFields": {
+    "author": "Mario Zechner",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/earendil-works/pi.git",
+      "directory": "packages/ai"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40earendil-works%2Fpi-ai/0.85.1",
+    "responseSha256": "8cd1b7fe760e93882c61ecdd71dce6ed88dafad11600ba4fde579392a6566641",
+    "gitHead": "d981de1229ef899957bbe968bc8dcda02a21f477",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-0.85.1.tgz",
+      "integrity": "sha512-+VgVIJDkDO2efYJKEEqvPTH4zmnIaXdAppGbO+vKFA9qy5PdhFiAenuFAkU+oiCSfOC4dMHDyrjdQeL4ZoC5CQ==",
+      "shasum": "3f5726032c30149f6060a3aeacb79436c7387a37"
+    },
+    "repository": {
+      "url": "git+https://github.com/earendil-works/pi.git",
+      "type": "git",
+      "directory": "packages/ai"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "af7d11986179445ce6fe88b37d57de22f823c0ffd3a65cae31c555b7f5e99253",
+    "bytes": 798833,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

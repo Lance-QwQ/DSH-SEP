@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "distribution": "20260921-mit-alpha",
+  "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
+  "scope": "Graph-matching editable release files for SEP/adapted host modules, full authored Office adapter including C# bridge, supplemental tests and fixed official LibreOffice source-access records.",
+  "upstreamDsh": {
+    "version": "0.1.6-alpha.2",
+    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887"
+  },
+  "office": {
+    "adapter": "@dsh-sep/office-converter@0.1.0",
+    "runtime": "LibreOffice 26.8.0.3",
+    "sourceAccess": "program-source/store/p0439/SOURCE-ACCESS.md",
+    "obsoleteKitIncluded": false
+  },
+  "historicalSourceSnapshotSha256": "551b61946a4572f91dc3c294e5a4fc99c2b897231f4773d7a42938734244cc88",
+  "sourceFilesManifestSha256": "ed91e199c25db5a35844111d535a75f66e3c5537bf332f08cb4a09b9ca16053f",
+  "reproducibleBuildClaim": false,
+  "allTransitiveBinarySourcesIncluded": false,
+  "privateGitHistoryIncluded": false,
+  "privateDataIncluded": false,
+  "licenseScope": "MIT for mapped original SEP contributions and current authored release tooling. Existing MIT/third-party notices remain unchanged. Historical old build generators are preserved as non-executable .py.txt references.",
+  "repository": "https://github.com/Lance-QwQ/DSH-SEP"
+}

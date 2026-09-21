@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "package": "dsh-tool-worker",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "license": "MIT",
+  "includePatterns": [
+    "index.js",
+    "json.js",
+    "worker.js",
+    "index.d.ts",
+    "README*.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "originalFiles": [
+    {
+      "path": "index.d.ts",
+      "baselineSha256": "7d535a8bff6bc8902668c0e2c4d5f77a572f8f01dd539bc24904f19897112198",
+      "bytes": 3065
+    },
+    {
+      "path": "index.js",
+      "baselineSha256": "79b27565d6b502842ce95a692076b61f8fdd62979ae1c9bb6c75f043ba2d918f",
+      "bytes": 15164
+    },
+    {
+      "path": "json.js",
+      "baselineSha256": "7674c44bfdfa499e8f0aabc516b432ac1971bb05b7f518f98e9a72e452f55d13",
+      "bytes": 2322
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "a520e5ac81e69a37d849743bb59a949095a5811f8a7976ba19e5b697c14ad1e6",
+      "bytes": 983
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "6b1a719db8f7702ba4b405e2ca55f64655a18f1908dd5b9af3f5bef7ea76ee90",
+      "bytes": 9860
+    },
+    {
+      "path": "README.zh.md",
+      "baselineSha256": "3015e336f00b9b0bdd2568ebebebf0ec6c6955c351b54ef5f72f99d5a60b50e1",
+      "bytes": 7967
+    },
+    {
+      "path": "worker.js",
+      "baselineSha256": "be42d21706d72e9af61214d6d0abda35a36ac6937f4341da927127126fdc9b38",
+      "bytes": 1445
+    }
+  ],
+  "terms": "Only the listed locally authored scope is designated under the custom license. Existing third-party, vendor and prior valid grants take priority and are not revoked. Scope listing records this release selection, not legal ownership certification. Manifest hashes below describe pre-overlay metadata; implementation bytes are unchanged.",
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

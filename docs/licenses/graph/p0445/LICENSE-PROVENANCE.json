@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "package": "dfa",
+  "version": "1.2.0",
+  "packageId": "p0445",
+  "baselineManifestSha256": "96c0ce3cc17b34aabd58fd442157766d9e244cba735e54ee4fe10d7841f0460c",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "MIT",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/MIT.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-MIT.txt",
+    "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": "Devon Govett <devongovett@gmail.com>",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com/devongovett/dfa.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/dfa/1.2.0",
+    "responseSha256": "a2f3f0a273f863856ae1b059c7e9f8c78d1b61ded01183e1972d8d404640720c",
+    "gitHead": "3f5e603e5082caedabefefdf53e8a6ca3111e966",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/dfa/-/dfa-1.2.0.tgz",
+      "integrity": "sha512-ED3jP8saaweFTjeGX8HQPjeC1YYyZs98jGNZx6IiBvxW7JG5v492kamAQB3m2wop07CvU/RQmzcKr6bgcC5D/Q==",
+      "shasum": "96ac3204e2d29c49ea5b57af8d92c2ae12790657"
+    },
+    "repository": {
+      "url": "git+ssh://git@github.com/devongovett/dfa.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "d781eb3a307ab6aa2d97028f695b17dbeadf6fd27788c333b1fb96d18d2a23ad",
+    "bytes": 29338,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0445",
+    "name": "dfa",
+    "version": "1.2.0",
+    "license": "MIT",
+    "author": {
+      "name": "Devon Govett",
+      "email": "devongovett@gmail.com"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+ssh://git@github.com/devongovett/dfa.git",
+      "type": "git"
+    },
+    "gitHead": "3f5e603e5082caedabefefdf53e8a6ca3111e966",
+    "metadataUrl": "https://registry.npmjs.org/dfa/1.2.0",
+    "tarball": "https://registry.npmjs.org/dfa/-/dfa-1.2.0.tgz",
+    "integrity": "sha512-ED3jP8saaweFTjeGX8HQPjeC1YYyZs98jGNZx6IiBvxW7JG5v492kamAQB3m2wop07CvU/RQmzcKr6bgcC5D/Q=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

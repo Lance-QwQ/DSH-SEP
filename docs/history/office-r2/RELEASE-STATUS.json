@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "distribution": "20260921-office-r2",
+  "platform": "Windows x64",
+  "status": "blocked",
+  "stage": "office-replacement-verified-historical-startup-condition-retained",
+  "publicReleaseReady": false,
+  "publication": {
+    "channel": "GitHub",
+    "repositoryCreated": false,
+    "uploaded": false,
+    "repositoryUrl": null,
+    "downloadUrl": null,
+    "supportUrl": null,
+    "securityContact": null
+  },
+  "dshVersion": "0.1.6-alpha.2",
+  "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
+  "graphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+  "baseGraphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "finalGraphBinding": {
+    "status": "pass",
+    "packages": 527,
+    "files": 44608,
+    "scope": "New Office adapter/runtime, provider, wire schemas and preview notice; remaining program bytes inherit fixed r1 graph.",
+    "sealRequired": false
+  },
+  "baseProgramRegression": {
+    "status": "pass",
+    "tests": 438,
+    "pass": 438,
+    "graphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+    "scope": "historical capability-source regression before this distribution seal; not current-package verification"
+  },
+  "currentPackageValidation": {
+    "status": "pass",
+    "phase": "graph-bound-program-and-installed-integration",
+    "graphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "evidence": "docs/evidence/office-validation.json",
+    "scope": "See fixed tests and failures in evidence. Final immutable ZIP byte verification and installation are separately bound in the external delivery report."
+  },
+  "sourceAccess": {
+    "status": "pass",
+    "scope": "Replacement Office adapter preferred source and matching official LibreOffice source-access identity verified; not a full legal or reproducible-build certification.",
+    "blockers": [],
+    "resolvedByReplacement": [
+      {
+        "code": "LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE",
+        "oldComponents": [
+          "@deepseek-ai/libreoffice-kit@0.0.1",
+          "@deepseek-ai/libreoffice-kit-win32-x64@0.0.1"
+        ],
+        "resolution": "Both old packages removed. Authored @dsh-sep/office-converter source and official LibreOffice runtime replace them. The old Kit repository has not become accessible."
+      }
+    ],
+    "office": {
+      "adapter": "@dsh-sep/office-converter@0.1.0",
+      "runtime": "LibreOffice 26.8.0.3",
+      "preferredSource": "DSH-SEP-Source-20260921-office-r2.zip",
+      "officialSourceAccess": "payload/store/p0439/SOURCE-ACCESS.md",
+      "officialSourceArchiveCount": 4,
+      "officialSourceArchiveTotalBytes": 654222716
+    },
+    "additionalReview": [
+      {
+        "code": "SHARP_NATIVE_CORRESPONDING_SOURCE_SCOPE",
+        "component": "@img/sharp-win32-x64@0.35.4",
+        "graphPackageId": "p0089",
+        "status": "pass",
+        "scope": "Fixed source chain and main libvips DLL correspondence verified; not complete static-component source delivery, second C++ DLL audit, relinking validation, or reproducible-build verification.",
+        "confirmedBlocker": false,
+        "remainingVerification": [
+          "all embedded static components source archives",
+          "second C++ DLL correspondence",
+          "relinking materials and reproducible builds"
+        ]
+      }
+    ]
+  },
+  "licenseSynchronization": {
+    "status": "pass",
+    "coverage": {
+      "packages": 527,
+      "noticeEntries": 624,
+      "missingLicenseDeclarations": 0
+    },
+    "evidence": "docs/licenses/release/LICENSE-SYNCHRONIZATION.md",
+    "approvedSepLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "policy": "Apply approved terms only to mapped local originals; preserve existing MIT grants and all third-party terms.",
+    "scope": "Notice identity and explicit declaration inventory; not full legal certification."
+  },
+  "historicalPreworkAnomaly": {
+    "uniqueCauseUnresolved": true,
+    "laterPassDoesNotProveFixed": true
+  },
+  "onlineModelCalls": 0,
+  "archiveChecksums": "External SHA256SUMS.txt; no checksum of the containing ZIP is embedded.",
+  "packageKind": "full",
+  "packageName": "DSH-SEP-Full-Windows-x64",
+  "validationBlockers": [
+    {
+      "code": "HOST_STARTUP_UNATTRIBUTED",
+      "status": "blocked",
+      "reason": "Historical r1 Only host exited before ready; original stderr body was unavailable. Ten later historical-graph starts and current graph checks do not prove that historical cause fixed."
+    }
+  ]
+}

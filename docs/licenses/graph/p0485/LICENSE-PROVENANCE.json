@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "package": "@deepseek-ai/dsh-desktop",
+  "version": "0.1.6-alpha.2",
+  "packageId": "p0485",
+  "baselineManifestSha256": "4dafab1497ba19f2d8270a18c3282ebd081c86fd889e7ecf9dbdb0d63024937b",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "fixed-DSH-root-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ddefc45fbc7f8e46dd73185e68295696d1297887/LICENSE",
+    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  },
+  "originalAttributionFields": {
+    "author": null,
+    "contributors": null,
+    "copyright": null,
+    "repository": null
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license."
+}

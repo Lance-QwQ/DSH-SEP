@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "distribution": "20260921-r1",
+  "platform": "Windows x64",
+  "status": "fail",
+  "stage": "candidate-with-unresolved-startup-publication-blocked",
+  "publicReleaseReady": false,
+  "publication": {
+    "channel": "GitHub",
+    "repositoryCreated": false,
+    "uploaded": false,
+    "repositoryUrl": null,
+    "downloadUrl": null,
+    "supportUrl": null,
+    "securityContact": null
+  },
+  "dshVersion": "0.1.6-alpha.2",
+  "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
+  "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "baseGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "finalGraphBinding": {
+    "status": "pass",
+    "changedFiles": 95,
+    "addedFiles": 68,
+    "packages": 527,
+    "files": 27227,
+    "scope": "Only license, notices, provenance and package metadata changed from base; no executable implementation change.",
+    "sealRequired": false
+  },
+  "baseProgramRegression": {
+    "status": "pass",
+    "tests": 438,
+    "pass": 438,
+    "graphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+    "scope": "historical capability-source regression before this distribution seal; not current-package verification"
+  },
+  "currentPackageValidation": {
+    "status": "fail",
+    "phase": "preliminary-archives",
+    "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+    "evidence": "docs/evidence/package-prevalidation.json",
+    "scope": "Current runtime and installation tested on bound preliminary ZIPs. Final archive metadata and installation are checked separately in external publication report."
+  },
+  "sourceAccess": {
+    "status": "blocked",
+    "blockers": [
+      {
+        "code": "LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE",
+        "component": "@deepseek-ai/libreoffice-kit@0.0.1",
+        "graphPackageId": "p0438",
+        "status": "blocked",
+        "reason": "Recorded preferred Node API source repository/commit returned 404 during source-access verification; matching preferred source access has not been established.",
+        "resolution": "Obtain and verify corresponding preferred Node API source or a valid source-access path. Do not confuse the separate LibreOffice core source material with this Node API source."
+      }
+    ],
+    "additionalReview": [
+      {
+        "code": "SHARP_NATIVE_CORRESPONDING_SOURCE_SCOPE",
+        "component": "@img/sharp-win32-x64@0.35.4",
+        "graphPackageId": "p0089",
+        "status": "pass",
+        "scope": "Fixed source chain and main libvips DLL correspondence verified; not complete static-component source delivery, second C++ DLL audit, relinking validation, or reproducible-build verification.",
+        "confirmedBlocker": false,
+        "remainingVerification": [
+          "all embedded static components source archives",
+          "second C++ DLL correspondence",
+          "relinking materials and reproducible builds"
+        ]
+      }
+    ],
+    "note": "These are source-access/evidence conditions; no complete legal compliance certification is made."
+  },
+  "licenseSynchronization": {
+    "status": "reviewed_with_scope",
+    "coverage": {
+      "packages": 527,
+      "noticeEntries": 613,
+      "missingLicenseDeclarations": 0
+    },
+    "evidence": "licenses/release/LICENSE-SYNCHRONIZATION.md in release documentation",
+    "approvedSepLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "policy": "Apply approved terms only to mapped local originals; preserve existing MIT grants and all third-party terms."
+  },
+  "historicalPreworkAnomaly": {
+    "uniqueCauseUnresolved": true,
+    "laterPassDoesNotProveFixed": true
+  },
+  "onlineModelCalls": 0,
+  "archiveChecksums": "External SHA256SUMS.txt; no checksum of the containing ZIP is embedded.",
+  "packageKind": "full",
+  "packageName": "DSH-SEP-Full-Windows-x64",
+  "validationBlockers": [
+    {
+      "code": "HOST_STARTUP_UNATTRIBUTED",
+      "status": "blocked",
+      "reason": "Desktop focused repeat: two rounds passed; round three Only host exited code 1 before ready, stderr body unavailable. A successful diagnostic retry is not proof of a fix."
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+"""Apply reviewed consumer changes only to the isolated, unsealed candidate."""
+from pathlib import Path
+import hashlib, json, re
+
+ROOT = Path(__file__).resolve().parents[3]
+OUT = ROOT / 'deliverables/DSH-SEP-alpha2-20260921-office-r2'
+BASE = ROOT / 'deliverables/DSH-SEP-alpha2-20260921/DSH-SEP-Full/payload'
+WORK = ROOT / 'work/office-fallback-20260921'
+sha = lambda b: hashlib.sha256(b).hexdigest()
+changes = []
+
+def change(rel, transform):
+    source = BASE / rel
+    before = source.read_bytes()
+    text = before.decode('utf-8').replace('\r\n', '\n')
+    after = transform(text).encode('utf-8')
+    assert after != before, rel
+    for name in ['DSH-SEP-Full', 'DSH-SEP-Only']:
+        dest = OUT / name / 'payload' / rel
+        if dest.exists():
+            assert dest.read_bytes() in (before, after), 'Candidate has an unexpected change: ' + rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(after)
+    changes.append({'path': rel, 'beforeSha256': sha(before), 'afterSha256': sha(after)})
+
+def once(s, a, b, count=1):
+    assert s.count(a) == count, (a, s.count(a), count)
+    return s.replace(a, b)
+
+def provider(s):
+    s = once(s, 'from "@deepseek-ai/libreoffice-kit"', 'from "@dsh-sep/office-converter"') if 'from "@deepseek-ai/libreoffice-kit"' in s else once(s, "from '@deepseek-ai/libreoffice-kit'", "from '@dsh-sep/office-converter'")
+    pattern = r'(?m)^(\s*)missingFonts: result\.missingFonts(,?)$'
+    if len(re.findall(pattern, s)) == 2:
+        return re.sub(pattern, lambda m: m[1]+'missingFonts: result.missingFonts,\n'+m[1]+'fontDiagnostics: result.fontDiagnostics'+m[2], s)
+    return once(s, 'missingFonts: result.missingFonts', 'missingFonts: result.missingFonts, fontDiagnostics: result.fontDiagnostics', 2)
+
+def manifest(s):
+    p = json.loads(s)
+    assert p['dependencies'].pop('@deepseek-ai/libreoffice-kit') == '0.0.1'
+    p['dependencies']['@dsh-sep/office-converter'] = '0.1.0'
+    p['dshSepOfficeAdapter'] = {'revision':'20260921-office-r2','fontDiagnostics':'unavailable'}
+    return json.dumps(p, ensure_ascii=False, indent=2)+'\n'
+
+def wire(s):
+    s = once(s, "  'missingFonts': z.array(z.string()).readonly(),", "  'missingFonts': z.array(z.string()).readonly(),\n  'fontDiagnostics': z.literal('unavailable').optional().readonly(),")
+    return s.replace('readonly missingFonts: string[];\\n', "readonly missingFonts: string[];\\n    readonly fontDiagnostics?: 'unavailable';\\n")
+
+def types(s):
+    s = s.replace('Requested OOXML font families unavailable to this conversion; binary Office formats return an empty list.', 'Font list supplied by the backend; when fontDiagnostics is unavailable, an empty list does not prove font availability.')
+    return s.replace('readonly missingFonts: string[];', "readonly missingFonts: string[];\n    readonly fontDiagnostics?: 'unavailable';")
+
+def client(s):
+    s = once(s, 'missingFonts: result.value.missingFonts,', 'missingFonts: result.value.missingFonts,\n\t\t\t\t\t\t\tfontDiagnostics: result.value.fontDiagnostics,')
+    s = once(s, 'missingFonts: "缺少文档使用的字体：{fonts}，可能影响文字和排版。",', 'missingFonts: "缺少文档使用的字体：{fonts}，可能影响文字和排版。",\n\t\t\tfontDiagnosticsUnavailable: "本次预览未检查字体完整性，文字和排版可能与原文档不同。",')
+    s = once(s, 'missingFonts: "Fonts used in this document are unavailable: {fonts}. Text and layout may differ.",', 'missingFonts: "Fonts used in this document are unavailable: {fonts}. Text and layout may differ.",\n\t\t\tfontDiagnosticsUnavailable: "Font availability was not checked for this preview. Text and layout may differ from the original.",')
+    return once(s, 'children: [(0, react_jsx_runtime.jsx)(FontNotice, {', 'children: [file.fontDiagnostics === "unavailable" ? (0, react_jsx_runtime.jsx)("p", { role: "status", style: { margin: "8px 12px", fontSize: "12px" }, children: t("fontDiagnosticsUnavailable") }) : null, (0, react_jsx_runtime.jsx)(FontNotice, {')
+
+for file in ['lib/index.js', 'lib/types/index.js']:
+    change('store/p0437/'+file, provider)
+change('store/p0437/package.json', manifest)
+change('store/p0437/lib/types/types.d.ts', types)
+for file in ['lib/typert.host.js','lib/typert.remote-client.js']:
+    change('store/p0437/'+file, wire)
+change('store/p0331/lib/client.js', lambda s: once(s, '"missingFonts": array(string()).readonly(),', '"missingFonts": array(string()).readonly(),\n\t\t\t"fontDiagnostics": literal("unavailable").optional().readonly(),'))
+change('store/p0367/lib/index.js', lambda s: s.replace('readonly missingFonts: string[];\\n', "readonly missingFonts: string[];\\n    readonly fontDiagnostics?: 'unavailable';\\n"))
+change('store/p0408/lib/client.js', client)
+change('store/p0408/lib/types/client/office/cache.d.ts', lambda s: once(s, 'readonly missingFonts: readonly string[];', "readonly missingFonts: readonly string[];\n    readonly fontDiagnostics?: 'unavailable';"))
+
+readme = '''# DSH SEP Office-to-PDF provider adaptation
+
+Distribution: 20260921-office-r2; Windows x64.
+
+This MIT-licensed DSH provider retains its existing authorization, deferred bounded reads, source-version checks, queue, cancellation sharing and PDF cache. The converter import now uses the separately sourced @dsh-sep/office-converter package and official LibreOffice runtime. It no longer uses @deepseek-ai/libreoffice-kit or its native package.
+
+The createConverter/render/dispose contract remains. Results and remote schemas carry optional fontDiagnostics: 'unavailable'. This backend does not inspect the actual fonts used by LibreOffice; missingFonts: [] must not be read as proof that all fonts exist. The preview UI shows the corresponding notice.
+
+System-installed fonts are used. Custom fontDirectories/fontFallbacks and nondefault maxFontFiles/maxFontFileBytes/maxLoadedFontBytes are not supported by the CLI backend and are rejected. Legacy default font-limit settings remain accepted for old profile compatibility, but do not enforce font-load limits in the external process. Input/output/archive size, queue and conversion timeout limits remain separately enforced.
+
+This package's original MIT terms are preserved. The adapter and the official runtime have separate licenses and source-access records. See docs/OFFICE_CONVERTER.md in the distribution for limitations and tests. Upstream documentation below is available in the previous immutable release; it must not be used to infer native/WASM auto-fallback or custom-font capabilities in this Windows candidate.
+'''
+change('store/p0437/README.md', lambda s: readme)
+change('store/p0437/README.zh.md', lambda s: readme)
+(WORK/'packaging/consumer-changes.json').write_text(json.dumps({'status':'applied-awaiting-verification','changes':changes},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps({'changedFiles':len(changes)}))

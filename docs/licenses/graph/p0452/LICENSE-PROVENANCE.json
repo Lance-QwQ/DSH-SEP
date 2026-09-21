@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "package": "saxes",
+  "version": "6.0.0",
+  "packageId": "p0452",
+  "baselineManifestSha256": "32052572b41c2a890ed0854798c48454cc5991dcaafe5fb1718a4253046acfd3",
+  "baselineLicenseDeclaration": "ISC",
+  "kind": "fixed-upstream-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "url": "https://raw.githubusercontent.com/lddubeau/saxes/211fa0ebec9b628affc09219199639887174bfc3/LICENSE",
+    "commit": "211fa0ebec9b628affc09219199639887174bfc3",
+    "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e"
+  },
+  "originalAttributionFields": {
+    "author": "Louis-Dominique Dubeau <ldd@lddubeau.com>",
+    "contributors": null,
+    "copyright": null,
+    "repository": "https://github.com/lddubeau/saxes.git"
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/saxes/6.0.0",
+    "responseSha256": "49e633171169d15e096b3a85f976a723bfcd25f97d2d63915901e0990b0e8c42",
+    "gitHead": "211fa0ebec9b628affc09219199639887174bfc3",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/saxes/-/saxes-6.0.0.tgz",
+      "integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+      "shasum": "fe5b4a4768df4f14a201b1ba6a65c1f3d9988cc5"
+    },
+    "repository": {
+      "url": "git+https://github.com/lddubeau/saxes.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+    "bytes": 35374,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  }
+}

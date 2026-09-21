@@ -1,0 +1,380 @@
+{
+  "status": "pass",
+  "distribution": "20260921-mit-alpha",
+  "baseGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+  "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
+  "changes": [
+    {
+      "path": "store/p0438/LICENSE",
+      "before": {
+        "path": "store/p0438/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0438/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0438/LICENSE-SCOPE.json",
+      "before": null,
+      "after": {
+        "path": "store/p0438/LICENSE-SCOPE.json",
+        "size": 2430,
+        "sha256": "11fca72e792633eee05352e04f188b119d48dfbf3b8bb46fff0d1ac04744c4ee"
+      }
+    },
+    {
+      "path": "store/p0438/LICENSE-SCOPE.md",
+      "before": null,
+      "after": {
+        "path": "store/p0438/LICENSE-SCOPE.md",
+        "size": 771,
+        "sha256": "038d547aa79f6385645e164ff702f880edab9d931a7ac66440f4a0fc31d6bde4"
+      }
+    },
+    {
+      "path": "store/p0438/package.json",
+      "before": {
+        "path": "store/p0438/package.json",
+        "size": 641,
+        "sha256": "eaf8041165aedfcf8ff212456d672f3b481094a9889bdb414c88e8bddbc01368"
+      },
+      "after": {
+        "path": "store/p0438/package.json",
+        "size": 683,
+        "sha256": "e1a277748ad6d178b1c9d7008f6bea9c3610097c237aed4648052b1e091d8dcc"
+      }
+    },
+    {
+      "path": "store/p0500/LICENSE",
+      "before": {
+        "path": "store/p0500/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0500/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0500/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0500/LICENSE-SCOPE.json",
+        "size": 4932,
+        "sha256": "00d137be7beae67022cb585639a2d5330a52eabf362dd7cae1d0f9f519c3b805"
+      },
+      "after": {
+        "path": "store/p0500/LICENSE-SCOPE.json",
+        "size": 5419,
+        "sha256": "442280f1c9ea88c0be01dca1ac3d89bedb7201afc72d8552034ba90849b8498e"
+      }
+    },
+    {
+      "path": "store/p0500/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0500/LICENSE-SCOPE.md",
+        "size": 774,
+        "sha256": "bbd81f51c3a18960c03a1ca1eaacddcc32988ed69dac2d15ded73c68ae7df64d"
+      },
+      "after": {
+        "path": "store/p0500/LICENSE-SCOPE.md",
+        "size": 765,
+        "sha256": "965b8000385b21a296ad3eb64dfb5cfae2e0cde03d8d322263d72e1230d5146e"
+      }
+    },
+    {
+      "path": "store/p0500/package.json",
+      "before": {
+        "path": "store/p0500/package.json",
+        "size": 1333,
+        "sha256": "cd0da5e69fa63e983cd86930e3d50c4de280e78caaa56923708ae2bb7becd98c"
+      },
+      "after": {
+        "path": "store/p0500/package.json",
+        "size": 1314,
+        "sha256": "5d8939ca0ae086927b68754e33b5705b9f6a9ca3ae509ba7b8b662de8a1b7c67"
+      }
+    },
+    {
+      "path": "store/p0501/LICENSE",
+      "before": {
+        "path": "store/p0501/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0501/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0501/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0501/LICENSE-SCOPE.json",
+        "size": 12273,
+        "sha256": "5b3324964ff5cb1ea411c85d1612107fc66caa72632aebc0328cfb04ed218edf"
+      },
+      "after": {
+        "path": "store/p0501/LICENSE-SCOPE.json",
+        "size": 12760,
+        "sha256": "f2a24079bac9cb2873c610e46c0694ddb378c798bf823587d16c699a246551b8"
+      }
+    },
+    {
+      "path": "store/p0501/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0501/LICENSE-SCOPE.md",
+        "size": 867,
+        "sha256": "4cb769725c5298e535e045d258ff2141d5951b0a9838790a3c53e428b05ad86a"
+      },
+      "after": {
+        "path": "store/p0501/LICENSE-SCOPE.md",
+        "size": 858,
+        "sha256": "022f702405991c59e5e32ada11cba14a9899cbbb2f63afc67ad056665dade903"
+      }
+    },
+    {
+      "path": "store/p0501/package.json",
+      "before": {
+        "path": "store/p0501/package.json",
+        "size": 2354,
+        "sha256": "073bf29c9c5f6950441abfc54710a4470d151c6c56a793c2049726b6c8cb6575"
+      },
+      "after": {
+        "path": "store/p0501/package.json",
+        "size": 2335,
+        "sha256": "27c4fdd2d255660cb6e1b20263853533c3357b3ecc969e41d373ccaf7d15841c"
+      }
+    },
+    {
+      "path": "store/p0516/LICENSE",
+      "before": {
+        "path": "store/p0516/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0516/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0516/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0516/LICENSE-SCOPE.json",
+        "size": 1391,
+        "sha256": "3fc429597729d9ee991526fed33f2afa701c8cf7d0121fb11023dd250fd08709"
+      },
+      "after": {
+        "path": "store/p0516/LICENSE-SCOPE.json",
+        "size": 1878,
+        "sha256": "c1e70266bd3c7473dde1a2c9e78037bdb9b5d5a3694590d75fa67aa7998b7d82"
+      }
+    },
+    {
+      "path": "store/p0516/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0516/LICENSE-SCOPE.md",
+        "size": 781,
+        "sha256": "d54a32d72163b43ab5366433416e26a5fa6835f1d4d9bbf8a9574aefd82aafc4"
+      },
+      "after": {
+        "path": "store/p0516/LICENSE-SCOPE.md",
+        "size": 772,
+        "sha256": "8e7246d71e698b14ffff3927dc4d0756c87cc470b7898ba67da83013e093c7a2"
+      }
+    },
+    {
+      "path": "store/p0516/package.json",
+      "before": {
+        "path": "store/p0516/package.json",
+        "size": 796,
+        "sha256": "6218477454c14a9633f7581efe492c0e327dc5b724ca029071d9972ab0ca9a41"
+      },
+      "after": {
+        "path": "store/p0516/package.json",
+        "size": 777,
+        "sha256": "a365f0a547066f6aea63234a43bb909ec1de0cc3d3ff53e942de18a8f8e558cc"
+      }
+    },
+    {
+      "path": "store/p0517/LICENSE",
+      "before": {
+        "path": "store/p0517/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0517/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0517/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0517/LICENSE-SCOPE.json",
+        "size": 3287,
+        "sha256": "bc44cf8a1a1c7a7463915a941a12d50ceacef1fd64f03d556c5f0e99195d91a1"
+      },
+      "after": {
+        "path": "store/p0517/LICENSE-SCOPE.json",
+        "size": 3774,
+        "sha256": "a0e816e94382561782b667f6a6c24f9a2a7e3332e4706147ff88c81c8c20758f"
+      }
+    },
+    {
+      "path": "store/p0517/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0517/LICENSE-SCOPE.md",
+        "size": 808,
+        "sha256": "e835a4236f2317d535792fd6e5eba63a6476b5c1b11ad2343794b8b34a5757e4"
+      },
+      "after": {
+        "path": "store/p0517/LICENSE-SCOPE.md",
+        "size": 799,
+        "sha256": "9b249157497bab592f86d2a845a7094be53414645910e687a7ca1f623d4acc1f"
+      }
+    },
+    {
+      "path": "store/p0517/package.json",
+      "before": {
+        "path": "store/p0517/package.json",
+        "size": 1434,
+        "sha256": "9a37b285427a31cc83130b6cdbb7cd0ef1cc59d91ed3a82f1071b23300b4cef6"
+      },
+      "after": {
+        "path": "store/p0517/package.json",
+        "size": 1415,
+        "sha256": "9cc9ee11c35d3a55462c7e1d93f0b88b335ad25e67cfae79edda3a56cb8df47d"
+      }
+    },
+    {
+      "path": "store/p0518/LICENSE",
+      "before": {
+        "path": "store/p0518/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0518/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0518/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0518/LICENSE-SCOPE.json",
+        "size": 3573,
+        "sha256": "5fe6203573e3bf970f46cb1497a6eb8657a11917d0c360b63383d895412eea88"
+      },
+      "after": {
+        "path": "store/p0518/LICENSE-SCOPE.json",
+        "size": 4060,
+        "sha256": "e20b2fd63fa396891271c9a9cb4a50d182dda0013fc398ad5e32b0201c792780"
+      }
+    },
+    {
+      "path": "store/p0518/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0518/LICENSE-SCOPE.md",
+        "size": 794,
+        "sha256": "005e9b87337a8a213ebf07e5b2430ff7feda59b106a2960dcb6d7e77ce2d6651"
+      },
+      "after": {
+        "path": "store/p0518/LICENSE-SCOPE.md",
+        "size": 785,
+        "sha256": "e529a56e96ea1a422945090c2501ee807e5fbfeab5c55b76c826f7be688efc60"
+      }
+    },
+    {
+      "path": "store/p0518/package.json",
+      "before": {
+        "path": "store/p0518/package.json",
+        "size": 809,
+        "sha256": "5d53a12317f62fb08a7fa4157a973c5b8beacbb93a41288dcc5f1b25b92c0264"
+      },
+      "after": {
+        "path": "store/p0518/package.json",
+        "size": 790,
+        "sha256": "8cf38d701c44ee8c93e6cdf3113bb79a90423ae41bc4f587aa566084c09ba021"
+      }
+    },
+    {
+      "path": "store/p0519/LICENSE",
+      "before": {
+        "path": "store/p0519/LICENSE",
+        "size": 2908,
+        "sha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a"
+      },
+      "after": {
+        "path": "store/p0519/LICENSE",
+        "size": 1077,
+        "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882"
+      }
+    },
+    {
+      "path": "store/p0519/LICENSE-SCOPE.json",
+      "before": {
+        "path": "store/p0519/LICENSE-SCOPE.json",
+        "size": 1850,
+        "sha256": "8fb7e300915c0f65d9117f681dfc0c491376077b33a371073c116ee55ba49981"
+      },
+      "after": {
+        "path": "store/p0519/LICENSE-SCOPE.json",
+        "size": 2337,
+        "sha256": "361e7b1a100ccf576c98b50aa9bd2020e2a1d9088e8fb215e4f0eea998e0e531"
+      }
+    },
+    {
+      "path": "store/p0519/LICENSE-SCOPE.md",
+      "before": {
+        "path": "store/p0519/LICENSE-SCOPE.md",
+        "size": 786,
+        "sha256": "286939b8b9dac3aaca4b1db1f67f93a26439a5e15518581f3890bb34244a4375"
+      },
+      "after": {
+        "path": "store/p0519/LICENSE-SCOPE.md",
+        "size": 777,
+        "sha256": "420e60c56e05b5c9969241169f99f54e93e0bc0d138ff585dbf30cb01265be1c"
+      }
+    },
+    {
+      "path": "store/p0519/package.json",
+      "before": {
+        "path": "store/p0519/package.json",
+        "size": 1133,
+        "sha256": "9139a3b479e0aad4313014b3786691a410a60f622fad2c136b60e8b1b5245509"
+      },
+      "after": {
+        "path": "store/p0519/package.json",
+        "size": 1114,
+        "sha256": "2daa576a6cbed4e77e37a5b45947ab108abe87dbcfc3a281aac35868282696b8"
+      }
+    }
+  ],
+  "scope": "Only mapped original LICENSE/LICENSE-SCOPE, package license declarations and authored documentation changed. Every other graph file, including executable implementation and third-party code/notices, is byte-identical.",
+  "changedFiles": 28,
+  "unchangedFiles": 44582,
+  "addedFiles": 2,
+  "codeChanges": 0,
+  "mappedOriginalModules": [
+    "p0438",
+    "p0500",
+    "p0501",
+    "p0516",
+    "p0517",
+    "p0518",
+    "p0519"
+  ],
+  "packages": 527,
+  "files": 44610
+}

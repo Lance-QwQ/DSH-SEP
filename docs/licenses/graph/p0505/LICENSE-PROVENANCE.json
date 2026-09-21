@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "package": "@nodable/entities",
+  "version": "3.0.0",
+  "packageId": "p0505",
+  "baselineManifestSha256": "548526ce0e1cad9ffe904fba19067013c9fea336eafd3cd52a337ec44406c9ed",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "previously-collected-upstream-supplement",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "programPath": "store/p0501/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+    "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+    "evidenceBoundary": "Preserved existing upstream supplement. Not a complete binary or npm payload to source correspondence audit."
+  },
+  "originalAttributionFields": {
+    "author": "Amit Gupta (https://solothought.com)",
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/nodable/val-parsers.git"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license."
+}

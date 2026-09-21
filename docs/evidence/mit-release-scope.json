@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "distribution": "20260921-mit-alpha",
+  "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
+  "baselineGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+  "runtimeCodeChanges": 0,
+  "inheritedFunctionalEvidence": "office-validation.json remains bound to Office-r2",
+  "finalZipEvidence": "External DELIVERY-REPORT.json",
+  "ownerAuthorizedKnownIssueAlpha": true,
+  "startupCauseFixed": false,
+  "modelCalls": 0
+}

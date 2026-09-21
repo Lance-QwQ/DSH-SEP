@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "package": "@aws-sdk/credential-provider-http",
+  "version": "3.972.73",
+  "packageId": "p0146",
+  "baselineManifestSha256": "053a07f9837ab56732facd808e115f12410ee118f60732ccb591be0258e6cb46",
+  "baselineLicenseDeclaration": "Apache-2.0",
+  "kind": "standard-terms-plus-fixed-package-declaration",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "kind": "standard-license-text-not-project-original",
+    "spdx": "Apache-2.0",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/Apache-2.0.txt",
+    "commit": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "file": "standard-Apache-2.0.txt",
+    "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+    "placeholders": "Any copyright placeholders are standard-text template fields, not invented project authors or years."
+  },
+  "originalAttributionFields": {
+    "author": {
+      "name": "AWS SDK for JavaScript Team",
+      "url": "https://aws.amazon.com/sdk-for-javascript/"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/aws/aws-sdk-js-v3.git",
+      "directory": "packages-internal/credential-provider-http"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40aws-sdk%2Fcredential-provider-http/3.972.73",
+    "responseSha256": "bf807cf7fa6c6a4205d09b0b2e79658997f23603791a33b6c561aca520ee9e34",
+    "gitHead": null,
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@aws-sdk/credential-provider-http/-/credential-provider-http-3.972.73.tgz",
+      "integrity": "sha512-uyYYnJOnlis8uQzaYGPd7N1JoioCoNpXgnkXYixsWJXHXgXyYi8WXJSDfofxJeWfQIGWLe2Nwyq60Uc7MZdVOg==",
+      "shasum": "879466b23dcaec4bee635abf1103e1f5f35d122d"
+    },
+    "repository": {
+      "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+      "type": "git",
+      "directory": "packages-internal/credential-provider-http"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "1f7397f9ef11f49defd8b086fa6b705b5253387cd2afa9d37a4495b68b2a004f",
+    "bytes": 5166,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0146",
+    "name": "@aws-sdk/credential-provider-http",
+    "version": "3.972.73",
+    "license": "Apache-2.0",
+    "author": {
+      "url": "https://aws.amazon.com/sdk-for-javascript/",
+      "name": "AWS SDK for JavaScript Team"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+      "type": "git",
+      "directory": "packages-internal/credential-provider-http"
+    },
+    "gitHead": null,
+    "metadataUrl": "https://registry.npmjs.org/%40aws-sdk%2Fcredential-provider-http/3.972.73",
+    "tarball": "https://registry.npmjs.org/@aws-sdk/credential-provider-http/-/credential-provider-http-3.972.73.tgz",
+    "integrity": "sha512-uyYYnJOnlis8uQzaYGPd7N1JoioCoNpXgnkXYixsWJXHXgXyYi8WXJSDfofxJeWfQIGWLe2Nwyq60Uc7MZdVOg=="
+  },
+  "evidenceBoundary": "This is the standard license text, not a license file fetched from the original project. Copyright placeholders are template fields, not actual project attributions. The actual fixed package declaration and author fields are retained without inventing a copyright year or holder. Absence of a standalone file is not treated as absence of a license grant."
+}

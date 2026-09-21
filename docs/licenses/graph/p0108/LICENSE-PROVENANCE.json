@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "package": "@koromix/koffi-win32-x64",
+  "version": "3.3.0",
+  "packageId": "p0108",
+  "baselineManifestSha256": "f154af2eb27861cd8b04d00ed8ec360ec5c177e5c08e9d78014e585e6f4d0706",
+  "baselineLicenseDeclaration": "MIT",
+  "kind": "same-version-parent-original-license",
+  "supplementFile": "LICENSE-SEP-SUPPLEMENT.txt",
+  "source": {
+    "programPath": "store/p0107/LICENSE.txt",
+    "sha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
+    "relationship": "same-version koffi 3.3.0 parent package; not binary-to-source verification"
+  },
+  "originalAttributionFields": {
+    "author": {
+      "name": "Niels Martignène",
+      "email": "niels.martignene@protonmail.com",
+      "url": "https://koromix.dev/"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Koromix/koffi"
+    }
+  },
+  "scope": "Third-party terms remain effective. This supplement is not legal certification and does not relicense this package under the SEP custom license.",
+  "fixedNpmMetadata": {
+    "url": "https://registry.npmjs.org/%40koromix%2Fkoffi-win32-x64/3.3.0",
+    "responseSha256": "add0953be5fb6c22c536b6e30eaf1d23a029a7cbc4bd32e7dd701cf493622fd7",
+    "gitHead": null,
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@koromix/koffi-win32-x64/-/koffi-win32-x64-3.3.0.tgz",
+      "integrity": "sha512-D+ORp73rTmvGVfq01+4uBmgVZqrPqU9N9xCZCfexaCDlVk0WQsaqid1dGsi6eScJuHt4Cp8s1i5/4CsecxFTKQ==",
+      "shasum": "768a25a83f69def5b6436c3b9d93c27322596cab"
+    },
+    "repository": {
+      "url": "git+https://github.com/Koromix/koffi.git",
+      "type": "git"
+    }
+  },
+  "tarballInspection": {
+    "sha256": "4fac3647364ae7049d65824b5ed34f56281113258c83b6ece4b7b222a39cfdfe",
+    "bytes": 399240,
+    "integrityVerified": true,
+    "standaloneNoticeFilesFound": 0,
+    "temporaryTarballRetained": false
+  },
+  "publicRegistryAttribution": {
+    "id": "p0108",
+    "name": "@koromix/koffi-win32-x64",
+    "version": "3.3.0",
+    "license": "MIT",
+    "author": {
+      "url": "https://koromix.dev/",
+      "name": "Niels Martignène",
+      "email": "niels.martignene@protonmail.com"
+    },
+    "contributors": null,
+    "copyright": null,
+    "repository": {
+      "url": "git+https://github.com/Koromix/koffi.git",
+      "type": "git"
+    },
+    "gitHead": null,
+    "metadataUrl": "https://registry.npmjs.org/%40koromix%2Fkoffi-win32-x64/3.3.0",
+    "tarball": "https://registry.npmjs.org/@koromix/koffi-win32-x64/-/koffi-win32-x64-3.3.0.tgz",
+    "integrity": "sha512-D+ORp73rTmvGVfq01+4uBmgVZqrPqU9N9xCZCfexaCDlVk0WQsaqid1dGsi6eScJuHt4Cp8s1i5/4CsecxFTKQ=="
+  }
+}

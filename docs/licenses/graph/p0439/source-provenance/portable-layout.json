@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "copies": [
+    {
+      "source": "System64/concrt140.dll",
+      "destination": "program/concrt140.dll",
+      "sha256": "2405355f0a58067b258f8df33c327e3a3d716eaac5a3a5aebb757842d85bd376",
+      "bytes": 324208
+    },
+    {
+      "source": "System64/msvcp140_1.dll",
+      "destination": "program/msvcp140_1.dll",
+      "sha256": "bfad5aef4c63a669e3c140655cdfdf395b6c979b400a447bd5dcb65ed8826c3d",
+      "bytes": 35952
+    },
+    {
+      "source": "System64/msvcp140_2.dll",
+      "destination": "program/msvcp140_2.dll",
+      "sha256": "3ea06f0ee098b4823cb79599df3780e7f23cce52c19aac31d2a0d47efe33a5e9",
+      "bytes": 280200
+    },
+    {
+      "source": "System64/msvcp140_atomic_wait.dll",
+      "destination": "program/msvcp140_atomic_wait.dll",
+      "sha256": "640b2aefced484d0368eea5bdd06addd0658a3a70a49256e560d6923b404a479",
+      "bytes": 50304
+    },
+    {
+      "source": "System64/msvcp140_codecvt_ids.dll",
+      "destination": "program/msvcp140_codecvt_ids.dll",
+      "sha256": "f2069a52880ec885ee7f0511186100eb7fada0411a2b4948fafea7735b878a18",
+      "bytes": 31872
+    },
+    {
+      "source": "System64/msvcp140.dll",
+      "destination": "program/msvcp140.dll",
+      "sha256": "0f885b509a685d2bbfa652fed26b5fb31d88fbdab0a978c641d1c7b8aa460aa9",
+      "bytes": 557728
+    },
+    {
+      "source": "System64/vccorlib140.dll",
+      "destination": "program/vccorlib140.dll",
+      "sha256": "19839407c3fdbc824e5bce189bf68ddf8097f12ec28b757797ffa0415c144ddd",
+      "bytes": 352384
+    },
+    {
+      "source": "System64/vcruntime140_1.dll",
+      "destination": "program/vcruntime140_1.dll",
+      "sha256": "1f2d41c4aa5db0bc33ebf7b66d72943a817d7ce6cbe880502a9403823633093f",
+      "bytes": 49792
+    },
+    {
+      "source": "System64/vcruntime140_threads.dll",
+      "destination": "program/vcruntime140_threads.dll",
+      "sha256": "219915cf20822f34d5e7c1fdd4e21ae7f3396881096c51036225fb8f84b47afa",
+      "bytes": 38528
+    },
+    {
+      "source": "System64/vcruntime140.dll",
+      "destination": "program/vcruntime140.dll",
+      "sha256": "d5e4d9a3e835fa679450145d6a7d94e36573a509317111904d9b3712c30d9066",
+      "bytes": 124544
+    }
+  ],
+  "excludedAdministrativeDatabase": {
+    "path": "LibreOffice_26.8.0_Win_x86-64.msi",
+    "sha256": "43543c36a1023b7695f5bfd79efe6de7f9d0750ed92f0bc639a2fb95f619d6f7",
+    "bytes": 19836928,
+    "reason": "Administrative extraction database; not a runtime dependency. Preserved outside runtime in acquisition evidence."
+  },
+  "sourceBytesModified": false,
+  "originalDirectoriesPreserved": true,
+  "officialNoticesPreserved": true,
+  "checkedAt": "2026-09-21T03:57:30.8839577Z"
+}

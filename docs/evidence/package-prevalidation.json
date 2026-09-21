@@ -1,0 +1,512 @@
+{
+  "schema": 1,
+  "status": "fail",
+  "phase": "preliminary-archive-functional-validation-with-unresolved-startup",
+  "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+  "publicReleaseReady": false,
+  "uploaded": false,
+  "modelCalls": 0,
+  "sourceEvidence": {
+    "archive-install": {
+      "file": "index.json",
+      "sha256": "d94ccef377e9c990e39ae2848d249a8319a304e8faa9d7090030157823adbbc8"
+    },
+    "installed-before": {
+      "file": "index.json",
+      "sha256": "f91b818c0e90c55d8655f0edb1a2616f7bd694e600367c4c780968678e17cc95"
+    },
+    "core-fixed-438": {
+      "file": "index.json",
+      "sha256": "580618d0ac096463c509266fc030646c767564d9a1f924632916709fc1e87a34"
+    },
+    "core-license-r2-438": {
+      "file": "index.json",
+      "sha256": "ea58f9ca275966e74b33b4170f3449f561df41f1fe2794f44517f5ac0d01b854"
+    },
+    "core-fixture-diagnosis": {
+      "file": "index.json",
+      "sha256": "cc742965e4752b964b99048f4e7b79622a77af3db491181350b1074051f268a4"
+    },
+    "desktop-three-rounds": {
+      "file": "index.json",
+      "sha256": "9ffa7ce8bd5a52d2f9ab73629a2f6bdacd5e83c31a6d6d527e34c94cef9beb8b"
+    },
+    "desktop-focused-r2": {
+      "file": "index.json",
+      "sha256": "2761799cb7c47966f3d48a946b8c4ba8652dba1a7273ea76582f52bc98d311ce"
+    },
+    "official-coexist-three": {
+      "file": "index.json",
+      "sha256": "2265ce1b9b81a6c181d25cc47f43de80861cef0f3560d3ff8418a7cf386e2e19"
+    },
+    "official-coexist-r2": {
+      "file": "index.json",
+      "sha256": "0f81f08a4c5e37403d4b3e1e155e7b302fa275dfd3e0ef671241ac01638abe26"
+    },
+    "official-coexist-r3": {
+      "file": "index.json",
+      "sha256": "90e147e6738a3c49287da5bf5fcf2e0b5271b8c4a714fb1949789ab1f464a35e"
+    },
+    "installed-after": {
+      "file": "index.json",
+      "sha256": "f91b818c0e90c55d8655f0edb1a2616f7bd694e600367c4c780968678e17cc95"
+    }
+  },
+  "archives": [
+    {
+      "status": "pass",
+      "kind": "sep",
+      "filename": "DSH-SEP-Only-Windows-x64.zip",
+      "bytes": 232155918,
+      "sha256": "1b4bb9a0ba109986e08585d44a8995c3f8fccab686ee26b277672edbc588a8d5",
+      "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 30678,
+      "unmanifestedFiles": 0
+    },
+    {
+      "status": "pass",
+      "kind": "full",
+      "filename": "DSH-SEP-Full-Windows-x64.zip",
+      "bytes": 520465072,
+      "sha256": "8707e564299398bc277c21ce802b5908f96ee5c5e248690b6f040e6a88ab9073",
+      "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 36446,
+      "unmanifestedFiles": 0
+    }
+  ],
+  "installation": [
+    {
+      "kind": "only",
+      "status": "pass",
+      "archiveSha256": "1b4bb9a0ba109986e08585d44a8995c3f8fccab686ee26b277672edbc588a8d5",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "archiveFiles": 30678,
+      "verifiedSourceFiles": 5768,
+      "originalSourceUnchanged": true,
+      "modelCalls": 0
+    },
+    {
+      "kind": "full",
+      "status": "pass",
+      "archiveSha256": "8707e564299398bc277c21ce802b5908f96ee5c5e248690b6f040e6a88ab9073",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "archiveFiles": 36446,
+      "verifiedSourceFiles": 0,
+      "originalSourceUnchanged": true,
+      "modelCalls": 0
+    }
+  ],
+  "installedBefore": [
+    {
+      "kind": "only",
+      "status": "pass",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 27227,
+      "links": 2640,
+      "installedDocuments": 646,
+      "instanceOnlyLinks": true,
+      "blankKey": true,
+      "modelCalls": 0,
+      "budgetEntries": 0,
+      "telemetryDisabled": true
+    },
+    {
+      "kind": "full",
+      "status": "pass",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 27227,
+      "links": 2640,
+      "installedDocuments": 646,
+      "instanceOnlyLinks": true,
+      "blankKey": true,
+      "modelCalls": 0,
+      "budgetEntries": 0,
+      "telemetryDisabled": true
+    }
+  ],
+  "installedAfter": [
+    {
+      "kind": "only",
+      "status": "pass",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 27227,
+      "links": 2640,
+      "installedDocuments": 646,
+      "instanceOnlyLinks": true,
+      "blankKey": true,
+      "modelCalls": 0,
+      "budgetEntries": 0,
+      "telemetryDisabled": true
+    },
+    {
+      "kind": "full",
+      "status": "pass",
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "files": 27227,
+      "links": 2640,
+      "installedDocuments": 646,
+      "instanceOnlyLinks": true,
+      "blankKey": true,
+      "modelCalls": 0,
+      "budgetEntries": 0,
+      "telemetryDisabled": true
+    }
+  ],
+  "coreRuns": [
+    {
+      "label": "core-fixed-438",
+      "status": "fail",
+      "tests": 438,
+      "pass": 424,
+      "fail": 14,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 113745,
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "testInputsHash": "310636732439df5da3dab8b349c16a5263b3917269e14e6f766920563367d8fc",
+      "modelCalls": 0
+    },
+    {
+      "label": "core-license-r2-438",
+      "status": "pass",
+      "tests": 438,
+      "pass": 438,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 199309,
+      "graphHash": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+      "testInputsHash": "d2a7d7d02ee9caa75a221d84cf26362b9f1939f8f2bc1d7e9e2bf4cf5229e387",
+      "modelCalls": 0
+    }
+  ],
+  "fixtureDiagnosis": {
+    "status": "pass",
+    "scope": "The legacy test fixture combined current installed source with old package.json; the strict identity gate rejected it. New fixture generation uses installed metadata. Product implementation and test assertions were not changed.",
+    "metadataFields": [
+      "dshSepLicenseScope",
+      "files",
+      "license"
+    ],
+    "oldManifestSha256": "7a22e0da64bfe53a5e961d8b7aa9bc3303719e31ead4e485028d5a18342a0e1d",
+    "installedManifestSha256": "073bf29c9c5f6950441abfc54710a4470d151c6c56a793c2049726b6c8cb6575",
+    "historicalFirstRunRetained": true
+  },
+  "privacy": [
+    {
+      "name": "DSH-SEP-Only",
+      "status": "pass",
+      "archiveSha256": "1b4bb9a0ba109986e08585d44a8995c3f8fccab686ee26b277672edbc588a8d5",
+      "filesScanned": 30678,
+      "developerPathHits": [],
+      "apiKeyPatternHits": [],
+      "gitDirectories": [],
+      "privateConfigEntries": [],
+      "scope": "All listed ZIP member bytes, with ASCII and NUL-stripped UTF-16 patterns; known developer paths and API/GitHub key formats; private-state filenames. Not a proof against arbitrary secret encodings. Test instances use blank profiles; no private daily state was copied."
+    },
+    {
+      "name": "DSH-SEP-Full",
+      "status": "pass",
+      "archiveSha256": "8707e564299398bc277c21ce802b5908f96ee5c5e248690b6f040e6a88ab9073",
+      "filesScanned": 36446,
+      "developerPathHits": [],
+      "apiKeyPatternHits": [],
+      "gitDirectories": [],
+      "privateConfigEntries": [],
+      "scope": "All listed ZIP member bytes, with ASCII and NUL-stripped UTF-16 patterns; known developer paths and API/GitHub key formats; private-state filenames. Not a proof against arbitrary secret encodings. Test instances use blank profiles; no private daily state was copied."
+    }
+  ],
+  "sourceSnapshot": {
+    "status": "pass",
+    "filename": "DSH-SEP-Source-20260921.zip",
+    "bytes": 5312244,
+    "sha256": "0fa30a5778feaf32247071b3ea85942a4df33978173dab675ab057bd880eccce",
+    "files": 744,
+    "graphSha256": "ef21d43d3c9545bb715819f4ef774c76ef0e9af76df7433b37d6771d2e5a2d40",
+    "sourceManifestSha256": "f73379afbe9dc74be924b981ee1ef3f6301c09940d1e6eff0ab1ab76a70a6683",
+    "scope": "Independent complete snapshot hash verification and ZIP byte comparison; source subset and supplemental authoring sources, not all transitive dependency source or a reproducible full build."
+  },
+  "limitations": [
+    "No paid model execution or real upstream upgrade in this round.",
+    "Official coexistence uses official alpha.2 desktop/host copies plus recorded shared dependency pool containing some SEP-adapted packages, not a fresh signed official installer.",
+    "Final ZIP is verified and installed separately after documentation freeze; final archive evidence is external to avoid recursive self-hashes.",
+    "Public upload blocked by LibreOffice Kit Node API preferred source access gap."
+  ],
+  "desktop-three-rounds": {
+    "status": "fail",
+    "planned": 3,
+    "completed": 1,
+    "scope": "Only and Full synthetic installations; not a substitute for official DSH coexistence, paid model tests, a real upstream upgrade, or continuous three-hour runtime",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "fail",
+        "errorMessageSha256": "3b1ef280394e7e9e7065a304bcaf03ffd04308a4859ef9041b72edd1f4a74bdb",
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": [
+          {
+            "kind": "only",
+            "recovery": false,
+            "cleanQuit": null,
+            "cleanup": "app.quit after failed or incomplete phase"
+          },
+          {
+            "kind": "full",
+            "recovery": false,
+            "cleanQuit": null,
+            "cleanup": "app.quit after failed or incomplete phase"
+          }
+        ]
+      }
+    ]
+  },
+  "desktop-focused-r2": {
+    "status": "fail",
+    "planned": 3,
+    "completed": 3,
+    "scope": "Only and Full synthetic installations; not a substitute for official DSH coexistence, paid model tests, a real upstream upgrade, or continuous three-hour runtime",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "pass",
+        "errorMessageSha256": null,
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": [
+          {
+            "kind": "only",
+            "recovery": true,
+            "cleanQuit": true,
+            "cleanup": null
+          },
+          {
+            "kind": "full",
+            "recovery": false,
+            "cleanQuit": true,
+            "cleanup": null
+          }
+        ]
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "errorMessageSha256": null,
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": [
+          {
+            "kind": "full",
+            "recovery": true,
+            "cleanQuit": true,
+            "cleanup": null
+          },
+          {
+            "kind": "only",
+            "recovery": false,
+            "cleanQuit": true,
+            "cleanup": null
+          }
+        ]
+      },
+      {
+        "round": 3,
+        "status": "fail",
+        "errorMessageSha256": "ec5bc5fa90ab7cff56d0f402d4c8d4ec2732f123d913b4b399cccd4c3ccf4756",
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": [
+          {
+            "kind": "only",
+            "recovery": false,
+            "cleanQuit": null,
+            "cleanup": null
+          }
+        ]
+      }
+    ]
+  },
+  "official-coexist-three": {
+    "status": "fail",
+    "planned": 3,
+    "completed": 1,
+    "scope": "Reuses recorded alpha.2 official desktop and desktop-host fixture bytes with a shared synthetic dependency pool, not an independently downloaded pristine official installer; dependency pool may contain SEP-modified packages, but no SEP bundle is enabled in this profile.",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "fail",
+        "errorMessageSha256": "d25d9f1aed2e1c22292dd4371d69a0624728cb2d190c30233ac21d9f504d37e5",
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [
+          {
+            "kind": "official",
+            "route": "app.quit after incomplete phase",
+            "hadError": false
+          }
+        ],
+        "faultRecovery": []
+      }
+    ]
+  },
+  "official-coexist-r2": {
+    "status": "fail",
+    "planned": 3,
+    "completed": 1,
+    "scope": "Reuses recorded alpha.2 official desktop and desktop-host fixture bytes with a shared synthetic dependency pool, not an independently downloaded pristine official installer; dependency pool may contain SEP-modified packages, but no SEP bundle is enabled in this profile.",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "fail",
+        "errorMessageSha256": "335a9ebfc3634d275eef76b89120f4f8fc0cc5d99f0d9b5509fd9c546c11f7b5",
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [
+          {
+            "kind": "only",
+            "route": "app.quit after incomplete phase",
+            "hadError": false
+          },
+          {
+            "kind": "full",
+            "route": "app.quit after incomplete phase",
+            "hadError": false
+          },
+          {
+            "kind": "official",
+            "route": "app.quit after incomplete phase",
+            "hadError": false
+          }
+        ],
+        "faultRecovery": []
+      }
+    ]
+  },
+  "official-coexist-r3": {
+    "status": "pass",
+    "planned": 3,
+    "completed": 3,
+    "scope": "Reuses recorded alpha.2 official desktop and desktop-host fixture bytes with a shared synthetic dependency pool, not an independently downloaded pristine official installer; dependency pool may contain SEP-modified packages, but no SEP bundle is enabled in this profile.",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "pass",
+        "errorMessageSha256": null,
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": []
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "errorMessageSha256": null,
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": []
+      },
+      {
+        "round": 3,
+        "status": "pass",
+        "errorMessageSha256": null,
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0,
+        "cleanup": [],
+        "faultRecovery": []
+      }
+    ]
+  },
+  "fixtureCandidateSet": {
+    "sha256": "ebfc4a803d3164a0654310f5ab84a37c326856846d77c4733875e9445ab058b6",
+    "candidateCount": 14,
+    "uniqueCandidateHashes": [
+      "e91c50cac930dd795387688acbf66ff8fce85458ad14931fb92ae2bca645a4f6"
+    ],
+    "packedFiles": 69
+  },
+  "startupDiagnostics": {
+    "status": "pass",
+    "planned": 5,
+    "completed": 5,
+    "sourceEvidence": {
+      "file": "index.json",
+      "sha256": "8e9dea86b773671d0513d05e9a6d1575ae18dfc436449e1a6454a20a5cdecfba"
+    },
+    "scope": "Bounded five consecutive starts/normal closes of the same Only installation and data with fresh control generations; no UI or crash injection. Passing means startup failure not reproduced under these conditions, not a fix or explanation of desktop r2 round3.",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "pass",
+        "cleanup": "normal-owned-service-close",
+        "stderrBytes": [
+          0
+        ],
+        "exitCodes": [
+          0
+        ],
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "cleanup": "normal-owned-service-close",
+        "stderrBytes": [
+          0
+        ],
+        "exitCodes": [
+          0
+        ],
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0
+      },
+      {
+        "round": 3,
+        "status": "pass",
+        "cleanup": "normal-owned-service-close",
+        "stderrBytes": [
+          0
+        ],
+        "exitCodes": [
+          0
+        ],
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0
+      },
+      {
+        "round": 4,
+        "status": "pass",
+        "cleanup": "normal-owned-service-close",
+        "stderrBytes": [
+          0
+        ],
+        "exitCodes": [
+          0
+        ],
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0
+      },
+      {
+        "round": 5,
+        "status": "pass",
+        "cleanup": "normal-owned-service-close",
+        "stderrBytes": [
+          0
+        ],
+        "exitCodes": [
+          0
+        ],
+        "resourceAuditStatus": "pass",
+        "remainingInspectedOwnedProcesses": 0
+      }
+    ],
+    "doesNotProveHistoricalFailureFixed": true
+  }
+}
