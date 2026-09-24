@@ -284,7 +284,16 @@
   "publication": {
     "status": "verified-before-upload",
     "repository": "https://github.com/Lance-QwQ/DSH-SEP",
-    "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260924-startup-r2"
+    "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260924-startup-r2",
+    "assets": [
+      "DSH-SEP-Source-Windows-Alpha-20260924-Startup-r2.zip",
+      "DSH-SEP-Startup-Repair-Windows-Alpha-20260924-Startup-r2.zip"
+    ],
+    "deferredArchives": [
+      "DSH-SEP-Full-Windows-Alpha-20260924-Startup-r2.zip",
+      "DSH-SEP-Only-Windows-Alpha-20260924-Startup-r2.zip"
+    ],
+    "reason": "Measured GitHub upload bandwidth did not support full archive delivery within the bounded attempt. Full and Only archives remain locally validated; this public hotfix delivers the existing-install repair and source."
   },
   "rawEvidence": "Raw local logs, synthetic process identities and private installation paths are not published. Public report stores scope, outcomes and SHA-256 bindings."
 }

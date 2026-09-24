@@ -23,7 +23,13 @@ DSH SEP 是面向 Windows x64 的 DeepSeek Harness 增强组件集合，在 DSH 
 - **更新与恢复**：定时查询官方版本、展示插件兼容状态；通过维护锁、提交记录和数据治理控制切换与恢复。未知状态会停止自动处理。
 - **Office 预览**：自有转换适配器连接随包官方 LibreOffice，保留文档预览接口，无需全局安装 LibreOffice。
 
-## 安装包怎么选
+## 本次公开下载
+
+本次热修复发行提供 **Startup-Repair（约 37 MB）和 Source**。Full／Only 新归档已完成本地验证，受当前上传带宽限制尚未公开上传；请勿将交付报告里的本地归档哈希误读为下载资产已齐备。
+
+已有用户使用[修补指南](release/REPAIR_README.md)。首次安装可先从[9 月 21 日基线发行](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260921-mit)下载 Full，安装到新目录后，在首次启动前应用本次 Startup-Repair；旧 Full／Only 安装的修补路径已有实际测试。
+
+## 基线安装包怎么选
 
 | 安装包 | 用途 |
 |---|---|

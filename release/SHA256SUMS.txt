@@ -1,4 +1,2 @@
-b5f573e94bafcb8104f54477d6caed0f9577dd98c9672b07bd2a4649f739defb  DSH-SEP-Full-Windows-Alpha-20260924-Startup-r2.zip
-662a1f4c82bc10c2dfe5f8f9c7d78d9996e940bac40ad488f384e868f8441346  DSH-SEP-Only-Windows-Alpha-20260924-Startup-r2.zip
 f17fda4f6007d23e7cc3e1cacb7caa30c0efc02b5eff11ad32d3de357dde8e3a  DSH-SEP-Source-Windows-Alpha-20260924-Startup-r2.zip
 183c4672917e3553856ff87baa085caa425550b74e3569a3a5779261a60baa9d  DSH-SEP-Startup-Repair-Windows-Alpha-20260924-Startup-r2.zip
