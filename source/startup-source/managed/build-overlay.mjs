@@ -1,0 +1,25 @@
+import {readFile,writeFile,copyFile,mkdir} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+const dir=fileURLToPath(new URL('.',import.meta.url)),root=resolve(dir,'../../..');
+const source=join(root,'deliverables/DSH-SEP-Windows-Alpha-20260921-MIT/DSH-SEP-Full/payload/store/p0500/src/managed.mjs');
+let text=await readFile(source,'utf8');
+const change=(a,b)=>{if(text.split(a).length!==2)throw Error('PATCH_ANCHOR_CHANGED '+a);text=text.replace(a,b);};
+change("import {prepareSepLockScope,captureSepLockReceipt,recoverSepOwnedLocks} from './sep-lock-recovery.mjs';","import {createNativeSepLifecycle} from './sep-lock-native.mjs';\nimport {prepareSepLockScope,captureSepLockReceipt} from './sep-lock-recovery.mjs';");
+change(' let service,prepared,receipt,lastRecovery=null,lastPrerequisite=null,hostUrl=null,ownedChild=null,carrier=null;',' const nativeOwnership=createNativeSepLifecycle({suiteLockDirectory:host.suiteLockDirectory,storageRoot:host.storageRoot,openControl});\n let service,prepared,lastRecovery=null,lastPrerequisite=null,hostUrl=null,ownedChild=null,carrier=null;');
+change(' const configured={...host,',' const configured={...host,\n  onSpawn:event=>{nativeOwnership.observeChild(event);host.onSpawn?.(event);},');
+change('    prepared=await prepareSepLockScope({suiteLockDirectory,storageRoot,resolveStorageIdentity:storageIdentity});receipt=null;lastPrerequisite=null;return true;','    const admitted=await nativeOwnership.beforeStart();if(admitted.status!==\'pass\'){lastPrerequisite=admitted.reason;return false;}\n    prepared=await prepareSepLockScope({suiteLockDirectory,storageRoot,resolveStorageIdentity:storageIdentity});lastPrerequisite=null;return true;');
+change('   receipt=await captureSepLockReceipt({child,generation,prepared,suiteLockDirectory,storageRoot});','   // Ready must still prove that both SEP data owners belong to this child.\n   // Exit recovery uses the native lease proof, including before-ready exits.\n   await captureSepLockReceipt({child,generation,prepared,suiteLockDirectory,storageRoot});');
+change("   if(!receipt){lastRecovery={status:'blocked',reason:'RECOVERY_HOST_OWNERSHIP_NOT_CAPTURED'};throw Error(lastRecovery.reason);}\n   lastRecovery=await recoverSepOwnedLocks({receipt,exit,openControl});","   lastRecovery=await nativeOwnership.afterExit(exit);");
+const overlay=join(dir,'overlay/p0500/src');await mkdir(overlay,{recursive:true});
+await writeFile(join(overlay,'managed.mjs'),text);await copyFile(join(dir,'sep-lock-native.mjs'),join(overlay,'sep-lock-native.mjs'));
+const serverSource=join(source,'../server.mjs');let server=await readFile(serverSource,'utf8');
+const prior="startHost:()=>{if(!guardian)throw failure(guardianBlocked??'RECOVERY_HOST_UNCONFIGURED');return guardian.start();}";
+if(server.split(prior).length!==2)throw Error('SERVER_PATCH_ANCHOR_CHANGED');
+server=server.replace(prior,"startHost:params=>{if(!guardian)throw failure(guardianBlocked??'RECOVERY_HOST_UNCONFIGURED');return guardian.start(params);}");await writeFile(join(overlay,'server.mjs'),server);
+// Test runtime is an isolated source copy prepared by the core owner tests.
+for(const name of ['managed.mjs','sep-lock-native.mjs','server.mjs'])await copyFile(join(overlay,name),join(dir,'../core/test-runtime/p0500/src',name));
+const files=[source,serverSource,join(overlay,'managed.mjs'),join(overlay,'sep-lock-native.mjs'),join(overlay,'server.mjs')];
+await writeFile(join(dir,'overlay-manifest.json'),JSON.stringify({schema:1,files:await Promise.all(files.map(async path=>({path,sha256:createHash('sha256').update(await readFile(path)).digest('hex')})))},null,2)+'\n');
+console.log(JSON.stringify({status:'pass',overlay}));

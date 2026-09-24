@@ -1,3 +1,4 @@
+import {acquireOwnerFile} from '../owner-lease.mjs';
 import {provenanceShape} from '../source-provenance.js';
 import {storageIdentity} from './storage-location.js';
 import {mkdir,open,readFile,writeFile,rename,unlink,realpath,stat,lstat} from 'node:fs/promises';
@@ -88,22 +89,13 @@ export async function openControl({storageRoot,mode='writer',initialize=false,re
   const lockPath=join(root,'owner.lock'),guardPath=join(root,'recovery.guard'),journalPath=join(root,'journal.jsonl'),legacyHeadPath=join(root,'head.json'),adoptionHeadPath=join(root,'adoption-control','head.json'),documentHeadPath=join(root,'document-control','head.json');
   const authorityHeads=[legacyHeadPath,adoptionHeadPath,documentHeadPath];
   let headPath=legacyHeadPath;
-  let lock,closed=false,tail=Promise.resolve();const token=randomUUID(),context=new AsyncLocalStorage();
-  if(recoverLockToken){
-    if(mode!=='maintenance')fail('P2_LOCKED');let guard;
-    try{guard=await open(guardPath,'wx',0o600);}catch{fail('P2_LOCKED','Recovery is already owned or indeterminate');}
-    try{
-      const prior=JSON.parse(await readFile(lockPath,'utf8'));if(prior.token!==recoverLockToken||! /^[a-f0-9-]{36}$/.test(prior.token)||prior.identity!==identity||!Number.isInteger(prior.pid)||prior.pid<=0)fail('P2_LOCKED','Recovery token or identity does not match');
-      try{process.kill(prior.pid,0);fail('P2_LOCKED','The prior PID exists; identity may have been reused');}catch(e){if(e.code!=='ESRCH')throw e;}
-      const check=JSON.parse(await readFile(lockPath,'utf8'));if(check.token!==recoverLockToken)fail('P2_FENCE_LOST');
-      await rename(lockPath,join(root,`abandoned-${prior.token}.json`));lock=await open(lockPath,'wx',0o600);
-    }finally{await guard.close();await unlink(guardPath);}
-  }else{
-    if(await exists(guardPath))fail('P2_LOCKED');try{lock=await open(lockPath,'wx',0o600);}catch(e){if(e.code==='EEXIST')fail('P2_LOCKED','A live or unknown previous writer owns this actual storage root');throw e;}
-    if(await exists(guardPath)){await lock.close();await unlink(lockPath);fail('P2_LOCKED');}
-  }
-  await lock.writeFile(JSON.stringify({token,identity,pid:process.pid,mode,createdAt:new Date().toISOString()}));await lock.sync();
-  async function assertOwned(){if(closed)fail('P2_FENCE_LOST','Coordinator closed');const owner=JSON.parse(await readFile(lockPath,'utf8'));if(owner.token!==token||owner.identity!==identity)fail('P2_FENCE_LOST');const current=await stat(storageRoot,{bigint:true});if(`${current.dev}:${current.ino}`!==locationKey||await realpath(storageRoot)!==storageRoot||await realpath(root)!==root||await realpath(dirname(headPath))!==dirname(headPath))fail('P2_STORAGE_MISMATCH');if((await Promise.all(authorityHeads.map(exists))).filter(Boolean).length>1)fail('P2_JOURNAL_INVALID');}
+  let matchedPrior=false;
+  let ownership,closed=false,tail=Promise.resolve();const token=randomUUID(),context=new AsyncLocalStorage();
+  // Legacy guard files remain a refusal: they carry no native ownership proof.
+  if(await exists(guardPath)||recoverLockToken&&(mode!=='maintenance'||!await exists(lockPath)))fail('P2_LOCKED');
+  try {ownership=await acquireOwnerFile({path:lockPath,payload:{token,identity,pid:process.pid,mode,createdAt:new Date().toISOString()},validatePrior:prior=>(matchedPrior=typeof prior.token==='string'&&/^[a-f0-9]{8}-[a-f0-9-]{27}$/.test(prior.token)&&Number.isInteger(prior.pid)&&prior.pid>0&&Number.isFinite(Date.parse(prior.createdAt))&&prior.identity===identity&&['writer','maintenance'].includes(prior.mode)&&(!recoverLockToken||prior.token===recoverLockToken))});}catch(cause){throw Object.assign(new Error('P2_LOCKED: '+(cause.code??'OWNER_UNKNOWN'),{cause}),{code:'P2_LOCKED',reason:cause.code});}
+  if(await exists(guardPath)||recoverLockToken&&!matchedPrior){await ownership.release();fail('P2_LOCKED');}
+  async function assertOwned(){if(closed)fail('P2_FENCE_LOST','Coordinator closed');await ownership.assertOwned();const owner=JSON.parse(await readFile(lockPath,'utf8'));if(owner.token!==token||owner.identity!==identity)fail('P2_FENCE_LOST');const current=await stat(storageRoot,{bigint:true});if(`${current.dev}:${current.ino}`!==locationKey||await realpath(storageRoot)!==storageRoot||await realpath(root)!==root||await realpath(dirname(headPath))!==dirname(headPath))fail('P2_STORAGE_MISMATCH');if((await Promise.all(authorityHeads.map(exists))).filter(Boolean).length>1)fail('P2_JOURNAL_INVALID');}
   const documentProtocol=cp=>headPath===documentHeadPath?{...cp,documentDeletionProtocol:1}:cp;
   async function checkpoint(){await assertOwned();try{const [body,head]=await Promise.all([readFile(journalPath,'utf8'),readFile(headPath,'utf8').then(JSON.parse)]);return documentProtocol(verifyJournal(body,head,identity));}catch(e){if(e.code==='P2_FENCE_LOST')throw e;fail('P2_JOURNAL_INVALID',e.message);}}
   function readableCheckpoint(){if(closed)fail('P2_FENCE_LOST');const owner=JSON.parse(readFileSync(lockPath,'utf8'));if(owner.token!==token)fail('P2_FENCE_LOST');let cp;try{if(authorityHeads.filter(existsSync).length>1)fail('P2_JOURNAL_INVALID');cp=documentProtocol(verifyJournal(readFileSync(journalPath,'utf8'),JSON.parse(readFileSync(headPath,'utf8')),identity));}catch(e){fail('P2_JOURNAL_INVALID',e.message);}const local=context.getStore();if((cp.barrier.closed||cp.pending.length)&&(local?.control!==control||local.kind==='access'))fail('P2_RECOVERY_REQUIRED');return cp;}
@@ -292,7 +284,7 @@ export async function openControl({storageRoot,mode='writer',initialize=false,re
     }finally{await admission?.close();}
   }
   const control={root,storageRoot,identity,mode,token,get headPath(){return headPath;},checkpoint,withCheckpoint,withAccess,event,assertOwned,assertReadable,assertDocumentDeletion,deletion,completeDeletion,documentDeletion,recoverDocumentDeletions,documentDeletions:()=>structuredClone(readableCheckpoint().deletions.filter(marker=>marker.documentPath!==undefined)),adoptionWrite:(meta,fn)=>adoptionOperation(meta,fn),reconcileAdoption:meta=>adoptionOperation(meta,null,true),commitAdoption,acceptAdoptionBaseline,business:(meta,fn)=>operation('business',meta,fn),maintenance:(meta,fn)=>operation('maintenance',meta,fn),setBarrier:payload=>event('barrier',payload),
-    async close(){if(context.getStore()?.control===control&&context.getStore().kind==='checkpoint')fail('P2_CHECKPOINT_READ_ONLY');if(closed)return;await tail;let ours=false;try{ours=JSON.parse(await readFile(lockPath,'utf8')).token===token;}catch{}closed=true;await lock.close();if(ours)await unlink(lockPath);}
+    async close(){if(context.getStore()?.control===control&&context.getStore().kind==='checkpoint')fail('P2_CHECKPOINT_READ_ONLY');if(closed)return;await tail;closed=true;await ownership.release();}
   };
   try{
     const journalExists=await exists(journalPath),legacyHeadExists=await exists(legacyHeadPath),adoptionHeadExists=await exists(adoptionHeadPath),documentHeadExists=await exists(documentHeadPath);

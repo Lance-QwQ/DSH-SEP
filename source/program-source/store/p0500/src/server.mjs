@@ -1,3 +1,4 @@
+import {safeHostCode} from "./startup-diagnostic.mjs";
 import {createServer} from 'node:http';
 import {readFile,open,rename,realpath} from 'node:fs/promises';
 import {join,relative,isAbsolute,resolve,dirname} from 'node:path';
@@ -12,8 +13,8 @@ const inside=(root,path)=>{const r=relative(root,path);return r===''||r!=='..'&&
 const key=path=>process.platform==='win32'?resolve(path).toLowerCase():resolve(path);
 export async function openService({controlRoot,host,port=0,limits,statusDetails,desktop}={}) {
   if(statusDetails!==undefined&&typeof statusDetails!=='function')throw failure('RECOVERY_STATUS_DETAILS_INVALID');
-  let controller,blocked;
-  try{controller=await openRecovery({controlRoot,limits});}catch(error){if(!['OWNER_LOCKED','JOURNAL_CORRUPT','JOURNAL_LIMIT'].includes(error.code))throw error;blocked=error.code;}
+  let controller,blocked,ownerReason;
+  try{controller=await openRecovery({controlRoot,limits});}catch(error){if(!['OWNER_LOCKED','JOURNAL_CORRUPT','JOURNAL_LIMIT'].includes(error.code))throw error;blocked=error.code;ownerReason=error.reason;}
   const token=randomBytes(32).toString('hex'),hostToken=randomBytes(32).toString('hex'),desktopToken=desktop?randomBytes(32).toString('hex'):null;
   const desktopProxy=desktop?createDesktopProxy(desktop):null;
   let guardian,guardianBlocked,closed=false,closing=false,finalizing=false,closePromise;
@@ -22,7 +23,7 @@ export async function openService({controlRoot,host,port=0,limits,statusDetails,
   const script=await readFile(new URL('../ui/app.js',import.meta.url));
   const status=async()=>{
     const details=statusDetails?{managedRecovery:await statusDetails()}:{};
-    if(!controller)return {...details,recoveryState:{state:'blocked',reason:blocked},projects:[],operations:[],guardian:{state:'blocked'}};
+    if(!controller)return {...details,recoveryState:{state:'blocked',reason:blocked,ownerReason},projects:[],operations:[],guardian:{state:'blocked'}};
     for(const p of controller.status().projects)await controller.inspectProject(p.id);
     return {...controller.status(),...details,recoveryState:{state:closing?'closing':'ready'},guardian:guardian?.status()??(guardianBlocked?{state:'blocked',phase:'blocked',reason:guardianBlocked}:{state:'unconfigured'})};
   };
@@ -71,7 +72,7 @@ export async function openService({controlRoot,host,port=0,limits,statusDetails,
     listBackupArtifacts:()=>backups.listBackupArtifacts({controlRoot}),
     planDeleteBackupArtifact:({artifactId})=>backups.planDeleteBackupArtifact({controlRoot,artifactId}),
     deleteBackupArtifact:({planId,confirmationHash})=>backups.commitDeleteBackupArtifact({controlRoot,planId,confirmationHash}),
-    startHost:()=>{if(!guardian)throw failure(guardianBlocked??'RECOVERY_HOST_UNCONFIGURED');return guardian.start();},
+    startHost:params=>{if(!guardian)throw failure(guardianBlocked??'RECOVERY_HOST_UNCONFIGURED');return guardian.start(params);},
     stopHost:()=>{if(!guardian)throw failure(guardianBlocked??'RECOVERY_HOST_UNCONFIGURED');return guardian.stop();},
   };
   let endpoint;
@@ -106,11 +107,11 @@ export async function openService({controlRoot,host,port=0,limits,statusDetails,
       const responseSettled=new Promise(done=>{if(res.destroyed||res.writableFinished)done();else{res.once('finish',done);res.once('close',done);}});
       const work=Promise.resolve().then(async()=>{
         try{send(200,{ok:true,result:await methods[request.method](request.params)});}
-        catch(error){send(409,{ok:false,error:{code:typeof error.code==='string'?error.code:'RECOVERY_OPERATION_FAILED'}});}
+        catch(error){send(409,{ok:false,error:{code:typeof error.code==='string'?error.code:'RECOVERY_OPERATION_FAILED',...(safeHostCode(error.hostCode)?{hostCode:error.hostCode}:{})}});}
         finally{await responseSettled;}
       });
       inFlight.add(work);try{await work;}finally{inFlight.delete(work);}
-    }catch(error){send(409,{ok:false,error:{code:typeof error.code==='string'?error.code:'RECOVERY_OPERATION_FAILED'}});}
+    }catch(error){send(409,{ok:false,error:{code:typeof error.code==='string'?error.code:'RECOVERY_OPERATION_FAILED',...(safeHostCode(error.hostCode)?{hostCode:error.hostCode}:{})}});}
   });
   server.requestTimeout=10000;server.headersTimeout=10000;server.maxConnections=32;
   try{

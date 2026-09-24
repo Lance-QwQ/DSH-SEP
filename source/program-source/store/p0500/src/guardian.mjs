@@ -1,4 +1,6 @@
+import {safeHostCode,startupFailure} from "./startup-diagnostic.mjs";
 import fs from 'node:fs/promises';
+import {acquireOwnerFile} from './owner-lease.mjs';
 import path from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
@@ -73,7 +75,7 @@ export async function openGuardian(options) {
   const readinessTimeoutMs = checkedInteger(options.readinessTimeoutMs, 30000, 10, 120000);
   const prerequisiteTimeoutMs = checkedInteger(options.prerequisiteTimeoutMs, 10000, 10, 60000);
   const afterExitTimeoutMs = checkedInteger(options.afterExitTimeoutMs, 10000, 10, 60000);
-  for (const key of ['beforeStart', 'readiness', 'gracefulStop', 'afterExit', 'onEvent']) {
+  for (const key of ['beforeStart', 'readiness', 'gracefulStop', 'afterExit', 'onEvent', 'onSpawn']) {
     if (options[key] !== undefined && typeof options[key] !== 'function') throw fault('GUARDIAN_OPTIONS_INVALID');
   }
   // No prerequisite callback means no authority to launch a host.
@@ -84,12 +86,38 @@ export async function openGuardian(options) {
   const ownerPath = path.join(guardianRoot, 'owner.json');
   const journalPath = path.join(guardianRoot, 'journal.jsonl');
   const token = randomUUID();
-  const ownerBytes = Buffer.from(JSON.stringify({ schema: 1, token, pid: process.pid, createdAt: new Date().toISOString() }) + '\n');
-  let owner, journal;
-  try { owner = await fs.open(ownerPath, 'wx', 0o600); }
-  catch (error) { if (error.code === 'EEXIST') throw fault('GUARDIAN_OWNER_UNPROVEN'); throw error; }
+
+  // A stale owner with missing/corrupt history must not reset generations or
+  // the restart budget. The complete durable chain is checked before archive.
+  async function priorOwnerJournal() {
+    const before=await regular(journalPath);
+    if(before.size>MAX_JOURNAL_BYTES)throw fault('GUARDIAN_JOURNAL_INVALID');
+    const bytes=await fs.readFile(journalPath),after=await regular(journalPath);
+    if(!sameFile(before,after)||before.size!==after.size||before.size!==bytes.length)throw fault('GUARDIAN_JOURNAL_INVALID');
+    if(!bytes.length)return;
+    if(bytes.at(-1)!==10)throw fault('GUARDIAN_JOURNAL_INVALID');
+    const text=bytes.toString('utf8');if(!Buffer.from(text).equals(bytes))throw fault('GUARDIAN_JOURNAL_INVALID');
+    let sequence=0,previousHash=null;
+    try {
+      for(const line of text.trimEnd().split('\n')) {
+        const record=JSON.parse(line),{digest,...payload}=record;
+        if(record.sequence!==sequence+1||record.previousHash!==previousHash||hash(JSON.stringify(payload))!==digest||!validState(record.state))throw fault('GUARDIAN_JOURNAL_INVALID');
+        sequence=record.sequence;previousHash=digest;
+      }
+    }catch{throw fault('GUARDIAN_JOURNAL_INVALID');}
+  }
+  async function prepareOwnerJournal(phase) {
+    if(phase!=='intent-durable')return;
+    let initial;
+    try{initial=await fs.open(journalPath,'wx',0o600);await initial.sync();}
+    catch(error){if(error.code!=='EEXIST')throw error;await regular(journalPath);}
+    finally{await initial?.close();}
+  }
+  let ownership,journal;
+  try {ownership=await acquireOwnerFile({path:ownerPath,payload:{schema:1,token,pid:process.pid,createdAt:new Date().toISOString()},validatePrior:async prior=>{if(!(prior.schema===1&&typeof prior.token==='string'&&/^[a-f0-9]{8}-[a-f0-9-]{27}$/.test(prior.token)&&Number.isInteger(prior.pid)&&prior.pid>0&&Number.isFinite(Date.parse(prior.createdAt))))return false;await priorOwnerJournal();return true;},onEvent:prepareOwnerJournal});}catch(cause){throw Object.assign(fault('GUARDIAN_OWNER_UNPROVEN'),{cause,reason:cause.code});}
+  const ownerBytes=Buffer.from(ownership.bytes);
   try {
-    await owner.writeFile(ownerBytes); await owner.sync();
+    await ownership.assertOwned();
     try { await regular(journalPath); }
     catch (error) { if (error.code !== 'ENOENT') throw error; }
     journal = await fs.open(journalPath, 'a+', 0o600);
@@ -122,6 +150,7 @@ export async function openGuardian(options) {
     }
     async function persist(change, event) {
       if (fatalError) throw fatalError;
+      await ownership.assertOwned();
       if (!(await fs.readFile(ownerPath)).equals(ownerBytes)) throw fault('GUARDIAN_OWNER_CHANGED');
       const onDisk = await regular(journalPath);
       if (!sameFile(await journal.stat(), onDisk)) throw fault('GUARDIAN_STORAGE_CHANGED');
@@ -140,7 +169,7 @@ export async function openGuardian(options) {
       state = { ...state, phase: 'faulted', reason: fatalError.code };
       if (current) {
         current.forced = true;
-        current.ready.reject(fault('GUARDIAN_NOT_READY'));
+        current.ready.reject(startupFailure(current));
         current.abort.abort();
         // This is forced termination of an owned handle, never evidence of a natural drain.
         if (current.child.exitCode === null && current.child.signalCode === null) current.child.kill();
@@ -162,9 +191,9 @@ export async function openGuardian(options) {
     async function afterClose(run, code, signal) {
       if (current !== run) { emit('stale-exit-ignored', { callbackGeneration: run.generation }); return; }
       clearTimeout(run.readyTimer); clearTimeout(run.stopTimer);
-      run.abort.abort(); run.ready.reject(fault('GUARDIAN_NOT_READY'));
+      run.abort.abort(); run.ready.reject(startupFailure(run));
       current = null;
-      const lastExit = { generation: run.generation, code, signal, forced: run.forced, ready: run.wasReady, errorCode: run.errorCode, at: new Date().toISOString() };
+      const lastExit = { generation: run.generation, code, signal, forced: run.forced, ready: run.wasReady, errorCode: run.errorCode, ...(safeHostCode(run.hostCode)?{hostCode:run.hostCode}:{}), at: new Date().toISOString() };
       if (fatalError) { run.done.resolve(status()); return; }
       const manual = state.intent === 'manual-stop';
       // A clean application exit is respected as user/application stop; it is never auto-restarted.
@@ -214,7 +243,7 @@ export async function openGuardian(options) {
           : ['ignore', 'pipe', 'pipe', 'ipc'],
       });
       const run = current = { child, generation: state.generation, ready: deferred(), observedReady: deferred(), done: deferred(), abort: new AbortController(),
-        stdoutBytes: 0, stderrBytes: 0, forced: false, wasReady: false, errorCode: null, readyTimer: null, stopTimer: null };
+        stdoutBytes: 0, stderrBytes: 0, forced: false, wasReady: false, errorCode: null, hostCode: null, readyTimer: null, stopTimer: null };
       run.abort.signal.addEventListener('abort', () => run.observedReady.reject(fault('GUARDIAN_NOT_READY')), { once: true });
       child.stdout.on('data', chunk => { run.stdoutBytes += chunk.length; });
       child.stderr.on('data', chunk => { run.stderrBytes += chunk.length; });
@@ -226,6 +255,13 @@ export async function openGuardian(options) {
         catch (error) { run.done.reject(error); throw error; }
       }));
       child.on('message', message => {
+        if(message?.type==='fatal') {
+          // Only this owned child's startup generation can supply diagnostics.
+          // The original message is never retained or forwarded.
+          const code=safeHostCode(message.code);
+          if(code&&current===run&&!run.abort.signal.aborted&&state.phase==='starting'&&!run.wasReady&&!run.hostCode)run.hostCode=code;
+          return;
+        }
         const validHttp = (() => {
           if (transport !== 'desktop-http' || message?.type !== 'ready' || message.transport !== 'desktop-http'
             || message.pid !== child.pid || message.nonce !== nonce || message.generation !== run.generation
@@ -262,16 +298,37 @@ export async function openGuardian(options) {
       run.ready.promise.then(() => { run.wasReady = true; }, () => {});
       run.readyTimer = setTimeout(() => {
         if (current !== run || state.phase !== 'starting') return;
-        run.errorCode = 'READINESS_TIMEOUT'; run.ready.reject(fault('GUARDIAN_NOT_READY'));
+        run.errorCode = 'READINESS_TIMEOUT'; run.ready.reject(startupFailure(run));
         run.abort.abort(); forceOwned(run);
       }, readinessTimeoutMs);
+      // Observe the actual owned handle before asynchronous spawn persistence.
+      // This also covers a child that exits before sending any ready message.
+      try {
+        const observed = options.onSpawn?.({ child, generation: run.generation });
+        if (observed && typeof observed.then === 'function') {
+          Promise.resolve(observed).catch(() => {});
+          throw fault('GUARDIAN_SPAWN_OBSERVER_ASYNC');
+        }
+      } catch (error) {
+        run.errorCode = error.code ?? 'GUARDIAN_SPAWN_OBSERVER_FAILED';
+        run.ready.reject(startupFailure(run)); run.abort.abort(); forceOwned(run);
+      }
       return run;
     }
-    async function start() {
+    async function start(options = {}) {
+      if (!options || typeof options !== 'object' || Array.isArray(options)
+        || Object.keys(options).some(key => key !== 'manual')
+        || (options.manual !== undefined && typeof options.manual !== 'boolean')) throw fault('GUARDIAN_OPTIONS_INVALID');
+      const manual = options.manual === true;
       stopRequested = false;
       const requestedIntervention = intervention;
       try {
-        const run = await enqueue(() => launch(state.intent === 'active' && state.generation > 0, requestedIntervention));
+        const run = await enqueue(async () => {
+          if (manual && !current && !closed && !closing && !stopRequested && requestedIntervention === intervention) {
+            await persist({ restarts: [], intent: 'manual-stop', reason: null }, 'manual-start-requested');
+          }
+          return launch(state.intent === 'active' && state.generation > 0, requestedIntervention);
+        });
         return run ? await run.ready.promise : status();
       } catch (error) {
         if (error.code !== 'GUARDIAN_NOT_READY' && error.code !== 'GUARDIAN_CLOSED') failClosed(error);
@@ -286,7 +343,7 @@ export async function openGuardian(options) {
         await persist({ intent: 'manual-stop', phase: current ? 'stopping' : 'stopped', reason: null }, 'manual-stop-recorded');
         if (!current) return null;
         const held = current;
-        held.ready.reject(fault('GUARDIAN_NOT_READY')); held.abort.abort(); clearTimeout(held.readyTimer);
+        held.ready.reject(startupFailure(held)); held.abort.abort(); clearTimeout(held.readyTimer);
         held.stopTimer = setTimeout(() => forceOwned(held), shutdownTimeoutMs);
         Promise.resolve().then(() => options.gracefulStop ? options.gracefulStop({ child: held.child, generation: held.generation })
           : new Promise((resolve, reject) => {
@@ -309,18 +366,14 @@ export async function openGuardian(options) {
         else if (current) await current.done.promise;
         await tail;
         closed = true;
-        await journal.close(); journal = null;
-        await owner.close(); owner = null;
-        if (!fatalError && (await fs.readFile(ownerPath)).equals(ownerBytes)) await fs.unlink(ownerPath);
+        try {await journal.close();} finally {journal=null;await ownership.release({remove:!fatalError});}
       })();
       return closing;
     }
     if (!sequence) await persist({}, 'initialized');
     return { start, stop, status, close };
   } catch (error) {
-    await journal?.close().catch(() => {}); await owner?.close().catch(() => {});
-    // This open attempt owns only the exact new token. Never remove a pre-existing or replaced owner.
-    if ((await fs.readFile(ownerPath).catch(() => null))?.equals(ownerBytes)) await fs.unlink(ownerPath);
+    await journal?.close().catch(() => {}); await ownership.release().catch(() => {});
     throw error;
   }
 }

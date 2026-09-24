@@ -1,24 +1,49 @@
 {
   "schema": 1,
-  "distribution": "20260921-mit-alpha",
-  "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
-  "scope": "Graph-matching editable release files for SEP/adapted host modules, full authored Office adapter including C# bridge, supplemental tests and fixed official LibreOffice source-access records.",
+  "distribution": "windows-alpha-20260924-startup-r2",
+  "graphSha256": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+  "sourceFilesManifestSha256": "14fbec1c8c821a4eedaf10e46cacc6a0395c52e39ff2beae748c9d532ea40551",
+  "baseGraphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
+  "repository": "https://github.com/Lance-QwQ/DSH-SEP",
+  "preferredHostSource": "startup-source/preferred-host/apps/desktop-host/src/index.ts",
+  "preferredRecoveryServerSource": "program-source/store/p0500/src/server.mjs",
+  "manualRpcSource": {
+    "generator": "startup-source/diagnostics/build-overlay.mjs",
+    "test": "startup-source/managed/rpc-manual.test.mjs"
+  },
+  "bootstrapSource": "startup-source/bootstrap",
+  "ownershipSource": "startup-source/ownership/owner-file.mjs",
+  "distributionSource": "startup-source/distribution",
+  "testSource": [
+    "startup-source/core.test.mjs",
+    "startup-source/bootstrap.test.mjs",
+    "startup-source/real-installed.test.mjs",
+    "startup-source/installed-worker.mjs",
+    "startup-source/real-electron.test.mjs",
+    "startup-source/real-coexist.test.mjs",
+    "startup-source/ownership",
+    "startup-source/managed",
+    "startup-source/host-lifecycle",
+    "startup-source/distribution"
+  ],
   "upstreamDsh": {
     "version": "0.1.6-alpha.2",
     "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887"
   },
-  "office": {
-    "adapter": "@dsh-sep/office-converter@0.1.0",
-    "runtime": "LibreOffice 26.8.0.3",
-    "sourceAccess": "program-source/store/p0439/SOURCE-ACCESS.md",
-    "obsoleteKitIncluded": false
-  },
-  "historicalSourceSnapshotSha256": "551b61946a4572f91dc3c294e5a4fc99c2b897231f4773d7a42938734244cc88",
-  "sourceFilesManifestSha256": "ed91e199c25db5a35844111d535a75f66e3c5537bf332f08cb4a09b9ca16053f",
+  "licenseScope": "MIT for mapped original SEP contributions; original DSH and third-party terms retained.",
+  "privateDataIncluded": false,
+  "privateGitHistoryIncluded": false,
   "reproducibleBuildClaim": false,
   "allTransitiveBinarySourcesIncluded": false,
-  "privateGitHistoryIncluded": false,
-  "privateDataIncluded": false,
-  "licenseScope": "MIT for mapped original SEP contributions and current authored release tooling. Existing MIT/third-party notices remain unchanged. Historical old build generators are preserved as non-executable .py.txt references.",
-  "repository": "https://github.com/Lance-QwQ/DSH-SEP"
+  "evidence": {
+    "schema": 1,
+    "originalReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+    "publicReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+    "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "redaction": "Public report values only; absolute local paths and credential fields redacted. Original report retained locally; raw logs and synthetic process files not bundled."
+  },
+  "sourceAmendment": {
+    "priorSourceManifestSha256": "e6e97267524dbf1cf7a197782ccb6211e9708b8b7d3f1ce329ef1ebce11d366d",
+    "scope": "Public generator completion and final synthetic installation evidence source; program graph unchanged."
+  }
 }

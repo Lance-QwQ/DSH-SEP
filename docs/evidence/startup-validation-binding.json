@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "originalReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+  "publicReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+  "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+  "redaction": "Public report values only; absolute local paths and credential fields redacted. Original report retained locally; raw logs and synthetic process files not bundled."
+}

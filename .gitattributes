@@ -1,0 +1,4 @@
+# Release snapshots carry SHA-256 manifests; preserve their original bytes.
+source/** -text
+docs/** -text
+release/** -text

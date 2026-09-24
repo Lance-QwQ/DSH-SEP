@@ -1,3 +1,5 @@
+import {fatalPayload} from "./startup-diagnostic.mjs";
+import {createHostLifecycle} from "./sep-host-lifecycle.mjs";
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
   for (var name3 in all)
@@ -271,10 +273,12 @@ async function main() {
   if (managed && (!/^[a-f0-9]{64}$/u.test(nonce ?? "") || !Number.isSafeInteger(generation) || generation < 1)) {
     throw new Error("SEP_HOST_IDENTITY_INVALID");
   }
+  const lifetime = createHostLifecycle({managed});
+  try {
   const version = JSON.parse(await readFile2(installAnchor, "utf8")).version;
   if (managed && version !== "0.1.6-alpha.2") throw new Error("SEP_HOST_VERSION_INVALID");
   const profile = loadProfileDirectory("dsh", projectDir, installAnchor);
-  const application = runProfile({
+  const application = lifetime.startApplication(() => runProfile({
     environment: loadLayeredEnv("dsh"),
     profile: "desktop",
     resolutionMode: process.argv[5] === "runtime" ? "runtime" : "link",
@@ -292,35 +296,15 @@ async function main() {
         }
       }
     }
-  });
-  let stopping;
+  }));
   const control = {};
-  const send = (message) => new Promise((resolve, reject) => {
-    if (!process.connected || process.send === void 0) {
-      resolve();
-      return;
-    }
-    process.send(message, (error) => {
-      if (error === null) resolve();
-      else reject(error);
-    });
-  });
-  const stop = () => stopping ??= (async () => {
-    const running = await application.catch(() => void 0);
-    await running?.shutdown.shutdown(0);
-    await send({ type: "shutdown-complete" });
-    if (process.connected) process.disconnect();
-  })();
+  const send = lifetime.send;
   process.on("message", (message) => {
     if (typeof message !== "object" || message === null || !("type" in message)) return;
-    if (message.type === "shutdown") {
-      void stop();
-      return;
-    }
     if (message.type !== "update-tasks" || !("requestId" in message) || !Number.isSafeInteger(message.requestId) || !("action" in message) || !["inspect", "lock", "unlock"].includes(String(message.action))) return;
     void (async () => {
       try {
-        if (stopping !== void 0 || control.updateTasks === void 0) throw new Error("desktop update: Host is unavailable");
+        if (lifetime.stopping || control.updateTasks === void 0) throw new Error("desktop update: Host is unavailable");
         const active = await control.updateTasks(message.action);
         await send({ type: "update-tasks", requestId: message.requestId, active });
       } catch (error) {
@@ -335,10 +319,8 @@ async function main() {
       console.error(error);
     });
   });
-  process.once("disconnect", () => {
-    void stop();
-  });
   const { ctx } = await application;
+  lifetime.assertActive();
   if (managed) ctx.provide("sepDesktopTransport", { kind: "sep-owned-http", generation });
   if (managed) installSepPluginPolicy(ctx);
   control.updateTasks = installDesktopUpdateTaskControl(ctx);
@@ -346,25 +328,28 @@ async function main() {
     source: process.argv[4] ?? join3(runtimeDir, "..", "runtime", "primary-runtime"),
     root: join3(resolveDshHome(), "dsh-runtimes", "dsh-primary-runtime")
   });
+  lifetime.assertActive();
   const url = ctx.connection.authenticatedUrl(`http://127.0.0.1:${String(ctx.webServer.port)}`);
-  if (process.connected) process.send?.({
+  await lifetime.publishReady({
     type: "ready",
     url,
     injections: ctx.webServer.collectIndexInjections(),
     ...managed ? { transport: "desktop-http", nonce, generation, pid: process.pid, dshVersion: version } : {}
-  }, (error) => {
-    if (error !== null) console.error(error);
   });
+  } catch (error) {
+    await lifetime.startupFailed(error);
+    if (error?.code !== "SEP_HOST_STOPPING") throw error;
+  }
 }
 if (import.meta.main) {
   main().catch((error) => {
-    const message = error instanceof Error ? error.message : String(error);
-    if (process.connected) process.send?.({ type: "fatal", message }, (error2) => {
+    const diagnostic = fatalPayload(error);
+    if (process.connected) process.send?.(diagnostic, (error2) => {
       if (error2 !== null) console.error(error2);
     });
-    console.error(error);
+    console.error(diagnostic.code);
     process.exitCode = 1;
     if (process.connected) process.disconnect();
   });
 }
-//# sourceMappingURL=index.js.map
+// Corresponding reviewed TypeScript is bound in overlay-manifest.json.

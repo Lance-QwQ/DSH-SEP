@@ -1,3 +1,5 @@
+本轮启动修订 `windows-alpha-20260924-startup-r2`，程序图 `0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3`。此页原有 2026-09-21 版本号、验收数量与发布状态保留为历史；本轮结果请读 [启动修订](STARTUP_FIX.md)。更新状态没有降低固定验收标准。
+
 # 使用手册
 
 <!-- SEP_RELEASE_STATUS_START -->

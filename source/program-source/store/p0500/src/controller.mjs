@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {acquireOwnerFile} from './owner-lease.mjs';
 import path from 'node:path';
 import os from 'node:os';
 import { createHash, randomUUID } from 'node:crypto';
@@ -49,9 +50,36 @@ export async function openRecovery({controlRoot,limits:requested={}}={}) {
   const controlIdentity=await directoryIdentity(controlRoot);
   const lockPath=path.join(controlRoot,'owner.lock.json');
   const journalPath=path.join(controlRoot,'journal.jsonl');
-  const lockBytes=JSON.stringify({version:1,token:randomUUID(),pid:process.pid,createdAt:new Date().toISOString(),controlIdentity})+'\n';
-  let lock;
-  try { lock=await fs.open(lockPath,'wx',0o600); } catch(error) { if(error.code==='EEXIST')fail('OWNER_LOCKED'); throw error; }
+
+  // Prior owner metadata is never permission to mint an empty replacement
+  // journal. Validate the durable chain before retiring that prior owner.
+  async function priorOwnerJournal() {
+    const before=await secureFile(journalPath);
+    if(before.size>limits.maxBytes)fail('JOURNAL_LIMIT');
+    const raw=await fs.readFile(journalPath),after=await secureFile(journalPath);
+    if(before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||raw.length!==before.size)fail('JOURNAL_CORRUPT');
+    if(raw.length&&raw.at(-1)!==10)fail('JOURNAL_CORRUPT');
+    const text=raw.toString('utf8');if(!Buffer.from(text).equals(raw))fail('JOURNAL_CORRUPT');
+    let priorSeq=0,priorHash='0'.repeat(64);
+    for(const line of text.split('\n').filter(Boolean)) {
+      if(Buffer.byteLength(line)+1>limits.maxRecordBytes||priorSeq>=limits.maxRecords)fail('JOURNAL_LIMIT');
+      let record;try{record=JSON.parse(line);}catch{fail('JOURNAL_CORRUPT');}
+      const {hash,...body}=record;
+      if(body.version!==1||body.seq!==priorSeq+1||body.previous!==priorHash||hash!==sha(JSON.stringify(body)))fail('JOURNAL_CORRUPT');
+      priorSeq++;priorHash=hash;
+    }
+  }
+  async function prepareOwnerJournal(phase) {
+    if(phase!=='intent-durable')return;
+    // This callback runs with the native lease held, before owner publication.
+    let initial;
+    try{initial=await fs.open(journalPath,'wx',0o600);await initial.sync();}
+    catch(error){if(error.code!=='EEXIST')throw error;await secureFile(journalPath);}
+    finally{await initial?.close();}
+  }
+  let ownership;
+  try { ownership=await acquireOwnerFile({path:lockPath,payload:{version:1,token:randomUUID(),pid:process.pid,createdAt:new Date().toISOString(),controlIdentity},validatePrior:async prior=>{if(!(prior.version===1&&typeof prior.token==='string'&&/^[a-f0-9]{8}-[a-f0-9-]{27}$/.test(prior.token)&&Number.isInteger(prior.pid)&&prior.pid>0&&Number.isFinite(Date.parse(prior.createdAt))&&prior.controlIdentity&&sameIdentity(prior.controlIdentity,controlIdentity)))return false;await priorOwnerJournal();return true;},onEvent:prepareOwnerJournal}); } catch(cause) {throw Object.assign(new Error('OWNER_LOCKED: '+(cause.code??'OWNER_UNKNOWN'),{cause}),{code:'OWNER_LOCKED',reason:cause.code});}
+  const lockBytes=ownership.bytes;
   let lockIdentity, journal, journalIdentity, closed=false, poisoned=false;
   let seq=0, bytes=0, previous='0'.repeat(64), queue=Promise.resolve();
   const projects=new Map(), operations=new Map(), plans=new Map(), continuations=new Map(), audit=[];
@@ -97,6 +125,7 @@ export async function openRecovery({controlRoot,limits:requested={}}={}) {
     }
   }
   async function own() {
+    await ownership.assertOwned();
     if(!sameIdentity(await directoryIdentity(controlRoot),controlIdentity))fail('CONTROL_CHANGED');
     const actual=await secureFile(lockPath);
     if(actual.dev!==lockIdentity.dev || actual.ino!==lockIdentity.ino || await fs.readFile(lockPath,'utf8')!==lockBytes)fail('OWNER_CHANGED');
@@ -104,8 +133,7 @@ export async function openRecovery({controlRoot,limits:requested={}}={}) {
   async function release() {
     if(closed)return;
     closed=true;
-    try { await own(); await lock.close(); lock=null; await fs.unlink(lockPath); }
-    finally { if(lock)await lock.close().catch(()=>{}); if(journal)await journal.close().catch(()=>{}); }
+    try { if(journal)await journal.close(); } finally { journal=null;await ownership.release({remove:!poisoned}); }
   }
   async function append(type,payload,beforeCommit) {
     if(closed)fail('CLOSED'); if(poisoned)fail('WRITER_POISONED');
@@ -166,7 +194,7 @@ export async function openRecovery({controlRoot,limits:requested={}}={}) {
     return clone(receipt);
   }
   try {
-    await lock.writeFile(lockBytes);await lock.sync();lockIdentity=await secureFile(lockPath);
+    lockIdentity=await secureFile(lockPath);
     try {await secureFile(journalPath);}catch(error) {if(error.code!=='ENOENT')throw error;const initial=await fs.open(journalPath,'wx',0o600);await initial.sync();await initial.close();}
     journalIdentity=await secureFile(journalPath);
     if(journalIdentity.size>limits.maxBytes)fail('JOURNAL_LIMIT');

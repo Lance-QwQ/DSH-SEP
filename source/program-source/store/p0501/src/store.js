@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { mkdir, open, unlink } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
+import {acquireOwnerFile} from './owner-lease.mjs';
 import { isAbsolute, join } from 'node:path';
 import { fail } from './errors.js';
 const locator = z.object({ lineStart:z.number().int().positive().optional(), lineEnd:z.number().int().positive().optional(), page:z.number().int().positive().optional(), paragraph:z.number().int().positive().optional() }).strict();
@@ -20,14 +21,14 @@ export async function openStore(facility, lockDirectory) {
   if (!lockDirectory || !isAbsolute(lockDirectory)) fail('CONFIG','An absolute lockDirectory is required');
   await mkdir(lockDirectory,{recursive:true});
   const lockPath = join(lockDirectory,'dsh-system-enhancement-package-v1.lock');
-  let lock;
-  try { lock = await open(lockPath,'wx'); } catch (e) { if (e.code === 'EEXIST') fail('DATA_LOCKED','Another instance or an unclean exit owns the data lock'); throw e; }
+  let ownership;
+  const acquire=()=>acquireOwnerFile({path:lockPath,payload:{pid:process.pid,createdAt:new Date().toISOString()},validatePrior:prior=>Number.isInteger(prior.pid)&&prior.pid>0&&Number.isFinite(Date.parse(prior.createdAt))});
+  try {ownership=facility.withAccess?await facility.withAccess(acquire):await acquire();}catch(cause){throw Object.assign(new Error('DATA_LOCKED: '+(cause.code??'OWNER_UNKNOWN'),{cause}),{code:'DATA_LOCKED',reason:cause.code});}
   let domain;
   try {
-    await lock.writeFile(JSON.stringify({pid:process.pid,createdAt:new Date().toISOString()}));
-    await lock.sync();
+    await ownership.assertOwned();
     domain = await facility.open(spec);
-  } catch(e) { await lock.close(); await unlink(lockPath); throw e; }
+  } catch(e) { await ownership.release().catch(()=>{}); throw e; }
   const table = domain.table('projects');
   const cache = domain.table('media');
   let tail = Promise.resolve(); let closed = false;
@@ -53,6 +54,6 @@ export async function openStore(facility, lockDirectory) {
       });
       tail = run.catch(()=>{}); return run;
     },
-    async close() { if(closed)return; closed=true; await tail; await domain.close(); await lock.close(); await unlink(lockPath); },
+    async close() { if(closed)return; closed=true; await tail; try {await domain.close();} finally {await ownership.release();} },
   };
 }

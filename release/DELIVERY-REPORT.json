@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "distribution": "windows-alpha-20260924-startup-r2",
+  "releaseLevel": "Windows x64 Alpha test",
+  "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+  "upstreamDsh": "0.1.6-alpha.2",
+  "license": "MIT for mapped SEP originals; third-party terms retained.",
+  "validation": {
+    "schema": 1,
+    "status": "pass",
+    "revision": "windows-alpha-20260924-startup-r2",
+    "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "environment": {
+      "platform": "win32",
+      "arch": "x64",
+      "node": "v24.19.0",
+      "osRelease": "10.0.26200"
+    },
+    "summary": {
+      "tests": 116,
+      "passed": 116,
+      "failed": 0,
+      "blocked": 0,
+      "notRun": 1
+    },
+    "summaryScope": "Counts cover the listed component test groups only. Real installation sequences are separate cases and rounds, not added as individual assertions.",
+    "groups": [
+      {
+        "id": "ownership/final-tests.log",
+        "status": "pass",
+        "tests": 22,
+        "passed": 22,
+        "failed": 0,
+        "logSha256": "818e737289af65775a100fb53fa006a2ce17c1897bba0458e259056dac4a890b",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "ownership/journal-green.log",
+        "status": "pass",
+        "tests": 6,
+        "passed": 6,
+        "failed": 0,
+        "logSha256": "162a13c4a030780ac22b8120962ca576e7bf238681954c04b858c24c09cf85bf",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "host-lifecycle/final-tests.log",
+        "status": "pass",
+        "tests": 24,
+        "passed": 24,
+        "failed": 0,
+        "logSha256": "04e090688ab3a63f45d3c5795d33f2f344ad6100bd2771a98ba48dd2ad10d5d9",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "managed/final-tests-v2.log",
+        "status": "pass",
+        "tests": 12,
+        "passed": 12,
+        "failed": 0,
+        "logSha256": "89a7c14007f061e7c65480bf04b2bb7b535bcab03dfc006e588e1049d127a848",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "managed/green-rpc-manual.log",
+        "status": "pass",
+        "tests": 2,
+        "passed": 2,
+        "failed": 0,
+        "logSha256": "49749ee5d7dc4d656e51d00ec2f855429430bda1d70fb221b795842e8bb52e0e",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "diagnostics/green.log",
+        "status": "pass",
+        "tests": 8,
+        "passed": 8,
+        "failed": 0,
+        "logSha256": "ccb87d9285340746e4ce5153a9759c23a8d5ec428cb483d9cf36c0c52e0aa439",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "core-bootstrap-final.log",
+        "status": "pass",
+        "tests": 17,
+        "passed": 17,
+        "failed": 0,
+        "logSha256": "bbc3056daf72dff307ffc9242b4ebe3f37e812af2ee310403209e73cd903d2d3",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      },
+      {
+        "id": "distribution-final-r2.log",
+        "status": "pass",
+        "tests": 25,
+        "passed": 25,
+        "failed": 0,
+        "logSha256": "d07f351fff595204fe07a2f18745865687089e5292db233ba75d753fcf3f23d5",
+        "scope": "Component and synthetic integration regression; real installed graph checked separately."
+      }
+    ],
+    "cases": [
+      {
+        "id": "old-public-repair",
+        "status": "pass",
+        "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+        "changedFiles": 28,
+        "preservedFixtureFiles": 3,
+        "dataRestored": false
+      },
+      {
+        "id": "real-installed-repeat",
+        "status": "pass",
+        "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+        "normalRounds": 3,
+        "crashRecoveryRounds": 3,
+        "parallelLaunches": 3,
+        "resourceResidue": 0,
+        "cleanupEvents": [],
+        "userPluginScope": "preserved unactivated synthetic user-plugin file",
+        "evidence": "real-installed-evidence/2026-09-24T07-32-35.626Z-12b85c6c-b762-47a4-b037-1bbe236cd693/result.json"
+      },
+      {
+        "id": "actual-electron",
+        "status": "pass",
+        "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+        "scope": "Actual isolated Electron entry, real host, CDP DOM/screenshot/responsiveness and second-process reuse; no GUI mouse interaction, model call, or normal window-close claim",
+        "cleanup": [
+          {
+            "action": "CDP Browser.close",
+            "result": "CDP_CLOSED"
+          },
+          {
+            "action": "normal-owned-center-close",
+            "result": "completed"
+          }
+        ],
+        "evidence": "real-electron-evidence/2026-09-24T07-35-22.790Z-b46cf39c-cc37-4c37-9462-00f8855154d9/result.json",
+        "evidenceSha256": "c0bf3fed07d42a5f4abe9796e9f0f3ccdb1cef1a26826ee0317fbdad47814f7d"
+      },
+      {
+        "id": "full-only-new-install-coexist",
+        "status": "pass",
+        "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+        "scope": "Two actual installed SEP runtimes, real bootstrap/host, synthetic empty credentials; no GUI/model call or claim of arbitrary official-build coexistence coverage",
+        "instances": 2,
+        "independentPidPortStorage": true,
+        "otherInstanceRemainedRunning": true,
+        "resourceResidue": 0,
+        "cleanup": "Normal controlled center close; no forced cleanup.",
+        "evidence": "real-coexist-evidence/2026-09-24T07-35-59.885Z-ac2448ac-d786-4fd6-8848-b808914bebe5/result.json",
+        "evidenceSha256": "ee13372ebd2bad53cd0e101519def2316579a5964ad3a4b33b11b84a9db948fc"
+      },
+      {
+        "id": "candidate-binding-review",
+        "status": "pass",
+        "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+        "scope": "Independent read-only candidate binding review; no runtime test reruns or private deployment reads; documentation finalization and final ZIP are outside this review.",
+        "evidence": "candidate-review.json",
+        "evidenceSha256": "e3c6ad1ad3c4c4c863c5e69003448eabffdddde2577d5e098278ab598542f016"
+      },
+      {
+        "id": "actual-windows-reboot",
+        "status": "not_run",
+        "scope": "Process-loss simulations only; the user PC was not rebooted."
+      }
+    ],
+    "history": [
+      {
+        "revision": "startup-r1",
+        "graphHash": "354375c4442fda17ab760ddd8be0d6f090076bbed69d3e43155e983c20df1ef1",
+        "status": "fail",
+        "reason": "Assembled RPC server dropped manual flag; second crash/restart was blocked by automatic restart budget. r1 preserved and not published.",
+        "resolution": "r2 passes manual flag through actual RPC; preserves the automatic two-retry limit."
+      }
+    ],
+    "limitations": [
+      "Windows x64 Alpha scope; no Windows 10-specific certification or real power-loss test.",
+      "Malformed or unverifiable owners, corrupted journals and unresolved business writes remain refused. No unknown external operation is replayed.",
+      "No paid model test; isolated installations use blank API credentials.",
+      "A preserved synthetic plugin file is not proof of arbitrary third-party plugin runtime compatibility.",
+      "DSH base remains 0.1.6-alpha.2; rc.1 session migration is outside this startup repair."
+    ],
+    "dailyDeployment": "Separate local action; excluded from public package validation and private data evidence.",
+    "privacy": "No user keys, personal conversations, data stores or private Git history are packaged."
+  },
+  "smallRepair": {
+    "status": "pass",
+    "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "kind": "startup-repair",
+    "updatedFiles": 28,
+    "actualPrepareApply": true,
+    "startStatus": {
+      "phase": "running",
+      "generation": 1,
+      "hostIdentity": "alive"
+    },
+    "controlledStop": true,
+    "ownedHostAbsent": true,
+    "preservedSyntheticFiles": 3,
+    "scope": "One actual old public SEP-only install repaired using the small bundle, started, and stopped; blank credentials and synthetic user files retained. No paid model or real system reboot.",
+    "evidenceSha256": "d648739d71c7bc63cef884ced2f49c700aaac36eae25c1dabec25cf1cbd0e874"
+  },
+  "source": {
+    "manifestSha256": "14fbec1c8c821a4eedaf10e46cacc6a0395c52e39ff2beae748c9d532ea40551",
+    "generatorCheck": "Temporary regeneration of seven current core files matched the sealed bytes; no complete upstream binary reproducibility claim.",
+    "sourceEntryCount": 997
+  },
+  "archiveVerification": {
+    "schema": 1,
+    "status": "pass",
+    "archives": [
+      {
+        "name": "DSH-SEP-Full-Windows-Alpha-20260924-Startup-r2.zip",
+        "bytes": 916592845,
+        "sha256": "b5f573e94bafcb8104f54477d6caed0f9577dd98c9672b07bd2a4649f739defb",
+        "files": 53930,
+        "crc": "pass",
+        "manifest": "pass"
+      },
+      {
+        "name": "DSH-SEP-Only-Windows-Alpha-20260924-Startup-r2.zip",
+        "bytes": 749536395,
+        "sha256": "662a1f4c82bc10c2dfe5f8f9c7d78d9996e940bac40ad488f384e868f8441346",
+        "files": 50328,
+        "crc": "pass",
+        "manifest": "pass"
+      },
+      {
+        "name": "DSH-SEP-Source-Windows-Alpha-20260924-Startup-r2.zip",
+        "bytes": 10072146,
+        "sha256": "f17fda4f6007d23e7cc3e1cacb7caa30c0efc02b5eff11ad32d3de357dde8e3a",
+        "files": 1009,
+        "crc": "pass",
+        "manifest": "pass"
+      },
+      {
+        "name": "DSH-SEP-Startup-Repair-Windows-Alpha-20260924-Startup-r2.zip",
+        "bytes": 36881224,
+        "sha256": "183c4672917e3553856ff87baa085caa425550b74e3569a3a5779261a60baa9d",
+        "files": 43,
+        "crc": "pass",
+        "manifest": "pass"
+      }
+    ]
+  },
+  "privacyVerification": {
+    "schema": 1,
+    "status": "pass",
+    "files": 105310,
+    "uniqueContents": 45501,
+    "bytesScanned": 2656838889,
+    "findings": [],
+    "scope": "All file contents and paths in four delivery trees; known local profile path and credential-format scan. Not a universal proof that arbitrary private text can never occur."
+  },
+  "history": [
+    {
+      "revision": "startup-r1",
+      "status": "fail",
+      "kind": "product",
+      "reason": "Actual assembled RPC dropped explicit manual start parameter. r2 preserves it; old result kept."
+    },
+    {
+      "revision": "startup-r2",
+      "status": "fail",
+      "kind": "test-fixture",
+      "attempts": 2,
+      "reason": "Port audit read unexported runtime.connection. Actual product was running; fixture changed to read runtime.connectionFile. No product/budget/data changes for these retries."
+    },
+    {
+      "status": "fail",
+      "kind": "packaging-script",
+      "reason": "First ZIP attempt omitted deep Windows paths when ordinary Python Path.is_file returned false. Archive verification refused publication. Extended-length paths and strict unreadable-entry rejection were applied; initial archives are retained locally and not published."
+    }
+  ],
+  "cleanup": "Final actual backend/coexist/small-repair tests used controlled close with no emergency kill. Three deliberate center+host terminations were fault injections. GUI used CDP Browser.close, then controlled center close.",
+  "excluded": [
+    "Real Windows reboot and power-loss test",
+    "Paid model service call",
+    "All third-party plugin compatibility",
+    "rc.1 session migration",
+    "Daily private deployment; depends on owner exit and separate local verification"
+  ],
+  "publication": {
+    "status": "verified-before-upload",
+    "repository": "https://github.com/Lance-QwQ/DSH-SEP",
+    "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260924-startup-r2"
+  },
+  "rawEvidence": "Raw local logs, synthetic process identities and private installation paths are not published. Public report stores scope, outcomes and SHA-256 bindings."
+}

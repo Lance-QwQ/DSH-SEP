@@ -13,6 +13,54 @@ export async function jsonFile(path,limit=16000000){const s=await lstat(path);if
 export async function fileHash(path){const st=await physicalStat(path);if(!st.isFile()||st.isSymbolicLink()||st.nlink!==1)throw Error('UPDATE_SOURCE_IDENTITY');const digest=createHash('sha256');for await(const b of (physicalFs?.createReadStream??createReadStream)(path))digest.update(b);const after=await physicalStat(path);if(after.ino!==st.ino||after.size!==st.size||after.mtimeMs!==st.mtimeMs||after.nlink!==1)throw Error('UPDATE_SOURCE_CHANGED');return digest.digest('hex');}
 const inside=(root,path)=>{const r=relative(root,path);return !isAbsolute(r)&&r!=='..'&&!r.startsWith('..\\')&&!r.startsWith('../');};
 async function loosePackage(root){const rows=[];let count=0;async function walk(path){for(const e of await readdir(path,{withFileTypes:true})){if(++count>10000)throw Error('UPDATE_INVENTORY_LIMIT');if(e.name==='node_modules'||e.name==='.git')continue;const p=join(path,e.name);if(e.isSymbolicLink())throw Error('UPDATE_UNTRACKED_LINK');if(e.isDirectory())await walk(p);else rows.push([relative(root,p),await fileHash(p)]);}}await walk(root);rows.sort();return {manifest:await jsonFile(join(root,'package.json')),fingerprint:hash(rows)};}
+// Inspect ESM exports as data. Loading a plugin (or require.resolve selecting its
+// require branch) would not prove the entry used by Cordis's dynamic import.
+function subpathSpecifier(value){
+ if(/[\\%?#\0]/.test(value))return null;
+ const parts=value.split('/'),count=value.startsWith('@')?2:1;
+ const name=parts.slice(0,count).join('/');
+ if(!/^(?:@[a-zA-Z0-9._~-]+\/)?[a-zA-Z0-9._~-]+$/.test(name)||parts.length<=count||parts.some(p=>!p||p==='.'||p==='..'))return null;
+ return {name,key:'./'+parts.slice(count).join('/')};
+}
+function importExport(value){
+ if(typeof value==='string')return value;
+ if(!value||typeof value!=='object'||Array.isArray(value))throw Error('UPDATE_EXPORT_UNVERIFIED');
+ for(const [condition,target] of Object.entries(value)){
+  if(condition.startsWith('.')||/^\d+$/.test(condition))throw Error('UPDATE_EXPORT_UNVERIFIED');
+  if(condition==='node'||condition==='import'||condition==='default'){
+   const selected=importExport(target);if(selected!==undefined)return selected;
+  }else if(!['require','types','browser'].includes(condition))throw Error('UPDATE_EXPORT_UNVERIFIED');
+ }
+ return undefined;
+}
+async function graphSubpath(root,graph,plugins,specifier){
+ const parsed=subpathSpecifier(specifier);if(!parsed)return null;
+ // A custom condition could make an otherwise inactive browser/types branch
+ // active. Unimplemented conditions (including node-addons/module-sync) also
+ // fail closed instead of guessing another branch.
+ if(process.execArgv.some(a=>/^--conditions(?:=|$)|^-C/.test(a))||/--conditions|-C/.test(process.env.NODE_OPTIONS??''))throw Error('UPDATE_EXPORT_UNVERIFIED');
+ const id=graph.roots?.[parsed.name],p=plugins.find(p=>p.instanceId==='package:'+id);
+ if(!id||!p||p.name!==parsed.name)return null;
+ const canonicalRoot=await realpath(root),packageRoot=join(canonicalRoot,'store',id);
+ if(resolve(await realpath(join(root,'node_modules',parsed.name)))!==resolve(packageRoot))throw Error('UPDATE_PLUGIN_PACKAGE_UNVERIFIED');
+ async function trackedFile(local){
+  const parts=local.split('/');let path=canonicalRoot;
+  for(const part of ['store',id,...parts]){path=join(path,part);const st=await lstat(path);if(st.isSymbolicLink())throw Error('UPDATE_PLUGIN_ENTRY_UNVERIFIED');}
+  if(!inside(packageRoot,path))throw Error('UPDATE_PLUGIN_ENTRY_UNVERIFIED');
+  const records=graph.files.filter(f=>f.path.replaceAll('\\','/')==='store/'+id+'/'+local);
+  if(records.length!==1||await fileHash(path)!==records[0].sha256)throw Error('UPDATE_PLUGIN_ENTRY_UNVERIFIED');
+  return {path,sha256:records[0].sha256};
+ }
+ const metadata=await trackedFile('package.json'),bytes=await readFile(metadata.path);
+ if(hash(bytes)!==metadata.sha256)throw Error('UPDATE_PLUGIN_ENTRY_UNVERIFIED');
+ const manifest=JSON.parse(bytes);if(manifest.name!==parsed.name)throw Error('UPDATE_PLUGIN_PACKAGE_UNVERIFIED');
+ const exportsMap=manifest.exports;
+ if(!exportsMap||typeof exportsMap!=='object'||Array.isArray(exportsMap)||!Object.hasOwn(exportsMap,parsed.key)||Object.keys(exportsMap).some(k=>!k.startsWith('.')))throw Error('UPDATE_EXPORT_UNVERIFIED');
+ const target=importExport(exportsMap[parsed.key]);
+ if(typeof target!=='string'||!target.startsWith('./')||/[\\%?#\0*]/.test(target)||target.slice(2).split('/').some(p=>!p||p==='.'||p==='..'||p==='node_modules'))throw Error('UPDATE_PLUGIN_ENTRY_UNVERIFIED');
+ const entryPath=target.slice(2),entry=await trackedFile(entryPath);
+ return {...p,entrySpecifier:specifier,entryPath,entryFingerprint:entry.sha256};
+}
 export async function inventory(root,{signal}={}){
  const graph=await jsonFile(join(root,'graph.json'));if(!Array.isArray(graph.packages)||!Array.isArray(graph.files)||graph.packages.length>3000||graph.files.length>100000)throw Error('UPDATE_GRAPH_INVALID');
  const hardBlocks=[],plugins=[],fingerprints=[],byId=new Map(),versions={};
@@ -29,17 +77,18 @@ export async function inventory(root,{signal}={}){
  const configFingerprint=hash(patch);const used=new Set();for(const row of patch.flatMap(p=>p.insert??[])){
   signal?.throwIfAborted();const name=row.name,id=row.id;if(typeof name!=='string'||typeof id!=='string'||used.has(id)){hardBlocks.push('PLUGIN_INSTANCE_INVALID');continue;}used.add(id);
   let p=plugins.find(p=>p.instanceId===(graph.roots?.[name]?'package:'+graph.roots[name]:'extra:'+name));if(name.startsWith('file:')){try{const path=await realpath(fileURLToPath(name)),fp=await fileHash(path);p={name,version:'local',fingerprint:fp,source:'local-file'};fingerprints.push([id,fp]);}catch{hardBlocks.push('LOCAL_PLUGIN_UNREADABLE: '+id);}}
+  else if(!p){try{p=await graphSubpath(root,graph,plugins,name);if(p)fingerprints.push([id,{entrySpecifier:p.entrySpecifier,entryPath:p.entryPath,entryFingerprint:p.entryFingerprint}]);}catch{/* Unproved exports and entries retain the source hard block below. */}}
   if(!p){hardBlocks.push('PLUGIN_SOURCE_UNRESOLVED: '+id);p={name,source:'unresolved',fingerprint:'unreadable'};}
   plugins.push({...p,name:p.name,instanceId:id,enabled:row.disabled===true||row.enabled===false?false:row.config?.enabled===false?false:'配置启用；未执行加载探测',configFingerprint:hash(row.config??{})});
  }
  const configs=[];for(const e of await readdir(root)){if(/\.(ya?ml|json)$/.test(e)&&!['graph.json','installation.json','cordis.patch.yml'].includes(e)){try{configs.push([e,await fileHash(join(root,e))]);}catch{hardBlocks.push('CONFIG_UNREADABLE: '+e);}}}
  const graphHash=hash(await readFile(join(root,'graph.json')));
- return {plugins:plugins.map(p=>({name:p.name,version:p.version,instanceId:p.instanceId,source:p.source,enabled:p.enabled,fingerprint:p.fingerprint,configFingerprint:p.configFingerprint,peerDependencies:p.peerDependencies,peerDependenciesMeta:p.peerDependenciesMeta,engines:p.engines,origin:p.origin,resolvedDependencies:p.resolvedDependencies})),versions,rootVersions:Object.fromEntries(Object.entries(graph.roots??{}).map(([n,id])=>[n,graph.packages.find(p=>p.id===id)?.version])),hardBlocks,binding:hash({graphHash,fingerprints,configFingerprint,configs,resolutions:plugins.map(p=>[p.instanceId,p.resolvedDependencies])}),graphHash,configFingerprint};
+ return {plugins:plugins.map(p=>({name:p.name,version:p.version,instanceId:p.instanceId,source:p.source,enabled:p.enabled,fingerprint:p.fingerprint,configFingerprint:p.configFingerprint,peerDependencies:p.peerDependencies,peerDependenciesMeta:p.peerDependenciesMeta,engines:p.engines,origin:p.origin,resolvedDependencies:p.resolvedDependencies,...(p.entrySpecifier?{entrySpecifier:p.entrySpecifier,entryPath:p.entryPath,entryFingerprint:p.entryFingerprint}:{})})),versions,rootVersions:Object.fromEntries(Object.entries(graph.roots??{}).map(([n,id])=>[n,graph.packages.find(p=>p.id===id)?.version])),hardBlocks,binding:hash({graphHash,fingerprints,configFingerprint,configs,resolutions:plugins.map(p=>[p.instanceId,p.resolvedDependencies])}),graphHash,configFingerprint};
 }
 export function preservationBlocks(current,candidate){const blocks=[];for(const p of current.plugins){
  const instance=!p.instanceId?.startsWith('package:');const trustedHost=p.origin?.kind==='host'&&p.origin.baselineFingerprint===p.fingerprint&&typeof p.origin.sourceIdentity==='string'&&p.origin.sourceIdentity.length>0;const protectedItem=instance||!trustedHost;
  if(!protectedItem)continue;const matches=candidate.plugins.filter(n=>instance?n.instanceId===p.instanceId:n.name===p.name&&n.version===p.version);
- if(!matches.some(n=>n.fingerprint===p.fingerprint&&n.configFingerprint===p.configFingerprint&&n.enabled===p.enabled))blocks.push('PLUGIN_PRESERVATION_FAILED: '+p.name+' ['+p.instanceId+']');
+ if(!matches.some(n=>n.fingerprint===p.fingerprint&&n.configFingerprint===p.configFingerprint&&n.enabled===p.enabled&&n.entrySpecifier===p.entrySpecifier&&n.entryPath===p.entryPath&&n.entryFingerprint===p.entryFingerprint))blocks.push('PLUGIN_PRESERVATION_FAILED: '+p.name+' ['+p.instanceId+']');
  }return blocks;}
 export function makeReport(current,candidate,release,installed,satisfies){
  const plugins=candidate?current.plugins.map(p=>{const matches=candidate.plugins.filter(n=>n.instanceId===p.instanceId&&n.name===p.name);const resolved=matches.length===1?matches[0].resolvedDependencies:undefined;if(!resolved)return {...p,verdict:'unknown',reasons:['无法唯一绑定目标实例的依赖解析，不能使用同名全局版本推断']};const known={},unknown=[];for(const name of Object.keys(p.peerDependencies??{})){if(!Object.hasOwn(resolved,name))unknown.push(name);else if(resolved[name])known[name]=resolved[name].version;}const checked=compatibility([p],known,satisfies)[0];if(unknown.length)return {...checked,verdict:'unknown',reasons:['目标依赖解析证据不足：'+unknown.join(', ')]};return checked;}):current.plugins.map(p=>({...p,verdict:'unknown',reasons:['尚无目标候选依赖清单和隔离运行证据，不能判断为不兼容或兼容']}));

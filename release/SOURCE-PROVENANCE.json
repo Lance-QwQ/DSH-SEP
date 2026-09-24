@@ -1,101 +1,35 @@
 {
   "schema": 1,
-  "kind": "dsh-sep-distribution-source-provenance",
-  "distribution": "20260921-mit-alpha",
+  "distribution": "windows-alpha-20260924-startup-r2",
   "packageKind": "full",
-  "publicReleaseReady": true,
-  "dshVersion": "0.1.6-alpha.2",
-  "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
-  "baseGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
-  "distributionGraphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
-  "distributionGraphState": "sealed",
-  "upstream": {
-    "repository": "https://github.com/deepseek-ai/deepseek-harness",
-    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887",
-    "tag": "dsh-v0.1.6-alpha.2",
-    "meaning": "Upstream base only; local SEP adaptations are identified by the final graph, not this upstream commit."
+  "distributionGraphSha256": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+  "baseGraphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
+  "upstreamDsh": {
+    "version": "0.1.6-alpha.2",
+    "commit": "ddefc45fbc7f8e46dd73185e68295696d1297887"
   },
   "sourceDelivery": {
-    "status": "pass",
-    "scope": "Graph-matching editable SEP/adapted host files and full authored Office bridge source; separate supplemental tests/build scripts; official LibreOffice source-access records.",
-    "sourceFiles": 888,
-    "exactReleaseFiles": 845,
-    "supplementalAuthoringFiles": 43,
-    "sourceFilesManifestSha256": "ed91e199c25db5a35844111d535a75f66e3c5537bf332f08cb4a09b9ca16053f",
-    "snapshot": "DSH-SEP-Source-20260921-MIT.zip",
-    "manifest": "SOURCE_FILES.json",
-    "reproducibleBuildClaim": false,
-    "allTransitiveBinarySourcesIncluded": false,
-    "privateDataIncluded": false,
-    "gitHistoryIncluded": false
+    "directory": "DSH-SEP-Source",
+    "sourceFilesManifestSha256": "14fbec1c8c821a4eedaf10e46cacc6a0395c52e39ff2beae748c9d532ea40551",
+    "graphSha256": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "files": 997,
+    "exactReleaseFiles": 853,
+    "supplementalFiles": 144,
+    "bytes": 21822675
   },
-  "sourceAccess": {
-    "status": "pass",
-    "scope": "Replacement Office adapter preferred source and matching official LibreOffice source-access identity verified; not a full legal or reproducible-build certification.",
-    "blockers": [],
-    "resolvedByReplacement": [
-      {
-        "code": "LIBREOFFICE_KIT_NODE_API_SOURCE_UNAVAILABLE",
-        "oldComponents": [
-          "@deepseek-ai/libreoffice-kit@0.0.1",
-          "@deepseek-ai/libreoffice-kit-win32-x64@0.0.1"
-        ],
-        "resolution": "Both old packages removed. Authored @dsh-sep/office-converter source and official LibreOffice runtime replace them. The old Kit repository has not become accessible."
-      }
-    ],
-    "office": {
-      "adapter": "@dsh-sep/office-converter@0.1.0",
-      "runtime": "LibreOffice 26.8.0.3",
-      "preferredSource": "DSH-SEP-Source-20260921-MIT.zip",
-      "officialSourceAccess": "payload/store/p0439/SOURCE-ACCESS.md",
-      "officialSourceArchiveCount": 4,
-      "officialSourceArchiveTotalBytes": 654222716
-    },
-    "additionalReview": [
-      {
-        "code": "SHARP_NATIVE_CORRESPONDING_SOURCE_SCOPE",
-        "component": "@img/sharp-win32-x64@0.35.4",
-        "graphPackageId": "p0089",
-        "status": "pass",
-        "scope": "Fixed source chain and main libvips DLL correspondence verified; not complete static-component source delivery, second C++ DLL audit, relinking validation, or reproducible-build verification.",
-        "confirmedBlocker": false,
-        "remainingVerification": [
-          "all embedded static components source archives",
-          "second C++ DLL correspondence",
-          "relinking materials and reproducible builds"
-        ]
-      }
-    ]
-  },
-  "license": {
-    "status": "pass",
-    "license": "MIT",
-    "scope": "Owner-authorized mapped originals only; not third-party relicensing or full legal certification.",
-    "coverage": {
-      "packages": 527,
-      "noticeEntries": 626,
-      "missingLicenseDeclarations": 0
-    },
-    "approvedSepLicenseSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
-    "evidence": "docs/licenses/release/LICENSE-SYNCHRONIZATION.md"
+  "licenseScope": "Mapped SEP originals MIT; original DSH and third-party notices retained.",
+  "reproducibleBuildClaim": false,
+  "privateDataIncluded": false,
+  "privateGitHistoryIncluded": false,
+  "evidence": {
+    "schema": 1,
+    "originalReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+    "publicReportSha256": "036553ec12e299f0f9c917352503057d0be23192a69d64bf369618c75521ff79",
+    "graphHash": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "redaction": "Public report values only; absolute local paths and credential fields redacted. Original report retained locally; raw logs and synthetic process files not bundled."
   },
   "publication": {
-    "channel": "GitHub",
-    "repositoryCreated": true,
-    "repositoryUrl": "https://github.com/Lance-QwQ/DSH-SEP",
-    "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260921-mit",
-    "releaseTag": "windows-alpha-20260921-mit",
-    "uploaded": false,
-    "snapshotMeaning": "Package preparation state before remote upload; remote publication is verified separately.",
-    "publicReleaseLevel": "Windows Alpha test",
-    "ownerAuthorizedKnownIssues": true,
-    "dailyInstallationChanged": false
+    "uploaded": false
   },
-  "archiveChecksums": "External release checksum list; no self-reference.",
-  "codeEquivalence": {
-    "baselineGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
-    "status": "pass",
-    "executableChanges": 0,
-    "evidence": "docs/evidence/mit-program-identity.json"
-  }
+  "historicalSource": "docs/history/20260921-mit-before-startup/SOURCE-PROVENANCE.json"
 }

@@ -1,125 +1,22 @@
 {
-  "schemaVersion": 1,
-  "documentRevision": "20260921-docs-r6",
-  "date": "2026-09-21",
-  "product": {
-    "name": "DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE",
-    "shortName": "DSH SEP",
-    "chineseName": "DSH系统增强套件",
-    "platform": "Windows x64"
-  },
-  "capabilityBaseline": {
-    "releaseId": "sep-alpha2-stability-20260921",
-    "dshVersion": "0.1.6-alpha.2",
-    "sepPackageVersion": "0.1.0-alpha.15.dsh-alpha2.1",
-    "graphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
-    "graphPackages": 527,
-    "manifestFiles": 27159,
-    "scope": "verified-program-and-controlled-daily-deployment",
-    "onlyArchive": null,
-    "fullArchive": null,
-    "sourceGitCommit": null,
-    "sourceBinding": "program graph plus verified local patch manifests; release source snapshot/commit pending"
-  },
-  "existingArchives": [
-    {
-      "filename": "DSH-SEP-Only-Windows-x64.zip",
-      "bytes": 228802366,
-      "sha256": "7dbddeaf867ded6a5afcf2771d40af4132bbcdf175e8691fa036cdf11ca3d9d0",
-      "distribution": "20260920-r2-sanitized",
-      "graphSha256": "e57816d02de36eefbcc0942ef9a644ce3e3ebbab47e303db1ab0b00278667ec5",
-      "latestFourFixesIncluded": false,
-      "purpose": "historical-artifact-identification",
-      "publicDownloadUrl": null
-    },
-    {
-      "filename": "DSH-SEP-Full-Windows-x64.zip",
-      "bytes": 517113251,
-      "sha256": "6a773b516a7a4723b8bb2f6aa959a98a9b3c788f254322e679b8e9553a66d46a",
-      "distribution": "20260920-r2-sanitized",
-      "graphSha256": "e57816d02de36eefbcc0942ef9a644ce3e3ebbab47e303db1ab0b00278667ec5",
-      "latestFourFixesIncluded": false,
-      "purpose": "historical-artifact-identification",
-      "publicDownloadUrl": null
-    }
+  "schema": 1,
+  "distribution": "windows-alpha-20260924-startup-r2",
+  "graphSha256": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+  "releaseLevel": "Windows Alpha test",
+  "status": "pass",
+  "sourceFilesManifestSha256": "14fbec1c8c821a4eedaf10e46cacc6a0395c52e39ff2beae748c9d532ea40551",
+  "evidence": "evidence/startup-validation.json",
+  "limitations": [
+    "本轮覆盖报告列明的 Windows 合成场景；真实 Windows 系统重启／断电尚未实测。",
+    "本轮没有调用收费模型，不把启动和恢复验证当作模型服务可用性验证。",
+    "损坏日志、无法验证的文件／进程身份、未完成业务写入与不受支持的治理记录仍会保守阻断；不会删锁后强行写库。",
+    "修补只接受明确支持的旧图及入口哈希；用户改过的受管文件、未知插件变化或候选漂移将拒绝覆盖。",
+    "后台保留与恢复不等于重放外部操作。未知操作结果仍需核对，不自动重复模型、工具或计费请求。",
+    "Windows x64 Alpha 测试版；Windows 10 的独立实测状态沿原记录，不声明跨平台或稳定版认证。"
   ],
-  "publicRelease": {
-    "authorizedLicense": "MIT License",
-    "currentSourceLicense": "527 packages, 626 notice/source entries. Only previously mapped original SEP contributions relicensed to MIT; all third-party terms and original notices retained.",
-    "status": "owner_authorized_windows_alpha_pending_upload",
-    "latestArchivesReady": true,
-    "downloadUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260921-mit",
-    "supportUrl": null,
-    "securityContact": null,
-    "requestedRights": [
-      "use",
-      "copy",
-      "modify",
-      "merge",
-      "publish",
-      "distribute",
-      "sublicense",
-      "sell"
-    ],
-    "pendingConditions": [],
-    "licenseDecisionRecord": "LICENSING.md",
-    "licenseFile": "LICENSE",
-    "licenseSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
-    "frozenProgramLicenseState": "Historical daily graph and archives unchanged; this release has separately recorded license coverage.",
-    "commercialDistribution": "Permitted for the MIT-covered original contributions, subject to MIT notice retention; third-party terms separately apply.",
-    "derivativeRestriction": "MIT notice and disclaimer retention; no SEP-specific commercial restriction.",
-    "thirdPartyLicenses": "unchanged",
-    "channel": "GitHub",
-    "repositoryUrl": "https://github.com/Lance-QwQ/DSH-SEP"
+  "publication": {
+    "uploaded": false,
+    "finalArchivesVerified": false
   },
-  "checksums": {
-    "SHA256SUMS.txt": "documentation files only; excludes itself",
-    "softwareArchives": "This release: external SHA256SUMS.txt. existingArchives records retain historical artifact identities."
-  },
-  "notes": [
-    "Historical source and distribution evidence remains bound to original bytes.",
-    "Current archive checksums are external to avoid self-reference.",
-    "Pending archive validation does not inherit a pass from daily deployment."
-  ],
-  "distribution": {
-    "releaseId": "20260921-mit-alpha",
-    "status": "pass",
-    "scope": "Owner-authorized Windows Alpha graph/source binding; final archives verified separately. Not an assertion that the historical startup cause is fixed.",
-    "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
-    "sourceBinding": {
-      "snapshot": "DSH-SEP-Source-20260921-MIT.zip",
-      "status": "pass",
-      "graphSha256": "8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52",
-      "files": 888,
-      "exactReleaseFiles": 845,
-      "supplementalFiles": 43,
-      "bytes": 21331390,
-      "sourceFilesManifestSha256": "ed91e199c25db5a35844111d535a75f66e3c5537bf332f08cb4a09b9ca16053f",
-      "oldGeneratorsHistoricalOnly": true
-    },
-    "archives": [
-      {
-        "kind": "only",
-        "filename": "DSH-SEP-Only-Windows-x64.zip"
-      },
-      {
-        "kind": "full",
-        "filename": "DSH-SEP-Full-Windows-x64.zip"
-      }
-    ],
-    "artifactChecksums": "External SHA256SUMS.txt and DELIVERY-REPORT.json."
-  },
-  "localAcceptanceStatus": "pass",
-  "publicReleaseReady": true,
-  "publicationBlockers": [],
-  "localAcceptanceScope": "MIT license/source/metadata binding and executable byte equivalence; final ZIP evidence external. Functional tests inherited without expanding their scope.",
-  "knownIssues": [
-    {
-      "code": "HOST_STARTUP_UNATTRIBUTED",
-      "causeStatus": "unattributed",
-      "fixed": false,
-      "acceptedForThisReleaseLevel": true,
-      "acceptance": "Owner explicitly approved Windows Alpha testing with disclosure. Historical failure remains unchanged; not stable release certification."
-    }
-  ]
+  "history": "history/20260921-mit-before-startup/"
 }

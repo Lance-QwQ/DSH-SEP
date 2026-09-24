@@ -5,7 +5,8 @@ import {pathToFileURL} from 'node:url';
 import {randomUUID} from 'node:crypto';
 import {createRecoveryMaintenance} from './maintenance.mjs';
 import {openHttpCarrier} from './http-carrier.mjs';
-import {prepareSepLockScope,captureSepLockReceipt,recoverSepOwnedLocks} from './sep-lock-recovery.mjs';
+import {createNativeSepLifecycle} from './sep-lock-native.mjs';
+import {prepareSepLockScope,captureSepLockReceipt} from './sep-lock-recovery.mjs';
 export async function openManagedService({host,...options}={}) {
  if(!host)return openService(options);
  if(!isAbsolute(host.suiteRoot??'')||!isAbsolute(host.suiteLockDirectory??'')||!isAbsolute(host.storageRoot??'')||!Array.isArray(host.projectIds)||!host.projectIds.length)throw Error('RECOVERY_MANAGED_CONFIG');
@@ -23,7 +24,8 @@ export async function openManagedService({host,...options}={}) {
    if(typeof DesktopHostProcess!=='function')throw Error('RECOVERY_DESKTOP_TRANSPORT');
   }
  }
- let service,prepared,receipt,lastRecovery=null,lastPrerequisite=null,hostUrl=null,ownedChild=null,carrier=null;
+ const nativeOwnership=createNativeSepLifecycle({suiteLockDirectory:host.suiteLockDirectory,storageRoot:host.storageRoot,openControl});
+ let service,prepared,lastRecovery=null,lastPrerequisite=null,hostUrl=null,ownedChild=null,carrier=null;
  const calls=new Map(),failure=code=>Object.assign(Error(code),{code});
  function forgetChild() {
   ownedChild=null;carrier?.close?.();carrier=null;
@@ -32,17 +34,21 @@ export async function openManagedService({host,...options}={}) {
  }
  const suiteLockDirectory=host.suiteLockDirectory,storageRoot=host.storageRoot;
  const configured={...host,
+  onSpawn:event=>{nativeOwnership.observeChild(event);host.onSpawn?.(event);},
   beforeStart:async()=>{
    try{
     await service.controller.assertBusinessOpen();
     let ready=0;for(const id of host.projectIds){const p=await service.controller.inspectProject(id);if(p.state==='ready')ready++;}
     if(!ready){lastPrerequisite='RECOVERY_NO_READY_PROJECT';return false;}
-    prepared=await prepareSepLockScope({suiteLockDirectory,storageRoot,resolveStorageIdentity:storageIdentity});receipt=null;lastPrerequisite=null;return true;
+    const admitted=await nativeOwnership.beforeStart();if(admitted.status!=='pass'){lastPrerequisite=admitted.reason;return false;}
+    prepared=await prepareSepLockScope({suiteLockDirectory,storageRoot,resolveStorageIdentity:storageIdentity});lastPrerequisite=null;return true;
    }catch(error){lastPrerequisite=error.code??'RECOVERY_PREREQUISITE';return false;}
   },
   readiness:async({child,generation,signal,observedReady})=>{
    const ready=await observedReady;signal.throwIfAborted();
-   receipt=await captureSepLockReceipt({child,generation,prepared,suiteLockDirectory,storageRoot});
+   // Ready must still prove that both SEP data owners belong to this child.
+   // Exit recovery uses the native lease proof, including before-ready exits.
+   await captureSepLockReceipt({child,generation,prepared,suiteLockDirectory,storageRoot});
    if(desktopConfig){
     if(ready.dshVersion!==desktopConfig.dshVersion)throw failure('RECOVERY_DESKTOP_VERSION');
     if(host.transport==='desktop-http'){
@@ -91,8 +97,7 @@ export async function openManagedService({host,...options}={}) {
   },
   afterExit:async exit=>{
    hostUrl=null;forgetChild();
-   if(!receipt){lastRecovery={status:'blocked',reason:'RECOVERY_HOST_OWNERSHIP_NOT_CAPTURED'};throw Error(lastRecovery.reason);}
-   lastRecovery=await recoverSepOwnedLocks({receipt,exit,openControl});
+   lastRecovery=await nativeOwnership.afterExit(exit);
    if(lastRecovery.status!=='pass')throw Error(lastRecovery.reason);
    await host.afterExit?.(exit);
   },

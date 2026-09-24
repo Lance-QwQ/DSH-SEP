@@ -6,7 +6,13 @@ DSH SEP 是面向 Windows x64 的 DeepSeek Harness 增强组件集合，在 DSH 
 
 **当前级别：Windows Alpha 测试版。** 基于 DSH `0.1.6-alpha.2`，实际验证环境为 Windows 11 x64。SEP 原创部分采用 [MIT](LICENSE)，DSH 和所有第三方组件保留各自许可。
 
-[下载安装包](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260921-mit) · [文档导航](docs/DOCS_INDEX.md) · [使用手册](docs/USER_GUIDE.md) · [适配的开源项目](docs/OPEN_SOURCE_INTEGRATIONS.md) · [问题反馈](https://github.com/Lance-QwQ/DSH-SEP/issues)
+[下载安装包](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260924-startup-r2) · [文档导航](docs/DOCS_INDEX.md) · [使用手册](docs/USER_GUIDE.md) · [适配的开源项目](docs/OPEN_SOURCE_INTEGRATIONS.md) · [问题反馈](https://github.com/Lance-QwQ/DSH-SEP/issues)
+
+## 本次启动修复
+
+修订 `windows-alpha-20260924-startup-r2` 修复异常退出后残留所有权阻塞、部分启动收尾和入口诊断问题。旧公开包用户请下载 **Startup-Repair**，按[已有安装修补说明](release/REPAIR_README.md)预检后应用；不要解压覆盖现有安装。原有资料、Key、工作区及用户插件保留，未知版本或修改过的受管程序会拒绝覆盖。
+
+本轮有 116 项组件与合成集成测试通过，另有实际安装的三轮正常启停、三轮崩溃恢复、三个并发入口、Electron 页面和独立实例并存证据；小型修补包与最终归档另见[交付报告](release/DELIVERY-REPORT.json)。真实系统重启／断电与收费模型调用未测。
 
 ## 核心增强
 
@@ -38,9 +44,9 @@ DSH SEP 是面向 Windows x64 的 DeepSeek Harness 增强组件集合，在 DSH 
 
 ## 测试范围与已知限制
 
-Office 功能候选已有 69 项适配器测试、三轮格式转换及边界共 34 项检查、真实桌面预览与两份最终包各三次启动记录。MIT 发布另核对许可改动、运行代码等同性和新包完整性；这些证据不代表所有真实环境、Office 排版和第三方插件均已验证。
+以下为 9 月 21 日历史功能证据；本次启动修复见[当前报告](docs/STARTUP_FIX.md)。Office 功能候选已有 69 项适配器测试、三轮格式转换及边界共 34 项检查、真实桌面预览与两份最终包各三次启动记录。MIT 发布另核对许可改动、运行代码等同性和新包完整性；这些证据不代表所有真实环境、Office 排版和第三方插件均已验证。
 
-历史一次 `GUARDIAN_NOT_READY` 尚未归因，后续未复现不能证明修复。本版按项目所有者决定以 **Alpha 测试版**公开，并保留该已知问题。字体完整性不可诊断；深路径可能需要可核验的短路径；恢复并不保证处理所有崩溃。详见[兼容性和已知问题](docs/COMPATIBILITY_KNOWN_ISSUES.md)及[测试摘要](docs/TEST_ACCEPTANCE.md)。
+历史一次独立的 `GUARDIAN_NOT_READY` 尚未归因，后续未复现不能证明修复。本版按项目所有者决定以 **Alpha 测试版**公开，并保留该已知问题。字体完整性不可诊断；深路径可能需要可核验的短路径；恢复并不保证处理所有崩溃。详见[兼容性和已知问题](docs/COMPATIBILITY_KNOWN_ISSUES.md)及[测试摘要](docs/TEST_ACCEPTANCE.md)。
 
 SWE-bench／SWE-ReX 等可选评测默认关闭，需要另行准备受控环境。被选入模型请求的内容可能发送给模型供应商；本地记忆不等于全部数据永不离开本机。
 
