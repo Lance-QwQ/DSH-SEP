@@ -25,11 +25,11 @@ DSH SEP 是面向 Windows x64 的 DeepSeek Harness 增强组件集合，在 DSH 
 
 ## 本次公开下载
 
-本次热修复发行提供 **Startup-Repair（约 37 MB）和 Source**。Full／Only 新归档已完成本地验证，受当前上传带宽限制尚未公开上传；请勿将交付报告里的本地归档哈希误读为下载资产已齐备。
+本次 r2 发行的 **Full（约 917 MB）、Only（约 750 MB）、Startup-Repair（约 37 MB）和 Source** 已全部公开上传，并已匿名下载核对完整 SHA-256。补传的是原封存 r2 归档，没有发布 rc.1 适配版。请核对发行页的 `SHA256SUMS-ALL-r2.txt` 与 `TRANSMISSION-COMPLETE.json`；原交付报告和旧校验清单保留历史部分上传状态。
 
-已有用户使用[修补指南](release/REPAIR_README.md)。首次安装可先从[9 月 21 日基线发行](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/windows-alpha-20260921-mit)下载 Full，安装到新目录后，在首次启动前应用本次 Startup-Repair；旧 Full／Only 安装的修补路径已有实际测试。
+已有用户使用[修补指南](release/REPAIR_README.md)。首次安装可直接下载本次 r2 Full，安装到新的独立目录。Only 的受支持来源要求见安装指南；旧 Full／Only 安装的修补路径已有实际测试。
 
-## 基线安装包怎么选
+## 安装包怎么选
 
 | 安装包 | 用途 |
 |---|---|
@@ -46,7 +46,7 @@ DSH SEP 是面向 Windows x64 的 DeepSeek Harness 增强组件集合，在 DSH 
 
 目标父目录须存在，目标目录须尚不存在。安装成功后，在安装目录自己的 `.env` 中填写 `DEEPSEEK_API_KEY`，再运行 `start.vbs`。完整步骤及 Only 参数见[安装指南](docs/INSTALL_UNINSTALL.md)和包内 README；不要直接启动内部 Electron 绕过受管入口。
 
-点窗口关闭按钮会保留后台，完整结束使用“应用 → 退出”或托盘“退出 DSH SEP”。请在 Releases 中核对 `SHA256SUMS.txt`，不要把 `.env`、私人记忆或会话日志提交到仓库。
+点窗口关闭按钮会保留后台，完整结束使用“应用 → 退出”或托盘“退出 DSH SEP”。请在 Releases 中核对 `SHA256SUMS-ALL-r2.txt`，不要把 `.env`、私人记忆或会话日志提交到仓库。
 
 ## 测试范围与已知限制
 
