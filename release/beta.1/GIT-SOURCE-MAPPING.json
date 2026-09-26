@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "sourceArchiveSha256": "480bc4dc0e3f02b4e015786938e36c9b11dd4259cf29b1210423311b9260643d",
+  "exactArchiveFilesInGit": 14299,
+  "documentedMetadataExceptions": [
+    {
+      "path": "README.md",
+      "archiveSha256": "bf6d9e5455f82fa0ed6a2c7a50ca5ff324b9d72ab1d7f4df8aafa3d83f71927c",
+      "gitSha256": "4475e9b18df83c4aefa156cde8731560139efba92b020abe7465b21776b3a18c",
+      "change": "Current release navigation"
+    },
+    {
+      "path": "source/.gitattributes",
+      "archiveSha256": "946bed079ec10d6ce1fe3fc3d76e42a9587548135f0f4a7500d77303d9cbd398",
+      "gitSha256": "5a86e7991271147c83ab8c91836b4778b6359ab76831b5c0ef9dc7fa91fb6a05",
+      "change": "Preserve delivered bytes in Git; no runtime code edit"
+    }
+  ],
+  "directSepAndVersionOverlayChecks": 116,
+  "scope": "Full Source ZIP content versus staged Git blobs; two delivery metadata edits only; all remaining bytes identical"
+}

@@ -1,0 +1,5 @@
+[
+  {"id":"connection","config":{"cookieLifetime":"process"}},
+  {"id":"session-log-deepseek","disabled":true,"config":{"enabled":false}},
+  {"id":"session-telemetry-otel","disabled":true}
+]

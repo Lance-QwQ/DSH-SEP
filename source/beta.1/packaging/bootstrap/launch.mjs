@@ -1,0 +1,1 @@
+import {reportStartupFailure} from './@MANAGED_DIR@/startup-report.mjs';import{join}from'node:path';try{const{run}=await import('./@MANAGED_DIR@/launcher.mjs');await run(join(import.meta.dirname,'@CONFIG_FILE@'));}catch(error){process.exitCode=await reportStartupFailure(import.meta.dirname,error);}

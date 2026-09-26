@@ -1,0 +1,31 @@
+{
+  "targetGraph": "fc2941c94bcd7552c7acf843a6161520c7c1a28ad47169e2d69eb7920a52c589",
+  "files": [
+    {
+      "programPath": "store/p0610/src/computer-click.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/computer-click.js",
+      "sha256": "49a726437a85729f9277f660c5f6ba20177d6664f2935567a6571e1209fb25cb"
+    },
+    {
+      "programPath": "store/p0610/package.json",
+      "sourcePath": "packages/sep/system-enhancement-package/package.json",
+      "sha256": "ac66df69b1c1b709c875417c021c9bb92a2692435463c95b99ab2258e5f3ec64"
+    },
+    {
+      "programPath": "store/p0609/package.json",
+      "sourcePath": "packages/sep/recovery/package.json",
+      "sha256": "e65587e67576fd30ac01d64baa783d588a212a4e0ea07ee93b9a66dbf35d6793"
+    },
+    {
+      "programPath": "store/p0628/package.json",
+      "sourcePath": "packages/sep/plugin-group/package.json",
+      "sha256": "e11f2eb9e17884420c079872a07f0c478f2bb8b6ae84ef4529d1d48ca2d14036"
+    },
+    {
+      "programPath": "store/p0609/src/managed.mjs",
+      "sourcePath": "packages/sep/recovery/src/managed.mjs",
+      "sha256": "db2e0cf02824498b135fe89e74ec0443c2935c1b6174d7b98abfa4f4e816f390"
+    }
+  ],
+  "verification": "Every changed production source/manifest is byte-identical to the prepared installed candidate. Whole-tree rebuild was not rerun."
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@deepseek-ai/dsh-sep-session-migration",
+  "version": "0.1.7-rc.1-sep.local.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "vendor-provenance.json"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-session-format": "workspace:*",
+    "@deepseek-ai/dsh-task-checkpoint": "workspace:*",
+    "@deepseek-ai/dsh-util-values": "workspace:*",
+    "@deepseek-ai/dsh-llm": "workspace:*",
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-session": "workspace:*",
+    "@deepseek-ai/cordis": "workspace:~"
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-local.sep1"
+  },
+  "dshLocalBuild": {
+    "kind": "isolated-source-candidate",
+    "upstreamVersion": "0.1.7-rc.1",
+    "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
+    "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "dailyDeployment": false
+  },
+  "license": "MIT"
+}

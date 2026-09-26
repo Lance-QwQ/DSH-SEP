@@ -1,0 +1,308 @@
+{
+  "schema": 1,
+  "baseGraphHash": "4eab1b703a916fc89658f34e2a529c0b53c82bc4dda80ca534187ce1e760b7bb",
+  "targetGraphHash": "c0f998fae1a785b25b09689b0dab77264acf9a6b266ccf3f9b6680d486b11e0f",
+  "changes": [
+    {
+      "path": "store/p0431/lib/client.js",
+      "before": "d8b5d8424bbbfc2e2c1ea27ef5c3e467c0b419645365e367323adfb39673850e",
+      "after": "a51067e4d84afa382364e53b1f3623919619db23297d9c2bea10b9d7eb9498f9",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0432/lib/client.js",
+      "before": "add78d24849945f33f98fadad926fcc488d6b77ea0afbe9a7e7acf9e982f7509",
+      "after": "848dc4b07fb55a5f0f30a4afdd0af8c6c81ee6c3d258a3095a8d1d1c659917c4",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0436/lib/client.js",
+      "before": "c44706daff68d6b0511eebcd79d18c2b9fbf97abdfe778531f61e63a039966a5",
+      "after": "e3747f1272181a4e1b228d978b93669df123ffe9a354d70ffa614194e76d991b",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0442/lib/client.js",
+      "before": "d78a3f854a57f3f5df28ff5bbc44df79aa6babda0b947bdefb8f56860105605f",
+      "after": "7a27e132f111e97ab7ad2148930be8c0175f8d2111a9833f9c91e7de5c5cf87b",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0443/lib/client.js",
+      "before": "2f7b5f574f36f94a65185231c92683bf7ddb00d89213ca1285173a19caeb6d92",
+      "after": "6df17019e82bc619363cabeba92657e236120c5551a50ad90b1e1dccabb21ffd",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0448/lib/client.js",
+      "before": "112de056f5ecd087ec2e82889470701b9cfd310081593620d285821226affdb8",
+      "after": "cbbce570664173fe16aa0f019099768a3a13e05630b54ea5aa60fec4985d3936",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0454/lib/client.js",
+      "before": "e5efd2980eaaef935c69c0fcafa7df233ecf012959294fdb2aa20a994e60eb43",
+      "after": "05aa8e6fb82d01425072f6514c23a11c0a305de8d6d870c666d0241fc301a2df",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0457/lib/client.js",
+      "before": "36e9dbbf6a57acd9242b760e06f6bdff3ae150f4dcf74103ecf5686ec7ffc561",
+      "after": "74f6266fbc5f15c7b652645255e11b6af6d2bb0ece95a2c2f79acc6a72251a79",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0515/lib/client.js",
+      "before": "bea2662030747f3bb65c334b8bb3ddbbcbfd8eeeef2f5a67b056e7d2d4e2b15c",
+      "after": "2481574059fbcdf1a5914659dbb0940526fcee86d5624051bf8c3a6b7d512a1a",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0516/lib/client.js",
+      "before": "7abaf5dcaf8cc9828c070c19ba6edf05a7ee7a076bda0622e32d049171b80eba",
+      "after": "9a60f5c2f08172452030ac06665b256a0975923127fd75022971dfe0d20a536d",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0518/lib/client.js",
+      "before": "6a52a47b3a879b4d29cf0c01089339b75ec5a7986167fd0ba0b38cad8103b734",
+      "after": "5c6ff93ec28d295c54c717102a5f2c002c645f111538712a386ee9f84f6dd506",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0519/lib/client.js",
+      "before": "0db7df1e27831c52353f0df01dfbf280009ae83c2c047607d459b5c3708a8ea2",
+      "after": "0bba87b5f8adb57b052ea3a868c34ab4a325c19c6a57d9e1cc1e0345ee973615",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0520/lib/client.js",
+      "before": "5fdbc9162e9fb1a75c10cd538e5a8a15b05358d0b1bbdc5e55facf09f96cc76e",
+      "after": "6bb7f161c83e547a744760e974ca1db97fafd08f12f556f87bc6f1156c7d48e4",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0521/lib/client.js",
+      "before": "7dc55887c156ecff910c20b3c0b187bc485161fe1511f23631652b661177e847",
+      "after": "14d9ee3a7065ec62bfe18dddaa36c5735d69dc2d680a0c07272eee2a74e4eef0",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0523/lib/client.js",
+      "before": "e89d1e11c3b26e2dddbf2d1ef16e088abbe786551be7cf5d43f663e438f45b98",
+      "after": "8664f8915b2cf461af75a9034139780e55386b281615ea74132077abdc4d7422",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0524/lib/client.js",
+      "before": "b0771e83faf64dab572feedf671c562ce89281d16c5606803ca43b07309a9104",
+      "after": "07b1ee8679ed7c823854f2c87e2c77c0fbc8fd9f18b00a93374a065c25e2479b",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0525/lib/client.js",
+      "before": "351cc050a1394ba7ef6693af27719c513473943b39731fbdf2bb622d85600bb1",
+      "after": "6edc11003d16e5c59a12054842274ff9f09ae1c5dfadf55bfe46d1be0be0138b",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0526/lib/client.js",
+      "before": "77d3c9e293f545c927bbd41b6658b941a65031da15fbd9f4cd4cdbca6c270d04",
+      "after": "b1959c8a3d100ee29e55eb138aee213b3256e6559ed862c952262b4b0814c77d",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0527/lib/client.js",
+      "before": "80c5aa60b5f91a3e5e21e8fc8905932faa365e67108c467584ec07e21e0bdd26",
+      "after": "323ae7ec7b5e610fcda70bf9ae807b601f14d85c2f1f6443f57d5cb580a531d8",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0528/lib/client.js",
+      "before": "4a5e120ff73ece3ee9e4d794ab2ccddafdf9f3dba372e2244321767b89c017d2",
+      "after": "d499dbf6339d598574292b7f18dea20c8dfdfaa7c6e445b4b24998cc8d3f5c83",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0529/lib/client.js",
+      "before": "384681602be3a010f23c19ebbab8d054a440be1ab6a102e006b246585e853997",
+      "after": "2cbbf07b524d4ec2c49bb2df8d531943dd672974a069c57c5f0722dd73eec1f7",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0530/lib/client.js",
+      "before": "491545b6fcb2a0518d62bb4731f510e5396d2141c3c0d9142ccf5d2af1341260",
+      "after": "3eb9d662de4bb0324bbb96707df3038dbcbad5c04b096d468846d97ed85b9107",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0531/lib/client.js",
+      "before": "8c753a73d9cb613cd5dbf938c7519bacd9262d4f0f60cd5038594a5e5acb82b7",
+      "after": "1b2e3e8ba9fb388d9d6d6185d9aa7541a2cdac4d2961ac66c03cefc8cd810173",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0533/lib/client.js",
+      "before": "acfd41a24d7c7a5a67cd4d342a2ed9c73d9570fc37ddcedd5a480e7501d5a057",
+      "after": "55ec9035f65c9b8809c75d82e7e21b0b64bcfb34e35847a396658c7c0da09faf",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0535/lib/client.js",
+      "before": "bbd615a0c8e6815e78420f761c42f5f1ac04b3219b0138ef4ac19880a4d243a6",
+      "after": "f8245b958763f42fcb7f35bf9b5344b89f625ed06b87e183eaaeacda7b641011",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0537/lib/client.js",
+      "before": "1b6e7a2c4836395f546cb3ed27df16f203deef33d1da7bba7ef663dfff7c2f66",
+      "after": "f01b5f2a0feb3ea65e8b7984436b542d6ce4d231387a7d1bb191b9bb999f44de",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0538/lib/client.js",
+      "before": "6207af4191fd0e2d2fe30a77b51fcc4920389e2ec2ff7619cf058fbb44648dca",
+      "after": "d9daa3178f4bcb0b87a62c0895706eabe8284179bfc3450f2ecf7d144a8bb67d",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0539/lib/client.js",
+      "before": "0faf70022c40a1fcfe8616c7f130d147b5333699daa1526039ad354fb1294091",
+      "after": "280e128207fa06ac3985d27de7b98034a72419466a038839b003900b74f61b43",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0540/lib/client.js",
+      "before": "a56dffc4b081ca8331c1a286ea0056ce4c0a36fddd861c0503b4bf03d71f1534",
+      "after": "0a872cb3fc6f011b4bdf51db730efad00c757817803b2c3415f83792b441ff71",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0542/lib/client.js",
+      "before": "9dd8b5a7955d2ed16c0912ede1c663ac50d19d2dad12f53d62688f8d2b001cc3",
+      "after": "ae70429c325b5e4eb8d882988cc8a3ec5cdae45e1e30592fb21e5581214023b0",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0544/lib/client.js",
+      "before": "9a201bc73267ec7b99d8f14dc911e2dc401a13366179d5eb3f579a999f382562",
+      "after": "588a1fe7f95c8abec61a23497c9764968371b62b2cd7d665b0947303ee171304",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0545/lib/client.js",
+      "before": "e5dcbad4878a05490b64b1b67fce764ee4dec01a84675b8ed8bd5a04a2043116",
+      "after": "f5a13b59620c341c6bb2d69a068d15cf2e6c4d644fa45be8bb7a6d3cca10d354",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0546/lib/client.js",
+      "before": "fd7ac74e694200dab21dba677f7b5d720736746a22bbfe34780e861a4818525a",
+      "after": "f4e47c499854526296b512a35b2872831360ae349779d01d079522b372ca79ec",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0547/lib/client.excel.js",
+      "before": "028781a9eefe94907bcd95ab42306b7ce8325a71d0bde93f73133b22678302d0",
+      "after": "c2b71b1e3497601e5dde5756c4718a05a0ce01fc99f43f8ed156e499a0499291",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0547/lib/client.js",
+      "before": "f0b56c44ff4fee78cb3517e5e7bfbae4b231511859641fbffadbc9db9b3715de",
+      "after": "b1a34c0339acea69e35292f29db1e563181e17315dbd171cb1f4fdcfd2885894",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0547/lib/client.pdf.js",
+      "before": "ee478f1ad3d53dcf11d5364feb521a5ddc9b3b03b9cd817590a9774e07925c59",
+      "after": "c9231e64e50071bc918a9617d8671362663f2da0f62edb94b1c45fe9bc7d54e5",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0548/lib/client.js",
+      "before": "25cee6944272043b20098531e82d8775a28e9d4d2a604a53a67ba6447fbd4881",
+      "after": "7b8db9e6d8ab0a720377a207778a0bda39dc9c9d94d2fd5ce39109a19d9a8a5e",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0549/lib/client.js",
+      "before": "75a448d3f092f4fc9328bc8e06af423f71ea79dea179158476bf83d48c4600c1",
+      "after": "77448ddbbb090b92ad5b2debada29efa08d02511292d141f77299f999aa985f5",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0550/lib/client.js",
+      "before": "a0cff9a3f123c616f624eea0ac2ec3d17beff8d759875b677a73f5143784d7c4",
+      "after": "4865161076efcb971a62a6d7f3422b3d03e1f6af51de19b705c8407008ac882c",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0550/lib/client.terminal.js",
+      "before": "c4de5e29ec1e2e6367308453872438538cbfb0c0b0075b270943c120179e77ad",
+      "after": "0921761df577720169b2b7a79dc000b8311102f474794e428174563d9973f0d5",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0551/lib/client.js",
+      "before": "daafb95dfa0d9f90f2158c4e60675951ea9dba33a0c4a00a81944b157e51a1f8",
+      "after": "5f0b2e00d7794b1007562e4888d5a34079adebbf4a197a9f5e774af371e912ca",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0552/lib/client.js",
+      "before": "9b3af13f4083e2a4801a73421882e4a0f1aaa752e2c7fdcc5259e2f2effb4e13",
+      "after": "cce023b9fe93184bda9b2053596b483d93abfc8546f78e2322d572734895ea33",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0553/lib/client.js",
+      "before": "e4f81123f987894e0705173b9fbcad8caa26b00c896666e1459c4cc1bb790b13",
+      "after": "0df1e9afafe94022ea48c8333d547c10fa8e4563c5b7470785cfd4157ee927f7",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0554/lib/client.js",
+      "before": "6d9803e9ce3bdc39d715d92a4c78e50527466304f060801bfcc19b1b078277c0",
+      "after": "f3b30edb05445674dd5d3ac01dde767b2d55e51321ec972f494d23922a692141",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0555/lib/client.js",
+      "before": "d3f979831d428bacc6d60876b82b081c3b78983cedd386eef0e1982e6ecad65a",
+      "after": "1aa4b8e34b13bf7b5c3748eff55751a1da53ede365df7e43ad600c664edf8ed1",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0556/lib/client.js",
+      "before": "e27d7087b7ea63389527739cb05dfd05590fd76e0d3f8fcff51b3c9475a4f9b1",
+      "after": "f80ca3c922951ba74e38f7ae8b040161c0ac2fd0d53cd6f605bc7430f1185891",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0557/lib/client.js",
+      "before": "d08e4df5836d3f2f1af06c6ae06583757dd200a3ecaa3066d5d7b1d17f975960",
+      "after": "ee5992c0d20508172d8d322a7913d17dd5e9deebd9aa3232f6d60b4b907d986a",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0565/lib/client.js",
+      "before": "9689d7df9a315436a804008b9a7188b3b2cca65e3d7713f7f529e3ced117ec1e",
+      "after": "ba4606b5417979959df1a143f541ae07ed7619e37989a89ac0e15bdc752c944a",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0592/lib/client.js",
+      "before": "ae3bb18bf0eabbc230a55824818dded44358156bb18e7d1527bf6d707e83d430",
+      "after": "d9e07e0c5312a7159f299ee4b40863ac1bdc68524e20550e921d6396da2c40e3",
+      "kind": "comment-only-path-sanitization"
+    },
+    {
+      "path": "store/p0610/THIRD_PARTY_NOTICES.md",
+      "before": "474adab0f6dd9f37fa2bc66fcb074b67da0ae07ad99cbddbbeeeaad105369d02",
+      "after": "c57d7a49af73aba775abc44f31fe191489b928c1198b71a1086959b650a730ad",
+      "kind": "notice-status-update"
+    }
+  ],
+  "runtimeCodeChanges": "Only standalone source-region comments; no executable tokens changed."
+}

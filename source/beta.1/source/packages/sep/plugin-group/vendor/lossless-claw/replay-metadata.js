@@ -1,0 +1,263 @@
+/**
+ * Extraction and canonicalization of raw replay metadata (tool call/result ids, raw block ids and signatures) carried on stored message parts.
+ *
+ * Extracted from engine.ts (Phase 1 of the engine decomposition).
+ */
+import { extractStructuredText, stripModelIdentityFromMetadataJson, } from "./message-content.js";
+import { asRecord, safeString, toJson } from "./value-utils.js";
+export function extractRawIdsFromPartMetadata(metadata) {
+    if (!metadata) {
+        return [];
+    }
+    let parsed;
+    try {
+        parsed = JSON.parse(metadata);
+    }
+    catch {
+        return [];
+    }
+    const record = asRecord(parsed);
+    const raw = asRecord(record?.raw);
+    // Replay IDs can be preserved either inside the raw transcript block or
+    // as top-level metadata for string-content tool messages.
+    return [
+        safeString(raw?.id),
+        safeString(raw?.call_id),
+        safeString(raw?.toolCallId),
+        safeString(raw?.tool_call_id),
+        safeString(raw?.toolUseId),
+        safeString(raw?.tool_use_id),
+        safeString(record?.id),
+        safeString(record?.call_id),
+        safeString(record?.toolCallId),
+        safeString(record?.tool_call_id),
+        safeString(record?.toolUseId),
+        safeString(record?.tool_use_id),
+    ].filter((value) => typeof value === "string" && value.length > 0);
+}
+export function extractRawBlockIdsFromPartMetadata(metadata) {
+    if (!metadata) {
+        return [];
+    }
+    let parsed;
+    try {
+        parsed = JSON.parse(metadata);
+    }
+    catch {
+        return [];
+    }
+    const raw = asRecord(asRecord(parsed)?.raw);
+    return [
+        safeString(raw?.id),
+        safeString(raw?.call_id),
+        safeString(raw?.toolCallId),
+        safeString(raw?.tool_call_id),
+        safeString(raw?.toolUseId),
+        safeString(raw?.tool_use_id),
+    ].filter((value) => typeof value === "string" && value.length > 0);
+}
+export function extractRawBlockSignatureFromPartMetadata(metadata) {
+    if (!metadata) {
+        return null;
+    }
+    let parsed;
+    try {
+        parsed = JSON.parse(metadata);
+    }
+    catch {
+        return null;
+    }
+    const raw = asRecord(asRecord(parsed)?.raw);
+    return raw ? toJson(raw) : null;
+}
+export function extractPlainToolReplayTextsById(message) {
+    const textsById = new Map();
+    const duplicateIds = new Set();
+    const addText = (replayId, text) => {
+        if (duplicateIds.has(replayId)) {
+            return;
+        }
+        if (textsById.has(replayId)) {
+            textsById.delete(replayId);
+            duplicateIds.add(replayId);
+            return;
+        }
+        textsById.set(replayId, text);
+    };
+    if ((message.role !== "toolResult" && message.role !== "tool") ||
+        !("content" in message)) {
+        return textsById;
+    }
+    const topLevel = message;
+    const topLevelToolCallId = safeString(topLevel.toolCallId) ??
+        safeString(topLevel.tool_call_id) ??
+        safeString(topLevel.toolUseId) ??
+        safeString(topLevel.tool_use_id) ??
+        safeString(topLevel.call_id) ??
+        safeString(topLevel.id);
+    if (typeof message.content === "string") {
+        if (topLevelToolCallId) {
+            addText(topLevelToolCallId, message.content);
+        }
+        return textsById;
+    }
+    if (!Array.isArray(message.content)) {
+        return textsById;
+    }
+    for (const item of message.content) {
+        const record = asRecord(item);
+        if (!record) {
+            continue;
+        }
+        const rawType = safeString(record.type);
+        const replayId = safeString(record.tool_use_id) ??
+            safeString(record.toolUseId) ??
+            safeString(record.tool_call_id) ??
+            safeString(record.toolCallId) ??
+            safeString(record.call_id) ??
+            safeString(record.id) ??
+            (message.content.length === 1 ? topLevelToolCallId : undefined);
+        if (!replayId) {
+            continue;
+        }
+        if (record.type === "text") {
+            const text = safeString(record.text);
+            if (text !== undefined) {
+                addText(replayId, text);
+            }
+            continue;
+        }
+        if (rawType !== "tool_result" &&
+            rawType !== "toolResult" &&
+            rawType !== "function_call_output") {
+            continue;
+        }
+        const textSource = record.output !== undefined
+            ? record.output
+            : record.content !== undefined
+                ? record.content
+                : record;
+        const text = extractStructuredText(textSource);
+        if (text !== undefined) {
+            addText(replayId, text);
+        }
+    }
+    return textsById;
+}
+export function stripExternalizedReplayMetadata(record) {
+    const stripped = { ...record };
+    delete stripped.raw;
+    delete stripped.output;
+    delete stripped.content;
+    delete stripped.text;
+    delete stripped.externalizedFileId;
+    delete stripped.originalByteSize;
+    delete stripped.toolOutputExternalized;
+    delete stripped.externalizationReason;
+    delete stripped.rawType;
+    return stripped;
+}
+export function canonicalizeReplayRawMetadata(record) {
+    const canonical = stripExternalizedReplayMetadata(record);
+    const rawType = safeString(canonical.type);
+    if (rawType === "toolResult") {
+        canonical.type = "tool_result";
+    }
+    const replayId = safeString(canonical.tool_use_id) ??
+        safeString(canonical.toolUseId) ??
+        safeString(canonical.tool_call_id) ??
+        safeString(canonical.toolCallId) ??
+        safeString(canonical.call_id) ??
+        safeString(canonical.id);
+    delete canonical.tool_use_id;
+    delete canonical.toolUseId;
+    delete canonical.tool_call_id;
+    delete canonical.toolCallId;
+    delete canonical.call_id;
+    delete canonical.id;
+    if (replayId) {
+        canonical[canonical.type === "function_call_output" ? "call_id" : "tool_use_id"] = replayId;
+    }
+    const isError = canonical.isError ?? canonical.is_error;
+    delete canonical.isError;
+    delete canonical.is_error;
+    if (typeof isError === "boolean") {
+        canonical.isError = isError;
+    }
+    return canonical;
+}
+export function pickTopLevelReplayMetadata(record) {
+    return {
+        originalRole: record.originalRole,
+        toolCallId: record.toolCallId,
+        toolName: record.toolName,
+        isError: record.isError,
+    };
+}
+export function externalizedReplayMetadataMatches(persistedMetadata, incomingMetadata) {
+    let persistedParsed;
+    let incomingParsed;
+    try {
+        // Model identity is replay affinity, not message identity: strip it so a
+        // row persisted before identity stamping still matches the post-upgrade
+        // representation of the same logical message (PR #1053).
+        persistedParsed = persistedMetadata
+            ? JSON.parse(stripModelIdentityFromMetadataJson(persistedMetadata) ?? "null")
+            : undefined;
+        incomingParsed = incomingMetadata
+            ? JSON.parse(stripModelIdentityFromMetadataJson(incomingMetadata) ?? "null")
+            : undefined;
+    }
+    catch {
+        return false;
+    }
+    const persistedRecord = asRecord(persistedParsed);
+    const incomingRecord = asRecord(incomingParsed);
+    if (!persistedRecord || !incomingRecord) {
+        return false;
+    }
+    const incomingRaw = asRecord(incomingRecord.raw);
+    if (!incomingRaw) {
+        return toJson(pickTopLevelReplayMetadata(persistedRecord)) ===
+            toJson(pickTopLevelReplayMetadata(incomingRecord));
+    }
+    if (toJson(stripExternalizedReplayMetadata(persistedRecord)) !==
+        toJson(stripExternalizedReplayMetadata(incomingRecord))) {
+        return false;
+    }
+    const persistedRaw = asRecord(persistedRecord.raw);
+    return !!persistedRaw &&
+        toJson(canonicalizeReplayRawMetadata(persistedRaw)) ===
+            toJson(canonicalizeReplayRawMetadata(incomingRaw));
+}
+export function extractTranscriptToolCallId(message) {
+    const topLevel = message;
+    const direct = safeString(topLevel.toolCallId) ??
+        safeString(topLevel.tool_call_id) ??
+        safeString(topLevel.toolUseId) ??
+        safeString(topLevel.tool_use_id) ??
+        safeString(topLevel.call_id) ??
+        safeString(topLevel.id);
+    if (direct) {
+        return direct;
+    }
+    if (!Array.isArray(topLevel.content)) {
+        return undefined;
+    }
+    for (const item of topLevel.content) {
+        const record = asRecord(item);
+        if (!record) {
+            continue;
+        }
+        const nested = safeString(record.toolCallId) ??
+            safeString(record.tool_call_id) ??
+            safeString(record.toolUseId) ??
+            safeString(record.tool_use_id) ??
+            safeString(record.call_id) ??
+            safeString(record.id);
+        if (nested) {
+            return nested;
+        }
+    }
+    return undefined;
+}

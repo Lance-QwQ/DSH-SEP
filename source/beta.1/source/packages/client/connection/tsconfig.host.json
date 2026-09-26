@@ -1,0 +1,52 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/tsconfig.host.tsbuildinfo"
+  },
+  "files": [
+    "src/api-path.ts",
+    "src/api-request-trust.ts",
+    "src/browser-auth.ts",
+    "src/client/random-uuid.ts",
+    "src/client/rpc.ts",
+    "src/http-bridge.ts",
+    "src/index.ts",
+    "src/loopback-hostname.ts",
+    "src/operator-peer.ts",
+    "src/recovery-config.ts",
+    "src/rpc-host.ts",
+    "src/rpc-schema.ts",
+    "src/rpc.ts"
+  ],
+  "references": [
+    {
+      "path": "../../../vendor/cordis"
+    },
+    {
+      "path": "../../../vendor/schemastery"
+    },
+    {
+      "path": "../../attachment/attachment"
+    },
+    {
+      "path": "../../core/scope"
+    },
+    {
+      "path": "../../core/session"
+    },
+    {
+      "path": "../../credentials/credentials"
+    },
+    {
+      "path": "../../host/webserver"
+    },
+    {
+      "path": "../../typert/protocol"
+    },
+    {
+      "path": "../../util/brand"
+    }
+  ]
+}
