@@ -1,0 +1,20 @@
+{
+  "schema": 2,
+  "sepVersion": "0.2.0-beta.2",
+  "baseGraphHash": "7a4acf5f10ea025684d419a3877cbace08acd31a19ee8ad158fdd74eedfbf61c",
+  "targetGraphHash": "7ccb8c88330c3f2f576bc3bc50b0e235ea1e0ee28e7fd772521039b213e4f0e5",
+  "baseSourceArchive": {
+    "name": "DSH-SEP-Source-0.2.0-beta.1-Windows.zip",
+    "sha256": "480bc4dc0e3f02b4e015786938e36c9b11dd4259cf29b1210423311b9260643d"
+  },
+  "historicalSanitization": {
+    "reference": "history/beta.1-SANITIZATION.json",
+    "sha256": "a0fd81a4972bbfea1bab68165c624b6b1ada75618d480038b512bcd40e7d714d",
+    "scope": "Original pre-Beta.1 comment and notice sanitization record; historical graph identifiers are not the Beta.2 transition."
+  },
+  "currentScan": "SOURCE-SCAN.json",
+  "sourceAndProgramMappings": "SOURCE-PROVENANCE.json",
+  "testAndDeliveryAdaptations": "SOURCE-DELIVERY.json",
+  "currentProductionSanitizationChanges": [],
+  "scope": "Constructed from the already public Beta.1 source and explicitly listed repair, test and delivery files. No private installation data copied. The scoped scan is not an exhaustive guarantee against all secret formats."
+}

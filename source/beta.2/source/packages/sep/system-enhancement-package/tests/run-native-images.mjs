@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {mkdir,mkdtemp} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
+assert.equal(Number(process.versions.node.split('.')[0]),24,'Use Node 24.');
+assert.ok(process.env.SEP_IMAGE_HOST,'SEP_IMAGE_HOST is required.');
+assert.ok(process.env.SEP_IMAGE_EVIDENCE_ROOT,'SEP_IMAGE_EVIDENCE_ROOT is required.');
+const evidence=resolve(process.env.SEP_IMAGE_EVIDENCE_ROOT);await mkdir(evidence,{recursive:true});
+const cwd=await mkdtemp(join(evidence,'run37-'));
+const path=name=>fileURLToPath(new URL(name,import.meta.url));
+const run=spawnSync(process.execPath,['--import',new URL('./native-images/host-dependencies.mjs',import.meta.url).href,'--test','--test-isolation=none',path('./native-images/native-images.test.mjs'),path('./budget.test.mjs'),path('./native-image-composition/composition.test.mjs')],{cwd,env:process.env,stdio:'inherit'});
+if(run.error)throw run.error;
+console.log('Synthetic evidence retained at:',cwd);
+process.exitCode=run.status??1;

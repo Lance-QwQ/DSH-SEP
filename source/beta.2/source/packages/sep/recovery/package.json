@@ -1,0 +1,49 @@
+{
+  "name": "@deepseek-ai/dsh-recovery",
+  "version": "0.1.7-rc.2-sep.local.7",
+  "private": true,
+  "type": "module",
+  "description": "DSH SEP isolated host supervision, workspace recovery and task reconciliation",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./client": "./src/client.mjs",
+    "./host-plugin": "./src/host-plugin.mjs",
+    "./suite-plugin": "./src/suite-plugin.mjs",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "dsh-recovery": "./bin/recovery.mjs"
+  },
+  "files": [
+    "src",
+    "bin",
+    "ui",
+    "README.md",
+    "README-controller.md",
+    "README-guardian.md",
+    "README-backup.md",
+    "README-continuation.md",
+    "LICENSE",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "peerDependencies": {
+    "dsh-system-enhancement-package": "0.2.0-beta.2",
+    "@deepseek-ai/dsh-session-persistence": "0.1.7-rc.2"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-local.sep2.rc2.1"
+  },
+  "dshLocalBuild": {
+    "kind": "isolated-source-candidate",
+    "upstreamVersion": "0.1.7-rc.1",
+    "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
+    "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "dailyDeployment": false
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}

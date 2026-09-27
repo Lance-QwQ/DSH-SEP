@@ -1,0 +1,74 @@
+{
+  "name": "@deepseek-ai/dsh-client-ui-settings-memory",
+  "version": "0.1.7-rc.1-sep.local.1",
+  "description": "DSH SEP project automatic memory controls in native Settings",
+  "type": "module",
+  "private": true,
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-connection"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:~",
+    "@deepseek-ai/dsh-client-connection": "workspace:*",
+    "@deepseek-ai/dsh-client-locale": "workspace:*",
+    "@deepseek-ai/dsh-client-ui-settings": "workspace:*",
+    "@deepseek-ai/dsh-client-ui-slots": "workspace:*",
+    "@deepseek-ai/dsh-invariants": "workspace:*",
+    "react": "18.3.1"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "workspace:~"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/client.js.map",
+    "lib/types/**/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "dshSepSourceBase": {
+    "version": "0.1.5-rc.2-local.sep-memory.1"
+  },
+  "dshLocalBuild": {
+    "kind": "isolated-source-candidate",
+    "upstreamVersion": "0.1.7-rc.1",
+    "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
+    "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "dailyDeployment": false
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "workspace:~",
+    "@deepseek-ai/dsh-client-connection": "workspace:*",
+    "@deepseek-ai/dsh-client-locale": "workspace:*",
+    "@deepseek-ai/dsh-client-ui-settings": "workspace:*",
+    "@deepseek-ai/dsh-client-ui-slots": "workspace:*",
+    "@deepseek-ai/dsh-invariants": "workspace:*",
+    "@deepseek-ai/schemastery": "workspace:~",
+    "@deepseek-ai/dsh-client-ui-renderer": "workspace:*",
+    "@deepseek-ai/dsh-client-ui-primitives": "workspace:*",
+    "react": "18.3.1",
+    "@types/react": "^18.3.31"
+  }
+}

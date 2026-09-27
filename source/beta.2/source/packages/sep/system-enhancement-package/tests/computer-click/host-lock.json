@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "hostVersion": "0.1.7-rc.2",
+  "graphSha256": "02e700a936b5e409e6b2966083179c2fdd4a9dddce80ad125e792e9de3a974cc",
+  "nodeMajor": 24,
+  "entries": [
+    "@deepseek-ai/cordis",
+    "@deepseek-ai/cordis-plugin-loader",
+    "@deepseek-ai/cordis-plugin-include",
+    "@deepseek-ai/dsh-system-prompt",
+    "@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-mcp-client",
+    "zod",
+    "@deepseek-ai/dsh-llm",
+    "@deepseek-ai/dsh-session",
+    "@deepseek-ai/dsh-session-projection",
+    "@deepseek-ai/dsh-agent",
+    "@deepseek-ai/dsh-agent-loop"
+  ]
+}

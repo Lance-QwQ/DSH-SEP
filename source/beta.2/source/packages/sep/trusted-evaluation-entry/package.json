@@ -1,0 +1,32 @@
+{
+  "name": "dsh-sep-trusted-evaluation-entry",
+  "version": "0.1.7-rc.1-sep.local.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "entry.mjs",
+    "evaluation",
+    "README.md",
+    "LICENSE",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:~",
+    "@deepseek-ai/dsh-tools": "workspace:*"
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-isolated.4"
+  },
+  "dshLocalBuild": {
+    "kind": "isolated-source-candidate",
+    "upstreamVersion": "0.1.7-rc.1",
+    "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
+    "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "dailyDeployment": false
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}

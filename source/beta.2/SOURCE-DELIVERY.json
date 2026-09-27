@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "sepVersion": "0.2.0-beta.2",
+  "graphHash": "7ccb8c88330c3f2f576bc3bc50b0e235ea1e0ee28e7fd772521039b213e4f0e5",
+  "testSnapshotAdaptations": [
+    {
+      "source": "source/packages/sep/system-enhancement-package/tests/native-images/native-images.test.mjs",
+      "originalSha256": "5b5403d6989e5ee809019bab727468b2b5c36334d7f6375fa9c55590174ccec2",
+      "publishedSha256": "1395e10cdbd15c2ead5a131279c0d1980da44b24bee212f5ab95492b8b47416c",
+      "kind": "test-only public fixture graph binding",
+      "hostGraphSha256": "7ccb8c88330c3f2f576bc3bc50b0e235ea1e0ee28e7fd772521039b213e4f0e5"
+    },
+    {
+      "source": "source/packages/sep/system-enhancement-package/tests/native-image-composition/host-lock.json",
+      "originalSha256": "11b617915c3de397aca8203c78455a41c6fd2ef25de33d29949b27f855476e1f",
+      "publishedSha256": "339b6c884a8de0197e501b4815d8901575184ee98020570aa32143a62f171ee5",
+      "kind": "test-only public fixture graph binding",
+      "hostGraphSha256": "7ccb8c88330c3f2f576bc3bc50b0e235ea1e0ee28e7fd772521039b213e4f0e5"
+    }
+  ],
+  "gitAttributes": {
+    "path": "source/.gitattributes",
+    "beforeSha256": "946bed079ec10d6ce1fe3fc3d76e42a9587548135f0f4a7500d77303d9cbd398",
+    "afterSha256": "5a86e7991271147c83ab8c91836b4778b6359ab76831b5c0ef9dc7fa91fb6a05",
+    "change": "Append byte-preserving snapshot attributes; no runtime change"
+  },
+  "budgetRegression": {
+    "source": "source/packages/sep/system-enhancement-package/tests/budget.test.mjs",
+    "sha256": "fd3966d5ce5696da89944a39fa5bd4a780b30acefdb87594ea72421f8f0db535",
+    "cases": 6
+  },
+  "policy": "No personal installation, credentials, private workspaces, session logs or Git object history copied; only source/test files enumerated by the builder."
+}

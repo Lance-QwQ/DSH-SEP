@@ -1,0 +1,437 @@
+const FILE_BLOCK_RE = /<file\b([^>]*)>([\s\S]*?)<\/file>/gi;
+const FILE_ID_RE = /\bfile_[a-f0-9]{16}\b/gi;
+const CODE_EXTENSIONS = new Set([
+    "c",
+    "cc",
+    "cpp",
+    "cs",
+    "go",
+    "h",
+    "hpp",
+    "java",
+    "js",
+    "jsx",
+    "kt",
+    "m",
+    "php",
+    "py",
+    "rb",
+    "rs",
+    "scala",
+    "sh",
+    "sql",
+    "swift",
+    "ts",
+    "tsx",
+]);
+const STRUCTURED_EXTENSIONS = new Set(["csv", "json", "tsv", "xml", "yaml", "yml"]);
+const MIME_EXTENSION_MAP = {
+    "application/json": "json",
+    "application/xml": "xml",
+    "application/yaml": "yaml",
+    "application/x-yaml": "yaml",
+    "application/x-ndjson": "json",
+    "application/csv": "csv",
+    "application/javascript": "js",
+    "application/typescript": "ts",
+    "application/x-python-code": "py",
+    "application/x-rust": "rs",
+    "application/x-sh": "sh",
+    "text/csv": "csv",
+    "text/markdown": "md",
+    "text/plain": "txt",
+    "text/tab-separated-values": "tsv",
+    "text/x-c": "c",
+    "text/x-c++": "cpp",
+    "text/x-go": "go",
+    "text/x-java": "java",
+    "text/x-python": "py",
+    "text/x-rust": "rs",
+    "text/x-script.python": "py",
+    "text/x-shellscript": "sh",
+    "text/x-typescript": "ts",
+    "text/xml": "xml",
+};
+const STRUCTURED_MIME_PREFIXES = [
+    "application/json",
+    "application/xml",
+    "application/yaml",
+    "application/x-yaml",
+    "application/x-ndjson",
+    "text/csv",
+    "text/tab-separated-values",
+    "text/xml",
+];
+const CODE_MIME_PREFIXES = [
+    "application/javascript",
+    "application/typescript",
+    "application/x-python-code",
+    "application/x-rust",
+    "text/javascript",
+    "text/x-c",
+    "text/x-c++",
+    "text/x-go",
+    "text/x-java",
+    "text/x-python",
+    "text/x-rust",
+    "text/x-script.python",
+    "text/x-shellscript",
+    "text/x-typescript",
+];
+const TEXT_SUMMARY_SLICE_CHARS = 2_400;
+const TEXT_HEADER_LIMIT = 18;
+function parseFileAttributes(raw) {
+    const attrs = {};
+    const attrRe = /([A-Za-z_:][A-Za-z0-9_:\-.]*)\s*=\s*("([^"]*)"|'([^']*)'|([^\s"'>]+))/g;
+    let match;
+    while ((match = attrRe.exec(raw)) !== null) {
+        const key = match[1].trim().toLowerCase();
+        const value = (match[3] ?? match[4] ?? match[5] ?? "").trim();
+        if (key.length > 0 && value.length > 0) {
+            attrs[key] = value;
+        }
+    }
+    return attrs;
+}
+function normalizeTextForLine(text, maxLen) {
+    const compact = text.replace(/\s+/g, " ").trim();
+    if (compact.length <= maxLen) {
+        return compact;
+    }
+    return `${compact.slice(0, maxLen)}...`;
+}
+function collectFileNameExtension(fileName) {
+    if (!fileName) {
+        return undefined;
+    }
+    const base = fileName.trim().split(/[\\/]/).pop() ?? "";
+    const idx = base.lastIndexOf(".");
+    if (idx <= 0 || idx === base.length - 1) {
+        return undefined;
+    }
+    const ext = base.slice(idx + 1).toLowerCase();
+    if (!/^[a-z0-9]{1,10}$/.test(ext)) {
+        return undefined;
+    }
+    return ext;
+}
+function guessMimeExtension(mimeType) {
+    if (!mimeType) {
+        return undefined;
+    }
+    const normalized = mimeType.trim().toLowerCase();
+    return MIME_EXTENSION_MAP[normalized];
+}
+function isStructured(params) {
+    const mime = params.mimeType?.trim().toLowerCase();
+    if (mime && STRUCTURED_MIME_PREFIXES.some((candidate) => mime.startsWith(candidate))) {
+        return true;
+    }
+    return params.extension ? STRUCTURED_EXTENSIONS.has(params.extension) : false;
+}
+function isCode(params) {
+    const mime = params.mimeType?.trim().toLowerCase();
+    if (mime && CODE_MIME_PREFIXES.some((candidate) => mime.startsWith(candidate))) {
+        return true;
+    }
+    return params.extension ? CODE_EXTENSIONS.has(params.extension) : false;
+}
+function uniqueOrdered(values) {
+    const seen = new Set();
+    const out = [];
+    for (const value of values) {
+        if (!seen.has(value)) {
+            seen.add(value);
+            out.push(value);
+        }
+    }
+    return out;
+}
+function exploreJson(content) {
+    const parsed = JSON.parse(content);
+    const describe = (value, depth = 0) => {
+        if (depth >= 2) {
+            return "...";
+        }
+        if (Array.isArray(value)) {
+            const sample = value.slice(0, 3).map((item) => describe(item, depth + 1));
+            return `array(len=${value.length}${sample.length > 0 ? `, sample=[${sample.join(", ")}]` : ""})`;
+        }
+        if (!value || typeof value !== "object") {
+            return typeof value;
+        }
+        const keys = Object.keys(value);
+        const preview = keys.slice(0, 10).join(", ");
+        return `object(keys=${keys.length}${preview ? `: ${preview}` : ""})`;
+    };
+    const topLevel = Array.isArray(parsed) ? "array" : typeof parsed;
+    return [
+        `Structured summary (JSON):`,
+        `Top-level type: ${topLevel}.`,
+        `Shape: ${describe(parsed)}.`,
+    ].join("\n");
+}
+function parseDelimitedLine(line, delimiter) {
+    return line
+        .split(delimiter)
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+}
+function exploreDelimited(content, delimiter, kind) {
+    const lines = content
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
+    if (lines.length === 0) {
+        return `Structured summary (${kind}): no rows found.`;
+    }
+    const headers = parseDelimitedLine(lines[0], delimiter);
+    const rowCount = Math.max(0, lines.length - 1);
+    const firstData = lines[1] ? normalizeTextForLine(lines[1], 180) : "(no data rows)";
+    return [
+        `Structured summary (${kind}):`,
+        `Rows: ${rowCount.toLocaleString("en-US")}.`,
+        `Columns (${headers.length}): ${headers.join(", ") || "(none detected)"}.`,
+        `First row sample: ${firstData}.`,
+    ].join("\n");
+}
+function exploreYaml(content) {
+    const topLevelKeys = uniqueOrdered(content
+        .split(/\r?\n/)
+        .map((line) => {
+        const match = line.match(/^([A-Za-z0-9_.-]+):\s*(?:#.*)?$/);
+        return match ? match[1] : "";
+    })
+        .filter((key) => key.length > 0));
+    return [
+        "Structured summary (YAML):",
+        `Top-level keys (${topLevelKeys.length}): ${topLevelKeys.slice(0, 30).join(", ") || "(none detected)"}.`,
+    ].join("\n");
+}
+function exploreXml(content) {
+    const rootMatch = content.match(/<([A-Za-z0-9_:-]+)(\s|>)/);
+    const rootTag = rootMatch?.[1] ?? "unknown";
+    const childTags = uniqueOrdered([...content.matchAll(/<([A-Za-z0-9_:-]+)(\s|>)/g)]
+        .map((match) => match[1])
+        .filter((tag) => tag !== rootTag)
+        .slice(0, 30));
+    return [
+        "Structured summary (XML):",
+        `Root element: ${rootTag}.`,
+        `Child elements seen: ${childTags.join(", ") || "(none detected)"}.`,
+    ].join("\n");
+}
+export function exploreStructuredData(content, mimeType, fileName) {
+    const extension = collectFileNameExtension(fileName) ?? guessMimeExtension(mimeType);
+    const normalizedMime = mimeType?.trim().toLowerCase() ?? "";
+    if (extension === "json" || normalizedMime.startsWith("application/json")) {
+        try {
+            return exploreJson(content);
+        }
+        catch {
+            return "Structured summary (JSON): failed to parse as valid JSON.";
+        }
+    }
+    if (extension === "csv" || normalizedMime.startsWith("text/csv")) {
+        return exploreDelimited(content, ",", "CSV");
+    }
+    if (extension === "tsv" || normalizedMime.startsWith("text/tab-separated-values")) {
+        return exploreDelimited(content, "\t", "TSV");
+    }
+    if (extension === "xml" ||
+        normalizedMime.startsWith("text/xml") ||
+        normalizedMime.startsWith("application/xml")) {
+        return exploreXml(content);
+    }
+    if (extension === "yaml" || extension === "yml" || normalizedMime.includes("yaml")) {
+        return exploreYaml(content);
+    }
+    return [
+        "Structured summary:",
+        `Characters: ${content.length.toLocaleString("en-US")}.`,
+        `Lines: ${content.split(/\r?\n/).length.toLocaleString("en-US")}.`,
+    ].join("\n");
+}
+export function exploreCode(content, fileName) {
+    const lines = content.split(/\r?\n/);
+    const imports = uniqueOrdered(lines
+        .filter((line) => /^\s*(import\s+|from\s+\S+\s+import\s+|const\s+\w+\s*=\s*require\()/.test(line))
+        .map((line) => normalizeTextForLine(line, 180))
+        .slice(0, 12));
+    const signatures = uniqueOrdered(lines
+        .map((line) => line.trim())
+        .filter((line) => /^(export\s+)?(async\s+)?(function|class|interface|type|const\s+\w+\s*=\s*\(|def\s+\w+\(|struct\s+\w+)/.test(line))
+        .map((line) => normalizeTextForLine(line, 200))
+        .slice(0, 24));
+    return [
+        `Code exploration summary${fileName ? ` (${fileName})` : ""}:`,
+        `Lines: ${lines.length.toLocaleString("en-US")}.`,
+        `Imports/dependencies (${imports.length}): ${imports.join(" | ") || "none detected"}.`,
+        `Top-level definitions (${signatures.length}): ${signatures.join(" | ") || "none detected"}.`,
+    ].join("\n");
+}
+function extractTextHeaders(content) {
+    const headers = uniqueOrdered(content
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 1)
+        .filter((line) => /^#{1,6}\s+/.test(line) || /^[A-Z0-9][A-Z0-9\s:_-]{6,}$/.test(line))
+        .map((line) => normalizeTextForLine(line, 160))
+        .slice(0, TEXT_HEADER_LIMIT));
+    return headers;
+}
+function buildTextSample(content) {
+    if (content.length <= TEXT_SUMMARY_SLICE_CHARS * 2) {
+        return content;
+    }
+    const middleStart = Math.max(0, Math.floor(content.length / 2) - Math.floor(TEXT_SUMMARY_SLICE_CHARS / 2));
+    const middleEnd = middleStart + TEXT_SUMMARY_SLICE_CHARS;
+    const head = content.slice(0, TEXT_SUMMARY_SLICE_CHARS);
+    const mid = content.slice(middleStart, middleEnd);
+    const tail = content.slice(-TEXT_SUMMARY_SLICE_CHARS);
+    return ["[Document Start]", head, "[Document Middle]", mid, "[Document End]", tail].join("\n\n");
+}
+function buildTextPrompt(params) {
+    const sample = buildTextSample(params.content);
+    return [
+        `Summarize this large file for retrieval-time context references.`,
+        `File name: ${params.fileName ?? "unknown"}`,
+        `Mime type: ${params.mimeType ?? "unknown"}`,
+        `Length: ${params.content.length.toLocaleString("en-US")} chars`,
+        `Line count: ${params.content.split(/\r?\n/).length.toLocaleString("en-US")}`,
+        params.headers.length > 0
+            ? `Detected section headers: ${params.headers.join(" | ")}`
+            : "Detected section headers: none",
+        "Produce 200-300 words with:",
+        "- What the document is about",
+        "- Key sections and topics",
+        "- Important names, dates, and numbers",
+        "- Any action items or constraints",
+        "Do not quote long passages verbatim.",
+        "",
+        "Document sample:",
+        sample,
+    ].join("\n");
+}
+function exploreTextDeterministicFallback(content, fileName) {
+    const normalized = content.replace(/\s+/g, " ").trim();
+    const headers = extractTextHeaders(content);
+    const lineCount = content.split(/\r?\n/).length;
+    const wordCount = normalized.length > 0 ? normalized.split(/\s+/).length : 0;
+    const first = normalizeTextForLine(content.slice(0, 500), 500);
+    const last = normalizeTextForLine(content.slice(-500), 500);
+    return [
+        `Text exploration summary${fileName ? ` (${fileName})` : ""}:`,
+        `Characters: ${content.length.toLocaleString("en-US")}.`,
+        `Words: ${wordCount.toLocaleString("en-US")}.`,
+        `Lines: ${lineCount.toLocaleString("en-US")}.`,
+        `Detected section headers: ${headers.join(" | ") || "none detected"}.`,
+        `Opening excerpt: ${first || "(empty)"}.`,
+        `Closing excerpt: ${last || "(empty)"}.`,
+    ].join("\n");
+}
+async function exploreText(params) {
+    const headers = extractTextHeaders(params.content);
+    if (params.summarizeText) {
+        const prompt = buildTextPrompt({
+            content: params.content,
+            fileName: params.fileName,
+            mimeType: params.mimeType,
+            headers,
+        });
+        try {
+            const summary = await params.summarizeText(prompt);
+            if (typeof summary === "string" && summary.trim().length > 0) {
+                return summary.trim();
+            }
+        }
+        catch {
+            // Use deterministic fallback if model summarization fails.
+        }
+    }
+    return exploreTextDeterministicFallback(params.content, params.fileName);
+}
+export function parseFileBlocks(content) {
+    const blocks = [];
+    let match;
+    FILE_BLOCK_RE.lastIndex = 0;
+    while ((match = FILE_BLOCK_RE.exec(content)) !== null) {
+        const fullMatch = match[0];
+        const rawAttrs = match[1] ?? "";
+        const text = match[2] ?? "";
+        const start = match.index;
+        const end = start + fullMatch.length;
+        const attributes = parseFileAttributes(rawAttrs);
+        blocks.push({
+            fullMatch,
+            start,
+            end,
+            attributes,
+            fileName: attributes.name,
+            mimeType: attributes.mime,
+            text,
+        });
+    }
+    return blocks;
+}
+export function extensionFromNameOrMime(fileName, mimeType) {
+    const fromName = collectFileNameExtension(fileName);
+    if (fromName) {
+        return fromName;
+    }
+    const fromMime = guessMimeExtension(mimeType);
+    if (fromMime) {
+        return fromMime;
+    }
+    return "txt";
+}
+export function extractFileIdsFromContent(content) {
+    const matches = content.match(FILE_ID_RE) ?? [];
+    return uniqueOrdered(matches.map((id) => id.toLowerCase()));
+}
+export function formatFileReference(input) {
+    const name = input.fileName?.trim() || "unknown";
+    const mime = input.mimeType?.trim() || "unknown";
+    const byteSize = Math.max(0, input.byteSize);
+    return [
+        `[LCM File: ${input.fileId} | ${name} | ${mime} | ${byteSize.toLocaleString("en-US")} bytes]`,
+        "",
+        "Exploration Summary:",
+        input.summary.trim() || "(no summary available)",
+    ].join("\n");
+}
+export function formatToolOutputReference(input) {
+    const toolName = input.toolName?.trim() || "unknown";
+    const byteSize = Math.max(0, input.byteSize);
+    return [
+        `[LCM Tool Output: ${input.fileId} | tool=${toolName} | ${byteSize.toLocaleString("en-US")} bytes]`,
+        "",
+        "Exploration Summary:",
+        input.summary.trim() || "(no summary available)",
+        "",
+        "Call lcm_describe(id=\"<file_id above>\", expandFile=true) to fetch the full output content from disk.",
+    ].join("\n");
+}
+export function formatRawPayloadReference(input) {
+    const role = input.role.trim() || "unknown";
+    const reason = input.reason.trim() || "large_raw_message";
+    const byteSize = Math.max(0, input.byteSize);
+    return [
+        `[LCM Raw Payload: ${input.fileId} | role=${role} | reason=${reason} | ${byteSize.toLocaleString("en-US")} bytes]`,
+        "",
+        "Exploration Summary:",
+        input.summary.trim() || "(no summary available)",
+        "",
+        "Call lcm_describe(id=\"<file_id above>\", expandFile=true) to fetch the full payload content from disk.",
+    ].join("\n");
+}
+export async function generateExplorationSummary(input) {
+    const extension = extensionFromNameOrMime(input.fileName, input.mimeType);
+    if (isStructured({ mimeType: input.mimeType, extension })) {
+        return exploreStructuredData(input.content, input.mimeType, input.fileName);
+    }
+    if (isCode({ mimeType: input.mimeType, extension })) {
+        return exploreCode(input.content, input.fileName);
+    }
+    return exploreText(input);
+}

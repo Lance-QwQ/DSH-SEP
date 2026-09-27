@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "package": "dsh-sep-plugin-group",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "license": "MIT",
+  "includePatterns": [
+    "source/**",
+    "README.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "vendor/**",
+    "catalog.json",
+    "THIRD_PARTY_NOTICES.md",
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "originalFiles": [
+    {
+      "path": "package.json",
+      "baselineSha256": "5a878bd334ee49bdfeee74cadda0909451ae24b1d12e37e8f34461e6ed6434b9",
+      "bytes": 1284
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "8d5a884c49c20608a848d69a6eaa2ab65e6c7478cdeeda3d301624a7ece3e825",
+      "bytes": 11609
+    },
+    {
+      "path": "source/adapters.mjs",
+      "baselineSha256": "12f591f60a4e8fba05918c0d0131889f5ba57ec4de56670d45a53c702acdac43",
+      "bytes": 2566
+    },
+    {
+      "path": "source/history-expansion.mjs",
+      "baselineSha256": "51efa3713134446f60bd0ddf81f508c1ec66e347e3d607c4263a3366404c759d",
+      "bytes": 5794
+    },
+    {
+      "path": "source/history-generation.mjs",
+      "baselineSha256": "7ca67e797c07bf14a618dafacc425850045e3071b32b4d8d11700fce6d2c6780",
+      "bytes": 2226
+    },
+    {
+      "path": "source/history-review-cli.mjs",
+      "baselineSha256": "b753ace9c67661d56c3ed9588deae98022af0d021dda0eb97b59ee8a9775cd36",
+      "bytes": 2138
+    },
+    {
+      "path": "source/history-review.mjs",
+      "baselineSha256": "34e86c7ae79c7855e2ab25c569bb8ff3c4397bb2a72ea65f9cbb476058bf68dc",
+      "bytes": 5840
+    },
+    {
+      "path": "source/index.mjs",
+      "baselineSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+      "bytes": 7202
+    },
+    {
+      "path": "source/lcm-worker.mjs",
+      "baselineSha256": "79782357d05e84e4fbfed950a6739bee4b5088877279d8cace2975d2f91d7ed5",
+      "bytes": 2321
+    },
+    {
+      "path": "source/lossless-compaction.mjs",
+      "baselineSha256": "76cd5da8d7d6c62d51150e2ccfa453db0ebd67863e87e68c9b83a3a246bd785f",
+      "bytes": 5105
+    },
+    {
+      "path": "source/lossless-integrity-worker.mjs",
+      "baselineSha256": "ea6db7679640579a67938d342568b8210ae042dfb490c4a88730226ebb5f644e",
+      "bytes": 2203
+    },
+    {
+      "path": "source/lossless-plugin.mjs",
+      "baselineSha256": "3b76dc3bae3458f532f48e4b0a9f128086b9972771942333197ce87f0716e741",
+      "bytes": 858
+    },
+    {
+      "path": "source/policies.mjs",
+      "baselineSha256": "ba724f7e751fb159b718ee3315a2e4d97a1939bd29d15cef75a40ea5ec49b9bb",
+      "bytes": 3892
+    },
+    {
+      "path": "source/prework.mjs",
+      "baselineSha256": "8727e6cfbee57c633c733310ba41835d5e5d6fc8d5d8febc549a197af21e79a2",
+      "bytes": 4870
+    },
+    {
+      "path": "source/rex-bridge.mjs",
+      "baselineSha256": "ac0463c5714ccc964a277af6f1601a83d087fb4d7e44206b3090a6dff24e43a0",
+      "bytes": 1005
+    }
+  ],
+  "terms": "Only the listed locally authored scope is designated under the custom license. Existing third-party, vendor and prior valid grants take priority and are not revoked. Scope listing records this release selection, not legal ownership certification. Manifest hashes below describe pre-overlay metadata; implementation bytes are unchanged.",
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

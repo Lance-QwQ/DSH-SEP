@@ -1,0 +1,47 @@
+{
+  "name": "dsh-sep-plugin-group",
+  "version": "0.1.7-rc.1-sep.local.6",
+  "private": true,
+  "type": "module",
+  "main": "./source/index.mjs",
+  "exports": {
+    ".": "./source/index.mjs",
+    "./package.json": "./package.json",
+    "./compaction": "./source/lossless-plugin.mjs"
+  },
+  "description": "DSH SEP isolated project memory/context and evaluation adapters",
+  "files": [
+    "source",
+    "vendor",
+    "catalog.json",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.4",
+    "dsh-system-enhancement-package": "0.2.0-beta.2",
+    "zod": "4.4.3",
+    "@deepseek-ai/dsh-compaction-basic": "0.1.7-rc.2",
+    "@deepseek-ai/dsh-session": "0.1.7-rc.2",
+    "@deepseek-ai/dsh-session-format": "0.1.7-rc.2",
+    "@deepseek-ai/dsh-session-persistence-jsonl": "0.1.7-rc.2",
+    "@deepseek-ai/dsh-subagent": "0.1.7-rc.2"
+  },
+  "bin": {
+    "dsh-sep-history": "./source/history-review-cli.mjs"
+  },
+  "dshSepSourceBase": {
+    "version": "0.1.0-isolated.8"
+  },
+  "dshLocalBuild": {
+    "kind": "isolated-source-candidate",
+    "upstreamVersion": "0.1.7-rc.1",
+    "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
+    "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
+    "dailyDeployment": false
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}
