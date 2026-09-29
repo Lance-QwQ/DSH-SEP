@@ -15,7 +15,7 @@ committed operation. The Guardian separately owns actual ChildProcess handles:
 normal close sends IPC, then the configured deadline forces only that handle
 (SIGKILL on POSIX, existing forced termination on Windows). A further bounded
 wait includes the exit fence plus 1000 ms; no confirmed exit yields
-GUARDIAN_STOP_TIMEOUT and keeps ownership. A failed close can be retried. A
+GUARDIAN_STOP_TIMEOUT and keeps ownership. A timed-out close can be retried after recovery; terminal cleanup errors keep the original rejection. A
 blocked close is not evidence of zero remaining resources. Tests which simulate
 refused termination release the synthetic child via later test cleanup.
 
@@ -27,7 +27,7 @@ are synchronized. This slice does not supply a Linux/macOS installer, .desktop
 file, complete .app bundle, signatures or a real desktop acceptance result.
 
 Tests use real child processes and synthetic state. Only unavailable external
-semver/profile-composition dependencies have throwing import stubs; those APIs
+semver/YAML/profile-composition dependencies have throwing import stubs; those APIs
 must never run in these lifecycle tests. No real keys, provider calls, user data
 or actual update publication are involved. The update's process gates and signed
 worker lease run directly; complete candidate preparation and native installation

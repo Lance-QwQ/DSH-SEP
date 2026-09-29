@@ -5,7 +5,7 @@ platform process identity, signed update-worker leases, live-parent cancellation
 publisher output/deadline behavior, Guardian IPC/deadline/blocked shutdown and
 platform launcher paths/environment. Prior baseline and r1 snapshots are retained.
 
-The native lifecycle suite has 18 scenarios. Profile/semver/YAML imports are
+The native lifecycle suite has 19 scenarios. Profile/semver/YAML imports are
 throwing external test stubs and must not execute; process inspection, signed
 lease state, queued update control and real child processes are the actual source.
 This is not a full profile boot, native installer, desktop launch or update-package

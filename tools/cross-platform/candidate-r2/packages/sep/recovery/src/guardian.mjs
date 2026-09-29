@@ -372,7 +372,7 @@ export async function openGuardian(options) {
         await tail;
         closed = true;
         try {await journal.close();} finally {journal=null;await ownership.release({remove:!fatalError});}
-      })().catch(error => { closing = null; throw error; });
+      })().catch(error => { if (!closed) closing = null; throw error; });
       return closing;
     }
     if (!sequence) await persist({}, 'initialized');

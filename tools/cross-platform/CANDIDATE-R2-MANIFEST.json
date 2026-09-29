@@ -6,8 +6,8 @@
   "records": [
     {
       "path": "apps/desktop/src/sep-update/LIFECYCLE-PORTABILITY.md",
-      "bytes": 2289,
-      "sha256": "60b5dbb83fefa16f96bd2318a11a4b2296c7877080401a27a131247bf6ab6ad2"
+      "bytes": 2365,
+      "sha256": "b76e22437d1fbff7cfa0359fc0e0cca8552621f5fa9826573c0228fc96f8b546"
     },
     {
       "path": "apps/desktop/src/sep-update/download-package.mjs",
@@ -136,8 +136,8 @@
     },
     {
       "path": "apps/desktop/src/sep-update/tests/lifecycle-portability.test.mjs",
-      "bytes": 11770,
-      "sha256": "ffc5ec1fc52d42fb36108ec0ae1bbf6f25ed4f84fa10e05f246b8684d191fe3a"
+      "bytes": 12319,
+      "sha256": "c4c698b6bc0e7e8ccb961c7c33495ea3517d183e7f41d0abdc1b0391fae89300"
     },
     {
       "path": "apps/desktop/src/sep-update/tests/lifecycle-yaml.cjs",
@@ -271,8 +271,8 @@
     },
     {
       "path": "packages/sep/recovery/src/guardian.mjs",
-      "bytes": 23779,
-      "sha256": "54248e13d958cde9df98267c61c394f72c5e6b6861f9a1b5044f7c1f4f9fbec6"
+      "bytes": 23792,
+      "sha256": "ba695b7c48b82a7d455a5132afd33d10123279994d0fb932ceb3bc64e3e23274"
     },
     {
       "path": "packages/sep/recovery/src/host-plugin.mjs",

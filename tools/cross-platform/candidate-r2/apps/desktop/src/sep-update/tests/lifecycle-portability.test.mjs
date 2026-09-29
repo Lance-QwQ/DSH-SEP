@@ -72,3 +72,9 @@ test('guardian reports blocked when termination cannot be confirmed; recovery cl
   await guardian?.close();
  }
 });
+test('terminal close failure preserves its original error on repeat instead of closing a null journal',async()=>{
+ const root=await fresh();const guardian=await openGuardian({controlRoot:root,command:{file:process.execPath,args:[],cwd:root},beforeStart:async()=>false});
+ await writeFile(join(root,'guardian/owner.json'),'changed synthetic owner');
+ let first;try{await guardian.close();assert.fail('close should detect changed owner')}catch(e){first=e;assert.equal(e.code,'OWNER_CHANGED')}
+ await assert.rejects(guardian.close(),e=>e===first);
+});
