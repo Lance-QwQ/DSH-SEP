@@ -50,8 +50,24 @@ jobs:
           SEP_DESKTOP_OUTPUT: ${{ runner.temp }}/sep-desktop-r8
           SEP_ELECTRON_PAYLOAD: ${{ runner.temp }}/sep-electron-r8
         run: node tools/cross-platform/desktop-r8/build-test-bundle.mjs
+      - name: Install Full and Only with concurrent host regression
+        env:
+          SEP_R8_BUNDLES: ${{ runner.temp }}/sep-desktop-r8
+        run: node tools/cross-platform/desktop-r8/install-native.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-native-r8" "$RUNNER_TEMP/sep-native-r8/program" "$RUNNER_TEMP/sep-desktop-r8/install-01"
       - name: Three installed start.sh desktop rounds
+        env:
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 空白/deployment-rc2.json
         run: node tools/cross-platform/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/desktop-r8/packaging"
+      - name: Three Only desktop rounds
+        env:
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/SEP B 空白/deployment-rc2.json
+        run: node tools/cross-platform/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-sep" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/only-01" "$GITHUB_WORKSPACE/tools/cross-platform/desktop-r8/packaging"
+      - name: Update and rollback preserve desktop binding
+        run: node tools/cross-platform/desktop-r8/update-native.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r8/install-01"
+      - name: Three updated start.sh desktop rounds
+        env:
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 空白/deployment-rc2.json
+        run: node tools/cross-platform/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/updated-01" "$GITHUB_WORKSPACE/tools/cross-platform/desktop-r8/packaging"
       - name: Preserve bounded evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -65,8 +81,13 @@ jobs:
             ${{ runner.temp }}/sep-electron-r8/PAYLOAD.json
             ${{ runner.temp }}/sep-desktop-r8/bundle-full/manifest.json
             ${{ runner.temp }}/sep-desktop-r8/bundle-sep/manifest.json
+            ${{ runner.temp }}/sep-desktop-r8/install-01/*RESULT.json
+            ${{ runner.temp }}/sep-desktop-r8/install-01/update-01/*.log
+            ${{ runner.temp }}/sep-desktop-r8/only-01/*.*
+            ${{ runner.temp }}/sep-desktop-r8/updated-01/*.*
             ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.json
             ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.png
             ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.log
           if-no-files-found: warn
           retention-days: 14
+

@@ -63,7 +63,7 @@ export async function openDaily(configPath,{readCredential=true,parentEnv=proces
   async launchDesktop({inspect=false}={}){await gate(config.dailyRoot);return spawn(config.desktopPayloadSha256?await installedDesktopExecutable(config):desktopExecutable(pkg('electron')),[...(inspect?['--inspect=127.0.0.1:0']:[]),pkg('@deepseek-ai/dsh-desktop'),'--user-data-dir='+config.electronUserData,'--sep-recovery-connection='+connectionFile],{cwd:config.dailyRoot,env:await desktopEnvironment(config,env),windowsHide:false,stdio:inspect?'inherit':'ignore'});},
  };
 }
-export async function run(configPath,{inspectDesktop=false}={}){
+export async function run(configPath,{inspectDesktop=process.argv.slice(2).includes('--inspect-desktop')}={}){
  const runtime=await startCoordinated(configPath,{openDaily,loadDeployment});let child;
  // A secondary shortcut only focuses the owning Electron instance. Its normal
  // exit must never stop the recovery center/host owned by the first launcher.
