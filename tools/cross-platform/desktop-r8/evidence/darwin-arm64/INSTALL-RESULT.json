@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "darwin",
+  "arch": "arm64",
+  "checks": [
+    {
+      "name": "independent-instance-config",
+      "status": "pass"
+    },
+    {
+      "name": "profile-directory-ready-a",
+      "status": "pass"
+    },
+    {
+      "name": "native-node-path-a",
+      "status": "pass"
+    },
+    {
+      "name": "profile-directory-ready-b",
+      "status": "pass"
+    },
+    {
+      "name": "native-node-path-b",
+      "status": "pass"
+    },
+    {
+      "name": "concurrent-owned-hosts",
+      "status": "pass"
+    },
+    {
+      "name": "both-budget-services-ready",
+      "status": "pass"
+    },
+    {
+      "name": "other-instance-remains-100",
+      "status": "pass"
+    },
+    {
+      "name": "second-survives-first-shutdown",
+      "status": "pass"
+    },
+    {
+      "name": "installed-restart-settings",
+      "status": "pass"
+    },
+    {
+      "name": "nonzero-ledger-survives-restart",
+      "status": "pass"
+    },
+    {
+      "name": "unsupported-host-refused-before-write",
+      "status": "pass"
+    }
+  ],
+  "installations": [
+    "/Users/runner/work/_temp/sep-desktop-r8/install-01/Full A 空白",
+    "/Users/runner/work/_temp/sep-desktop-r8/install-01/SEP B 空白"
+  ],
+  "graphHash": "124db3246be58a3a444ab792de3350445e0368735e2ab29f523b22fa9aa2337c",
+  "scope": "Real installer, full and SEP-only using exact already-adapted host input, concurrent SEP instances, nonzero synthetic ledger, controlled shutdown. Native desktop payload receipt validated in both installs; physical official-host coexistence not covered."
+}

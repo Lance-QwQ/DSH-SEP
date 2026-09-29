@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "linux",
+  "arch": "x64",
+  "checks": [
+    {
+      "name": "zero-hard-blocks",
+      "status": "pass"
+    },
+    {
+      "name": "zero-declared-incompatibilities",
+      "status": "pass"
+    },
+    {
+      "name": "wrong-fingerprint-consent-refused",
+      "status": "pass"
+    },
+    {
+      "name": "real-publication-rolled-back",
+      "status": "pass"
+    },
+    {
+      "name": "old-code-pointer-restored",
+      "status": "pass"
+    },
+    {
+      "name": "ledger-unchanged-after-rollback",
+      "status": "pass"
+    },
+    {
+      "name": "desktop-binding-retained-after-rollback",
+      "status": "pass"
+    },
+    {
+      "name": "real-publication-committed",
+      "status": "pass"
+    },
+    {
+      "name": "desktop-binding-retained-after-commit",
+      "status": "pass"
+    },
+    {
+      "name": "candidate-selected",
+      "status": "pass"
+    },
+    {
+      "name": "nonzero-ledger-byte-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "synthetic-user-file-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "existing-governed-domain-bytes-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "updated-host-open",
+      "status": "pass"
+    },
+    {
+      "name": "updated-host-exited",
+      "status": "pass"
+    }
+  ],
+  "oldGraphHash": "7876999f7277124d9f46afb8545e3e244e16c61be805d6c44f654baa6033df81",
+  "newGraphHash": "5bba89716d0a01dc76d90bd845bb9750ca84189aa47cc6e06019389ae830bbc1",
+  "rollback": {
+    "status": "rolled_back",
+    "businessEntry": "open",
+    "planHash": "073d5b8d4b5bbeb5b0875ba0642bbf566d80ee58ec8d4c4a546230410091e73d",
+    "direction": "old",
+    "recoveryAdmission": "open"
+  },
+  "commit": {
+    "status": "committed",
+    "businessEntry": "open",
+    "planHash": "3e6c493c2753b0481f612e677ce3b099587e19c9de89c7fd48c83a29b986c94e",
+    "direction": "candidate",
+    "recoveryAdmission": "open"
+  },
+  "compatibility": {
+    "hardBlocks": 0,
+    "incompatible": 0,
+    "unknown": 817,
+    "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+  },
+  "scope": "Real preparePackage/copyProfile/prepareOfflinePlan/executePreparedPlan against isolated installed instance. Same-schema synthetic version plus exact Recovery and peer dependency version-binding delta; one injected health-failure rollback then a separately bound successful plan. Not GUI or public update delivery."
+}

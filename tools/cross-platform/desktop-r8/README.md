@@ -1,0 +1,7 @@
+# Native desktop r8 validation
+
+The fixed default workspace, SEP composition, installed Electron entry and final-quit request handling passed the stated Linux x64/WSLg and macOS 15 arm64 CI scope. Each platform passed Full, Only and updated-Full start.sh in three rounds each, plus installer and transactional rollback checks. See [results](evidence/RESULT.json), [limits](evidence/REMAINING.md), [execution notes](evidence/EXECUTION-NOTES.md) and [functional source bindings](evidence/PUBLIC-SOURCE-BINDINGS.json). Functional CI: https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36554703052 . Artifact 11027498623 has SHA-256 c95772e7a13b8958c948900e0244c29036a95f3f3a815fcdb5b1635a6b163842.
+
+Only two TypeScript JSDoc/trailing-newline improvements follow that functional run; [emitted-JavaScript equivalence](evidence/COMMENT-EQUIVALENCE.json) records their before/after hashes. Linux physical source bytes were independently verified against the functional overlay. Public evidence is a compact index; full raw logs/manifests/screenshots are retained in the CI artifact and the project’s desktop-r8 evidence directory.
+
+These are isolated native test candidates. Windows daily was not changed; main and Releases were not changed. releaseReady remains false. This is not physical tray/drag/TCC acceptance, a public signed installer, or verification of all 817 unknown compatibility entries. Only still requires the exact supported adapted host. Electron itself was unchanged in the tested SEP update.

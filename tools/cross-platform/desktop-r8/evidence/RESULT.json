@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "r7 default-workspace, native desktop installer integration, SEP core composition and shutdown-request fixes; isolated WSLg Linux x64 and macOS 15 arm64 CI. No paid model calls.",
+  "releaseReady": false,
+  "testedCodeCommit": "07921dd1a606fad1afa3debd07160dcf971ea78c",
+  "macosRun": "36554703052",
+  "artifact": {
+    "id": 11027498623,
+    "sha256": "c95772e7a13b8958c948900e0244c29036a95f3f3a815fcdb5b1635a6b163842"
+  },
+  "platforms": [
+    {
+      "platform": "linux-x64",
+      "status": "pass",
+      "unitChecks": 16,
+      "desktopRegressionChecks": 141,
+      "installChecks": 12,
+      "updateChecks": 15,
+      "desktopRounds": 9,
+      "samples": [
+        {
+          "path": "linux-evidence/full-final/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "7876999f7277124d9f46afb8545e3e244e16c61be805d6c44f654baa6033df81",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "d65286d812719f2b4c1a1b806a80f288a1058c89c7b058dae1e03ab25e499446",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        },
+        {
+          "path": "linux-evidence/only-final/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "7876999f7277124d9f46afb8545e3e244e16c61be805d6c44f654baa6033df81",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "d65286d812719f2b4c1a1b806a80f288a1058c89c7b058dae1e03ab25e499446",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        },
+        {
+          "path": "linux-evidence/updated-final/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "5bba89716d0a01dc76d90bd845bb9750ca84189aa47cc6e06019389ae830bbc1",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "d65286d812719f2b4c1a1b806a80f288a1058c89c7b058dae1e03ab25e499446",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        }
+      ],
+      "compatibility": {
+        "hardBlocks": 0,
+        "incompatible": 0,
+        "unknown": 817,
+        "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+      },
+      "rollback": {
+        "status": "rolled_back",
+        "businessEntry": "open",
+        "planHash": "073d5b8d4b5bbeb5b0875ba0642bbf566d80ee58ec8d4c4a546230410091e73d",
+        "direction": "old",
+        "recoveryAdmission": "open"
+      },
+      "commit": {
+        "status": "committed",
+        "businessEntry": "open",
+        "planHash": "3e6c493c2753b0481f612e677ce3b099587e19c9de89c7fd48c83a29b986c94e",
+        "direction": "candidate",
+        "recoveryAdmission": "open"
+      }
+    },
+    {
+      "platform": "darwin-arm64",
+      "status": "pass",
+      "unitChecks": 16,
+      "desktopRegressionChecks": 141,
+      "installChecks": 12,
+      "updateChecks": 15,
+      "desktopRounds": 9,
+      "samples": [
+        {
+          "path": "macos-evidence/sep-desktop-r8/attempt-01/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "124db3246be58a3a444ab792de3350445e0368735e2ab29f523b22fa9aa2337c",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "076d79742986e1b100b69ebecc691cb07368045e54c9087cef631b8622b76a80",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        },
+        {
+          "path": "macos-evidence/sep-desktop-r8/only-01/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "124db3246be58a3a444ab792de3350445e0368735e2ab29f523b22fa9aa2337c",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "076d79742986e1b100b69ebecc691cb07368045e54c9087cef631b8622b76a80",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        },
+        {
+          "path": "macos-evidence/sep-desktop-r8/updated-01/RESULT.json",
+          "rounds": 3,
+          "checksPerRound": 13,
+          "inputs": {
+            "graphHash": "f1badd326f3f914997a6e9674f132da0e3cfbbbf9bc508d7af2f25c216ee85bb",
+            "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+            "electronSha256": "076d79742986e1b100b69ebecc691cb07368045e54c9087cef631b8622b76a80",
+            "electronVersion": "44.0.0"
+          },
+          "normalQuit": true,
+          "cleanupActions": []
+        }
+      ],
+      "compatibility": {
+        "hardBlocks": 0,
+        "incompatible": 0,
+        "unknown": 817,
+        "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+      },
+      "rollback": {
+        "status": "rolled_back",
+        "businessEntry": "open",
+        "planHash": "22ae0f633e179ab8c474bc228fbc921634ab514a88e0cab2072868bb71bcc4e4",
+        "direction": "old",
+        "recoveryAdmission": "open"
+      },
+      "commit": {
+        "status": "committed",
+        "businessEntry": "open",
+        "planHash": "73dbcc747d3bb75a7e7dd107cbb9a8b4c04b4c48284fa7629d7a2a00d5c27d26",
+        "direction": "candidate",
+        "recoveryAdmission": "open"
+      }
+    }
+  ],
+  "windows": {
+    "bootstrapChecks": 9,
+    "requestAndProfileChecks": 6,
+    "nativePayloadSkipped": 4,
+    "dailyModified": false
+  },
+  "commentOnlyChanges": "COMMENT-EQUIVALENCE.json",
+  "remaining": "REMAINING.md",
+  "history": "EXECUTION-NOTES.md"
+}

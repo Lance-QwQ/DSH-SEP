@@ -1,0 +1,367 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "linux",
+  "arch": "x64",
+  "commit": null,
+  "checks": [
+    {
+      "name": "three-planned-rounds",
+      "status": "pass"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "sep-brand-visible",
+          "status": "pass"
+        },
+        {
+          "name": "default-workspace-created-inside-instance",
+          "status": "pass"
+        },
+        {
+          "name": "sep-budget-and-memory-mounted",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        },
+        {
+          "name": "shutdown-no-request-errors",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T10:22:19.294Z",
+      "owned": {
+        "launcherPid": 37,
+        "electronPid": 63,
+        "hostPid": 51
+      },
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "SEP\nNew Session\nCtrl\nN\nPlugins\nWorkspaces\nNo sessions yet\nMore\nDSH Checking for updates…\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 12
+      },
+      "workspace": {
+        "workspace": {
+          "workspaceId": "292224f4-7be0-41e1-87f2-961f1ac862b7",
+          "path": "/opt/dsh-sep-cross-platform/desktop-r8/install-01/Full A 空白/workspace/deepseek-harness/default-workspace",
+          "title": "default-workspace",
+          "sessionIds": [],
+          "createdAt": "2026-09-29T10:22:24.721Z",
+          "updatedAt": "2026-09-29T10:22:24.721Z"
+        }
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 646,
+          "y": 417,
+          "width": 1280,
+          "height": 820
+        },
+        "after": {
+          "x": 671,
+          "y": 437,
+          "width": 1280,
+          "height": 820
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T10:22:29.012Z"
+    },
+    {
+      "round": 2,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "sep-brand-visible",
+          "status": "pass"
+        },
+        {
+          "name": "default-workspace-created-inside-instance",
+          "status": "pass"
+        },
+        {
+          "name": "sep-budget-and-memory-mounted",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        },
+        {
+          "name": "shutdown-no-request-errors",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T10:22:29.013Z",
+      "owned": {
+        "launcherPid": 264,
+        "electronPid": 290,
+        "hostPid": 278
+      },
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "SEP\nNew Session\nCtrl\nN\nPlugins\nWorkspaces\nDefault workspace\nMore\nDSH Checking for updates…\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 14
+      },
+      "workspace": {
+        "workspace": {
+          "workspaceId": "292224f4-7be0-41e1-87f2-961f1ac862b7",
+          "path": "/opt/dsh-sep-cross-platform/desktop-r8/install-01/Full A 空白/workspace/deepseek-harness/default-workspace",
+          "title": "default-workspace",
+          "sessionIds": [
+            "session-9b6ed1e9-b80d-4b22-9fd3-393c60aaf2fe"
+          ],
+          "createdAt": "2026-09-29T10:22:24.721Z",
+          "updatedAt": "2026-09-29T10:22:24.973Z"
+        }
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 646,
+          "y": 417,
+          "width": 1280,
+          "height": 820
+        },
+        "after": {
+          "x": 671,
+          "y": 437,
+          "width": 1280,
+          "height": 820
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T10:22:35.168Z"
+    },
+    {
+      "round": 3,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "sep-brand-visible",
+          "status": "pass"
+        },
+        {
+          "name": "default-workspace-created-inside-instance",
+          "status": "pass"
+        },
+        {
+          "name": "sep-budget-and-memory-mounted",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        },
+        {
+          "name": "shutdown-no-request-errors",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T10:22:35.169Z",
+      "owned": {
+        "launcherPid": 487,
+        "electronPid": 513,
+        "hostPid": 501
+      },
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "SEP\nNew Session\nCtrl\nN\nPlugins\nWorkspaces\nDefault workspace\nMore\nDSH Checking for updates…\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 14
+      },
+      "workspace": {
+        "workspace": {
+          "workspaceId": "292224f4-7be0-41e1-87f2-961f1ac862b7",
+          "path": "/opt/dsh-sep-cross-platform/desktop-r8/install-01/Full A 空白/workspace/deepseek-harness/default-workspace",
+          "title": "default-workspace",
+          "sessionIds": [
+            "session-9b6ed1e9-b80d-4b22-9fd3-393c60aaf2fe"
+          ],
+          "createdAt": "2026-09-29T10:22:24.721Z",
+          "updatedAt": "2026-09-29T10:22:24.973Z"
+        }
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 646,
+          "y": 417,
+          "width": 1280,
+          "height": 820
+        },
+        "after": {
+          "x": 671,
+          "y": 437,
+          "width": 1280,
+          "height": 820
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T10:22:41.723Z"
+    }
+  ],
+  "cleanup": [],
+  "limits": {
+    "startupMs": 90000,
+    "quitMs": 30000,
+    "plannedRounds": 3
+  },
+  "captureTiming": "mounted frame, document.fonts.ready, two animation frames, then 1000ms compositor settle; not a performance measurement",
+  "scope": "Installed Full candidate through its own start.sh, bound native Electron, workspace/SEP composition and normal shutdown. Inspector lifecycle is not physical input/tray/TCC or signed public delivery acceptance.",
+  "inputs": {
+    "graphHash": "7876999f7277124d9f46afb8545e3e244e16c61be805d6c44f654baa6033df81",
+    "desktopMainSha256": "310aef87a2030d951e616344be29c0e91cd1e4229dcd48072678e9c5f2fd0b0b",
+    "electronSha256": "d65286d812719f2b4c1a1b806a80f288a1058c89c7b058dae1e03ab25e499446",
+    "electronVersion": "44.0.0"
+  },
+  "remainingOwnedPids": []
+}

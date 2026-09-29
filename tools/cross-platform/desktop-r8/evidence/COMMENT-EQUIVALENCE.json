@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "typescript": "6.0.3",
+  "testedCodeCommit": "07921dd1a606fad1afa3debd07160dcf971ea78c",
+  "scope": "Before bytes are exact tested Git blobs. Documentation/trailing-newline edits emit byte-identical JavaScript with comments removed.",
+  "rows": [
+    {
+      "path": "apps/desktop/src/request-lifetime.ts",
+      "status": "pass",
+      "before": "0064026cd714630a548afc124017e696dfd7f9e95882ff22a0635db688f46107",
+      "after": "8ec88953918b297ea3266ab1cbf9737f37300a29093237908dc99e74151584dd",
+      "emittedSha256": "a07cd0b1009742de749135fd6edbe4516b02e52ab49c9d71295fe08fbb9a3018"
+    },
+    {
+      "path": "apps/desktop/src/web-document.ts",
+      "status": "pass",
+      "before": "2076f9d8d7c4696f5d901ea42b914fb151a642cc819c8c70c283ee099d23889b",
+      "after": "cee050980703f228d959de740d708011921c06f629e8ddbd58fa90f21f758f11",
+      "emittedSha256": "e1239c238b8098a52405bb30f7242de30c85369d6663062384bc98247e2f1bcb"
+    }
+  ]
+}

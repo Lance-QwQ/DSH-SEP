@@ -1,0 +1,213 @@
+{
+  "codeCommit": "07921dd1a606fad1afa3debd07160dcf971ea78c",
+  "branch": "codex/sep-cross-platform-20260929",
+  "files": [
+    {
+      "path": ".github/workflows/sep-desktop-r8.yml",
+      "size": 6258,
+      "sha256": "48a16823790d283587f6d6b83c6b20b4b27be15517abc2d04095d1f7a6803710"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/OVERLAY.json",
+      "size": 1473,
+      "sha256": "c3bc1b8621b847f9d9a9ac025db7cbc9c8787dc32b1344dac609068830d10e81"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/apply-overlay.mjs",
+      "size": 805,
+      "sha256": "8d42e6bfc685df5b88ff7250b79fdbbb485dff323e67c8121d95dcd00e1fcb20"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/build-test-bundle.mjs",
+      "size": 774,
+      "sha256": "0a3184980d5a251789a1ccf70ad4d57f91fc4d43d65cb9137015f8d93954d47f"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/install-native.mjs",
+      "size": 6025,
+      "sha256": "74ad7a6f70f14a9bbf10557467751cdef291ce6e7c7a541862c60b3e036c427c"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/native-package.test.mjs",
+      "size": 3212,
+      "sha256": "9651412f251ee5f73bfa473d26d7922df46b1435c07c16d927eef6a751b2573a"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/main.ts",
+      "size": 68771,
+      "sha256": "f54c6820e0b3efa177b828bceca6fa328fc82780831fc0c2b82850a94f1fbc66"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/request-lifetime.ts",
+      "size": 1072,
+      "sha256": "0064026cd714630a548afc124017e696dfd7f9e95882ff22a0635db688f46107"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
+      "size": 3687,
+      "sha256": "4238443baa0ed88bb667da227f7db1bde899b83f1ade4e9780fabe87fb94ffa8"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/sep-update/runtime/launcher/desktop-temp.mjs",
+      "size": 1185,
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",
+      "size": 8938,
+      "sha256": "7e0a4e4e0ec2bb0e7e86e7923bfdae0d86aef7a3a81e6b1946dcefa7e0701489"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/sep-update/runtime/launcher/validate-bootstrap.mjs",
+      "size": 2339,
+      "sha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/overlay/apps/desktop/src/web-document.ts",
+      "size": 5094,
+      "sha256": "2076f9d8d7c4696f5d901ea42b914fb151a642cc819c8c70c283ee099d23889b"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/checkpoint-inspection.mjs",
+      "size": 6867,
+      "sha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/credential-reader.mjs",
+      "size": 2978,
+      "sha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/desktop-payload.mjs",
+      "size": 3687,
+      "sha256": "4238443baa0ed88bb667da227f7db1bde899b83f1ade4e9780fabe87fb94ffa8"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/desktop-temp.mjs",
+      "size": 1185,
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/launch.mjs",
+      "size": 369,
+      "sha256": "f285f9902ae56e587e15c5e81f6e79197334c12c0aaf26bf10e24aa04a564156"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/launcher.mjs",
+      "size": 8938,
+      "sha256": "7e0a4e4e0ec2bb0e7e86e7923bfdae0d86aef7a3a81e6b1946dcefa7e0701489"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/start.ps1",
+      "size": 180,
+      "sha256": "1a0619e380d3d9e5d3d625feb444ca1fe7ae703dbf13e8e60824df6fbc12226c"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/start.sh",
+      "size": 267,
+      "sha256": "06d24b0fe89c31247915aac255263cabf48fc1c449e6e61cce4d14e6f96c0005"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/start.vbs",
+      "size": 2656,
+      "sha256": "0e618b785d815821b65591e39e9128f5f24c0071a119eca335e4800da441f708"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/startup-coordinator.mjs",
+      "size": 1311,
+      "sha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/startup-diagnostic.mjs",
+      "size": 1172,
+      "sha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/startup-lease.mjs",
+      "size": 1869,
+      "sha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/startup-report.mjs",
+      "size": 3865,
+      "sha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/bootstrap/validate-bootstrap.mjs",
+      "size": 2339,
+      "sha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/installer.mjs",
+      "size": 11496,
+      "sha256": "7e95e7e1af399ab225b989afa60bfe6e91b0bf90a1e619a4b2fa79cf9f645c42"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/native-install/native-bundle.mjs",
+      "size": 7160,
+      "sha256": "94703182e69a1d4c9a1a1e846f0f0c22dda2c69613edeb2ee2ef0b9eff69179c"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/native-install/native-bundle.test.mjs",
+      "size": 4207,
+      "sha256": "f77c7d8cab3a98909bfccc2a46318e4267307aec28295732ec620647ebbae30e"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/packaging/native-install/native-profile.mjs",
+      "size": 826,
+      "sha256": "fef58f0adbf432ac861b20d6ff9de1142d9cb2b8c4cb13299f92ff22e35e3f9c"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/request-lifetime.test.mjs",
+      "size": 2660,
+      "sha256": "76df71d2485839b0d845af82cf5ef64ead4172795c6ff18430718ad840adbb37"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/run-desktop.mjs",
+      "size": 12805,
+      "sha256": "15c51b5eefbd98306cbe80d98b9e4a53da45e4e6b89ba52cea6a241be06295b9"
+    },
+    {
+      "path": "tools/cross-platform/desktop-r8/update-native.mjs",
+      "size": 11515,
+      "sha256": "64fe08f919ef4f9bbaeda237898dd145c47c7745af969c43e7c53f70c474fd0e"
+    }
+  ],
+  "sourceOverlay": [
+    {
+      "path": "apps/desktop/src/main.ts",
+      "before": "3cd9ee67032cc15b61fa28a1cf54170561ae8b39f5978edf419f48020ab17e2b",
+      "sha256": "f54c6820e0b3efa177b828bceca6fa328fc82780831fc0c2b82850a94f1fbc66"
+    },
+    {
+      "path": "apps/desktop/src/web-document.ts",
+      "before": "05ab6fd59199f1b7a7dd558e60f50e38f4df1085a70af671014c085d270e91cc",
+      "sha256": "2076f9d8d7c4696f5d901ea42b914fb151a642cc819c8c70c283ee099d23889b"
+    },
+    {
+      "path": "apps/desktop/src/request-lifetime.ts",
+      "before": null,
+      "sha256": "0064026cd714630a548afc124017e696dfd7f9e95882ff22a0635db688f46107"
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",
+      "before": "557d2eb901cae85e924dc688ba5ab95ed9ceb11b4f3ad1879f5ab460987e5583",
+      "sha256": "7e0a4e4e0ec2bb0e7e86e7923bfdae0d86aef7a3a81e6b1946dcefa7e0701489"
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
+      "before": null,
+      "sha256": "4238443baa0ed88bb667da227f7db1bde899b83f1ade4e9780fabe87fb94ffa8"
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-temp.mjs",
+      "before": null,
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/validate-bootstrap.mjs",
+      "before": "373584a45f0de2653964defd0fa602fc8710faff1cb5f4b3bf1c1aeaeca3156d",
+      "sha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662"
+    }
+  ]
+}

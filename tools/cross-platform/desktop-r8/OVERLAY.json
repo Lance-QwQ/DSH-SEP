@@ -7,12 +7,12 @@
   {
     "path": "apps/desktop/src/web-document.ts",
     "before": "05ab6fd59199f1b7a7dd558e60f50e38f4df1085a70af671014c085d270e91cc",
-    "sha256": "2076f9d8d7c4696f5d901ea42b914fb151a642cc819c8c70c283ee099d23889b"
+    "sha256": "cee050980703f228d959de740d708011921c06f629e8ddbd58fa90f21f758f11"
   },
   {
     "path": "apps/desktop/src/request-lifetime.ts",
     "before": null,
-    "sha256": "0064026cd714630a548afc124017e696dfd7f9e95882ff22a0635db688f46107"
+    "sha256": "8ec88953918b297ea3266ab1cbf9737f37300a29093237908dc99e74151584dd"
   },
   {
     "path": "apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",

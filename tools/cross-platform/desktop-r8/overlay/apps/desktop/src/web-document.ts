@@ -72,6 +72,7 @@ const PLUGIN_BUNDLE_PATH = /^\/plugins\//u
  * @param request - Request from the application origin.
  * @param host - Owned Host URL.
  * @param cookie - Host-issued authentication cookie.
+ * @param shutdown - Final-quit cancellation; rejects new forwarding and maps cancelled fetches to 503.
  * @returns Host response without connection-level headers.
  */
 export async function forwardWebRequest(request: Request, host: string, cookie: string, shutdown?: AbortSignal): Promise<Response> {
@@ -97,5 +98,3 @@ export async function forwardWebRequest(request: Request, host: string, cookie: 
   if (PLUGIN_BUNDLE_PATH.test(source.pathname)) outgoing.set('cache-control', 'no-store')
   return new Response(response.body, { status: response.status, headers: outgoing })
 }
-
-
