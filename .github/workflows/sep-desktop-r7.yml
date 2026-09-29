@@ -1,0 +1,62 @@
+name: SEP native desktop r7
+on:
+  push:
+    branches: ['codex/sep-cross-platform-20260929']
+    paths: ['tools/cross-platform/desktop-r7/**', '.github/workflows/sep-desktop-r7.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos-desktop:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Verify fixed source and payload audit tests
+        run: |
+          node tools/cross-platform/application-r4/verify-source.mjs
+          node --test tools/cross-platform/desktop-r7/payload-audit.test.mjs
+      - name: Prepare pinned build tool
+        run: npm install --prefix "$RUNNER_TEMP/sep-r7-tools" pnpm@11.7.0 --ignore-scripts --no-audit --no-fund
+      - name: Build fixed application
+        env:
+          SEP_APPLICATION_OUTPUT: ${{ runner.temp }}/sep-r7-build
+          SEP_APPLICATION_PNPM: ${{ runner.temp }}/sep-r7-tools/node_modules/pnpm/bin/pnpm.cjs
+        run: node tools/cross-platform/application-r4/run-application.mjs
+      - name: Assemble native managed host
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r7
+        run: node tools/cross-platform/runtime-r5/run-native.mjs
+      - name: Prepare fresh Full test bundle
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r7
+          SEP_DESKTOP_OUTPUT: ${{ runner.temp }}/sep-desktop-r7
+        run: node tools/cross-platform/desktop-r7/build-test-bundle.mjs
+      - name: Verify official Electron payload
+        run: node tools/cross-platform/desktop-r7/prepare-electron.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-electron-r7"
+      - name: Three real desktop lifecycle rounds
+        run: node tools/cross-platform/desktop-r7/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r7/bundle-full" "$RUNNER_TEMP/sep-electron-r7" "$RUNNER_TEMP/sep-desktop-r7/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/runtime-install-r6/packaging"
+      - name: Preserve bounded evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-desktop-r7-evidence
+          path: |
+            ${{ runner.temp }}/sep-r7-build/*.log
+            ${{ runner.temp }}/sep-r7-build/RESULT.json
+            ${{ runner.temp }}/sep-native-r7/*.log
+            ${{ runner.temp }}/sep-native-r7/*RESULT.json
+            ${{ runner.temp }}/sep-electron-r7/PAYLOAD.json
+            ${{ runner.temp }}/sep-desktop-r7/bundle-full/manifest.json
+            ${{ runner.temp }}/sep-desktop-r7/attempt-01/*.json
+            ${{ runner.temp }}/sep-desktop-r7/attempt-01/*.png
+            ${{ runner.temp }}/sep-desktop-r7/attempt-01/*.log
+          if-no-files-found: warn
+          retention-days: 14
