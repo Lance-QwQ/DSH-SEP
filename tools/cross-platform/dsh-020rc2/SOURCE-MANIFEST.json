@@ -67772,8 +67772,8 @@
     },
     {
       "path": "packages/extensions/cordis-client-runner/src/client/slot-catalog.ts",
-      "sha256": "65199695bc6edd94f87ad7b1de7a61fe1a3b962abd24e898c5afba18fd1efd2a",
-      "size": 228580,
+      "sha256": "af177380cb77355027866d144c92f7e93e0e884aaab63c5923a54b46a2c05b19",
+      "size": 228766,
       "mode": 420,
       "link": false
     },

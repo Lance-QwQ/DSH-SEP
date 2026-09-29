@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import{mkdtemp,mkdir,writeFile,readFile,lstat,realpath}from'node:fs/promises';
+import{join}from'node:path';import{tmpdir}from'node:os';
+import{assembleNativeProgram}from'./native-assembly.mjs';
+const name='@img/sharp-libvips-linux-x64';
+async function fixture(){const root=await realpath(await mkdtemp(join(tmpdir(),'sep-runtime-root-'))),parent=join(root,'input'),child=join(parent,'node_modules',name);for(const p of [parent,child])await mkdir(join(p,'lib'),{recursive:true});await writeFile(join(parent,'package.json'),JSON.stringify({name:'sharp-binding',version:'1.0.0',dependencies:{[name]:'1.3.2'}}));await writeFile(join(child,'package.json'),JSON.stringify({name,version:'1.3.2'}));await writeFile(join(parent,'lib/index.js'),'binding');await writeFile(join(child,'lib/index.js'),'native-library');return{root,parent,destination:join(root,'program')}}
+const listFiles=async()=>['package.json','lib/index.js'];
+test('runtime dependency root preserves the loader root-node_modules RPATH layout',async()=>{const f=await fixture();const r=await assembleNativeProgram({roots:{'sharp-binding':f.parent},destination:f.destination,listFiles,runtimeRoots:[name]});const id=r.graph.roots[name];assert.ok(id,'required RPATH root must be in the hashed graph');assert.equal(await realpath(join(f.destination,'node_modules',name)),join(f.destination,'store',id));const binding=r.graph.roots['sharp-binding'];assert.equal(await readFile(join(f.destination,'store',binding,'lib','../../../node_modules',name,'lib/index.js'),'utf8'),'native-library')});
+test('missing runtime dependency root refuses assembly before output creation',async()=>{const f=await fixture();await assert.rejects(()=>assembleNativeProgram({roots:{'sharp-binding':f.parent},destination:f.destination,listFiles,runtimeRoots:['missing-native-library']}),/ASSEMBLY_RUNTIME_ROOT/);await assert.rejects(lstat(f.destination),{code:'ENOENT'})});
+test('unsafe runtime root is refused',async()=>{const f=await fixture();await assert.rejects(()=>assembleNativeProgram({roots:{'sharp-binding':f.parent},destination:f.destination,listFiles,runtimeRoots:['../outside']}),/ASSEMBLY_RUNTIME_ROOT/)});

@@ -30,12 +30,14 @@ jobs:
       - name: Managed composition regressions
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
-        run: node --test tools/cross-platform/dsh-020rc2/qualification/managed-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/desktop-composition.test.mjs
+        run: node --test tools/cross-platform/dsh-020rc2/qualification/managed-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/desktop-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/runtime-r5/native-rpath.test.mjs
       - name: Assemble native managed host
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
           SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r8
         run: node tools/cross-platform/dsh-020rc2/qualification/runtime-r5/run-native.mjs
+      - name: Decode native image with assembled runtime
+        run: node tools/cross-platform/dsh-020rc2/qualification/runtime-r5/native-image-smoke.mjs "$RUNNER_TEMP/sep-native-r8/program" "$RUNNER_TEMP/sep-native-r8/IMAGE-RESULT.json"
       - name: Verify official Electron payload
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r7/prepare-electron.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-electron-r8"
       - name: Build native Full and Only installers
@@ -53,17 +55,17 @@ jobs:
         run: node tools/cross-platform/dsh-020rc2/qualification/run-composition.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/install-01/Full A 空白/program" "$RUNNER_TEMP/sep-composition-r8"
       - name: Three installed start.sh desktop rounds
         env:
-          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 绌虹櫧/deployment-rc2.json
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 空白/deployment-rc2.json
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/qualification/desktop-r8/packaging"
       - name: Three Only desktop rounds
         env:
-          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/SEP B 绌虹櫧/deployment-rc2.json
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/SEP B 空白/deployment-rc2.json
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-sep" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/only-01" "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/qualification/desktop-r8/packaging"
       - name: Update and rollback preserve desktop binding
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r8/update-native.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/install-01"
       - name: Three updated start.sh desktop rounds
         env:
-          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 绌虹櫧/deployment-rc2.json
+          SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 空白/deployment-rc2.json
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/updated-01" "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/qualification/desktop-r8/packaging"
       - name: Preserve bounded evidence
         if: always()

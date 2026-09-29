@@ -6,7 +6,7 @@ const allowed=(list,value)=>!Array.isArray(list)||(!list.includes('!'+value)&&(l
 const platformMatches=p=>allowed(p.os,process.platform)&&allowed(p.cpu,process.arch)&&allowed(p.libc,process.platform==='linux'?(process.report.getReport().header.glibcVersionRuntime?'glibc':'musl'):'any');
 async function findPackage(from,name,fallback){for(let at=from;;at=dirname(at)){const p=join(at,'node_modules',name);try{await lstat(join(p,'package.json'));return await realpath(p)}catch(e){if(e.code!=='ENOENT'&&e.code!=='ENOTDIR')throw e}if(dirname(at)===at)break}return fallback[name]??null}
 /** Assemble native installed dependencies as a create-only, hash-bound offline graph. */
-export async function assembleNativeProgram({roots,destination,listFiles,workspacePackages={},runtimeLinks=[]}){
+export async function assembleNativeProgram({roots,destination,listFiles,workspacePackages={},runtimeLinks=[],runtimeRoots=[]}){
  if(!isAbsolute(destination??'')||typeof listFiles!=='function'||!Object.keys(roots??{}).length)fail('ASSEMBLY_INPUT');destination=resolve(destination);
  try{await lstat(destination);fail('ASSEMBLY_DESTINATION_EXISTS')}catch(e){if(e.code!=='ENOENT')throw e}
  if(await realpath(dirname(destination))!==dirname(destination))fail('ASSEMBLY_DESTINATION_ALIAS');
@@ -23,6 +23,9 @@ export async function assembleNativeProgram({roots,destination,listFiles,workspa
  }
  const graphRoots={};for(const[name,path]of Object.entries(roots).sort()){if(!packageName(name))fail('ASSEMBLY_ROOT');graphRoots[name]=(await visit(path)).id;}
  for(const link of runtimeLinks){const from=packages.filter(p=>p.name===link.from&&p.version===link.version),to=packages.filter(p=>p.name===link.to&&p.version===link.version);if(from.length!==1||to.length!==1||!packageName(link.to))fail('ASSEMBLY_RUNTIME_LINK');const old=from[0].dependencies[link.to];if(old&&old!==to[0].id)fail('ASSEMBLY_RUNTIME_LINK_CONFLICT');from[0].dependencies[link.to]=to[0].id;}
+
+ if(!Array.isArray(runtimeRoots))fail('ASSEMBLY_RUNTIME_ROOT');
+ for(const name of runtimeRoots){const matches=packages.filter(p=>p.name===name);if(!packageName(name)||matches.length!==1||(graphRoots[name]&&graphRoots[name]!==matches[0].id))fail('ASSEMBLY_RUNTIME_ROOT');graphRoots[name]=matches[0].id;}
  await mkdir(destination);await writeFile(join(destination,'ASSEMBLING.json'),JSON.stringify({platform:process.platform,arch:process.arch,roots:Object.keys(roots)}));
  const files=[];
  for(const p of packages){if(hash(await readFile(join(p.dir,'package.json')))!==p.manifestHash)fail('ASSEMBLY_SOURCE_CHANGED');for(const file of p.files){const source=join(p.dir,file),before=await lstat(source,{bigint:true});let bytes=await readFile(source);const after=await lstat(source,{bigint:true});for(const k of ['ino','dev','size','mtimeNs','ctimeNs'])if(before[k]!==after[k])fail('ASSEMBLY_SOURCE_CHANGED');if(file==='package.json'){const m=JSON.parse(bytes);for(const section of ['dependencies','optionalDependencies','peerDependencies'])for(const[name,value]of Object.entries(m[section]??{}))if(value.startsWith('workspace:')&&p.dependencies[name])m[section][name]=packages.find(v=>v.id===p.dependencies[name]).version;delete m.devDependencies;delete m.dshLocalBuild;delete m.dshSepSourceBase;bytes=Buffer.from(JSON.stringify(m,null,2)+'\n')}
