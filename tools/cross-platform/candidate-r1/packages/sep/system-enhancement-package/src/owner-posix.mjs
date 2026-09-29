@@ -69,11 +69,16 @@ export async function assertPosixLocalDirectory(path) {
     }).filter(x => x.mount && (x.mount === '/' || path === x.mount || path.startsWith(x.mount + '/'))).sort((a, b) => b.mount.length - a.mount.length);
     if (mounts[0]?.type !== 'ext4') throw new Error('unsupported filesystem');
   } else if (process.platform === 'darwin') {
-    const { stdout } = await execute('/usr/sbin/diskutil', ['info', '-plist', path], options);
+    // diskutil accepts devices/mount points, not arbitrary descendant directories.
+    const listing = (await execute('/bin/df', ['-P', path], options)).stdout.trim().split('\n');
+    const device = listing.length === 2 ? listing[1].trim().split(/\s+/)[0] : '';
+    if (!/^\/dev\/disk\d+(?:s\d+)*$/.test(device)) throw new Error('unsupported filesystem');
+    const { stdout } = await execute('/usr/sbin/diskutil', ['info', '-plist', device], options);
     const convert = execute('/usr/bin/plutil', ['-convert', 'json', '-o', '-', '-'], options);
     convert.child.stdin.on('error', () => {}); convert.child.stdin.end(stdout);
     const info = JSON.parse((await convert).stdout);
-    if (info.FilesystemType !== 'apfs' || !/^\/dev\/disk\d+(?:s\d+)*$/.test(info.DeviceNode || '') || !(await lstat(info.DeviceNode)).isBlockDevice()) throw new Error('unsupported filesystem');
+    const node = await lstat(device, { bigint: true });
+    if (info.FilesystemType !== 'apfs' || info.DeviceNode !== device || !node.isBlockDevice() || node.rdev !== before.dev) throw new Error('unsupported filesystem');
   } else throw new Error('unsupported platform');
   const after = await lstat(path, { bigint: true });
   if (!after.isDirectory() || after.isSymbolicLink() || before.dev !== after.dev || before.ino !== after.ino) throw new Error('directory changed');

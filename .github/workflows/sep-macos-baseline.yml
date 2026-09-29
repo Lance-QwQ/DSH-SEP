@@ -22,8 +22,11 @@ jobs:
       - name: Original budget arithmetic tests
         run: node --test tools/cross-platform/candidate-r1/packages/sep/system-enhancement-package/tests/budget-pricing.test.mjs
       - name: Owner identity and interrupted-publication tests
-        run: node --test tools/cross-platform/candidate-r1/packages/sep/system-enhancement-package/tests/owner-portability.test.mjs
+        run: |
+          set -o pipefail
+          node --test tools/cross-platform/candidate-r1/packages/sep/system-enhancement-package/tests/owner-portability.test.mjs | tee "$RUNNER_TEMP/sep-owner-tests.log"
       - name: Native storage and recovery integration
+        if: always()
         env:
           SEP_PLATFORM_SOURCE: tools/cross-platform/candidate-r1
           SEP_PLATFORM_WORK: ${{ runner.temp }}
@@ -34,6 +37,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: macos-owner-r1-integration
-          path: ${{ runner.temp }}/sep-platform-baseline.json
+          path: |
+            ${{ runner.temp }}/sep-platform-baseline.json
+            ${{ runner.temp }}/sep-owner-tests.log
           if-no-files-found: error
           retention-days: 7

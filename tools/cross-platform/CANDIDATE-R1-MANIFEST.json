@@ -96,8 +96,8 @@
     },
     {
       "path": "packages/sep/recovery/src/owner-posix.mjs",
-      "bytes": 5747,
-      "sha256": "88c2e03f03dbaf93d3ee281cc6d33019d6678989ef4f36edbf5b449e88d9fb31"
+      "bytes": 6134,
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3"
     },
     {
       "path": "packages/sep/recovery/src/quit-inspection.mjs",
@@ -291,8 +291,8 @@
     },
     {
       "path": "packages/sep/system-enhancement-package/src/owner-posix.mjs",
-      "bytes": 5747,
-      "sha256": "88c2e03f03dbaf93d3ee281cc6d33019d6678989ef4f36edbf5b449e88d9fb31"
+      "bytes": 6134,
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3"
     },
     {
       "path": "packages/sep/system-enhancement-package/src/p1-failures.js",
