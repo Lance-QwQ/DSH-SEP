@@ -3,3 +3,5 @@
 baseline/** -text -whitespace
 
 candidate-r1/** -text -whitespace
+
+candidate-r2/** -text -whitespace

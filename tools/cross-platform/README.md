@@ -1,3 +1,26 @@
+# Current candidate: lifecycle gates (r2)
+
+`candidate-r2/` and `CANDIDATE-R2-MANIFEST.json` bind the second adaptation slice:
+platform process identity, signed update-worker leases, live-parent cancellation,
+publisher output/deadline behavior, Guardian IPC/deadline/blocked shutdown and
+platform launcher paths/environment. Prior baseline and r1 snapshots are retained.
+
+The native lifecycle suite has 18 scenarios. Profile/semver/YAML imports are
+throwing external test stubs and must not execute; process inspection, signed
+lease state, queued update control and real child processes are the actual source.
+This is not a full profile boot, native installer, desktop launch or update-package
+publication. The bootstrap source copy is included and byte-matched to the runtime.
+A simulated refused termination requires later test cleanup, separate from the
+product's blocked close. See `apps/desktop/src/sep-update/LIFECYCLE-PORTABILITY.md`.
+
+CI now selects r2 and retains the original 30 budget cases, 28 owner-lock cases
+and five storage/recovery probes. Results are tied to each CI commit; do not apply
+r1's passing result to an unexecuted r2 commit. No Release or daily installation is
+changed. Local/CI temporary state is synthetic and does not contain API keys.
+
+---
+
+Historical r1 candidate description follows:
 # Current candidate: POSIX owner-lock adaptation
 
 `candidate-r1/` contains the selected current source and new owner-lock adapter;
