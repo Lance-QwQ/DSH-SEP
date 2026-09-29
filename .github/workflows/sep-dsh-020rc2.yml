@@ -30,7 +30,7 @@ jobs:
       - name: Managed composition regressions
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
-        run: node --test tools/cross-platform/dsh-020rc2/qualification/managed-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/desktop-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/runtime-r5/native-rpath.test.mjs
+        run: node --test tools/cross-platform/dsh-020rc2/qualification/managed-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/desktop-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/runtime-r5/native-rpath.test.mjs tools/cross-platform/dsh-020rc2/qualification/windows-payload.test.mjs
       - name: Assemble native managed host
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
@@ -67,6 +67,20 @@ jobs:
         env:
           SEP_R7_EXISTING_CONFIG: ${{ runner.temp }}/sep-desktop-r8/install-01/Full A 空白/deployment-rc2.json
         run: node tools/cross-platform/dsh-020rc2/qualification/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/updated-01" "$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/qualification/desktop-r8/packaging"
+      - name: Archive tested native installer candidates
+        run: |
+          tar -czf "$RUNNER_TEMP/DSH-SEP-macos-full-020rc2-testing.tar.gz" -C "$RUNNER_TEMP/sep-desktop-r8" bundle-full
+          tar -czf "$RUNNER_TEMP/DSH-SEP-macos-only-020rc2-testing.tar.gz" -C "$RUNNER_TEMP/sep-desktop-r8" bundle-sep
+          shasum -a 256 "$RUNNER_TEMP/DSH-SEP-macos-full-020rc2-testing.tar.gz" "$RUNNER_TEMP/DSH-SEP-macos-only-020rc2-testing.tar.gz" > "$RUNNER_TEMP/DSH-SEP-macos-SHA256.txt"
+      - name: Retain installer candidates without a Release
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-dsh-020rc2-installers-testing
+          path: |
+            ${{ runner.temp }}/DSH-SEP-macos-*-020rc2-testing.tar.gz
+            ${{ runner.temp }}/DSH-SEP-macos-SHA256.txt
+          retention-days: 7
+          compression-level: 0
       - name: Preserve bounded evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

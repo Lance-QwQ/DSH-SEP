@@ -29650,8 +29650,8 @@
     },
     {
       "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
-      "sha256": "4238443baa0ed88bb667da227f7db1bde899b83f1ade4e9780fabe87fb94ffa8",
-      "size": 3687,
+      "sha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e",
+      "size": 3783,
       "mode": 420,
       "link": false
     },
