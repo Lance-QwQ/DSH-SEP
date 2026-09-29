@@ -1,3 +1,7 @@
+Current build stage: **r4 full source build and real CLI/Web startup**. See [application-r4](application-r4/README.md). Linux passed; macOS is evaluated by the dedicated application workflow. Full installers and interactive desktop validation remain pending.
+
+The following is the preserved r3 component scope:
+
 # Cross-platform diagnostic snapshots
 
 Current: **r3 package preparation and publication components**. See candidate-r3/apps/desktop/src/sep-update/PREPARATION-PORTABILITY.md and CANDIDATE-R3-MANIFEST.json. Local Linux testing is complete for the synthetic component scope; the branch workflow provides the corresponding macOS-native result. Neither result means a full application installer or end-user update channel is ready.

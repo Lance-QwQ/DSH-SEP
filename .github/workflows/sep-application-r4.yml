@@ -1,0 +1,38 @@
+name: SEP full application build r4
+on:
+  push:
+    branches: ['codex/sep-cross-platform-20260929']
+    paths: ['tools/cross-platform/application-r4/**', '.github/workflows/sep-application-r4.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos-build:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Verify exact source snapshot
+        run: node tools/cross-platform/application-r4/verify-source.mjs
+      - name: Prepare pinned build tool in runner temp
+        run: npm install --prefix "$RUNNER_TEMP/sep-r4-tools" pnpm@11.7.0 --ignore-scripts --no-audit --no-fund
+      - name: Build application and run isolated startup regressions
+        env:
+          SEP_APPLICATION_OUTPUT: ${{ runner.temp }}/sep-application-r4
+          SEP_APPLICATION_PNPM: ${{ runner.temp }}/sep-r4-tools/node_modules/pnpm/bin/pnpm.cjs
+        run: node tools/cross-platform/application-r4/run-application.mjs
+      - name: Preserve build and test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-application-r4-evidence
+          path: |
+            ${{ runner.temp }}/sep-application-r4/*.log
+            ${{ runner.temp }}/sep-application-r4/RESULT.json
+          if-no-files-found: warn
+          retention-days: 14

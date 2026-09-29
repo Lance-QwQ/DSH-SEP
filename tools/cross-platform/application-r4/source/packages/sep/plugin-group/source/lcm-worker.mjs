@@ -1,0 +1,11 @@
+import {parentPort,workerData} from 'node:worker_threads';import {DatabaseSync}from'node:sqlite';import{randomUUID}from'node:crypto';
+import{runLcmMigrations}from'../vendor/lossless-claw/db/migration.js';import{ConversationStore}from'../vendor/lossless-claw/store/conversation-store.js';import{SummaryStore}from'../vendor/lossless-claw/store/summary-store.js';import{estimateTokens}from'../vendor/lossless-claw/estimate-tokens.js';
+let db;try{
+ db=new DatabaseSync(':memory:');db.exec('PRAGMA foreign_keys=ON');runLcmMigrations(db);const conversations=new ConversationStore(db),summaries=new SummaryStore(db),conversation=await conversations.createConversation({sessionId:randomUUID(),sessionKey:workerData.projectId}),ids=[];
+ for(const [seq,message]of workerData.messages.entries()){const saved=await conversations.createMessage({conversationId:conversation.conversationId,seq,role:'user',content:message.text,tokenCount:estimateTokens(message.text)});ids.push(saved.messageId);}
+ // This is an extractive preview, not an automatically installed LLM compactor.
+ const leafId=randomUUID(),summary=workerData.messages.map(m=>m.text.slice(0,80)).join('\n');await summaries.insertSummary({summaryId:leafId,conversationId:conversation.conversationId,kind:'leaf',content:summary,tokenCount:estimateTokens(summary),model:'sep-extractive-preview'});await summaries.linkSummaryToMessages(leafId,ids);
+ const rootId=randomUUID();await summaries.insertSummary({summaryId:rootId,conversationId:conversation.conversationId,kind:'condensed',depth:1,content:summary.slice(0,200),tokenCount:estimateTokens(summary.slice(0,200)),model:'sep-extractive-preview'});await summaries.linkSummaryToParents(rootId,[leafId]);
+ const parents=await summaries.getSummaryParents(rootId),linked=await summaries.getSummaryMessages(parents[0].summaryId),recoveredMessages=linked.map(id=>db.prepare('SELECT content FROM messages WHERE message_id=?').get(id).content);
+ parentPort.postMessage({ok:true,result:{status:'pass',projectId:workerData.projectId,engine:'lossless-claw-summary-store',storage:'volatile-worker-sqlite',rawMessages:ids.length,summary:summary.slice(0,200),summaryDepth:1,recoveredMessages,persisted:false}});
+}catch(e){parentPort.postMessage({ok:false,code:'GROUP_LCM_CORE: '+String(e.message).slice(0,200)});}finally{db?.close();}

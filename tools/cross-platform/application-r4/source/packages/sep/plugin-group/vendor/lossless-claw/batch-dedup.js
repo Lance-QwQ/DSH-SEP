@@ -1,0 +1,1114 @@
+/**
+ * After-turn batch deduplication: guards ingest against gateway replays of
+ * full history by aligning the runtime turn delta with the persisted
+ * conversation tail (exact frontier alignment after a covered transcript
+ * reconcile, heuristic overlap dedup otherwise).
+ *
+ * Extracted from engine.ts (Phase 2 of the engine decomposition).
+ */
+import { createRequire } from "node:module";
+import { formatFileReference, formatRawPayloadReference, formatToolOutputReference, parseFileBlocks, } from "./large-files.js";
+import { liveContentIsRecognizedDecoratedBareBody } from "./live-coverage.js";
+import { buildMessageParts, extractStructuredText, RAW_PAYLOAD_EXTERNALIZATION_REASON, serializeRawPayloadContent, toStoredMessage, } from "./message-content.js";
+import { messageIdentity } from "./message-signatures.js";
+import { openClawInboundBodiesMatchWithInjectedContext } from "./openclaw-inbound-metadata.js";
+import { buildMessageIdentityHash } from "./store/message-identity.js";
+import { extractAssistantToolCallIdsForPairing, extractToolPairingIdFromRecord, extractToolResultIdForPairing, } from "./tool-pairing.js";
+import { getTranscriptEntryId } from "./transcript.js";
+import { structuredPartsIdentity } from "./structured-anchor-identity.js";
+function isStrongReplayAnchor(match) {
+    return match === "exact" || match === "decorated";
+}
+function redactedMatchesHaveAdjacentAnchor(matches) {
+    return matches.every((match, index) => match !== "redacted" ||
+        isStrongReplayAnchor(matches[index - 1]) ||
+        isStrongReplayAnchor(matches[index + 1]));
+}
+/** Load the host redactor without making the optional OpenClaw peer mandatory. */
+function loadOpenClawRedactor() {
+    try {
+        const require = createRequire(import.meta.url);
+        const loggingCore = require("openclaw/plugin-sdk/logging-core");
+        return typeof loggingCore.redactSensitiveText === "function"
+            ? loggingCore.redactSensitiveText
+            : undefined;
+    }
+    catch {
+        return undefined;
+    }
+}
+function incomingToolCallIds(message) {
+    const ids = extractAssistantToolCallIdsForPairing(message);
+    const toolResultId = extractToolResultIdForPairing(message);
+    if (toolResultId)
+        ids.push(toolResultId);
+    return new Set(ids);
+}
+function sameNonEmptyIds(left, right) {
+    return left.size > 0 && left.size === right.size && [...left].every((id) => right.has(id));
+}
+/**
+ * Collapse only the whitespace OpenClaw core actually rewrites on the runtime
+ * face: runs of spaces squashed to a single space. Newlines, tabs, and
+ * leading/trailing whitespace are preserved, so two turns that differ in
+ * meaningful whitespace (line breaks or tab indentation) are never treated as
+ * one. Frontier-coverage comparison only; storage stays byte-verbatim.
+ */
+function normalizeFrontierWhitespace(content) {
+    return content.replace(/ +/g, (spaces, offset) => {
+        const isMessageBoundary = offset === 0 || offset + spaces.length === content.length;
+        return isMessageBoundary ? spaces : " ";
+    });
+}
+export class BatchDeduplicator {
+    conversationStore;
+    summaryStore;
+    largeFilesDir;
+    deps;
+    redactSensitiveText;
+    constructor(conversationStore, summaryStore, largeFilesDir, deps, redactSensitiveText = loadOpenClawRedactor()) {
+        this.conversationStore = conversationStore;
+        this.summaryStore = summaryStore;
+        this.largeFilesDir = largeFilesDir;
+        this.deps = deps;
+        this.redactSensitiveText = redactSensitiveText;
+    }
+    /**
+     * Accept host redaction only when both faces carry the same complete set of
+     * tool-call ids and applying redaction to one complete message produces the
+     * other. The provenance gate keeps different secret-bearing tool calls from
+     * collapsing; redactor failure degrades to exact-only dedup.
+     */
+    async messagesDifferOnlyByHostRedaction(persisted, incoming, incomingMessage) {
+        if (persisted.role !== incoming.role || !this.redactSensitiveText)
+            return false;
+        const incomingIds = incomingToolCallIds(incomingMessage);
+        if (incomingIds.size === 0)
+            return false;
+        const storedIds = await this.storedToolCallIds(persisted.messageId);
+        if (!sameNonEmptyIds(storedIds, incomingIds))
+            return false;
+        try {
+            const redactedPersisted = this.redactSensitiveText(persisted.content);
+            if (redactedPersisted !== persisted.content && redactedPersisted === incoming.content) {
+                return true;
+            }
+            const redactedIncoming = this.redactSensitiveText(incoming.content);
+            return redactedIncoming !== incoming.content && redactedIncoming === persisted.content;
+        }
+        catch {
+            return false;
+        }
+    }
+    /** Read stable tool-call provenance from the stored message parts. */
+    async storedToolCallIds(messageId) {
+        const ids = new Set();
+        for (const part of await this.conversationStore.getMessageParts(messageId)) {
+            if (part.toolCallId)
+                ids.add(part.toolCallId);
+            const metadata = parsePartMetadata(part.metadata);
+            const metadataId = metadata ? extractToolPairingIdFromRecord(metadata) : undefined;
+            if (metadataId)
+                ids.add(metadataId);
+        }
+        return ids;
+    }
+    /**
+     * Remove messages from the batch that already exist in the DB for this session.
+     * Conservative replay detection: only strip a prefix when the incoming
+     * batch begins with the entire stored transcript for the session.
+     *
+     * Fixes two issues from #246:
+     * 1. Replaced hasMessage() fast-path with aligned-tail check — the old
+     *    approach false-positives on legitimate repeated first messages
+     * 2. Dedup now runs on newMessages only, before autoCompactionSummary
+     *    is prepended — synthetic summaries can no longer interfere with
+     *    replay detection
+     */
+    /**
+     * After a covered transcript reconcile the DB tail IS the transcript
+     * frontier, so the runtime turn delta needs exact alignment, not heuristic
+     * dedup. Three cases:
+     *  - the transcript flushed the whole turn: the batch aligns fully with the
+     *    DB tail — nothing to ingest;
+     *  - the transcript flush lagged mid-turn: a prefix of the batch aligns
+     *    with the DB tail — ingest only the remainder;
+     *  - no tail alignment: a batch with zero persisted-identity overlap is a
+     *    genuinely unflushed new turn (ingest all); a fully persisted batch is
+     *    a replay (ingest none); partial overlap is ambiguous and fails open by
+     *    ingesting the full batch so repeated control rows cannot hide new data.
+     */
+    /**
+     * A runtime batch row is covered by a persisted frontier row when their
+     * identities match, OR when the runtime copy is the DECORATED face of the
+     * persisted bare body of the same turn. OpenClaw delivers the current turn
+     * twice — the transcript persists the BARE body, while the runtime array
+     * carries a per-turn DECORATED copy (for example, a leading channel
+     * timestamp). Their identities differ, so the afterTurn
+     * batch would otherwise persist the decorated copy as a second row (the store
+     * double-write). liveContentIsRecognizedDecoratedBareBody collapses it only
+     * when the runtime copy structurally contains the bare body AND carries
+     * recognized timestamp decoration — user-role only. A genuinely distinct
+     * turn, or one that merely quotes or authors metadata-shaped prose, is never
+     * collapsed (silent data loss).
+     * A third case: faces identical apart from insignificant whitespace (core
+     * collapses the runtime indentation; the transcript persists it verbatim).
+     */
+    runtimeRowCoversPersistedFrontierRow(persistedRole, persistedContent, batchRole, batchContent, options) {
+        // This fallback only proves decorated user text, never structured messages.
+        if (persistedRole !== "user" || batchRole !== "user")
+            return false;
+        if (messageIdentity(persistedRole, persistedContent) ===
+            messageIdentity(batchRole, batchContent)) {
+            return true;
+        }
+        // Whitespace-divergent faces of the same turn: core collapses the runtime
+        // message's space runs to single spaces while the transcript keeps them
+        // verbatim, so their identity_hashes differ and the decoration matcher's
+        // containment check breaks on the whitespace too. Treat them as one turn
+        // only when identical once those space runs are normalized. Newlines and
+        // tabs stay significant (comparison only; the verbatim persisted row
+        // survives).
+        if (options?.allowCollapsedSpaceRunMatch === true) {
+            const normalizedPersisted = normalizeFrontierWhitespace(persistedContent);
+            if (normalizedPersisted.length > 0 &&
+                normalizedPersisted === normalizeFrontierWhitespace(batchContent)) {
+                return true;
+            }
+        }
+        // Metadata blocks and injected-context tags are user-forgeable, so body
+        // equality after stripping them is not proof of same-turn decoration.
+        // Covered-frontier callers may use this no-timestamp match only as
+        // alignment support; another exact or timestamp-backed row must still
+        // anchor the slice.
+        if (options?.allowUntimestampedInboundBodyMatch === true &&
+            openClawInboundBodiesMatchWithInjectedContext(batchContent, persistedContent)) {
+            return true;
+        }
+        return liveContentIsRecognizedDecoratedBareBody({
+            liveContent: batchContent,
+            bareContent: persistedContent,
+        });
+    }
+    async alignRuntimeBatchAgainstCoveredFrontier(sessionId, sessionKey, batch) {
+        if (batch.length === 0)
+            return batch;
+        const conversation = await this.conversationStore.getConversationForSession({
+            sessionId,
+            sessionKey,
+        });
+        if (!conversation)
+            return batch;
+        const conversationId = conversation.conversationId;
+        const storedBatch = batch.map((message) => toStoredMessage(message));
+        const batchHashes = computeBatchIdentityHashes(storedBatch);
+        const rawPayloadContents = computeBatchRawPayloadContents(batch, storedBatch);
+        const tail = await this.conversationStore.getLastMessages(conversationId, batch.length);
+        const tailHashes = await this.conversationStore.getRecentMessageIdentityHashes(conversationId, batch.length);
+        let unprovenExternalizedOverlap = false;
+        for (let k = Math.min(tail.length, tailHashes.length, batch.length); k > 0; k -= 1) {
+            const tailMessages = tail.slice(tail.length - k);
+            const tailSlice = tailHashes.slice(tailHashes.length - k);
+            let aligned = true;
+            const matches = [];
+            for (let i = 0; i < k; i += 1) {
+                const match = await this.matchStoredMessageToIncoming(tailMessages[i], storedBatch[i], batch[i], batchHashes[i], tailSlice[i], rawPayloadContents[i]);
+                if (match === "unproven-externalized") {
+                    unprovenExternalizedOverlap = true;
+                    aligned = false;
+                    break;
+                }
+                if (!match) {
+                    // Identity_hash / externalized matching found no coverage. Recognize
+                    // the OpenClaw store double-write: a runtime row that is the DECORATED
+                    // face of the persisted bare body of the same turn — their
+                    // identity_hashes differ, so identity dedup cannot see it. Strictly
+                    // gated to genuine decoration; a distinct turn is never collapsed.
+                    if (this.runtimeRowCoversPersistedFrontierRow(tailMessages[i].role, tailMessages[i].content, storedBatch[i].role, storedBatch[i].content, { allowCollapsedSpaceRunMatch: true })) {
+                        matches.push("decorated");
+                        continue;
+                    }
+                    if (tailMessages[i].transcriptEntryId != null &&
+                        this.runtimeRowCoversPersistedFrontierRow(tailMessages[i].role, tailMessages[i].content, storedBatch[i].role, storedBatch[i].content, { allowUntimestampedInboundBodyMatch: true })) {
+                        // Stored provenance qualifies this as alignment support, but it
+                        // authenticates only the persisted row. Another exact/timestamp
+                        // anchor must still prove the runtime batch is a replay.
+                        matches.push("unanchored-inbound");
+                        continue;
+                    }
+                    aligned = false;
+                    break;
+                }
+                matches.push(match);
+            }
+            // Externalized-only matches are ambiguous in the same way as suffix
+            // fallback anchors: they may be a replay or a legitimate repeated upload.
+            // Trim only when at least one matched message still has exact identity.
+            if (aligned &&
+                matches.some(isStrongReplayAnchor) &&
+                redactedMatchesHaveAdjacentAnchor(matches)) {
+                return batch.slice(k);
+            }
+        }
+        if (unprovenExternalizedOverlap) {
+            this.deps.log.warn(`[lcm] afterTurn: runtime batch has an unproven externalized overlap with the covered transcript frontier; ingesting full batch conversation=${conversationId}`);
+            return batch;
+        }
+        const persistedIdentityOverlaps = await this.countPersistedIdentityOverlaps(conversationId, storedBatch);
+        if (persistedIdentityOverlaps > 0) {
+            if (!batch.some((message, index) => structuredPartsIdentity(buildMessageParts({
+                sessionId: "",
+                message,
+                fallbackContent: storedBatch[index].content,
+            })) !== null) &&
+                (await this.batchIsFullyPersistedByMultiplicity(conversationId, storedBatch))) {
+                this.deps.log.debug(`[lcm] afterTurn: runtime batch does not align with the covered transcript frontier but is fully persisted by multiplicity (${persistedIdentityOverlaps}/${batch.length}); skipping replay conversation=${conversationId}`);
+                return [];
+            }
+            this.deps.log.warn(`[lcm] afterTurn: runtime batch does not align with the covered transcript frontier and partially overlaps persisted history (${persistedIdentityOverlaps}/${batch.length}); ingesting full batch to preserve potentially new messages conversation=${conversationId}`);
+            return batch;
+        }
+        return batch;
+    }
+    /**
+     * Remove a full replay with already-persisted transcript identities when the
+     * transcript is unavailable but its checkpoint was preserved. Batches
+     * without complete identity proof retain the established degraded dedup
+     * behavior; this path adds no timestamp-based reason to drop them.
+     */
+    async deduplicateAfterTurnBatchAgainstPreservedCheckpoint(sessionId, sessionKey, batch) {
+        if (batch.length === 0)
+            return batch;
+        const conversation = await this.conversationStore.getConversationForSession({
+            sessionId,
+            sessionKey,
+        });
+        if (!conversation)
+            return batch;
+        if (await this.batchIsFullyPersistedByTranscriptEntryId(conversation.conversationId, batch)) {
+            this.deps.log.debug(`[lcm] afterTurn: transcript unavailable with preserved checkpoint; skipping fully persisted runtime replay conversation=${conversation.conversationId} batchLen=${batch.length}`);
+            return [];
+        }
+        return this.deduplicateAfterTurnBatch(sessionId, sessionKey, batch, {
+            oversizedNoOverlap: "ingest",
+        });
+    }
+    /**
+     * Prove that every runtime row carries a canonical transcript entry id that
+     * is already persisted. Missing or unfamiliar ids fail open because content
+     * and second-truncated timestamps cannot distinguish a replay from a
+     * genuinely new same-second repeat.
+     */
+    async batchIsFullyPersistedByTranscriptEntryId(conversationId, batch) {
+        for (const message of batch) {
+            const entryId = getTranscriptEntryId(message);
+            if (!entryId)
+                return false;
+            const candidate = await this.conversationStore.getTranscriptEntryAnchorCandidate(conversationId, entryId);
+            if (!candidate ||
+                !(await this.matchesPersistedAnchor(candidate.messageId, message))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    async deduplicateAfterTurnBatch(sessionId, sessionKey, batch, options) {
+        if (batch.length === 0)
+            return batch;
+        const conversation = await this.conversationStore.getConversationForSession({
+            sessionId,
+            sessionKey,
+        });
+        if (!conversation)
+            return batch;
+        const conversationId = conversation.conversationId;
+        const storedMessageCount = await this.conversationStore.getMessageCount(conversationId);
+        if (storedMessageCount === 0)
+            return batch;
+        const lastDbIdentityHash = await this.conversationStore.getLastMessageIdentityHash(conversationId);
+        if (!lastDbIdentityHash)
+            return batch;
+        const storedBatch = batch.map((m) => toStoredMessage(m));
+        const batchHashes = computeBatchIdentityHashes(storedBatch);
+        const rawPayloadContents = computeBatchRawPayloadContents(batch, storedBatch);
+        // When the DB already has more messages than the incoming batch,
+        // the batch may be a tail-only replay. Try tail-matching first,
+        // then fall back to suffix-matching.
+        if (storedMessageCount > batch.length) {
+            return this.deduplicateOversizedBatch(conversationId, batch, storedBatch, batchHashes, rawPayloadContents, storedMessageCount, lastDbIdentityHash, options);
+        }
+        // Aligned-tail check: the DB's last message must align with the message at
+        // the exact replay boundary in the incoming batch. Identity_hash is the
+        // fast path; a hash mismatch still aligns when the boundary row is the
+        // DECORATED face of the bare DB row (the store double-write — same turn,
+        // different identity_hash), which is collapsed under a strict decoration
+        // gate instead of ingested as a duplicate.
+        const batchAtBoundaryHash = batchHashes[storedMessageCount - 1];
+        if (batchAtBoundaryHash !== lastDbIdentityHash) {
+            const lastDbMessage = await this.conversationStore.getLastMessage(conversationId);
+            const batchAtBoundary = storedBatch[storedMessageCount - 1];
+            const batchAtBoundaryMessage = batch[storedMessageCount - 1];
+            if (!lastDbMessage ||
+                (!this.runtimeRowCoversPersistedFrontierRow(lastDbMessage.role, lastDbMessage.content, batchAtBoundary.role, batchAtBoundary.content) &&
+                    !(await this.messagesDifferOnlyByHostRedaction(lastDbMessage, batchAtBoundary, batchAtBoundaryMessage)))) {
+                // Prefix mismatch — attempt suffix fallback before giving up.
+                return this.deduplicateSuffixFallback(conversationId, batch, storedBatch, batchHashes, rawPayloadContents, storedMessageCount, "prefix-mismatch", { onNoOverlap: "ingest" });
+            }
+        }
+        // Full proof: incoming batch must start with the entire stored transcript
+        // in exact order before we trim anything.
+        const recentDbHashes = await this.conversationStore.getRecentMessageIdentityHashes(conversationId, storedMessageCount);
+        if (recentDbHashes.length !== storedMessageCount) {
+            return batch;
+        }
+        const storedMessages = await this.conversationStore.getMessages(conversationId, {
+            limit: storedMessageCount,
+        });
+        if (storedMessages.length !== storedMessageCount) {
+            return batch;
+        }
+        const matches = [];
+        for (let i = 0; i < storedMessageCount; i += 1) {
+            const match = await this.matchStoredMessageToIncoming(storedMessages[i], storedBatch[i], batch[i], batchHashes[i], recentDbHashes[i], rawPayloadContents[i]);
+            if (match === "unproven-externalized") {
+                return batch;
+            }
+            if (!match) {
+                // Identity_hash / externalized matching found no coverage. Recognize
+                // the OpenClaw store double-write: the incoming row is the DECORATED
+                // face of the stored bare body of the same turn (different
+                // identity_hash). Strictly gated to genuine decoration; a distinct turn
+                // is never collapsed.
+                if (!this.runtimeRowCoversPersistedFrontierRow(storedMessages[i].role, storedMessages[i].content, storedBatch[i].role, storedBatch[i].content)) {
+                    return batch;
+                }
+                matches.push("decorated");
+            }
+            else {
+                matches.push(match);
+            }
+        }
+        // A redacted value is intentionally lossy. Require an adjacent unchanged
+        // or structurally decorated row before treating it as replay evidence.
+        if (!redactedMatchesHaveAdjacentAnchor(matches))
+            return batch;
+        return batch.slice(storedMessageCount);
+    }
+    /**
+     * Stamp an entry id onto a recent tail row whose persisted form matches the
+     * incoming transcript message, including side-effect-free externalized-file
+     * equivalence. Returns true only after an unstamped row was updated.
+     */
+    async adoptRecentTranscriptEntryIdForMessage(params) {
+        const tailWindow = Math.max(1, Math.floor(params.tailWindow));
+        const tail = await this.conversationStore.getLastMessages(params.conversationId, tailWindow);
+        const tailHashes = await this.conversationStore.getRecentMessageIdentityHashes(params.conversationId, tailWindow);
+        if (tail.length === 0 || tail.length !== tailHashes.length) {
+            return false;
+        }
+        const stored = toStoredMessage(params.message);
+        const incomingHash = storedMessageIdentityHash(stored);
+        const incomingRawPayloadContent = serializeRawPayloadContent(params.message, stored.content)?.content ?? null;
+        const candidates = [];
+        for (let index = tail.length - 1; index >= 0; index -= 1) {
+            if (tail[index].transcriptEntryId)
+                continue;
+            const match = await this.matchStoredMessageToIncoming(tail[index], stored, params.message, incomingHash, tailHashes[index], incomingRawPayloadContent);
+            if (!match || match === "unproven-externalized") {
+                continue;
+            }
+            candidates.push(tail[index].messageId);
+        }
+        if (candidates.length !== 1)
+            return false;
+        return this.conversationStore.adoptTranscriptEntryIdForMessage(params.conversationId, candidates[0], params.transcriptEntryId);
+    }
+    /**
+     * Handle the case where the DB has more messages than the incoming batch.
+     * The batch is likely a tail-only replay after compaction — try to match
+     * the entire batch against the tail of stored messages.
+     */
+    async deduplicateOversizedBatch(conversationId, batch, storedBatch, batchHashes, rawPayloadContents, storedMessageCount, lastDbIdentityHash, options) {
+        const lastBatchHash = batchHashes[batchHashes.length - 1];
+        // Quick check: if the last DB identity_hash matches the last batch
+        // identity_hash, verify that the entire batch matches the actual DB tail.
+        if (lastDbIdentityHash === lastBatchHash) {
+            const tailMessages = await this.conversationStore.getLastMessages(conversationId, batch.length);
+            const tailHashes = await this.conversationStore.getRecentMessageIdentityHashes(conversationId, batch.length);
+            if (tailMessages.length === batch.length && tailHashes.length === batch.length) {
+                let tailMatch = true;
+                const matches = [];
+                for (let i = 0; i < batch.length; i++) {
+                    const match = await this.matchStoredMessageToIncomingOrDecoratedCoverage(tailMessages[i], storedBatch[i], batch[i], batchHashes[i], tailHashes[i], rawPayloadContents[i]);
+                    if (!match || match === "unproven-externalized") {
+                        tailMatch = false;
+                        break;
+                    }
+                    matches.push(match);
+                }
+                if (tailMatch && redactedMatchesHaveAdjacentAnchor(matches)) {
+                    this.deps.log.debug(`[lcm] dedup: tail-match detected, batch already fully stored ` +
+                        `(storedCount=${storedMessageCount} batchLen=${batch.length}), skipping entire batch`);
+                    return [];
+                }
+            }
+        }
+        // Fall back to suffix matching. Outside the transcript-covered path, a
+        // short runtime batch with no overlap may be a genuine live turn after a
+        // missing/unreadable transcript reconcile. Ingest on no-overlap unless the
+        // caller has a stronger proof source and explicitly asks to skip.
+        return this.deduplicateSuffixFallback(conversationId, batch, storedBatch, batchHashes, rawPayloadContents, storedMessageCount, "oversized", { onNoOverlap: options?.oversizedNoOverlap ?? "ingest" });
+    }
+    /**
+     * Suffix-matching fallback: scan the batch from the end looking for a
+     * boundary where the stored transcript's tail aligns with a suffix of the
+     * batch. Returns only the genuinely new messages after that boundary.
+     */
+    async deduplicateSuffixFallback(conversationId, batch, storedBatch, batchHashes, rawPayloadContents, storedMessageCount, context, options) {
+        const allRecentHashes = await this.conversationStore.getRecentMessageIdentityHashes(conversationId, storedMessageCount);
+        if (allRecentHashes.length === 0)
+            return batch;
+        const allStored = await this.conversationStore.getMessages(conversationId, {
+            limit: storedMessageCount,
+        });
+        if (allStored.length !== allRecentHashes.length)
+            return batch;
+        const lastStoredHash = allRecentHashes[allRecentHashes.length - 1];
+        const lastStoredMessage = allStored[allStored.length - 1];
+        let ambiguousWeakOverlap = false;
+        for (let k = batch.length - 1; k >= 0; k--) {
+            const lastMatch = await this.matchStoredMessageToIncomingOrDecoratedCoverage(lastStoredMessage, storedBatch[k], batch[k], batchHashes[k], lastStoredHash, rawPayloadContents[k]);
+            if (lastMatch === "unproven-externalized") {
+                ambiguousWeakOverlap = true;
+                continue;
+            }
+            if (!lastMatch)
+                continue;
+            const matchLen = Math.min(k + 1, allRecentHashes.length);
+            const startDb = allRecentHashes.length - matchLen;
+            let suffixMatch = true;
+            const matches = [];
+            for (let j = 0; j < matchLen; j++) {
+                const match = await this.matchStoredMessageToIncomingOrDecoratedCoverage(allStored[startDb + j], storedBatch[k - matchLen + 1 + j], batch[k - matchLen + 1 + j], batchHashes[k - matchLen + 1 + j], allRecentHashes[startDb + j], rawPayloadContents[k - matchLen + 1 + j]);
+                if (match === "unproven-externalized") {
+                    ambiguousWeakOverlap = true;
+                    suffixMatch = false;
+                    break;
+                }
+                if (!match) {
+                    suffixMatch = false;
+                    break;
+                }
+                matches.push(match);
+            }
+            const exactAnchor = matches.some(isStrongReplayAnchor);
+            const redactionAnchored = redactedMatchesHaveAdjacentAnchor(matches);
+            const newSlice = batch.slice(k + 1);
+            // Outside the transcript-covered path, an externalized-only anchor is
+            // ambiguous: it may be a replay prefix or a new turn that repeats the
+            // same upload. Require an exact anchor before trimming.
+            if (suffixMatch &&
+                exactAnchor &&
+                redactionAnchored &&
+                (newSlice.length > 0 || matchLen > 1 || lastMatch === "decorated")) {
+                this.deps.log.debug(`[lcm] dedup: ${context} suffix-match at batch[${k}], ` +
+                    `returning ${newSlice.length} new messages ` +
+                    `(storedCount=${storedMessageCount} batchLen=${batch.length})`);
+                return newSlice;
+            }
+            if (suffixMatch && (!exactAnchor || !redactionAnchored)) {
+                ambiguousWeakOverlap = true;
+            }
+        }
+        if (ambiguousWeakOverlap) {
+            this.deps.log.warn(`[lcm] dedup: ${context}, storedCount=${storedMessageCount} batchLen=${batch.length}, ` +
+                `externalized/redacted-only overlap is ambiguous — ingesting full batch`);
+            return batch;
+        }
+        const onNoOverlap = options?.onNoOverlap ?? "ingest";
+        if (onNoOverlap === "skip") {
+            this.deps.log.warn(`[lcm] dedup: ${context}, storedCount=${storedMessageCount} batchLen=${batch.length}, ` +
+                `no overlap found — fail-closed skipping full batch`);
+            return [];
+        }
+        this.deps.log.warn(`[lcm] dedup: ${context}, storedCount=${storedMessageCount} batchLen=${batch.length}, ` +
+            `no overlap found — ingesting full batch`);
+        return batch;
+    }
+    async matchStoredMessageToIncomingOrDecoratedCoverage(storedMessage, incoming, incomingMessage, incomingHash, storedHash, incomingRawPayloadContent) {
+        const match = await this.matchStoredMessageToIncoming(storedMessage, incoming, incomingMessage, incomingHash, storedHash, incomingRawPayloadContent);
+        if (match) {
+            return match;
+        }
+        if (this.runtimeRowCoversPersistedFrontierRow(storedMessage.role, storedMessage.content, incoming.role, incoming.content)) {
+            return "decorated";
+        }
+        return null;
+    }
+    async matchStoredMessageToIncoming(storedMessage, incoming, incomingMessage, incomingHash, storedHash, incomingRawPayloadContent) {
+        const storedParts = await this.conversationStore.getMessageParts(storedMessage.messageId);
+        const storedStructured = structuredPartsIdentity(storedParts);
+        const incomingStructured = structuredPartsIdentity(buildMessageParts({
+            sessionId: "",
+            message: incomingMessage,
+            fallbackContent: incoming.content,
+        }));
+        const externalizedMatch = await this.messagesAreExternalizedEquivalent(storedMessage, incoming, incomingRawPayloadContent);
+        if (externalizedMatch === "externalized") {
+            const storedIds = await this.storedToolCallIds(storedMessage.messageId);
+            const incomingIds = incomingToolCallIds(incomingMessage);
+            if ((storedIds.size === 0 && incomingIds.size === 0) ||
+                sameNonEmptyIds(storedIds, incomingIds)) {
+                return "externalized";
+            }
+        }
+        // Text hashes are only candidate indexes. Never equate unrelated tool events.
+        if ((storedStructured !== null || incomingStructured !== null) &&
+            storedStructured !== incomingStructured) {
+            // Preserve the separately proven, provenance-gated host-redaction path.
+            return (await this.messagesDifferOnlyByHostRedaction(storedMessage, incoming, incomingMessage))
+                ? "redacted"
+                : null;
+        }
+        if (incoming.content.trim() === "" && incomingStructured === null)
+            return null;
+        if (storedHash === incomingHash &&
+            storedMessage.role === incoming.role &&
+            storedMessage.content === incoming.content) {
+            return "exact";
+        }
+        if (externalizedMatch === "unproven-externalized")
+            return externalizedMatch;
+        return (await this.messagesDifferOnlyByHostRedaction(storedMessage, incoming, incomingMessage))
+            ? "redacted"
+            : null;
+    }
+    /** Verify replay payloads, including proven externalization and host redaction. */
+    async matchesPersistedAnchor(messageId, message) {
+        const persisted = await this.conversationStore.getMessageById(messageId);
+        if (!persisted)
+            return false;
+        const incoming = toStoredMessage(message);
+        const match = await this.matchStoredMessageToIncoming(persisted, incoming, message, storedMessageIdentityHash(incoming), buildMessageIdentityHash(persisted.role, persisted.content), serializeRawPayloadContent(message, incoming.content)?.content ?? null);
+        return match !== null && match !== "unproven-externalized";
+    }
+    /** Compare complete structured parts, rejecting blank text without payload proof. */
+    async matchesStructuredAnchor(messageId, message) {
+        const storedParts = await this.conversationStore.getMessageParts(messageId);
+        const incoming = toStoredMessage(message);
+        const expected = structuredPartsIdentity(buildMessageParts({ sessionId: "", message, fallbackContent: incoming.content }));
+        const actual = structuredPartsIdentity(storedParts);
+        return actual === expected && (expected !== null || incoming.content.trim() !== "");
+    }
+    async countPersistedIdentityOverlaps(conversationId, incomingBatch) {
+        let overlaps = 0;
+        for (const incoming of incomingBatch) {
+            if (await this.conversationStore.hasMessage(conversationId, incoming.role, incoming.content)) {
+                overlaps += 1;
+            }
+        }
+        return overlaps;
+    }
+    /** Return whether persisted multiplicity covers every incoming identity. */
+    async batchIsFullyPersistedByMultiplicity(conversationId, incomingBatch) {
+        if (incomingBatch.some((message) => message.content.trim() === ""))
+            return false;
+        const requiredCounts = new Map();
+        for (const incoming of incomingBatch) {
+            const identityHash = buildMessageIdentityHash(incoming.role, incoming.content);
+            const key = `${incoming.role}\0${identityHash}`;
+            const current = requiredCounts.get(key);
+            if (current) {
+                current.count += 1;
+            }
+            else {
+                requiredCounts.set(key, { role: incoming.role, identityHash, count: 1 });
+            }
+        }
+        for (const required of requiredCounts.values()) {
+            const persistedCount = await this.conversationStore.countMessagesByIdentityHash(conversationId, required.role, required.identityHash);
+            if (persistedCount < required.count) {
+                return false;
+            }
+        }
+        return true;
+    }
+    async messagesAreExternalizedEquivalent(storedMessage, incoming, incomingRawPayloadContent) {
+        if (storedMessage.role !== incoming.role) {
+            return null;
+        }
+        let references = extractExternalizedReferences(storedMessage.content);
+        if (references.length === 0) {
+            return null;
+        }
+        const proofKeys = await this.getStoredExternalizedReferenceProofKeys(storedMessage, references);
+        if (proofKeys.size > 0) {
+            references = references.filter((reference) => proofKeys.has(referenceProofKey(reference)));
+            if (references.length === 0) {
+                return null;
+            }
+        }
+        const provenanceBacked = proofKeys.size > 0 &&
+            references.every((reference) => proofKeys.has(referenceProofKey(reference)));
+        if (references.length === 1 &&
+            isWholeIncomingReference(references[0]) &&
+            (await this.referenceMatchesWholeIncoming(storedMessage, incoming, references[0], incomingRawPayloadContent))) {
+            return provenanceBacked ? "externalized" : "unproven-externalized";
+        }
+        const fileBlocks = parseFileBlocks(incoming.content);
+        if (fileBlocks.length === 0) {
+            if (await this.incomingNativeImagesMatchStoredContent(storedMessage.content, references, incomingRawPayloadContent)) {
+                return provenanceBacked ? "externalized" : "unproven-externalized";
+            }
+            return (references.length === 1 &&
+                isWholeIncomingReference(references[0]) &&
+                (await this.referenceMatchesWholeIncoming(storedMessage, incoming, references[0], incomingRawPayloadContent)))
+                ? provenanceBacked ? "externalized" : "unproven-externalized"
+                : null;
+        }
+        let rewritten = "";
+        let cursor = 0;
+        const usedReferenceIndexes = new Set();
+        for (const block of fileBlocks) {
+            const referenceIndex = await this.findMatchingReferenceIndex(references, block, usedReferenceIndexes);
+            rewritten += incoming.content.slice(cursor, block.start);
+            if (referenceIndex < 0) {
+                rewritten += incoming.content.slice(block.start, block.end);
+            }
+            else {
+                usedReferenceIndexes.add(referenceIndex);
+                rewritten += references[referenceIndex].formattedReference;
+            }
+            cursor = block.end;
+        }
+        rewritten += incoming.content.slice(cursor);
+        if (usedReferenceIndexes.size === references.length && rewritten === storedMessage.content) {
+            return provenanceBacked ? "externalized" : "unproven-externalized";
+        }
+        return null;
+    }
+    async incomingNativeImagesMatchStoredContent(storedContent, references, incomingRawPayloadContent) {
+        if (incomingRawPayloadContent == null || !references.every(isImageReference)) {
+            return false;
+        }
+        const blocks = extractNativeImageReplayBlocks(incomingRawPayloadContent);
+        if (!blocks) {
+            return false;
+        }
+        let referenceIndex = 0;
+        const rewritten = [];
+        for (const block of blocks) {
+            // Mirror extractStructuredText's array join while replacing each replayed
+            // native image with the exact stored reference after byte proof.
+            if (block.kind === "text") {
+                rewritten.push(block.text);
+                continue;
+            }
+            const reference = references[referenceIndex];
+            if (!reference || !(await this.referenceMatchesNativeImage(reference, block.buffer))) {
+                return false;
+            }
+            rewritten.push(reference.reference);
+            referenceIndex += 1;
+        }
+        return referenceIndex === references.length && rewritten.join("\n") === storedContent;
+    }
+    async getStoredExternalizedReferenceProofKeys(storedMessage, references) {
+        const proofKeys = new Set();
+        if (storedMessage.largeContent) {
+            for (const reference of references) {
+                if (reference.fileId === storedMessage.largeContent) {
+                    proofKeys.add(referenceProofKey(reference));
+                }
+            }
+        }
+        const parts = await this.conversationStore.getMessageParts(storedMessage.messageId);
+        for (const part of parts) {
+            const metadata = parsePartMetadata(part.metadata);
+            if (!metadata) {
+                continue;
+            }
+            if (metadata.rawPayloadExternalized === true &&
+                metadata.externalizationReason === RAW_PAYLOAD_EXTERNALIZATION_REASON &&
+                typeof metadata.externalizedFileId === "string") {
+                proofKeys.add(`raw:${metadata.externalizedFileId}`);
+            }
+            if (metadata.fileBlocksExternalized === true &&
+                metadata.externalizationReason === "large_file_block" &&
+                Array.isArray(metadata.externalizedFileIds)) {
+                for (const fileId of metadata.externalizedFileIds) {
+                    if (typeof fileId === "string") {
+                        proofKeys.add(`file:${fileId}`);
+                    }
+                }
+            }
+            if (metadata.toolOutputExternalized === true &&
+                metadata.externalizationReason === "large_tool_result" &&
+                typeof metadata.externalizedFileId === "string") {
+                proofKeys.add(`tool:${metadata.externalizedFileId}`);
+            }
+            if (metadata.imageExternalized === true &&
+                metadata.externalizationReason === "native_image" &&
+                typeof metadata.externalizedFileId === "string") {
+                proofKeys.add(`image:${metadata.externalizedFileId}`);
+            }
+        }
+        return proofKeys;
+    }
+    async referenceMatchesWholeIncoming(storedMessage, incoming, reference, incomingRawPayloadContent) {
+        const largeFile = await this.summaryStore.getLargeFile(reference.fileId);
+        if (!largeFile) {
+            return false;
+        }
+        if (this.formatExternalizedReference(reference, largeFile, storedMessage) !== storedMessage.content) {
+            return false;
+        }
+        if (isImageReference(reference)) {
+            const incomingImage = extractSingleNativeImageBuffer(incomingRawPayloadContent ?? incoming.content);
+            return incomingImage
+                ? this.referenceMatchesNativeImage(reference, incomingImage)
+                : false;
+        }
+        const contentToCompare = reference.reference.startsWith("[LCM Raw Payload:") && incomingRawPayloadContent != null
+            ? incomingRawPayloadContent
+            : incoming.content;
+        if (await this.summaryStore.largeFileContentEquals(reference.fileId, contentToCompare, {
+            largeFilesDir: this.largeFilesDir,
+        })) {
+            return true;
+        }
+        if (!reference.reference.startsWith("[LCM Raw Payload:") ||
+            incomingRawPayloadContent == null) {
+            return false;
+        }
+        const hasFileBlocks = parseFileBlocks(incomingRawPayloadContent).length > 0;
+        const hasNativeImages = rawPayloadHasNativeImages(incomingRawPayloadContent);
+        if (!hasFileBlocks && !hasNativeImages) {
+            return false;
+        }
+        const storedPayload = await this.summaryStore.getLargeFileContent(reference.fileId, {
+            largeFilesDir: this.largeFilesDir,
+            maxBytes: largeFile.byteSize ?? Buffer.byteLength(incomingRawPayloadContent, "utf8"),
+        });
+        if (!storedPayload) {
+            return false;
+        }
+        if (hasFileBlocks) {
+            const rewrittenPayload = await this.rewriteIncomingFileBlocksFromStoredPayload(incomingRawPayloadContent, storedPayload);
+            if (rewrittenPayload === storedPayload) {
+                return true;
+            }
+        }
+        return hasNativeImages
+            ? this.incomingNativeImageRawPayloadMatchesStoredPayload(incomingRawPayloadContent, storedPayload)
+            : false;
+    }
+    async referenceMatchesNativeImage(reference, incomingImage) {
+        const largeFile = await this.summaryStore.getLargeFile(reference.fileId);
+        if (!largeFile?.mimeType?.toLowerCase().startsWith("image/")) {
+            return false;
+        }
+        return this.summaryStore.largeFileBufferEquals(reference.fileId, incomingImage, {
+            largeFilesDir: this.largeFilesDir,
+        });
+    }
+    async incomingNativeImageRawPayloadMatchesStoredPayload(incomingRawPayloadContent, storedPayload) {
+        const incoming = parseJsonPayload(incomingRawPayloadContent);
+        const stored = parseJsonPayload(storedPayload);
+        if (!Array.isArray(incoming) || !Array.isArray(stored) || incoming.length !== stored.length) {
+            return false;
+        }
+        for (let index = 0; index < incoming.length; index += 1) {
+            const incomingEntry = incoming[index];
+            const storedEntry = stored[index];
+            const incomingImage = extractSingleNativeImageBufferFromValue(incomingEntry);
+            if (!incomingImage) {
+                // Non-image raw blocks must remain byte-for-byte JSON equivalent.
+                if (isNativeImageEntry(incomingEntry) || JSON.stringify(incomingEntry) !== JSON.stringify(storedEntry)) {
+                    return false;
+                }
+                continue;
+            }
+            if (!(await this.storedRawPayloadImageEntryMatches(storedEntry, incomingImage))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    async storedRawPayloadImageEntryMatches(storedEntry, incomingImage) {
+        if (!storedEntry || typeof storedEntry !== "object" || Array.isArray(storedEntry)) {
+            return false;
+        }
+        const record = storedEntry;
+        if (record.type !== "text" ||
+            record.imageExternalized !== true ||
+            record.externalizationReason !== "native_image" ||
+            typeof record.text !== "string" ||
+            typeof record.externalizedFileId !== "string") {
+            return false;
+        }
+        const references = extractExternalizedReferences(record.text);
+        if (references.length !== 1 || references[0].fileId !== record.externalizedFileId) {
+            return false;
+        }
+        return this.referenceMatchesNativeImage(references[0], incomingImage);
+    }
+    async rewriteIncomingFileBlocksFromStoredPayload(incomingContent, storedPayload) {
+        const references = extractExternalizedReferences(storedPayload);
+        const fileBlocks = parseFileBlocks(incomingContent);
+        if (references.length === 0 || fileBlocks.length === 0) {
+            return null;
+        }
+        let rewritten = "";
+        let cursor = 0;
+        const usedReferenceIndexes = new Set();
+        for (const block of fileBlocks) {
+            const referenceIndex = await this.findMatchingReferenceIndex(references, block, usedReferenceIndexes);
+            rewritten += incomingContent.slice(cursor, block.start);
+            if (referenceIndex < 0) {
+                rewritten += incomingContent.slice(block.start, block.end);
+            }
+            else {
+                usedReferenceIndexes.add(referenceIndex);
+                rewritten += references[referenceIndex].formattedReference;
+            }
+            cursor = block.end;
+        }
+        rewritten += incomingContent.slice(cursor);
+        return usedReferenceIndexes.size === references.length ? rewritten : null;
+    }
+    async findMatchingReferenceIndex(references, block, usedReferenceIndexes) {
+        for (let index = 0; index < references.length; index += 1) {
+            if (usedReferenceIndexes.has(index)) {
+                continue;
+            }
+            const reference = references[index];
+            const largeFile = await this.summaryStore.getLargeFile(reference.fileId);
+            if (!largeFile) {
+                continue;
+            }
+            if ((largeFile.fileName ?? undefined) !== block.fileName ||
+                (largeFile.mimeType ?? undefined) !== block.mimeType) {
+                continue;
+            }
+            if (await this.summaryStore.largeFileContentEquals(reference.fileId, block.text, {
+                largeFilesDir: this.largeFilesDir,
+            })) {
+                reference.formattedReference = this.formatFileReference(largeFile);
+                return index;
+            }
+        }
+        return -1;
+    }
+    formatExternalizedReference(reference, largeFile, storedMessage) {
+        if (isImageReference(reference)) {
+            return reference.reference;
+        }
+        if (reference.reference.startsWith("[LCM Tool Output:")) {
+            return formatToolOutputReference({
+                fileId: largeFile.fileId,
+                toolName: extractReferenceField(reference.reference, "tool"),
+                byteSize: largeFile.byteSize ?? 0,
+                summary: largeFile.explorationSummary ?? "",
+            });
+        }
+        if (reference.reference.startsWith("[LCM Raw Payload:")) {
+            return formatRawPayloadReference({
+                fileId: largeFile.fileId,
+                role: extractReferenceField(reference.reference, "role") ?? storedMessage.role,
+                reason: extractReferenceField(reference.reference, "reason") ??
+                    RAW_PAYLOAD_EXTERNALIZATION_REASON,
+                byteSize: largeFile.byteSize ?? 0,
+                summary: largeFile.explorationSummary ?? "",
+            });
+        }
+        return this.formatFileReference(largeFile);
+    }
+    formatFileReference(largeFile) {
+        return formatFileReference({
+            fileId: largeFile.fileId,
+            fileName: largeFile.fileName ?? undefined,
+            mimeType: largeFile.mimeType ?? undefined,
+            byteSize: largeFile.byteSize ?? 0,
+            summary: largeFile.explorationSummary ?? "",
+        });
+    }
+}
+function storedMessageIdentityHash(stored) {
+    return buildMessageIdentityHash(stored.role, stored.content);
+}
+function computeBatchIdentityHashes(batch) {
+    return batch.map((m) => storedMessageIdentityHash(m));
+}
+function computeBatchRawPayloadContents(batch, storedBatch) {
+    return batch.map((message, index) => {
+        const rawPayload = serializeRawPayloadContent(message, storedBatch[index]?.content ?? "");
+        return rawPayload?.content ?? null;
+    });
+}
+function extractExternalizedReferences(content) {
+    const references = [];
+    const summaryMarker = "\n\nExploration Summary:";
+    const referencePattern = /\[LCM (?:File|Raw Payload|Tool Output):\s*(file_[a-f0-9]{16})\b/gi;
+    let match;
+    while ((match = referencePattern.exec(content)) !== null) {
+        const fileId = match[1]?.toLowerCase();
+        if (!fileId)
+            continue;
+        const markerIndex = content.indexOf(summaryMarker, referencePattern.lastIndex);
+        if (markerIndex < 0 || content[markerIndex - 1] !== "]") {
+            continue;
+        }
+        const headerRemainder = content.slice(referencePattern.lastIndex, markerIndex);
+        if (/\][\s\S]*\[LCM (?:File|Raw Payload|Tool Output):\s*file_[a-f0-9]{16}\b/i.test(headerRemainder)) {
+            continue;
+        }
+        references.push({
+            fileId,
+            reference: content.slice(match.index, markerIndex),
+            formattedReference: content.slice(match.index, markerIndex),
+            end: markerIndex,
+        });
+        referencePattern.lastIndex = markerIndex;
+    }
+    const imageReferencePattern = /\[(?:(?:User|System|Tool|Assistant) image|Image): [^\]]*?\bLCM file:\s*(file_[a-f0-9]{16})\]/gi;
+    while ((match = imageReferencePattern.exec(content)) !== null) {
+        const fileId = match[1]?.toLowerCase();
+        if (!fileId)
+            continue;
+        references.push({
+            fileId,
+            reference: match[0],
+            formattedReference: match[0],
+            end: imageReferencePattern.lastIndex,
+        });
+    }
+    return references;
+}
+function extractReferenceField(reference, field) {
+    const match = new RegExp(`\\b${field}=([^|\\]]+)`).exec(reference);
+    return match?.[1]?.trim() || undefined;
+}
+function referenceProofKey(reference) {
+    if (reference.reference.startsWith("[LCM Raw Payload:")) {
+        return `raw:${reference.fileId}`;
+    }
+    if (reference.reference.startsWith("[LCM File:")) {
+        return `file:${reference.fileId}`;
+    }
+    if (reference.reference.startsWith("[LCM Tool Output:")) {
+        return `tool:${reference.fileId}`;
+    }
+    if (isImageReference(reference)) {
+        return `image:${reference.fileId}`;
+    }
+    return `other:${reference.fileId}`;
+}
+function isWholeIncomingReference(reference) {
+    return (reference.reference.startsWith("[LCM Raw Payload:") ||
+        reference.reference.startsWith("[LCM Tool Output:") ||
+        isImageReference(reference));
+}
+function isImageReference(reference) {
+    return /^\[(?:(?:User|System|Tool|Assistant) image|Image): /i.test(reference.reference);
+}
+function extractSingleNativeImageBuffer(content) {
+    const parsed = parseJsonPayload(content);
+    const imageBlocks = parsed === undefined
+        ? extractNativeImageBuffersFromValue(content)
+        : extractNativeImageBuffersFromValue(parsed);
+    return imageBlocks.length === 1 ? imageBlocks[0] : null;
+}
+function extractNativeImageReplayBlocks(content) {
+    const parsed = parseJsonPayload(content);
+    if (!Array.isArray(parsed)) {
+        return null;
+    }
+    const blocks = [];
+    let sawImage = false;
+    for (const entry of parsed) {
+        const image = extractSingleNativeImageBufferFromValue(entry);
+        if (image) {
+            blocks.push({ kind: "image", buffer: image });
+            sawImage = true;
+            continue;
+        }
+        if (isNativeImageEntry(entry)) {
+            return null;
+        }
+        const text = extractStructuredText(entry);
+        if (typeof text === "string" && text.trim().length > 0) {
+            blocks.push({ kind: "text", text });
+        }
+    }
+    return sawImage ? blocks : null;
+}
+function rawPayloadHasNativeImages(content) {
+    const parsed = parseJsonPayload(content);
+    return Array.isArray(parsed) && parsed.some((entry) => extractSingleNativeImageBufferFromValue(entry));
+}
+function extractSingleNativeImageBufferFromValue(value) {
+    const images = extractNativeImageBuffersFromValue(value);
+    return images.length === 1 ? images[0] : null;
+}
+function isNativeImageEntry(value) {
+    return (!!value &&
+        typeof value === "object" &&
+        !Array.isArray(value) &&
+        value.type === "image");
+}
+function extractNativeImageBuffersFromValue(value) {
+    if (Array.isArray(value)) {
+        return value.flatMap((entry) => extractNativeImageBuffersFromValue(entry));
+    }
+    if (!value || typeof value !== "object") {
+        return [];
+    }
+    const record = value;
+    if (record.type === "image") {
+        const data = typeof record.data === "string" ? record.data : undefined;
+        const decoded = data ? decodeBase64ImageData(data) : null;
+        return decoded ? [decoded] : [];
+    }
+    return [];
+}
+function decodeBase64ImageData(rawData) {
+    const dataUrlMatch = rawData.match(/^data:([^;,]+);base64,(.*)$/s);
+    const base64Data = (dataUrlMatch?.[2] ?? rawData).replace(/\s+/g, "");
+    if (!base64Data || !/^[A-Za-z0-9+/]+={0,2}$/.test(base64Data)) {
+        return null;
+    }
+    try {
+        return Buffer.from(base64Data, "base64");
+    }
+    catch {
+        return null;
+    }
+}
+function parseJsonPayload(content) {
+    const trimmed = content.trim();
+    if (!((trimmed.startsWith("{") && trimmed.endsWith("}")) ||
+        (trimmed.startsWith("[") && trimmed.endsWith("]")))) {
+        return undefined;
+    }
+    try {
+        return JSON.parse(trimmed);
+    }
+    catch {
+        return undefined;
+    }
+}
+function parsePartMetadata(metadata) {
+    if (!metadata) {
+        return null;
+    }
+    try {
+        const parsed = JSON.parse(metadata);
+        return parsed && typeof parsed === "object" && !Array.isArray(parsed)
+            ? parsed
+            : null;
+    }
+    catch {
+        return null;
+    }
+}

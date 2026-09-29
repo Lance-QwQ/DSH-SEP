@@ -1,0 +1,6 @@
+# Explicitly installed bundle: the cross-realm inspector. The Host row
+# activates only where a Web server exists.
+
+- insert:
+    - id: experimental-inspector
+      name: '@deepseek-ai/dsh-experimental-inspector'

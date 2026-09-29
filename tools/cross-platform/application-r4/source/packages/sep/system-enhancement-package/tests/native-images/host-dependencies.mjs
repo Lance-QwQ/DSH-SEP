@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {resolve,join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {registerHooks} from 'node:module';
+assert.ok(process.env.SEP_IMAGE_HOST,'Set SEP_IMAGE_HOST to the installed public Beta.2 fixture.');
+const root=resolve(process.env.SEP_IMAGE_HOST),bytes=await readFile(join(root,'graph.json'));
+const sha=value=>createHash('sha256').update(value).digest('hex');
+assert.equal(sha(bytes),'7ccb8c88330c3f2f576bc3bc50b0e235ea1e0ee28e7fd772521039b213e4f0e5','The test requires the reviewed public Beta.2 program graph.');
+const graph=JSON.parse(bytes),zod=graph.packages.find(p=>p.name==='zod');assert.ok(zod);
+for(const file of graph.files.filter(f=>f.path.startsWith(`store/${zod.id}/`)))assert.equal(sha(await readFile(join(root,file.path))),file.sha256);
+registerHooks({resolve(specifier,context,next){return specifier==='zod'?{url:pathToFileURL(join(root,'store',zod.id,'index.js')).href,shortCircuit:true}:next(specifier,context);}});
