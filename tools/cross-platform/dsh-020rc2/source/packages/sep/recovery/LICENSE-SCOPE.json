@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "package": "@deepseek-ai/dsh-recovery",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "license": "MIT",
+  "includePatterns": [
+    "src/**",
+    "bin/**",
+    "ui/**",
+    "README*.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "originalFiles": [
+    {
+      "path": "bin/host.mjs",
+      "baselineSha256": "c6bd13e0491f8f698762df94066079aaf074a424aded6da19977a4ea06b44d19",
+      "bytes": 2094
+    },
+    {
+      "path": "bin/recovery.mjs",
+      "baselineSha256": "3b55ca1b9127a1ce30d5098760007c08284112b7b811a354a19d0103f511a43e",
+      "bytes": 2141
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "59f8892381f1578a8e6c664ab05743ea5b778cd35b87431a9398b0520dd2c83f",
+      "bytes": 1183
+    },
+    {
+      "path": "README-backup.md",
+      "baselineSha256": "5602605d3f6a5f50a3294c4be4c069d4bc9b35002b06a9fa3753be02e838c291",
+      "bytes": 6927
+    },
+    {
+      "path": "README-continuation.md",
+      "baselineSha256": "e06e9b589251515288057edf10b6a25fcbff874c1ea09ff741260324eb60fa9e",
+      "bytes": 2924
+    },
+    {
+      "path": "README-controller.md",
+      "baselineSha256": "4df271a0463bb2c3b141884c5631b37d7f41e62ddce2cd25fae8060b56f73ecc",
+      "bytes": 8364
+    },
+    {
+      "path": "README-guardian.md",
+      "baselineSha256": "873bb33d9be2243ba1575cc830e2b815aa0a93a3f42196f418cab5266f9e25f2",
+      "bytes": 12647
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "591c5fb2ca875fc3767431ffa88c6d845617ac28970933bc11bd76f45e4bfb7b",
+      "bytes": 6594
+    },
+    {
+      "path": "src/backup.mjs",
+      "baselineSha256": "24a9d546cca3d74cfb651433e8273046253c4e3f1b1a199cc8c64a0be2c19a14",
+      "bytes": 34911
+    },
+    {
+      "path": "src/client.mjs",
+      "baselineSha256": "34f52c1b905323afb114ea03f68c38241be66a5e5bc3ce91afc808e8a415dab3",
+      "bytes": 1397
+    },
+    {
+      "path": "src/continuation.mjs",
+      "baselineSha256": "a62f3502dd6b1917fd689ab98cafef3c1ec097a1005a217ab640301927c1e05b",
+      "bytes": 4803
+    },
+    {
+      "path": "src/controller.mjs",
+      "baselineSha256": "330b9977b7631713093a0b61946231f38465cffa8cffcd560b0d56af9291d37f",
+      "bytes": 23642
+    },
+    {
+      "path": "src/desktop-continuation.mjs",
+      "baselineSha256": "b6e1de851bf3f7d9d9d8d25abfa1ee8c8952ad7c4131d2f6d183f05c3f79e530",
+      "bytes": 2061
+    },
+    {
+      "path": "src/desktop-proxy.mjs",
+      "baselineSha256": "bb903cad06b727aca62f6c7d992d339e2edb0cee439c25e883c28009035980e9",
+      "bytes": 3180
+    },
+    {
+      "path": "src/guardian.mjs",
+      "baselineSha256": "a1f3f85fcc263e11300bc128687adc32410384d5329cfaa398c235cb3ea790f4",
+      "bytes": 19936
+    },
+    {
+      "path": "src/host-plugin.mjs",
+      "baselineSha256": "2e5a7c56665bb310690dab30ba92d7968448a5a7958145bc1cafdb1829021c89",
+      "bytes": 4156
+    },
+    {
+      "path": "src/host-runtime.mjs",
+      "baselineSha256": "bac3170ee182aefb9cdebcf05601262cafa86f24fe9fcef29250d33cddcda754",
+      "bytes": 3837
+    },
+    {
+      "path": "src/http-carrier.mjs",
+      "baselineSha256": "f77de4aaf5655d03d4b9116e5cdc9eb11baedb1e47b7b1ab91b86dbd6f37c07f",
+      "bytes": 2235
+    },
+    {
+      "path": "src/index.mjs",
+      "baselineSha256": "0675afea75ea228b74cab1e10b5b953da375dad6b19036646ea2f188359d79bd",
+      "bytes": 259
+    },
+    {
+      "path": "src/maintenance.mjs",
+      "baselineSha256": "cd9e4e9ea9d11aa2416c38c8448f8d0c416f11f38a82da3ed18d5fb4f2838bee",
+      "bytes": 2733
+    },
+    {
+      "path": "src/managed.mjs",
+      "baselineSha256": "eaec1098e5328469bb5a0ab7db174f0b8482c3d5e102c92f46e8544e811e9a4c",
+      "bytes": 8656
+    },
+    {
+      "path": "src/sep-lock-recovery.mjs",
+      "baselineSha256": "ad55a874f754dbb63c71c17aa4917e7b34283ee00094535835aba52eef88af83",
+      "bytes": 11242
+    },
+    {
+      "path": "src/server.mjs",
+      "baselineSha256": "257b254d6eb35557ef2e7da0cecc52847d396bdfc455dc1a0de38bfc0c5e287e",
+      "bytes": 13103
+    },
+    {
+      "path": "src/suite-plugin.mjs",
+      "baselineSha256": "f65e0b0bf1744211d4e9779d2a821529ae3190b4370136d1c9fa362523ae7c34",
+      "bytes": 249
+    },
+    {
+      "path": "ui/app.js",
+      "baselineSha256": "1e053f9564971772f748297ceff439f9322b5e25813684d4b50f892bb91cfe83",
+      "bytes": 4421
+    },
+    {
+      "path": "ui/index.html",
+      "baselineSha256": "9b896e7fb6d2d90448601bf8c6e88cf3a05bc37cce2d6332bdab6a3d08180a8c",
+      "bytes": 3716
+    }
+  ],
+  "terms": "Only the listed locally authored scope is designated under the custom license. Existing third-party, vendor and prior valid grants take priority and are not revoked. Scope listing records this release selection, not legal ownership certification. Manifest hashes below describe pre-overlay metadata; implementation bytes are unchanged.",
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

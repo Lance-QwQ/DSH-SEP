@@ -1,0 +1,263 @@
+import crypto from "node:crypto";
+import { resolveDelegatedExpansionGrantId } from "../expansion-auth.js";
+export const EXPANSION_RECURSION_ERROR_CODE = "EXPANSION_RECURSION_BLOCKED";
+export const EXPANSION_CONCURRENCY_ERROR_CODE = "EXPANSION_CONCURRENCY_BLOCKED";
+const EXPANSION_DELEGATION_DEPTH_CAP = 1;
+const telemetryCounters = {
+    start: 0,
+    block: 0,
+    timeout: 0,
+    success: 0,
+};
+const delegatedContextBySessionKey = new Map();
+const blockedRequestIdsBySessionKey = new Map();
+const activeRequestIdByOriginSessionKey = new Map();
+function normalizeSessionKey(sessionKey) {
+    return typeof sessionKey === "string" ? sessionKey.trim() : "";
+}
+function getOrInitBlockedRequestIds(sessionKey) {
+    const existing = blockedRequestIdsBySessionKey.get(sessionKey);
+    if (existing) {
+        return existing;
+    }
+    const created = new Set();
+    blockedRequestIdsBySessionKey.set(sessionKey, created);
+    return created;
+}
+function resolveFallbackDelegatedContext(sessionKey, requestId) {
+    if (!sessionKey) {
+        return undefined;
+    }
+    const grantId = resolveDelegatedExpansionGrantId(sessionKey);
+    if (!grantId) {
+        return undefined;
+    }
+    return {
+        requestId,
+        expansionDepth: EXPANSION_DELEGATION_DEPTH_CAP,
+        originSessionKey: sessionKey,
+        stampedBy: "delegated_grant",
+        createdAt: new Date().toISOString(),
+    };
+}
+/**
+ * Build actionable recovery guidance for recursion-blocked delegated calls.
+ */
+function buildExpansionRecursionRecoveryGuidance(originSessionKey) {
+    return ("Recovery: In delegated sub-agent sessions, call `lcm_expand` directly and synthesize " +
+        "your answer from that result. Do NOT call `lcm_expand_query` from delegated context. " +
+        `If deeper delegation is required, return to the origin session (${originSessionKey}) ` +
+        "and call `lcm_expand_query` there.");
+}
+function buildExpansionConcurrencyRecoveryGuidance(originSessionKey) {
+    return ("Recovery: Wait for the active expansion to finish before retrying. " +
+        `If you need an immediate fallback, stay in the origin session (${originSessionKey}) ` +
+        "and use `lcm_grep` or `lcm_describe` instead.");
+}
+/**
+ * Create a stable request identifier for delegated expansion orchestration.
+ */
+export function createExpansionRequestId() {
+    return crypto.randomUUID();
+}
+/**
+ * Resolve the active expansion request id for a session, inheriting from any
+ * stamped delegated context when present.
+ */
+export function resolveExpansionRequestId(sessionKey) {
+    const key = normalizeSessionKey(sessionKey);
+    return delegatedContextBySessionKey.get(key)?.requestId ?? createExpansionRequestId();
+}
+/**
+ * Resolve the next delegated expansion depth to stamp onto a child session.
+ */
+export function resolveNextExpansionDepth(sessionKey) {
+    const key = normalizeSessionKey(sessionKey);
+    if (!key) {
+        return 1;
+    }
+    const existing = delegatedContextBySessionKey.get(key);
+    if (existing) {
+        return existing.expansionDepth + 1;
+    }
+    return resolveDelegatedExpansionGrantId(key) ? EXPANSION_DELEGATION_DEPTH_CAP + 1 : 1;
+}
+/**
+ * Stamp delegated expansion metadata for a child session so re-entry checks can
+ * enforce recursion and depth policies deterministically.
+ */
+export function stampDelegatedExpansionContext(params) {
+    const sessionKey = normalizeSessionKey(params.sessionKey);
+    const context = {
+        requestId: params.requestId,
+        expansionDepth: Math.max(0, Math.trunc(params.expansionDepth)),
+        originSessionKey: params.originSessionKey.trim() || "main",
+        stampedBy: params.stampedBy,
+        createdAt: new Date().toISOString(),
+    };
+    if (sessionKey) {
+        delegatedContextBySessionKey.set(sessionKey, context);
+    }
+    return context;
+}
+/**
+ * Remove delegated expansion metadata for a child session after cleanup.
+ */
+export function clearDelegatedExpansionContext(sessionKey) {
+    const key = normalizeSessionKey(sessionKey);
+    if (!key) {
+        return;
+    }
+    delegatedContextBySessionKey.delete(key);
+    blockedRequestIdsBySessionKey.delete(key);
+}
+/**
+ * Evaluate whether a session is allowed to delegate expansion work.
+ * Delegated contexts are blocked at depth >= 1, with repeated request id
+ * re-entry mapped to an explicit idempotency block reason.
+ */
+export function evaluateExpansionRecursionGuard(params) {
+    const sessionKey = normalizeSessionKey(params.sessionKey);
+    const requestId = params.requestId.trim();
+    const delegatedContext = delegatedContextBySessionKey.get(sessionKey) ??
+        resolveFallbackDelegatedContext(sessionKey, requestId || createExpansionRequestId());
+    if (!delegatedContext) {
+        return {
+            blocked: false,
+            requestId,
+            expansionDepth: 0,
+            originSessionKey: sessionKey || "main",
+        };
+    }
+    if (delegatedContext.expansionDepth < EXPANSION_DELEGATION_DEPTH_CAP) {
+        return {
+            blocked: false,
+            requestId,
+            expansionDepth: delegatedContext.expansionDepth,
+            originSessionKey: delegatedContext.originSessionKey,
+        };
+    }
+    const seenRequestIds = getOrInitBlockedRequestIds(sessionKey);
+    const isIdempotentReentry = seenRequestIds.has(requestId);
+    seenRequestIds.add(requestId);
+    const reason = isIdempotentReentry
+        ? "idempotent_reentry"
+        : "depth_cap";
+    return {
+        blocked: true,
+        code: EXPANSION_RECURSION_ERROR_CODE,
+        reason,
+        message: `${EXPANSION_RECURSION_ERROR_CODE}: Expansion delegation blocked at depth ` +
+            `${delegatedContext.expansionDepth} (${reason}; requestId=${requestId}; ` +
+            `origin=${delegatedContext.originSessionKey}). ` +
+            buildExpansionRecursionRecoveryGuidance(delegatedContext.originSessionKey),
+        requestId,
+        expansionDepth: delegatedContext.expansionDepth,
+        originSessionKey: delegatedContext.originSessionKey,
+    };
+}
+/**
+ * Acquire the single active delegated-expansion slot for an origin session.
+ * A second concurrent caller from the same origin session is blocked
+ * immediately so sub-agents do not deadlock on a shared lane.
+ */
+export function acquireExpansionConcurrencySlot(params) {
+    const originSessionKey = normalizeSessionKey(params.originSessionKey) || "main";
+    const requestId = params.requestId.trim();
+    const activeRequestId = activeRequestIdByOriginSessionKey.get(originSessionKey);
+    if (activeRequestId && activeRequestId !== requestId) {
+        return {
+            blocked: true,
+            code: EXPANSION_CONCURRENCY_ERROR_CODE,
+            reason: "origin_session_in_flight",
+            message: `${EXPANSION_CONCURRENCY_ERROR_CODE}: Another lcm_expand_query delegation is already ` +
+                `in flight for origin session (${originSessionKey}; activeRequestId=${activeRequestId}). ` +
+                buildExpansionConcurrencyRecoveryGuidance(originSessionKey),
+            requestId,
+            originSessionKey,
+        };
+    }
+    if (!activeRequestId) {
+        activeRequestIdByOriginSessionKey.set(originSessionKey, requestId);
+    }
+    return {
+        blocked: false,
+        requestId,
+        originSessionKey,
+    };
+}
+/**
+ * Release the active delegated-expansion slot for an origin session.
+ */
+export function releaseExpansionConcurrencySlot(params) {
+    const originSessionKey = normalizeSessionKey(params.originSessionKey);
+    if (!originSessionKey) {
+        return;
+    }
+    const activeRequestId = activeRequestIdByOriginSessionKey.get(originSessionKey);
+    if (!activeRequestId) {
+        return;
+    }
+    const requestId = params.requestId?.trim();
+    if (requestId && activeRequestId !== requestId) {
+        return;
+    }
+    activeRequestIdByOriginSessionKey.delete(originSessionKey);
+}
+/**
+ * Emit structured delegated expansion telemetry with monotonic counters.
+ */
+export function recordExpansionDelegationTelemetry(params) {
+    telemetryCounters[params.event] += 1;
+    const payload = {
+        component: params.component,
+        event: params.event,
+        requestId: params.requestId,
+        sessionKey: normalizeSessionKey(params.sessionKey) || undefined,
+        expansionDepth: params.expansionDepth,
+        originSessionKey: params.originSessionKey,
+        reason: params.reason,
+        runId: params.runId,
+        counters: {
+            start: telemetryCounters.start,
+            block: telemetryCounters.block,
+            timeout: telemetryCounters.timeout,
+            success: telemetryCounters.success,
+        },
+    };
+    const line = `[lcm][expansion_delegation] ${JSON.stringify(payload)}`;
+    if (params.event === "start" || params.event === "success") {
+        params.deps.log.debug(line);
+        return;
+    }
+    params.deps.log.warn(line);
+}
+/**
+ * Return the currently stamped delegated expansion context for test assertions.
+ */
+export function getDelegatedExpansionContextForTests(sessionKey) {
+    return delegatedContextBySessionKey.get(normalizeSessionKey(sessionKey));
+}
+/**
+ * Return the delegated expansion telemetry counters for tests.
+ */
+export function getExpansionDelegationTelemetrySnapshotForTests() {
+    return {
+        start: telemetryCounters.start,
+        block: telemetryCounters.block,
+        timeout: telemetryCounters.timeout,
+        success: telemetryCounters.success,
+    };
+}
+/**
+ * Reset delegated expansion context and telemetry state between tests.
+ */
+export function resetExpansionDelegationGuardForTests() {
+    delegatedContextBySessionKey.clear();
+    blockedRequestIdsBySessionKey.clear();
+    activeRequestIdByOriginSessionKey.clear();
+    telemetryCounters.start = 0;
+    telemetryCounters.block = 0;
+    telemetryCounters.timeout = 0;
+    telemetryCounters.success = 0;
+}

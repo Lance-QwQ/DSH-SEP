@@ -1,0 +1,88 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write apps/desktop/README.md
+/deepseek-harness-desktop:
+  en: eccac345d51428fa
+  zh: 4a448b3d63cb8117
+/deepseek-harness-desktop/terminal-command:
+  en: bef92953c237363f
+  zh: d21d6effd21b8c00
+/deepseek-harness-desktop/closing-the-window-and-quitting:
+  en: c323e02e3f0305fe
+  zh: 3c730db632136443
+/deepseek-harness-desktop/key-technical-decisions:
+  en: 069fdfd72d2ea26a
+  zh: 76ae549d43c99bb4
+/deepseek-harness-desktop/key-technical-decisions/bundled-workspace-dependencies:
+  en: 320733f93ede61a4
+  zh: 33206c3c4753c802
+/deepseek-harness-desktop/bundled-command-runtime:
+  en: beecf076aa2f0796
+  zh: c9001ce0f22d2379
+/deepseek-harness-desktop/installation-ownership:
+  en: 22153a298a6662e1
+  zh: 3600803c8c9d0274
+/deepseek-harness-desktop/installation-ownership/runtime-and-plugin-activation:
+  en: 0d11af8639977a6d
+  zh: 86b086b12d2210d3
+/deepseek-harness-desktop/installation-ownership/host-environment:
+  en: 84a9cc7ca9455aa8
+  zh: 4091b8aa8231b74a
+/deepseek-harness-desktop/develop:
+  en: 40d2ad4014bf445b
+  zh: 6a08de06df9ed042
+/deepseek-harness-desktop/develop/startup-onboarding:
+  en: a51346b8d880ddba
+  zh: 7913214c1c66063c
+/deepseek-harness-desktop/develop/welcome-window-appearance:
+  en: ae319a496639b38d
+  zh: ef044103240ac9da
+/deepseek-harness-desktop/package:
+  en: 4cd8a8da6977928d
+  zh: 9f624855a2edac37
+/deepseek-harness-desktop/package/release-versions:
+  en: f461b255133384cc
+  zh: 2b9db718f22fdd04
+/deepseek-harness-desktop/package/runtime-file-selection:
+  en: f0e345fd89868803
+  zh: fd2c775ad23fa2f0
+/deepseek-harness-desktop/package/upload-updates:
+  en: 72073b2e72590067
+  zh: 63b1f9790395c37d
+/deepseek-harness-desktop/package/unsigned-windows-test-installer:
+  en: cfd5780dd26a8e46
+  zh: f7a16b1ede793b7b
+/deepseek-harness-desktop/package/windows-installer-interface:
+  en: f176a8b1c7de3064
+  zh: 6ea2dbe6bb808c34
+/deepseek-harness-desktop/package/windows-ev-signing:
+  en: 8efe3498dbe8686d
+  zh: a88c16f20a9430f3
+/deepseek-harness-desktop/updates:
+  en: d0df867b69cbffa4
+  zh: eeb47b79b86fe5ee
+/deepseek-harness-desktop/updates/mandatory-update-policy:
+  en: 2f789a4949fafb12
+  zh: d8b28c01cfee11b7
+/deepseek-harness-desktop/updates/local-updater-qualification:
+  en: bc50fd8a4d96c227
+  zh: fb0a6ce80c31cda6
+/deepseek-harness-desktop/low-level-development-overrides:
+  en: 0b225f914142ef0b
+  zh: 9ffd07768d37824e
+/deepseek-harness-desktop/known-limitations:
+  en: 5b77213c86bbcfb6
+  zh: b34bf21773bb852b
+/deepseek-harness-desktop/dev-note:
+  en: 8e26b460ba31f21b
+  zh: fbcd0307b3867125
+/deepseek-harness-desktop/sep-managed-updates:
+  en: 44ca1c4a01cced80
+  zh: 73b455142d32529c
+/deepseek-harness-desktop/sep-controlled-profile-updates:
+  en: 3c055ccb97753908
+  zh: 9ca3aa3d90d33868
+/deepseek-harness-desktop/sep-rc-2-lifecycle-adaptation:
+  en: df67db36e3c3a191
+  zh: c0f289ccb1fa7767

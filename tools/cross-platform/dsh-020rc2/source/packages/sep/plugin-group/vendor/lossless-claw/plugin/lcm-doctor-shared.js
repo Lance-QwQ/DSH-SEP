@@ -1,0 +1,184 @@
+import { FALLBACK_DIRECTIVE_SUMMARY_MARKER, FALLBACK_SUMMARY_MARKER, } from "../summary-fallback.js";
+export { FALLBACK_SUMMARY_MARKER };
+export const TRUNCATED_SUMMARY_PREFIX = "[Truncated from ";
+export const BARE_EMERGENCY_TRUNCATION_MARKER = "[Truncated for context management]";
+export const EMERGENCY_FALLBACK_MODEL = "emergency-fallback";
+export const TRUNCATED_SUMMARY_WINDOW = 40;
+export const FALLBACK_SUMMARY_WINDOW = 80;
+/**
+ * Detect broken summary markers that doctor should flag or repair.
+ */
+export function detectDoctorMarker(content) {
+    if (content.startsWith(FALLBACK_DIRECTIVE_SUMMARY_MARKER)) {
+        return "fallback";
+    }
+    if (content.startsWith(FALLBACK_SUMMARY_MARKER)) {
+        return "old";
+    }
+    const directiveFallbackIndex = content.indexOf(FALLBACK_DIRECTIVE_SUMMARY_MARKER);
+    if (directiveFallbackIndex >= 0) {
+        return "fallback";
+    }
+    const truncatedIndex = content.indexOf(TRUNCATED_SUMMARY_PREFIX);
+    if (truncatedIndex >= 0 && content.length - truncatedIndex < TRUNCATED_SUMMARY_WINDOW) {
+        return "new";
+    }
+    const fallbackIndex = content.indexOf(FALLBACK_SUMMARY_MARKER);
+    if (fallbackIndex >= 0 && content.length - fallbackIndex < FALLBACK_SUMMARY_WINDOW) {
+        return "fallback";
+    }
+    return null;
+}
+function detectDoctorMarkerForRow(row) {
+    const markerKind = detectDoctorMarker(row.content);
+    if (markerKind) {
+        return markerKind;
+    }
+    const model = row.model?.trim();
+    if (model === EMERGENCY_FALLBACK_MODEL) {
+        return "emergency";
+    }
+    if (model === "unknown" && row.content.includes(BARE_EMERGENCY_TRUNCATION_MARKER)) {
+        return "emergency";
+    }
+    return null;
+}
+/**
+ * Load doctor targets for one conversation or the whole DB.
+ */
+export function loadDoctorTargets(db, conversationId) {
+    const statement = conversationId === undefined
+        ? db.prepare(`SELECT
+           s.conversation_id,
+           s.summary_id,
+           s.kind,
+           COALESCE(s.depth, 0) AS depth,
+           COALESCE(s.token_count, 0) AS token_count,
+           COALESCE(s.content, '') AS content,
+           COALESCE(s.model, '') AS model,
+           COALESCE(s.created_at, '') AS created_at,
+           COALESCE(spc.child_count, 0) AS child_count
+         FROM summaries s
+         LEFT JOIN (
+           SELECT summary_id, COUNT(*) AS child_count
+           FROM summary_parents
+           GROUP BY summary_id
+         ) spc ON spc.summary_id = s.summary_id
+         WHERE INSTR(COALESCE(s.content, ''), ?) > 0
+            OR INSTR(COALESCE(s.content, ''), ?) > 0
+            OR INSTR(COALESCE(s.content, ''), ?) > 0
+            OR COALESCE(s.model, '') = ?
+            OR (
+              COALESCE(s.model, '') = 'unknown'
+              AND INSTR(COALESCE(s.content, ''), ?) > 0
+            )
+         ORDER BY s.conversation_id ASC, COALESCE(s.depth, 0) ASC, s.created_at ASC, s.summary_id ASC`)
+        : db.prepare(`SELECT
+           s.conversation_id,
+           s.summary_id,
+           s.kind,
+           COALESCE(s.depth, 0) AS depth,
+           COALESCE(s.token_count, 0) AS token_count,
+           COALESCE(s.content, '') AS content,
+           COALESCE(s.model, '') AS model,
+           COALESCE(s.created_at, '') AS created_at,
+           COALESCE(spc.child_count, 0) AS child_count
+         FROM summaries s
+         LEFT JOIN (
+           SELECT summary_id, COUNT(*) AS child_count
+           FROM summary_parents
+           GROUP BY summary_id
+         ) spc ON spc.summary_id = s.summary_id
+         WHERE s.conversation_id = ?
+           AND (
+             INSTR(COALESCE(s.content, ''), ?) > 0
+             OR INSTR(COALESCE(s.content, ''), ?) > 0
+             OR INSTR(COALESCE(s.content, ''), ?) > 0
+             OR COALESCE(s.model, '') = ?
+             OR (
+               COALESCE(s.model, '') = 'unknown'
+               AND INSTR(COALESCE(s.content, ''), ?) > 0
+             )
+           )
+         ORDER BY COALESCE(s.depth, 0) ASC, s.created_at ASC, s.summary_id ASC`);
+    const rows = (conversationId === undefined
+        ? statement.all(FALLBACK_SUMMARY_MARKER, TRUNCATED_SUMMARY_PREFIX, FALLBACK_DIRECTIVE_SUMMARY_MARKER, EMERGENCY_FALLBACK_MODEL, BARE_EMERGENCY_TRUNCATION_MARKER)
+        : statement.all(conversationId, FALLBACK_SUMMARY_MARKER, TRUNCATED_SUMMARY_PREFIX, FALLBACK_DIRECTIVE_SUMMARY_MARKER, EMERGENCY_FALLBACK_MODEL, BARE_EMERGENCY_TRUNCATION_MARKER));
+    const targets = [];
+    for (const row of rows) {
+        const markerKind = detectDoctorMarkerForRow(row);
+        if (!markerKind) {
+            continue;
+        }
+        targets.push({
+            conversationId: row.conversation_id,
+            summaryId: row.summary_id,
+            kind: row.kind,
+            depth: Math.max(0, Math.floor(row.depth ?? 0)),
+            tokenCount: Math.max(0, Math.floor(row.token_count ?? 0)),
+            content: row.content,
+            model: row.model,
+            createdAt: row.created_at,
+            childCount: typeof row.child_count === "number" && Number.isFinite(row.child_count)
+                ? Math.max(0, Math.floor(row.child_count))
+                : 0,
+            markerKind,
+        });
+    }
+    return targets;
+}
+/**
+ * Aggregate doctor counts from target rows.
+ */
+export function getDoctorSummaryStats(db, conversationId) {
+    const targets = loadDoctorTargets(db, conversationId);
+    const candidates = [];
+    const byConversation = new Map();
+    let old = 0;
+    let truncated = 0;
+    let fallback = 0;
+    let emergency = 0;
+    for (const target of targets) {
+        const current = byConversation.get(target.conversationId) ?? {
+            total: 0,
+            old: 0,
+            truncated: 0,
+            fallback: 0,
+            emergency: 0,
+        };
+        current.total += 1;
+        switch (target.markerKind) {
+            case "old":
+                old += 1;
+                current.old += 1;
+                break;
+            case "new":
+                truncated += 1;
+                current.truncated += 1;
+                break;
+            case "fallback":
+                fallback += 1;
+                current.fallback += 1;
+                break;
+            case "emergency":
+                emergency += 1;
+                current.emergency += 1;
+                break;
+        }
+        byConversation.set(target.conversationId, current);
+        candidates.push({
+            conversationId: target.conversationId,
+            summaryId: target.summaryId,
+            markerKind: target.markerKind,
+        });
+    }
+    return {
+        candidates,
+        total: candidates.length,
+        old,
+        truncated,
+        fallback,
+        emergency,
+        byConversation,
+    };
+}

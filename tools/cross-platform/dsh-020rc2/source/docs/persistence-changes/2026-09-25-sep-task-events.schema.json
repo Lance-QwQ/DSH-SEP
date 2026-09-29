@@ -1,0 +1,434 @@
+{
+  "formatVersion": 2,
+  "roots": [
+    {
+      "key": "event:task/checkpoint-change",
+      "kind": "event",
+      "event": "task/checkpoint-change",
+      "surface": false,
+      "digest": "c31b339df4a8078e03f9b4f97468d07c4d974deca364022abec160d103c65592",
+      "schema": {
+        "root": 0,
+        "nodes": [
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "data",
+                "type": 1,
+                "optional": false
+              },
+              {
+                "name": "ignorable",
+                "type": 24,
+                "optional": true
+              },
+              {
+                "name": "seq",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "time",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "type",
+                "type": 25,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "union",
+            "types": [
+              2,
+              11,
+              20,
+              22
+            ]
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "action",
+                "type": 3,
+                "optional": false
+              },
+              {
+                "name": "agentId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "objective",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "project",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "revision",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "schema",
+                "type": 6,
+                "optional": false
+              },
+              {
+                "name": "sessionId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "steps",
+                "type": 7,
+                "optional": false
+              },
+              {
+                "name": "taskId",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "literal",
+            "value": "create"
+          },
+          {
+            "kind": "primitive",
+            "type": "string"
+          },
+          {
+            "kind": "primitive",
+            "type": "number"
+          },
+          {
+            "kind": "literal",
+            "value": 1
+          },
+          {
+            "kind": "array",
+            "element": 8
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "acceptance",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "artifacts",
+                "type": 9,
+                "optional": false
+              },
+              {
+                "name": "description",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "id",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "array",
+            "element": 10
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "path",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "sha256",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "action",
+                "type": 12,
+                "optional": false
+              },
+              {
+                "name": "agentId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "operation",
+                "type": 13,
+                "optional": false
+              },
+              {
+                "name": "project",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "revision",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "schema",
+                "type": 6,
+                "optional": false
+              },
+              {
+                "name": "sessionId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "taskId",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "literal",
+            "value": "prepare"
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "argumentsHash",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "artifacts",
+                "type": 14,
+                "optional": false
+              },
+              {
+                "name": "id",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "innerCallId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "intentSeq",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "outerCallId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "resultCode",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "state",
+                "type": 16,
+                "optional": false
+              },
+              {
+                "name": "stepId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "tool",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "array",
+            "element": 15
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "bytes",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "path",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "sha256",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "version",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "union",
+            "types": [
+              17,
+              18,
+              19
+            ]
+          },
+          {
+            "kind": "literal",
+            "value": "completed"
+          },
+          {
+            "kind": "literal",
+            "value": "prepared"
+          },
+          {
+            "kind": "literal",
+            "value": "uncertain"
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "action",
+                "type": 21,
+                "optional": false
+              },
+              {
+                "name": "agentId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "operation",
+                "type": 13,
+                "optional": false
+              },
+              {
+                "name": "project",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "revision",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "schema",
+                "type": 6,
+                "optional": false
+              },
+              {
+                "name": "sessionId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "taskId",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "literal",
+            "value": "settle"
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "action",
+                "type": 23,
+                "optional": false
+              },
+              {
+                "name": "agentId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "project",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "revision",
+                "type": 5,
+                "optional": false
+              },
+              {
+                "name": "schema",
+                "type": 6,
+                "optional": false
+              },
+              {
+                "name": "sessionId",
+                "type": 4,
+                "optional": false
+              },
+              {
+                "name": "taskId",
+                "type": 4,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "literal",
+            "value": "cancel"
+          },
+          {
+            "kind": "literal",
+            "value": true
+          },
+          {
+            "kind": "literal",
+            "value": "task/checkpoint-change"
+          }
+        ]
+      }
+    }
+  ],
+  "types": []
+}

@@ -1,0 +1,1389 @@
+import { createHash } from "node:crypto";
+import { getLcmDbFeatures } from "./features.js";
+import { canonicalizeOpenClawInboundMetadataIdentityContent, canonicalizeOpenClawInboundMetadataIdentityContentBeforeHistoryRecap, } from "../openclaw-inbound-metadata.js";
+import { buildMessageIdentityHash } from "../store/message-identity.js";
+import { parseUtcTimestampOrNull } from "../store/parse-utc-timestamp.js";
+const VERSIONED_BACKFILL_STEPS = {
+    backfillSummaryDepths: 1,
+    backfillSummaryMetadata: 1,
+    backfillToolCallColumns: 1,
+    repairOpenClawMetadataIdentityState: 2,
+};
+function ensureSummaryDepthColumn(db) {
+    const summaryColumns = db.prepare(`PRAGMA table_info(summaries)`).all();
+    const hasDepth = summaryColumns.some((col) => col.name === "depth");
+    if (!hasDepth) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN depth INTEGER NOT NULL DEFAULT 0`);
+    }
+}
+function ensureSummaryMetadataColumns(db) {
+    const summaryColumns = db.prepare(`PRAGMA table_info(summaries)`).all();
+    const hasEarliestAt = summaryColumns.some((col) => col.name === "earliest_at");
+    const hasLatestAt = summaryColumns.some((col) => col.name === "latest_at");
+    const hasDescendantCount = summaryColumns.some((col) => col.name === "descendant_count");
+    const hasDescendantTokenCount = summaryColumns.some((col) => col.name === "descendant_token_count");
+    const hasSourceMessageTokenCount = summaryColumns.some((col) => col.name === "source_message_token_count");
+    if (!hasEarliestAt) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN earliest_at TEXT`);
+    }
+    if (!hasLatestAt) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN latest_at TEXT`);
+    }
+    if (!hasDescendantCount) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN descendant_count INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasDescendantTokenCount) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN descendant_token_count INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasSourceMessageTokenCount) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN source_message_token_count INTEGER NOT NULL DEFAULT 0`);
+    }
+}
+function parseTimestamp(value) {
+    return parseUtcTimestampOrNull(value);
+}
+function isoStringOrNull(value) {
+    return value ? value.toISOString() : null;
+}
+function ensureSummaryModelColumn(db) {
+    const summaryColumns = db.prepare(`PRAGMA table_info(summaries)`).all();
+    const hasModel = summaryColumns.some((col) => col.name === "model");
+    if (!hasModel) {
+        db.exec(`ALTER TABLE summaries ADD COLUMN model TEXT NOT NULL DEFAULT 'unknown'`);
+    }
+}
+function ensureCompactionTelemetryColumns(db) {
+    const telemetryColumns = db.prepare(`PRAGMA table_info(conversation_compaction_telemetry)`).all();
+    const hasConsecutiveColdObservations = telemetryColumns.some((col) => col.name === "consecutive_cold_observations");
+    const hasLastLeafCompactionAt = telemetryColumns.some((col) => col.name === "last_leaf_compaction_at");
+    const hasTurnsSinceLeafCompaction = telemetryColumns.some((col) => col.name === "turns_since_leaf_compaction");
+    const hasTokensAccumulatedSinceLeafCompaction = telemetryColumns.some((col) => col.name === "tokens_accumulated_since_leaf_compaction");
+    const hasLastActivityBand = telemetryColumns.some((col) => col.name === "last_activity_band");
+    const hasLastApiCallAt = telemetryColumns.some((col) => col.name === "last_api_call_at");
+    const hasLastCacheTouchAt = telemetryColumns.some((col) => col.name === "last_cache_touch_at");
+    const hasProvider = telemetryColumns.some((col) => col.name === "provider");
+    const hasModel = telemetryColumns.some((col) => col.name === "model");
+    const hasLastObservedPromptTokenCount = telemetryColumns.some((col) => col.name === "last_observed_prompt_token_count");
+    if (!hasConsecutiveColdObservations) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN consecutive_cold_observations INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasLastLeafCompactionAt) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN last_leaf_compaction_at TEXT`);
+    }
+    if (!hasTurnsSinceLeafCompaction) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN turns_since_leaf_compaction INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasTokensAccumulatedSinceLeafCompaction) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN tokens_accumulated_since_leaf_compaction INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasLastActivityBand) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN last_activity_band TEXT NOT NULL DEFAULT 'low' CHECK (last_activity_band IN ('low', 'medium', 'high'))`);
+    }
+    if (!hasLastApiCallAt) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN last_api_call_at TEXT`);
+    }
+    if (!hasLastCacheTouchAt) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN last_cache_touch_at TEXT`);
+    }
+    if (!hasProvider) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN provider TEXT`);
+    }
+    if (!hasModel) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN model TEXT`);
+    }
+    if (!hasLastObservedPromptTokenCount) {
+        db.exec(`ALTER TABLE conversation_compaction_telemetry ADD COLUMN last_observed_prompt_token_count INTEGER`);
+    }
+}
+function ensureLargeFilesLineCountColumn(db) {
+    const columns = db.prepare(`PRAGMA table_info(large_files)`).all();
+    const hasLineCount = columns.some((col) => col.name === "line_count");
+    if (!hasLineCount) {
+        db.exec(`ALTER TABLE large_files ADD COLUMN line_count INTEGER`);
+    }
+}
+// Adds per-node retry bookkeeping to pending_summary_nodes for DBs created
+// before failed-node retry existed.
+function ensurePendingSummaryNodeRetryColumns(db) {
+    const nodeColumns = db
+        .prepare(`PRAGMA table_info(pending_summary_nodes)`)
+        .all();
+    if (!nodeColumns.some((col) => col.name === "retry_count")) {
+        db.exec(`ALTER TABLE pending_summary_nodes ADD COLUMN retry_count INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!nodeColumns.some((col) => col.name === "next_attempt_after")) {
+        db.exec(`ALTER TABLE pending_summary_nodes ADD COLUMN next_attempt_after TEXT`);
+    }
+}
+function ensureCompactionMaintenanceColumns(db) {
+    const maintenanceColumns = db
+        .prepare(`PRAGMA table_info(conversation_compaction_maintenance)`)
+        .all();
+    const hasProjectedTokenCount = maintenanceColumns.some((col) => col.name === "projected_token_count");
+    const hasRawTokensOutsideTail = maintenanceColumns.some((col) => col.name === "raw_tokens_outside_tail");
+    const hasRetryAttempts = maintenanceColumns.some((col) => col.name === "retry_attempts");
+    const hasNextAttemptAfter = maintenanceColumns.some((col) => col.name === "next_attempt_after");
+    const hasContextThreshold = maintenanceColumns.some((col) => col.name === "context_threshold");
+    const hasContextThresholdSource = maintenanceColumns.some((col) => col.name === "context_threshold_source");
+    const hasContextFreshTailCount = maintenanceColumns.some((col) => col.name === "context_fresh_tail_count");
+    const hasContextLeafChunkTokens = maintenanceColumns.some((col) => col.name === "context_leaf_chunk_tokens");
+    const hasResolutionReason = maintenanceColumns.some((col) => col.name === "resolution_reason");
+    const hasResolvedAt = maintenanceColumns.some((col) => col.name === "resolved_at");
+    const hasMaintenanceRevision = maintenanceColumns.some((col) => col.name === "maintenance_revision");
+    if (!hasProjectedTokenCount) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN projected_token_count INTEGER`);
+    }
+    if (!hasRawTokensOutsideTail) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN raw_tokens_outside_tail INTEGER`);
+    }
+    if (!hasRetryAttempts) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN retry_attempts INTEGER NOT NULL DEFAULT 0`);
+    }
+    if (!hasNextAttemptAfter) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN next_attempt_after TEXT`);
+    }
+    if (!hasContextThreshold) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN context_threshold REAL`);
+    }
+    if (!hasContextThresholdSource) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN context_threshold_source TEXT`);
+    }
+    if (!hasContextFreshTailCount) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN context_fresh_tail_count INTEGER`);
+    }
+    if (!hasContextLeafChunkTokens) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN context_leaf_chunk_tokens INTEGER`);
+    }
+    if (!hasResolutionReason) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN resolution_reason TEXT`);
+    }
+    if (!hasResolvedAt) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN resolved_at TEXT`);
+    }
+    if (!hasMaintenanceRevision) {
+        db.exec(`ALTER TABLE conversation_compaction_maintenance ADD COLUMN maintenance_revision INTEGER NOT NULL DEFAULT 0`);
+    }
+}
+function ensureFocusBriefTables(db) {
+    db.exec(`
+    CREATE TABLE IF NOT EXISTS focus_briefs (
+      brief_id TEXT PRIMARY KEY,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      session_key TEXT,
+      prompt TEXT NOT NULL,
+      content TEXT NOT NULL,
+      status TEXT NOT NULL CHECK (status IN ('draft', 'active', 'superseded', 'failed', 'inactive')),
+      token_count INTEGER NOT NULL DEFAULT 0,
+      target_tokens INTEGER NOT NULL DEFAULT 0,
+      covered_latest_at TEXT,
+      covered_message_seq INTEGER,
+      source_context_hash TEXT NOT NULL DEFAULT '',
+      generator_run_id TEXT,
+      generator_session_key TEXT,
+      raw_result_json TEXT,
+      error TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      superseded_at TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS focus_brief_sources (
+      brief_id TEXT NOT NULL REFERENCES focus_briefs(brief_id) ON DELETE CASCADE,
+      summary_id TEXT NOT NULL,
+      ordinal INTEGER,
+      role TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      PRIMARY KEY (brief_id, summary_id, role)
+    );
+
+    CREATE INDEX IF NOT EXISTS focus_briefs_conversation_status_idx
+      ON focus_briefs (conversation_id, status, created_at);
+    CREATE INDEX IF NOT EXISTS focus_brief_sources_summary_idx
+      ON focus_brief_sources (summary_id);
+  `);
+}
+/**
+ * Belt-and-suspenders guard: create `message_parts` if it does not yet exist.
+ *
+ * `message_parts` is defined inside the large `db.exec()` block in
+ * `runLcmMigrations`.  On some Node.js SQLite builds (particularly
+ * `node:sqlite` before v22.12) a syntax error or constraint-check mismatch
+ * anywhere in that block causes the exec to stop early, silently leaving
+ * tables that appear later in the string uncreated.  Any subsequent INSERT
+ * into `message_parts` then throws "no such table".
+ *
+ * This function probes `sqlite_master` directly and creates the table +
+ * indexes when absent, matching the pattern used for column guards
+ * (`ensureSummaryDepthColumn`, `ensureMessageIdentityHashColumn`, …).
+ */
+function ensureMessagePartsTable(db) {
+    const tables = db
+        .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'message_parts'`)
+        .all();
+    if (tables.length > 0)
+        return;
+    db.exec(`
+    CREATE TABLE IF NOT EXISTS message_parts (
+      part_id TEXT PRIMARY KEY,
+      message_id INTEGER NOT NULL REFERENCES messages(message_id) ON DELETE CASCADE,
+      session_id TEXT NOT NULL,
+      part_type TEXT NOT NULL CHECK (part_type IN (
+        'text', 'reasoning', 'tool', 'patch', 'file',
+        'subtask', 'compaction', 'step_start', 'step_finish',
+        'snapshot', 'agent', 'retry'
+      )),
+      ordinal INTEGER NOT NULL,
+      text_content TEXT,
+      is_ignored INTEGER,
+      is_synthetic INTEGER,
+      tool_call_id TEXT,
+      tool_name TEXT,
+      tool_status TEXT,
+      tool_input TEXT,
+      tool_output TEXT,
+      tool_error TEXT,
+      tool_title TEXT,
+      patch_hash TEXT,
+      patch_files TEXT,
+      file_mime TEXT,
+      file_name TEXT,
+      file_url TEXT,
+      subtask_prompt TEXT,
+      subtask_desc TEXT,
+      subtask_agent TEXT,
+      step_reason TEXT,
+      step_cost REAL,
+      step_tokens_in INTEGER,
+      step_tokens_out INTEGER,
+      snapshot_hash TEXT,
+      compaction_auto INTEGER,
+      metadata TEXT,
+      UNIQUE (message_id, ordinal)
+    )
+  `);
+    db.exec(`CREATE INDEX IF NOT EXISTS message_parts_message_idx ON message_parts (message_id)`);
+    db.exec(`CREATE INDEX IF NOT EXISTS message_parts_type_idx ON message_parts (part_type)`);
+}
+function ensureMessageIdentityHashColumn(db) {
+    const messageColumns = db.prepare(`PRAGMA table_info(messages)`).all();
+    const hasIdentityHash = messageColumns.some((col) => col.name === "identity_hash");
+    if (!hasIdentityHash) {
+        db.exec(`ALTER TABLE messages ADD COLUMN identity_hash TEXT`);
+    }
+}
+/**
+ * OpenClaw sender identity used for lossless group-message replay. The JSON
+ * object contains only the allowlisted senderId, senderName, and
+ * senderUsername envelope fields. NULL preserves legacy and direct-message
+ * behavior without rewriting existing rows.
+ */
+function ensureMessageOpenClawSenderMetadataColumn(db) {
+    const messageColumns = db.prepare(`PRAGMA table_info(messages)`).all();
+    const hasSenderMetadata = messageColumns.some((column) => column.name === "openclaw_sender_metadata");
+    if (!hasSenderMetadata) {
+        db.exec(`ALTER TABLE messages ADD COLUMN openclaw_sender_metadata TEXT`);
+    }
+}
+/**
+ * v4.2 §B — stub-tier stratification: the `large_content` sidecar column.
+ *
+ * Stratifies the messages row into a thread-metadata tier (always emitted)
+ * and a payload tier (elided to a stub when outside the fresh tail). The
+ * column is NULL by default; populated by `scripts/lcm-blob-migrate.mjs`
+ * for tool messages whose content exceeds the bytewise threshold. When
+ * non-NULL it stores the externalized `file_xxx` id (reusing the v4.1
+ * `large_files` storage model) — NOT a content copy. `messages.content`
+ * remains lossless and unchanged so all existing readers keep working
+ * without schema awareness.
+ *
+ * The assembler reads `large_content IS NOT NULL` to decide whether a
+ * given evictable tool result is stubbable. Drilldown via the existing
+ * `lcm_describe(id="file_xxx")` path.
+ */
+function ensureMessageLargeContentColumn(db) {
+    const cols = db.prepare(`PRAGMA table_info(messages)`).all();
+    const hasLargeContent = cols.some((c) => c.name === "large_content");
+    if (!hasLargeContent) {
+        db.exec(`ALTER TABLE messages ADD COLUMN large_content TEXT`);
+    }
+}
+/**
+ * Transcript-entry-id reconciliation: the stable JSONL envelope id of the
+ * transcript entry a message was imported from. NULL for runtime-array
+ * ingests, legacy rows, and transcripts without envelopes. The partial
+ * unique index makes transcript imports idempotent — replaying a transcript
+ * region can never duplicate rows. See
+ * specs/transcript-reconciliation-by-entry-id.md.
+ */
+function ensureMessageTranscriptEntryIdColumn(db) {
+    const messageColumns = db.prepare(`PRAGMA table_info(messages)`).all();
+    const hasTranscriptEntryId = messageColumns.some((col) => col.name === "transcript_entry_id");
+    if (!hasTranscriptEntryId) {
+        db.exec(`ALTER TABLE messages ADD COLUMN transcript_entry_id TEXT`);
+    }
+}
+/**
+ * Stable event-key deduplication: a stable identity for a message that survives
+ * across representations (e.g., transcript redacted vs. runtime unredacted).
+ * NULL for legacy rows; populated by `extractStableEventKey` at ingest time.
+ * The partial unique index `(conversation_id, stable_event_key) WHERE
+ * stable_event_key IS NOT NULL` enforces idempotency only for non-NULL keys.
+ */
+function ensureMessageStableEventKeyColumn(db) {
+    const messageColumns = db.prepare(`PRAGMA table_info(messages)`).all();
+    const hasStableEventKey = messageColumns.some((col) => col.name === "stable_event_key");
+    if (!hasStableEventKey) {
+        db.exec(`ALTER TABLE messages ADD COLUMN stable_event_key TEXT`);
+    }
+}
+// Creates the durable trust boundary used by SQLite transcript migration.
+// Existing message transcript ids remain data, not trusted anchors, until a
+// later audit writes an explicit trust row or conversation epoch.
+function ensureTranscriptAnchorTrustTables(db) {
+    db.exec(`
+    CREATE TABLE IF NOT EXISTS message_transcript_anchor_trust (
+      message_id INTEGER PRIMARY KEY REFERENCES messages(message_id) ON DELETE CASCADE,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      transcript_entry_id TEXT,
+      trust_state TEXT NOT NULL CHECK (trust_state IN (
+        'verified', 'repaired', 'suspect', 'legacy_prefix', 'unproven'
+      )),
+      source TEXT NOT NULL,
+      reason TEXT,
+      verified_at TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS conversation_transcript_epochs (
+      conversation_id INTEGER PRIMARY KEY REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      session_id TEXT NOT NULL,
+      session_key TEXT,
+      frontier_entry_id TEXT,
+      frontier_seq INTEGER,
+      frontier_created_at TEXT,
+      migration_mode TEXT NOT NULL CHECK (migration_mode IN (
+        'verified', 'repairable', 'legacy_prefix', 'corrupt'
+      )),
+      metadata_json TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE INDEX IF NOT EXISTS message_anchor_trust_conv_state_idx
+      ON message_transcript_anchor_trust (conversation_id, trust_state);
+    CREATE INDEX IF NOT EXISTS message_anchor_trust_conv_entry_idx
+      ON message_transcript_anchor_trust (conversation_id, transcript_entry_id)
+      WHERE transcript_entry_id IS NOT NULL;
+    CREATE INDEX IF NOT EXISTS conversation_transcript_epochs_mode_idx
+      ON conversation_transcript_epochs (migration_mode, created_at);
+  `);
+}
+function backfillMessageIdentityHashes(db, options) {
+    const selectStmt = db.prepare(`SELECT message_id, role, content
+     FROM messages
+     WHERE message_id > ?
+       AND (identity_hash IS NULL OR identity_hash = '')
+     ORDER BY message_id
+     LIMIT ?`);
+    const updateStmt = db.prepare(`UPDATE messages SET identity_hash = ? WHERE message_id = ?`);
+    let lastProcessedMessageId = 0;
+    const managesOwnTransaction = options?.managesOwnTransaction ?? true;
+    while (true) {
+        const rows = selectStmt.all(lastProcessedMessageId, 1_000);
+        if (rows.length === 0) {
+            return;
+        }
+        if (managesOwnTransaction) {
+            db.exec(`BEGIN`);
+        }
+        try {
+            for (const row of rows) {
+                updateStmt.run(buildMessageIdentityHash(row.role, row.content), row.message_id);
+            }
+            if (managesOwnTransaction) {
+                db.exec(`COMMIT`);
+            }
+        }
+        catch (error) {
+            if (managesOwnTransaction) {
+                try {
+                    db.exec(`ROLLBACK`);
+                }
+                catch {
+                    // Preserve the original migration failure if rollback also errors.
+                }
+            }
+            throw error;
+        }
+        lastProcessedMessageId = rows[rows.length - 1]?.message_id ?? lastProcessedMessageId;
+    }
+}
+function buildLegacyRawMessageIdentityHash(role, content) {
+    return createHash("sha256")
+        .update(role)
+        .update("\u0000")
+        .update(content)
+        .digest("hex");
+}
+function repairOpenClawMetadataIdentityState(db) {
+    const selectStmt = db.prepare(`SELECT message_id, conversation_id, role, content, identity_hash
+     FROM messages
+     WHERE message_id > ? AND role = 'user'
+     ORDER BY message_id
+     LIMIT ?`);
+    const updateIdentityStmt = db.prepare(`UPDATE messages SET identity_hash = ? WHERE message_id = ?`);
+    let lastProcessedMessageId = 0;
+    while (true) {
+        const rows = selectStmt.all(lastProcessedMessageId, 1_000);
+        if (rows.length === 0) {
+            return;
+        }
+        for (const row of rows) {
+            const canonicalContent = canonicalizeOpenClawInboundMetadataIdentityContent(row.role, row.content);
+            if (canonicalContent === row.content) {
+                continue;
+            }
+            const legacyMessageHash = buildLegacyRawMessageIdentityHash(row.role, row.content);
+            const previousCanonicalContent = canonicalizeOpenClawInboundMetadataIdentityContentBeforeHistoryRecap(row.role, row.content);
+            const previousCanonicalMessageHash = buildLegacyRawMessageIdentityHash(row.role, previousCanonicalContent);
+            if (row.identity_hash === legacyMessageHash ||
+                row.identity_hash === previousCanonicalMessageHash) {
+                updateIdentityStmt.run(buildMessageIdentityHash(row.role, row.content), row.message_id);
+            }
+        }
+        lastProcessedMessageId = rows[rows.length - 1]?.message_id ?? lastProcessedMessageId;
+    }
+}
+function describeMigrationError(error) {
+    return error instanceof Error ? error.message : String(error);
+}
+function runMigrationStep(name, log, step) {
+    const startedAt = Date.now();
+    try {
+        step();
+        log?.info?.(`[lcm] migration step complete: step=${name} durationMs=${Date.now() - startedAt}`);
+    }
+    catch (error) {
+        log?.info?.(`[lcm] migration step failed: step=${name} durationMs=${Date.now() - startedAt} error=${describeMigrationError(error)}`);
+        throw error;
+    }
+}
+function getVersionedBackfillSavepointName(stepName) {
+    return `lcm_backfill_${stepName}`;
+}
+function hasCompletedVersionedBackfill(db, stepName, algorithmVersion) {
+    const row = db
+        .prepare(`SELECT 1
+       FROM lcm_migration_state
+       WHERE step_name = ? AND algorithm_version = ?
+       LIMIT 1`)
+        .get(stepName, algorithmVersion);
+    return row != null;
+}
+function markVersionedBackfillComplete(db, stepName, algorithmVersion) {
+    db.prepare(`INSERT INTO lcm_migration_state (step_name, algorithm_version, completed_at)
+     VALUES (?, ?, datetime('now'))
+     ON CONFLICT(step_name, algorithm_version)
+     DO UPDATE SET completed_at = excluded.completed_at`).run(stepName, algorithmVersion);
+}
+function rollbackSavepoint(db, savepointName) {
+    try {
+        db.exec(`ROLLBACK TO SAVEPOINT ${savepointName}`);
+    }
+    finally {
+        db.exec(`RELEASE SAVEPOINT ${savepointName}`);
+    }
+}
+function runVersionedBackfillStep(db, stepName, log, step) {
+    const algorithmVersion = VERSIONED_BACKFILL_STEPS[stepName];
+    if (hasCompletedVersionedBackfill(db, stepName, algorithmVersion)) {
+        log?.info?.(`[lcm] migration step skipped: step=${stepName} algorithmVersion=${algorithmVersion} reason=already-complete`);
+        return;
+    }
+    const startedAt = Date.now();
+    const savepointName = getVersionedBackfillSavepointName(stepName);
+    db.exec(`SAVEPOINT ${savepointName}`);
+    try {
+        step();
+        markVersionedBackfillComplete(db, stepName, algorithmVersion);
+        db.exec(`RELEASE SAVEPOINT ${savepointName}`);
+        log?.info?.(`[lcm] migration step complete: step=${stepName} algorithmVersion=${algorithmVersion} durationMs=${Date.now() - startedAt}`);
+    }
+    catch (error) {
+        rollbackSavepoint(db, savepointName);
+        log?.info?.(`[lcm] migration step failed: step=${stepName} algorithmVersion=${algorithmVersion} durationMs=${Date.now() - startedAt} error=${describeMigrationError(error)}`);
+        throw error;
+    }
+}
+function backfillSummaryDepths(db) {
+    // Leaves are always depth 0, even if legacy rows had malformed values.
+    db.exec(`UPDATE summaries SET depth = 0 WHERE kind = 'leaf'`);
+    const conversationRows = db
+        .prepare(`SELECT DISTINCT conversation_id FROM summaries WHERE kind = 'condensed'`)
+        .all();
+    if (conversationRows.length === 0) {
+        return;
+    }
+    const updateDepthStmt = db.prepare(`UPDATE summaries SET depth = ? WHERE summary_id = ?`);
+    for (const row of conversationRows) {
+        const conversationId = row.conversation_id;
+        const summaries = db
+            .prepare(`SELECT summary_id, conversation_id, kind, depth, token_count, created_at
+         FROM summaries
+         WHERE conversation_id = ?`)
+            .all(conversationId);
+        const depthBySummaryId = new Map();
+        const unresolvedCondensedIds = new Set();
+        for (const summary of summaries) {
+            if (summary.kind === "leaf") {
+                depthBySummaryId.set(summary.summary_id, 0);
+                continue;
+            }
+            unresolvedCondensedIds.add(summary.summary_id);
+        }
+        const edges = db
+            .prepare(`SELECT summary_id, parent_summary_id
+         FROM summary_parents
+         WHERE summary_id IN (
+           SELECT summary_id FROM summaries
+           WHERE conversation_id = ? AND kind = 'condensed'
+         )`)
+            .all(conversationId);
+        const parentsBySummaryId = new Map();
+        for (const edge of edges) {
+            const existing = parentsBySummaryId.get(edge.summary_id) ?? [];
+            existing.push(edge.parent_summary_id);
+            parentsBySummaryId.set(edge.summary_id, existing);
+        }
+        while (unresolvedCondensedIds.size > 0) {
+            let progressed = false;
+            for (const summaryId of [...unresolvedCondensedIds]) {
+                const parentIds = parentsBySummaryId.get(summaryId) ?? [];
+                if (parentIds.length === 0) {
+                    depthBySummaryId.set(summaryId, 1);
+                    unresolvedCondensedIds.delete(summaryId);
+                    progressed = true;
+                    continue;
+                }
+                let maxParentDepth = -1;
+                let allParentsResolved = true;
+                for (const parentId of parentIds) {
+                    const parentDepth = depthBySummaryId.get(parentId);
+                    if (parentDepth == null) {
+                        allParentsResolved = false;
+                        break;
+                    }
+                    if (parentDepth > maxParentDepth) {
+                        maxParentDepth = parentDepth;
+                    }
+                }
+                if (!allParentsResolved) {
+                    continue;
+                }
+                depthBySummaryId.set(summaryId, maxParentDepth + 1);
+                unresolvedCondensedIds.delete(summaryId);
+                progressed = true;
+            }
+            // Guard against malformed cycles/cross-conversation references.
+            if (!progressed) {
+                for (const summaryId of unresolvedCondensedIds) {
+                    depthBySummaryId.set(summaryId, 1);
+                }
+                unresolvedCondensedIds.clear();
+            }
+        }
+        for (const summary of summaries) {
+            const depth = depthBySummaryId.get(summary.summary_id);
+            if (depth == null) {
+                continue;
+            }
+            updateDepthStmt.run(depth, summary.summary_id);
+        }
+    }
+}
+function backfillSummaryMetadata(db) {
+    const conversationRows = db
+        .prepare(`SELECT DISTINCT conversation_id FROM summaries`)
+        .all();
+    if (conversationRows.length === 0) {
+        return;
+    }
+    const updateMetadataStmt = db.prepare(`UPDATE summaries
+     SET earliest_at = ?, latest_at = ?, descendant_count = ?,
+         descendant_token_count = ?, source_message_token_count = ?
+     WHERE summary_id = ?`);
+    for (const conversationRow of conversationRows) {
+        const conversationId = conversationRow.conversation_id;
+        const summaries = db
+            .prepare(`SELECT summary_id, conversation_id, kind, depth, token_count, created_at
+         FROM summaries
+         WHERE conversation_id = ?
+         ORDER BY depth ASC, created_at ASC`)
+            .all(conversationId);
+        if (summaries.length === 0) {
+            continue;
+        }
+        const leafRanges = db
+            .prepare(`SELECT
+           sm.summary_id,
+           MIN(m.created_at) AS earliest_at,
+           MAX(m.created_at) AS latest_at,
+           COALESCE(SUM(m.token_count), 0) AS source_message_token_count
+         FROM summary_messages sm
+         JOIN messages m ON m.message_id = sm.message_id
+         JOIN summaries s ON s.summary_id = sm.summary_id
+         WHERE s.conversation_id = ? AND s.kind = 'leaf'
+         GROUP BY sm.summary_id`)
+            .all(conversationId);
+        const leafRangeBySummaryId = new Map(leafRanges.map((row) => [
+            row.summary_id,
+            {
+                earliestAt: row.earliest_at,
+                latestAt: row.latest_at,
+                sourceMessageTokenCount: row.source_message_token_count,
+            },
+        ]));
+        const edges = db
+            .prepare(`SELECT summary_id, parent_summary_id
+         FROM summary_parents
+         WHERE summary_id IN (
+           SELECT summary_id FROM summaries WHERE conversation_id = ?
+         )`)
+            .all(conversationId);
+        const parentsBySummaryId = new Map();
+        for (const edge of edges) {
+            const existing = parentsBySummaryId.get(edge.summary_id) ?? [];
+            existing.push(edge.parent_summary_id);
+            parentsBySummaryId.set(edge.summary_id, existing);
+        }
+        const metadataBySummaryId = new Map();
+        const tokenCountBySummaryId = new Map(summaries.map((summary) => [summary.summary_id, Math.max(0, Math.floor(summary.token_count ?? 0))]));
+        for (const summary of summaries) {
+            const fallbackDate = parseTimestamp(summary.created_at);
+            if (summary.kind === "leaf") {
+                const range = leafRangeBySummaryId.get(summary.summary_id);
+                const earliestAt = parseTimestamp(range?.earliestAt ?? summary.created_at) ?? fallbackDate;
+                const latestAt = parseTimestamp(range?.latestAt ?? summary.created_at) ?? fallbackDate;
+                metadataBySummaryId.set(summary.summary_id, {
+                    earliestAt,
+                    latestAt,
+                    descendantCount: 0,
+                    descendantTokenCount: 0,
+                    sourceMessageTokenCount: Math.max(0, Math.floor(range?.sourceMessageTokenCount ?? 0)),
+                });
+                continue;
+            }
+            const parentIds = parentsBySummaryId.get(summary.summary_id) ?? [];
+            if (parentIds.length === 0) {
+                metadataBySummaryId.set(summary.summary_id, {
+                    earliestAt: fallbackDate,
+                    latestAt: fallbackDate,
+                    descendantCount: 0,
+                    descendantTokenCount: 0,
+                    sourceMessageTokenCount: 0,
+                });
+                continue;
+            }
+            let earliestAt = null;
+            let latestAt = null;
+            let descendantCount = 0;
+            let descendantTokenCount = 0;
+            let sourceMessageTokenCount = 0;
+            for (const parentId of parentIds) {
+                const parentMetadata = metadataBySummaryId.get(parentId);
+                if (!parentMetadata) {
+                    continue;
+                }
+                const parentEarliest = parentMetadata.earliestAt;
+                if (parentEarliest && (!earliestAt || parentEarliest < earliestAt)) {
+                    earliestAt = parentEarliest;
+                }
+                const parentLatest = parentMetadata.latestAt;
+                if (parentLatest && (!latestAt || parentLatest > latestAt)) {
+                    latestAt = parentLatest;
+                }
+                descendantCount += Math.max(0, parentMetadata.descendantCount) + 1;
+                const parentTokenCount = tokenCountBySummaryId.get(parentId) ?? 0;
+                descendantTokenCount +=
+                    Math.max(0, parentTokenCount) + Math.max(0, parentMetadata.descendantTokenCount);
+                sourceMessageTokenCount += Math.max(0, parentMetadata.sourceMessageTokenCount);
+            }
+            metadataBySummaryId.set(summary.summary_id, {
+                earliestAt: earliestAt ?? fallbackDate,
+                latestAt: latestAt ?? fallbackDate,
+                descendantCount: Math.max(0, descendantCount),
+                descendantTokenCount: Math.max(0, descendantTokenCount),
+                sourceMessageTokenCount: Math.max(0, sourceMessageTokenCount),
+            });
+        }
+        for (const summary of summaries) {
+            const metadata = metadataBySummaryId.get(summary.summary_id);
+            if (!metadata) {
+                continue;
+            }
+            updateMetadataStmt.run(isoStringOrNull(metadata.earliestAt), isoStringOrNull(metadata.latestAt), Math.max(0, metadata.descendantCount), Math.max(0, metadata.descendantTokenCount), Math.max(0, metadata.sourceMessageTokenCount), summary.summary_id);
+        }
+    }
+}
+/**
+ * Backfill tool_call_id, tool_name, and tool_input from metadata JSON for rows
+ * where the DB columns are NULL but the values exist in metadata.  This covers
+ * legacy text-type parts where the string-content ingestion path stored tool
+ * info only in the metadata JSON (see #158).
+ */
+function backfillToolCallColumns(db) {
+    db.exec(`UPDATE message_parts
+     SET tool_call_id = COALESCE(
+       json_extract(metadata, '$.toolCallId'),
+       json_extract(metadata, '$.raw.id'),
+       json_extract(metadata, '$.raw.call_id'),
+       json_extract(metadata, '$.raw.toolCallId'),
+       json_extract(metadata, '$.raw.tool_call_id')
+     )
+     WHERE tool_call_id IS NULL
+       AND metadata IS NOT NULL
+       AND COALESCE(
+         json_extract(metadata, '$.toolCallId'),
+         json_extract(metadata, '$.raw.id'),
+         json_extract(metadata, '$.raw.call_id'),
+         json_extract(metadata, '$.raw.toolCallId'),
+         json_extract(metadata, '$.raw.tool_call_id')
+       ) IS NOT NULL`);
+    db.exec(`UPDATE message_parts
+     SET tool_name = COALESCE(
+       json_extract(metadata, '$.toolName'),
+       json_extract(metadata, '$.raw.name'),
+       json_extract(metadata, '$.raw.toolName'),
+       json_extract(metadata, '$.raw.tool_name')
+     )
+     WHERE tool_name IS NULL
+       AND metadata IS NOT NULL
+       AND COALESCE(
+         json_extract(metadata, '$.toolName'),
+         json_extract(metadata, '$.raw.name'),
+         json_extract(metadata, '$.raw.toolName'),
+         json_extract(metadata, '$.raw.tool_name')
+       ) IS NOT NULL`);
+    db.exec(`UPDATE message_parts
+     SET tool_input = COALESCE(
+       json_extract(metadata, '$.raw.input'),
+       json_extract(metadata, '$.raw.arguments'),
+       json_extract(metadata, '$.raw.toolInput')
+     )
+     WHERE tool_input IS NULL
+       AND metadata IS NOT NULL
+       AND COALESCE(
+         json_extract(metadata, '$.raw.input'),
+         json_extract(metadata, '$.raw.arguments'),
+         json_extract(metadata, '$.raw.toolInput')
+       ) IS NOT NULL`);
+}
+function getExistingTableNames(db, names) {
+    if (names.length === 0) {
+        return new Set();
+    }
+    const placeholders = names.map(() => "?").join(", ");
+    const rows = db
+        .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name IN (${placeholders})`)
+        .all(...names);
+    return new Set(rows
+        .map((row) => row.name)
+        .filter((name) => typeof name === "string" && name.length > 0));
+}
+function getFtsShadowTableNames(tableName) {
+    return [
+        `${tableName}_data`,
+        `${tableName}_idx`,
+        `${tableName}_content`,
+        `${tableName}_docsize`,
+        `${tableName}_config`,
+    ];
+}
+function quoteSqlIdentifier(identifier) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(identifier)) {
+        throw new Error(`Invalid SQL identifier: ${identifier}`);
+    }
+    return `"${identifier.replaceAll(`"`, `""`)}"`;
+}
+function shouldRecreateStandaloneFtsTable(db, spec) {
+    const shadowTables = getFtsShadowTableNames(spec.tableName);
+    const existingTables = getExistingTableNames(db, [spec.tableName, ...shadowTables]);
+    if (!existingTables.has(spec.tableName)) {
+        return true;
+    }
+    if (shadowTables.some((name) => !existingTables.has(name))) {
+        return true;
+    }
+    try {
+        const info = db
+            .prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name = ?")
+            .get(spec.tableName);
+        const sql = info?.sql ?? "";
+        if (spec.staleSchemaPatterns?.some((pattern) => sql.includes(pattern))) {
+            return true;
+        }
+        const columns = db
+            .prepare(`PRAGMA table_info(${quoteSqlIdentifier(spec.tableName)})`)
+            .all();
+        const columnNames = new Set(columns
+            .map((col) => col.name)
+            .filter((name) => typeof name === "string" && name.length > 0));
+        return spec.expectedColumns.some((column) => !columnNames.has(column));
+    }
+    catch {
+        return true;
+    }
+}
+function ensureStandaloneFtsTable(db, spec) {
+    if (!shouldRecreateStandaloneFtsTable(db, spec)) {
+        return;
+    }
+    db.exec(`DROP TABLE IF EXISTS ${quoteSqlIdentifier(spec.tableName)}`);
+    for (const shadowTableName of getFtsShadowTableNames(spec.tableName)) {
+        db.exec(`DROP TABLE IF EXISTS ${quoteSqlIdentifier(shadowTableName)}`);
+    }
+    db.exec(spec.createSql);
+    db.exec(spec.seedSql);
+}
+export function runLcmMigrations(db, options) {
+    const log = options?.log;
+    let transactionActive = false;
+    // v4.2 adversarial review P1: prevent instant SQLITE_BUSY when the
+    // gateway has a writer in flight on the live DB.
+    try {
+        db.exec(`PRAGMA busy_timeout = 30000`);
+    }
+    catch { /* best-effort */ }
+    db.exec(`BEGIN EXCLUSIVE`);
+    transactionActive = true;
+    try {
+        db.exec(`
+    CREATE TABLE IF NOT EXISTS conversations (
+      conversation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id TEXT NOT NULL,
+      session_key TEXT,
+      active INTEGER NOT NULL DEFAULT 1,
+      archived_at TEXT,
+      archive_cause TEXT,
+      title TEXT,
+      bootstrapped_at TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS messages (
+      message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      seq INTEGER NOT NULL,
+      role TEXT NOT NULL CHECK (role IN ('system', 'user', 'assistant', 'tool')),
+      content TEXT NOT NULL,
+      token_count INTEGER NOT NULL,
+      identity_hash TEXT,
+      openclaw_sender_metadata TEXT,
+      transcript_entry_id TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE (conversation_id, seq)
+    );
+
+    CREATE TABLE IF NOT EXISTS message_transcript_anchor_trust (
+      message_id INTEGER PRIMARY KEY REFERENCES messages(message_id) ON DELETE CASCADE,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      transcript_entry_id TEXT,
+      trust_state TEXT NOT NULL CHECK (trust_state IN (
+        'verified', 'repaired', 'suspect', 'legacy_prefix', 'unproven'
+      )),
+      source TEXT NOT NULL,
+      reason TEXT,
+      verified_at TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS conversation_transcript_epochs (
+      conversation_id INTEGER PRIMARY KEY REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      session_id TEXT NOT NULL,
+      session_key TEXT,
+      frontier_entry_id TEXT,
+      frontier_seq INTEGER,
+      frontier_created_at TEXT,
+      migration_mode TEXT NOT NULL CHECK (migration_mode IN (
+        'verified', 'repairable', 'legacy_prefix', 'corrupt'
+      )),
+      metadata_json TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS summaries (
+      summary_id TEXT PRIMARY KEY,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK (kind IN ('leaf', 'condensed')),
+      depth INTEGER NOT NULL DEFAULT 0,
+      content TEXT NOT NULL,
+      token_count INTEGER NOT NULL,
+      earliest_at TEXT,
+      latest_at TEXT,
+      descendant_count INTEGER NOT NULL DEFAULT 0,
+      descendant_token_count INTEGER NOT NULL DEFAULT 0,
+      source_message_token_count INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      file_ids TEXT NOT NULL DEFAULT '[]'
+    );
+
+    CREATE TABLE IF NOT EXISTS message_parts (
+      part_id TEXT PRIMARY KEY,
+      message_id INTEGER NOT NULL REFERENCES messages(message_id) ON DELETE CASCADE,
+      session_id TEXT NOT NULL,
+      part_type TEXT NOT NULL CHECK (part_type IN (
+        'text', 'reasoning', 'tool', 'patch', 'file',
+        'subtask', 'compaction', 'step_start', 'step_finish',
+        'snapshot', 'agent', 'retry'
+      )),
+      ordinal INTEGER NOT NULL,
+      text_content TEXT,
+      is_ignored INTEGER,
+      is_synthetic INTEGER,
+      tool_call_id TEXT,
+      tool_name TEXT,
+      tool_status TEXT,
+      tool_input TEXT,
+      tool_output TEXT,
+      tool_error TEXT,
+      tool_title TEXT,
+      patch_hash TEXT,
+      patch_files TEXT,
+      file_mime TEXT,
+      file_name TEXT,
+      file_url TEXT,
+      subtask_prompt TEXT,
+      subtask_desc TEXT,
+      subtask_agent TEXT,
+      step_reason TEXT,
+      step_cost REAL,
+      step_tokens_in INTEGER,
+      step_tokens_out INTEGER,
+      snapshot_hash TEXT,
+      compaction_auto INTEGER,
+      metadata TEXT,
+      UNIQUE (message_id, ordinal)
+    );
+
+    CREATE TABLE IF NOT EXISTS summary_messages (
+      summary_id TEXT NOT NULL REFERENCES summaries(summary_id) ON DELETE CASCADE,
+      message_id INTEGER NOT NULL REFERENCES messages(message_id) ON DELETE RESTRICT,
+      ordinal INTEGER NOT NULL,
+      PRIMARY KEY (summary_id, message_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS summary_parents (
+      summary_id TEXT NOT NULL REFERENCES summaries(summary_id) ON DELETE CASCADE,
+      parent_summary_id TEXT NOT NULL REFERENCES summaries(summary_id) ON DELETE RESTRICT,
+      ordinal INTEGER NOT NULL,
+      PRIMARY KEY (summary_id, parent_summary_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS context_items (
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      ordinal INTEGER NOT NULL,
+      item_type TEXT NOT NULL CHECK (item_type IN ('message', 'summary')),
+      message_id INTEGER REFERENCES messages(message_id) ON DELETE RESTRICT,
+      summary_id TEXT REFERENCES summaries(summary_id) ON DELETE RESTRICT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      PRIMARY KEY (conversation_id, ordinal),
+      CHECK (
+        (item_type = 'message' AND message_id IS NOT NULL AND summary_id IS NULL) OR
+        (item_type = 'summary' AND summary_id IS NOT NULL AND message_id IS NULL)
+      )
+    );
+
+    CREATE TABLE IF NOT EXISTS large_files (
+      file_id TEXT PRIMARY KEY,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      file_name TEXT,
+      mime_type TEXT,
+      byte_size INTEGER,
+      line_count INTEGER,
+      storage_uri TEXT NOT NULL,
+      exploration_summary TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+
+    CREATE TABLE IF NOT EXISTS conversation_compaction_telemetry (
+      conversation_id INTEGER PRIMARY KEY REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      last_observed_cache_read INTEGER,
+      last_observed_cache_write INTEGER,
+      last_observed_prompt_token_count INTEGER,
+      last_observed_cache_hit_at TEXT,
+      last_observed_cache_break_at TEXT,
+      cache_state TEXT NOT NULL DEFAULT 'unknown'
+        CHECK (cache_state IN ('hot', 'cold', 'unknown')),
+      consecutive_cold_observations INTEGER NOT NULL DEFAULT 0,
+      retention TEXT,
+      last_leaf_compaction_at TEXT,
+      turns_since_leaf_compaction INTEGER NOT NULL DEFAULT 0,
+      tokens_accumulated_since_leaf_compaction INTEGER NOT NULL DEFAULT 0,
+      last_activity_band TEXT NOT NULL DEFAULT 'low'
+        CHECK (last_activity_band IN ('low', 'medium', 'high')),
+      last_api_call_at TEXT,
+      last_cache_touch_at TEXT,
+      provider TEXT,
+      model TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS conversation_compaction_maintenance (
+      conversation_id INTEGER PRIMARY KEY REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      pending INTEGER NOT NULL DEFAULT 0,
+      requested_at TEXT,
+      reason TEXT,
+      running INTEGER NOT NULL DEFAULT 0,
+      last_started_at TEXT,
+      last_finished_at TEXT,
+      last_failure_summary TEXT,
+      token_budget INTEGER,
+      current_token_count INTEGER,
+      projected_token_count INTEGER,
+      raw_tokens_outside_tail INTEGER,
+      context_threshold REAL,
+      context_threshold_source TEXT,
+      context_fresh_tail_count INTEGER,
+      context_leaf_chunk_tokens INTEGER,
+      retry_attempts INTEGER NOT NULL DEFAULT 0,
+      next_attempt_after TEXT,
+      resolution_reason TEXT,
+      resolved_at TEXT,
+      maintenance_revision INTEGER NOT NULL DEFAULT 0,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS pending_compaction_batches (
+      batch_id TEXT PRIMARY KEY,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      session_key TEXT,
+      session_target_json TEXT NOT NULL DEFAULT '{}',
+      status TEXT NOT NULL DEFAULT 'planning'
+        CHECK (status IN ('planning', 'ready', 'publishing', 'published', 'stale', 'failed')),
+      source_projection_fingerprint TEXT NOT NULL,
+      compactable_start_ordinal INTEGER NOT NULL,
+      compactable_end_ordinal INTEGER NOT NULL,
+      planned_fresh_tail_start_ordinal INTEGER,
+      prompt_version TEXT NOT NULL DEFAULT 'unknown',
+      model TEXT NOT NULL DEFAULT 'unknown',
+      failure_summary TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      published_at TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS pending_summary_nodes (
+      node_id TEXT PRIMARY KEY,
+      batch_id TEXT NOT NULL REFERENCES pending_compaction_batches(batch_id) ON DELETE CASCADE,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK (kind IN ('leaf', 'condensed')),
+      depth INTEGER NOT NULL DEFAULT 0,
+      status TEXT NOT NULL DEFAULT 'planned'
+        CHECK (status IN ('planned', 'running', 'ready', 'promoted', 'stale', 'failed')),
+      ordinal_start INTEGER NOT NULL,
+      ordinal_end INTEGER NOT NULL,
+      source_fingerprint TEXT NOT NULL,
+      source_context_hash TEXT,
+      content TEXT,
+      token_count INTEGER,
+      prompt_version TEXT NOT NULL DEFAULT 'unknown',
+      model TEXT NOT NULL DEFAULT 'unknown',
+      canonical_summary_id TEXT REFERENCES summaries(summary_id) ON DELETE SET NULL,
+      lease_owner TEXT,
+      lease_expires_at TEXT,
+      failure_summary TEXT,
+      retry_count INTEGER NOT NULL DEFAULT 0,
+      next_attempt_after TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      ready_at TEXT,
+      promoted_at TEXT,
+      UNIQUE (batch_id, ordinal_start, ordinal_end, depth, kind),
+      CHECK (ordinal_end >= ordinal_start),
+      CHECK (token_count IS NULL OR token_count >= 0)
+    );
+
+    CREATE TABLE IF NOT EXISTS pending_summary_node_messages (
+      node_id TEXT NOT NULL REFERENCES pending_summary_nodes(node_id) ON DELETE CASCADE,
+      message_id INTEGER NOT NULL REFERENCES messages(message_id) ON DELETE RESTRICT,
+      ordinal INTEGER NOT NULL,
+      transcript_entry_id TEXT,
+      identity_hash TEXT,
+      PRIMARY KEY (node_id, message_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS pending_summary_node_children (
+      node_id TEXT NOT NULL REFERENCES pending_summary_nodes(node_id) ON DELETE CASCADE,
+      ordinal INTEGER NOT NULL,
+      child_node_id TEXT REFERENCES pending_summary_nodes(node_id) ON DELETE CASCADE,
+      child_summary_id TEXT REFERENCES summaries(summary_id) ON DELETE RESTRICT,
+      PRIMARY KEY (node_id, ordinal),
+      CHECK (
+        (child_node_id IS NOT NULL AND child_summary_id IS NULL) OR
+        (child_node_id IS NULL AND child_summary_id IS NOT NULL)
+      )
+    );
+
+    CREATE TABLE IF NOT EXISTS focus_briefs (
+      brief_id TEXT PRIMARY KEY,
+      conversation_id INTEGER NOT NULL REFERENCES conversations(conversation_id) ON DELETE CASCADE,
+      session_key TEXT,
+      prompt TEXT NOT NULL,
+      content TEXT NOT NULL,
+      status TEXT NOT NULL CHECK (status IN ('draft', 'active', 'superseded', 'failed', 'inactive')),
+      token_count INTEGER NOT NULL DEFAULT 0,
+      target_tokens INTEGER NOT NULL DEFAULT 0,
+      covered_latest_at TEXT,
+      covered_message_seq INTEGER,
+      source_context_hash TEXT NOT NULL DEFAULT '',
+      generator_run_id TEXT,
+      generator_session_key TEXT,
+      raw_result_json TEXT,
+      error TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      superseded_at TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS focus_brief_sources (
+      brief_id TEXT NOT NULL REFERENCES focus_briefs(brief_id) ON DELETE CASCADE,
+      summary_id TEXT NOT NULL,
+      ordinal INTEGER,
+      role TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      PRIMARY KEY (brief_id, summary_id, role)
+    );
+
+    CREATE TABLE IF NOT EXISTS lcm_migration_state (
+      step_name TEXT NOT NULL,
+      algorithm_version INTEGER NOT NULL,
+      completed_at TEXT NOT NULL DEFAULT (datetime('now')),
+      PRIMARY KEY (step_name, algorithm_version)
+    );
+
+    CREATE TABLE IF NOT EXISTS turn_advancements (
+      advancement_key TEXT PRIMARY KEY,
+      payload_hash TEXT NOT NULL,
+      session_id TEXT NOT NULL,
+      session_key TEXT,
+      admission_entry_id TEXT NOT NULL,
+      terminal_entry_id TEXT NOT NULL,
+      message_count INTEGER NOT NULL,
+      committed_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Indexes
+    CREATE INDEX IF NOT EXISTS messages_conv_seq_idx ON messages (conversation_id, seq);
+    CREATE INDEX IF NOT EXISTS message_anchor_trust_conv_state_idx
+      ON message_transcript_anchor_trust (conversation_id, trust_state);
+    CREATE INDEX IF NOT EXISTS message_anchor_trust_conv_entry_idx
+      ON message_transcript_anchor_trust (conversation_id, transcript_entry_id)
+      WHERE transcript_entry_id IS NOT NULL;
+    CREATE INDEX IF NOT EXISTS conversation_transcript_epochs_mode_idx
+      ON conversation_transcript_epochs (migration_mode, created_at);
+    CREATE INDEX IF NOT EXISTS summaries_conv_created_idx ON summaries (conversation_id, created_at);
+    CREATE INDEX IF NOT EXISTS summary_messages_message_idx ON summary_messages (message_id);
+    CREATE INDEX IF NOT EXISTS summary_parents_parent_summary_idx ON summary_parents (parent_summary_id);
+    CREATE INDEX IF NOT EXISTS message_parts_message_idx ON message_parts (message_id);
+    CREATE INDEX IF NOT EXISTS message_parts_type_idx ON message_parts (part_type);
+    CREATE INDEX IF NOT EXISTS context_items_conv_idx ON context_items (conversation_id, ordinal);
+    CREATE INDEX IF NOT EXISTS large_files_conv_idx ON large_files (conversation_id, created_at);
+    CREATE INDEX IF NOT EXISTS compaction_telemetry_state_idx
+      ON conversation_compaction_telemetry (cache_state, updated_at);
+    CREATE INDEX IF NOT EXISTS pending_compaction_batches_conv_status_idx
+      ON pending_compaction_batches (conversation_id, status, created_at);
+    CREATE INDEX IF NOT EXISTS pending_summary_nodes_batch_status_idx
+      ON pending_summary_nodes (batch_id, status, ordinal_start);
+    CREATE INDEX IF NOT EXISTS pending_summary_nodes_conv_status_idx
+      ON pending_summary_nodes (conversation_id, status, ordinal_start);
+    CREATE INDEX IF NOT EXISTS pending_summary_node_messages_message_idx
+      ON pending_summary_node_messages (message_id);
+    CREATE INDEX IF NOT EXISTS pending_summary_node_children_child_node_idx
+      ON pending_summary_node_children (child_node_id);
+    CREATE INDEX IF NOT EXISTS pending_summary_node_children_child_summary_idx
+      ON pending_summary_node_children (child_summary_id);
+    CREATE INDEX IF NOT EXISTS focus_briefs_conversation_status_idx
+      ON focus_briefs (conversation_id, status, created_at);
+    CREATE INDEX IF NOT EXISTS focus_brief_sources_summary_idx
+      ON focus_brief_sources (summary_id);
+    CREATE INDEX IF NOT EXISTS turn_advancements_session_idx
+      ON turn_advancements (session_id, committed_at);
+
+    -- Speed up summary_messages lookups by message_id (PK is summary_id,message_id)
+    CREATE INDEX IF NOT EXISTS summary_messages_message_idx ON summary_messages (message_id);
+  `);
+        // Forward-compatible conversations migration for existing DBs.
+        const conversationColumns = db.prepare(`PRAGMA table_info(conversations)`).all();
+        const hasBootstrappedAt = conversationColumns.some((col) => col.name === "bootstrapped_at");
+        if (!hasBootstrappedAt) {
+            db.exec(`ALTER TABLE conversations ADD COLUMN bootstrapped_at TEXT`);
+        }
+        const hasSessionKey = conversationColumns.some((col) => col.name === "session_key");
+        if (!hasSessionKey) {
+            db.exec(`ALTER TABLE conversations ADD COLUMN session_key TEXT`);
+        }
+        const hasActive = conversationColumns.some((col) => col.name === "active");
+        if (!hasActive) {
+            db.exec(`ALTER TABLE conversations ADD COLUMN active INTEGER NOT NULL DEFAULT 1`);
+        }
+        const hasArchivedAt = conversationColumns.some((col) => col.name === "archived_at");
+        if (!hasArchivedAt) {
+            db.exec(`ALTER TABLE conversations ADD COLUMN archived_at TEXT`);
+        }
+        const hasArchiveCause = conversationColumns.some((col) => col.name === "archive_cause");
+        if (!hasArchiveCause) {
+            db.exec(`ALTER TABLE conversations ADD COLUMN archive_cause TEXT`);
+        }
+        db.exec(`UPDATE conversations SET active = 1 WHERE active IS NULL`);
+        db.exec(`
+      CREATE UNIQUE INDEX IF NOT EXISTS conversations_active_session_key_idx
+      ON conversations (session_key)
+      WHERE session_key IS NOT NULL AND active = 1
+    `);
+        db.exec(`
+      CREATE INDEX IF NOT EXISTS conversations_session_key_active_created_idx
+      ON conversations (session_key, active, created_at)
+    `);
+        db.exec(`
+      CREATE INDEX IF NOT EXISTS conversations_session_id_active_created_idx
+      ON conversations (session_id, active, created_at)
+    `);
+        db.exec(`DROP INDEX IF EXISTS conversations_session_key_idx`);
+        runMigrationStep("ensureSummaryDepthColumn", log, () => ensureSummaryDepthColumn(db));
+        runMigrationStep("ensureSummaryMetadataColumns", log, () => ensureSummaryMetadataColumns(db));
+        runMigrationStep("ensureSummaryModelColumn", log, () => ensureSummaryModelColumn(db));
+        runMigrationStep("ensureMessageIdentityHashColumn", log, () => ensureMessageIdentityHashColumn(db));
+        runMigrationStep("ensureMessageOpenClawSenderMetadataColumn", log, () => ensureMessageOpenClawSenderMetadataColumn(db));
+        // v4.2 §B — messages.large_content sidecar column for stub-tier
+        // stratification. Idempotent additive ALTER; safe across versions.
+        runMigrationStep("ensureMessageLargeContentColumn", log, () => ensureMessageLargeContentColumn(db));
+        // Belt-and-suspenders: ensure message_parts exists even if the bulk
+        // CREATE TABLE block above was interrupted before reaching it.
+        runMigrationStep("ensureMessagePartsTable", log, () => ensureMessagePartsTable(db));
+        runMigrationStep("backfillMessageIdentityHashes", log, () => backfillMessageIdentityHashes(db, { managesOwnTransaction: false }));
+        runVersionedBackfillStep(db, "repairOpenClawMetadataIdentityState", log, () => repairOpenClawMetadataIdentityState(db));
+        runMigrationStep("createMessagesIdentityHashIndex", log, () => db.exec(`CREATE INDEX IF NOT EXISTS messages_conv_identity_hash_idx ON messages (conversation_id, identity_hash)`));
+        runMigrationStep("ensureMessageTranscriptEntryIdColumn", log, () => ensureMessageTranscriptEntryIdColumn(db));
+        runMigrationStep("ensureTranscriptAnchorTrustTables", log, () => ensureTranscriptAnchorTrustTables(db));
+        // Partial unique index: NULL entry ids (legacy rows, runtime ingests) are
+        // exempt, so this only enforces idempotency for transcript-imported rows.
+        runMigrationStep("createMessagesTranscriptEntryIdIndex", log, () => db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS messages_conv_entry_unique_idx
+         ON messages (conversation_id, transcript_entry_id)
+         WHERE transcript_entry_id IS NOT NULL`));
+        runMigrationStep("ensureMessageStableEventKeyColumn", log, () => ensureMessageStableEventKeyColumn(db));
+        // Partial unique index: NULL stable event keys (legacy rows, messages
+        // without a stable identity) are exempt, so this only enforces idempotency
+        // for messages that carry a computed key.
+        runMigrationStep("createMessagesStableEventKeyIndex", log, () => db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS messages_stable_event_key_unique
+         ON messages (conversation_id, stable_event_key)
+         WHERE stable_event_key IS NOT NULL`));
+        runMigrationStep("ensureCompactionTelemetryColumns", log, () => ensureCompactionTelemetryColumns(db));
+        runMigrationStep("ensureCompactionMaintenanceColumns", log, () => ensureCompactionMaintenanceColumns(db));
+        runMigrationStep("ensureLargeFilesLineCountColumn", log, () => ensureLargeFilesLineCountColumn(db));
+        runMigrationStep("ensurePendingSummaryNodeRetryColumns", log, () => ensurePendingSummaryNodeRetryColumns(db));
+        runMigrationStep("ensureFocusBriefTables", log, () => ensureFocusBriefTables(db));
+        runVersionedBackfillStep(db, "backfillSummaryDepths", log, () => backfillSummaryDepths(db));
+        // Index on depth — created AFTER backfillSummaryDepths to avoid index
+        // maintenance overhead during bulk depth updates on large existing DBs.
+        runMigrationStep("createSummariesDepthIndex", log, () => db.exec(`CREATE INDEX IF NOT EXISTS summaries_conv_depth_kind_idx ON summaries (conversation_id, depth, kind)`));
+        runVersionedBackfillStep(db, "backfillSummaryMetadata", log, () => backfillSummaryMetadata(db));
+        runVersionedBackfillStep(db, "backfillToolCallColumns", log, () => backfillToolCallColumns(db));
+        const detectedFeatures = options?.fts5Available === false ? null : getLcmDbFeatures(db);
+        const fts5Available = options?.fts5Available ?? detectedFeatures?.fts5Available ?? false;
+        if (fts5Available) {
+            const trigramTokenizerAvailable = detectedFeatures?.trigramTokenizerAvailable ?? false;
+            if (!trigramTokenizerAvailable) {
+                try {
+                    db.exec(`DROP TABLE IF EXISTS summaries_fts_cjk`);
+                }
+                catch {
+                    // Best effort only. A stale virtual table should not block core migration.
+                }
+            }
+            // FTS5 virtual tables for full-text search (cannot use IF NOT EXISTS, so check manually)
+            runMigrationStep("ensureMessagesFts", log, () => {
+                ensureStandaloneFtsTable(db, {
+                    tableName: "messages_fts",
+                    createSql: `
+            CREATE VIRTUAL TABLE messages_fts USING fts5(
+              content,
+              tokenize='porter unicode61'
+            )
+          `,
+                    seedSql: `
+            INSERT INTO messages_fts(rowid, content)
+            SELECT message_id, content FROM messages
+          `,
+                    expectedColumns: ["content"],
+                    staleSchemaPatterns: ["content_rowid"],
+                });
+            });
+            runMigrationStep("ensureSummariesFts", log, () => {
+                ensureStandaloneFtsTable(db, {
+                    tableName: "summaries_fts",
+                    createSql: `
+            CREATE VIRTUAL TABLE summaries_fts USING fts5(
+              summary_id UNINDEXED,
+              content,
+              tokenize='porter unicode61'
+            )
+          `,
+                    seedSql: `
+            INSERT INTO summaries_fts(summary_id, content)
+            SELECT summary_id, content FROM summaries
+          `,
+                    expectedColumns: ["summary_id", "content"],
+                    staleSchemaPatterns: [
+                        "content_rowid='summary_id'",
+                        'content_rowid="summary_id"',
+                    ],
+                });
+            });
+            // ── CJK trigram FTS table ────────────────────────────────────────────────
+            // FTS5 unicode61 (porter) tokenizer cannot segment CJK ideographs, so CJK
+            // queries currently fall back to a LIKE path with AND logic.  When the user's
+            // phrasing doesn't match the summary verbatim (e.g. "端到端测试结果" vs
+            // "端到端测试"), ALL terms must match and the query returns 0 candidates.
+            //
+            // A trigram-tokenized table indexes every 3-character substring, enabling
+            // native CJK substring matching via FTS5 MATCH with OR semantics.
+            runMigrationStep("ensureSummariesFtsCjk", log, () => {
+                if (trigramTokenizerAvailable) {
+                    ensureStandaloneFtsTable(db, {
+                        tableName: "summaries_fts_cjk",
+                        createSql: `
+              CREATE VIRTUAL TABLE summaries_fts_cjk USING fts5(
+                summary_id UNINDEXED,
+                content,
+                tokenize='trigram'
+              )
+            `,
+                        seedSql: `
+              INSERT INTO summaries_fts_cjk(summary_id, content)
+              SELECT summary_id, content FROM summaries
+            `,
+                        expectedColumns: ["summary_id", "content"],
+                    });
+                }
+            });
+        }
+        db.exec(`COMMIT`);
+        transactionActive = false;
+    }
+    catch (error) {
+        if (transactionActive) {
+            try {
+                db.exec(`ROLLBACK`);
+            }
+            catch {
+                // Preserve the original migration failure if rollback also errors.
+            }
+        }
+        throw error;
+    }
+}
