@@ -20,7 +20,7 @@ jobs:
       - name: Verify fixed source and payload audit tests
         run: |
           node tools/cross-platform/application-r4/verify-source.mjs
-          node --test tools/cross-platform/desktop-r7/payload-audit.test.mjs
+          node --test tools/cross-platform/desktop-r7/payload-audit.test.mjs tools/cross-platform/desktop-r7/desktop-temp.test.mjs
       - name: Prepare pinned build tool
         run: npm install --prefix "$RUNNER_TEMP/sep-r7-tools" pnpm@11.7.0 --ignore-scripts --no-audit --no-fund
       - name: Build fixed application
@@ -42,7 +42,7 @@ jobs:
       - name: Verify official Electron payload
         run: node tools/cross-platform/desktop-r7/prepare-electron.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-electron-r7"
       - name: Three real desktop lifecycle rounds
-        run: node tools/cross-platform/desktop-r7/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r7/bundle-full" "$RUNNER_TEMP/sep-electron-r7" "$RUNNER_TEMP/sep-desktop-r7/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/runtime-install-r6/packaging"
+        run: node tools/cross-platform/desktop-r7/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r7/bundle-full" "$RUNNER_TEMP/sep-electron-r7" "$RUNNER_TEMP/sep-desktop-r7/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/desktop-r7/packaging"
       - name: Preserve bounded evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
