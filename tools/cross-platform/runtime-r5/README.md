@@ -2,7 +2,7 @@
 
 This is an isolated assembly/health harness for the fixed DSH rc.2 and SEP source snapshot. It is not a distributable installer and does not modify a daily installation.
 
-Set absolute `SEP_NATIVE_SOURCE` to a fully built native source tree and `SEP_NATIVE_OUTPUT` to a new real output directory. Run `node packaging/native-runtime/run-native.mjs`. Only Linux and macOS are supported by this validation driver. Large output and cache directories must remain on the user's designated data volume.
+Set absolute `SEP_NATIVE_SOURCE` to a fully built native source tree and `SEP_NATIVE_OUTPUT` to a new real output directory. Run `node tools/cross-platform/runtime-r5/run-native.mjs`. Only Linux and macOS are supported by this validation driver. Large output and cache directories must remain on the user's designated data volume.
 
 The program closure is copied from native package files into independent regular files with SHA-256 hashes, POSIX modes and explicit internal links. No development dependencies or private `.env` files are packaged. Source dependencies must already be installed and built. The loader bridge is deliberately pinned to node-addon-native-custom-loader 0.1.6 and the matching platform binding 0.1.6; an absent or ambiguous package refuses assembly.
 
