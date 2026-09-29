@@ -1,0 +1,165 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "testedCommit": "45855179999ecf7dc0e07897b6d48af401cf36c9",
+  "macosRun": "36542638783",
+  "artifact": {
+    "run": "36542638783",
+    "artifactId": 11021582767,
+    "size": 4199944,
+    "digest": "sha256:de2e67e882fa68e31fba69514c4ed381445f26762f273b6828183ba9280c8e41"
+  },
+  "scope": "Internal native managed-host installation and same-schema synthetic SEP delta, with exact local consent and separately audited publication decisions.",
+  "bindings": [
+    {
+      "path": "evidence/CI-RESULT.json",
+      "size": 920,
+      "sha256": "58dfe0571e86dc5da2636f4f9a90b996abafe6c7515c1c85f243c2844dd5fb8d"
+    },
+    {
+      "path": "evidence/linux/FINAL-AUDIT.json",
+      "size": 4467,
+      "sha256": "3baf79d703243876239c199ed71be9ce7c438e587467f43d9cf8a8c24391a5f7"
+    },
+    {
+      "path": "evidence/linux/INSTALL-RESULT.json",
+      "size": 1552,
+      "sha256": "c51da14cf4b27256faa2235e9a7482f7fe6815726c8c855094f759046dbbb986"
+    },
+    {
+      "path": "evidence/linux/UPDATE-RESULT.json",
+      "size": 2266,
+      "sha256": "5466d0bed3336146d48764ac845089631dbd0c2deb4b26ac6fb84a10d468c776"
+    },
+    {
+      "path": "evidence/macos/FINAL-AUDIT.json",
+      "size": 4446,
+      "sha256": "ed364cb1580a840047f58ccca3795a95e8b3b7de5dcb32c299c241a7fd31e9d8"
+    },
+    {
+      "path": "evidence/macos/INSTALL-RESULT.json",
+      "size": 1531,
+      "sha256": "e4042fdd99a5f1ed1fb69938b95e4933ebc1e423115a3a782be5154f2377a66f"
+    },
+    {
+      "path": "evidence/macos/UPDATE-RESULT.json",
+      "size": 2269,
+      "sha256": "ff8ba54d9dc764ba8dd020d1289ece15c521f92f00c0a7cfb17336d3f71621f8"
+    },
+    {
+      "path": "final-audit.mjs",
+      "size": 2735,
+      "sha256": "f34e91fec19d36d4d30fee6b73d66bff5faec4d1bf7db7f8a2751d00132c49f0"
+    },
+    {
+      "path": "install-native.mjs",
+      "size": 6129,
+      "sha256": "8cfbe548890a4f584829cc99d7925dd5effd4a17ee86eedcf96241b04815c308"
+    },
+    {
+      "path": "native-bundle.mjs",
+      "size": 6031,
+      "sha256": "42cee3e7c0bc1a236deb7f6a0774de28581622a7eaff991081a962222cd1323c"
+    },
+    {
+      "path": "native-bundle.test.mjs",
+      "size": 4207,
+      "sha256": "f77c7d8cab3a98909bfccc2a46318e4267307aec28295732ec620647ebbae30e"
+    },
+    {
+      "path": "NEXT-DESKTOP.md",
+      "size": 2643,
+      "sha256": "ae694f1acf974ee4002ce2c4ddbd27b27250083b3298762448c959378dc7a19c"
+    },
+    {
+      "path": "packaging/bootstrap/checkpoint-inspection.mjs",
+      "size": 6867,
+      "sha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec"
+    },
+    {
+      "path": "packaging/bootstrap/credential-reader.mjs",
+      "size": 2978,
+      "sha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39"
+    },
+    {
+      "path": "packaging/bootstrap/launch.mjs",
+      "size": 300,
+      "sha256": "3132afd88a134507801e5024c084f425c81f1643a0b317dd2a20887ab05e91e6"
+    },
+    {
+      "path": "packaging/bootstrap/launcher.mjs",
+      "size": 8537,
+      "sha256": "557d2eb901cae85e924dc688ba5ab95ed9ceb11b4f3ad1879f5ab460987e5583"
+    },
+    {
+      "path": "packaging/bootstrap/start.ps1",
+      "size": 180,
+      "sha256": "1a0619e380d3d9e5d3d625feb444ca1fe7ae703dbf13e8e60824df6fbc12226c"
+    },
+    {
+      "path": "packaging/bootstrap/start.sh",
+      "size": 267,
+      "sha256": "06d24b0fe89c31247915aac255263cabf48fc1c449e6e61cce4d14e6f96c0005"
+    },
+    {
+      "path": "packaging/bootstrap/start.vbs",
+      "size": 2656,
+      "sha256": "0e618b785d815821b65591e39e9128f5f24c0071a119eca335e4800da441f708"
+    },
+    {
+      "path": "packaging/bootstrap/startup-coordinator.mjs",
+      "size": 1311,
+      "sha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8"
+    },
+    {
+      "path": "packaging/bootstrap/startup-diagnostic.mjs",
+      "size": 1172,
+      "sha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b"
+    },
+    {
+      "path": "packaging/bootstrap/startup-lease.mjs",
+      "size": 1869,
+      "sha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47"
+    },
+    {
+      "path": "packaging/bootstrap/startup-report.mjs",
+      "size": 3865,
+      "sha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea"
+    },
+    {
+      "path": "packaging/bootstrap/validate-bootstrap.mjs",
+      "size": 2298,
+      "sha256": "0b0334bc3af4e22c6ca280dff1cf8d273f275db483704741fa178ec6c5917529"
+    },
+    {
+      "path": "packaging/installer.mjs",
+      "size": 10479,
+      "sha256": "68f41ed5d64c5fdc807ec31559522046301e5b944fdc556c4f6d254b7c2f762d"
+    },
+    {
+      "path": "README.md",
+      "size": 1481,
+      "sha256": "7b16ea38a84643881d2efaa41b2a03a66ae7436ca56369ad8ee6d5c1c3d470fe"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 4951,
+      "sha256": "3524d754839f0e01c4912d9fc72a0d0c583823b54e97eca10b9b05a9d536fff0"
+    },
+    {
+      "path": "RESULTS.md",
+      "size": 6937,
+      "sha256": "a935a88149a6c6309d725cff122e336064b51e14afec62ce5e1b1826dd424fec"
+    },
+    {
+      "path": "run-install.mjs",
+      "size": 2126,
+      "sha256": "74ca44d3fc615e4971f28fc8de9953105186e845472ee38cd412e6bb23353ba6"
+    },
+    {
+      "path": "update-native.mjs",
+      "size": 10672,
+      "sha256": "59402721e17b63cfd6d46a99b83a8674e425b397ced154367377ba4e65b7ed24"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "linux",
+  "arch": "x64",
+  "checks": [
+    {
+      "name": "independent-instance-config",
+      "status": "pass"
+    },
+    {
+      "name": "profile-directory-ready-a",
+      "status": "pass"
+    },
+    {
+      "name": "native-node-path-a",
+      "status": "pass"
+    },
+    {
+      "name": "profile-directory-ready-b",
+      "status": "pass"
+    },
+    {
+      "name": "native-node-path-b",
+      "status": "pass"
+    },
+    {
+      "name": "concurrent-owned-hosts",
+      "status": "pass"
+    },
+    {
+      "name": "both-budget-services-ready",
+      "status": "pass"
+    },
+    {
+      "name": "other-instance-remains-100",
+      "status": "pass"
+    },
+    {
+      "name": "second-survives-first-shutdown",
+      "status": "pass"
+    },
+    {
+      "name": "installed-restart-settings",
+      "status": "pass"
+    },
+    {
+      "name": "nonzero-ledger-survives-restart",
+      "status": "pass"
+    },
+    {
+      "name": "unsupported-host-refused-before-write",
+      "status": "pass"
+    }
+  ],
+  "installations": [
+    "/opt/dsh-sep-cross-platform/runtime-install-r6/attempt-04/Full A 空白",
+    "/opt/dsh-sep-cross-platform/runtime-install-r6/attempt-04/SEP B 空白"
+  ],
+  "graphHash": "7f7af425e35159f98cd631349eb6a04a6758404921174f73383ef6fced51a6dc",
+  "scope": "Real installer, full and SEP-only using exact already-adapted host input, concurrent SEP instances, nonzero synthetic ledger, controlled shutdown. No official unmodified host coexistence, GUI or update transaction yet."
+}

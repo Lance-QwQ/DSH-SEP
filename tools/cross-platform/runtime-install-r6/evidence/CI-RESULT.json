@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "darwin",
+  "arch": "arm64",
+  "commit": "45855179999ecf7dc0e07897b6d48af401cf36c9",
+  "results": [
+    {
+      "name": "bundle-tests",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null,
+      "signal": null,
+      "durationMs": 259
+    },
+    {
+      "name": "install-coexist",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null,
+      "signal": null,
+      "durationMs": 136149
+    },
+    {
+      "name": "update-rollback",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null,
+      "signal": null,
+      "durationMs": 348671
+    },
+    {
+      "name": "final-audit",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null,
+      "signal": null,
+      "durationMs": 10542
+    }
+  ],
+  "scope": "Internal native installer and transaction validation. No Electron GUI delivery, daily switch, main or Release change."
+}

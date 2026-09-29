@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "darwin",
+  "arch": "arm64",
+  "instances": [
+    {
+      "name": "Full A 空白",
+      "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+      "audit": {
+        "status": "pass",
+        "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+        "packages": 629,
+        "files": 23843,
+        "bytes": 454367274,
+        "links": 2781
+      },
+      "ledgerSha256": "113c3b08c31789ec486ea89256b79470e0756fe521ace1dfee9cd99ec948fb91",
+      "profileDirectory": 2
+    },
+    {
+      "name": "SEP B 空白",
+      "graphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+      "audit": {
+        "status": "pass",
+        "graphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+        "packages": 629,
+        "files": 23843,
+        "bytes": 454367254,
+        "links": 2781
+      },
+      "ledgerSha256": "af5eda46d4ef76a5bf29debc3d56eb4070fde57e4225dd85ae2ebd07d6f83bac",
+      "profileDirectory": 0
+    }
+  ],
+  "decisions": {
+    "rollback": {
+      "seq": 9,
+      "previous": "3658e876021abb14d0dd07177c76f21941cbcb1e84d7593f7edcf3881e215b6e",
+      "identity": "9478904c9ca87b2580410a8fd0a5f10fb47bb0c9bf7190c21da4c533fa320319",
+      "type": "rolled_back",
+      "payload": {
+        "transactionId": "a9165c6f-398f-48a1-adf5-4a5a480ff371",
+        "planHash": "efb8c42173f84cc15e3bb937cdd0009eacaefc6db6fd8fed3487e4facddadb5e",
+        "kind": "reviewed-profile-graph",
+        "cause": "R6_SYNTHETIC_HEALTH",
+        "health": {
+          "status": "pass",
+          "version": "0.1.7-rc.2",
+          "kind": "cold-restoration"
+        },
+        "domainsRetained": true,
+        "graphReview": {
+          "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+          "sourceGraphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+          "targetRoot": "/Users/runner/work/_temp/sep-install-r6/trial/update-01/prepared/program",
+          "scope": "Same-host SEP-only update with exact local profile preservation"
+        }
+      },
+      "at": "2026-09-29T08:38:36.476Z",
+      "hash": "455af0906cbfa02ba36087eadeae5159f874cd72006df122a7c269b1b5af2fef"
+    },
+    "commit": {
+      "seq": 14,
+      "previous": "9805ca0901975b39f40a58fbdfc690e658b35c7abc1e3f30497728f8e0d38d2a",
+      "identity": "9478904c9ca87b2580410a8fd0a5f10fb47bb0c9bf7190c21da4c533fa320319",
+      "type": "committed",
+      "payload": {
+        "transactionId": "e486deee-db4d-47f0-a5fa-f5f93ee74e03",
+        "planHash": "09bbd0903952a95f3e29a77f45d1828ff25711c978e209360325a9740c761822",
+        "kind": "reviewed-profile-graph",
+        "install": {
+          "status": "pass",
+          "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+          "packages": 629,
+          "files": 23843,
+          "bytes": 454367274,
+          "links": 2781
+        },
+        "health": {
+          "status": "pass",
+          "version": "0.1.7-rc.2",
+          "kind": "bound-empty-profile-runtime-health",
+          "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3"
+        },
+        "domainsRetained": true,
+        "dataFingerprints": {
+          "dsh_enhancement_suite_v1": "673812e1c55ef7c3b96a588903e4a65aee3f900e3261f8fe155307c273acf704",
+          "dsh_four_layer_memory_v1": null,
+          "dsh_four_layer_archive_v1": null
+        },
+        "graphReview": {
+          "graphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+          "sourceGraphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+          "targetRoot": "/Users/runner/work/_temp/sep-install-r6/trial/update-01/prepared/program",
+          "scope": "Same-host SEP-only update with exact local profile preservation"
+        }
+      },
+      "at": "2026-09-29T08:41:02.063Z",
+      "hash": "c91b07189c19e510d5c160b95815a6fcd97f8e71f0e124b709c05b2b069c3d83"
+    },
+    "pending": 0,
+    "barrier": {
+      "closed": false,
+      "transactionId": "e486deee-db4d-47f0-a5fa-f5f93ee74e03",
+      "planHash": "09bbd0903952a95f3e29a77f45d1828ff25711c978e209360325a9740c761822"
+    }
+  },
+  "ownedProcesses": [],
+  "cleanupPath": "Managed runtimes closed by test finally blocks; audit only reads state under the normal control lease and performs no process cleanup."
+}

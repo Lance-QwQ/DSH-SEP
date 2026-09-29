@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "date": "2026-09-29",
+  "stage": "r6",
+  "testedCommit": "45855179999ecf7dc0e07897b6d48af401cf36c9",
+  "macosRun": "36542638783",
+  "artifact": {
+    "run": "36542638783",
+    "artifactId": 11021582767,
+    "size": 4199944,
+    "digest": "sha256:de2e67e882fa68e31fba69514c4ed381445f26762f273b6828183ba9280c8e41"
+  },
+  "platforms": {
+    "linux-x64": {
+      "status": "pass",
+      "generatorChecks": 6,
+      "installChecks": 12,
+      "updateChecks": 13,
+      "finalAudit": "pass",
+      "baseGraphHash": "7f7af425e35159f98cd631349eb6a04a6758404921174f73383ef6fced51a6dc",
+      "targetGraphHash": "ecea503ca264c1f523f22c8ecd1d3c0798b248bab4eb05db638fa64ad5ce6806",
+      "bundles": {
+        "fullManifestSha256": "27af04db0427d98552bb462fd910c90eb2536931e093d09354d1363d405e2db5",
+        "sepManifestSha256": "a2d51ca938dbb1abb3f821f305d9bd9c6d2398438aeef4ef64dceac1150127a4"
+      },
+      "compatibility": {
+        "hardBlocks": 0,
+        "incompatible": 0,
+        "unknown": 815,
+        "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+      },
+      "ownedProcesses": 0,
+      "decisions": {
+        "rollback": {
+          "status": "rolled_back",
+          "businessEntry": "open",
+          "planHash": "7f991906b6d1d53d160be42bf067a0ac0cc0571874e44ea9211eafe95fc7a2ba",
+          "direction": "old",
+          "recoveryAdmission": "open"
+        },
+        "commit": {
+          "status": "committed",
+          "businessEntry": "open",
+          "planHash": "8993f0ee38c569adce64329e2e82f6340118bbd79956af6c4d92b07fae6ad754",
+          "direction": "candidate",
+          "recoveryAdmission": "open"
+        }
+      },
+      "dataCoverage": {
+        "dsh_enhancement_suite_v1": "e03f112585251864dc4885226868d2ee65c0a58817bb9b6c6cd82f6af7e1809c",
+        "dsh_four_layer_memory_v1": null,
+        "dsh_four_layer_archive_v1": null
+      }
+    },
+    "darwin-arm64": {
+      "status": "pass",
+      "generatorChecks": 6,
+      "installChecks": 12,
+      "updateChecks": 13,
+      "finalAudit": "pass",
+      "baseGraphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+      "targetGraphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+      "bundles": {
+        "fullManifestSha256": "af717302964dee7119e47bee3edcec274ac1cf1b9a73bdd73d31b26cbd24e427",
+        "sepManifestSha256": "df00c308624c524bfa7ef924c940d8ac3b035cec0f6855c478a2022241503e7d"
+      },
+      "compatibility": {
+        "hardBlocks": 0,
+        "incompatible": 0,
+        "unknown": 815,
+        "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+      },
+      "ownedProcesses": 0,
+      "decisions": {
+        "rollback": {
+          "status": "rolled_back",
+          "businessEntry": "open",
+          "planHash": "efb8c42173f84cc15e3bb937cdd0009eacaefc6db6fd8fed3487e4facddadb5e",
+          "direction": "old",
+          "recoveryAdmission": "open"
+        },
+        "commit": {
+          "status": "committed",
+          "businessEntry": "open",
+          "planHash": "09bbd0903952a95f3e29a77f45d1828ff25711c978e209360325a9740c761822",
+          "direction": "candidate",
+          "recoveryAdmission": "open"
+        }
+      },
+      "dataCoverage": {
+        "dsh_enhancement_suite_v1": "673812e1c55ef7c3b96a588903e4a65aee3f900e3261f8fe155307c273acf704",
+        "dsh_four_layer_memory_v1": null,
+        "dsh_four_layer_archive_v1": null
+      }
+    }
+  },
+  "windowsPackagingRegression": {
+    "status": "pass",
+    "checks": 9,
+    "dailyChanged": false
+  },
+  "modelCalls": 0,
+  "privateDataImported": false,
+  "releasePublished": false,
+  "mainChanged": false,
+  "scope": "Internal native managed-host installation and same-schema synthetic SEP delta, with exact local consent and separately audited publication decisions.",
+  "notRun": [
+    "Electron GUI distribution and interaction",
+    "official unmodified DSH coexistence",
+    "SEP-only on arbitrary official installs",
+    "nonempty L2/L3/L4 and real user plugin migration",
+    "new schema migration",
+    "macOS signing and notarization",
+    "Linux arm64 and macOS x64"
+  ],
+  "history": [
+    {
+      "scope": "Linux initial fixture mistakes and missing profile directory",
+      "status": "fail",
+      "evidence": "linux-final-01.stderr.log"
+    },
+    {
+      "scope": "Linux 180-second fault subprocess deadline",
+      "status": "fail",
+      "followUp": "Controlled recover confirmed alreadyFinalized / recoveryAdmission=open; later new-plan runs passed.",
+      "evidence": "linux-timeout-recovery.log"
+    },
+    {
+      "scope": "Older synthetic candidate declared-peer mismatch",
+      "status": "pass",
+      "interpretation": "Transaction checks passed with five declared incompatibility entries accepted only in the synthetic test; superseded by final zero-incompatibility candidate."
+    }
+  ]
+}

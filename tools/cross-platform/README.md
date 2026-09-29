@@ -1,3 +1,7 @@
+Current isolated installation stage: **r6 native managed-host installers and controlled update**. Linux WSL2 x64 and macOS arm64 passed 31 scoped checks each plus final state audits. See [r6 results and limits](runtime-install-r6/RESULTS.md), [evidence](runtime-install-r6/EVIDENCE.json), and [remaining desktop work](runtime-install-r6/NEXT-DESKTOP.md). No Electron GUI payload, daily deployment, main change or Release. Earlier r5 native runtime health is preserved in [runtime-r5](runtime-r5/README.md).
+
+Historical navigation follows:
+
 Current build stage: **r4 full source build and real CLI/Web startup**. See [application-r4](application-r4/README.md). Linux WSL2 x64 and macOS arm64 passed the complete source build and 119 tests each; the completed application workflow and exact tested commit are linked in that report. Full installers and interactive desktop validation remain pending.
 
 The following is the preserved r3 component scope:

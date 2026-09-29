@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "darwin",
+  "arch": "arm64",
+  "checks": [
+    {
+      "name": "zero-hard-blocks",
+      "status": "pass"
+    },
+    {
+      "name": "zero-declared-incompatibilities",
+      "status": "pass"
+    },
+    {
+      "name": "wrong-fingerprint-consent-refused",
+      "status": "pass"
+    },
+    {
+      "name": "real-publication-rolled-back",
+      "status": "pass"
+    },
+    {
+      "name": "old-code-pointer-restored",
+      "status": "pass"
+    },
+    {
+      "name": "ledger-unchanged-after-rollback",
+      "status": "pass"
+    },
+    {
+      "name": "real-publication-committed",
+      "status": "pass"
+    },
+    {
+      "name": "candidate-selected",
+      "status": "pass"
+    },
+    {
+      "name": "nonzero-ledger-byte-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "synthetic-user-file-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "existing-governed-domain-bytes-preserved",
+      "status": "pass"
+    },
+    {
+      "name": "updated-host-open",
+      "status": "pass"
+    },
+    {
+      "name": "updated-host-exited",
+      "status": "pass"
+    }
+  ],
+  "oldGraphHash": "d45c7875109c84d6c6a7ef8ead507cd291e3a707572712adabfc332e47db04b8",
+  "newGraphHash": "6b74b50afb3ef0e63aff9de23a0df281ec72f6bf1973ddcd4a49e665fe888ac3",
+  "rollback": {
+    "status": "rolled_back",
+    "businessEntry": "open",
+    "planHash": "efb8c42173f84cc15e3bb937cdd0009eacaefc6db6fd8fed3487e4facddadb5e",
+    "direction": "old",
+    "recoveryAdmission": "open"
+  },
+  "commit": {
+    "status": "committed",
+    "businessEntry": "open",
+    "planHash": "09bbd0903952a95f3e29a77f45d1828ff25711c978e209360325a9740c761822",
+    "direction": "candidate",
+    "recoveryAdmission": "open"
+  },
+  "compatibility": {
+    "hardBlocks": 0,
+    "incompatible": 0,
+    "unknown": 815,
+    "scope": "Synthetic exact-plan risk acceptance only; unknown plugins not claimed compatible"
+  },
+  "scope": "Real preparePackage/copyProfile/prepareOfflinePlan/executePreparedPlan against isolated installed instance. Same-schema synthetic version plus exact Recovery and peer dependency version-binding delta; one injected health-failure rollback then a separately bound successful plan. Not GUI or public update delivery."
+}
