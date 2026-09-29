@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Diagnostic source snapshot only; not an application",
+  "dependencies": {
+    "yauzl": "3.4.0"
+  }
+}
