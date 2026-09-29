@@ -29825,8 +29825,8 @@
     },
     {
       "path": "apps/desktop/src/sep-update/update-desktop.mjs",
-      "sha256": "a50c2f52181c8887d5b04dda42af481c17468d824ea10a533f8a6e8fd66eb28f",
-      "size": 14600,
+      "sha256": "a6e21efd394273e1e4d7317040b8ce5393b97497ec4498bb58ee59987c295113",
+      "size": 15019,
       "mode": 420,
       "link": false
     },
@@ -29902,8 +29902,8 @@
     },
     {
       "path": "apps/desktop/src/sep-update/update-sep.mjs",
-      "sha256": "5a0469dc8aad41110ca955f83c82517104baa27a771cc5046464fd9f90c656db",
-      "size": 7629,
+      "sha256": "ef93fdfdada70b80ae799dbd2ae4363bbf2435747172fd62c760acb9a35377dd",
+      "size": 8056,
       "mode": 420,
       "link": false
     },

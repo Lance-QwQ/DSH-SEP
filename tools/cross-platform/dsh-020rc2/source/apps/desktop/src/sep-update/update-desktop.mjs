@@ -65,7 +65,8 @@ export function createManagedUpdater({app,dialog,BrowserWindow,powerMonitor,proj
    await save('sep-check-state.json',{status:'pass',checkedAt:new Date(now()).toISOString(),current:installed.version,...found});
    sepLatest=found.release;sepCheckedAt=new Date(now()).toISOString();
    const unknown=found.status==='metadata-unavailable'||found.status==='no-releases';
-   emitSep(found.release?'available':unknown?'error':'idle',unknown?'SEP_UPDATE_METADATA_UNAVAILABLE':undefined);
+   const platformUnavailable=found.status==='platform-unavailable';
+   emitSep(found.release?'available':platformUnavailable?'candidate-unavailable':unknown?'error':'idle',platformUnavailable?'SEP_UPDATE_PLATFORM_UNAVAILABLE':unknown?'SEP_UPDATE_METADATA_UNAVAILABLE':undefined);
    if(found.release){
     const release=found.release,prepared=await getReport(release,signal);if(closed)return;
     const ready=prepared.report.readiness==='review-ready';
@@ -74,7 +75,7 @@ export function createManagedUpdater({app,dialog,BrowserWindow,powerMonitor,proj
     if(answer.response===0&&!closed){if(ready)await reviewAndQueue(release,signal);else{await prepareSep({directory,release,nodeExecutable,projectDir,userData:app.getPath('userData')});await info({message:'SEP 更新准备已排队',detail:'请完成当前任务，从托盘或应用菜单退出应用。后台准备器随后下载、核验和检查候选，并展示完整插件报告，请你确认具体计划。关闭窗口仅隐藏到后台。等待退出最多 3 小时；可在应用菜单取消待执行更新。',buttons:['知道了']});}}
    }else if(sepManual){
     const unknown=found.status==='metadata-unavailable'||found.status==='no-releases';
-    await info({message:unknown?'SEP 发布信息尚不足以判断可更新版本':'未发现更高的可用 SEP 版本',detail:'当前 SEP：'+installed.version+'\nDSH：'+app.getVersion()+'\n'+(unknown?'SEP_UPDATE_METADATA_UNAVAILABLE：历史包缺少 dsh-sep-update.json。不能据此宣称已是最新，也不会直接运行下载包。':'已按 SEP 独立版本清单检查；DSH 版本未变。'),buttons:['知道了']});
+    await info({message:platformUnavailable?'尚无适用于当前平台的 SEP 更新包':unknown?'SEP 发布信息尚不足以判断可更新版本':'未发现更高的可用 SEP 版本',detail:'当前 SEP：'+installed.version+'\nDSH：'+app.getVersion()+'\n'+(platformUnavailable?'SEP_UPDATE_PLATFORM_UNAVAILABLE：公开清单目前只提供其他平台的包；不会下载或执行这些包，也不能据此确认当前平台已是最新。':unknown?'SEP_UPDATE_METADATA_UNAVAILABLE：历史包缺少 dsh-sep-update.json。不能据此宣称已是最新，也不会直接运行下载包。':'已按 SEP 独立版本清单检查；DSH 版本未变。'),buttons:['知道了']});
    }
   }catch(error){if(closed||signal.aborted)return;emitSep('error',String(error.message).slice(0,160));await save('sep-check-state.json',{status:'fail',checkedAt:new Date(now()).toISOString(),message:String(error.message).slice(0,160)}).catch(()=>{});if(sepManual)await info({type:'warning',message:'SEP 本体更新检查失败',detail:String(error.message).slice(0,160)+'\n当前安装保持原状，失败不代表已是最新。',buttons:['知道了']});}
  }});

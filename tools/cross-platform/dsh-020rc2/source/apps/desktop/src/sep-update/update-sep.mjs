@@ -2,6 +2,7 @@ import semver from 'semver';
 import {createHash} from 'node:crypto';
 const digest=value=>createHash('sha256').update(typeof value==='string'||Buffer.isBuffer(value)?value:JSON.stringify(value)).digest('hex');
 export const SEP_RELEASES='https://api.github.com/repos/Lance-QwQ/DSH-SEP/releases?per_page=100';
+const supportedPlatforms=new Set(['win32-x64','linux-x64','linux-arm64','darwin-x64','darwin-arm64']);
 const releasesBase='https://github.com/Lance-QwQ/DSH-SEP/releases';
 async function json(url,{fetcher,signal,limit}){
  let target=url;
@@ -21,12 +22,13 @@ async function json(url,{fetcher,signal,limit}){
 }
 /** Discover SEP releases independently from the host. Old archives without a
  * machine-readable update manifest remain explicitly unverified. */
-export async function fetchSepRelease({installedSepVersion,hostVersion,fetcher=fetch,signal}={}){
+export async function fetchSepRelease({installedSepVersion,hostVersion,platform=process.platform+'-'+process.arch,fetcher=fetch,signal}={}){
  if(!semver.valid(installedSepVersion)||!semver.valid(hostVersion))throw Error('SEP_UPDATE_LOCAL_VERSION');
+ if(!supportedPlatforms.has(platform))throw Error('SEP_UPDATE_LOCAL_PLATFORM');
  const bounded=AbortSignal.any([AbortSignal.timeout(15000),...(signal?[signal]:[])]);
  const {value:rows}=await json(SEP_RELEASES,{fetcher,signal:bounded,limit:2000000});
  if(!Array.isArray(rows)||rows.length>100)throw Error('SEP_UPDATE_METADATA_INVALID');
- let legacy=false,best=null;let manifests=0;
+ let legacy=false,best=null;let manifests=0,matchingPlatforms=0,foreignPlatform=false;
  for(const row of rows){
   if(row?.draft===true)continue;
   if(!row||typeof row.tag_name!=='string'||!/^[a-zA-Z0-9._-]{1,100}$/.test(row.tag_name)||row.html_url!==releasesBase+'/tag/'+row.tag_name||!Array.isArray(row.assets)||!Number.isFinite(Date.parse(row.published_at)))throw Error('SEP_UPDATE_ORIGIN');
@@ -37,12 +39,13 @@ export async function fetchSepRelease({installedSepVersion,hostVersion,fetcher=f
   const parsed=await json('https://api.github.com/repos/Lance-QwQ/DSH-SEP/releases/assets/'+asset.id,{fetcher,signal:bounded,limit:65536});
   if(asset.digest!=='sha256:'+parsed.hash)throw Error('SEP_UPDATE_MANIFEST_CHANGED');
   const m=parsed.value;
-  if(m?.schema!==1||m.product!=='dsh-sep'||m.platform!=='win32-x64'||!semver.valid(m.sepVersion)||!semver.valid(m.hostVersion)||!m.bundle||!/^[a-zA-Z0-9._-]+\.zip$/.test(m.bundle.name??'')||!/^\w{64}$/.test(m.bundle.sha256??'')||!/^[a-f0-9]{64}$/.test(m.bundle.sha256)||m.bundle.url!==releasesBase+'/download/'+row.tag_name+'/'+m.bundle.name)throw Error('SEP_UPDATE_MANIFEST_INVALID');
+  if(m?.schema!==1||m.product!=='dsh-sep'||!supportedPlatforms.has(m.platform)||!semver.valid(m.sepVersion)||!semver.valid(m.hostVersion)||!m.bundle||!/^[a-zA-Z0-9._-]+\.zip$/.test(m.bundle.name??'')||!/^\w{64}$/.test(m.bundle.sha256??'')||!/^[a-f0-9]{64}$/.test(m.bundle.sha256)||m.bundle.url!==releasesBase+'/download/'+row.tag_name+'/'+m.bundle.name)throw Error('SEP_UPDATE_MANIFEST_INVALID');
+  if(m.platform!==platform){foreignPlatform=true;continue;}matchingPlatforms++;
   if(!semver.gt(m.sepVersion,installedSepVersion)||!semver.prerelease(installedSepVersion)&&semver.prerelease(m.sepVersion))continue;
   if(m.hostVersion!==hostVersion)throw Error('SEP_UPDATE_HOST_ADAPTATION_REQUIRED');
-  if(!best||semver.gt(m.sepVersion,best.sepVersion))best={source:'sep',version:hostVersion,sepVersion:m.sepVersion,url:row.html_url,publishedAt:row.published_at,manifestHash:parsed.hash,bundle:m.bundle};
+  if(!best||semver.gt(m.sepVersion,best.sepVersion))best={source:'sep',platform,version:hostVersion,sepVersion:m.sepVersion,url:row.html_url,publishedAt:row.published_at,manifestHash:parsed.hash,bundle:m.bundle};
  }
- return {status:best?'available':legacy?'metadata-unavailable':manifests?'current':'no-releases',release:best};
+ return {status:best?'available':foreignPlatform&&!matchingPlatforms?'platform-unavailable':legacy?'metadata-unavailable':manifests?'current':'no-releases',release:best};
 }
 // These packages contain SEP code or the reviewed desktop integration seam.
 // An authenticated local policy must also bind each exact before/after instance.

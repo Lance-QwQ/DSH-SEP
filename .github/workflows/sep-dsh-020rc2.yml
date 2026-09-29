@@ -31,6 +31,9 @@ jobs:
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
         run: node --test tools/cross-platform/dsh-020rc2/qualification/managed-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/desktop-composition.test.mjs tools/cross-platform/dsh-020rc2/qualification/runtime-r5/native-rpath.test.mjs tools/cross-platform/dsh-020rc2/qualification/windows-payload.test.mjs
+      - name: Update discovery respects platform
+        run: |
+          SEP_NATIVE_SOURCE="$GITHUB_WORKSPACE/tools/cross-platform/dsh-020rc2/source" SEP_UPDATE_TEST_ROOT="$RUNNER_TEMP" node --test tools/cross-platform/dsh-020rc2/qualification/update-platform.test.mjs tools/cross-platform/dsh-020rc2/qualification/update-platform-ui.test.mjs
       - name: Assemble native managed host
         env:
           SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/dsh-020rc2/source
