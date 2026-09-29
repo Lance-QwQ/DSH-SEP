@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "fail",
+  "scope": "Cross-platform out-of-box readiness remains unmet: Linux default workspace initialization failed; desktop lifecycle subset passes.",
+  "releaseReady": false,
+  "testedCommit": "baa82c7b8e9c4cd15e783ce1bf05cc9c5fdbe938",
+  "macosRun": "36549016380",
+  "macosUrl": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36549016380",
+  "desktopLifecycle": {
+    "status": "pass",
+    "linux": {
+      "rounds": 3,
+      "checksPerRound": 9,
+      "inputs": {
+        "graphHash": "7f7af425e35159f98cd631349eb6a04a6758404921174f73383ef6fced51a6dc",
+        "desktopMainSha256": "97e87e74d214a8553695e5eb22bd714492e8635535f7a8e94da3432100dd1e56",
+        "electronSha256": "d65286d812719f2b4c1a1b806a80f288a1058c89c7b058dae1e03ab25e499446",
+        "electronVersion": "44.0.0"
+      }
+    },
+    "macos": {
+      "rounds": 3,
+      "checksPerRound": 9,
+      "inputs": {
+        "graphHash": "1691cc8534c37f9a20aac1f43c584c74aaf2212a3ca215cacef1a881f6c7a5db",
+        "desktopMainSha256": "97e87e74d214a8553695e5eb22bd714492e8635535f7a8e94da3432100dd1e56",
+        "electronSha256": "076d79742986e1b100b69ebecc691cb07368045e54c9087cef631b8622b76a80",
+        "electronVersion": "44.0.0"
+      }
+    }
+  },
+  "targetedTests": {
+    "linux": 10,
+    "macos": 10,
+    "windowsPackaging": 9,
+    "windowsEnvironment": 1,
+    "windowsPosixSkipped": 4
+  },
+  "linuxDefaultWorkspace": {
+    "status": "fail",
+    "error": {
+      "code": "gateway/internal",
+      "message": "system Documents directory is unavailable",
+      "details": {}
+    }
+  },
+  "notRun": [
+    "integrated Full/Only Electron distribution installation",
+    "full SEP desktop profile and branding",
+    "physical drag/tray interaction",
+    "macOS TCC",
+    "SEP app signing/notarization",
+    "official DSH coexistence and nonempty RAG/user plugin migration"
+  ],
+  "dailyWindowsModified": false,
+  "mainModified": false,
+  "releasePublished": false
+}

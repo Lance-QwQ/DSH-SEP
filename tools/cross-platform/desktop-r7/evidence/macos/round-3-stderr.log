@@ -1,0 +1,30 @@
+Debugger listening on ws://127.0.0.1:49353/5050a9ad-80f1-4a95-bc86-e674ced4b748
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:49353/5050a9ad-80f1-4a95-bc86-e674ced4b748
+For help, see: https://nodejs.org/learn/getting-started/debugging
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:521:24)
+      at endReadableNT (node:internal/streams/readable:1729:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '127.0.0.1',
+      localPort: 49365,
+      remoteAddress: '127.0.0.1',
+      remotePort: 49350,
+      remoteFamily: 'IPv4',
+      timeout: undefined,
+      bytesWritten: 1656,
+      bytesRead: 429
+    }
+  }
+}
+Error occurred in handler for 'dsh-desktop:onboarding-api-key': Error: desktop welcome: backend unavailable
+    at readWelcomeState (file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8054:67)
+    at file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8269:17
+    at Session.<anonymous> (node:electron/js2c/browser_init:2:122853)
+    at Session.emit (node:events:509:28)
+2026-09-29 09:40:00.285 Electron Helper[21312:58131] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid

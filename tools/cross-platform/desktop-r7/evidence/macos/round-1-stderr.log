@@ -1,0 +1,55 @@
+Debugger listening on ws://127.0.0.1:49292/73982e37-0a76-4c43-993b-ff0cce765cfb
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+2026-09-29 09:39:37.654 Electron Helper[20542:56145] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+2026-09-29 09:39:37.654 Electron Helper[20542:56144] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+2026-09-29 09:39:37.663 Electron Helper[20542:56144] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+2026-09-29 09:39:37.917 Electron Helper[20542:56139] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+2026-09-29 09:39:37.919 Electron Helper[20542:56139] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+2026-09-29 09:39:37.920 Electron Helper[20542:56139] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid
+Debugger ending on ws://127.0.0.1:49292/73982e37-0a76-4c43-993b-ff0cce765cfb
+For help, see: https://nodejs.org/learn/getting-started/debugging
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:521:24)
+      at endReadableNT (node:internal/streams/readable:1729:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '127.0.0.1',
+      localPort: 49303,
+      remoteAddress: '127.0.0.1',
+      remotePort: 49289,
+      remoteFamily: 'IPv4',
+      timeout: undefined,
+      bytesWritten: 2440,
+      bytesRead: 1075
+    }
+  }
+}
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:521:24)
+      at endReadableNT (node:internal/streams/readable:1729:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '127.0.0.1',
+      localPort: 49296,
+      remoteAddress: '127.0.0.1',
+      remotePort: 49289,
+      remoteFamily: 'IPv4',
+      timeout: undefined,
+      bytesWritten: 8138,
+      bytesRead: 215716
+    }
+  }
+}
+Error occurred in handler for 'dsh-desktop:onboarding-api-key': Error: desktop welcome: backend unavailable
+    at readWelcomeState (file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8054:67)
+    at file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8269:17
+    at Session.<anonymous> (node:electron/js2c/browser_init:2:122853)
+    at Session.emit (node:events:509:28)
+2026-09-29 09:39:44.225 Electron Helper[20542:56144] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid

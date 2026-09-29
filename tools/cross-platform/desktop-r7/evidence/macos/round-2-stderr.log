@@ -1,0 +1,11 @@
+Debugger listening on ws://127.0.0.1:49323/0ae16c3a-d5c6-448b-98d4-60706da8793f
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:49323/0ae16c3a-d5c6-448b-98d4-60706da8793f
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Error occurred in handler for 'dsh-desktop:onboarding-api-key': Error: desktop welcome: backend unavailable
+    at readWelcomeState (file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8054:67)
+    at file:///Users/runner/work/_temp/sep-desktop-r7/attempt-01/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8269:17
+    at Session.<anonymous> (node:electron/js2c/browser_init:2:122853)
+    at Session.emit (node:events:509:28)
+2026-09-29 09:39:52.132 Electron Helper[20895:57069] XPC error for connection com.apple.backupd.sandbox.xpc: Connection invalid

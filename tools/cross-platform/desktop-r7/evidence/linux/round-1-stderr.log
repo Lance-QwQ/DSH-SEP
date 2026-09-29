@@ -1,0 +1,49 @@
+[39:0929/172503.280170:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.280267:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+Debugger listening on ws://127.0.0.1:46459/5fdf10c9-1ec6-4841-a1e3-e467072b40af
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+[39:0929/172503.558126:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.558242:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.569284:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[39:0929/172503.569410:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172503.571739:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[39:0929/172503.573615:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.573679:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.573701:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.587690:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[39:0929/172503.603769:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172503.618051:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.login1.Manager.Inhibit: object_path= /org/freedesktop/login1: unknown error type: 
+[39:0929/172503.868624:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172504.662353:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172504.694446:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172505.954858:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172505.955078:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[39:0929/172505.955143:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[39:0929/172505.955498:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+Debugger ending on ws://127.0.0.1:46459/5fdf10c9-1ec6-4841-a1e3-e467072b40af
+For help, see: https://nodejs.org/learn/getting-started/debugging
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:521:24)
+      at endReadableNT (node:internal/streams/readable:1729:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '127.0.0.1',
+      localPort: 57690,
+      remoteAddress: '127.0.0.1',
+      remotePort: 38585,
+      remoteFamily: 'IPv4',
+      timeout: undefined,
+      bytesWritten: 14288,
+      bytesRead: 5302695
+    }
+  }
+}
+Error occurred in handler for 'dsh-desktop:onboarding-api-key': Error: desktop welcome: backend unavailable
+    at readWelcomeState (file:///opt/dsh-sep-cross-platform/desktop-r7/attempt-02/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8054:67)
+    at file:///opt/dsh-sep-cross-platform/desktop-r7/attempt-02/Full%20Desktop%20%E7%A9%BA%E7%99%BD/program/store/p0596/lib/main.js:8269:17
+    at Session.<anonymous> (node:electron/js2c/browser_init:2:122853)
+    at Session.emit (node:events:509:28)

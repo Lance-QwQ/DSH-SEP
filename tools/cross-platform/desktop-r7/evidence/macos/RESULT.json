@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "platform": "darwin",
+  "arch": "arm64",
+  "commit": "baa82c7b8e9c4cd15e783ce1bf05cc9c5fdbe938",
+  "checks": [
+    {
+      "name": "three-planned-rounds",
+      "status": "pass"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T09:39:31.237Z",
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "New Session\n⌘\nN\nPlugins\nWorkspaces\nNo sessions yet\nMore\nDSH Update\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 11
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 0,
+          "y": 25,
+          "width": 1024,
+          "height": 684
+        },
+        "after": {
+          "x": 25,
+          "y": 45,
+          "width": 1024,
+          "height": 684
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T09:39:44.431Z"
+    },
+    {
+      "round": 2,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T09:39:44.431Z",
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "New Session\n⌘\nN\nPlugins\nWorkspaces\nDefault workspace\nMore\nDSH Update\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 13
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 0,
+          "y": 25,
+          "width": 1024,
+          "height": 681
+        },
+        "after": {
+          "x": 25,
+          "y": 45,
+          "width": 1024,
+          "height": 681
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T09:39:52.357Z"
+    },
+    {
+      "round": 3,
+      "status": "pass",
+      "checks": [
+        {
+          "name": "main-window-ready",
+          "status": "pass"
+        },
+        {
+          "name": "renderer-security",
+          "status": "pass"
+        },
+        {
+          "name": "page-content-rendered",
+          "status": "pass"
+        },
+        {
+          "name": "window-bounds-api",
+          "status": "pass"
+        },
+        {
+          "name": "close-keeps-same-window-and-host",
+          "status": "pass"
+        },
+        {
+          "name": "second-launch-exits-cleanly",
+          "status": "pass"
+        },
+        {
+          "name": "reopen-same-window-host",
+          "status": "pass"
+        },
+        {
+          "name": "normal-desktop-exit",
+          "status": "pass"
+        },
+        {
+          "name": "owned-host-stopped",
+          "status": "pass"
+        }
+      ],
+      "startedAt": "2026-09-29T09:39:52.358Z",
+      "lastWindows": [
+        {
+          "id": 1,
+          "visible": true,
+          "url": "dsh-app://app/",
+          "loading": false,
+          "sandbox": true,
+          "contextIsolation": true,
+          "nodeIntegration": false
+        }
+      ],
+      "lastPage": {
+        "title": "DeepSeek Harness",
+        "text": "New Session\n⌘\nN\nPlugins\nWorkspaces\nDefault workspace\nMore\nDSH Update\nInto the Unknown\nPreview\nChoose workspace\nChoose a workspace to start",
+        "boot": false,
+        "frame": true,
+        "buttons": 13
+      },
+      "programmaticBounds": {
+        "before": {
+          "x": 0,
+          "y": 25,
+          "width": 1024,
+          "height": 681
+        },
+        "after": {
+          "x": 25,
+          "y": 45,
+          "width": 1024,
+          "height": 681
+        }
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "endedAt": "2026-09-29T09:40:00.483Z"
+    }
+  ],
+  "cleanup": [],
+  "limits": {
+    "startupMs": 90000,
+    "quitMs": 30000,
+    "plannedRounds": 3
+  },
+  "captureTiming": "mounted frame, document.fonts.ready, two animation frames, then 1000ms compositor settle; not a performance measurement",
+  "scope": "Real unmodified desktop entry + separately verified Electron payload, isolated r6 Full install. Inspector-driven lifecycle is not physical input/tray/TCC acceptance; no integrated Electron installer claim.",
+  "inputs": {
+    "graphHash": "1691cc8534c37f9a20aac1f43c584c74aaf2212a3ca215cacef1a881f6c7a5db",
+    "desktopMainSha256": "97e87e74d214a8553695e5eb22bd714492e8635535f7a8e94da3432100dd1e56",
+    "electronSha256": "076d79742986e1b100b69ebecc691cb07368045e54c9087cef631b8622b76a80",
+    "electronVersion": "44.0.0"
+  },
+  "remainingOwnedPids": []
+}

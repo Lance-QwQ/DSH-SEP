@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "meaning": "Evidence integrity only; out-of-box readiness status remains fail in RESULT.json",
+  "testedCommit": "baa82c7b8e9c4cd15e783ce1bf05cc9c5fdbe938",
+  "macosRun": "36549016380",
+  "artifact": {
+    "id": 11023614834,
+    "sha256": "ed5d63937b311b683e0d32decef660cd5a0ea223673da8fb45e8edba71084b3b"
+  },
+  "bytes": "Git index bytes; LF normalization accounted for",
+  "bindings": [
+    {
+      "path": "build-test-bundle.mjs",
+      "size": 637,
+      "sha256": "fe1e9f221f5fdccd48a20324ff76df9cbce4cc5989427df2de7210a06363b9ac"
+    },
+    {
+      "path": "desktop-temp.mjs",
+      "size": 1185,
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "desktop-temp.test.mjs",
+      "size": 2143,
+      "sha256": "65aca7e6abc77912e92e0391ee28f815c75bef9f3c900a21abf1c2bd65aa2fb4"
+    },
+    {
+      "path": "evidence/linux/DEFAULT-WORKSPACE-DIAGNOSTIC.json",
+      "size": 425,
+      "sha256": "0bc3b90eb5a39be8a18efe7546542be7aa9f43f9e9ae492b73f0c36b2116b60d"
+    },
+    {
+      "path": "evidence/linux/RESULT.json",
+      "size": 6784,
+      "sha256": "ff2e8d2322731cd4902cf594c9314fd1c88aa7a602319393f60fe0477db37b18"
+    },
+    {
+      "path": "evidence/linux/round-1-page.json",
+      "size": 244,
+      "sha256": "afa9ce8b3b6359f3d36d36e331ccdb3425918b78afe6689e2acf21f194276a16"
+    },
+    {
+      "path": "evidence/linux/round-1-stderr.log",
+      "size": 4882,
+      "sha256": "935e37541f664a73f1d7ca0f04816f06ef4adb6a5d6f81e5087079f50d1e8d4c"
+    },
+    {
+      "path": "evidence/linux/round-1.png",
+      "size": 47858,
+      "sha256": "e75b6fce0ecc40d63fa38f68cb1b10c00f95772bafaf9d42918cbf3e339527e7"
+    },
+    {
+      "path": "evidence/linux/round-2-page.json",
+      "size": 244,
+      "sha256": "afa9ce8b3b6359f3d36d36e331ccdb3425918b78afe6689e2acf21f194276a16"
+    },
+    {
+      "path": "evidence/linux/round-2-stderr.log",
+      "size": 3770,
+      "sha256": "b6b9dc74fbb87441da1e0ced510f0cb7e0d06cc7f902c95440fb3f7a907a0f56"
+    },
+    {
+      "path": "evidence/linux/round-2.png",
+      "size": 47858,
+      "sha256": "e75b6fce0ecc40d63fa38f68cb1b10c00f95772bafaf9d42918cbf3e339527e7"
+    },
+    {
+      "path": "evidence/linux/round-3-page.json",
+      "size": 259,
+      "sha256": "9a848631fd198bf675ebc94f1296b5dd972af2a15e219ffb151d44c1f6b6fc57"
+    },
+    {
+      "path": "evidence/linux/round-3-stderr.log",
+      "size": 3770,
+      "sha256": "eb62cdee65adce6b07befbffb8a54a353f78a2a990c0b1fcc2f46494bbed3c18"
+    },
+    {
+      "path": "evidence/linux/round-3.png",
+      "size": 47197,
+      "sha256": "cbe61534dfdcab8d35155698799dd7fa19c166812586dffe51e397ca8b3d21ad"
+    },
+    {
+      "path": "evidence/macos/PAYLOAD.json",
+      "size": 70257,
+      "sha256": "d88061be70479beacd53335982e44e74201345e3250aef4ed31adc83aa0c8411"
+    },
+    {
+      "path": "evidence/macos/RESULT.json",
+      "size": 6745,
+      "sha256": "1d2cefe58077529158a2661edf09f0a4724f6b1cc1be63585e801b9a3a6a28df"
+    },
+    {
+      "path": "evidence/macos/round-1-page.json",
+      "size": 226,
+      "sha256": "e54c211da507b371bc1eaf6f7f0ae1b62aa7a73cd6816855f6edd0c7eeff36ac"
+    },
+    {
+      "path": "evidence/macos/round-1-stderr.log",
+      "size": 2946,
+      "sha256": "f97036efad9e21931035218ba7fffb61d2512ba6f25228da4acd1f16a2491ff9"
+    },
+    {
+      "path": "evidence/macos/round-1.png",
+      "size": 36989,
+      "sha256": "299e95b8c3ed4099b8d283da5089ceeb82583becc3c04d9afede013522b0a1fa"
+    },
+    {
+      "path": "evidence/macos/round-2-page.json",
+      "size": 228,
+      "sha256": "6b59db8550643d0001db08b7d00da263c9dbf2ea57c852ff444e374e3816fe8f"
+    },
+    {
+      "path": "evidence/macos/round-2-stderr.log",
+      "size": 956,
+      "sha256": "ef0a13d27f112d2caf0804973888e05e6c2228709cd89afda90856898497094f"
+    },
+    {
+      "path": "evidence/macos/round-2.png",
+      "size": 50202,
+      "sha256": "273873ded57f03784e66f0298f0186470751b1f29b6f0b3d4e9556e5d50ed7ea"
+    },
+    {
+      "path": "evidence/macos/round-3-page.json",
+      "size": 228,
+      "sha256": "6b59db8550643d0001db08b7d00da263c9dbf2ea57c852ff444e374e3816fe8f"
+    },
+    {
+      "path": "evidence/macos/round-3-stderr.log",
+      "size": 1565,
+      "sha256": "17b8c6aad15cc1a3d3544ff2d7576ba681a9940dc17a56b7431a5f79303812f9"
+    },
+    {
+      "path": "evidence/macos/round-3.png",
+      "size": 41361,
+      "sha256": "1444ea97cc494ee5a99c1a100d2fc75deada4f654e958c6d0847ee6d24cbf528"
+    },
+    {
+      "path": "INTERPRETATION.md",
+      "size": 4320,
+      "sha256": "5554fea03b8564030a578b27c03b1c1c0af8232da6b3e4628d72fd53c34a5ba0"
+    },
+    {
+      "path": "NEXT.md",
+      "size": 1082,
+      "sha256": "778ea9fc699b93321ea3ca13d8d897a02564a8e34b89605a4becacb963295bd2"
+    },
+    {
+      "path": "OPEN-ISSUES.md",
+      "size": 2368,
+      "sha256": "349af225e0a9f120b61823e4abb0979c8f556bba5a31f5f5f7e2acbb877671be"
+    },
+    {
+      "path": "packaging/bootstrap/checkpoint-inspection.mjs",
+      "size": 6867,
+      "sha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec"
+    },
+    {
+      "path": "packaging/bootstrap/credential-reader.mjs",
+      "size": 2978,
+      "sha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39"
+    },
+    {
+      "path": "packaging/bootstrap/desktop-temp.mjs",
+      "size": 1185,
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "packaging/bootstrap/launch.mjs",
+      "size": 300,
+      "sha256": "3132afd88a134507801e5024c084f425c81f1643a0b317dd2a20887ab05e91e6"
+    },
+    {
+      "path": "packaging/bootstrap/launcher.mjs",
+      "size": 8629,
+      "sha256": "489515c9ab35c75075ed9d5332802abfe535670414c9a88073d80b8c01a4295e"
+    },
+    {
+      "path": "packaging/bootstrap/start.ps1",
+      "size": 180,
+      "sha256": "1a0619e380d3d9e5d3d625feb444ca1fe7ae703dbf13e8e60824df6fbc12226c"
+    },
+    {
+      "path": "packaging/bootstrap/start.sh",
+      "size": 267,
+      "sha256": "06d24b0fe89c31247915aac255263cabf48fc1c449e6e61cce4d14e6f96c0005"
+    },
+    {
+      "path": "packaging/bootstrap/start.vbs",
+      "size": 2656,
+      "sha256": "0e618b785d815821b65591e39e9128f5f24c0071a119eca335e4800da441f708"
+    },
+    {
+      "path": "packaging/bootstrap/startup-coordinator.mjs",
+      "size": 1311,
+      "sha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8"
+    },
+    {
+      "path": "packaging/bootstrap/startup-diagnostic.mjs",
+      "size": 1172,
+      "sha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b"
+    },
+    {
+      "path": "packaging/bootstrap/startup-lease.mjs",
+      "size": 1869,
+      "sha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47"
+    },
+    {
+      "path": "packaging/bootstrap/startup-report.mjs",
+      "size": 3865,
+      "sha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea"
+    },
+    {
+      "path": "packaging/bootstrap/validate-bootstrap.mjs",
+      "size": 2298,
+      "sha256": "0b0334bc3af4e22c6ca280dff1cf8d273f275db483704741fa178ec6c5917529"
+    },
+    {
+      "path": "packaging/installer.mjs",
+      "size": 10479,
+      "sha256": "68f41ed5d64c5fdc807ec31559522046301e5b944fdc556c4f6d254b7c2f762d"
+    },
+    {
+      "path": "payload-audit.mjs",
+      "size": 1251,
+      "sha256": "b8879e99105ee7f40e8621235660b19035920394f67a31d2dac6c8f8e350d52e"
+    },
+    {
+      "path": "payload-audit.test.mjs",
+      "size": 1840,
+      "sha256": "8c3ac5417dc6e7b1d542813a9a93f71d2e5b6f456fb491aed7cc178f42dfc3b7"
+    },
+    {
+      "path": "PLAN.md",
+      "size": 1439,
+      "sha256": "42db6465b774fcf896f3041a65e0635389931492846a164aca69976abea71448"
+    },
+    {
+      "path": "prepare-electron.mjs",
+      "size": 2061,
+      "sha256": "c61f969174f5c7b34ef49424bb177ee3bab19af8b22e94f9f9b47a1d0378a652"
+    },
+    {
+      "path": "README.md",
+      "size": 2888,
+      "sha256": "3d487cf5ae4eb40a2cc599806d4f2217a235ca01e15e37d2a117e4b16a9f0de2"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 1960,
+      "sha256": "ac50420699a6edc1dba085d942068acaa3afd5c41fc9242fdce70ab83d790360"
+    },
+    {
+      "path": "run-desktop.mjs",
+      "size": 11175,
+      "sha256": "7a247f6c03713565b329dfdc0b13cf38f880440fc7c77bb14a2c4ecf05a564c3"
+    }
+  ]
+}
