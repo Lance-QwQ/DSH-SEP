@@ -53,6 +53,12 @@ jobs:
             ${{ runner.temp }}/sep-install-r6/*.log
             ${{ runner.temp }}/sep-install-r6/RESULT.json
             ${{ runner.temp }}/sep-install-r6/trial/*RESULT.json
+            ${{ runner.temp }}/sep-install-r6/trial/FINAL-AUDIT.json
+            ${{ runner.temp }}/sep-install-r6/trial/bundle-*/manifest.json
+            ${{ runner.temp }}/sep-install-r6/trial/bundle-full/graph.json
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/fault-process.json
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/delta/sep-package.json
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/delta/target-graph.json
             ${{ runner.temp }}/sep-install-r6/trial/update-01/*.log
             ${{ runner.temp }}/sep-install-r6/trial/update-01/*plan/*result.json
           if-no-files-found: warn
