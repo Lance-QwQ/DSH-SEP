@@ -1,4 +1,4 @@
-Current build stage: **r4 full source build and real CLI/Web startup**. See [application-r4](application-r4/README.md). Linux passed; macOS is evaluated by the dedicated application workflow. Full installers and interactive desktop validation remain pending.
+Current build stage: **r4 full source build and real CLI/Web startup**. See [application-r4](application-r4/README.md). Linux WSL2 x64 and macOS arm64 passed the complete source build and 119 tests each; the completed application workflow and exact tested commit are linked in that report. Full installers and interactive desktop validation remain pending.
 
 The following is the preserved r3 component scope:
 

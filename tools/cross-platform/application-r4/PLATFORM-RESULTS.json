@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "sourceManifestSha256": "d9fb142f8d3b6c80143310fb12e0ecf10de76d7d5bf7b1f9c2e9145951bb040a",
+  "testedCommit": "2dc71e44f33af1abfba0e1abdc42007b7443a69d",
+  "linux": {
+    "status": "pass",
+    "platform": "linux-x64",
+    "frozenInstall": true,
+    "fullBuild": true,
+    "tests": {
+      "budgetApiAndUi": 28,
+      "sidebarAndPluginManager": 83,
+      "realBuiltWebStartup": 8,
+      "total": 119,
+      "skipped": 0
+    },
+    "binding": "linux-final-binding.json"
+  },
+  "macos": {
+    "status": "pass",
+    "platform": "darwin-arm64",
+    "frozenInstall": true,
+    "fullBuild": true,
+    "tests": {
+      "budgetApiAndUi": 28,
+      "sidebarAndPluginManager": 83,
+      "realBuiltWebStartup": 8,
+      "total": 119,
+      "skipped": 0
+    },
+    "runId": 36519855489,
+    "runUrl": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36519855489",
+    "artifactId": 11012114788,
+    "artifactSha256": "79fc09fe1953d9b3951d05daed4c12efbb9e3bf1f6d804b9fea1e6114159bd2c",
+    "binding": "macos-evidence/RESULT.json"
+  },
+  "notRun": [
+    "complete SEP profile installation",
+    "actual application update publication and recovery",
+    "standalone Only/Full distribution",
+    "interactive Electron desktop",
+    "macOS TCC and computer use",
+    "coexistence with official desktop"
+  ]
+}

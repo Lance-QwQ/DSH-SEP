@@ -1,0 +1,41 @@
+{
+  "platform": "linux",
+  "arch": "x64",
+  "node": "v24.19.0",
+  "sourceFiles": 14345,
+  "manifestSha256": "d9fb142f8d3b6c80143310fb12e0ecf10de76d7d5bf7b1f9c2e9145951bb040a",
+  "differences": [],
+  "artifacts": [
+    {
+      "path": "apps/cli/lib/bin.js",
+      "bytes": 11237,
+      "sha256": "935e95d05f4dc70a8a013eea59da80028946b5c139e45c6351dcaf2810ca00a1"
+    },
+    {
+      "path": "apps/desktop/lib/main.js",
+      "bytes": 359621,
+      "sha256": "97e87e74d214a8553695e5eb22bd714492e8635535f7a8e94da3432100dd1e56"
+    },
+    {
+      "path": "apps/web/dist/index.html",
+      "bytes": 825,
+      "sha256": "1225933ec815d5d6ac8a3240e6031484aea91ba973f62d64205be34e041903c1"
+    },
+    {
+      "path": "packages/client/ui-settings-memory/lib/index.js",
+      "bytes": 5876,
+      "sha256": "8ed14eb1932b7b622778fd0a17d37d1c1f095caf125597d263047849d2a47c52"
+    },
+    {
+      "path": "packages/client/ui-settings-memory/lib/client.js",
+      "bytes": 81819,
+      "sha256": "31e13d6ceac92b12e315b0a3067d384d5650c8e432448f71cb1f82b2993e62e6"
+    },
+    {
+      "path": "packages/client/sep-brand/lib/client.js",
+      "bytes": 2092,
+      "sha256": "02bfe9a033de3c3a241f7bf2323cc46b3004e18eb47499d9d0a533835c5e9e99"
+    }
+  ],
+  "activeOwnedCli": []
+}

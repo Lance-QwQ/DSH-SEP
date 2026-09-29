@@ -7,7 +7,7 @@ This is an isolated test-branch source snapshot, not an installable release. DSH
 - Frozen pnpm 11.7.0 workspace install, native system module, complete host/client/Web build, and desktop JavaScript bundling.
 - Budget settings API/UI: 28 tests; plugin-manager and separate SEP/sidebar state: 83 tests.
 - Actual built CLI/Web startup: 8 tests covering successful HTTP startup with unrelated plugin failures, required dependencies, required expressions, occupied ports, and detached rejection cleanup. All use synthetic data and isolated homes, with no model calls.
-- Linux WSL2 x64 passed these checks. The macOS job rebuilds and repeats them independently; only its completed logs establish its result.
+- Linux WSL2 x64 and macOS arm64 passed these checks: 119 tests per platform, zero skipped. See PLATFORM-RESULTS.json and [completed macOS CI](https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36519855489), tested commit 2dc71e44f33af1abfba0e1abdc42007b7443a69d. Documentation-only follow-ups do not replace that tested source binding.
 
 The source fixes restore workspace dependency references at the already locked versions, restore six upstream build configurations from the pinned rc.2 commit, remove a machine-specific bundler override, mark the two SEP client projects as composite, and correct test mock types. Three test dependencies are explicitly pinned at versions already present in the lockfile. The budget tests now use declared dependencies and relative source imports instead of a developer's directories.
 
