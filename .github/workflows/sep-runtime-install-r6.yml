@@ -61,5 +61,6 @@ jobs:
             ${{ runner.temp }}/sep-install-r6/trial/update-01/delta/target-graph.json
             ${{ runner.temp }}/sep-install-r6/trial/update-01/*.log
             ${{ runner.temp }}/sep-install-r6/trial/update-01/*plan/*result.json
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/*plan/report.json
           if-no-files-found: warn
           retention-days: 14
