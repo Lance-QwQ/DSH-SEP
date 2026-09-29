@@ -1,0 +1,72 @@
+name: SEP native desktop r8
+on:
+  push:
+    branches: ['codex/sep-cross-platform-20260929']
+    paths: ['tools/cross-platform/desktop-r8/**', '.github/workflows/sep-desktop-r8.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos-desktop:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Verify baseline and apply bound r8 overlay
+        run: |
+          node tools/cross-platform/application-r4/verify-source.mjs
+          node tools/cross-platform/desktop-r8/apply-overlay.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source"
+      - name: Shutdown and native packaging unit tests
+        env:
+          SEP_R8_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_R8_PACKAGING: ${{ github.workspace }}/tools/cross-platform/desktop-r8/packaging
+        run: node --test tools/cross-platform/desktop-r8/request-lifetime.test.mjs tools/cross-platform/desktop-r8/native-package.test.mjs tools/cross-platform/desktop-r8/packaging/native-install/native-bundle.test.mjs
+      - name: Prepare pinned build tool
+        run: npm install --prefix "$RUNNER_TEMP/sep-r8-tools" pnpm@11.7.0 --ignore-scripts --no-audit --no-fund
+      - name: Build overlaid application
+        env:
+          SEP_APPLICATION_OUTPUT: ${{ runner.temp }}/sep-r8-build
+          SEP_APPLICATION_PNPM: ${{ runner.temp }}/sep-r8-tools/node_modules/pnpm/bin/pnpm.cjs
+        run: node tools/cross-platform/application-r4/run-application.mjs
+      - name: Desktop regressions
+        working-directory: tools/cross-platform/application-r4/source
+        run: node "$RUNNER_TEMP/sep-r8-tools/node_modules/pnpm/bin/pnpm.cjs" exec vitest run apps/desktop/tests/web-document.spec.ts apps/desktop/tests/main-startup.spec.ts apps/desktop/tests/welcome-host.spec.ts apps/desktop/tests/backend-controller.spec.ts apps/desktop/tests/sep-sidebar-state.spec.ts
+      - name: Assemble native managed host
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r8
+        run: node tools/cross-platform/runtime-r5/run-native.mjs
+      - name: Verify official Electron payload
+        run: node tools/cross-platform/desktop-r7/prepare-electron.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-electron-r8"
+      - name: Build native Full and Only installers
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r8
+          SEP_DESKTOP_OUTPUT: ${{ runner.temp }}/sep-desktop-r8
+          SEP_ELECTRON_PAYLOAD: ${{ runner.temp }}/sep-electron-r8
+        run: node tools/cross-platform/desktop-r8/build-test-bundle.mjs
+      - name: Three installed start.sh desktop rounds
+        run: node tools/cross-platform/desktop-r8/run-desktop.mjs "$GITHUB_WORKSPACE/tools/cross-platform/application-r4/source" "$RUNNER_TEMP/sep-desktop-r8/bundle-full" "$RUNNER_TEMP/sep-electron-r8" "$RUNNER_TEMP/sep-desktop-r8/attempt-01" "$GITHUB_WORKSPACE/tools/cross-platform/desktop-r8/packaging"
+      - name: Preserve bounded evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-desktop-r8-evidence
+          path: |
+            ${{ runner.temp }}/sep-r8-build/*.log
+            ${{ runner.temp }}/sep-r8-build/RESULT.json
+            ${{ runner.temp }}/sep-native-r8/*.log
+            ${{ runner.temp }}/sep-native-r8/*RESULT.json
+            ${{ runner.temp }}/sep-electron-r8/PAYLOAD.json
+            ${{ runner.temp }}/sep-desktop-r8/bundle-full/manifest.json
+            ${{ runner.temp }}/sep-desktop-r8/bundle-sep/manifest.json
+            ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.json
+            ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.png
+            ${{ runner.temp }}/sep-desktop-r8/attempt-01/*.log
+          if-no-files-found: warn
+          retention-days: 14

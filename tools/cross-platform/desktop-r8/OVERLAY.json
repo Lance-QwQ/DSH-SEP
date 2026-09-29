@@ -1,0 +1,32 @@
+[
+  {
+    "path": "apps/desktop/src/main.ts",
+    "before": "3cd9ee67032cc15b61fa28a1cf54170561ae8b39f5978edf419f48020ab17e2b",
+    "sha256": "f54c6820e0b3efa177b828bceca6fa328fc82780831fc0c2b82850a94f1fbc66"
+  },
+  {
+    "path": "apps/desktop/src/web-document.ts",
+    "before": "05ab6fd59199f1b7a7dd558e60f50e38f4df1085a70af671014c085d270e91cc",
+    "sha256": "2076f9d8d7c4696f5d901ea42b914fb151a642cc819c8c70c283ee099d23889b"
+  },
+  {
+    "path": "apps/desktop/src/request-lifetime.ts",
+    "before": null,
+    "sha256": "0064026cd714630a548afc124017e696dfd7f9e95882ff22a0635db688f46107"
+  },
+  {
+    "path": "apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",
+    "before": "557d2eb901cae85e924dc688ba5ab95ed9ceb11b4f3ad1879f5ab460987e5583",
+    "sha256": "a567711aeb2dc0d33e3aa331ec1c67287d0b1f1543802e7c4ab8143d3dde5411"
+  },
+  {
+    "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
+    "before": null,
+    "sha256": "4238443baa0ed88bb667da227f7db1bde899b83f1ade4e9780fabe87fb94ffa8"
+  },
+  {
+    "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-temp.mjs",
+    "before": null,
+    "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+  }
+]
