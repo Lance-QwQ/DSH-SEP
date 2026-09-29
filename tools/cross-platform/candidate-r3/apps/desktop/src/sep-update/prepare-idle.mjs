@@ -18,6 +18,7 @@ export async function assertInstallationIdle(installation,allowed=[]){
  if(typeof installation?.dailyRoot!=='string')throw Error('SEP_PLAN_PROCESS_QUERY');
  const ignore=[process.pid];for(const identity of allowed)if(await isProcessAlive(identity))ignore.push(identity.pid);
  const roots=[...new Set(['dailyRoot','releaseRoot','home','storageRoot','controlRoot'].map(k=>installation[k]).filter(Boolean).map(p=>resolve(p)))];
+ if(roots.some(p=>/[\x00-\x1f\x7f]/.test(p)))throw Error('SEP_PLAN_PROCESS_QUERY');
  let pids;
  try{
   if(process.platform==='win32'){

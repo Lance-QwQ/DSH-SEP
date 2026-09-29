@@ -18,7 +18,7 @@ import {createOfflinePublisher} from './runtime/offline-publisher.mjs';
 import {createNativeProgramAdapter} from './runtime/native-program.mjs';
 import {auditInstalledGraph} from './runtime/audit-graph.mjs';
 import {validateBootstrap} from './runtime/launcher/validate-bootstrap.mjs';
-const load=p=>import(pathToFileURL(p)),run=promisify(execFile),demand=(v,c)=>{if(!v)throw Error(c);};
+const load=p=>import(pathToFileURL(p)),demand=(v,c)=>{if(!v)throw Error(c);};
 export async function verifySelectedInstallation(installation){demand(hash(await jsonFile(join(installation.dailyRoot,'deployment-rc2.json')))===hash(installation),'SEP_PREPARATION_INSTALLATION_CHANGED');}
 export async function profileAliases(home,oldRoot,newRoot){
  const root=join(home,'profiles/node_modules'),beforeAliases=[];let entries;try{entries=await readdir(root);}catch(e){if(e.code==='ENOENT')return {beforeAliases,candidateAliases:[]};throw e;}

@@ -41,13 +41,13 @@
     },
     {
       "path": "apps/desktop/src/sep-update/prepare-idle.mjs",
-      "bytes": 2772,
-      "sha256": "b47af53f4bd23a720c0e162f3f74f5bfdd0d2654f84cc731f8b933a9bd41af6c"
+      "bytes": 2856,
+      "sha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6"
     },
     {
       "path": "apps/desktop/src/sep-update/prepare-offline.mjs",
-      "bytes": 13458,
-      "sha256": "1ba48cebcce6a73cbf4da3e873db77a330c703d5a588da753b4b2a90814fea17"
+      "bytes": 13434,
+      "sha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8"
     },
     {
       "path": "apps/desktop/src/sep-update/prepare-package.mjs",
@@ -176,8 +176,8 @@
     },
     {
       "path": "apps/desktop/src/sep-update/tests/preparation-portability.test.mjs",
-      "bytes": 10080,
-      "sha256": "d22b855454858c966d654f5b8bca0f70dd61d473c6dbd6ba1717a550fa661dd7"
+      "bytes": 10271,
+      "sha256": "d989e9db2d09d32f510de828f3783a22abc67d7db5425039889ff706a38d1c2b"
     },
     {
       "path": "apps/desktop/src/sep-update/update-admission.mjs",

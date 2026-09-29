@@ -56,3 +56,4 @@ import {matchingProcessIds} from '../prepare-idle.mjs';
 test('process inventory parsing rejects malformed rows; POSIX paths stay case sensitive',()=>{assert.throws(()=>matchingProcessIds('not-a-pid command',['/a']),/SEP_PLAN_PROCESS_QUERY/);assert.deepEqual(matchingProcessIds('123 node /Other\n124 node /other',['/Other']),[123]);});
 import {auditInstalledGraph} from '../runtime/audit-graph.mjs';
 test('installed graph audit rejects executable permission drift',{skip:process.platform==='win32'},async()=>{const f=await fixture(),p=await preparePackage(f.options);await auditInstalledGraph(p.root,p.graphHash);await chmod(join(p.root,'store/sep/run.mjs'),0o644);await assert.rejects(auditInstalledGraph(p.root,p.graphHash));});
+test('ambiguous control-character installation paths fail closed',async()=>{await assert.rejects(assertInstallationIdle({dailyRoot:join(tmpdir(),'sep\nroot')}),/SEP_PLAN_PROCESS_QUERY/);});
