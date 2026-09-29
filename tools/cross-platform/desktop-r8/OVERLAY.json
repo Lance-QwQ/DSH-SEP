@@ -31,7 +31,7 @@
   },
   {
     "path": "apps/desktop/src/sep-update/runtime/launcher/validate-bootstrap.mjs",
-    "before": "0b0334bc3af4e22c6ca280dff1cf8d273f275db483704741fa178ec6c5917529",
+    "before": "373584a45f0de2653964defd0fa602fc8710faff1cb5f4b3bf1c1aeaeca3156d",
     "sha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662"
   }
 ]
