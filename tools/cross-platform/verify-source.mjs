@@ -5,7 +5,8 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 const root=fileURLToPath(new URL('.',import.meta.url));
-const manifest=JSON.parse(await readFile(join(root,'SOURCE-MANIFEST.json')));
+const candidate=process.argv.includes('--candidate');
+const manifest=JSON.parse(await readFile(join(root,candidate?'CANDIDATE-R1-MANIFEST.json':'SOURCE-MANIFEST.json')));
 let checked=0;
-for(const file of manifest.records){const path=join(root,'baseline',file.path),bytes=await readFile(path);assert.equal(bytes.length,file.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sha256);if(/\.(?:mjs|js)$/.test(path)){const r=spawnSync(process.execPath,['--check',path],{encoding:'utf8',timeout:10000,windowsHide:true});assert.equal(r.status,0,'Syntax failure in '+file.path);checked++;}}
+for(const file of manifest.records){const path=join(root,candidate?'candidate-r1':'baseline',file.path),bytes=await readFile(path);assert.equal(bytes.length,file.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sha256);if(/\.(?:mjs|js)$/.test(path)){const r=spawnSync(process.execPath,['--check',path],{encoding:'utf8',timeout:10000,windowsHide:true});assert.equal(r.status,0,'Syntax failure in '+file.path);checked++;}}
 console.log(JSON.stringify({status:'pass',files:manifest.records.length,syntaxChecked:checked}));

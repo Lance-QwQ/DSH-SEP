@@ -1,3 +1,5 @@
 # Immutable baseline bytes: preserve source EOL and inherited whitespace exactly.
 # Harness and workflow files retain normal repository whitespace checks.
 baseline/** -text -whitespace
+
+candidate-r1/** -text -whitespace

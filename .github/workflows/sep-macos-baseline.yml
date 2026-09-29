@@ -1,4 +1,4 @@
-name: SEP macOS portability baseline
+name: SEP macOS owner-lock adaptation
 on:
   push:
     branches: ['codex/sep-cross-platform-20260929']
@@ -18,11 +18,14 @@ jobs:
         with:
           node-version: '24.19.0'
       - name: Verify exact source and syntax
-        run: node tools/cross-platform/verify-source.mjs
+        run: node tools/cross-platform/verify-source.mjs --candidate
       - name: Original budget arithmetic tests
-        run: node --test tools/cross-platform/baseline/packages/sep/system-enhancement-package/tests/budget-pricing.test.mjs
-      - name: Native platform baseline (known Windows-only blockers remain failures)
+        run: node --test tools/cross-platform/candidate-r1/packages/sep/system-enhancement-package/tests/budget-pricing.test.mjs
+      - name: Owner identity and interrupted-publication tests
+        run: node --test tools/cross-platform/candidate-r1/packages/sep/system-enhancement-package/tests/owner-portability.test.mjs
+      - name: Native storage and recovery integration
         env:
+          SEP_PLATFORM_SOURCE: tools/cross-platform/candidate-r1
           SEP_PLATFORM_WORK: ${{ runner.temp }}
           SEP_PLATFORM_RESULT: ${{ runner.temp }}/sep-platform-baseline.json
         run: node tools/cross-platform/platform-probe.mjs
@@ -30,7 +33,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: macos-portability-baseline
+          name: macos-owner-r1-integration
           path: ${{ runner.temp }}/sep-platform-baseline.json
           if-no-files-found: error
           retention-days: 7

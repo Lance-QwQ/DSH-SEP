@@ -1,3 +1,25 @@
+# Current candidate: POSIX owner-lock adaptation
+
+`candidate-r1/` contains the selected current source and new owner-lock adapter;
+`CANDIDATE-R1-MANIFEST.json` binds its exact bytes. The unchanged `baseline/` and
+its manifest retain the initial failures for comparison. The workflow now runs
+the candidate: syntax/hash verification, 30 original budget cases, 28 lock cases
+and five native integration probes. macOS CI outcomes remain authoritative; local
+Windows/Linux success is not a substitute for macOS execution.
+
+Linux native ext4 ownership and the empty P2/Recovery probes passed locally.
+Windows regression preserves schema-1 records; POSIX uses schema 2 with boot and
+process-birth evidence. See each package's `docs/owner-portability.md` for the
+second-precision macOS limitation, foreign records, supported filesystems and
+unverified full-application surfaces. No changes to release source or daily data.
+
+Candidate command: `node tools/cross-platform/verify-source.mjs --candidate`.
+For the native probe set `SEP_PLATFORM_SOURCE=tools/cross-platform/candidate-r1`;
+it otherwise deliberately retains the original baseline default.
+
+---
+
+The following is the **historical diagnostic baseline**, not the current result:
 # macOS / Linux diagnostic baseline
 
 This test branch adds selected current SEP source modules under `baseline/` with SHA256 bindings in `SOURCE-MANIFEST.json`. It does not replace release code, modify the default branch, install SEP, or publish a Release. The snapshot supplements the older public source with exactly the modules under investigation; it is not a complete new application distribution.
