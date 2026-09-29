@@ -1,0 +1,36 @@
+name: SEP macOS portability baseline
+on:
+  push:
+    branches: ['codex/sep-cross-platform-20260929']
+    paths: ['tools/cross-platform/**', '.github/workflows/sep-macos-baseline.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.19.0'
+      - name: Verify exact source and syntax
+        run: node tools/cross-platform/verify-source.mjs
+      - name: Original budget arithmetic tests
+        run: node --test tools/cross-platform/baseline/packages/sep/system-enhancement-package/tests/budget-pricing.test.mjs
+      - name: Native platform baseline (known Windows-only blockers remain failures)
+        env:
+          SEP_PLATFORM_WORK: ${{ runner.temp }}
+          SEP_PLATFORM_RESULT: ${{ runner.temp }}/sep-platform-baseline.json
+        run: node tools/cross-platform/platform-probe.mjs
+      - name: Save diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: macos-portability-baseline
+          path: ${{ runner.temp }}/sep-platform-baseline.json
+          if-no-files-found: error
+          retention-days: 7

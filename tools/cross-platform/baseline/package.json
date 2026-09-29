@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Exact selected source snapshot for diagnostic cross-platform baseline; not a distributable application"
+}
