@@ -15,7 +15,7 @@ async function fixture(){
  await mkdir(join(root,'node_modules/dsh-system-enhancement-package'),{recursive:true})
  await writeFile(join(root,'node_modules/dsh-system-enhancement-package/package.json'),JSON.stringify({version:'0.2.0-beta.3'}))
  let mode='available'
- const body=JSON.stringify({schema:1,product:'dsh-sep',platform:'win32-x64',sepVersion:'0.2.0-beta.4',hostVersion:'0.1.7-rc.2',bundle:{name:'sep.zip',sha256:'a'.repeat(64),url:'https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.0-beta.4/sep.zip'}})
+ const body=JSON.stringify({schema:1,product:'dsh-sep',platform:process.platform+'-'+process.arch,sepVersion:'0.2.0-beta.4',hostVersion:'0.1.7-rc.2',bundle:{name:'sep.zip',sha256:'a'.repeat(64),url:'https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.0-beta.4/sep.zip'}})
  const rows=[{tag_name:'v0.2.0-beta.4',draft:false,html_url:'https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.0-beta.4',published_at:'2026-09-28T00:00:00Z',assets:[{id:1,name:'dsh-sep-update.json',digest:'sha256:'+createHash('sha256').update(body).digest('hex'),browser_download_url:'https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.0-beta.4/dsh-sep-update.json'}]}]
  const sep:any[]=[],host:any[]=[],dialogs:any[]=[]
  const service=createManagedUpdater({app:{getPath:()=>root,getVersion:()=> '0.1.7-rc.2'} as any,dialog:{async showMessageBox(options: MessageBoxOptions){dialogs.push(options);return {response:1,checkboxChecked:false}}},BrowserWindow:class {} as any,powerMonitor:new EventEmitter() as any,projectDir:root,profileContext:{home:null,installAnchor:root,overlayFiles:[]},onState:(s: ManagedUpdateState)=>host.push(s),onSepState:(s: ManagedUpdateState)=>sep.push(s),fetcher:async(url:string)=>{if(mode==='failure')throw Error('OFFLINE');return new Response(url.includes('/releases/assets/')?body:JSON.stringify(url.includes('deepseek-ai/')?[]:mode==='empty'?[]:rows))}} as any)
@@ -45,3 +45,4 @@ it('clears stale availability and reports insufficient metadata as a check failu
 it('does not emit after disposal',async()=>{
  const f=await fixture();f.service.close();await f.service.checkSep();expect(f.sep).toEqual([])
 })
+

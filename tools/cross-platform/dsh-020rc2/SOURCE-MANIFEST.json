@@ -31337,8 +31337,8 @@
     },
     {
       "path": "apps/desktop/tests/sep-sidebar-state.spec.ts",
-      "sha256": "b84a1ca47158513ddfbf1ff50d26178c1fd56642f9ac2d136e4ab0906486304f",
-      "size": 3834,
+      "sha256": "82b9c83dcfff62067636cbe226a1ebd9fdba71b0ad5a69bb7535b46d75b8a2ed",
+      "size": 3858,
       "mode": 420,
       "link": false
     },
