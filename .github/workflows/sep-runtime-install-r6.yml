@@ -1,0 +1,59 @@
+name: SEP native installation r6
+on:
+  push:
+    branches: ['codex/sep-cross-platform-20260929']
+    paths: ['tools/cross-platform/runtime-install-r6/**', '.github/workflows/sep-runtime-install-r6.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos-native:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Verify fixed source
+        run: node tools/cross-platform/application-r4/verify-source.mjs
+      - name: Prepare pinned build tool
+        run: npm install --prefix "$RUNNER_TEMP/sep-r5-tools" pnpm@11.7.0 --ignore-scripts --no-audit --no-fund
+      - name: Build official and SEP application
+        env:
+          SEP_APPLICATION_OUTPUT: ${{ runner.temp }}/sep-r5-build
+          SEP_APPLICATION_PNPM: ${{ runner.temp }}/sep-r5-tools/node_modules/pnpm/bin/pnpm.cjs
+        run: node tools/cross-platform/application-r4/run-application.mjs
+      - name: Assemble native runtime and run managed health
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r5
+        run: node tools/cross-platform/runtime-r5/run-native.mjs
+      - name: Validate native installers and controlled update
+        env:
+          SEP_NATIVE_SOURCE: ${{ github.workspace }}/tools/cross-platform/application-r4/source
+          SEP_NATIVE_OUTPUT: ${{ runner.temp }}/sep-native-r5
+          SEP_INSTALL_OUTPUT: ${{ runner.temp }}/sep-install-r6
+        run: node tools/cross-platform/runtime-install-r6/run-install.mjs
+      - name: Preserve bounded evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-runtime-install-r6-evidence
+          path: |
+            ${{ runner.temp }}/sep-r5-build/*.log
+            ${{ runner.temp }}/sep-r5-build/RESULT.json
+            ${{ runner.temp }}/sep-native-r5/*.log
+            ${{ runner.temp }}/sep-native-r5/*RESULT.json
+            ${{ runner.temp }}/sep-native-r5/program/assembly-report.json
+            ${{ runner.temp }}/sep-native-r5/program/graph.json
+            ${{ runner.temp }}/sep-native-r5/probe-native/health.json
+            ${{ runner.temp }}/sep-install-r6/*.log
+            ${{ runner.temp }}/sep-install-r6/RESULT.json
+            ${{ runner.temp }}/sep-install-r6/trial/*RESULT.json
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/*.log
+            ${{ runner.temp }}/sep-install-r6/trial/update-01/*plan/*result.json
+          if-no-files-found: warn
+          retention-days: 14
