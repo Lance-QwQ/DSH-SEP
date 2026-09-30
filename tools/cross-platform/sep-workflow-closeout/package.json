@@ -1,0 +1,10 @@
+{
+  "name": "sep-workflow-closeout-regressions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private SEP-only cross-platform regression snapshot; no application build or release.",
+  "dependencies": {
+    "zod": "4.4.3"
+  }
+}

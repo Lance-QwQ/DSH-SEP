@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "sourceBaseCommit": "639ed015397290b3745d163aafe02ffee4aa3f84",
+  "sourceVersion": "0.2.0-beta.3-workflow.1",
+  "scope": "Selected SEP workflow source and four unit test files; no application build, user state, credentials or release",
+  "files": [
+    {
+      "path": "src/sep-safe-change/index.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/sep-safe-change/index.js",
+      "size": 7424,
+      "sha256": "c49906ece878e250a0a2d83763d24c62d0a59720c74c5959ab7c50b031392181"
+    },
+    {
+      "path": "src/sep-safe-change/safe-change.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/sep-safe-change/safe-change.js",
+      "size": 9844,
+      "sha256": "5c92d6817669191eff760d63f27451277f79882149e92df5a9dd7004099f68e9"
+    },
+    {
+      "path": "src/sep-safe-change/validation.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/sep-safe-change/validation.js",
+      "size": 5362,
+      "sha256": "efa96e61f0eda5e605a104af93d23c602c5a298059846e8c066e9838fa219039"
+    },
+    {
+      "path": "src/sep-safe-change/confirmation.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/sep-safe-change/confirmation.js",
+      "size": 5412,
+      "sha256": "9270edf6402e5d6140a2907aad2fc32b682f929ec315542bc1f97f522d765ea4"
+    },
+    {
+      "path": "src/sep-safe-change/closeout.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/sep-safe-change/closeout.js",
+      "size": 6298,
+      "sha256": "b0bee1e9139ff19b794e4c5017b730025b05d04789d64a0d1f4018707e95749f"
+    },
+    {
+      "path": "src/scope.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/scope.js",
+      "size": 12802,
+      "sha256": "2f3562e636383cf7474777689ed7c851b0922d0cdfac48bb8003feb06d40d8a3"
+    },
+    {
+      "path": "src/errors.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/errors.js",
+      "size": 443,
+      "sha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3"
+    },
+    {
+      "path": "src/recovery-binding.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/recovery-binding.js",
+      "size": 4113,
+      "sha256": "a42cb14ddd8d7df319e5af727ad1d32f4cae7ee92fff56c9a5b448a2709418be"
+    },
+    {
+      "path": "src/session-events.js",
+      "sourcePath": "packages/sep/system-enhancement-package/src/session-events.js",
+      "size": 1277,
+      "sha256": "4e8720ec4778a6c69301b100ff1eadfb3a318aaf5788c310345dd79e59dc4e19"
+    },
+    {
+      "path": "tests/safe-change-validation.test.mjs",
+      "sourcePath": "packages/sep/system-enhancement-package/tests/safe-change-validation.test.mjs",
+      "size": 10780,
+      "sha256": "bd611e865b7c865fee7a93f1cf4af9adec22447213bb80dcec411d5b7019fe6c"
+    },
+    {
+      "path": "tests/safe-change-confirmation.test.mjs",
+      "sourcePath": "packages/sep/system-enhancement-package/tests/safe-change-confirmation.test.mjs",
+      "size": 10419,
+      "sha256": "9499d5049800f755b2553bbef06edff6c4075d334100a84a42936ac72bd2e963"
+    },
+    {
+      "path": "tests/safe-change-closeout.test.mjs",
+      "sourcePath": "packages/sep/system-enhancement-package/tests/safe-change-closeout.test.mjs",
+      "size": 8735,
+      "sha256": "fd8868da015e5f3b2feb892a5341c2aee9147fc73d706b396636a212bbcc1609"
+    },
+    {
+      "path": "tests/safe-change-engine.test.mjs",
+      "sourcePath": "packages/sep/system-enhancement-package/tests/safe-change-engine.test.mjs",
+      "size": 5968,
+      "sha256": "2a903ab83f5311a861648c2d57627670624bd5701ac5660ab86b9209194fb217"
+    }
+  ]
+}

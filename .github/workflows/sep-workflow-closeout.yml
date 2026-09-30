@@ -1,0 +1,44 @@
+name: SEP workflow closeout regressions
+on:
+  push:
+    branches: ['codex/sep-dsh-020rc2-20260929']
+    paths: ['tools/cross-platform/sep-workflow-closeout/**', '.github/workflows/sep-workflow-closeout.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos-unit:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Verify exact SEP source snapshot
+        run: node tools/cross-platform/sep-workflow-closeout/verify-source.mjs
+      - name: Stage an isolated test copy
+        run: |
+          mkdir -p "$RUNNER_TEMP/sep-workflow-candidate"
+          cp -R tools/cross-platform/sep-workflow-closeout/. "$RUNNER_TEMP/sep-workflow-candidate/"
+      - name: Install only the locked schema dependency
+        run: npm ci --prefix "$RUNNER_TEMP/sep-workflow-candidate" --ignore-scripts --no-audit --no-fund --cache "$RUNNER_TEMP/sep-workflow-npm-cache"
+      - name: Verify checksum and round retention behavior
+        env:
+          SEP_RUNNER_TEST_ROOT: ${{ runner.temp }}/sep-workflow-runner-tests
+        run: node --test "$RUNNER_TEMP/sep-workflow-candidate/tests/runner.test.mjs"
+      - name: Run three independent SEP unit rounds
+        run: node "$RUNNER_TEMP/sep-workflow-candidate/run-unit.mjs" --output "$RUNNER_TEMP/sep-workflow-closeout"
+      - name: Preserve every round without a Release
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-sep-workflow-closeout-attempt-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/sep-workflow-closeout/attempt-*/RESULT.json
+            ${{ runner.temp }}/sep-workflow-closeout/attempt-*/round-*.json
+            ${{ runner.temp }}/sep-workflow-closeout/attempt-*/round-*.log
+          if-no-files-found: warn
+          retention-days: 14
