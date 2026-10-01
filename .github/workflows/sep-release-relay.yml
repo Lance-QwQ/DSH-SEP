@@ -1,6 +1,14 @@
 name: SEP sealed Beta transfer relay
 on:
   workflow_dispatch:
+    inputs:
+      phase:
+        type: choice
+        required: true
+        default: assemble
+        options:
+          - preflight
+          - assemble
 permissions:
   contents: write
 concurrency:
@@ -15,6 +23,7 @@ jobs:
       - name: Verify parts, upload byte-identical archives, remove owned temporary parts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELAY_PHASE: ${{ inputs.phase }}
           EXPECTED_MANIFEST_SHA256: 27cc3bba0a935fc7adbb9a23b30fbb200066fa2d32646774ba7248ae9f3481e1
         shell: bash
         run: |
@@ -93,7 +102,9 @@ jobs:
              else:raise RuntimeError('Relay download HTTP '+str(r.status))
              return data
             finally:conn.close()
-           for row in manifest['archives']:
+           phase=os.environ.get('RELAY_PHASE','assemble');assert phase in ('preflight','assemble')
+           selected=[a for a in manifest['archives'] if phase=='assemble' or a['name'].split('-')[2] in ('Source','Update')]
+           for row in selected:
             if row['name'] in known:
              check(row,known[row['name']]);print(json.dumps({'alreadyUploaded':row['name']}),flush=True);continue
             path=work/row['name']
@@ -115,6 +126,8 @@ jobs:
              print(json.dumps({'uploadedOriginal':row['name'],'bytes':row['size'],'serverSha256Matches':True}),flush=True)
             finally:conn.close()
             path.unlink()
+           if phase=='preflight':
+            print(json.dumps({'status':'pass','phase':'preflight','originalArchives':len(selected),'draftStillTrue':True,'remainingFullAndOnlyAwaitTransport':True}),flush=True);return
            release();known=assets()
            for row in manifest['finalAssets']:check(row,known[row['name']])
            allowed={p['name']:p for a in manifest['archives'] for p in a['parts']}
