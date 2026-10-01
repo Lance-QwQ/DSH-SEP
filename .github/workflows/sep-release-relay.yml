@@ -1,0 +1,130 @@
+name: SEP sealed Beta transfer relay
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: sep-beta-sealed-release-relay
+  cancel-in-progress: false
+jobs:
+  assemble:
+    if: github.repository == 'Lance-QwQ/DSH-SEP' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Verify parts, upload byte-identical archives, remove owned temporary parts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPECTED_MANIFEST_SHA256: 27cc3bba0a935fc7adbb9a23b30fbb200066fa2d32646774ba7248ae9f3481e1
+        shell: bash
+        run: |
+          python3 - <<'SEP_RELAY_PY'
+          import hashlib,re
+          
+          def assemble(row,reader,destination):
+              target=re.fullmatch(r'DSH-SEP-(Full|Only|Source|Update)-0\.2\.1-beta\.1-Windows\.zip',row.get('name',''))
+              parts=row.get('parts',[])
+              if not target or not parts or len(parts)>100:raise ValueError('RELAY_LAYOUT')
+              total=0
+              for index,part in enumerate(parts,1):
+                  expected=f'sep-relay-v0.2.1-beta.1-{target[1]}.part{index:03}'
+                  if part.get('index')!=index or part.get('name')!=expected:raise ValueError('RELAY_ORDER')
+                  if type(part.get('size')) is not int or not 0<part['size']<=33554432:raise ValueError('RELAY_BOUND')
+                  if not re.fullmatch(r'[a-f0-9]{64}',part.get('sha256','')):raise ValueError('RELAY_HASH_FORMAT')
+                  total+=part['size']
+              if total!=row.get('size') or total>=2147483648:raise ValueError('RELAY_TOTAL')
+              whole=hashlib.sha256()
+              for part in parts:
+                  data=reader(part)
+                  if not isinstance(data,bytes) or len(data)!=part['size'] or hashlib.sha256(data).hexdigest()!=part['sha256']:raise ValueError('RELAY_PART_HASH')
+                  destination.write(data);whole.update(data)
+              if whole.hexdigest()!=row.get('sha256'):raise ValueError('RELAY_WHOLE_HASH')
+          
+          from pathlib import Path
+          import os,json,base64,http.client,urllib.parse,urllib.request,time
+          
+          def main():
+           repo='Lance-QwQ/DSH-SEP';api_root='/repos/'+repo
+           assert os.environ['GITHUB_REPOSITORY']==repo and os.environ['GITHUB_REF']=='refs/heads/main'
+           token=os.environ['GITHUB_TOKEN'];headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2026-03-10','User-Agent':'DSH-SEP-byte-bound-release-relay'}
+           def api(method,path,data=None):
+            assert path.startswith(api_root+'/')
+            raw=None if data is None else json.dumps(data).encode('utf-8')
+            for attempt in range(3 if method=='GET' else 1):
+             conn=http.client.HTTPSConnection('api.github.com',timeout=60)
+             try:
+              h=dict(headers)
+              if raw is not None:h['Content-Type']='application/json'
+              conn.request(method,path,body=raw,headers=h);r=conn.getresponse();body=r.read(8388609)
+              if r.status not in (200,201,204):raise RuntimeError('GitHub HTTP '+str(r.status)+'; inspect remote state before mutation retry')
+              if len(body)>8388608:raise ValueError('RELAY_API_BOUND')
+              return json.loads(body) if body else None
+             except (OSError,TimeoutError,http.client.HTTPException):
+              if method=='GET' and attempt<2:time.sleep(2);continue
+              raise RuntimeError('GitHub connection failed; inspect remote state before mutation retry') from None
+             finally:conn.close()
+           ref=os.environ['GITHUB_SHA'];assert re.fullmatch(r'[a-f0-9]{40}',ref)
+           obj=api('GET',api_root+'/contents/release/v0.2.1-beta.1/RELAY-MANIFEST.json?ref='+ref)
+           raw=base64.b64decode(obj['content']);assert hashlib.sha256(raw).hexdigest()==os.environ['EXPECTED_MANIFEST_SHA256']
+           manifest=json.loads(raw);assert manifest['releaseId']==400966559 and manifest['releaseTag']=='v0.2.1-beta.1' and manifest['tagCommit']=='5aee367756406aa590182bc4fa409e90208e4017'
+           release_path=api_root+'/releases/'+str(manifest['releaseId'])
+           def release():
+            row=api('GET',release_path);assert row['draft'] is True and row['prerelease'] is True and row['tag_name']==manifest['releaseTag'] and row['target_commitish']==manifest['tagCommit']
+            return row
+           def assets():
+            return {a['name']:a for a in api('GET',release_path+'/assets?per_page=100')}
+           def check(row,actual):
+            assert actual['name']==row['name'] and actual['state']=='uploaded' and actual['size']==row['size'] and actual.get('digest')=='sha256:'+row['sha256']
+           release();known=assets();work=Path(os.environ['RUNNER_TEMP'])/'sep-validated-release-relay';work.mkdir(exist_ok=False)
+           def download(part):
+            asset=known[part['name']];check(part,asset)
+            conn=http.client.HTTPSConnection('api.github.com',timeout=60)
+            try:
+             h=dict(headers);h['Accept']='application/octet-stream'
+             conn.request('GET',api_root+'/releases/assets/'+str(asset['id']),headers=h);r=conn.getresponse()
+             if r.status==200:
+              data=r.read(part['size']+1)
+             elif r.status==302:
+              location=r.getheader('Location');u=urllib.parse.urlsplit(location)
+              assert u.scheme=='https' and u.hostname=='release-assets.githubusercontent.com' and not u.username and not u.password
+              request=urllib.request.Request(location,headers={'User-Agent':'DSH-SEP-bound-release-download'})
+              with urllib.request.urlopen(request,timeout=120) as response:
+               assert response.status==200;data=response.read(part['size']+1)
+             else:raise RuntimeError('Relay download HTTP '+str(r.status))
+             return data
+            finally:conn.close()
+           for row in manifest['archives']:
+            if row['name'] in known:
+             check(row,known[row['name']]);print(json.dumps({'alreadyUploaded':row['name']}),flush=True);continue
+            path=work/row['name']
+            with path.open('xb') as output:assemble(row,download,output)
+            assert path.stat().st_size==row['size'];r=release();u=urllib.parse.urlsplit(r['upload_url'].split('{',1)[0])
+            assert u.scheme=='https' and u.netloc=='uploads.github.com' and u.path==release_path+'/assets'
+            conn=http.client.HTTPSConnection(u.netloc,timeout=120);start=time.monotonic()
+            try:
+             route=u.path+'?'+urllib.parse.urlencode({'name':row['name']});h=dict(headers);h['Content-Type']='application/zip';h['Content-Length']=str(row['size'])
+             conn.putrequest('POST',route)
+             for k,v in h.items():conn.putheader(k,v)
+             conn.endheaders()
+             with path.open('rb') as source:
+              for chunk in iter(lambda:source.read(1048576),b''):
+               assert time.monotonic()-start<1500;conn.send(chunk)
+             response=conn.getresponse();body=response.read(1048576)
+             if response.status!=201:raise RuntimeError('Relay upload HTTP '+str(response.status)+'; inspect remote state before retry')
+             actual=json.loads(body);check(row,actual);known[row['name']]=actual
+             print(json.dumps({'uploadedOriginal':row['name'],'bytes':row['size'],'serverSha256Matches':True}),flush=True)
+            finally:conn.close()
+            path.unlink()
+           release();known=assets()
+           for row in manifest['finalAssets']:check(row,known[row['name']])
+           allowed={p['name']:p for a in manifest['archives'] for p in a['parts']}
+           assert set(known)<=set(allowed)|{a['name'] for a in manifest['finalAssets']}
+           for name,row in allowed.items():
+            if name not in known:continue
+            check(row,known[name]);release();api('DELETE',api_root+'/releases/assets/'+str(known[name]['id']))
+           release();final=assets();assert set(final)=={a['name'] for a in manifest['finalAssets']}
+           for row in manifest['finalAssets']:check(row,final[row['name']])
+           print(json.dumps({'status':'pass','originalAssets':9,'temporaryPartsRemaining':0,'draftStillTrue':True,'publicationPerformedByRelay':False}),flush=True)
+          
+          if __name__=='__main__':main()
+          SEP_RELAY_PY
