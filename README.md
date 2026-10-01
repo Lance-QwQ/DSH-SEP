@@ -4,7 +4,7 @@
 
 DSH SEP 为 DeepSeek Harness 增加四层记忆、本地 RAG、受管任务、受控文件修改、更新与恢复，以及可选点击增强。本候选以 **DSH 0.2.0-rc.2** 为宿主；SEP 是 **Beta 测试版**，宿主名称中的 rc.2 不代表 SEP 已进入 RC。
 
-**当前已完成限定范围的内容目录安装、更新与真实桌面验证；尚未发布本版 GitHub Release。** Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。日常已另行切换并完成35项限定检查；本次不发布Linux／macOS包。
+**当前已完成限定范围的内容目录安装、更新与真实桌面验证；已作为Windows x64 Beta公开发布。** Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。日常已另行切换并完成35项限定检查；本次不发布Linux／macOS包。
 
 ## 选择包
 
@@ -58,3 +58,7 @@ SEP 原创部分采用 [MIT](LICENSE)，第三方组件保留各自许可。详�
 截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](docs/DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
 
 [下载Windows Beta安装包](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1) · [BM25及实现路线](docs/TECHNICAL_OVERVIEW.md) · [源码](source/)
+
+## 公开发行
+
+本版[GitHub Release](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1)已公开，包含九项附件；服务器SHA-256和公开更新下载链接已核验。完整源码与BM25技术文档已同步。包内待发布状态是封包时历史，当前凭证见[公开记录](release/v0.2.1-beta.1/PUBLICATION.json)。

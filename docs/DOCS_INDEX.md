@@ -23,3 +23,5 @@
 ## 最新状态补充
 
 截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
+
+当前公开发行：[Windows x64 Beta](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1)；最终成品凭证和公开回读记录见仓库的`release/v0.2.1-beta.1/`。封包时与历史准备状态保留，不改写旧失败记录。

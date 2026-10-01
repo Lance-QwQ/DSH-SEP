@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "release": {
+    "id": 400966559,
+    "tag_name": "v0.2.1-beta.1",
+    "name": "DSH SEP 0.2.1-beta.1 — Windows x64 Beta",
+    "draft": false,
+    "prerelease": true,
+    "published_at": "2026-10-01T15:46:01Z"
+  },
+  "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1",
+  "tagCommit": "5aee367756406aa590182bc4fa409e90208e4017",
+  "assets": [
+    {
+      "id": 603287650,
+      "name": "ARTIFACT-VERIFICATION.json",
+      "size": 12819,
+      "state": "uploaded",
+      "digest": "sha256:8e609d0e8e24589205f6d4e485ef93ea03b4d0e33d7ac1042acb65ab5148e2a8",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/ARTIFACT-VERIFICATION.json"
+    },
+    {
+      "id": 603569854,
+      "name": "DSH-SEP-Full-0.2.1-beta.1-Windows.zip",
+      "size": 1185531433,
+      "state": "uploaded",
+      "digest": "sha256:8f00952553ac25601d819ba108c4709c239759d15365a9dfa460fe37aa19cda1",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Full-0.2.1-beta.1-Windows.zip"
+    },
+    {
+      "id": 603571482,
+      "name": "DSH-SEP-Only-0.2.1-beta.1-Windows.zip",
+      "size": 1133354496,
+      "state": "uploaded",
+      "digest": "sha256:e9a6fb2bd239f8316665e857ed37e3767d76afd9327ab9543b10029519c690db",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Only-0.2.1-beta.1-Windows.zip"
+    },
+    {
+      "id": 603528638,
+      "name": "DSH-SEP-Source-0.2.1-beta.1-Windows.zip",
+      "size": 53714248,
+      "state": "uploaded",
+      "digest": "sha256:fafa8b5bac5614fcbef29232fa7398b78e51152f550b217d2e3ddd9e70958764",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Source-0.2.1-beta.1-Windows.zip"
+    },
+    {
+      "id": 603528708,
+      "name": "DSH-SEP-Update-0.2.1-beta.1-Windows.zip",
+      "size": 4214324,
+      "state": "uploaded",
+      "digest": "sha256:93a69643326c7268c765fecf720c0948ebd37f63289230f681e71c50b9b9098c",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Update-0.2.1-beta.1-Windows.zip"
+    },
+    {
+      "id": 603286293,
+      "name": "dsh-sep-update.json",
+      "size": 744,
+      "state": "uploaded",
+      "digest": "sha256:52c6c00fa28f62e70b91900e0e1a6a35f86ccc48ce0c3a5e1b4e108d2da02f08",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/dsh-sep-update.json"
+    },
+    {
+      "id": 603287982,
+      "name": "RELEASE-ASSETS-SHA256SUMS.txt",
+      "size": 764,
+      "state": "uploaded",
+      "digest": "sha256:747c30196d77a6ed093e3c298346df2eb62accff94a66642ccee029c7efbe68d",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/RELEASE-ASSETS-SHA256SUMS.txt"
+    },
+    {
+      "id": 603287926,
+      "name": "RELEASE-README.md",
+      "size": 3316,
+      "state": "uploaded",
+      "digest": "sha256:5278d081180044da8fe8729c1f2617ab8f063e246eeb0658c93df9313ca583f6",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/RELEASE-README.md"
+    },
+    {
+      "id": 603286466,
+      "name": "SHA256SUMS.txt",
+      "size": 506,
+      "state": "uploaded",
+      "digest": "sha256:6d68047900dd36aed574e355e6375ba14b1db30128d042bfc00f65f9ad75cd81",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/SHA256SUMS.txt"
+    }
+  ],
+  "publicVerification": {
+    "schema": 1,
+    "status": "pass",
+    "unauthenticated": true,
+    "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1",
+    "tag": "v0.2.1-beta.1",
+    "commit": "5aee367756406aa590182bc4fa409e90208e4017",
+    "prerelease": true,
+    "draft": false,
+    "assets": 9,
+    "serverSha256Matches": true,
+    "downloadedAndHashed": [
+      "dsh-sep-update.json",
+      "DSH-SEP-Update-0.2.1-beta.1-Windows.zip",
+      "RELEASE-README.md"
+    ],
+    "publicSourceFiles": 14686,
+    "publicSourceGitModesAndBlobIdsMatch": true,
+    "publicBm25TechnicalOverviewAndNavigationMatch": true,
+    "privateDailyDataPublished": false
+  },
+  "transportVerification": {
+    "mode": "Byte-bound 32 MiB parts, assembled and reuploaded by same-repository GitHub CI; original ZIPs unchanged",
+    "parts": 73,
+    "assemblyRunUrl": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36885873280",
+    "assemblyRunConclusion": "success",
+    "scope": "The relay did not publish or execute the packages. Local publication and public download verification remain separate steps."
+  },
+  "temporaryTransferPartsRemaining": 0,
+  "transferPreflight": {
+    "successfulRunUrl": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36882912780",
+    "retainedFailedRunUrl": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/36881275631",
+    "retainedFailure": "Initial preflight refused incomplete starters from aborted direct uploads. Owned failed starters were inspected and removed before retry; the original ZIP hashes were unchanged."
+  }
+}

@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "status": "documentation-revision-awaiting-fresh-archive-verification",
+  "status": "published-windows-beta",
   "product": "DSH SEP",
   "sepVersion": "0.2.1-beta.1",
   "hostVersion": "0.2.0-rc.2",
   "platform": "win32-x64",
   "graphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
   "distribution": "Windows Beta",
-  "published": false,
+  "published": true,
   "dailyDeployment": true,
   "programFiles": 44980,
   "componentPackages": 678,
@@ -24,8 +24,13 @@
     "publicationSourceVersionOverlay": "0.2.1-beta.1"
   },
   "verification": "docs/VERIFICATION-RESULT.json",
-  "archiveAttestation": "ARTIFACT-VERIFICATION.json alongside ZIP assets",
+  "archiveAttestation": "release/v0.2.1-beta.1/ARTIFACT-VERIFICATION.json",
   "dailyValidation": "docs/DAILY-VALIDATION-SUMMARY.json",
   "documentationRevision": "20261001-bm25-r1",
-  "programUnchangedFromPriorSealedCandidate": true
+  "programUnchangedFromPriorSealedCandidate": true,
+  "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1",
+  "releaseTag": "v0.2.1-beta.1",
+  "publishedAt": "2026-10-01T15:46:01Z",
+  "prerelease": true,
+  "publicReadback": "release/v0.2.1-beta.1/PUBLICATION.json"
 }
