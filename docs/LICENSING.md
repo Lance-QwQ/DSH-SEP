@@ -1,38 +1,27 @@
-本轮启动修订 `windows-alpha-20260924-startup-r2`，程序图 `0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3`。此页原有 2026-09-21 版本号、验收数量与发布状态保留为历史；本轮结果请读 [启动修订](STARTUP_FIX.md)。更新状态没有降低固定验收标准。
+# 许可说明
 
-# SEP 许可说明与决定记录
+[导航](DOCS_INDEX.md) · [第三方声明](THIRD_PARTY_NOTICES.md)
 
-<!-- SEP_RELEASE_STATUS_START -->
-分发修订 `20260921-mit-alpha` · 文档 `20260921-docs-r6` · **Windows x64 Alpha 测试发布**。SEP 已确认原创部分采用 MIT，第三方保留原许可。历史启动异常作为已接受的已知问题披露；功能证据与本轮封包验证分别见[发布说明](RELEASE_NOTES.md)和[测试摘要](TEST_ACCEPTANCE.md)。项目入口：[GitHub 仓库](https://github.com/Lance-QwQ/DSH-SEP)。
-<!-- SEP_RELEASE_STATUS_END -->
+项目所有者已明确将 **SEP原创部分采用MIT**。此前私人预览／商业限制文档属于历史，不是本版许可。MIT允许使用、修改、复制、分发、再许可和销售，须保留版权及许可声明；不要求衍生版沿用旧商业限制。准确条文见 [LICENSE](../LICENSE)。
 
-项目所有者于 2026-09-21 明确授权：**本版已确认属于 SEP 原创的部分采用 MIT License**。版权声明为 `Copyright (c) 2026 DSH SEP contributors`。正式条款见 [LICENSE](LICENSE)，逐文件边界见[许可同步记录](licenses/release/LICENSE-SYNCHRONIZATION.md)及对应包的 LICENSE-SCOPE。
+MIT不自动覆盖DSH、vendor代码、字体、数据、模型、容器镜像、运行库或其他第三方。它们保留各自版权、许可证和notice；不能将整个组合包简单改成单一MIT授权。
 
-## 允许什么
+- DSH及许多JavaScript依赖采用MIT，实际文件仍带上游声明。
+- lossless-claw与PinchBench材料保留MIT原文。
+- Mem0固定来源根许可证为Apache-2.0，nested OSS manifest另声明MIT；两者记录均保留，不擅自解释为已取得任选双许可。
+- PDF.js和其他Apache许可材料保留原文及notice要求。
+- Electron的MIT不概括Chromium全部内嵌组件。
+- LibreOffice与其源码／运行库适用原有多许可证及对应材料要求。
+- SWE评测的代码、数据、测试和镜像分别适用原许可；SWE-bench框架的MIT不能推定整套数据或镜像同许可。
 
-MIT 允许使用、复制、修改、合并、发布、分发、再许可和销售软件副本，包括个人及企业商业使用。分发软件的副本或实质部分时，须保留版权声明和许可声明；软件按原样提供，不附带保证。详见 [MIT 标准文本](https://opensource.org/license/mit)。
+只重打包安装器、改变文件布局或转译TypeScript，不会取消上游许可。对外转发或制作衍生版时保留本包相应声明、实际依赖许可和来源记录。许可原文与文件绑定须随实际最终包核验，不能引用旧package序号当成本版索引。
 
-MIT 不强制衍生版源码公开，不强制衍生版采用同一许可，也不保留此前的销售限制。衍生作品包含第三方组件时，应分别遵守它们的原有条款。
+实际本版材料入口：[许可证文件索引](licenses/index.json)、[组件清单](COMPONENTS.json)。它们绑定新包文件；封包前的缺失状态不得被解释为许可证核验通过。
 
-## 适用范围
+## 历史私人预览措辞
 
-- MIT 仅覆盖有权许可且已经确认的 SEP 原创代码和文档；包中 LICENSE-SCOPE、源码清单和文件声明用于划清范围。
-- DSH 宿主、Cordis、Electron、lossless-claw、Mem0、PinchBench、DSH-RAG、PDF.js、LibreOffice 和其他依赖，保留各自原许可、版权、NOTICE 及适用的源码义务。
-- 混合或改编的上游文件继续保留上游授权。SEP MIT 不撤销已有权利，也不把第三方或整套二进制运行环境统一改为 MIT。
-- 新写的 Office CLI 适配器按其确认原创范围采用 MIT；官方 LibreOffice 运行库保留原有许可和对应源码入口。
+早期核心notices的“private local preview／public redistribution has not been cleared”描述的是当时预览姿态；此后项目所有者授权原创MIT，并已有公开许可同步记录。它不是本版SEP原创部分的现行禁止分发条款。原声明中“不等于完整原生源码到二进制审计”的限制仍有效，不能把更正姿态理解为全部依赖法律合规已认证。
 
-当前许可索引与依赖映射绑定程序图 `8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52`，源码归档为 `DSH-SEP-Source-20260921-MIT.zip`，`SOURCE_FILES.json` 的 SHA-256 为 `ed91e199c25db5a35844111d535a75f66e3c5537bf332f08cb4a09b9ca16053f`。实际条目以随包清单为准，不从历史计数推导当前覆盖。
+@nodable/entities补充许可来自其声明仓库的固定提交；canvas平台包补充许可来自同版本父包。相应原文SHA-256分别为 `750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40`、`8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6`。本次已核对原文身份；该结果不证明发布二进制与该源码逐字对应，也不完成Skia内嵌组件审计。
 
-## 历史与本次变更
-
-office-r2 曾使用的自定义许可及当时解释保留在[历史许可说明](history/office-r2/LICENSING.md)和[历史许可同步页](history/office-r2/licenses/release/LICENSE-SYNCHRONIZATION.md)。历史文档中的商业限制只描述当时许可，不作为本版已按 MIT 授权原创部分的附加限制；历史包与原报告不改字节。
-
-本轮只更新许可、文档和相关元数据；运行实现基线为 `20260921-office-r2`，程序图 `a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8`。代码与二进制等同性、重新安装、ZIP 和脱敏核验结果：**pass：本轮已核对仅已映射原创许可、包声明与文档/绑定变更，运行实现及第三方文件与 Office-r2 字节相同；沿用其固定 Windows 11 功能证据，未重跑全部功能或付费模型。最终 MIT ZIP 安装、逐文件验证与脱敏结果由包外 DELIVERY-REPORT.json 单独绑定。**。功能证据沿用该固定基线，不宣称本轮重跑了完整功能矩阵、真实模型、长时间运行或全部环境测试。
-
-## 第三方来源与审阅边界
-
-旧 LibreOffice Kit 由 office-r2 的 SEP 自有适配器和官方 LibreOffice 26.8.0.3 替换；本次继续沿用这一实现，不是取得了旧 Kit 缺失的 Node API 源码。四个匹配的官方源码归档已有下载与哈希核验记录，入口见[Office 转换说明](OFFICE_CONVERTER.md)。
-
-sharp/libvips 主 DLL 固定来源对应关系的既有证据保留；全部静态组件源码交付、第二个 C++ DLL 完整对应及重链接尚未全面验证。官方 LibreOffice 四份源码可访问也不证明全部可选外部依赖已下载或二进制已本地重建。MIT 许可变更不抹去这些第三方审阅边界，不等于整个依赖闭包获得了统一合规认证。
-
-[第三方声明](THIRD_PARTY_NOTICES.md) · [发布说明](RELEASE_NOTES.md) · [返回导航](DOCS_INDEX.md)
+LibreOffice对应源材料和原生依赖证据保留各自身份；sharp/libvips完整静态组件与重新链接、全部运行时原生源对应仍未全面验证。本版不得以一个“已清除许可”标签替代这些具体范围。

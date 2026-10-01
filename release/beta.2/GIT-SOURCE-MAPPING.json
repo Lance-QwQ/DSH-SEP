@@ -1,9 +1,0 @@
-{
-  "schema": 1,
-  "status": "pass",
-  "stagedFiles": 14328,
-  "exactArchiveFilesInGit": 14318,
-  "sourceArchiveSha256": "0beb49bd052b1d645bbee73f5092d79c110d99159d736d1d79a584e3ae08cf09",
-  "metadataExceptions": [],
-  "scope": "Every Source ZIP file equals its staged Git blob, including delivery metadata. All changed paths limited to new public source/release and current navigation; old public sources and releases unchanged."
-}

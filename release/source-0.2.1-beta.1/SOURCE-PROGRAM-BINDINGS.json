@@ -1,0 +1,2655 @@
+{
+  "schema": 1,
+  "programGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "scope": "Exact files present both in seven SEP authoring source packages and final runtime store; compiled host/transitive native equivalence is not asserted. Nonmatching source workspace manifests and README/notice overlays are individually scoped.",
+  "bindings": [
+    {
+      "source": "packages/sep/context-preparation/context_resolver.py",
+      "program": "store/p0637/context_resolver.py",
+      "sourceSha256": "a5ecf6c75e891d4973a1e5bf0395f9eb18a632c109e8c1ac3944b865b11bc38d",
+      "programSha256": "a5ecf6c75e891d4973a1e5bf0395f9eb18a632c109e8c1ac3944b865b11bc38d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/context-preparation/index.mjs",
+      "program": "store/p0637/index.mjs",
+      "sourceSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+      "programSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/context-preparation/LICENSE",
+      "program": "store/p0637/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/context-preparation/LICENSE-SCOPE.json",
+      "program": "store/p0637/LICENSE-SCOPE.json",
+      "sourceSha256": "c1e70266bd3c7473dde1a2c9e78037bdb9b5d5a3694590d75fa67aa7998b7d82",
+      "programSha256": "c1e70266bd3c7473dde1a2c9e78037bdb9b5d5a3694590d75fa67aa7998b7d82",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/context-preparation/LICENSE-SCOPE.md",
+      "program": "store/p0637/LICENSE-SCOPE.md",
+      "sourceSha256": "8e7246d71e698b14ffff3927dc4d0756c87cc470b7898ba67da83013e093c7a2",
+      "programSha256": "8e7246d71e698b14ffff3927dc4d0756c87cc470b7898ba67da83013e093c7a2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/context-preparation/package.json",
+      "program": "store/p0637/package.json",
+      "sourceSha256": "eda16a704ecbbdb0bb8566fe28a2e3577bdbcd72e025a2eba2914593097c275a",
+      "programSha256": "82bf4dcf9deea83ef895d19ff391a18a2b2afd44feb023d26f6f17a92e43b2e1",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/context-preparation/README.md",
+      "program": "store/p0637/README.md",
+      "sourceSha256": "8ec3534eb5f82d651f3227f0ba85d5f477611ce2a1107a7555b8fb8114a7ef55",
+      "programSha256": "8ec3534eb5f82d651f3227f0ba85d5f477611ce2a1107a7555b8fb8114a7ef55",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/LICENSE",
+      "program": "store/p0638/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/LICENSE-SCOPE.json",
+      "program": "store/p0638/LICENSE-SCOPE.json",
+      "sourceSha256": "a0e816e94382561782b667f6a6c24f9a2a7e3332e4706147ff88c81c8c20758f",
+      "programSha256": "a0e816e94382561782b667f6a6c24f9a2a7e3332e4706147ff88c81c8c20758f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/LICENSE-SCOPE.md",
+      "program": "store/p0638/LICENSE-SCOPE.md",
+      "sourceSha256": "9b249157497bab592f86d2a845a7094be53414645910e687a7ca1f623d4acc1f",
+      "programSha256": "9b249157497bab592f86d2a845a7094be53414645910e687a7ca1f623d4acc1f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/package.json",
+      "program": "store/p0638/package.json",
+      "sourceSha256": "e912d3ba98f2381a0a16484c2b24cdafc3b3d35aeb35bb0a795d2f6d76895c72",
+      "programSha256": "4ccbba14fa6447c637ad932384575968360fe3eb8ca82cc059638560c9822c4f",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/plugin-group/README.md",
+      "program": "store/p0638/README.md",
+      "sourceSha256": "2e290b6d109fb465293bbf460fffb5f2a09b26e95f5323368e3e0c66d7b44217",
+      "programSha256": "290a8ee19629c4b03ed2b2160898139e1a16cff2f07326014e5a5b4b58c76126",
+      "exactByteMatch": false,
+      "differenceScope": "Documented current release/public source notice overlay versus runtime or historical README banner"
+    },
+    {
+      "source": "packages/sep/plugin-group/source/adapters.mjs",
+      "program": "store/p0638/source/adapters.mjs",
+      "sourceSha256": "12f591f60a4e8fba05918c0d0131889f5ba57ec4de56670d45a53c702acdac43",
+      "programSha256": "12f591f60a4e8fba05918c0d0131889f5ba57ec4de56670d45a53c702acdac43",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/history-expansion.mjs",
+      "program": "store/p0638/source/history-expansion.mjs",
+      "sourceSha256": "cf6999e569bbdbd7730c5fe5d31145d12ac5a819422378f026ead59772b6c809",
+      "programSha256": "cf6999e569bbdbd7730c5fe5d31145d12ac5a819422378f026ead59772b6c809",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/history-generation.mjs",
+      "program": "store/p0638/source/history-generation.mjs",
+      "sourceSha256": "7ca67e797c07bf14a618dafacc425850045e3071b32b4d8d11700fce6d2c6780",
+      "programSha256": "7ca67e797c07bf14a618dafacc425850045e3071b32b4d8d11700fce6d2c6780",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/history-review-cli.mjs",
+      "program": "store/p0638/source/history-review-cli.mjs",
+      "sourceSha256": "b753ace9c67661d56c3ed9588deae98022af0d021dda0eb97b59ee8a9775cd36",
+      "programSha256": "b753ace9c67661d56c3ed9588deae98022af0d021dda0eb97b59ee8a9775cd36",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/history-review.mjs",
+      "program": "store/p0638/source/history-review.mjs",
+      "sourceSha256": "5cf17b042805b94d64193dfe1f0c969fd50fc38b9008c72ae8f139e55bacf8c3",
+      "programSha256": "5cf17b042805b94d64193dfe1f0c969fd50fc38b9008c72ae8f139e55bacf8c3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/index.mjs",
+      "program": "store/p0638/source/index.mjs",
+      "sourceSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+      "programSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/lcm-worker.mjs",
+      "program": "store/p0638/source/lcm-worker.mjs",
+      "sourceSha256": "fb7f0b4caebaad555a6114e99c9403054c80b9cd143dceed5f20e9710f428ecc",
+      "programSha256": "fb7f0b4caebaad555a6114e99c9403054c80b9cd143dceed5f20e9710f428ecc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/lossless-compaction.mjs",
+      "program": "store/p0638/source/lossless-compaction.mjs",
+      "sourceSha256": "76cd5da8d7d6c62d51150e2ccfa453db0ebd67863e87e68c9b83a3a246bd785f",
+      "programSha256": "76cd5da8d7d6c62d51150e2ccfa453db0ebd67863e87e68c9b83a3a246bd785f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/lossless-integrity-worker.mjs",
+      "program": "store/p0638/source/lossless-integrity-worker.mjs",
+      "sourceSha256": "ea6db7679640579a67938d342568b8210ae042dfb490c4a88730226ebb5f644e",
+      "programSha256": "ea6db7679640579a67938d342568b8210ae042dfb490c4a88730226ebb5f644e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/lossless-plugin.mjs",
+      "program": "store/p0638/source/lossless-plugin.mjs",
+      "sourceSha256": "3b76dc3bae3458f532f48e4b0a9f128086b9972771942333197ce87f0716e741",
+      "programSha256": "3b76dc3bae3458f532f48e4b0a9f128086b9972771942333197ce87f0716e741",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/policies.mjs",
+      "program": "store/p0638/source/policies.mjs",
+      "sourceSha256": "ba724f7e751fb159b718ee3315a2e4d97a1939bd29d15cef75a40ea5ec49b9bb",
+      "programSha256": "ba724f7e751fb159b718ee3315a2e4d97a1939bd29d15cef75a40ea5ec49b9bb",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/prework.mjs",
+      "program": "store/p0638/source/prework.mjs",
+      "sourceSha256": "1d39819234d570ab8372f5eba6b661c7262251c1c324a087e3ab5968d1077890",
+      "programSha256": "1d39819234d570ab8372f5eba6b661c7262251c1c324a087e3ab5968d1077890",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/source/rex-bridge.mjs",
+      "program": "store/p0638/source/rex-bridge.mjs",
+      "sourceSha256": "ac0463c5714ccc964a277af6f1601a83d087fb4d7e44206b3090a6dff24e43a0",
+      "programSha256": "ac0463c5714ccc964a277af6f1601a83d087fb4d7e44206b3090a6dff24e43a0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/THIRD_PARTY_NOTICES.md",
+      "program": "store/p0638/THIRD_PARTY_NOTICES.md",
+      "sourceSha256": "ea9d57d97f23a10e3d4ab01f6199e7f7fb4b1527acc538d816bee26049097a82",
+      "programSha256": "ea9d57d97f23a10e3d4ab01f6199e7f7fb4b1527acc538d816bee26049097a82",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/assemble-debug.js",
+      "program": "store/p0638/vendor/lossless-claw/assemble-debug.js",
+      "sourceSha256": "f4ed0fde0d38a478f9fa5c4e06986bcbfce13ed53c89669a0c5255ca335323ab",
+      "programSha256": "f4ed0fde0d38a478f9fa5c4e06986bcbfce13ed53c89669a0c5255ca335323ab",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/assemble-fallback.js",
+      "program": "store/p0638/vendor/lossless-claw/assemble-fallback.js",
+      "sourceSha256": "68c4f14aae2e830ab5af9eb0280bbd3959da22e6f8ac732a23634acdd279d50f",
+      "programSha256": "68c4f14aae2e830ab5af9eb0280bbd3959da22e6f8ac732a23634acdd279d50f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/assembler.js",
+      "program": "store/p0638/vendor/lossless-claw/assembler.js",
+      "sourceSha256": "3cb4c42e5c7c8a78f21862cec46d384a8719260a2eaffdc93f11604e6c463263",
+      "programSha256": "3cb4c42e5c7c8a78f21862cec46d384a8719260a2eaffdc93f11604e6c463263",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/batch-dedup.js",
+      "program": "store/p0638/vendor/lossless-claw/batch-dedup.js",
+      "sourceSha256": "2c9f243f632d41921ccad9e7e316db055d685a83f13d2716a2aba608d2057887",
+      "programSha256": "2c9f243f632d41921ccad9e7e316db055d685a83f13d2716a2aba608d2057887",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/bootstrap-budget.js",
+      "program": "store/p0638/vendor/lossless-claw/bootstrap-budget.js",
+      "sourceSha256": "18dfc15fe8a9cf6d1a3bd05e4543d6741a44486f6810fcaffd78c64fb05d40b7",
+      "programSha256": "18dfc15fe8a9cf6d1a3bd05e4543d6741a44486f6810fcaffd78c64fb05d40b7",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/args.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/args.js",
+      "sourceSha256": "f2039b41785ba34bdfe9aada8df0f18e9732c3954f935e3ed9bb7a9644456b5e",
+      "programSha256": "f2039b41785ba34bdfe9aada8df0f18e9732c3954f935e3ed9bb7a9644456b5e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/config-file.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/config-file.js",
+      "sourceSha256": "79f7769faf335cd6a369ff24a55769bedb2e1cc7c65e97bbd9d3307d93b3fa0c",
+      "programSha256": "79f7769faf335cd6a369ff24a55769bedb2e1cc7c65e97bbd9d3307d93b3fa0c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/database.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/database.js",
+      "sourceSha256": "815959d235a75af637a532f6c22a66927c0b8631dfa4e41fbd232327563cef80",
+      "programSha256": "815959d235a75af637a532f6c22a66927c0b8631dfa4e41fbd232327563cef80",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/main.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/main.js",
+      "sourceSha256": "f6b5af994540bf157bc1f5de8d1888ec2cfd0f66cfa8817d39c64ce789c5163c",
+      "programSha256": "f6b5af994540bf157bc1f5de8d1888ec2cfd0f66cfa8817d39c64ce789c5163c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/migrate-sessions.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/migrate-sessions.js",
+      "sourceSha256": "d2ecf4b560c788c0057a90b8ed73c0dfdc8bda5e8f0685fe7078ff5d68eb4488",
+      "programSha256": "d2ecf4b560c788c0057a90b8ed73c0dfdc8bda5e8f0685fe7078ff5d68eb4488",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/output.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/output.js",
+      "sourceSha256": "0627e9a842e942a602546901464f6da060a441b1105e5eb87d305103f8a85cf6",
+      "programSha256": "0627e9a842e942a602546901464f6da060a441b1105e5eb87d305103f8a85cf6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/paths.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/paths.js",
+      "sourceSha256": "61468533d141a7c8478d4ed4fef8b749bab73b921aaea2e50e554c31aaca14d2",
+      "programSha256": "61468533d141a7c8478d4ed4fef8b749bab73b921aaea2e50e554c31aaca14d2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/queries.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/queries.js",
+      "sourceSha256": "8846475a26e9d82c27c70ca7d90445c12fccfd28b4b5a8d970804242daa0f90c",
+      "programSha256": "8846475a26e9d82c27c70ca7d90445c12fccfd28b4b5a8d970804242daa0f90c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/cli/summary-queries.js",
+      "program": "store/p0638/vendor/lossless-claw/cli/summary-queries.js",
+      "sourceSha256": "0469d0677823599621b767f191aa0ec346192a1e9a087a3ae26b174500d35499",
+      "programSha256": "0469d0677823599621b767f191aa0ec346192a1e9a087a3ae26b174500d35499",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/compaction-guards.js",
+      "program": "store/p0638/vendor/lossless-claw/compaction-guards.js",
+      "sourceSha256": "9c464c2573b057eb74373dca7e8be3c352c26af2d03c298d2bf0642da42c4ff4",
+      "programSha256": "9c464c2573b057eb74373dca7e8be3c352c26af2d03c298d2bf0642da42c4ff4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/compaction-telemetry.js",
+      "program": "store/p0638/vendor/lossless-claw/compaction-telemetry.js",
+      "sourceSha256": "f006e2d4df5e4880c895a7a2623e1302f82d47bb5893d6a34c5f9b8c63ca2355",
+      "programSha256": "f006e2d4df5e4880c895a7a2623e1302f82d47bb5893d6a34c5f9b8c63ca2355",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/compaction.js",
+      "program": "store/p0638/vendor/lossless-claw/compaction.js",
+      "sourceSha256": "7814f3b08d9437b804fa2b6373ad8034a9f570c8e6490ff0c5215b6fe0618673",
+      "programSha256": "7814f3b08d9437b804fa2b6373ad8034a9f570c8e6490ff0c5215b6fe0618673",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/context-threshold.js",
+      "program": "store/p0638/vendor/lossless-claw/context-threshold.js",
+      "sourceSha256": "10974bf27f4777398d033a43c0c1f111e3b5215ddf5ccf5d3e09b6ef55b83930",
+      "programSha256": "10974bf27f4777398d033a43c0c1f111e3b5215ddf5ccf5d3e09b6ef55b83930",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/db/config.js",
+      "program": "store/p0638/vendor/lossless-claw/db/config.js",
+      "sourceSha256": "54032ce2eaa3fd7aac18a36b92e5ee207e30c3021dad153928810fa9f2dc0d6d",
+      "programSha256": "54032ce2eaa3fd7aac18a36b92e5ee207e30c3021dad153928810fa9f2dc0d6d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/db/connection.js",
+      "program": "store/p0638/vendor/lossless-claw/db/connection.js",
+      "sourceSha256": "ac533613db59f15720cc45161d787cc13275c9aa7854017ab7b3b0b123a37961",
+      "programSha256": "ac533613db59f15720cc45161d787cc13275c9aa7854017ab7b3b0b123a37961",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/db/features.js",
+      "program": "store/p0638/vendor/lossless-claw/db/features.js",
+      "sourceSha256": "44434748416c67a39437eac23faa6ccd8acd3a323768b291285f5680e8b64c7f",
+      "programSha256": "44434748416c67a39437eac23faa6ccd8acd3a323768b291285f5680e8b64c7f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/db/migration.js",
+      "program": "store/p0638/vendor/lossless-claw/db/migration.js",
+      "sourceSha256": "cc407b39982ebcb44de589692c75de6489ffcc15a2673eaf4e795034165a1f46",
+      "programSha256": "cc407b39982ebcb44de589692c75de6489ffcc15a2673eaf4e795034165a1f46",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/engine.js",
+      "program": "store/p0638/vendor/lossless-claw/engine.js",
+      "sourceSha256": "210f22b59118f1e3575d43430eff711af680b1085a610cc6d0ae7ffc8d9b697d",
+      "programSha256": "210f22b59118f1e3575d43430eff711af680b1085a610cc6d0ae7ffc8d9b697d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/estimate-tokens.js",
+      "program": "store/p0638/vendor/lossless-claw/estimate-tokens.js",
+      "sourceSha256": "bfdd40effdcb2821098294b61a502704ca8b2dc304bb249a3ae9aea07412c3dd",
+      "programSha256": "bfdd40effdcb2821098294b61a502704ca8b2dc304bb249a3ae9aea07412c3dd",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/expansion-auth.js",
+      "program": "store/p0638/vendor/lossless-claw/expansion-auth.js",
+      "sourceSha256": "8c9f555e81489318ff8a0fc671987c93cda4c3ac63c422768e158418cc001188",
+      "programSha256": "8c9f555e81489318ff8a0fc671987c93cda4c3ac63c422768e158418cc001188",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/expansion-policy.js",
+      "program": "store/p0638/vendor/lossless-claw/expansion-policy.js",
+      "sourceSha256": "05e762e5f28ba3257815fcacb43c9b6fae1a26688b460f2884425672faa03264",
+      "programSha256": "05e762e5f28ba3257815fcacb43c9b6fae1a26688b460f2884425672faa03264",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/expansion.js",
+      "program": "store/p0638/vendor/lossless-claw/expansion.js",
+      "sourceSha256": "9b07677d26fed6e0006c69c336654929bfe141fd4e12f1c3589893a7352059fa",
+      "programSha256": "9b07677d26fed6e0006c69c336654929bfe141fd4e12f1c3589893a7352059fa",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/focus-briefs.js",
+      "program": "store/p0638/vendor/lossless-claw/focus-briefs.js",
+      "sourceSha256": "bae8bea7d7a6b7da14e156e90a9ad94601772dbd1cfa78e621434ca870c4cc28",
+      "programSha256": "bae8bea7d7a6b7da14e156e90a9ad94601772dbd1cfa78e621434ca870c4cc28",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/heartbeat-filter.js",
+      "program": "store/p0638/vendor/lossless-claw/heartbeat-filter.js",
+      "sourceSha256": "8ccb3b855ff31d480e8a6a64e07d56d2809b484a088cfd27925d86bcb19ab2fb",
+      "programSha256": "8ccb3b855ff31d480e8a6a64e07d56d2809b484a088cfd27925d86bcb19ab2fb",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/large-file-interceptor.js",
+      "program": "store/p0638/vendor/lossless-claw/large-file-interceptor.js",
+      "sourceSha256": "d96ffe9302e6a2d62b984f5321a0424bf79ff2343bf405e26afd014d5d8ddf0c",
+      "programSha256": "d96ffe9302e6a2d62b984f5321a0424bf79ff2343bf405e26afd014d5d8ddf0c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/large-files.js",
+      "program": "store/p0638/vendor/lossless-claw/large-files.js",
+      "sourceSha256": "1fe99e5e090c76291654c954b85ed510d6a733c4df0c9a4dc659c07d45c975a7",
+      "programSha256": "1fe99e5e090c76291654c954b85ed510d6a733c4df0c9a4dc659c07d45c975a7",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/lcm-file-log.js",
+      "program": "store/p0638/vendor/lossless-claw/lcm-file-log.js",
+      "sourceSha256": "00b212f6bab986e79b23254b50d0ed54bbbb685ea75f071b91e48fdbd6cab46f",
+      "programSha256": "00b212f6bab986e79b23254b50d0ed54bbbb685ea75f071b91e48fdbd6cab46f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/lcm-log.js",
+      "program": "store/p0638/vendor/lossless-claw/lcm-log.js",
+      "sourceSha256": "e4f5b603ea8c8bb7ed727d6587fb5d5cb2843c0b7db8719ecc1d06dd08cd504d",
+      "programSha256": "e4f5b603ea8c8bb7ed727d6587fb5d5cb2843c0b7db8719ecc1d06dd08cd504d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/LICENSE",
+      "program": "store/p0638/vendor/lossless-claw/LICENSE",
+      "sourceSha256": "b88a085e19252796c5ba424a8bfe8eb0d4a0af3b89e4460a0dc334a634a995c0",
+      "programSha256": "b88a085e19252796c5ba424a8bfe8eb0d4a0af3b89e4460a0dc334a634a995c0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/live-coverage.js",
+      "program": "store/p0638/vendor/lossless-claw/live-coverage.js",
+      "sourceSha256": "f8e296e8522431559a0520bf9d401e52f39ddfe87c7e2d244132ee1ac1109915",
+      "programSha256": "f8e296e8522431559a0520bf9d401e52f39ddfe87c7e2d244132ee1ac1109915",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/message-content.js",
+      "program": "store/p0638/vendor/lossless-claw/message-content.js",
+      "sourceSha256": "c9d52456f94b8fb98d7511753e26744b192fbe0fabcbfa1a0fa077c93ce5bad7",
+      "programSha256": "c9d52456f94b8fb98d7511753e26744b192fbe0fabcbfa1a0fa077c93ce5bad7",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/message-signatures.js",
+      "program": "store/p0638/vendor/lossless-claw/message-signatures.js",
+      "sourceSha256": "b46bdfbb1baeaf863f029c32b71784daff58fb6575ede8ceff9214b472ff3b92",
+      "programSha256": "b46bdfbb1baeaf863f029c32b71784daff58fb6575ede8ceff9214b472ff3b92",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/migrate-sessions.js",
+      "program": "store/p0638/vendor/lossless-claw/migrate-sessions.js",
+      "sourceSha256": "f2837989dc04c0b513f17f51eb755460bd057c8441e49af57b291b30bca120ec",
+      "programSha256": "f2837989dc04c0b513f17f51eb755460bd057c8441e49af57b291b30bca120ec",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/openclaw-bridge.js",
+      "program": "store/p0638/vendor/lossless-claw/openclaw-bridge.js",
+      "sourceSha256": "a19cc4cfffd5ce98bc57c33722ff538db9582cfa34dc0f78cd5dd3c7058234d5",
+      "programSha256": "a19cc4cfffd5ce98bc57c33722ff538db9582cfa34dc0f78cd5dd3c7058234d5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/openclaw-inbound-metadata.js",
+      "program": "store/p0638/vendor/lossless-claw/openclaw-inbound-metadata.js",
+      "sourceSha256": "51538186697624381a9520ebd29a9b9c193b124a8e48836df30edb2fac7cefdf",
+      "programSha256": "51538186697624381a9520ebd29a9b9c193b124a8e48836df30edb2fac7cefdf",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/openclaw-sender-metadata.js",
+      "program": "store/p0638/vendor/lossless-claw/openclaw-sender-metadata.js",
+      "sourceSha256": "5f94e0943a7c4c50d63996ade85fd91f67b8e99fb76b3754befb2099931a98dc",
+      "programSha256": "5f94e0943a7c4c50d63996ade85fd91f67b8e99fb76b3754befb2099931a98dc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/package.json",
+      "program": "store/p0638/vendor/lossless-claw/package.json",
+      "sourceSha256": "5ef867714c0133726985fdda71dc72b6ad8cb6c2217d0d54a508049b8fb9b5e9",
+      "programSha256": "5ef867714c0133726985fdda71dc72b6ad8cb6c2217d0d54a508049b8fb9b5e9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/pending-summary-coordinator.js",
+      "program": "store/p0638/vendor/lossless-claw/pending-summary-coordinator.js",
+      "sourceSha256": "aa4533e09879896953d2ad2bc40b2d8e2a987a48129962d7f3ef63dbd53b3a3f",
+      "programSha256": "aa4533e09879896953d2ad2bc40b2d8e2a987a48129962d7f3ef63dbd53b3a3f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/pending-summary-planner.js",
+      "program": "store/p0638/vendor/lossless-claw/pending-summary-planner.js",
+      "sourceSha256": "6d97989fc5ad28d27f02039f1a993a6e8d154b3761830c1a9707ea2416589ddf",
+      "programSha256": "6d97989fc5ad28d27f02039f1a993a6e8d154b3761830c1a9707ea2416589ddf",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/pending-summary-publisher.js",
+      "program": "store/p0638/vendor/lossless-claw/pending-summary-publisher.js",
+      "sourceSha256": "6b264411a7b50e688ea73bc2878c616d5112db1fc1eaf68331903ab9412ec6b8",
+      "programSha256": "6b264411a7b50e688ea73bc2878c616d5112db1fc1eaf68331903ab9412ec6b8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/pending-summary-worker.js",
+      "program": "store/p0638/vendor/lossless-claw/pending-summary-worker.js",
+      "sourceSha256": "2b285659500c9277755a26127dea9be84b7771b8408292fcdc9b239ec83e7ec9",
+      "programSha256": "2b285659500c9277755a26127dea9be84b7771b8408292fcdc9b239ec83e7ec9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/index.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/index.js",
+      "sourceSha256": "4bd476731f4a158f83d7d565fdae701790dafcfaa0ec9b76f71700b085a3c7d2",
+      "programSha256": "4bd476731f4a158f83d7d565fdae701790dafcfaa0ec9b76f71700b085a3c7d2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-command.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-command.js",
+      "sourceSha256": "3013d04938b9e89417687721cca1f14dc0a22a8b6160089377e862ccdbd1df19",
+      "programSha256": "3013d04938b9e89417687721cca1f14dc0a22a8b6160089377e862ccdbd1df19",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-db-backup.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-db-backup.js",
+      "sourceSha256": "126ac310c09ac08b8a242cfcb04b56e2fcae4dc0d5ad955d8827fb5b1ba21937",
+      "programSha256": "126ac310c09ac08b8a242cfcb04b56e2fcae4dc0d5ad955d8827fb5b1ba21937",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-apply.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-doctor-apply.js",
+      "sourceSha256": "aff1dc62c969c7787e8ba6d54e04a4b07ecc33588d9fba566cd3f1816ddf5b60",
+      "programSha256": "aff1dc62c969c7787e8ba6d54e04a4b07ecc33588d9fba566cd3f1816ddf5b60",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-cleaners.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-doctor-cleaners.js",
+      "sourceSha256": "c5cbf290892283df933a0fea0beb6bc9ab315aa63a14427ee01ce0ac965a2a30",
+      "programSha256": "c5cbf290892283df933a0fea0beb6bc9ab315aa63a14427ee01ce0ac965a2a30",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-maintenance.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-doctor-maintenance.js",
+      "sourceSha256": "656749b130a3fb39e3c8401aebd826bb38a2a7f8a8e0b49dfbd5148692748650",
+      "programSha256": "656749b130a3fb39e3c8401aebd826bb38a2a7f8a8e0b49dfbd5148692748650",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-rollover-splits.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-doctor-rollover-splits.js",
+      "sourceSha256": "4a0a6e71bc751b0b0c00d59185e3c54eb37fe41cf6e1c575933e27994dc4ca8b",
+      "programSha256": "4a0a6e71bc751b0b0c00d59185e3c54eb37fe41cf6e1c575933e27994dc4ca8b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-shared.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-doctor-shared.js",
+      "sourceSha256": "8d35328fbe4c1a20ace92b07c0f9afb688a5ba93e2e93c621509eb76e5817009",
+      "programSha256": "8d35328fbe4c1a20ace92b07c0f9afb688a5ba93e2e93c621509eb76e5817009",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/lcm-version-doctor.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/lcm-version-doctor.js",
+      "sourceSha256": "764c5208edba3daa899c773bf0ae6903c06c6e18c78d32c57c1eff09339809d5",
+      "programSha256": "764c5208edba3daa899c773bf0ae6903c06c6e18c78d32c57c1eff09339809d5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/openclaw-agent-ids.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/openclaw-agent-ids.js",
+      "sourceSha256": "85b5aaf55736ecf8d696c4b5fbadb9ac34379d691e26ea5337bf1163d4abf1de",
+      "programSha256": "85b5aaf55736ecf8d696c4b5fbadb9ac34379d691e26ea5337bf1163d4abf1de",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/plugin/shared-init.js",
+      "program": "store/p0638/vendor/lossless-claw/plugin/shared-init.js",
+      "sourceSha256": "8d590d90c005d80e565300398323f0788cc8f9f13bff0839f95e2984f662c6de",
+      "programSha256": "8d590d90c005d80e565300398323f0788cc8f9f13bff0839f95e2984f662c6de",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/prompt-recall.js",
+      "program": "store/p0638/vendor/lossless-claw/prompt-recall.js",
+      "sourceSha256": "4ad89f167b41a6363c733f3761ddfc07bdcda17963261ce037b5ba306348f01e",
+      "programSha256": "4ad89f167b41a6363c733f3761ddfc07bdcda17963261ce037b5ba306348f01e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/prune.js",
+      "program": "store/p0638/vendor/lossless-claw/prune.js",
+      "sourceSha256": "a668312bf49a17854370d392393e46f61d2c163dd07dca93418fb44ddca9f68d",
+      "programSha256": "a668312bf49a17854370d392393e46f61d2c163dd07dca93418fb44ddca9f68d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/raw-id-replay-filter.js",
+      "program": "store/p0638/vendor/lossless-claw/raw-id-replay-filter.js",
+      "sourceSha256": "940459e19f489da18f1d8bf8eedb473b148d02f8936f13cbfa99285a1c64e329",
+      "programSha256": "940459e19f489da18f1d8bf8eedb473b148d02f8936f13cbfa99285a1c64e329",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/read-tool-recovery.js",
+      "program": "store/p0638/vendor/lossless-claw/read-tool-recovery.js",
+      "sourceSha256": "344a5de54c24990c508877a13523d8d5a1c29ccf8beacc2a841088055dbcc05c",
+      "programSha256": "344a5de54c24990c508877a13523d8d5a1c29ccf8beacc2a841088055dbcc05c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/reconcile-plan.js",
+      "program": "store/p0638/vendor/lossless-claw/reconcile-plan.js",
+      "sourceSha256": "fbe537f09d1c09fc3f4f71a1a73e828f1170813fa826dae1fe05e3d8e1a24fb9",
+      "programSha256": "fbe537f09d1c09fc3f4f71a1a73e828f1170813fa826dae1fe05e3d8e1a24fb9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/replay-metadata.js",
+      "program": "store/p0638/vendor/lossless-claw/replay-metadata.js",
+      "sourceSha256": "75a4abc201c7033864f1eeebd777028ef3fd743a1334d8165b4cd84a7a4e5e79",
+      "programSha256": "75a4abc201c7033864f1eeebd777028ef3fd743a1334d8165b4cd84a7a4e5e79",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/retrieval.js",
+      "program": "store/p0638/vendor/lossless-claw/retrieval.js",
+      "sourceSha256": "998aedd38ee9b965e70de0f955c3ef2af33c97fc45ba9bea80863725208fc523",
+      "programSha256": "998aedd38ee9b965e70de0f955c3ef2af33c97fc45ba9bea80863725208fc523",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/runtime-model.js",
+      "program": "store/p0638/vendor/lossless-claw/runtime-model.js",
+      "sourceSha256": "5423fd86c09b2f370d0e0b64d61ba112cfb2828679fd003d6fc53c7a5e29fe64",
+      "programSha256": "5423fd86c09b2f370d0e0b64d61ba112cfb2828679fd003d6fc53c7a5e29fe64",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/SEP-LOCAL-CHANGES.md",
+      "program": "store/p0638/vendor/lossless-claw/SEP-LOCAL-CHANGES.md",
+      "sourceSha256": "3c62e6fc0ed5c8267d4fbd35e703493000089912b8329a6273b40aa4de677c51",
+      "programSha256": "3c62e6fc0ed5c8267d4fbd35e703493000089912b8329a6273b40aa4de677c51",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/session-patterns.js",
+      "program": "store/p0638/vendor/lossless-claw/session-patterns.js",
+      "sourceSha256": "c5e96972ee5b196f742c55b357e963fc853f5a01bbb9387906f5da6900ab2cfe",
+      "programSha256": "c5e96972ee5b196f742c55b357e963fc853f5a01bbb9387906f5da6900ab2cfe",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/stable-event-key.js",
+      "program": "store/p0638/vendor/lossless-claw/stable-event-key.js",
+      "sourceSha256": "8cb11c8ff35a2b5b6f3c760055cc15f15e9b3eac8de928dac5e474b5d833a3b5",
+      "programSha256": "8cb11c8ff35a2b5b6f3c760055cc15f15e9b3eac8de928dac5e474b5d833a3b5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/startup-banner-log.js",
+      "program": "store/p0638/vendor/lossless-claw/startup-banner-log.js",
+      "sourceSha256": "146ef28832d268b56ed5b38dbd6851ede027c9abc41386701a8d3527034c7d7c",
+      "programSha256": "146ef28832d268b56ed5b38dbd6851ede027c9abc41386701a8d3527034c7d7c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/compaction-maintenance-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/compaction-maintenance-store.js",
+      "sourceSha256": "7cb95f61e5d15a2f7cb39b1854fd93887178c4accdf5d42e7152af9d62c3b589",
+      "programSha256": "7cb95f61e5d15a2f7cb39b1854fd93887178c4accdf5d42e7152af9d62c3b589",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/compaction-telemetry-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/compaction-telemetry-store.js",
+      "sourceSha256": "3d22bcaaa9a9acebe59531dde968f475451b26a4c53f744d85d374ce105af6bf",
+      "programSha256": "3d22bcaaa9a9acebe59531dde968f475451b26a4c53f744d85d374ce105af6bf",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/conversation-scope.js",
+      "program": "store/p0638/vendor/lossless-claw/store/conversation-scope.js",
+      "sourceSha256": "540ea1897998b8f10751f4d6facdb943dfde523667f533f44e04d44958e8d57a",
+      "programSha256": "540ea1897998b8f10751f4d6facdb943dfde523667f533f44e04d44958e8d57a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/conversation-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/conversation-store.js",
+      "sourceSha256": "62ce581b4595773c1aba3b62a9033a1a225c8cbd2d7596b3f928618c3d0783e1",
+      "programSha256": "62ce581b4595773c1aba3b62a9033a1a225c8cbd2d7596b3f928618c3d0783e1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/focus-brief-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/focus-brief-store.js",
+      "sourceSha256": "556ea8d6941899707d69f38cc656c3d396679c8479c35f6ccc8d9724bdd8babd",
+      "programSha256": "556ea8d6941899707d69f38cc656c3d396679c8479c35f6ccc8d9724bdd8babd",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/fts5-sanitize.js",
+      "program": "store/p0638/vendor/lossless-claw/store/fts5-sanitize.js",
+      "sourceSha256": "7930e73d9aba5b44d9ecd88f6b8682a324a3739f307eaf364bb1f3872b6c0186",
+      "programSha256": "7930e73d9aba5b44d9ecd88f6b8682a324a3739f307eaf364bb1f3872b6c0186",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/full-text-fallback.js",
+      "program": "store/p0638/vendor/lossless-claw/store/full-text-fallback.js",
+      "sourceSha256": "b21a92d4d2a64982b4b6ca417945e57e82cdbfdec73ae8f900650c4eb023ebd9",
+      "programSha256": "b21a92d4d2a64982b4b6ca417945e57e82cdbfdec73ae8f900650c4eb023ebd9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/full-text-sort.js",
+      "program": "store/p0638/vendor/lossless-claw/store/full-text-sort.js",
+      "sourceSha256": "91ceab76d9a09deb0ef68c0caa4bd8e5586f1c2c33143c01bdc80836322da6b1",
+      "programSha256": "91ceab76d9a09deb0ef68c0caa4bd8e5586f1c2c33143c01bdc80836322da6b1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/index.js",
+      "program": "store/p0638/vendor/lossless-claw/store/index.js",
+      "sourceSha256": "ed64a7649175a39060600d17fdf3c86d8f0412509cbe70630ee26e1e8db88a97",
+      "programSha256": "ed64a7649175a39060600d17fdf3c86d8f0412509cbe70630ee26e1e8db88a97",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/message-identity.js",
+      "program": "store/p0638/vendor/lossless-claw/store/message-identity.js",
+      "sourceSha256": "bf593c54c0b752cffefc924393b5003b1a06c78b689a6fd6cf78a356acc3136e",
+      "programSha256": "bf593c54c0b752cffefc924393b5003b1a06c78b689a6fd6cf78a356acc3136e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/parse-utc-timestamp.js",
+      "program": "store/p0638/vendor/lossless-claw/store/parse-utc-timestamp.js",
+      "sourceSha256": "0502aa253c4de1846ab19d27d79c7dc923674ec2a71b7e8afff81a891fcd0417",
+      "programSha256": "0502aa253c4de1846ab19d27d79c7dc923674ec2a71b7e8afff81a891fcd0417",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/pending-summary-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/pending-summary-store.js",
+      "sourceSha256": "bfb6866cbcfcae7d42a2b3b154d9e6f238b7d8c563186f98c986214cd8b065ad",
+      "programSha256": "bfb6866cbcfcae7d42a2b3b154d9e6f238b7d8c563186f98c986214cd8b065ad",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/pending-summary-types.js",
+      "program": "store/p0638/vendor/lossless-claw/store/pending-summary-types.js",
+      "sourceSha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "programSha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/search-regex.js",
+      "program": "store/p0638/vendor/lossless-claw/store/search-regex.js",
+      "sourceSha256": "52f94e841cc90e9870e468e33815cd39b25fa0fa5b8a90b972fd08dfc3f46c8d",
+      "programSha256": "52f94e841cc90e9870e468e33815cd39b25fa0fa5b8a90b972fd08dfc3f46c8d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/store/summary-store.js",
+      "program": "store/p0638/vendor/lossless-claw/store/summary-store.js",
+      "sourceSha256": "7851891845258a5cde8b9d571def1608fbd423f025fee58679fd58bb5b48a2b0",
+      "programSha256": "7851891845258a5cde8b9d571def1608fbd423f025fee58679fd58bb5b48a2b0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/structured-anchor-identity.js",
+      "program": "store/p0638/vendor/lossless-claw/structured-anchor-identity.js",
+      "sourceSha256": "bff836917936bfc2ca52e699a198c401498d9d252b2fd28edfbe2bd9aa7a6416",
+      "programSha256": "bff836917936bfc2ca52e699a198c401498d9d252b2fd28edfbe2bd9aa7a6416",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/summarize.js",
+      "program": "store/p0638/vendor/lossless-claw/summarize.js",
+      "sourceSha256": "ee3974ed750996945942e4f3591990f41d9e938657f2ae3ba1d25fbf004a9268",
+      "programSha256": "ee3974ed750996945942e4f3591990f41d9e938657f2ae3ba1d25fbf004a9268",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/summary-fallback.js",
+      "program": "store/p0638/vendor/lossless-claw/summary-fallback.js",
+      "sourceSha256": "ef0fa648d750e9312e84ad71f24fefaa26769c9e81dec4e39f480d10dd1a47df",
+      "programSha256": "ef0fa648d750e9312e84ad71f24fefaa26769c9e81dec4e39f480d10dd1a47df",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/token-accounting.js",
+      "program": "store/p0638/vendor/lossless-claw/token-accounting.js",
+      "sourceSha256": "6eb76fb96fb9c9a5a6642b44fcd71f78ceab6f69f8a146690556df72dcc80672",
+      "programSha256": "6eb76fb96fb9c9a5a6642b44fcd71f78ceab6f69f8a146690556df72dcc80672",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tool-pairing.js",
+      "program": "store/p0638/vendor/lossless-claw/tool-pairing.js",
+      "sourceSha256": "1a331946552e063e8bb6bbf79b4d376b5876e7464861d59abca2d10e12c48bc4",
+      "programSha256": "1a331946552e063e8bb6bbf79b4d376b5876e7464861d59abca2d10e12c48bc4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tool-result-blocks.js",
+      "program": "store/p0638/vendor/lossless-claw/tool-result-blocks.js",
+      "sourceSha256": "7080a26f5d03d715127a1cbe2704b639c34b78d6e8845bfee8115c77f1c01264",
+      "programSha256": "7080a26f5d03d715127a1cbe2704b639c34b78d6e8845bfee8115c77f1c01264",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/common.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/common.js",
+      "sourceSha256": "d8e83fa5a6c058cf92f3f94c19a33bfb11793f182d9715889061fa1d656f3c87",
+      "programSha256": "d8e83fa5a6c058cf92f3f94c19a33bfb11793f182d9715889061fa1d656f3c87",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-conversation-scope.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-conversation-scope.js",
+      "sourceSha256": "4d406667d3c16e2630584e2ac3db48ea98258086ba2c46f17e73bf99bd69aca7",
+      "programSha256": "4d406667d3c16e2630584e2ac3db48ea98258086ba2c46f17e73bf99bd69aca7",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-describe-id.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-describe-id.js",
+      "sourceSha256": "9d2d113de1e7a63d43e8c8fbbe1c6f1d69ce669680d449dfbbd3171747d0839e",
+      "programSha256": "9d2d113de1e7a63d43e8c8fbbe1c6f1d69ce669680d449dfbbd3171747d0839e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-describe-tool.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-describe-tool.js",
+      "sourceSha256": "6a3c17b22e00f2d13968c6d53a8ea3b9e78833b081c90c9768c3b334daf60784",
+      "programSha256": "6a3c17b22e00f2d13968c6d53a8ea3b9e78833b081c90c9768c3b334daf60784",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-delegation.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expand-query-delegation.js",
+      "sourceSha256": "4457802199a635aa91c078d2ea06b589bff3e1cff8600dce757b29cd3c1f1928",
+      "programSha256": "4457802199a635aa91c078d2ea06b589bff3e1cff8600dce757b29cd3c1f1928",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-tool.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expand-query-tool.js",
+      "sourceSha256": "93e12704ba62c153c72490309915c3078e7ad23dc195df81dbd49127c03fd3bf",
+      "programSha256": "93e12704ba62c153c72490309915c3078e7ad23dc195df81dbd49127c03fd3bf",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.delegation.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expand-tool.delegation.js",
+      "sourceSha256": "116f37e2a572a88bd017a55454da7c343e9a89e0dc7e3f5444dc228f5b237121",
+      "programSha256": "116f37e2a572a88bd017a55454da7c343e9a89e0dc7e3f5444dc228f5b237121",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expand-tool.js",
+      "sourceSha256": "8c0a8b453a1e002011a97ade714c02ce551ca138e82dccf6d7f2786f8499c39e",
+      "programSha256": "8c0a8b453a1e002011a97ade714c02ce551ca138e82dccf6d7f2786f8499c39e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expansion-deadline.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expansion-deadline.js",
+      "sourceSha256": "18e243529ac45ac630649ef02fc9364569e89b123de81149233798718c4b698e",
+      "programSha256": "18e243529ac45ac630649ef02fc9364569e89b123de81149233798718c4b698e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-expansion-recursion-guard.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-expansion-recursion-guard.js",
+      "sourceSha256": "05fab23ddc96c982a02f8887fa03ce4ee99671f7048c322e5b83820c89dbfc2e",
+      "programSha256": "05fab23ddc96c982a02f8887fa03ce4ee99671f7048c322e5b83820c89dbfc2e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/tools/lcm-grep-tool.js",
+      "program": "store/p0638/vendor/lossless-claw/tools/lcm-grep-tool.js",
+      "sourceSha256": "1313fe7e80b9128c4d54792e6feceab6a0203eba1c5035a15010fe0ba9c2aba9",
+      "programSha256": "1313fe7e80b9128c4d54792e6feceab6a0203eba1c5035a15010fe0ba9c2aba9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/transaction-mutex.js",
+      "program": "store/p0638/vendor/lossless-claw/transaction-mutex.js",
+      "sourceSha256": "5d7209d8a5f360d5288535ef8a8bd30a5a6f25741dfc7225911fb50b5df45c61",
+      "programSha256": "5d7209d8a5f360d5288535ef8a8bd30a5a6f25741dfc7225911fb50b5df45c61",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/transcript-anchor-audit.js",
+      "program": "store/p0638/vendor/lossless-claw/transcript-anchor-audit.js",
+      "sourceSha256": "7cb306db45ef29e4c7f911a514f2520ae9eab658aaea196097002cdc62b0d47e",
+      "programSha256": "7cb306db45ef29e4c7f911a514f2520ae9eab658aaea196097002cdc62b0d47e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/transcript-repair.js",
+      "program": "store/p0638/vendor/lossless-claw/transcript-repair.js",
+      "sourceSha256": "58e810577ae0b3c086d531ba4e7dcb0c23a32c82015dc0721bf05909fc2eac9a",
+      "programSha256": "58e810577ae0b3c086d531ba4e7dcb0c23a32c82015dc0721bf05909fc2eac9a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/transcript.js",
+      "program": "store/p0638/vendor/lossless-claw/transcript.js",
+      "sourceSha256": "57569ed9fcbef40129d91e0f375fb9f84453e22801bee388ff8c89eee8b6de54",
+      "programSha256": "57569ed9fcbef40129d91e0f375fb9f84453e22801bee388ff8c89eee8b6de54",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/types.js",
+      "program": "store/p0638/vendor/lossless-claw/types.js",
+      "sourceSha256": "c9a0b9026f2dad6e7d4788db1e16eaafadb2a69d95f6ea9b5f83f4150974d757",
+      "programSha256": "c9a0b9026f2dad6e7d4788db1e16eaafadb2a69d95f6ea9b5f83f4150974d757",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/user-replay.js",
+      "program": "store/p0638/vendor/lossless-claw/user-replay.js",
+      "sourceSha256": "6c938e9640b8148189677c7ccc65bf6edb7aab97ff235ee504124b52c73f01cd",
+      "programSha256": "6c938e9640b8148189677c7ccc65bf6edb7aab97ff235ee504124b52c73f01cd",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/lossless-claw/value-utils.js",
+      "program": "store/p0638/vendor/lossless-claw/value-utils.js",
+      "sourceSha256": "118abba61f0c8a4037ebf5994ad1a2f8ad128c7fe702f876bae4f88785214ddc",
+      "programSha256": "118abba61f0c8a4037ebf5994ad1a2f8ad128c7fe702f876bae4f88785214ddc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/mem0/index.js",
+      "program": "store/p0638/vendor/mem0/index.js",
+      "sourceSha256": "832335cbf6cdd384745353290779f844530a0665321240485e9758f390a92a59",
+      "programSha256": "832335cbf6cdd384745353290779f844530a0665321240485e9758f390a92a59",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/mem0/LICENSE",
+      "program": "store/p0638/vendor/mem0/LICENSE",
+      "sourceSha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "programSha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/mem0/package.json",
+      "program": "store/p0638/vendor/mem0/package.json",
+      "sourceSha256": "e4bc73e6a1e4ef48807fc580b514ffe44e9af2602f15f1e6d48cdfe84ae69a76",
+      "programSha256": "e4bc73e6a1e4ef48807fc580b514ffe44e9af2602f15f1e6d48cdfe84ae69a76",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/pinchbench/LICENSE",
+      "program": "store/p0638/vendor/pinchbench/LICENSE",
+      "sourceSha256": "f942b9b066da3d762e171514094917a887fe76cf72d057e2884f03fed5f6b2b0",
+      "programSha256": "f942b9b066da3d762e171514094917a887fe76cf72d057e2884f03fed5f6b2b0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/pinchbench/selected-sources.json",
+      "program": "store/p0638/vendor/pinchbench/selected-sources.json",
+      "sourceSha256": "36405515b9d7c4fe1f31f0bdc35ec43d7e785d6a75fe0289be703decf0967db8",
+      "programSha256": "36405515b9d7c4fe1f31f0bdc35ec43d7e785d6a75fe0289be703decf0967db8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/pinchbench/tasks/task_csv_cities_filter.md",
+      "program": "store/p0638/vendor/pinchbench/tasks/task_csv_cities_filter.md",
+      "sourceSha256": "fa674cffb51a6cd944e332994c83c7e1e3f7ffe05a2ded8767a400a0c2c74488",
+      "programSha256": "fa674cffb51a6cd944e332994c83c7e1e3f7ffe05a2ded8767a400a0c2c74488",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/pinchbench/tasks/task_sanity.md",
+      "program": "store/p0638/vendor/pinchbench/tasks/task_sanity.md",
+      "sourceSha256": "a6912dc746a88faba7557266da7ccd55fb5b02313701c276dffe6ff9e6e9059c",
+      "programSha256": "a6912dc746a88faba7557266da7ccd55fb5b02313701c276dffe6ff9e6e9059c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/plugin-group/vendor/pinchbench/tasks/task_summary.md",
+      "program": "store/p0638/vendor/pinchbench/tasks/task_summary.md",
+      "sourceSha256": "4b708aad0439834a514e5ccb4c424c22c2ff29a4a4f2cc2013b3cfbc837b52f2",
+      "programSha256": "4b708aad0439834a514e5ccb4c424c22c2ff29a4a4f2cc2013b3cfbc837b52f2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/bin/host.mjs",
+      "program": "store/p0620/bin/host.mjs",
+      "sourceSha256": "c6bd13e0491f8f698762df94066079aaf074a424aded6da19977a4ea06b44d19",
+      "programSha256": "c6bd13e0491f8f698762df94066079aaf074a424aded6da19977a4ea06b44d19",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/bin/recovery.mjs",
+      "program": "store/p0620/bin/recovery.mjs",
+      "sourceSha256": "3b55ca1b9127a1ce30d5098760007c08284112b7b811a354a19d0103f511a43e",
+      "programSha256": "3b55ca1b9127a1ce30d5098760007c08284112b7b811a354a19d0103f511a43e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/LICENSE",
+      "program": "store/p0620/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/LICENSE-SCOPE.json",
+      "program": "store/p0620/LICENSE-SCOPE.json",
+      "sourceSha256": "442280f1c9ea88c0be01dca1ac3d89bedb7201afc72d8552034ba90849b8498e",
+      "programSha256": "442280f1c9ea88c0be01dca1ac3d89bedb7201afc72d8552034ba90849b8498e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/LICENSE-SCOPE.md",
+      "program": "store/p0620/LICENSE-SCOPE.md",
+      "sourceSha256": "965b8000385b21a296ad3eb64dfb5cfae2e0cde03d8d322263d72e1230d5146e",
+      "programSha256": "965b8000385b21a296ad3eb64dfb5cfae2e0cde03d8d322263d72e1230d5146e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/package.json",
+      "program": "store/p0620/package.json",
+      "sourceSha256": "3c4c9415a41d95665130e75f786636b610afcc882003021d5b7943ea6f0d0d93",
+      "programSha256": "6c542f150362b35f5955fa04474a2899d74599e62b23ad17bbf4287da40dbc45",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/recovery/README-backup.md",
+      "program": "store/p0620/README-backup.md",
+      "sourceSha256": "5602605d3f6a5f50a3294c4be4c069d4bc9b35002b06a9fa3753be02e838c291",
+      "programSha256": "5602605d3f6a5f50a3294c4be4c069d4bc9b35002b06a9fa3753be02e838c291",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/README-continuation.md",
+      "program": "store/p0620/README-continuation.md",
+      "sourceSha256": "e06e9b589251515288057edf10b6a25fcbff874c1ea09ff741260324eb60fa9e",
+      "programSha256": "e06e9b589251515288057edf10b6a25fcbff874c1ea09ff741260324eb60fa9e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/README-controller.md",
+      "program": "store/p0620/README-controller.md",
+      "sourceSha256": "8bb73560af6b1a57e67f559cd2e6661aa05ebe8b6eddd15a1c933bb41753cee1",
+      "programSha256": "8bb73560af6b1a57e67f559cd2e6661aa05ebe8b6eddd15a1c933bb41753cee1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/README-guardian.md",
+      "program": "store/p0620/README-guardian.md",
+      "sourceSha256": "873bb33d9be2243ba1575cc830e2b815aa0a93a3f42196f418cab5266f9e25f2",
+      "programSha256": "873bb33d9be2243ba1575cc830e2b815aa0a93a3f42196f418cab5266f9e25f2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/README.md",
+      "program": "store/p0620/README.md",
+      "sourceSha256": "870d30d1edcc24566683b48125ff4c668522a9f5d5a8c30e12bf1a439aa54044",
+      "programSha256": "88ec96bbdbf16f711813dff6e68de59e23f20dc5410d5f3c606d2c230444b57d",
+      "exactByteMatch": false,
+      "differenceScope": "Documented current release/public source notice overlay versus runtime or historical README banner"
+    },
+    {
+      "source": "packages/sep/recovery/src/backup.mjs",
+      "program": "store/p0620/src/backup.mjs",
+      "sourceSha256": "24a9d546cca3d74cfb651433e8273046253c4e3f1b1a199cc8c64a0be2c19a14",
+      "programSha256": "24a9d546cca3d74cfb651433e8273046253c4e3f1b1a199cc8c64a0be2c19a14",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/client.mjs",
+      "program": "store/p0620/src/client.mjs",
+      "sourceSha256": "863a9ea41119828451fda6886463edab8c6452b1dd405b2ed86e61e66f33225a",
+      "programSha256": "863a9ea41119828451fda6886463edab8c6452b1dd405b2ed86e61e66f33225a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/continuation.mjs",
+      "program": "store/p0620/src/continuation.mjs",
+      "sourceSha256": "a62f3502dd6b1917fd689ab98cafef3c1ec097a1005a217ab640301927c1e05b",
+      "programSha256": "a62f3502dd6b1917fd689ab98cafef3c1ec097a1005a217ab640301927c1e05b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/controller.mjs",
+      "program": "store/p0620/src/controller.mjs",
+      "sourceSha256": "e836fe04e3f6971da3d1cf0838cc511167a8fe65286b8045349553e7024167c0",
+      "programSha256": "e836fe04e3f6971da3d1cf0838cc511167a8fe65286b8045349553e7024167c0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/desktop-continuation.mjs",
+      "program": "store/p0620/src/desktop-continuation.mjs",
+      "sourceSha256": "b6e1de851bf3f7d9d9d8d25abfa1ee8c8952ad7c4131d2f6d183f05c3f79e530",
+      "programSha256": "b6e1de851bf3f7d9d9d8d25abfa1ee8c8952ad7c4131d2f6d183f05c3f79e530",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/desktop-proxy.mjs",
+      "program": "store/p0620/src/desktop-proxy.mjs",
+      "sourceSha256": "bb903cad06b727aca62f6c7d992d339e2edb0cee439c25e883c28009035980e9",
+      "programSha256": "bb903cad06b727aca62f6c7d992d339e2edb0cee439c25e883c28009035980e9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/guardian.mjs",
+      "program": "store/p0620/src/guardian.mjs",
+      "sourceSha256": "3fb0de9fdc60dbec6ae2021b6f3e6cc7f0c451fb51fd69ebe49976476a52cfe2",
+      "programSha256": "3fb0de9fdc60dbec6ae2021b6f3e6cc7f0c451fb51fd69ebe49976476a52cfe2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/host-plugin.mjs",
+      "program": "store/p0620/src/host-plugin.mjs",
+      "sourceSha256": "b51593763bc12b524f29dd5f48cba5d6b48854db38c5ce5ca2bef3f2d4830cfa",
+      "programSha256": "b51593763bc12b524f29dd5f48cba5d6b48854db38c5ce5ca2bef3f2d4830cfa",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/host-runtime.mjs",
+      "program": "store/p0620/src/host-runtime.mjs",
+      "sourceSha256": "bac3170ee182aefb9cdebcf05601262cafa86f24fe9fcef29250d33cddcda754",
+      "programSha256": "bac3170ee182aefb9cdebcf05601262cafa86f24fe9fcef29250d33cddcda754",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/http-carrier.mjs",
+      "program": "store/p0620/src/http-carrier.mjs",
+      "sourceSha256": "f77de4aaf5655d03d4b9116e5cdc9eb11baedb1e47b7b1ab91b86dbd6f37c07f",
+      "programSha256": "f77de4aaf5655d03d4b9116e5cdc9eb11baedb1e47b7b1ab91b86dbd6f37c07f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/index.mjs",
+      "program": "store/p0620/src/index.mjs",
+      "sourceSha256": "0675afea75ea228b74cab1e10b5b953da375dad6b19036646ea2f188359d79bd",
+      "programSha256": "0675afea75ea228b74cab1e10b5b953da375dad6b19036646ea2f188359d79bd",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/maintenance.mjs",
+      "program": "store/p0620/src/maintenance.mjs",
+      "sourceSha256": "cd9e4e9ea9d11aa2416c38c8448f8d0c416f11f38a82da3ed18d5fb4f2838bee",
+      "programSha256": "cd9e4e9ea9d11aa2416c38c8448f8d0c416f11f38a82da3ed18d5fb4f2838bee",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/managed.mjs",
+      "program": "store/p0620/src/managed.mjs",
+      "sourceSha256": "bc953f110cd65bb919d3d2bd21d84433c713bacfdce70e775f4fec5eb4c0c229",
+      "programSha256": "bc953f110cd65bb919d3d2bd21d84433c713bacfdce70e775f4fec5eb4c0c229",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/owner-lease.mjs",
+      "program": "store/p0620/src/owner-lease.mjs",
+      "sourceSha256": "7c0253ec460bb4eca9a97bc1936602e704a3c7badede5042311e05fb770d2c84",
+      "programSha256": "7c0253ec460bb4eca9a97bc1936602e704a3c7badede5042311e05fb770d2c84",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/owner-posix.mjs",
+      "program": "store/p0620/src/owner-posix.mjs",
+      "sourceSha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "programSha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/quit-inspection.mjs",
+      "program": "store/p0620/src/quit-inspection.mjs",
+      "sourceSha256": "b2252d36408cdf9d79b9d451ac23e92e17558685ffe6d546f1c8313753375e8a",
+      "programSha256": "b2252d36408cdf9d79b9d451ac23e92e17558685ffe6d546f1c8313753375e8a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/sep-lock-native.mjs",
+      "program": "store/p0620/src/sep-lock-native.mjs",
+      "sourceSha256": "35287403a076a816f9758c5b20f15b3ed5503c9f83cc4e283e91795ec16b7bb1",
+      "programSha256": "35287403a076a816f9758c5b20f15b3ed5503c9f83cc4e283e91795ec16b7bb1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/sep-lock-recovery.mjs",
+      "program": "store/p0620/src/sep-lock-recovery.mjs",
+      "sourceSha256": "ad55a874f754dbb63c71c17aa4917e7b34283ee00094535835aba52eef88af83",
+      "programSha256": "ad55a874f754dbb63c71c17aa4917e7b34283ee00094535835aba52eef88af83",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/server.mjs",
+      "program": "store/p0620/src/server.mjs",
+      "sourceSha256": "4db8cb81e551673be3dd0389719d43971cdb4186e17667de7462a3cbb7de66f0",
+      "programSha256": "4db8cb81e551673be3dd0389719d43971cdb4186e17667de7462a3cbb7de66f0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/startup-diagnostic.d.mts",
+      "program": "store/p0620/src/startup-diagnostic.d.mts",
+      "sourceSha256": "3a5e67885d4ee7a626ba6567747edfc2d0e845e4aeabc80e0a7d6261eb4a5d64",
+      "programSha256": "3a5e67885d4ee7a626ba6567747edfc2d0e845e4aeabc80e0a7d6261eb4a5d64",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/startup-diagnostic.mjs",
+      "program": "store/p0620/src/startup-diagnostic.mjs",
+      "sourceSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "programSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/src/suite-plugin.mjs",
+      "program": "store/p0620/src/suite-plugin.mjs",
+      "sourceSha256": "f65e0b0bf1744211d4e9779d2a821529ae3190b4370136d1c9fa362523ae7c34",
+      "programSha256": "f65e0b0bf1744211d4e9779d2a821529ae3190b4370136d1c9fa362523ae7c34",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/ui/app.js",
+      "program": "store/p0620/ui/app.js",
+      "sourceSha256": "1e053f9564971772f748297ceff439f9322b5e25813684d4b50f892bb91cfe83",
+      "programSha256": "1e053f9564971772f748297ceff439f9322b5e25813684d4b50f892bb91cfe83",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/recovery/ui/index.html",
+      "program": "store/p0620/ui/index.html",
+      "sourceSha256": "9b896e7fb6d2d90448601bf8c6e88cf3a05bc37cce2d6332bdab6a3d08180a8c",
+      "programSha256": "9b896e7fb6d2d90448601bf8c6e88cf3a05bc37cce2d6332bdab6a3d08180a8c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/LICENSE",
+      "program": "store/p0635/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "programSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/package.json",
+      "program": "store/p0635/package.json",
+      "sourceSha256": "feffed80be0424d095484561e02651b6703d3dd35b1b1e2f0e4ae360aa27eddc",
+      "programSha256": "3537c6ac6a436e353ee022dc0a41c0abfc3bbe6044d234190bfe4c5476b2d868",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/session-migration/README.md",
+      "program": "store/p0635/README.md",
+      "sourceSha256": "45121f78820b7df4ae82ae8a32b0cba755dbccec3c416057ed84cdf666a00360",
+      "programSha256": "45121f78820b7df4ae82ae8a32b0cba755dbccec3c416057ed84cdf666a00360",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/extensions.mjs",
+      "program": "store/p0635/src/extensions.mjs",
+      "sourceSha256": "823743a092579725f46b17df6cdcabfe1af871f59f916562b1566bd07bd450a1",
+      "programSha256": "823743a092579725f46b17df6cdcabfe1af871f59f916562b1566bd07bd450a1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/index.d.mts",
+      "program": "store/p0635/src/index.d.mts",
+      "sourceSha256": "ef6166ca7242d834f7db4939f762519aca2ff0b2fbcfdf69addede75526e03a3",
+      "programSha256": "ef6166ca7242d834f7db4939f762519aca2ff0b2fbcfdf69addede75526e03a3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/index.mjs",
+      "program": "store/p0635/src/index.mjs",
+      "sourceSha256": "010d548740c7a7502f89774f26606c85763228e0d7a1c05b46bb46b2e68ab0db",
+      "programSha256": "010d548740c7a7502f89774f26606c85763228e0d7a1c05b46bb46b2e68ab0db",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/vendor/v0-v1.mjs",
+      "program": "store/p0635/src/vendor/v0-v1.mjs",
+      "sourceSha256": "7930a62f26369cb0c4a19b0c885f6d91a955ae0700297380b9aaca199be31935",
+      "programSha256": "7930a62f26369cb0c4a19b0c885f6d91a955ae0700297380b9aaca199be31935",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/vendor/v1-v2.mjs",
+      "program": "store/p0635/src/vendor/v1-v2.mjs",
+      "sourceSha256": "b5363da32888d5ab00b3820b2cf6ee342c1b5dfa535a404f70ce8d3778c63b6b",
+      "programSha256": "b5363da32888d5ab00b3820b2cf6ee342c1b5dfa535a404f70ce8d3778c63b6b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/src/vendor/v2-v3.mjs",
+      "program": "store/p0635/src/vendor/v2-v3.mjs",
+      "sourceSha256": "c5085d40cd3eae39982a7a1c799998dbea7da90254a63d16ed4571d2e6e14c5f",
+      "programSha256": "c5085d40cd3eae39982a7a1c799998dbea7da90254a63d16ed4571d2e6e14c5f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/session-migration/vendor-provenance.json",
+      "program": "store/p0635/vendor-provenance.json",
+      "sourceSha256": "0fd2dd7de774db14c30cbbaf77b3793b919adef1562b5fb2606f05e06067a7c0",
+      "programSha256": "0fd2dd7de774db14c30cbbaf77b3793b919adef1562b5fb2606f05e06067a7c0",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/cordis.patch.yml",
+      "program": "store/p0621/cordis.patch.yml",
+      "sourceSha256": "20e7d4046eb8dafd2861e5720155f10adeae3d3b0e2f7e48b41232891df88668",
+      "programSha256": "20e7d4046eb8dafd2861e5720155f10adeae3d3b0e2f7e48b41232891df88668",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/budget-policy-20260927.md",
+      "program": "store/p0621/docs/budget-policy-20260927.md",
+      "sourceSha256": "0c339afd90ed32b95025e2e8c5159087571529a57ea5d8df8a433dbe1dcc8a11",
+      "programSha256": "0c339afd90ed32b95025e2e8c5159087571529a57ea5d8df8a433dbe1dcc8a11",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/owner-portability.md",
+      "program": "store/p0621/docs/owner-portability.md",
+      "sourceSha256": "4e3441279b1316149d4381691bffce6e1d470c6456c45fead289b94ac9c60d03",
+      "programSha256": "4e3441279b1316149d4381691bffce6e1d470c6456c45fead289b94ac9c60d03",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/safe-change-workflow.i18n.yaml",
+      "program": "store/p0621/docs/safe-change-workflow.i18n.yaml",
+      "sourceSha256": "d03f7c2e47164a0f5bb32289cad0ea72ceceb19f801aeb8517c2cce4658aff78",
+      "programSha256": "d03f7c2e47164a0f5bb32289cad0ea72ceceb19f801aeb8517c2cce4658aff78",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/safe-change-workflow.md",
+      "program": "store/p0621/docs/safe-change-workflow.md",
+      "sourceSha256": "95997a62e0c6809a51d3372d24fe38b2c0727a51dd55a10c00f8c1ca75b5d2e6",
+      "programSha256": "95997a62e0c6809a51d3372d24fe38b2c0727a51dd55a10c00f8c1ca75b5d2e6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/safe-change-workflow.zh.md",
+      "program": "store/p0621/docs/safe-change-workflow.zh.md",
+      "sourceSha256": "1891ffd10f5cede4f7ee52230c22922f86b5f552589cf7ced8bc6d09aab770df",
+      "programSha256": "1891ffd10f5cede4f7ee52230c22922f86b5f552589cf7ced8bc6d09aab770df",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/session-budget.md",
+      "program": "store/p0621/docs/session-budget.md",
+      "sourceSha256": "d3935c19c183585713eeee6278f82d5cda719f099c1e4c0936973764c149fb08",
+      "programSha256": "d3935c19c183585713eeee6278f82d5cda719f099c1e4c0936973764c149fb08",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/update-assessment.i18n.yaml",
+      "program": "store/p0621/docs/update-assessment.i18n.yaml",
+      "sourceSha256": "6d464c7a16b8e1a1da69dd22775fc779047bd9d477521a602d2b5ef36dabb063",
+      "programSha256": "6d464c7a16b8e1a1da69dd22775fc779047bd9d477521a602d2b5ef36dabb063",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/update-assessment.md",
+      "program": "store/p0621/docs/update-assessment.md",
+      "sourceSha256": "68b24e9d07b4b2444ceb5d0a9e3908e367632777c7466d2766b2e08ba612f2b6",
+      "programSha256": "68b24e9d07b4b2444ceb5d0a9e3908e367632777c7466d2766b2e08ba612f2b6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/docs/update-assessment.zh.md",
+      "program": "store/p0621/docs/update-assessment.zh.md",
+      "sourceSha256": "567f25afcc8d0ec6e2af6871e72a6a974637f98fd0360bb92405621e97179a1b",
+      "programSha256": "567f25afcc8d0ec6e2af6871e72a6a974637f98fd0360bb92405621e97179a1b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/LICENSE",
+      "program": "store/p0621/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/LICENSE-SCOPE.json",
+      "program": "store/p0621/LICENSE-SCOPE.json",
+      "sourceSha256": "f2a24079bac9cb2873c610e46c0694ddb378c798bf823587d16c699a246551b8",
+      "programSha256": "f2a24079bac9cb2873c610e46c0694ddb378c798bf823587d16c699a246551b8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/LICENSE-SCOPE.md",
+      "program": "store/p0621/LICENSE-SCOPE.md",
+      "sourceSha256": "022f702405991c59e5e32ada11cba14a9899cbbb2f63afc67ad056665dade903",
+      "programSha256": "022f702405991c59e5e32ada11cba14a9899cbbb2f63afc67ad056665dade903",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/anynum-1.0.1-LICENSE",
+      "program": "store/p0621/licenses/anynum-1.0.1-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "programSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/DSH-RAG-MIT.txt",
+      "program": "store/p0621/licenses/DSH-RAG-MIT.txt",
+      "sourceSha256": "ca448b0d1e97ebda348510e06bcb5b210f8ee3ec9aa28e890d2af799bc6c93a1",
+      "programSha256": "ca448b0d1e97ebda348510e06bcb5b210f8ee3ec9aa28e890d2af799bc6c93a1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/fast-xml-builder-1.3.1-LICENSE",
+      "program": "store/p0621/licenses/fast-xml-builder-1.3.1-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "programSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/fast-xml-parser-5.11.1-LICENSE",
+      "program": "store/p0621/licenses/fast-xml-parser-5.11.1-LICENSE",
+      "sourceSha256": "7883225d5e84a6bbb9b170c3d891b4bf6d6259cee869c86bd86381a927071745",
+      "programSha256": "7883225d5e84a6bbb9b170c3d891b4bf6d6259cee869c86bd86381a927071745",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/fflate-0.8.3-LICENSE",
+      "program": "store/p0621/licenses/fflate-0.8.3-LICENSE",
+      "sourceSha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551",
+      "programSha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/is-unsafe-2.0.2-LICENSE",
+      "program": "store/p0621/licenses/is-unsafe-2.0.2-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "programSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/napi-rs-canvas-1.0.8-LICENSE",
+      "program": "store/p0621/licenses/napi-rs-canvas-1.0.8-LICENSE",
+      "sourceSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "programSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+      "program": "store/p0621/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+      "sourceSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "programSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+      "program": "store/p0621/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+      "sourceSha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "programSha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/path-expression-matcher-1.6.2-LICENSE",
+      "program": "store/p0621/licenses/path-expression-matcher-1.6.2-LICENSE",
+      "sourceSha256": "75486ea0af9309140ca6e2c401d7e67bea8f4892344e5707f6394dc5e83dfc44",
+      "programSha256": "75486ea0af9309140ca6e2c401d7e67bea8f4892344e5707f6394dc5e83dfc44",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/pdfjs-dist-6.2.108-LICENSE",
+      "program": "store/p0621/licenses/pdfjs-dist-6.2.108-LICENSE",
+      "sourceSha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "programSha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/strnum-2.4.2-LICENSE",
+      "program": "store/p0621/licenses/strnum-2.4.2-LICENSE",
+      "sourceSha256": "2aa16be0f4fad003a352a955a43314e9d1d8deef7034060a82ac9c49f32b81e2",
+      "programSha256": "2aa16be0f4fad003a352a955a43314e9d1d8deef7034060a82ac9c49f32b81e2",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/xml-naming-0.3.0-LICENSE",
+      "program": "store/p0621/licenses/xml-naming-0.3.0-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "programSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/licenses/zod-4.4.3-LICENSE",
+      "program": "store/p0621/licenses/zod-4.4.3-LICENSE",
+      "sourceSha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
+      "programSha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/package.json",
+      "program": "store/p0621/package.json",
+      "sourceSha256": "2c204342ec40af86718941c493b7f4fd8d0856ae85ac3ec0b2473c11f14a4117",
+      "programSha256": "7966089a957875e1e1ce253539c19f5695b2de2460e78e475d7fb41d490a0266",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/README.md",
+      "program": "store/p0621/README.md",
+      "sourceSha256": "f46bcc4eee1cffd11fc0e1f115cde469fc1fd010e378db92b3d53c6ee69b6567",
+      "programSha256": "9dc27029eccdb61cb5e6a7522c088cf64c0418e0d4a2e81d2ca46b60b7bfcd9b",
+      "exactByteMatch": false,
+      "differenceScope": "Documented current release/public source notice overlay versus runtime or historical README banner"
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/access-queue.js",
+      "program": "store/p0621/src/access-queue.js",
+      "sourceSha256": "d9655a0340c670008fb463526978a3e3ba72a3a8a4effc311350157b310a13a5",
+      "programSha256": "d9655a0340c670008fb463526978a3e3ba72a3a8a4effc311350157b310a13a5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/automatic-layered-memory.js",
+      "program": "store/p0621/src/automatic-layered-memory.js",
+      "sourceSha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+      "programSha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/automatic-memory.js",
+      "program": "store/p0621/src/automatic-memory.js",
+      "sourceSha256": "37b2dcac6157e03fc88a5103081c412c16f580058d3b26378f4188f5a4b922c4",
+      "programSha256": "37b2dcac6157e03fc88a5103081c412c16f580058d3b26378f4188f5a4b922c4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/automation-settings.js",
+      "program": "store/p0621/src/automation-settings.js",
+      "sourceSha256": "5e832328b4827ebb1a79fcc696a6a21d76604b00ca7056372226531013004511",
+      "programSha256": "5e832328b4827ebb1a79fcc696a6a21d76604b00ca7056372226531013004511",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-continuity.js",
+      "program": "store/p0621/src/budget-continuity.js",
+      "sourceSha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8",
+      "programSha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-ledger.js",
+      "program": "store/p0621/src/budget-ledger.js",
+      "sourceSha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475",
+      "programSha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-legacy-reconcile.js",
+      "program": "store/p0621/src/budget-legacy-reconcile.js",
+      "sourceSha256": "dfd2d44ab81980a5f0830e4d0924f33d8811244940c4570c6fbb2fec1256e44c",
+      "programSha256": "dfd2d44ab81980a5f0830e4d0924f33d8811244940c4570c6fbb2fec1256e44c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-lock.js",
+      "program": "store/p0621/src/budget-lock.js",
+      "sourceSha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5",
+      "programSha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-pricing.js",
+      "program": "store/p0621/src/budget-pricing.js",
+      "sourceSha256": "59bf838c9c101436346967cafe2b731ed26afa6881114220c2a43fa1addce58a",
+      "programSha256": "59bf838c9c101436346967cafe2b731ed26afa6881114220c2a43fa1addce58a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-request.js",
+      "program": "store/p0621/src/budget-request.js",
+      "sourceSha256": "ca27e79b68db4e847ecab12cdb3d76c606a61f96ba255d2644e7a390c79f0e3b",
+      "programSha256": "ca27e79b68db4e847ecab12cdb3d76c606a61f96ba255d2644e7a390c79f0e3b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-scope.js",
+      "program": "store/p0621/src/budget-scope.js",
+      "sourceSha256": "dbc192a71fff57baaf688715bc3502ba15a29f739b69246c467f91f980860573",
+      "programSha256": "dbc192a71fff57baaf688715bc3502ba15a29f739b69246c467f91f980860573",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/budget-settings-service.js",
+      "program": "store/p0621/src/budget-settings-service.js",
+      "sourceSha256": "487665ce7d2d9f0f3b29fb5dbd84598f4d1a48d5be4e1b59a67ddca882a3627c",
+      "programSha256": "487665ce7d2d9f0f3b29fb5dbd84598f4d1a48d5be4e1b59a67ddca882a3627c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/computer-click.js",
+      "program": "store/p0621/src/computer-click.js",
+      "sourceSha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+      "programSha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/deepseek.js",
+      "program": "store/p0621/src/deepseek.js",
+      "sourceSha256": "b54f88513bef5783b6c1a106ac9638d6f17c3d35144104729314df5ab004e8bc",
+      "programSha256": "b54f88513bef5783b6c1a106ac9638d6f17c3d35144104729314df5ab004e8bc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/document-cli.js",
+      "program": "store/p0621/src/document-cli.js",
+      "sourceSha256": "edbd80ca76b489ddf98e37e58d8ec74a0610d02552116c56a9e6b799b2b8caa1",
+      "programSha256": "edbd80ca76b489ddf98e37e58d8ec74a0610d02552116c56a9e6b799b2b8caa1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/document-source-win32.ps1",
+      "program": "store/p0621/src/document-source-win32.ps1",
+      "sourceSha256": "63864b2c3c1b1cf8b7eea2216f1792ba0c49af297a469cf9686b9ecb0cee9552",
+      "programSha256": "63864b2c3c1b1cf8b7eea2216f1792ba0c49af297a469cf9686b9ecb0cee9552",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/document-source.js",
+      "program": "store/p0621/src/document-source.js",
+      "sourceSha256": "da0af1088f4e9b3e0e311c631a63ca06d4257cb14a2862c9ed09c2cc743f5b9c",
+      "programSha256": "da0af1088f4e9b3e0e311c631a63ca06d4257cb14a2862c9ed09c2cc743f5b9c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/documents.js",
+      "program": "store/p0621/src/documents.js",
+      "sourceSha256": "4a5aabeea2b3e3805415a6c239f6bc8d01a6cc8806b66b944c23086c589199cc",
+      "programSha256": "4a5aabeea2b3e3805415a6c239f6bc8d01a6cc8806b66b944c23086c589199cc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/errors.js",
+      "program": "store/p0621/src/errors.js",
+      "sourceSha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3",
+      "programSha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/index.js",
+      "program": "store/p0621/src/index.js",
+      "sourceSha256": "5ed066004dfc0beddaff18f621557cae0b4a89396470861a8b88a79f2af05bfb",
+      "programSha256": "5ed066004dfc0beddaff18f621557cae0b4a89396470861a8b88a79f2af05bfb",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/layer-policy.js",
+      "program": "store/p0621/src/layer-policy.js",
+      "sourceSha256": "3963c15421951c0728baedef89bef4abf921f45e51ec063f1c779078e7951f84",
+      "programSha256": "3963c15421951c0728baedef89bef4abf921f45e51ec063f1c779078e7951f84",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/layered-memory.js",
+      "program": "store/p0621/src/layered-memory.js",
+      "sourceSha256": "2e9c22aa8b041942335842c190b96feb17c911db82acba5c9f70702913d7235d",
+      "programSha256": "2e9c22aa8b041942335842c190b96feb17c911db82acba5c9f70702913d7235d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/media.js",
+      "program": "store/p0621/src/media.js",
+      "sourceSha256": "6873d53ce70c84dc158d9528ee68e6497381b94feae3469e78c391afe092eec3",
+      "programSha256": "6873d53ce70c84dc158d9528ee68e6497381b94feae3469e78c391afe092eec3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/memory-commit.js",
+      "program": "store/p0621/src/memory-commit.js",
+      "sourceSha256": "10766372e2cc2b5cba67e0a3d7850e1c36c37de05816992bffa1e530903dcabe",
+      "programSha256": "10766372e2cc2b5cba67e0a3d7850e1c36c37de05816992bffa1e530903dcabe",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/memory-context.js",
+      "program": "store/p0621/src/memory-context.js",
+      "sourceSha256": "e9b38e37cdee181cbae23106c5bfac22170ef3bde766570f64d2f8fd1c4283ce",
+      "programSha256": "e9b38e37cdee181cbae23106c5bfac22170ef3bde766570f64d2f8fd1c4283ce",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/memory-settings-service.js",
+      "program": "store/p0621/src/memory-settings-service.js",
+      "sourceSha256": "f2c08998ca06216aecde46b54acfa5fb3f906d1d657bf37e1412481c465607b3",
+      "programSha256": "f2c08998ca06216aecde46b54acfa5fb3f906d1d657bf37e1412481c465607b3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/memory.js",
+      "program": "store/p0621/src/memory.js",
+      "sourceSha256": "3249ab50a531ad07295c115fdc409dfc846c8e3d34014918c873daf93eb8203f",
+      "programSha256": "3249ab50a531ad07295c115fdc409dfc846c8e3d34014918c873daf93eb8203f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/native-image-budget.js",
+      "program": "store/p0621/src/native-image-budget.js",
+      "sourceSha256": "2ec59128ae035c12ca4efd7e4e6954671bca706a71058454881cf4fd89edd668",
+      "programSha256": "2ec59128ae035c12ca4efd7e4e6954671bca706a71058454881cf4fd89edd668",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/owner-lease.mjs",
+      "program": "store/p0621/src/owner-lease.mjs",
+      "sourceSha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "programSha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/owner-posix.mjs",
+      "program": "store/p0621/src/owner-posix.mjs",
+      "sourceSha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "programSha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p1-failures.js",
+      "program": "store/p0621/src/p1-failures.js",
+      "sourceSha256": "dc1e84e76426ac6506d544a6785c2b6f2b2327eea48b03870a3ab9860ba8dc36",
+      "programSha256": "dc1e84e76426ac6506d544a6785c2b6f2b2327eea48b03870a3ab9860ba8dc36",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p1.js",
+      "program": "store/p0621/src/p1.js",
+      "sourceSha256": "3e4e8d836137186a77213f0ebc7ea8700cfaa1d360e3f6d745fdd1f1cb00184a",
+      "programSha256": "3e4e8d836137186a77213f0ebc7ea8700cfaa1d360e3f6d745fdd1f1cb00184a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-admission.js",
+      "program": "store/p0621/src/p2/adoption-admission.js",
+      "sourceSha256": "69f885292c614b6566f7240dc325c8dd5db0290095e0579a2780a0d34b640eca",
+      "programSha256": "69f885292c614b6566f7240dc325c8dd5db0290095e0579a2780a0d34b640eca",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-budget.js",
+      "program": "store/p0621/src/p2/adoption-budget.js",
+      "sourceSha256": "81d4f009866ad2275dd2a42f20d6e780503f840ed2d63b41ee3bf32ce8ce8efe",
+      "programSha256": "81d4f009866ad2275dd2a42f20d6e780503f840ed2d63b41ee3bf32ce8ce8efe",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-candidates.js",
+      "program": "store/p0621/src/p2/adoption-candidates.js",
+      "sourceSha256": "1816d1edc0b06683b6b1e16b89296695c47b15dde35f5438d112ba50677c0f82",
+      "programSha256": "1816d1edc0b06683b6b1e16b89296695c47b15dde35f5438d112ba50677c0f82",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-capture-win32.ps1",
+      "program": "store/p0621/src/p2/adoption-capture-win32.ps1",
+      "sourceSha256": "7184cf4b91ac508debc2d1c0e58bf9305e431fe22281b083315fb90a24f52029",
+      "programSha256": "7184cf4b91ac508debc2d1c0e58bf9305e431fe22281b083315fb90a24f52029",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-capture.js",
+      "program": "store/p0621/src/p2/adoption-capture.js",
+      "sourceSha256": "29959e2d90fcfe72338b55d159a77ab56a8421eaf9f15af00aeee8a7591988d5",
+      "programSha256": "29959e2d90fcfe72338b55d159a77ab56a8421eaf9f15af00aeee8a7591988d5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-cli.js",
+      "program": "store/p0621/src/p2/adoption-cli.js",
+      "sourceSha256": "bb1c9f5fe924839cc4ba3970ee6296ce15d410eb061cbaa6a1d889087bf89a47",
+      "programSha256": "bb1c9f5fe924839cc4ba3970ee6296ce15d410eb061cbaa6a1d889087bf89a47",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-copies.js",
+      "program": "store/p0621/src/p2/adoption-copies.js",
+      "sourceSha256": "16949c813af77ac92dc7846c8cd1c25a0f5e70629de39b14a13934320c9eb051",
+      "programSha256": "16949c813af77ac92dc7846c8cd1c25a0f5e70629de39b14a13934320c9eb051",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-governance.js",
+      "program": "store/p0621/src/p2/adoption-governance.js",
+      "sourceSha256": "dbd5036549160c57af185cb6775dfe1a2c5a5a975ec4cc16e4f0b7535e51aafe",
+      "programSha256": "dbd5036549160c57af185cb6775dfe1a2c5a5a975ec4cc16e4f0b7535e51aafe",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-health.js",
+      "program": "store/p0621/src/p2/adoption-health.js",
+      "sourceSha256": "a88a1e3d2481b674cbdae3780bdcf33ae61dc9aa37da4fcd944d5b588359d4c9",
+      "programSha256": "a88a1e3d2481b674cbdae3780bdcf33ae61dc9aa37da4fcd944d5b588359d4c9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-lifecycle.js",
+      "program": "store/p0621/src/p2/adoption-lifecycle.js",
+      "sourceSha256": "b626bee0a48855c056c434cd804aa2217d2294ac4baf61720b045c9cdfd2f22d",
+      "programSha256": "b626bee0a48855c056c434cd804aa2217d2294ac4baf61720b045c9cdfd2f22d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-metadata-retention.js",
+      "program": "store/p0621/src/p2/adoption-metadata-retention.js",
+      "sourceSha256": "654593d0c69518c59acf955c40e035efb2ae685263030d38eb94b718b5439e1f",
+      "programSha256": "654593d0c69518c59acf955c40e035efb2ae685263030d38eb94b718b5439e1f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-metadata.js",
+      "program": "store/p0621/src/p2/adoption-metadata.js",
+      "sourceSha256": "f2285db1a6f2bdbafecc4c1a87d7b369bc8175b341460bd3a7d540f4c014b3c6",
+      "programSha256": "f2285db1a6f2bdbafecc4c1a87d7b369bc8175b341460bd3a7d540f4c014b3c6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-presentation.js",
+      "program": "store/p0621/src/p2/adoption-presentation.js",
+      "sourceSha256": "bee7b3b6834500bd6f803ff579ebf95b943687822d03719b62515a5eed905ee4",
+      "programSha256": "bee7b3b6834500bd6f803ff579ebf95b943687822d03719b62515a5eed905ee4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-publication.js",
+      "program": "store/p0621/src/p2/adoption-publication.js",
+      "sourceSha256": "4c52788bcf469fb66c9a93366c801118b963ab78893a7e4165396b9422a3ac0e",
+      "programSha256": "4c52788bcf469fb66c9a93366c801118b963ab78893a7e4165396b9422a3ac0e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-restore-cli.js",
+      "program": "store/p0621/src/p2/adoption-restore-cli.js",
+      "sourceSha256": "97ee602486b91c196b7596eef9f38f131250d1644a3d9e6b29cb7ed11da0c03f",
+      "programSha256": "97ee602486b91c196b7596eef9f38f131250d1644a3d9e6b29cb7ed11da0c03f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-restore.js",
+      "program": "store/p0621/src/p2/adoption-restore.js",
+      "sourceSha256": "e8d00e9c5c742bfb94b0b5ebe5269f0668e2a7d3bdd8ef7659f4b91637073c3a",
+      "programSha256": "e8d00e9c5c742bfb94b0b5ebe5269f0668e2a7d3bdd8ef7659f4b91637073c3a",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-retention-cli.js",
+      "program": "store/p0621/src/p2/adoption-retention-cli.js",
+      "sourceSha256": "0f5d1ce7297e58177f008e07af21bd677c42dce17e30548f2f33f04e2a459133",
+      "programSha256": "0f5d1ce7297e58177f008e07af21bd677c42dce17e30548f2f33f04e2a459133",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-retention.js",
+      "program": "store/p0621/src/p2/adoption-retention.js",
+      "sourceSha256": "defed25e495d6c08d41d8ea683595573d2dd3b61533ac7ef6afba9c482db7874",
+      "programSha256": "defed25e495d6c08d41d8ea683595573d2dd3b61533ac7ef6afba9c482db7874",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption-terminal.js",
+      "program": "store/p0621/src/p2/adoption-terminal.js",
+      "sourceSha256": "1160069340437e3593e9e3412a781f7edcd9d51d1c5cf3e067e43d4b76fdc9c5",
+      "programSha256": "1160069340437e3593e9e3412a781f7edcd9d51d1c5cf3e067e43d4b76fdc9c5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/adoption.js",
+      "program": "store/p0621/src/p2/adoption.js",
+      "sourceSha256": "081d2c5665fd6982e3ac271224b0a28f93197631c0e7081f7edc95bfc6133640",
+      "programSha256": "081d2c5665fd6982e3ac271224b0a28f93197631c0e7081f7edc95bfc6133640",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/artifacts.js",
+      "program": "store/p0621/src/p2/artifacts.js",
+      "sourceSha256": "5815fcbf1b8f5544f8d14a56c82ae92c452af45e9d865989171f3ddfd0b20397",
+      "programSha256": "5815fcbf1b8f5544f8d14a56c82ae92c452af45e9d865989171f3ddfd0b20397",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/backups.js",
+      "program": "store/p0621/src/p2/backups.js",
+      "sourceSha256": "5ec0431cb1327e122e815b800f30ce072216b4b19b5b298aa4587659b54278d5",
+      "programSha256": "5ec0431cb1327e122e815b800f30ce072216b4b19b5b298aa4587659b54278d5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/cli.js",
+      "program": "store/p0621/src/p2/cli.js",
+      "sourceSha256": "4572162dcd1533ef9f2fc9fc5f4a0873728846152a77acf3d2a036e3f2429908",
+      "programSha256": "4572162dcd1533ef9f2fc9fc5f4a0873728846152a77acf3d2a036e3f2429908",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/config-binding.js",
+      "program": "store/p0621/src/p2/config-binding.js",
+      "sourceSha256": "9ad8b29b57cc55cabd90b2fdcdf1c72b0a7c8df9e7ef26127ed063c92bf517dc",
+      "programSha256": "9ad8b29b57cc55cabd90b2fdcdf1c72b0a7c8df9e7ef26127ed063c92bf517dc",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/control.js",
+      "program": "store/p0621/src/p2/control.js",
+      "sourceSha256": "dfe42a1e75f6a594964481f0c0b83bba0aec6adcff2b6043b9d8a79866cf36d1",
+      "programSha256": "dfe42a1e75f6a594964481f0c0b83bba0aec6adcff2b6043b9d8a79866cf36d1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/document-governance.js",
+      "program": "store/p0621/src/p2/document-governance.js",
+      "sourceSha256": "579e66698c842e09f46afb3589de1215a1a70d69ec2ed16e62e886eebf0cc331",
+      "programSha256": "579e66698c842e09f46afb3589de1215a1a70d69ec2ed16e62e886eebf0cc331",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/health.js",
+      "program": "store/p0621/src/p2/health.js",
+      "sourceSha256": "977c563937e22c0014f65eb24e4d5a781168658b5a2a458a6e187d779e0c0356",
+      "programSha256": "977c563937e22c0014f65eb24e4d5a781168658b5a2a458a6e187d779e0c0356",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/host-admission.js",
+      "program": "store/p0621/src/p2/host-admission.js",
+      "sourceSha256": "92cfae3e3afe8f35a44ab79b378884c10ddd466d720b63f2fb38f0331d804e0c",
+      "programSha256": "92cfae3e3afe8f35a44ab79b378884c10ddd466d720b63f2fb38f0331d804e0c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/install-inputs.js",
+      "program": "store/p0621/src/p2/install-inputs.js",
+      "sourceSha256": "cfa0104c97a9c0c5e9530c39291304b26540ee9b24069743f3cd5bc92165f2f9",
+      "programSha256": "cfa0104c97a9c0c5e9530c39291304b26540ee9b24069743f3cd5bc92165f2f9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/migrations.js",
+      "program": "store/p0621/src/p2/migrations.js",
+      "sourceSha256": "d5bb052215bc41de47cce08369777f39be55cf98a45874000ca8e4249cb6d108",
+      "programSha256": "d5bb052215bc41de47cce08369777f39be55cf98a45874000ca8e4249cb6d108",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/recovery-maintenance.js",
+      "program": "store/p0621/src/p2/recovery-maintenance.js",
+      "sourceSha256": "b90a947ed846bcf8114d582aab45345f1d11f90062607765ea1f4d26bbb0c68c",
+      "programSha256": "b90a947ed846bcf8114d582aab45345f1d11f90062607765ea1f4d26bbb0c68c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/storage-location.js",
+      "program": "store/p0621/src/p2/storage-location.js",
+      "sourceSha256": "36cb638eaee80384bc8fe847fb8c81f6cfc2e9deed0fd70da03493549d0eb7ff",
+      "programSha256": "36cb638eaee80384bc8fe847fb8c81f6cfc2e9deed0fd70da03493549d0eb7ff",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/storage.js",
+      "program": "store/p0621/src/p2/storage.js",
+      "sourceSha256": "2149555587ccc1f2df85fc76782433598112af912bc1c583bda3904037e1a709",
+      "programSha256": "2149555587ccc1f2df85fc76782433598112af912bc1c583bda3904037e1a709",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/p2/updater.js",
+      "program": "store/p0621/src/p2/updater.js",
+      "sourceSha256": "17e399e9c9906ad610dc7f7516709310d164f2d7532af0bb8984b3e224e5b605",
+      "programSha256": "17e399e9c9906ad610dc7f7516709310d164f2d7532af0bb8984b3e224e5b605",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/parser-worker.js",
+      "program": "store/p0621/src/parser-worker.js",
+      "sourceSha256": "f064624031f0d09511579f288d9fcbf370a2707f6883af0d46adaf973a2f0d6f",
+      "programSha256": "f064624031f0d09511579f288d9fcbf370a2707f6883af0d46adaf973a2f0d6f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/parsers.js",
+      "program": "store/p0621/src/parsers.js",
+      "sourceSha256": "13ea4678c4554ee4e422eebff90af760452eeda701571b3686a66b8ccc5f6599",
+      "programSha256": "13ea4678c4554ee4e422eebff90af760452eeda701571b3686a66b8ccc5f6599",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/provider-diagnostics.js",
+      "program": "store/p0621/src/provider-diagnostics.js",
+      "sourceSha256": "6cd466a9ad5be31884992df0c26d5ab475bfbc1020cb103771d5d7f6376ba0a6",
+      "programSha256": "6cd466a9ad5be31884992df0c26d5ab475bfbc1020cb103771d5d7f6376ba0a6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/rag.js",
+      "program": "store/p0621/src/rag.js",
+      "sourceSha256": "7ccc2618b83c01f6a02061b3f3b107c560b83cddf05f747843bddb8c1d127e3d",
+      "programSha256": "7ccc2618b83c01f6a02061b3f3b107c560b83cddf05f747843bddb8c1d127e3d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/recovery-binding.js",
+      "program": "store/p0621/src/recovery-binding.js",
+      "sourceSha256": "a42cb14ddd8d7df319e5af727ad1d32f4cae7ee92fff56c9a5b448a2709418be",
+      "programSha256": "a42cb14ddd8d7df319e5af727ad1d32f4cae7ee92fff56c9a5b448a2709418be",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/scope.js",
+      "program": "store/p0621/src/scope.js",
+      "sourceSha256": "2f3562e636383cf7474777689ed7c851b0922d0cdfac48bb8003feb06d40d8a3",
+      "programSha256": "2f3562e636383cf7474777689ed7c851b0922d0cdfac48bb8003feb06d40d8a3",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/sep-safe-change/closeout.js",
+      "program": "store/p0621/src/sep-safe-change/closeout.js",
+      "sourceSha256": "b0bee1e9139ff19b794e4c5017b730025b05d04789d64a0d1f4018707e95749f",
+      "programSha256": "b0bee1e9139ff19b794e4c5017b730025b05d04789d64a0d1f4018707e95749f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/sep-safe-change/confirmation.js",
+      "program": "store/p0621/src/sep-safe-change/confirmation.js",
+      "sourceSha256": "9270edf6402e5d6140a2907aad2fc32b682f929ec315542bc1f97f522d765ea4",
+      "programSha256": "9270edf6402e5d6140a2907aad2fc32b682f929ec315542bc1f97f522d765ea4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/sep-safe-change/index.js",
+      "program": "store/p0621/src/sep-safe-change/index.js",
+      "sourceSha256": "c49906ece878e250a0a2d83763d24c62d0a59720c74c5959ab7c50b031392181",
+      "programSha256": "c49906ece878e250a0a2d83763d24c62d0a59720c74c5959ab7c50b031392181",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/sep-safe-change/safe-change.js",
+      "program": "store/p0621/src/sep-safe-change/safe-change.js",
+      "sourceSha256": "5c92d6817669191eff760d63f27451277f79882149e92df5a9dd7004099f68e9",
+      "programSha256": "5c92d6817669191eff760d63f27451277f79882149e92df5a9dd7004099f68e9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/sep-safe-change/validation.js",
+      "program": "store/p0621/src/sep-safe-change/validation.js",
+      "sourceSha256": "efa96e61f0eda5e605a104af93d23c602c5a298059846e8c066e9838fa219039",
+      "programSha256": "efa96e61f0eda5e605a104af93d23c602c5a298059846e8c066e9838fa219039",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/session-events.js",
+      "program": "store/p0621/src/session-events.js",
+      "sourceSha256": "4e8720ec4778a6c69301b100ff1eadfb3a318aaf5788c310345dd79e59dc4e19",
+      "programSha256": "4e8720ec4778a6c69301b100ff1eadfb3a318aaf5788c310345dd79e59dc4e19",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/source-provenance.js",
+      "program": "store/p0621/src/source-provenance.js",
+      "sourceSha256": "71e95d59004ac9e9f83c249e37d23a2109154c98af35745a0267a39e835fe329",
+      "programSha256": "71e95d59004ac9e9f83c249e37d23a2109154c98af35745a0267a39e835fe329",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/store.js",
+      "program": "store/p0621/src/store.js",
+      "sourceSha256": "bbe0c638db814275a2d605564a55739052d2d902e0d9cf2e9dbbd673bb95dbcb",
+      "programSha256": "bbe0c638db814275a2d605564a55739052d2d902e0d9cf2e9dbbd673bb95dbcb",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/update-assessment-service.js",
+      "program": "store/p0621/src/update-assessment-service.js",
+      "sourceSha256": "9b2938deb5c0c35a25e4d14cddc443c705619bbb5ba22b0e018c030de95b1286",
+      "programSha256": "9b2938deb5c0c35a25e4d14cddc443c705619bbb5ba22b0e018c030de95b1286",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/update-assessment.js",
+      "program": "store/p0621/src/update-assessment.js",
+      "sourceSha256": "b572cde965af96cc4c1ade3997c2b5108b4cf9907fd0183ae7aabca154c21fe9",
+      "programSha256": "b572cde965af96cc4c1ade3997c2b5108b4cf9907fd0183ae7aabca154c21fe9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/src/vendor/bm25.js",
+      "program": "store/p0621/src/vendor/bm25.js",
+      "sourceSha256": "4bdea400e13e17df9541731bcc523b96da84c02a51df23c8c8d59b6e2aaa0e10",
+      "programSha256": "4bdea400e13e17df9541731bcc523b96da84c02a51df23c8c8d59b6e2aaa0e10",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/THIRD_PARTY_NOTICES.md",
+      "program": "store/p0621/THIRD_PARTY_NOTICES.md",
+      "sourceSha256": "fc02e1c248ead4b04bf1cbdc78f4e318bbd7a94b1f5d6395e585aa828958ca9e",
+      "programSha256": "fc02e1c248ead4b04bf1cbdc78f4e318bbd7a94b1f5d6395e585aa828958ca9e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/system-enhancement-package/tools/budget-reconcile.mjs",
+      "program": "store/p0621/tools/budget-reconcile.mjs",
+      "sourceSha256": "64905f9eb17f33be0cbf3770ae13a97763856e48787fdccd75d30fbc0d21186e",
+      "programSha256": "64905f9eb17f33be0cbf3770ae13a97763856e48787fdccd75d30fbc0d21186e",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/index.d.ts",
+      "program": "store/p0411/index.d.ts",
+      "sourceSha256": "7d535a8bff6bc8902668c0e2c4d5f77a572f8f01dd539bc24904f19897112198",
+      "programSha256": "7d535a8bff6bc8902668c0e2c4d5f77a572f8f01dd539bc24904f19897112198",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/index.js",
+      "program": "store/p0411/index.js",
+      "sourceSha256": "79b27565d6b502842ce95a692076b61f8fdd62979ae1c9bb6c75f043ba2d918f",
+      "programSha256": "79b27565d6b502842ce95a692076b61f8fdd62979ae1c9bb6c75f043ba2d918f",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/json.js",
+      "program": "store/p0411/json.js",
+      "sourceSha256": "7674c44bfdfa499e8f0aabc516b432ac1971bb05b7f518f98e9a72e452f55d13",
+      "programSha256": "7674c44bfdfa499e8f0aabc516b432ac1971bb05b7f518f98e9a72e452f55d13",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/LICENSE",
+      "program": "store/p0411/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/LICENSE-SCOPE.json",
+      "program": "store/p0411/LICENSE-SCOPE.json",
+      "sourceSha256": "361e7b1a100ccf576c98b50aa9bd2020e2a1d9088e8fb215e4f0eea998e0e531",
+      "programSha256": "361e7b1a100ccf576c98b50aa9bd2020e2a1d9088e8fb215e4f0eea998e0e531",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/LICENSE-SCOPE.md",
+      "program": "store/p0411/LICENSE-SCOPE.md",
+      "sourceSha256": "420e60c56e05b5c9969241169f99f54e93e0bc0d138ff585dbf30cb01265be1c",
+      "programSha256": "420e60c56e05b5c9969241169f99f54e93e0bc0d138ff585dbf30cb01265be1c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/package.json",
+      "program": "store/p0411/package.json",
+      "sourceSha256": "4b3a1e21b8be339d831c03acddbc5758c19caa6acc2a2c5e542f065bed66bb10",
+      "programSha256": "23ae6a35bf427831ea099371606b122f7219d036d060316793caf529125ecb02",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/tool-worker/README.md",
+      "program": "store/p0411/README.md",
+      "sourceSha256": "6b1a719db8f7702ba4b405e2ca55f64655a18f1908dd5b9af3f5bef7ea76ee90",
+      "programSha256": "6b1a719db8f7702ba4b405e2ca55f64655a18f1908dd5b9af3f5bef7ea76ee90",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/README.zh.md",
+      "program": "store/p0411/README.zh.md",
+      "sourceSha256": "3015e336f00b9b0bdd2568ebebebf0ec6c6955c351b54ef5f72f99d5a60b50e1",
+      "programSha256": "3015e336f00b9b0bdd2568ebebebf0ec6c6955c351b54ef5f72f99d5a60b50e1",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/tool-worker/worker.js",
+      "program": "store/p0411/worker.js",
+      "sourceSha256": "be42d21706d72e9af61214d6d0abda35a36ac6937f4341da927127126fdc9b38",
+      "programSha256": "be42d21706d72e9af61214d6d0abda35a36ac6937f4341da927127126fdc9b38",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/entry.mjs",
+      "program": "store/p0639/entry.mjs",
+      "sourceSha256": "c6ed6f797bac4efe3e1f4838910c849b487ea856d8dc066aba8c9ffeb899cfc9",
+      "programSha256": "c6ed6f797bac4efe3e1f4838910c849b487ea856d8dc066aba8c9ffeb899cfc9",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/admission.py",
+      "program": "store/p0639/evaluation/admission.py",
+      "sourceSha256": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+      "programSha256": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/compile_patch.py",
+      "program": "store/p0639/evaluation/compile_patch.py",
+      "sourceSha256": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+      "programSha256": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/deadline.py",
+      "program": "store/p0639/evaluation/deadline.py",
+      "sourceSha256": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+      "programSha256": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/evaluation.py",
+      "program": "store/p0639/evaluation/evaluation.py",
+      "sourceSha256": "211361c814cac15d902228d0717b66db24e17713b69d7647ab6d0a62a1daae2d",
+      "programSha256": "211361c814cac15d902228d0717b66db24e17713b69d7647ab6d0a62a1daae2d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/grade_worker.py",
+      "program": "store/p0639/evaluation/grade_worker.py",
+      "sourceSha256": "6b9bf456751f8204ff588b6d5fe37df58663236653119d9f9c9ba4eb2f3a8226",
+      "programSha256": "6b9bf456751f8204ff588b6d5fe37df58663236653119d9f9c9ba4eb2f3a8226",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/index.mjs",
+      "program": "store/p0639/evaluation/index.mjs",
+      "sourceSha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+      "programSha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/lifecycle-manifest.json",
+      "program": "store/p0639/evaluation/lifecycle-manifest.json",
+      "sourceSha256": "4a9bc4512b431a669c22c6eaed8d7ab2d908e1b3d06f9ff7f1150ddded73c818",
+      "programSha256": "4a9bc4512b431a669c22c6eaed8d7ab2d908e1b3d06f9ff7f1150ddded73c818",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/lifecycle.py",
+      "program": "store/p0639/evaluation/lifecycle.py",
+      "sourceSha256": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+      "programSha256": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/lifecycle_worker.py",
+      "program": "store/p0639/evaluation/lifecycle_worker.py",
+      "sourceSha256": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+      "programSha256": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/official.py",
+      "program": "store/p0639/evaluation/official.py",
+      "sourceSha256": "6c08f6308371a273f62f772c65574b5f9efc28c133fafd2d766a9b13994eb015",
+      "programSha256": "6c08f6308371a273f62f772c65574b5f9efc28c133fafd2d766a9b13994eb015",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/package.json",
+      "program": "store/p0639/evaluation/package.json",
+      "sourceSha256": "e889d80c73016c2f532affb4012a7e1554dc08423582d31f4ee42d1b0e1ce87c",
+      "programSha256": "e889d80c73016c2f532affb4012a7e1554dc08423582d31f4ee42d1b0e1ce87c",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/README.md",
+      "program": "store/p0639/evaluation/README.md",
+      "sourceSha256": "4e8d4d81edb85f93737d787e9f77e13658bcaac63895633ffe7f2aa2b4391631",
+      "programSha256": "4e8d4d81edb85f93737d787e9f77e13658bcaac63895633ffe7f2aa2b4391631",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/evaluation/supervisor.py",
+      "program": "store/p0639/evaluation/supervisor.py",
+      "sourceSha256": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b",
+      "programSha256": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/index.mjs",
+      "program": "store/p0639/index.mjs",
+      "sourceSha256": "6756b3d6e39d12e24f2586c23f9d7d13d702e2ce05f26c80f35c3a2cdec23c71",
+      "programSha256": "6756b3d6e39d12e24f2586c23f9d7d13d702e2ce05f26c80f35c3a2cdec23c71",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/LICENSE",
+      "program": "store/p0639/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "programSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/LICENSE-SCOPE.json",
+      "program": "store/p0639/LICENSE-SCOPE.json",
+      "sourceSha256": "e20b2fd63fa396891271c9a9cb4a50d182dda0013fc398ad5e32b0201c792780",
+      "programSha256": "e20b2fd63fa396891271c9a9cb4a50d182dda0013fc398ad5e32b0201c792780",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/LICENSE-SCOPE.md",
+      "program": "store/p0639/LICENSE-SCOPE.md",
+      "sourceSha256": "e529a56e96ea1a422945090c2501ee807e5fbfeab5c55b76c826f7be688efc60",
+      "programSha256": "e529a56e96ea1a422945090c2501ee807e5fbfeab5c55b76c826f7be688efc60",
+      "exactByteMatch": true,
+      "differenceScope": null
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/package.json",
+      "program": "store/p0639/package.json",
+      "sourceSha256": "ac752d53d67febfc806dbf4920317ae9b727889a89444c9020ddc3f79d24795c",
+      "programSha256": "9612c3d466a8bee975c2a4456b0a487f613af97e983a10576930a4465a80669c",
+      "exactByteMatch": false,
+      "differenceScope": "Authoring workspace dependency/peer manifest differs from generated resolved runtime manifest"
+    },
+    {
+      "source": "packages/sep/trusted-evaluation-entry/README.md",
+      "program": "store/p0639/README.md",
+      "sourceSha256": "a05424d57ee01198ea2df1b8d2a13b3fb04f357d50a60c0aefc40ae8cecf25d4",
+      "programSha256": "a05424d57ee01198ea2df1b8d2a13b3fb04f357d50a60c0aefc40ae8cecf25d4",
+      "exactByteMatch": true,
+      "differenceScope": null
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "requestId": "recorded-action",
-  "outcome": "not_verified",
-  "automaticRetry": false,
-  "providerObservation": {"success": true, "action": "click"},
-  "observationOmitted": "window-content; use a separate scoped read"
-}

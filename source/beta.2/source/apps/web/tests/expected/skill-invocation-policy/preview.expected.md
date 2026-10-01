@@ -1,3 +1,0 @@
-- separator
-- 'heading "name: policy-shared description: Available to both model and user invocation" [level=2]'
-- heading "policy-shared" [level=1]

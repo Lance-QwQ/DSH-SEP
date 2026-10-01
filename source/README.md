@@ -1,7 +1,77 @@
-# DSH SEP Windows Alpha 启动修订源码
+# DeepSeek Harness
 
-修订 `windows-alpha-20260924-startup-r2`；程序图 `0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3`。逐文件来源和哈希见 SOURCE_FILES.json。
+English | [中文](README.zh.md)
 
-program-source 对应实际发布程序文件；startup-source 收录新所有权实现、首选桌面宿主 TypeScript 源、统一 bootstrap、生成器及测试。首选宿主源为 startup-source/preferred-host/apps/desktop-host/src/index.ts。恢复服务的 .mjs 首选源为 program-source/store/p0500/src/server.mjs；manual 参数最终转发由 startup-source/diagnostics/build-overlay.mjs 生成，并由 startup-source/managed/rpc-manual.test.mjs 覆盖。实装、Electron 和双实例并存测试及其 worker 已收录，测试与生成的本机故障现场分开，未打包私人会话、Key、.env 或 Git 历史。
+DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
 
-机器验收报告及具体限制在 Full／Only 的 docs/STARTUP_FIX.md。9 月 21 日旧许可和功能指标保留在 history 中，不能代替本轮测试。构建条件与边界见 BUILD.md；本快照不声称可以独立重建全部上游二进制。
+It is built on an **everything-is-a-plugin** architecture and powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://arxiv.org/abs/2608.25512).
+
+Documentation: [https://deepseek-harness.github.io/deepseek-harness/](https://deepseek-harness.github.io/deepseek-harness/)
+
+## Developer preview
+
+DeepSeek Harness is in _developer preview_ and iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
+
+Review the [safety notice](SAFETY.md) before running the project.
+
+## Run
+
+### Run from `npm`
+
+Install `Node.js`, then run:
+
+```sh
+npx @deepseek-ai/dsh web
+```
+
+The command starts the Web UI at `http://127.0.0.1:3080` by default and opens it in the default browser for a local launch. An SSH launch only prints the host URL because the SSH client or editor owns the local forwarded address. Pass `--no-open` to run the server without opening a browser. See [Web UI guide](docs/user/guide/index.md).
+
+### Run from source
+
+To run from a repository checkout:
+
+```sh
+git clone https://github.com/deepseek-ai/deepseek-harness.git
+cd deepseek-harness
+pnpm install
+pnpm run build
+pnpm dsh web
+```
+
+`pnpm run build` prepares the repository artifacts. `pnpm dsh web` uses those built artifacts without rebuilding.
+
+## Community and support
+
+- Submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).
+- Add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your plugin repository for discoverability.
+- Join <a href="https://discord.gg/4MrtZUhpxg">DeepSeek Harness Discord community</a>.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Development
+
+Start with the [development guide](docs/development.md) and [architecture documentation](docs/architecture.md).
+
+`pnpm run dev:web` builds, serves, and rebuilds client bundles on source edits in one terminal, and `make help` lists the matching Make targets for Web and Desktop; the guide's application commands section owns the full table.
+
+For agents, follow [AGENTS.md](AGENTS.md).
+
+## Citation
+
+```bibtex
+@misc{deepseek-harness2026,
+  title={DeepSeek Harness: Everything is a Plugin},
+  author={DeepSeek-AI},
+  year={2026},
+  publisher={GitHub},
+  howpublished={\url{https://github.com/deepseek-ai/deepseek-harness}},
+}
+```
+
+## License
+
+[MIT](LICENSE)
+
+Third-party dependencies and their licenses are disclosed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

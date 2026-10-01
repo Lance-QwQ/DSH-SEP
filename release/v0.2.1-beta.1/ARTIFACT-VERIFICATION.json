@@ -1,0 +1,299 @@
+{
+  "schema": 2,
+  "status": "pass",
+  "releaseReady": true,
+  "completedAt": "2026-10-01T12:45:26.703297+00:00",
+  "product": "DSH SEP",
+  "sepVersion": "0.2.1-beta.1",
+  "hostVersion": "0.2.0-rc.2",
+  "platform": "win32-x64",
+  "releaseScope": "Windows x64 Beta",
+  "graphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "baseGraphHash": "dba096eabda8ee22fa8ed3f6d4b98ab229b22b36e5e56f28ed068c54bca41b77",
+  "assets": [
+    {
+      "name": "DSH-SEP-Full-0.2.1-beta.1-Windows.zip",
+      "bytes": 1185531433,
+      "sha256": "8f00952553ac25601d819ba108c4709c239759d15365a9dfa460fe37aa19cda1",
+      "members": 53868,
+      "graphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+      "manifestSha256": "2927e9fae0a4451fc7411b2bf2b79686edd195cbbc5129511936987270173a90"
+    },
+    {
+      "name": "DSH-SEP-Only-0.2.1-beta.1-Windows.zip",
+      "bytes": 1133354496,
+      "sha256": "e9a6fb2bd239f8316665e857ed37e3767d76afd9327ab9543b10029519c690db",
+      "members": 33782,
+      "graphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+      "manifestSha256": "7f27a723c34d496b370792e435a4a6cda9e444ca3a56766d7eae4877624cc9f8"
+    },
+    {
+      "name": "DSH-SEP-Source-0.2.1-beta.1-Windows.zip",
+      "bytes": 53714248,
+      "sha256": "fafa8b5bac5614fcbef29232fa7398b78e51152f550b217d2e3ddd9e70958764",
+      "members": 15317
+    },
+    {
+      "name": "DSH-SEP-Update-0.2.1-beta.1-Windows.zip",
+      "bytes": 4214324,
+      "sha256": "93a69643326c7268c765fecf720c0948ebd37f63289230f681e71c50b9b9098c"
+    },
+    {
+      "name": "dsh-sep-update.json",
+      "bytes": 744,
+      "sha256": "52c6c00fa28f62e70b91900e0e1a6a35f86ccc48ce0c3a5e1b4e108d2da02f08"
+    }
+  ],
+  "documentationRevision": {
+    "id": "20261001-bm25-r1",
+    "documents": 15,
+    "relativeLinksPerInstallation": 108,
+    "licenseTextsPerInstallation": 559,
+    "technicalOverviewIncluded": true,
+    "topics": [
+      "BM25 formula/k1=1.2/b=0.75",
+      "Chinese tokenization",
+      "JSON storage domains and SQLite auxiliary components",
+      "L1-L4 memory, scopes, lifecycle, limits",
+      "budgets, Worker boundaries, controlled update and recovery"
+    ],
+    "programAndSourceBodiesChanged": false
+  },
+  "freshArchiveAudit": {
+    "status": "pass",
+    "reports": [
+      {
+        "archive": "DSH-SEP-Full-0.2.1-beta.1-Windows.zip",
+        "archiveSha256": "8f00952553ac25601d819ba108c4709c239759d15365a9dfa460fe37aa19cda1",
+        "archiveBytes": 1185531433,
+        "filesScanned": 53868,
+        "uncompressedBytesScanned": 3394069060,
+        "invalidPathCount": 0,
+        "duplicatePathCount": 0,
+        "privateFileCount": 0,
+        "crcFailureCount": 0,
+        "unreviewedFindingCount": 0,
+        "fixedFixtureFindingCount": 0
+      },
+      {
+        "archive": "DSH-SEP-Only-0.2.1-beta.1-Windows.zip",
+        "archiveSha256": "e9a6fb2bd239f8316665e857ed37e3767d76afd9327ab9543b10029519c690db",
+        "archiveBytes": 1133354496,
+        "filesScanned": 33782,
+        "uncompressedBytesScanned": 3214990542,
+        "invalidPathCount": 0,
+        "duplicatePathCount": 0,
+        "privateFileCount": 0,
+        "crcFailureCount": 0,
+        "unreviewedFindingCount": 0,
+        "fixedFixtureFindingCount": 0
+      },
+      {
+        "archive": "DSH-SEP-Source-0.2.1-beta.1-Windows.zip",
+        "archiveSha256": "fafa8b5bac5614fcbef29232fa7398b78e51152f550b217d2e3ddd9e70958764",
+        "archiveBytes": 53714248,
+        "filesScanned": 15317,
+        "uncompressedBytesScanned": 179006371,
+        "invalidPathCount": 0,
+        "duplicatePathCount": 0,
+        "privateFileCount": 0,
+        "crcFailureCount": 0,
+        "unreviewedFindingCount": 0,
+        "fixedFixtureFindingCount": 1
+      },
+      {
+        "archive": "DSH-SEP-Update-0.2.1-beta.1-Windows.zip",
+        "archiveSha256": "93a69643326c7268c765fecf720c0948ebd37f63289230f681e71c50b9b9098c",
+        "archiveBytes": 4214324,
+        "filesScanned": 12,
+        "uncompressedBytesScanned": 18303968,
+        "invalidPathCount": 0,
+        "duplicatePathCount": 0,
+        "privateFileCount": 0,
+        "crcFailureCount": 0,
+        "unreviewedFindingCount": 0,
+        "fixedFixtureFindingCount": 0
+      }
+    ],
+    "scope": "All four current sealed ZIPs streamed to EOF per file with CRC, whole-file SHA, duplicate/traversal/private-name checks and bounded known secret/developer-path byte patterns including native binaries. Exact fixed upstream fixture only. Completeness/metadata checks use fresh archive hashes and bound scans. No extraction, daily state scan or source modification; no assertion of arbitrary-secret absence, full source-to-native rebuild reproducibility, macOS/Linux release readiness or all-plugin runtime compatibility.",
+    "sourceFiles": 14686,
+    "sourceDeliveryFilesExcludingOwnIndex": 15316,
+    "relativeGitLinks": 14,
+    "fixedFixtureException": "One fixed upstream unit-test key-shaped constant bound by path, whole-file SHA and matched SHA; no unreviewed findings under the specified patterns."
+  },
+  "finalZipInstall": {
+    "status": "pass",
+    "namedChecks": 18,
+    "rpcRequests": 11,
+    "programFilesPerInstance": 44980,
+    "publicBoundDocsPerInstance": 583,
+    "twoConcurrentIndependentInstances": true,
+    "officialDonorUnchangedFiles": 25725,
+    "resourceAudit": {
+      "status": "pass",
+      "path": "Both concurrent owned managed Hosts closed normally during acceptance, then PID absence confirmed. No forced cleanup, deadline recovery or broad process kill."
+    }
+  },
+  "unchangedProgramEvidence": {
+    "priorAttestationSha256": "57c72ca13cf21c0cb624988df3c13e12d33b276e2d7450c9a131ff4a449e33f5",
+    "graphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+    "candidateInstallChecks": 55,
+    "controlledUpdateChecks": 31,
+    "desktopStartupChecks": 12,
+    "updateArchiveUnchanged": true,
+    "interpretation": "Previous content-level evidence retained for identical program graph and Update ZIP; these were not all rerun after document-only packaging. Counts overlap and must not be summed into unique feature coverage."
+  },
+  "dailyValidation": {
+    "schema": 1,
+    "status": "pass",
+    "sepVersion": "0.2.1-beta.1",
+    "hostVersion": "0.2.0-rc.2",
+    "platform": "win32-x64",
+    "scope": "Real daily launcher, renderer, read-only budget/memory/assessment services, required composition and normal shutdown; not all-plugin runtime certification.",
+    "checks": 35,
+    "budgetLedgerBytesPreserved": true,
+    "credentialBytesPreserved": true,
+    "privateStateEntries": 170,
+    "privateStateInterpretation": "Includes directories and absent markers; not a file count. Original byte hashes checked locally; no paths, bodies or hashes exported.",
+    "originalPrivateBytesPreserved": true,
+    "sessionAppendBytes": 0,
+    "cleanupPath": "Normal Electron app.quit and managed launcher/host close; no forced cleanup.",
+    "remainingOwnedProcesses": 0,
+    "cleanupUnknown": 0,
+    "modelRequestsInitiatedByVerifier": 0,
+    "compatibility": {
+      "componentPackages": 678,
+      "pluginInstances": 197,
+      "runtimeUnknown": 875,
+      "confirmedIncompatible": 0,
+      "hardBlocks": 0,
+      "interpretation": "Inventory counts do not establish per-plugin runtime compatibility or defect counts."
+    }
+  },
+  "compatibility": {
+    "syntheticUpdateInventory": {
+      "componentsAndInstances": 868,
+      "unknown": 868,
+      "incompatible": 0,
+      "hardBlocks": 0
+    },
+    "scope": "Inventory unknown is not a fault count or per-plugin runtime certification. Historical private daily inventory is a separate scope."
+  },
+  "limitations": [
+    "All private/custom plugin runtime functions",
+    "Paid model quality and actual provider billing",
+    "Linux/macOS complete desktop distribution",
+    "Multi-day hardware and policy matrix",
+    "Official mandatory-status IPC in managed mode; nonfatal warning persists",
+    "Public Beta.2 with DSH 0.1.7 cannot use this exact same-host delta.",
+    "Source manifests and 331 source-program bindings do not prove byte-reproducible native/transitive binary builds.",
+    "Known-pattern scans do not establish absence of every possible secret encoding."
+  ],
+  "retainedAttempts": [
+    {
+      "case": "update-r1",
+      "status": "fail",
+      "reason": "Synthetic Windows bundle used schema2 with partially absent POSIX modes; installer refused before destination creation."
+    },
+    {
+      "case": "update-r2",
+      "status": "fail",
+      "reason": "Test sent stale budget settings revision; correct conflict refusal. No update transaction started."
+    },
+    {
+      "case": "desktop-r1",
+      "status": "fail",
+      "reason": "Probe omitted the expected blank-key welcome flow."
+    },
+    {
+      "case": "desktop-r2",
+      "status": "fail",
+      "reason": "Probe expected scheme welcome URL; actual welcome document was a file URL."
+    },
+    {
+      "case": "candidate-closure-r1",
+      "status": "fail",
+      "reason": "Official source setup files were not yet bound as support; no unknown secrets or developer paths found."
+    },
+    {
+      "case": "archive-install-r1",
+      "status": "fail",
+      "classification": "Test extractor expected a nonexistent top-level Full/Only directory prefix; actual sealed ZIP bundle-root layout was confirmed and the test script corrected. No extraction, installation, Host launch or donor modification occurred. This is not a product installer failure."
+    },
+    {
+      "case": "archive-install-r2",
+      "status": "pass",
+      "classification": "Final corrected sealed ZIP installation run."
+    },
+    {
+      "case": "final-archive-closure-r1",
+      "status": "fail",
+      "reason": "The r1 auditor required a Git link target to be a file; source/.claude/skills instead targets an included directory tree. r2 accepts a confined directory only with already scanned and manifest-bound descendants, with exact target text, Git mode, representation and SHA checks unchanged. Original failed evidence is preserved; no archive bytes changed.",
+      "evidence": "FINAL-ARCHIVE-AUDIT.json",
+      "evidenceSha256": "d723aa57b3c5ac66ee4e1d55af6eba9693db4b4ded774b53274a4821c756b386"
+    },
+    {
+      "case": "documentation-format-r1",
+      "status": "fail",
+      "classification": "Generated CRLF detected before publication; LF corrected and final archives rebuilt. Program unaffected; prior artifacts retained."
+    },
+    {
+      "case": "repository-stage-r1",
+      "status": "fail",
+      "classification": "Inherited ignore rule omitted one manifest-bound public app.local fixture; full known source was staged and byte/mode checked. No private Git history imported."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "SEALED-ARTIFACTS.json",
+      "bytes": 1452,
+      "sha256": "ce3d8a9470053cd208a2d8cb8505530a0e69c3c64122a7f9a0f483b9b2bcb609"
+    },
+    {
+      "path": "DOCS-CHECK.json",
+      "bytes": 2948,
+      "sha256": "27b327d6451617ba4e154fa2fd28be6edd24f1bddbaa3c56ef54d1100c853695"
+    },
+    {
+      "path": "DOCUMENTATION-REVISION.json",
+      "bytes": 11846,
+      "sha256": "18ff47ed9c58a66912357aae0abdc1dc5b9ebab1e223af2efdabb0cf8f2beeab"
+    },
+    {
+      "path": "privacy-validation/FINAL-ARCHIVE-AUDIT-R2.json",
+      "bytes": 3361,
+      "sha256": "89b06b9aec419660d51006c35a67e1f089f33d5ba6389266980484f14f577c0f"
+    },
+    {
+      "path": "archive-install-validation-r2/RESULT.json",
+      "bytes": 5863,
+      "sha256": "f8461bed701abc452e6d88d91c16661f9d484d271859c3c069801ba54dcca9b7"
+    },
+    {
+      "path": "archive-install-validation-doclinks.json",
+      "bytes": 483,
+      "sha256": "17535c9a8d0fe6e21c44550ed080c297925b0f00f413856574514b6fe61b0137"
+    },
+    {
+      "path": "REPOSITORY-STAGE-CHECK.json",
+      "bytes": 306,
+      "sha256": "8b66c32f2db6670fff3e48641d3d6982bd1810ddfa089e71f223e34a2626c322"
+    },
+    {
+      "path": "docs/DAILY-VALIDATION-SUMMARY.json",
+      "bytes": 1148,
+      "sha256": "77ccf576cef20a1f3bf4148d3ad21494b3e9f9a3a9327527c5f0db17ce0fc008"
+    },
+    {
+      "path": "evidence/PRIOR-ARTIFACT-VERIFICATION.json",
+      "bytes": 14480,
+      "sha256": "57c72ca13cf21c0cb624988df3c13e12d33b276e2d7450c9a131ff4a449e33f5"
+    }
+  ],
+  "evidenceRoot": "Fresh local release workspace. Prior content evidence is separately bound by the retained prior attestation. Private daily paths, hashes, bodies, consent and raw logs are not public assets.",
+  "authority": "Binds exact final archive bytes; package-internal preparation states are historical seal-time records. Current acceptance is this external attestation.",
+  "githubPublishedAtAttestation": false,
+  "paidModelCalls": 0,
+  "privateDailyDataImported": false,
+  "dailyChangedByThisPublication": false
+}

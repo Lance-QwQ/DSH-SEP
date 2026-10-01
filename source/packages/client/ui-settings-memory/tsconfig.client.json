@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "lib/tsconfig.client.tsbuildinfo"
+  },
+  "include": [
+    "src/client",
+    "src/config.ts",
+    "src/protocol.ts",
+    "src/budget-protocol.ts",
+    "src/css-modules.d.ts",
+    "src/errors.ts"
+  ]
+}

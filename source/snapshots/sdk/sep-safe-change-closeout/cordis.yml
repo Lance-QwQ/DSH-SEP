@@ -1,0 +1,25 @@
+# Keep this SEP scenario's headers portable; platform shell and skill catalogs
+# have their own recorded scenarios. Runtime context embeds platform file policy.
+- id: tool-bash
+  disabled: true
+- id: tool-pwsh
+  disabled: true
+- id: tool-skill
+  disabled: true
+- id: system-prompt
+  config:
+    includeRuntimeContext: false
+# Real SDK profile with isolated SEP workflow services; no live provider is needed.
+- id: skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+  config:
+    includeDefaultRoots: false
+- id: session-persistence-jsonl
+  name: '@deepseek-ai/dsh-session-persistence-jsonl'
+  config:
+    root: !!js dshHomePath('sessions')
+    compression: none
+- insert:
+    - id: sep-safe-change-snapshot-runtime
+      name: './runtime.mjs'
+

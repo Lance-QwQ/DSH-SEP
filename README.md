@@ -1,40 +1,60 @@
-# DSH SEP · Windows Beta 测试版
+# DSH SEP 0.2.1-beta.1 · Windows x64 Beta
 
 **DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE（DSH 系统增强套件）**
 
-DSH SEP 在 DeepSeek Harness 上增加四层记忆与本地 RAG、受管子任务、文件修改辅助、受控更新、故障恢复和点击增强。本项目独立维护，SEP 原创部分采用 [MIT](LICENSE)，第三方组件保留各自许可。
+DSH SEP 为 DeepSeek Harness 增加四层记忆、本地 RAG、受管任务、受控文件修改、更新与恢复，以及可选点击增强。本候选以 **DSH 0.2.0-rc.2** 为宿主；SEP 是 **Beta 测试版**，宿主名称中的 rc.2 不代表 SEP 已进入 RC。
 
-当前发布线：**SEP 0.2.0-beta.2 / DSH 0.1.7-rc.2 / Windows x64 Beta**。
+**当前已完成限定范围的内容目录安装、更新与真实桌面验证；尚未发布本版 GitHub Release。** Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。日常已另行切换并完成35项限定检查；本次不发布Linux／macOS包。
 
-[下载 Beta.2](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.0-beta.2) · [修复及范围](release/beta.2/RELEASE-NOTES.md) · [完整源码](source/beta.2/README.md) · [文档导航](docs/DOCS_INDEX.md) · [反馈问题](https://github.com/Lance-QwQ/DSH-SEP/issues)
+## 选择包
 
-## 本版修复
+| 包 | 用途 |
+|---|---|
+| `DSH-SEP-Full-0.2.1-beta.1-Windows.zip` | 包含 DSH、SEP 和随附运行环境，在新目录建立独立空白实例。 |
+| `DSH-SEP-Only-0.2.1-beta.1-Windows.zip` | 包含 SEP、必要宿主适配和依赖；从精确核验的官方 npm DSH 来源只读复制所需本体，再创建独立新实例。 |
+| `DSH-SEP-Update-0.2.1-beta.1-Windows.zip` | 受控差分包，仅适用本轮列明的同宿主精确基图，不能作为完整安装包。 |
+| `DSH-SEP-Source-0.2.1-beta.1-Windows.zip` | 本轮完整源码、安装器、测试及来源对应记录，不包含私人会话、真实 Key 或私人 Git 历史。 |
 
-修复原生 `read_image` 成功后被 SEP 的旧 P1 图片限制拦截，导致下一次模型请求和携带该历史图片的文本继续请求失败的问题。现按宿主明确的图像能力处理原生附件，并按每次图片出现保守预留预算；原有模型、输入输出及金额限制保留。取消或插件退出发生在图像能力查询期间时，不再继续预留和派发。
+Full 与 Only 都不会原地覆盖已有官方 DSH 或 SEP。安装器要求目标尚不存在、父目录是真实路径；不要通过解压覆盖、修改指纹或移动安装后的目录绕过检查。独立实例隔离程序、数据、锁、身份和端口，**不等于操作系统安全沙箱**。
 
-这是图片链路修复。DSH 宿主版本及其他增强能力保持，测试结论与限制见[本版验证说明](release/beta.2/VERIFICATION.md)。
+## 安装
 
-## 安装与更新
+从解压后的 Full 包根运行：
 
-Full 包含 DSH 与 SEP，用于在新目录建立独立空白实例；Only 提供 SEP 与必要适配，需要精确匹配的官方 npm DSH rc.2 来源。按包内 README 安装，在新实例的 `.env` 中填写自己的 Key。不要解压覆盖已有 DSH、SEP 或用户数据。
+```powershell
+.\runtime\node\node.exe .\installer.mjs 'D:\Applications\DSH-SEP'
+```
 
-Beta.2 Update 只接受公开 Beta.1 的固定 `7a4acf5f…` 程序图。旧 Alpha、local.8、私人日常图及同版本其他字节均不适用。更新前会检查实际程序、插件与数据状态，展示报告，并要求确认具体计划；不会用新的空白库覆盖原库。见[更新范围](release/beta.2/UPDATE-SCOPE.md)。
+从 Only 包根运行：
 
-关闭主窗口保留后台，使用应用或托盘“退出 DSH SEP”完整结束。独立实例不等于操作系统安全沙箱。
+```powershell
+.\runtime\node\node.exe .\installer.mjs 'D:\Applications\DSH-SEP' 'D:\Sources\DSH-020rc2'
+```
 
-## 增强能力
+Only 的第二个路径须是包内来源说明指定的 npm 程序布局，必须同时匹配版本、文件和依赖来源。任意同版本官方桌面目录不一定合格；不匹配会拒绝。不要把现有私人实例当作“精确官方来源”。
 
-- 四层记忆：L1 模型上下文，L2 项目和事项，L3 偏好、重要资料和项目总目标，L4 按需归档；记忆学习与引用可分别控制。Mem0 只使用同项目允许的消息。
-- 历史来源追溯和按需原文展开，不将压缩摘要自动当作完整原文。
-- 经 `suite_delegate` 创建的只读子任务具备受管并发、返工、超时、取消和记录；Profile 级模型和预算控制另行生效。
-- Safe Change 为受支持的文件变更提供候选与审阅；普通 Shell 没有全局强制隔离试改保证。
-- DSH 与 SEP 分别检查更新，展示兼容性报告，并依据具体计划与持久化记录进行切换和恢复。
-- 点击插件减少不必要观测返回，对异常提供方设置有界等待；不确定是否已执行的点击不自动重复。
+安装后，在新实例的 `.env` 填写自己的 `DEEPSEEK_API_KEY`，通过 `start.vbs` 启动。首次空白Key会显示欢迎页，可暂时跳过进入主界面；实际模型对话仍需填写有效Key。Key 只保存在本机，不上传、不随反馈发送。关闭主窗口保留后台；完整退出使用应用或托盘的“退出 DSH SEP”。
 
-## 验证与历史
+已有公开 Beta.2 基于 DSH 0.1.7-rc.2，**不能通过本版 SEP 同宿主差分直接升级到 DSH 0.2.0-rc.2**。可先建立本版独立空白实例；私人资料迁移须另行核对，不自动复制。详见 [UPDATE-SCOPE.md](docs/UPDATE-SCOPE.md)。
 
-本版按实际公开包记录图片修复、安装和受控更新验证。Beta.1 的原生 GUI、独立 Windows 和其他历史验证保留原范围，不冒称本轮重跑；本机合成 HTTP 不等于官方在线视觉理解。兼容性 `unknown` 不等于故障，也不等于已证明兼容。所有私人插件、外部服务和多日高负载未获全面保证。
+## 本版重点
 
-已安装最新版时，历史 Alpha 缺少更新元数据可能造成 `metadata-unavailable` 提示；该状态归并限制未在本次修复。
+- 修复经独立核验成立的宿主、持久化、文件保护、Worker 交付及记忆生命周期问题，保留审查更正和失败历史。
+- “设置 → 会话预算”提供默认100元及单会话上限，保留既有消费和未知预留；共享预算和单轮额度仍分别生效。
+- Safe Change 支持绑定确切候选的可信确认、分项验证和收尾摘要；普通 Shell 没有全局隔离试改保证。
+- “设置 → 更新适配评估”默认关闭。开启可能产生两阶段模型请求和费用；模型结论没有安装权限。
+- SEP 与 DSH 独立检查更新。部分历史清单缺失时单独显示范围提示，不误称已经全面检查或全局最新。
 
-[Beta.1 历史说明](release/beta.1/RELEASE-NOTES.md) · [Beta.1 固定源码](source/beta.1/README.md) · [Alpha 历史](docs/history/README-alpha-20260924.md)。当前完整源码入口为 `source/beta.2`，来源、版本绑定和交付元数据变化分别记录，不宣称所有上游原生二进制均可重现构建。
+## 阅读顺序
+
+[极简介绍与核心亮点](docs/PRODUCT_OVERVIEW.md) · [使用手册](docs/USER_GUIDE.md) · [发布说明](docs/RELEASE-NOTES.md) · [验证范围](docs/VERIFICATION.md) · [已知限制](docs/COMPATIBILITY_KNOWN_ISSUES.md) · [隐私](docs/PRIVACY_DATA.md) · [文档导航](docs/DOCS_INDEX.md)
+
+SEP 原创部分采用 [MIT](LICENSE)，第三方组件保留各自许可。详见 [许可说明](docs/LICENSING.md) 和 [第三方集成](docs/OPEN_SOURCE_INTEGRATIONS.md)。本项目独立维护，不是 DeepSeek 或所列上游组件的官方发行版。
+
+四份最终归档的CRC、SHA-256、脱敏审计与ZIP安装结论，由随资产提供的包外 `ARTIFACT-VERIFICATION.json` 和 `SHA256SUMS.txt` 权威记录；包内 `VERIFICATION-RESULT.json` 只绑定内容目录验收，不能嵌入自身ZIP哈希形成自引用。
+
+## 最新状态补充
+
+截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](docs/DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
+
+[下载Windows Beta安装包](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1) · [BM25及实现路线](docs/TECHNICAL_OVERVIEW.md) · [源码](source/)

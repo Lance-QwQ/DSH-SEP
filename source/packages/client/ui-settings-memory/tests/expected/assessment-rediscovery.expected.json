@@ -1,0 +1,18 @@
+{
+  "en": {
+    "notice": "Check official updates again to continue assessment. Existing results and usage are retained.",
+    "retryDisabled": true,
+    "analysis": "Pass",
+    "review": "Fail",
+    "inputTokens": "200",
+    "outputTokens": "40"
+  },
+  "zh": {
+    "notice": "需要重新检查官方更新；历史评估和用量记录会保留",
+    "retryDisabled": true,
+    "analysis": "通过",
+    "review": "失败",
+    "inputTokens": "200",
+    "outputTokens": "40"
+  }
+}

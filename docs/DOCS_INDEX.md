@@ -1,61 +1,25 @@
-# 当前 Windows Beta.2 导航
+# 文档导航 · 0.2.1-beta.1
 
-当前版本为 **SEP 0.2.0-beta.2 / DSH rc.2**。优先阅读[本版修复](../release/beta.2/RELEASE-NOTES.md)、[验证范围](../release/beta.2/VERIFICATION.md)、[更新限制](../release/beta.2/UPDATE-SCOPE.md)及[完整源码](../source/beta.2/README.md)。
+本套资料对应 **SEP 0.2.1-beta.1 / DSH 0.2.0-rc.2 / Windows x64 Beta**。内容目录安装55项、受控更新31项、真实Electron首启12项已通过；四份最终归档的CRC、SHA-256、脱敏审计和ZIP安装结论由随资产提供的包外 `ARTIFACT-VERIFICATION.json` 和 `SHA256SUMS.txt` 权威记录。封包阶段未发布GitHub或切换日常；之后日常已切换并完成35项限定检查。机器记录见 [版本与来源](../RELEASE-STATUS.json)、[内容目录验收](VERIFICATION-RESULT.json)及[文件内容校验清单](CONTENTS-SHA256SUMS.txt)。它不是三平台桌面发行或 SEP RC 声明。
 
-以下 Beta.1 与 Alpha 条目保留为历史，不代表当前版本状态。
-
-# 历史 Windows Beta.1 导航
-
-此历史导航对应 SEP 0.2.0-beta.1 / DSH rc.2。优先阅读[本版说明](../release/beta.1/RELEASE-NOTES.md)、[更新限制](../release/beta.1/UPDATE-SCOPE.md)和[完整源码](../source/beta.1/README.md)。以下原有条目保留，涉及 Alpha 的状态属于历史。
-
-本轮启动修订 `windows-alpha-20260924-startup-r2`，程序图 `0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3`。此页原有 2026-09-21 版本号、验收数量与发布状态保留为历史；本轮结果请读 [启动修订](STARTUP_FIX.md)。更新状态没有降低固定验收标准。
-
-# 文档索引 / 导航
-
-<!-- SEP_RELEASE_STATUS_START -->
-分发修订 `20260921-mit-alpha` · 文档 `20260921-docs-r6` · **Windows x64 Alpha 测试发布**。SEP 已确认原创部分采用 MIT，第三方保留原许可。历史启动异常作为已接受的已知问题披露；功能证据与本轮封包验证分别见[发布说明](RELEASE_NOTES.md)和[测试摘要](TEST_ACCEPTANCE.md)。项目入口：[GitHub 仓库](https://github.com/Lance-QwQ/DSH-SEP)。
-<!-- SEP_RELEASE_STATUS_END -->
-
-文档集 `20260921-docs-r6`。首次阅读按“定义 → 版本 → 安装 → 使用”的顺序即可。
-
-## 使用者
-
-| 需求 | 文档 |
+| 你想了解 | 入口 |
 |---|---|
-| 用一分钟了解 SEP | [极简定义](WHAT_IS_DSH_SEP.md) |
-| 了解 SEP 相较于 DSH 的核心亮点，或向他人介绍 | [产品宣传介绍](PRODUCT_OVERVIEW.md) |
-| 查看项目与两种包的概况 | [README](README.md) |
-| 确认手里是哪一版、修复是否已包含 | [发布说明](RELEASE_NOTES.md)、[机器可读版本清单](RELEASE_MANIFEST.json) |
-| 安装、启动、迁移或卸载 | [安装与卸载](INSTALL_UNINSTALL.md) |
-| 建库、记忆管理、任务辅助和更新 | [使用手册](USER_GUIDE.md) |
-| 查看系统要求、限制与已知问题 | [兼容性与已知问题](COMPATIBILITY_KNOWN_ISSUES.md) |
-| Office 预览、字体提示、格式和运行库来源 | [Office 转换说明](OFFICE_CONVERTER.md) |
-| 了解数据存放、模型请求与删除 | [数据与隐私](PRIVACY_DATA.md) |
-| 处理报错、维护状态和恢复 | [恢复与故障排查](RECOVERY_TROUBLESHOOTING.md) |
-| 提交普通问题 / 漏洞 | [反馈指南](SUPPORT.md) / [安全说明](SECURITY.md) |
+| 一句话理解及核心亮点 | [极简介绍](PRODUCT_OVERVIEW.md) |
+| 包怎么选、如何安装 | [README](README.md) |
+| 本版相较历史发布改了什么 | [发布说明](RELEASE-NOTES.md) |
+| 记忆、建库、预算、点击和更新怎么用 | [使用手册](USER_GUIDE.md) |
+| 差分支持什么基线、为什么拒绝跨宿主更新 | [更新范围](UPDATE-SCOPE.md) |
+| 新包验证与维护／历史证据的区别 | [验证范围](VERIFICATION.md) |
+| 支持平台、未完能力和已知问题 | [兼容性与已知限制](COMPATIBILITY_KNOWN_ISSUES.md) |
+| BM25、四层记忆、存储和运行机制 | [技术概览](TECHNICAL_OVERVIEW.md) |
+| 数据在哪里、何时发送及如何删除 | [数据与隐私](PRIVACY_DATA.md) |
+| 哪些上游项目真实参与了功能 | [开源集成列表](OPEN_SOURCE_INTEGRATIONS.md) |
+| SEP原创与第三方分别如何授权 | [许可说明](LICENSING.md)、[第三方声明](THIRD_PARTY_NOTICES.md)、[许可证索引](licenses/index.json)、[组件清单](COMPONENTS.json)、[MIT原文](../LICENSE) |
 
-## 开发者与审阅者
+[完整源码来源说明](sep-release-source.md)说明当前交付方式。完整源码包提供自身 README、`SOURCE-PROVENANCE.json` 与 `SOURCE-DELIVERY.json`。前者绑定实际来源／变更／程序对应，后者记录测试锁、交付元数据和构建范围。单独一个 upstream HEAD 不能代表含本地改动的完整 SEP 源码。
 
-| 需求 | 文档 |
-|---|---|
-| 哪些开源项目被依赖、适配或参考 | [开源集成清单](OPEN_SOURCE_INTEGRATIONS.md) |
-| 审阅授权与第三方条款 | [许可决定记录](LICENSING.md)、[SEP 当前许可文件](LICENSE)、[第三方声明](THIRD_PARTY_NOTICES.md)、[许可文件索引](licenses/index.json) |
-| 查看准确依赖版本与来源记录 | [依赖清单](DEPENDENCIES.json) |
-| 了解测试范围和证据版本 | [测试与验收摘要](TEST_ACCEPTANCE.md)、[Office 功能基线](evidence/office-validation.json)、[更早能力证据](evidence/verification-summary.json) |
-| 准备正式发布 | [发布前清单](PUBLICATION_CHECKLIST.md) |
-| 校验本套文档是否改变 | [文档 SHA256 清单](SHA256SUMS.txt) |
+旧 Alpha、Beta.1、Beta.2 的固定文档和失败证据作为历史保留。历史页面中的“当前”、local.*、图哈希及测试数只按其当时范围理解，不因新文档而改成最新或通过。
 
-## 如何理解版本和证据
+## 最新状态补充
 
-- **本次 Alpha 分发**：`20260921-mit-alpha`，图 `8660c8d5ba2611ca676b0e6169705abd6843cce4a43cdccdea0bd0478a834e52`；本轮只改许可、文档和元数据，等同性与新包安装证据见[测试摘要](TEST_ACCEPTANCE.md)。
-- **Office 功能基线**：`20260921-office-r2`，图 `a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8`；功能证据保留原身份，本轮未全量重跑。
-- **更早能力来源**：`sep-alpha2-stability-20260921`，图 `ffb961…`；四层记忆、治理等回归为继承证据。
-- **历史 office-r2 文档**：[原文入口](history/office-r2/README.md)，原许可与当时状态保留原字节；归档的相对链接按原目录理解。
-- **历史 r1 文档**：[原文入口](history/r1/README.md)；十次追加启动是该旧图的补充证据，未证明原启动异常修复。
-- **更早历史分发**：`20260920-r2-sanitized`，图 `e57816…`；不因本次发布改变字节。
-- **本版许可**：已确认 SEP 原创部分为 MIT，允许使用、修改、分发、再许可和销售并保留声明；第三方继续适用原许可。
-- **Alpha 已知问题**：历史启动异常仍未归因；用户已接受在本级别发布时披露，历史失败与固定标准不改写。
-
-完整值见 [版本清单](RELEASE_MANIFEST.json)。各文档中的“当前”均指这套文档的固定基线，不会随上游发布自动变化。
-
-本目录可独立阅读，公开摘要不链接个人电脑上的原始日志、密钥或会话。原始开发证据另行留存；发布者需要共享时应先脱敏，并说明对应版本。本次两种包应附同一修订文档；当前 ZIP 自身的最终哈希由包外 SHA256SUMS.txt 提供，不嵌入本 ZIP 形成自引用。
+截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。

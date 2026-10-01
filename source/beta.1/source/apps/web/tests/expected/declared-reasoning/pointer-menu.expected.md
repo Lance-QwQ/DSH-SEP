@@ -1,9 +1,0 @@
-- menu "模型与推理等级":
-  - group "DeepSeek":
-    - text: DeepSeek
-    - menuitemradio "DeepSeek-V4-Flash"
-    - menuitemradio "DeepSeek-V4-Flash-Vision-Exp"
-  - group "Acme Gateway":
-    - text: Acme Gateway
-    - menuitemradio "Acme Think"
-    - menuitemradio "Acme Swift" [checked]

@@ -1,0 +1,8 @@
+version: 1
+scenario: sep-safe-change-closeout
+profile: sdk
+composition: sdk-sep-safe-change
+recording: authored
+header:
+  class: sdk-sep-safe-change
+  pin: true

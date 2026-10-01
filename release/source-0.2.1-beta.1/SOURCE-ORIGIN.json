@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "upstreamRepository": "https://github.com/deepseek-ai/deepseek-harness",
+  "sourceHeadCommit": "639ed015397290b3745d163aafe02ffee4aa3f84",
+  "hostVersion": "0.2.0-rc.2",
+  "sourceSepVersionBeforePublicationOverlay": "0.2.0-beta.3-workflow.1",
+  "releaseSepVersion": "0.2.1-beta.1",
+  "baseProgramGraphSha256": "dba096eabda8ee22fa8ed3f6d4b98ab229b22b36e5e56f28ed068c54bca41b77",
+  "scope": "Current tracked and non-ignored untracked project source, tests, lock files, compilation/type configuration, patches, vendored source and licenses. No original Git directory/history or private runtime state. Publication version overlays are applied separately. This snapshot alone does not prove reproducible native/transitive binary builds.",
+  "programGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "publicationSourceVersionOverlay": "0.2.1-beta.1"
+}

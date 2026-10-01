@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "nodeMajor": 24,
+  "hostVersion": "0.2.0-rc.2",
+  "graphSha256": "ef7277743b14b69eb98dfcdee4c402649a137783afaa7e70698754c880f7b004",
+  "entries": [
+    "@deepseek-ai/cordis",
+    "@deepseek-ai/cordis-plugin-loader",
+    "@deepseek-ai/cordis-plugin-include",
+    "@deepseek-ai/dsh-llm",
+    "@deepseek-ai/dsh-session",
+    "@deepseek-ai/dsh-session-projection",
+    "@deepseek-ai/dsh-system-prompt",
+    "@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-agent",
+    "@deepseek-ai/dsh-agent-loop",
+    "@deepseek-ai/dsh-fs-local",
+    "@deepseek-ai/dsh-sandbox-policy",
+    "@deepseek-ai/dsh-user-questions",
+    "@deepseek-ai/dsh-storage",
+    "@deepseek-ai/dsh-storage-json",
+    "@deepseek-ai/dsh-storage-domain",
+    "@deepseek-ai/dsh-session-persistence-jsonl",
+    "@deepseek-ai/dsh-recovery",
+    "dsh-system-enhancement-package"
+  ],
+  "platform": "win32",
+  "arch": "x64"
+}

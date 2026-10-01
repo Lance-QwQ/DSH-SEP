@@ -1,0 +1,16 @@
+# Bilingual-pair consistency record for guide.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/upgrade-guide/v0.2.0-rc.2/sep-safe-change-validation-status/guide.md
+/:
+  en: 1d7e467f06b76a5e
+  zh: c4332d015445bd43
+/sep-safe-change-verification-no-longer-reports-unrun-tests-as-a-pass:
+  en: 33c8bd5de1a75778
+  zh: ae4b9f478162cafc
+/sep-safe-change-verification-no-longer-reports-unrun-tests-as-a-pass/change:
+  en: 3ce776cc2bf823fd
+  zh: b8549975c4ce48fa
+/sep-safe-change-verification-no-longer-reports-unrun-tests-as-a-pass/migration:
+  en: d6189bfbade167e3
+  zh: 7a8e643e7d66fa3f

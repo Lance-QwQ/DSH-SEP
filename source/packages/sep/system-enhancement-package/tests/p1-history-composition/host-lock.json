@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "hostVersion": "0.2.0-rc.2",
+  "graphSha256": "ff0dd7be6ef3f23233329217bbc2f09ba4e868dcbe2f2e5307b5f489ac1768fb",
+  "entries": [
+    "@deepseek-ai/cordis",
+    "@deepseek-ai/cordis-plugin-loader",
+    "@deepseek-ai/cordis-plugin-include",
+    "@deepseek-ai/dsh-llm",
+    "@deepseek-ai/dsh-llm-deepseek",
+    "@deepseek-ai/dsh-session",
+    "@deepseek-ai/dsh-session-projection",
+    "@deepseek-ai/dsh-system-prompt",
+    "@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-agent",
+    "@deepseek-ai/dsh-agent-loop",
+    "@deepseek-ai/dsh-fs-local",
+    "@deepseek-ai/dsh-fs-observation-policy",
+    "@deepseek-ai/dsh-tool-fs",
+    "@deepseek-ai/dsh-attachment-local",
+    "@deepseek-ai/dsh-storage",
+    "@deepseek-ai/dsh-storage-json",
+    "@deepseek-ai/dsh-storage-domain",
+    "@deepseek-ai/dsh-subagent",
+    "@deepseek-ai/dsh-subagent-spawn-in-process",
+    "@deepseek-ai/dsh-user-approval",
+    "@deepseek-ai/dsh-session-persistence-jsonl"
+  ]
+}

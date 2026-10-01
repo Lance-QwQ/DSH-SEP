@@ -1,8 +1,0 @@
-version: 1
-scenario: schedule-catalog
-profile: web
-composition: web-schedule
-recording: authored
-header:
-  class: web-schedule
-  pin: true

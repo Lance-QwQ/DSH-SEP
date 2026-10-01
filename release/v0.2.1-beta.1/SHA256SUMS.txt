@@ -1,0 +1,5 @@
+8f00952553ac25601d819ba108c4709c239759d15365a9dfa460fe37aa19cda1  DSH-SEP-Full-0.2.1-beta.1-Windows.zip
+e9a6fb2bd239f8316665e857ed37e3767d76afd9327ab9543b10029519c690db  DSH-SEP-Only-0.2.1-beta.1-Windows.zip
+fafa8b5bac5614fcbef29232fa7398b78e51152f550b217d2e3ddd9e70958764  DSH-SEP-Source-0.2.1-beta.1-Windows.zip
+93a69643326c7268c765fecf720c0948ebd37f63289230f681e71c50b9b9098c  DSH-SEP-Update-0.2.1-beta.1-Windows.zip
+52c6c00fa28f62e70b91900e0e1a6a35f86ccc48ce0c3a5e1b4e108d2da02f08  dsh-sep-update.json

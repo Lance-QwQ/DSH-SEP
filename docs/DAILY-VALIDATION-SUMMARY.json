@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "sepVersion": "0.2.1-beta.1",
+  "hostVersion": "0.2.0-rc.2",
+  "platform": "win32-x64",
+  "scope": "Real daily launcher, renderer, read-only budget/memory/assessment services, required composition and normal shutdown; not all-plugin runtime certification.",
+  "checks": 35,
+  "budgetLedgerBytesPreserved": true,
+  "credentialBytesPreserved": true,
+  "privateStateEntries": 170,
+  "privateStateInterpretation": "Includes directories and absent markers; not a file count. Original byte hashes checked locally; no paths, bodies or hashes exported.",
+  "originalPrivateBytesPreserved": true,
+  "sessionAppendBytes": 0,
+  "cleanupPath": "Normal Electron app.quit and managed launcher/host close; no forced cleanup.",
+  "remainingOwnedProcesses": 0,
+  "cleanupUnknown": 0,
+  "modelRequestsInitiatedByVerifier": 0,
+  "compatibility": {
+    "componentPackages": 678,
+    "pluginInstances": 197,
+    "runtimeUnknown": 875,
+    "confirmedIncompatible": 0,
+    "hardBlocks": 0,
+    "interpretation": "Inventory counts do not establish per-plugin runtime compatibility or defect counts."
+  }
+}

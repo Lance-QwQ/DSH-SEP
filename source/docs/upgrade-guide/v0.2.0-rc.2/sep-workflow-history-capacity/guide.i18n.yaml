@@ -1,0 +1,19 @@
+# Bilingual-pair consistency record for guide.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/upgrade-guide/v0.2.0-rc.2/sep-workflow-history-capacity/guide.md
+/:
+  en: cb3f91d54eee30e5
+  zh: cb3f91d54eee30e5
+/kind-upgrade-guide-description-sep-workflow-history-may-exceed-the-former-200-record-schema-and-requires-the-matching-reader:
+  en: 9e6dae60ae213954
+  zh: 956c89c2bd2a7c01
+/sep-workflow-history-uses-a-byte-capacity:
+  en: 87f78a03a959ba0e
+  zh: 78812c6c967b815d
+/sep-workflow-history-uses-a-byte-capacity/change:
+  en: 271fc240ce7c81fd
+  zh: 0c2ac8707d134b4d
+/sep-workflow-history-uses-a-byte-capacity/migration:
+  en: 0d9f32bcc3b59147
+  zh: f0ebe15c5147b4e6

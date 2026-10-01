@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "product": "dsh-sep",
+  "platform": "win32-x64",
+  "hostVersion": "0.2.0-rc.2",
+  "sepVersion": "0.2.1-beta.1",
+  "bundle": {
+    "name": "DSH-SEP-Update-0.2.1-beta.1-Windows.zip",
+    "sha256": "93a69643326c7268c765fecf720c0948ebd37f63289230f681e71c50b9b9098c",
+    "url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Update-0.2.1-beta.1-Windows.zip"
+  },
+  "supportedBaseGraphHashes": [
+    "dba096eabda8ee22fa8ed3f6d4b98ab229b22b36e5e56f28ed068c54bca41b77"
+  ],
+  "targetGraphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "scope": "Exact same-host controlled SEP update only; older 0.1.7 host releases require a separate host adaptation."
+}

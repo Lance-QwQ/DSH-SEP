@@ -1,5 +1,3 @@
-# 第三方许可与来源
+# Third-party notices
 
-DSH、LibreOffice、Electron 及其他第三方保留各自版权与许可。
-
-[完整声明](docs/THIRD_PARTY_NOTICES.md) · [依赖清单](docs/DEPENDENCIES.json) · [许可文件索引](docs/licenses/index.json)
+See [release notices](docs/THIRD_PARTY_NOTICES.md), [integrations](docs/OPEN_SOURCE_INTEGRATIONS.md), [components](docs/COMPONENTS.json) and [retained exact notice texts](docs/licenses/index.json). This root MIT file does not relicense them.

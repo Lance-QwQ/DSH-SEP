@@ -1,2 +1,0 @@
-- button "Settings"
-- button "Reconnecting, reconnect now": Reconnecting

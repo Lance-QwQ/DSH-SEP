@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "documents": [
+    {
+      "path": "docs/COMPATIBILITY_KNOWN_ISSUES.md",
+      "bytes": 5786,
+      "sha256": "01fbdaad1f5c7ef5f0ff04dec3454e34d3d45f939d0f9e52af747e75aae7a11b"
+    },
+    {
+      "path": "docs/DOCS_INDEX.md",
+      "bytes": 2662,
+      "sha256": "c63d4cd12c7442b3a093d3a4f19bfbd959ca15eb78046a44bf2a486a987a865a"
+    },
+    {
+      "path": "docs/LICENSING.md",
+      "bytes": 2843,
+      "sha256": "9d41030b55c14d77a5f3a03f16b72a50fb367c3487ab419ff3b11cd75249564f"
+    },
+    {
+      "path": "docs/OPEN_SOURCE_INTEGRATIONS.md",
+      "bytes": 4192,
+      "sha256": "d833f1dab9b2b6b4d7ee36113bce8d224d815cbda7895b009cd4d398c65e3e3d"
+    },
+    {
+      "path": "docs/PRIVACY_DATA.md",
+      "bytes": 5186,
+      "sha256": "3b7412e0261a59c92e6363c78a9791b4738c4071497684475d147271ccdd8a2b"
+    },
+    {
+      "path": "docs/PRODUCT_OVERVIEW.md",
+      "bytes": 2297,
+      "sha256": "68fbadd1ff08f508f1264e2cc02aa1643fe5c9fb3697d19cfd8e7e351e2f3eeb"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 5054,
+      "sha256": "7d8ece474f3d09739c09c3e9b8aa3809ad00da9fd9e5c31cd732868cf2954422"
+    },
+    {
+      "path": "docs/RELEASE-NOTES.md",
+      "bytes": 5173,
+      "sha256": "0b51d600c348f1321b944353da3b881c78473d1217348c198766893d4bb1cb0c"
+    },
+    {
+      "path": "docs/sep-release-source.md",
+      "bytes": 2525,
+      "sha256": "63f8e18c771b88fa9790d6bfbe10c0cb9bce7e413726f4766bd3aadd831ac493"
+    },
+    {
+      "path": "docs/TECHNICAL_OVERVIEW.md",
+      "bytes": 8255,
+      "sha256": "bd2c21516ab32e6e0b86f44cf1f51360d035461f99e3d060f637f8bc23bb2f40"
+    },
+    {
+      "path": "docs/THIRD_PARTY_NOTICES.md",
+      "bytes": 3199,
+      "sha256": "27b91de0cf052bb06c6a48d24bf462bf37fdf5096b9427bbb188243544d8cb30"
+    },
+    {
+      "path": "docs/UPDATE-SCOPE.md",
+      "bytes": 3261,
+      "sha256": "fda3b64798836f04fe3101dbcd0f7aab7ee74bd757c9278024033d9b4aa62a57"
+    },
+    {
+      "path": "docs/USER_GUIDE.md",
+      "bytes": 8437,
+      "sha256": "b4004d9bdd4203808fbd4e2ed538af3361ca97008e5c377167df357bfeecc8bd"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "bytes": 6490,
+      "sha256": "92587d8a54776e587c006d552b6074b5c185cfa82d6ee130f2a0437a37486384"
+    },
+    {
+      "path": "root-README.md",
+      "bytes": 4941,
+      "sha256": "632b3ac9eb9018fc9ba7064b93c658ff5038a872e2f20edc3c823c5185ce962d"
+    }
+  ],
+  "checkedLocalLinks": 108,
+  "technicalDescriptionCheckedAgainst": [
+    "vendor/bm25.js",
+    "rag.js",
+    "layered-memory.js",
+    "layer-policy.js",
+    "p2/storage.js"
+  ],
+  "programGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "scope": "Document encoding, private-pattern refusal, local navigation and source-anchored description; no algorithm, performance or all-plugin runtime certification."
+}
