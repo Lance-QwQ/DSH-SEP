@@ -71,6 +71,7 @@
     "apps/web/tests/settings-appearance.e2e.ts",
     "apps/web/tests/menu-material.e2e.ts",
     "apps/web/tests/desktop-locale.e2e.ts",
+    "apps/web/tests/update-filter.e2e.ts",
     "apps/web/tests/window-controls.e2e.ts",
     "apps/web/tests/settings-import.e2e.ts",
     "apps/web/tests/models-settings.e2e.ts",

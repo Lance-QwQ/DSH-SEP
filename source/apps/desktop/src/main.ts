@@ -434,6 +434,11 @@ async function main(): Promise<void> {
       if (!response.ok || reply.result?.ok !== true) throw new Error('ASSESSMENT_HOST_UNAVAILABLE')
     },
     onState: state => { publishUpdate(presentManagedState(state)) },
+    onPreferences: preferences => {
+      for (const window of BrowserWindow.getAllWindows()) {
+        window.webContents.send(DESKTOP_IPC.updatePreferencesChanged, preferences)
+      }
+    },
     onSepState: state => {
       for (const window of BrowserWindow.getAllWindows()) {
         window.webContents.send(DESKTOP_IPC.sepUpdatesPresentation, presentDesktopUpdate(presentManagedState(state)))
@@ -809,6 +814,16 @@ async function main(): Promise<void> {
     platformView.notifyLocaleChanged()
     windowsLanguage = locale.id
     refreshApplicationMenu()
+  })
+  ipcMain.handle(DESKTOP_IPC.updatePreferencesGet, (event) => {
+    assertProductSender(event)
+    return sepUpdates?.getUpdatePreferences() ?? null
+  })
+  ipcMain.handle(DESKTOP_IPC.updatePreferencesSet, (event, strength: unknown) => {
+    assertProductSender(event)
+    if (sepUpdates === undefined) throw new Error('UPDATE_PREFERENCES_UNAVAILABLE')
+    if (strength !== 'weak' && strength !== 'medium' && strength !== 'strong') throw new Error('UPDATE_FILTER_INVALID')
+    return sepUpdates.setUpdatePreferences(strength)
   })
   ipcMain.handle(DESKTOP_IPC.sepUpdatesStatus, (event) => {
     assertProductSender(event)

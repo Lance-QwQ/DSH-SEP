@@ -28,8 +28,10 @@ import type { ShortcutCommandId } from '@deepseek-ai/dsh-client-shortcuts/client
 import { createSettingsShellStore } from './shell-store.ts'
 import { SettingsRoot } from './SettingsRoot.tsx'
 import { DesktopUpdateBadge } from './DesktopUpdateIndicator.tsx'
-import type { DesktopUpdateBridge } from '../types.ts'
+import type { DesktopUpdateBridge, DesktopUpdatePreferencesBridge } from '../types.ts'
 import { DesktopUpdateSource } from './desktop-update-source.ts'
+import { DesktopUpdatePreferencesSource } from './desktop-update-preferences-source.ts'
+import { UpdateFilterRow, type UpdateFilterRowInjected } from './UpdateFilterRow.tsx'
 import { CloseLabel, HeaderContent, TriggerContent } from './chrome.tsx'
 import { GeneralSection } from './GeneralSection.tsx'
 import { CurrentVersionRow } from './CurrentVersionRow.tsx'
@@ -86,9 +88,20 @@ export function apply(ctx: ClientContext): void {
   }, CurrentVersionRow))
   ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-settings-general: dictionaries')
   const connection = ctx.get('connection') as ConnectionHandle
-  const carrier = (globalThis as typeof globalThis & { dshDesktop?: { protocolVersion: number; updates?: DesktopUpdateBridge; sepUpdates?: DesktopUpdateBridge } }).dshDesktop
+  const carrier = (globalThis as typeof globalThis & { dshDesktop?: { protocolVersion: number; updates?: DesktopUpdateBridge; sepUpdates?: DesktopUpdateBridge; updatePreferences?: DesktopUpdatePreferencesBridge } }).dshDesktop
   const desktopUpdate = new DesktopUpdateSource(carrier?.protocolVersion === 1 ? carrier.updates : undefined)
   const sepUpdate = new DesktopUpdateSource(carrier?.protocolVersion === 1 ? carrier.sepUpdates : undefined)
+  const preferenceBridge = carrier?.protocolVersion === 1 ? carrier.updatePreferences : undefined
+  const updatePreferences = new DesktopUpdatePreferencesSource(preferenceBridge)
+  ctx.effect(() => () => { updatePreferences.dispose() }, 'ui-settings-general: update preferences carrier')
+  if (preferenceBridge !== undefined) ctx.slots.inject('settings.general.item', () => ctx.slots.register({
+    name: 'settings.general.item', id: 'update-filter', order: 90, locale: NS,
+    inject: (): UpdateFilterRowInjected => ({
+      hooks: { updatePreferences: updatePreferences.store },
+      setStrength: strength => { updatePreferences.set(strength) },
+      reload: () => { updatePreferences.reload() },
+    }),
+  }, UpdateFilterRow))
   ctx.effect(() => () => { desktopUpdate.dispose(); sepUpdate.dispose() }, 'ui-settings-general: desktop update carrier')
   ctx.slots.inject('sidebar.toggle.badge', () => ctx.slots.register({
     name: 'sidebar.toggle.badge', locale: NS,

@@ -241,3 +241,20 @@ describe('ui-settings-general apply', () => {
     expect(c.ctx.slots.spec('settings.general.item')).toBeUndefined()
   })
 })
+
+it('registers the managed update preference and releases its carrier on unload', async ({ mock, start }) => {
+  const stop = vi.fn()
+  vi.stubGlobal('dshDesktop', { protocolVersion: 1, updatePreferences: {
+    get: async () => ({ strength: 'strong' }),
+    set: async (strength: string) => ({ strength }),
+    subscribe: () => stop,
+  } })
+  onTestFinished(() => { vi.unstubAllGlobals() })
+  const { c } = await client(mock, start)
+  const row = c.ctx.slots.entries('settings.general.item').find(entry => entry.options.id === 'update-filter')
+  expect(row).toBeDefined()
+  await c.unload(SELF)
+  await c.flush()
+  expect(c.ctx.slots.entries('settings.general.item').some(entry => entry.options.id === 'update-filter')).toBe(false)
+  expect(stop).toHaveBeenCalledOnce()
+}, COLD_BOOT_TIMEOUT_MS)

@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "revision": "update-filter-20261007",
+  "hostVersion": "0.2.0-rc.2",
+  "sepManifestVersion": "0.2.1-beta.1",
+  "scope": "Source update and a separately approved local Windows daily deployment. Historical v0.2.1-beta.1 Release ZIPs, tags and attestations are unchanged; this is not a new downloadable release or cross-platform runtime acceptance.",
+  "sourceBaseCommit": "736c9fe30cd8f7f0bbd429d5e8b51358e3ece196",
+  "sourceFiles": [
+    {
+      "file": "apps/desktop/src/sep-update/update-core.mjs",
+      "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/update-sep.mjs",
+      "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/update-filter.mjs",
+      "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/update-filter.d.mts",
+      "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/tests/update-filter.test.mjs",
+      "sha256": "7228375ed3b869b7df789ef52b96ae5eb3fc4f23abb130b2e65cb8ca5468391c"
+    },
+    {
+      "file": "apps/desktop/tests/sep-release-discovery.test.mjs",
+      "sha256": "a7085bf31533c1a7b8495be3b3e3335afba452bb88e6af5a026d22b18fa539b8"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/update-desktop.mjs",
+      "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/update-desktop.d.mts",
+      "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/tests/update-preferences.test.mjs",
+      "sha256": "374e5027679ba94562b5f3bd7d3e7b9b44d78e316ede1076dfecac7e3edd525b"
+    },
+    {
+      "file": "apps/desktop/src/sep-update/README.md",
+      "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8"
+    },
+    {
+      "file": "apps/desktop/tests/sep-sidebar-state.spec.ts",
+      "sha256": "fb661e5977115a060ce1b4a165d9233ec91bb9100c2ef9fe812f4b9516b8f9b9"
+    },
+    {
+      "file": "apps/desktop/tests/expected/sep-metadata-partial.json",
+      "sha256": "2ef3d622054a9519238def393e04409d793a7f3edd9ca7dd341e607cb623cffd"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/types.ts",
+      "sha256": "27de9f3d30116d19c1ae4cd3f8f5afc49233b1d679f0792e6000fafb9df039ef"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/client/index.ts",
+      "sha256": "b7de35fc59481edd46e2d26ff6a801fdae399005b87bf1eda1eda61695e4e24b"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/client/locales.ts",
+      "sha256": "0f9f0cb71340c772d0cac2eadcddc5fa81fbb000e26afffe307defe174d25d12"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/client/UpdateFilterRow.tsx",
+      "sha256": "b6c8be5c8bec3525caf84174571a979151760f8e1ce6f04a55d05991e62d0f7b"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/client/UpdateFilterRow.module.css",
+      "sha256": "5cc937debe39f5199cc727afe0e07fb68105e97f87e9d7393a7443a8776218c6"
+    },
+    {
+      "file": "packages/client/ui-settings-general/src/client/desktop-update-preferences-source.ts",
+      "sha256": "eb61174af3774072d23e2263a1b4829a1db522ae5b8acef0f2c128a29ddb52d6"
+    },
+    {
+      "file": "packages/client/ui-settings-general/tests/update-preferences.client.spec.tsx",
+      "sha256": "71356f6913e41a2213a855f547ab9ac5f48ca04c74daf792d99ea0a448da3a00"
+    },
+    {
+      "file": "packages/client/ui-settings-general/tests/apply.client.spec.ts",
+      "sha256": "3f3572b45a74f085e5f5fea9a3b7c3d4f8b84e3dc6484cacf306dc0272e633cd"
+    },
+    {
+      "file": "packages/client/ui-settings-general/README.md",
+      "sha256": "0cd05d86ed66fd2c11c1d73a5ac7990adcfd5679c1030f6d26fbf07bc30ee68c"
+    },
+    {
+      "file": "packages/client/ui-settings-general/README.zh.md",
+      "sha256": "20564effd05b02b8129e38cd7af182b6cb1e44e3ad5810e4aa520f8115253f49"
+    },
+    {
+      "file": "packages/client/ui-settings-general/README.i18n.yaml",
+      "sha256": "d5341a2614f34c79ccc3ef691ec79c635b5df94b544e98bfec69cd8ea4e365f2"
+    },
+    {
+      "file": "apps/desktop/src/ipc.ts",
+      "sha256": "76358ffff851abf505c0c63f7684407ae6a0beef9fc1f5e043d0a84c20113307"
+    },
+    {
+      "file": "apps/desktop/src/preload-app.ts",
+      "sha256": "5a16ae77de722b40e8fde6da6eb3a3dee54445a72164dc4d636122e706d4f9bc"
+    },
+    {
+      "file": "apps/desktop/src/main.ts",
+      "sha256": "43c4b0d6fddb944e0157a794cc53245bc2575863d888da9b15e9153f0915b0d4"
+    },
+    {
+      "file": "apps/desktop/tests/preload-app.spec.ts",
+      "sha256": "3c84ba95f42c19954f75ab75d3b09c736637a83fcded2b0d1549ee7d5d9b7404"
+    },
+    {
+      "file": "apps/desktop/tests/main-startup.spec.ts",
+      "sha256": "427d614f11cbe27d47949ded724c7861a7f18a83d18a982bbdf21b4f52b45496"
+    },
+    {
+      "file": "apps/desktop/tsconfig.host.json",
+      "sha256": "76b5c3172f6dfbb48c7013362247c62c6d0ba31f3e192cb96f74574abfacff96"
+    },
+    {
+      "file": "apps/web/tests/update-filter.e2e.ts",
+      "sha256": "79e2866adc62a43891bc8877e51766e58f76c3b6c0d2cebd96d31f7abd978f3b"
+    },
+    {
+      "file": "tsconfig.host.json",
+      "sha256": "55dac5de77e8faf290afcfa7b81eb87b06174e5a7774dac7d2f14bbdfba5b772"
+    },
+    {
+      "file": "apps/web/tsconfig.json",
+      "sha256": "45923c4e02e432455c5e2835aff7b3e24f6e4af237db3f74988ac143ac0f90c3"
+    }
+  ],
+  "publishedReleaseGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+  "localDailyGraphSha256": "682529a8c5aa7858335036672e7cc0056d37090308f67fb3c9663c4dd38dbe1e",
+  "programChange": {
+    "replaced": 15,
+    "added": 6,
+    "deleted": 0,
+    "componentOwners": 2
+  },
+  "compatibility": {
+    "componentPackages": 678,
+    "pluginInstances": 197,
+    "runtimeUnknown": 875,
+    "confirmedIncompatible": 0,
+    "hardBlocks": 0,
+    "interpretation": "Unknown means not individually runtime-verified; not a count of faults or user-installed plugins."
+  },
+  "checks": [
+    {
+      "name": "source-core",
+      "status": "pass",
+      "passed": 44,
+      "failed": 0,
+      "logSha256": "6c080337c09d9696cbb880625092f15d5d1c7ea539781004e97351f99aad13c9"
+    },
+    {
+      "name": "deployed-built-updater",
+      "status": "pass",
+      "passed": 29,
+      "failed": 0,
+      "logSha256": "bb60747a9fa944c88fb0357724f2f75ddda8050a9744fb15498c31bbdb1c65db"
+    },
+    {
+      "name": "settings-ipc-desktop-sidebar",
+      "status": "pass",
+      "passed": 236,
+      "failed": 0,
+      "logSha256": "10440699fe32475a3b23867db884319058308353dbabde670dd496a4a7518243"
+    },
+    {
+      "name": "isolated-native-candidate",
+      "status": "pass",
+      "assertions": 40,
+      "normalStartupCycles": 3,
+      "note": "Separate 14 visual assertions overlap with this group."
+    },
+    {
+      "name": "deployed-daily-native",
+      "status": "pass",
+      "assertions": 51,
+      "normalStartupCycles": 3,
+      "electronSessionGuards": 3,
+      "remainingOwnedProcesses": 0,
+      "cleanup": "All three accepted cycles used normal Electron app.quit; managed Host and launcher exited. No forced cleanup for these successful cycles."
+    },
+    {
+      "name": "larger-gui-regression",
+      "status": "fail",
+      "passed": 9539,
+      "failed": 5,
+      "skipped": 1,
+      "note": "One Windows symlink EPERM, one missing npm_execpath in direct test launch, and three pre-existing memory-settings CSS checks. Preserved as failures; not relaxed or counted as passing.",
+      "logSha256": "552e312f991672cc071aa43d2ad79ce702546096ab12370cc721120a98d7d5c7"
+    },
+    {
+      "name": "changed-docs-translation-pair",
+      "status": "pass",
+      "pairs": 1,
+      "logSha256": "fae15a7f59e468b9eabfdb187ab207945eea4022d5ba99c736a0ce5a7a596923"
+    },
+    {
+      "name": "repository-doc-sync",
+      "status": "blocked",
+      "note": "Aggregate attempted but doc-typecheck could not invoke npm in this runtime; fail-fast skipped remaining gates. pnpm also warned that existing dependency virtual-store settings differed. No automatic module purge/reinstall was accepted. Focused changed-file links and translation pairing are checked separately; no full doc-sync success claimed.",
+      "logSha256": "4e6260e3c3806b7394b45c20649bad0d5e769357c6cf7667e2b00c28ac8550dc"
+    }
+  ],
+  "failedSamples": [
+    {
+      "name": "initial-daily-probe",
+      "status": "fail",
+      "assertionsBeforeFailure": 12,
+      "cause": "Initial inspector probe returned Cannot find module electron. Waiting for the explicit Electron-loaded event resolved subsequent probe runs; initialization timing is the supported explanation, not proof of a product crash.",
+      "cleanup": "Later authenticated stopHost and identity-checked termination of this test-owned launcher produced zero remaining matching processes; not normal-exit evidence for the failed sample.",
+      "scope": "Original guard did not propagate to Host/Electron. No task/model request was issued; full external-network isolation is not claimed for this early sample."
+    },
+    {
+      "name": "revised-probe-preflight",
+      "status": "fail",
+      "cause": "Overstrict budget byte-equality assertion detected startup JSON key-order normalization. Exact reconstruction of the previous serialization matched the approved baseline hash; no ledger values or entries changed."
+    },
+    {
+      "name": "regression-summary-parser",
+      "status": "fail",
+      "cause": "Both child test commands exited zero, but summary parser expected TAP while Node emitted spec. Counts were re-read from preserved full logs; tests were not excluded."
+    },
+    {
+      "name": "transient-idle-admission",
+      "status": "blocked",
+      "cause": "An initial publication attempt refused before writes with APP_RUNNING; immediate follow-up inventory was empty. Cause remains unproven. Fresh exact revalidation succeeded; no PID ignored and no idle gate loosened."
+    }
+  ],
+  "preservation": {
+    "ledgerAmountsUnchanged": true,
+    "reservationsUnchanged": true,
+    "limitsUnchanged": true,
+    "budgetBytesUnchangedAfterVerifiedNormalization": true,
+    "credentialsUnchanged": true,
+    "originalPrivateBytesPreserved": true,
+    "privateBodiesDecoded": false,
+    "note": "Only JSON field order changed at startup; private ledger hashes, identifiers and records are not published. Original session bytes were streamed for integrity, with only a verified append permitted."
+  },
+  "limitations": [
+    "No full repository coverage gate in this round.",
+    "No new Linux/macOS real-desktop runtime acceptance.",
+    "No individual execution of all private plugin functionality.",
+    "Successful daily test cycles blocked external network and used no paid model calls. This is not live provider or real download/install evidence."
+  ],
+  "commands": [
+    "node --test apps/desktop/src/sep-update/tests/update-filter.test.mjs apps/desktop/src/sep-update/tests/update-preferences.test.mjs apps/desktop/tests/sep-release-discovery.test.mjs apps/desktop/src/sep-update/tests/assessment-discovery.test.mjs apps/desktop/src/sep-update/tests/assessment-input.test.mjs",
+    "node node_modules/vitest/vitest.mjs run packages/client/ui-settings-general/tests/apply.client.spec.ts packages/client/ui-settings-general/tests/update-preferences.client.spec.tsx apps/desktop/tests/preload-app.spec.ts apps/desktop/tests/main-startup.spec.ts apps/desktop/tests/sep-sidebar-state.spec.ts"
+  ],
+  "countingRule": "Groups overlap and are not summed as independent scenarios. Failed samples remain recorded separately."
+}

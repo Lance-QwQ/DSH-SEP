@@ -1,3 +1,4 @@
+import {allowsUpdateChannel,validateUpdateFilter} from './update-filter.mjs';
 import semver from 'semver';
 import {createHash} from 'node:crypto';
 const digest=value=>createHash('sha256').update(typeof value==='string'||Buffer.isBuffer(value)?value:JSON.stringify(value)).digest('hex');
@@ -24,7 +25,8 @@ async function json(url,{fetcher,signal,limit}){
  * machine-readable update manifest remain explicitly unverified. Coverage counts
  * verified manifests separately from missing or download-limited metadata;
  * metadata-partial compares only verified manifests for this platform. */
-export async function fetchSepRelease({installedSepVersion,hostVersion,platform=process.platform+'-'+process.arch,fetcher=fetch,signal}={}){
+export async function fetchSepRelease({installedSepVersion,hostVersion,platform=process.platform+'-'+process.arch,fetcher=fetch,signal,filterStrength='strong'}={}){
+ validateUpdateFilter(filterStrength);
  if(!semver.valid(installedSepVersion)||!semver.valid(hostVersion))throw Error('SEP_UPDATE_LOCAL_VERSION');
  if(!supportedPlatforms.has(platform))throw Error('SEP_UPDATE_LOCAL_PLATFORM');
  const bounded=AbortSignal.any([AbortSignal.timeout(15000),...(signal?[signal]:[])]);
@@ -44,7 +46,7 @@ export async function fetchSepRelease({installedSepVersion,hostVersion,platform=
   if(m?.schema!==1||m.product!=='dsh-sep'||!supportedPlatforms.has(m.platform)||!semver.valid(m.sepVersion)||!semver.valid(m.hostVersion)||!m.bundle||!/^[a-zA-Z0-9._-]+\.zip$/.test(m.bundle.name??'')||!/^\w{64}$/.test(m.bundle.sha256??'')||!/^[a-f0-9]{64}$/.test(m.bundle.sha256)||m.bundle.url!==releasesBase+'/download/'+row.tag_name+'/'+m.bundle.name)throw Error('SEP_UPDATE_MANIFEST_INVALID');
   manifests++;
   if(m.platform!==platform){foreignPlatform=true;continue;}matchingPlatforms++;
-  if(!semver.gt(m.sepVersion,installedSepVersion)||!semver.prerelease(installedSepVersion)&&semver.prerelease(m.sepVersion))continue;
+  if(!allowsUpdateChannel(m.sepVersion,filterStrength)||!semver.gt(m.sepVersion,installedSepVersion))continue;
   if(m.hostVersion!==hostVersion)throw Error('SEP_UPDATE_HOST_ADAPTATION_REQUIRED');
   if(!best||semver.gt(m.sepVersion,best.sepVersion))best={source:'sep',platform,version:hostVersion,sepVersion:m.sepVersion,url:row.html_url,publishedAt:row.published_at,manifestHash:parsed.hash,bundle:m.bundle};
  }

@@ -4,7 +4,13 @@
 
 DSH SEP 为 DeepSeek Harness 增加四层记忆、本地 RAG、受管任务、受控文件修改、更新与恢复，以及可选点击增强。本候选以 **DSH 0.2.0-rc.2** 为宿主；SEP 是 **Beta 测试版**，宿主名称中的 rc.2 不代表 SEP 已进入 RC。
 
-**当前已完成限定范围的内容目录安装、更新与真实桌面验证；已作为Windows x64 Beta公开发布。** Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。日常已另行切换并完成35项限定检查；本次不发布Linux／macOS包。
+**当前已完成限定范围的内容目录安装、更新与真实桌面验证；已作为Windows x64 Beta公开发布。** Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。2026-10-01 的日常切换完成35项限定检查；本轮更新见下方，不发布Linux／macOS包。
+
+## 最新源码与日常版
+
+2026-10-07 已增加“设置 → 通用设置 → 更新过滤强度”：弱包含 Alpha/Beta/RC/正式版，中排除 Alpha，强仅查看 RC/正式版，**默认强**。一个设置同时控制 DSH 与 SEP；保存后重新检查并在重启后保留，安装前的兼容性、指纹和确认要求继续生效。行为与 Token 影响见 [更新过滤说明](docs/UPDATE_FILTER.md)。
+
+对应 Windows 日常版已按确认计划切换，三轮真实启动、设置及正常退出 51 项通过；已部署更新器 29 项、源码核心 44 项通过，完整范围和失败历史见 [验证摘要](docs/UPDATE-FILTER-VERIFICATION.json)。本次同步源码与文档，**下方现有 Beta.1 下载包保持原封存内容，不包含这次新增设置**；SEP 没有改称 RC，也未发布新的安装版本。
 
 ## 选择包
 
@@ -53,9 +59,9 @@ SEP 原创部分采用 [MIT](LICENSE)，第三方组件保留各自许可。详�
 
 四份最终归档的CRC、SHA-256、脱敏审计与ZIP安装结论，由随资产提供的包外 `ARTIFACT-VERIFICATION.json` 和 `SHA256SUMS.txt` 权威记录；包内 `VERIFICATION-RESULT.json` 只绑定内容目录验收，不能嵌入自身ZIP哈希形成自引用。
 
-## 最新状态补充
+## 2026-10-01 公开 Beta.1 记录
 
-截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](docs/DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
+2026-10-01 发布对应的日常切换完成了35项限定检查；这是历史基线，本轮日常结果见上方最新源码说明。封包阶段的未部署记载属于历史；[公开日常验证摘要](docs/DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
 
 [下载Windows Beta安装包](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1) · [BM25及实现路线](docs/TECHNICAL_OVERVIEW.md) · [源码](source/)
 

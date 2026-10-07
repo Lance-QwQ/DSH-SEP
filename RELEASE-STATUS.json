@@ -32,5 +32,20 @@
   "releaseTag": "v0.2.1-beta.1",
   "publishedAt": "2026-10-01T15:46:01Z",
   "prerelease": true,
-  "publicReadback": "release/v0.2.1-beta.1/PUBLICATION.json"
+  "publicReadback": "release/v0.2.1-beta.1/PUBLICATION.json",
+  "sourceUpdates": [
+    {
+      "revision": "update-filter-20261007",
+      "documentation": "docs/UPDATE_FILTER.md",
+      "verification": "docs/UPDATE-FILTER-VERIFICATION.json",
+      "scope": "Source and approved local Windows deployment only; original Release ZIPs, tag and artifact/source attestations above remain historical and unchanged."
+    }
+  ],
+  "dailyCurrent": {
+    "graphHash": "682529a8c5aa7858335036672e7cc0056d37090308f67fb3c9663c4dd38dbe1e",
+    "hostVersion": "0.2.0-rc.2",
+    "sepManifestVersion": "0.2.1-beta.1",
+    "verification": "docs/UPDATE-FILTER-VERIFICATION.json",
+    "scope": "Local update-filter adaptation, not the historical published Release graph."
+  }
 }

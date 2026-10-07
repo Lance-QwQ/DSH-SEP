@@ -1,14 +1,16 @@
+import {allowsUpdateChannel,validateUpdateFilter} from './update-filter.mjs';
 import {createHash} from 'node:crypto';
 export const INTERVAL=10800000;
 export const OFFICIAL='https://api.github.com/repos/deepseek-ai/deepseek-harness/releases?per_page=100';
 export const hash=value=>createHash('sha256').update(typeof value==='string'||Buffer.isBuffer(value)?value:JSON.stringify(value)).digest('hex');
 function version(s){const m=/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-(rc|alpha|beta)\.(0|[1-9]\d*))?$/.exec(s??'');if(!m||s.length>80)return null;const n=[+m[1],+m[2],+m[3],m[4]?{alpha:0,beta:1,rc:2}[m[4]]:3,+(m[5]??0)];if(n.some(x=>!Number.isSafeInteger(x)))return null;return {s:s.replace(/^v/,''),n,channel:m[4]??'stable'};}
 function compare(a,b){for(let i=0;i<a.n.length;i++)if(a.n[i]!==b.n[i])return a.n[i]-b.n[i];return 0;}
-export function selectRelease(rows,current){
+export function selectRelease(rows,current,strength='strong'){
+ validateUpdateFilter(strength);
  const installed=version(current);if(!installed||!Array.isArray(rows)||rows.length>100)throw Error('UPDATE_METADATA_INVALID');let best=null;
  for(const r of rows){if(!r||typeof r!=='object'||typeof r.tag_name!=='string'||typeof r.draft!=='boolean'||typeof r.prerelease!=='boolean')throw Error('UPDATE_METADATA_INVALID');if(r.draft)continue;const v=version(r.tag_name.replace(/^dsh-/,''));if(!v)continue;
-  // Follow the installed prerelease channel or a more stable one; never silently opt a stable/RC user into alpha.
-  if(v.n[3]<installed.n[3])continue;
+  // The explicit preference determines channels independently of the installed version.
+  if(!allowsUpdateChannel(v.s,strength))continue;
   const expected='https://github.com/deepseek-ai/deepseek-harness/releases/tag/'+r.tag_name;
   if(r.html_url!==expected||!Number.isFinite(Date.parse(r.published_at)))throw Error('UPDATE_RELEASE_ORIGIN');
   if(compare(v,installed)>0&&(!best||compare(v,best.v)>0))best={v,version:v.s,url:expected,publishedAt:r.published_at,...(Number.isSafeInteger(r.id)&&r.id>0?{id:String(r.id),notes:typeof r.body==='string'?r.body.slice(0,12000):''}:{})};
@@ -23,7 +25,8 @@ export async function fetchReleases({fetcher=fetch,signal}={}){
 }
 export class UpdateClock {
  constructor({check,now=Date.now}){this.check=check;this.now=now;this.last=null;this.operation=null;this.closed=false;}
- open(){if(this.closed)return Promise.resolve();if(this.operation)return this.operation;this.last=this.now();this.abort=new AbortController();this.operation=Promise.resolve().then(()=>this.check(this.abort.signal)).finally(()=>{this.operation=null;});return this.operation;}
+ open(){if(this.closed)return Promise.resolve();if(this.operation)return this.operation;this.last=this.now();const abort=new AbortController();this.abort=abort;const operation=Promise.resolve().then(()=>this.check(abort.signal)).finally(()=>{if(this.operation===operation)this.operation=null;});this.operation=operation;return operation;}
+ invalidate(){this.abort?.abort();this.last=null;this.operation=null;}
  tick(){const now=this.now();return !this.closed&&(this.last===null||now-this.last>=INTERVAL||now<this.last)?this.open():Promise.resolve();}
  close(){this.closed=true;this.abort?.abort();}
 }

@@ -9,7 +9,7 @@ function release(id,sepVersion='0.2.0-beta.2',patch={}){
  const body=JSON.stringify(manifest);
  return {body,row:{tag_name:tag,draft:false,prerelease:true,published_at:'2026-09-27T00:00:00Z',html_url:base+'/tag/'+tag,assets:[{id,name:'dsh-sep-update.json',browser_download_url:base+'/download/'+tag+'/dsh-sep-update.json',digest:'sha256:'+createHash('sha256').update(body).digest('hex')}]}};
 }
-async function discover(items,{installed='0.2.0-beta.3-workflow.1',redirect=false,mutateResponse}={}){
+async function discover(items,{installed='0.2.0-beta.3-workflow.1',redirect=false,mutateResponse,filterStrength='weak'}={}){
  const requested=[];
  const fetcher=async(url,options)=>{
   requested.push(url);
@@ -21,7 +21,7 @@ async function discover(items,{installed='0.2.0-beta.3-workflow.1',redirect=fals
   assert.ok(item,'only manifest assets may be fetched');
   return new Response(mutateResponse?mutateResponse(item.body):item.body);
  };
- const result=await fetchSepRelease({installedSepVersion:installed,hostVersion:'0.2.0-rc.2',platform:'win32-x64',fetcher});
+ const result=await fetchSepRelease({installedSepVersion:installed,hostVersion:'0.2.0-rc.2',platform:'win32-x64',fetcher,filterStrength});
  return {result,requested};
 }
 const legacy=()=>({row:{tag_name:'windows-alpha',draft:false,prerelease:true,published_at:'2026-09-21T00:00:00Z',html_url:base+'/tag/windows-alpha',assets:[]}});
@@ -57,8 +57,8 @@ test('foreign-platform manifests cannot yield a current-platform update',async()
 test('a verified newer candidate for another host still requires adaptation',async()=>{
  await assert.rejects(discover([release(1,'0.2.1-beta.1',{hostVersion:'0.2.0-rc.3'})]),/SEP_UPDATE_HOST_ADAPTATION_REQUIRED/);
 });
-test('stable installations do not opt into prerelease updates',async()=>{
- const {result}=await discover([release(1,'0.3.0-beta.1'),legacy()],{installed:'0.2.0'});
+test('strong filtering excludes beta releases from stable installations',async()=>{
+ const {result}=await discover([release(1,'0.3.0-beta.1'),legacy()],{installed:'0.2.0',filterStrength:'strong'});
  assert.equal(result.release,null);assert.equal(result.status,'metadata-partial');
 });
 test('a changed manifest remains a failed check rather than partial information',async()=>{

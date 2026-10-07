@@ -274,3 +274,26 @@ it('keeps SEP status, events and review actions separate from host updates', asy
   dispose()
   expect(electron.ipcRenderer.off).toHaveBeenCalledWith(DESKTOP_IPC.sepUpdatesPresentation,handler)
 })
+
+it('exposes update filtering without granting artifact selection or installation', async () => {
+  vi.stubGlobal('location', new URL('dsh-app://app/'))
+  await import('../src/preload-app.ts')
+  const api = electron.contextBridge.exposeInMainWorld.mock.calls.find(([name]) => name === 'dshDesktop')?.[1] as DshDesktopProductApi
+  expect(api.updatePreferences).toBeDefined()
+  electron.ipcRenderer.invoke.mockResolvedValue({ strength: 'strong' })
+  await expect(api.updatePreferences!.get()).resolves.toEqual({ strength: 'strong' })
+  electron.ipcRenderer.invoke.mockResolvedValue({ strength: 'weak' })
+  await expect(api.updatePreferences!.set('weak')).resolves.toEqual({ strength: 'weak' })
+  expect(electron.ipcRenderer.invoke.mock.calls).toEqual([
+    ['dsh-desktop:update-preferences-get'], ['dsh-desktop:update-preferences-set', 'weak'],
+  ])
+  expect(api.updatePreferences).not.toHaveProperty('install')
+  const listener = vi.fn()
+  const off = api.updatePreferences!.subscribe(listener)
+  const handler = electron.ipcRenderer.on.mock.calls.find(([name]) => name === 'dsh-desktop:update-preferences-changed')![1] as
+    (event: unknown, state: unknown) => void
+  handler({}, { strength: 'medium' })
+  expect(listener).toHaveBeenCalledWith({ strength: 'medium' })
+  off()
+  expect(electron.ipcRenderer.off).toHaveBeenCalledWith('dsh-desktop:update-preferences-changed', handler)
+})

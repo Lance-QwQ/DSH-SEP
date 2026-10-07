@@ -33,3 +33,18 @@ export interface DesktopUpdateView {
   readonly failed: boolean
   readonly opening: boolean
 }
+
+/** Minimum maturity included in DSH and SEP update discovery. */
+export type UpdateFilterStrength = 'weak' | 'medium' | 'strong'
+
+/** Main-process persisted update discovery preference. */
+export interface DesktopUpdatePreferences {
+  readonly strength: UpdateFilterStrength
+}
+
+/** Optional managed Desktop preference API; it cannot authorize installation. */
+export interface DesktopUpdatePreferencesBridge {
+  get(): Promise<DesktopUpdatePreferences | null>
+  set(strength: UpdateFilterStrength): Promise<DesktopUpdatePreferences>
+  subscribe(listener: (preferences: DesktopUpdatePreferences) => void): () => void
+}

@@ -12,6 +12,7 @@ const active: ReturnType<typeof createManagedUpdater>[]=[]
 afterEach(()=>{for(const service of active.splice(0))service.close()})
 async function fixture(){
  const root=await mkdtemp(join(tmpdir(),'sep-sidebar-'))
+ await mkdir(join(root,'sep-updates'));await writeFile(join(root,'sep-updates/update-preferences.json'),JSON.stringify({schema:1,strength:'weak'}))
  await mkdir(join(root,'node_modules/dsh-system-enhancement-package'),{recursive:true})
  await writeFile(join(root,'node_modules/dsh-system-enhancement-package/package.json'),JSON.stringify({version:'0.2.0-beta.3'}))
  let mode='available'

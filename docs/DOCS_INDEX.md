@@ -8,6 +8,7 @@
 | 包怎么选、如何安装 | [README](README.md) |
 | 本版相较历史发布改了什么 | [发布说明](RELEASE-NOTES.md) |
 | 记忆、建库、预算、点击和更新怎么用 | [使用手册](USER_GUIDE.md) |
+| 更新过滤档位、默认值及 Token 影响 | [更新过滤设置](UPDATE_FILTER.md)、[本次验证摘要](UPDATE-FILTER-VERIFICATION.json) |
 | 差分支持什么基线、为什么拒绝跨宿主更新 | [更新范围](UPDATE-SCOPE.md) |
 | 新包验证与维护／历史证据的区别 | [验证范围](VERIFICATION.md) |
 | 支持平台、未完能力和已知问题 | [兼容性与已知限制](COMPATIBILITY_KNOWN_ISSUES.md) |
@@ -20,8 +21,8 @@
 
 旧 Alpha、Beta.1、Beta.2 的固定文档和失败证据作为历史保留。历史页面中的“当前”、local.*、图哈希及测试数只按其当时范围理解，不因新文档而改成最新或通过。
 
-## 最新状态补充
+## 2026-10-01 公开 Beta.1 记录
 
-截至本次发布准备，日常版已切换到SEP 0.2.1-beta.1，真实启动及正常收尾35项通过。封包阶段的未部署记载属于历史；[公开日常验证摘要](DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
+2026-10-01 发布对应的日常切换完成35项限定检查；它是历史基线。本次更新过滤的源码与日常部署结果见[更新过滤设置](UPDATE_FILTER.md)。现有Release下载包未因此改写。封包阶段的未部署记载属于历史；[公开日常验证摘要](DAILY-VALIDATION-SUMMARY.json)不含私人路径、正文或凭据。GitHub公开状态以Release实际页面为准。
 
 当前公开发行：[Windows x64 Beta](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.1)；最终成品凭证和公开回读记录见仓库的`release/v0.2.1-beta.1/`。封包时与历史准备状态保留，不改写旧失败记录。

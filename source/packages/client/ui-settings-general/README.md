@@ -43,7 +43,9 @@ The current release version appears at the bottom of General Settings in Web and
 
 The Coding Tools switch controls the shared `ui-settings.enabled` preference described by [ui-settings](../ui-settings/README.md#use-this-package). It is available in both Web and desktop, follows accepted changes immediately, and disables duplicate input while a write settles. A failed write displays localized retry guidance.
 
-The General section holds the built-in Coding Tools and Current version rows alongside rows registered into `settings.general.item` by feature packages. Each registrant owns its row copy and behavior. The Appearance row, for example, lives in ui-theme.
+Managed Desktop also exposes Update filter strength for both DSH and SEP discovery. Weak includes Alpha, Beta, RC, and stable releases; Medium includes Beta, RC, and stable releases; Strong, the default, includes RC and stable releases. Only newer versions qualify. Saving persists the preference in Desktop, invalidates previous discoveries, and starts a fresh check; it never authorizes installation. The row retains the last saved value during writes and after a failure. Ordinary browsers and unmanaged Desktop carriers omit it.
+
+The General section holds the built-in Coding Tools, managed update filter, and Current version rows alongside rows registered into `settings.general.item` by feature packages. Each registrant owns its row copy and behavior. The Appearance row, for example, lives in ui-theme.
 
 ### Opening the configuration file
 
@@ -63,7 +65,7 @@ The shell declares settings.launcher for an account-owned sidebar menu and retai
 <details>
 <summary>Implementation internals — click to expand</summary>
 
-The shell owns the chrome and the projections; it contributes the Coding Tools and Current version rows, while feature registrants own their additional content and copy.
+The shell owns the chrome and the projections; it contributes the Coding Tools, managed update filter, and Current version rows, while feature registrants own their additional content and copy.
 
 ### Ledger projections
 
@@ -114,7 +116,7 @@ None; this package neither assembles nor sends a provider request.
 
 These limits define what the shell itself provides versus what features must supply; they are current package constraints.
 
-- **Additional General rows require their feature plugins** — the shell supplies Coding Tools and Current version; feature plugins supply the remaining preferences.
+- **Additional General rows require their feature plugins** — the shell supplies Coding Tools, the managed update filter, and Current version; feature plugins supply the remaining preferences.
 - **The Windows caption badge keeps a side-opening bubble** — `DesktopUpdateBadge` occupies `sidebar.toggle.badge` in the caption and requests `side="right"`, so the Desktop-owned menu text can cover its bubble while the sidebar is collapsed on Windows; the sidebar toggle and New Session bubbles open below the caption instead (#4688).
 
 <a id="dev-note"></a>

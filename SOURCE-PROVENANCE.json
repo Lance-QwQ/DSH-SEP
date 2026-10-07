@@ -15,5 +15,13 @@
   "programGraphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
   "sourceManifest": "Source delivery/SOURCE-MANIFEST.json",
   "programBindings": "Source delivery/SOURCE-PROGRAM-BINDINGS.json",
-  "scope": "Modified host and SEP source exported without private Git history; package version metadata alone does not establish byte-equivalent rebuilds."
+  "scope": "Modified host and SEP source exported without private Git history; package version metadata alone does not establish byte-equivalent rebuilds.",
+  "sourceUpdates": [
+    {
+      "revision": "update-filter-20261007",
+      "documentation": "docs/UPDATE_FILTER.md",
+      "verification": "docs/UPDATE-FILTER-VERIFICATION.json",
+      "scope": "Source and approved local Windows deployment only; original Release ZIPs, tag and artifact/source attestations above remain historical and unchanged."
+    }
+  ]
 }

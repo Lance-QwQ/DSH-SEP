@@ -695,10 +695,20 @@ describe('desktop main startup', () => {
     }
   })
 
+  it('hides managed update preferences on an unmanaged desktop and rejects writes', async () => {
+    await readyForUpdate()
+    expect(harness.handlers.has('dsh-desktop:update-preferences-get')).toBe(true)
+    expect(await invoke('dsh-desktop:update-preferences-get', 'app')).toBeNull()
+    await expect(Promise.resolve().then(() => invoke('dsh-desktop:update-preferences-set', 'app', 'weak')))
+      .rejects.toThrow('UPDATE_PREFERENCES_UNAVAILABLE')
+    for (const channel of ['dsh-desktop:update-preferences-get', 'dsh-desktop:update-preferences-set']) {
+      await expect(Promise.resolve().then(() => invoke(channel, 'shell', 'weak'))).rejects.toThrow('unowned renderer')
+    }
+  })
   it('accepts product IPC only from the current application top frame in the owned main window', async () => {
     await readyForUpdate()
     const sender = harness.windows[0]!.webContents
-    for (const channel of [DESKTOP_IPC.updatesStatus, DESKTOP_IPC.deviceInfo]) {
+    for (const channel of [DESKTOP_IPC.updatesStatus, DESKTOP_IPC.deviceInfo, DESKTOP_IPC.updatePreferencesGet]) {
       const handler = harness.handlers.get(channel)!
       expect(() => handler({ sender, senderFrame: sender.mainFrame })).not.toThrow()
       for (const event of [

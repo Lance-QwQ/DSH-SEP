@@ -3,6 +3,7 @@
 import type { DesktopKeyboardApi, DesktopShortcutsApi } from '@deepseek-ai/dsh-client-shortcuts/protocol'
 import type { IpcMainInvokeEvent } from 'electron'
 import type { DesktopBrowserBridge } from '@deepseek-ai/dsh-client-ui-sidebar-browser/types'
+import type { DesktopUpdatePreferencesBridge } from '@deepseek-ai/dsh-client-ui-settings-general/types'
 
 /** IPC channel names kept private to the desktop application bundle. */
 export const DESKTOP_IPC = {
@@ -24,6 +25,9 @@ export const DESKTOP_IPC = {
   deviceInfo: 'dsh-desktop:device-info',
   localeBootstrap: 'dsh-desktop:locale-bootstrap',
   localeChanged: 'dsh-desktop:locale-changed',
+  updatePreferencesGet: 'dsh-desktop:update-preferences-get',
+  updatePreferencesSet: 'dsh-desktop:update-preferences-set',
+  updatePreferencesChanged: 'dsh-desktop:update-preferences-changed',
   sepUpdatesStatus: 'dsh-desktop:sep-updates-status',
   sepUpdatesOpen: 'dsh-desktop:sep-updates-open',
   sepUpdatesPresentation: 'dsh-desktop:sep-updates-presentation',
@@ -82,6 +86,7 @@ export interface DshDesktopProductApi {
    * @returns `name=value` fields separated by `; `, with no hostname, user name, or serial number.
    */
   deviceInfo(): Promise<string>
+  readonly updatePreferences?: DesktopUpdatePreferencesBridge
   readonly sepUpdates?: DshDesktopProductApi['updates']
   readonly updates: {
     status(): Promise<DesktopUpdatePresentation>

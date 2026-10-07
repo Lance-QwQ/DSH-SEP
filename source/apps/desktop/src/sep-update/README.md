@@ -12,6 +12,14 @@ A separate window displays that report and the exact plan. Acceptance binds cons
 
 Download limit: 512 MiB and five minutes. ZIP limit: 20,000 entries and 2 GiB expanded. Preparation review expires after 30 minutes; a failure notice exits within 60 seconds. The full-graph publisher wait is bounded to ten minutes. Timeout means an unknown outcome: the process is not killed or blindly retried. P2 recovery is bounded to two attempts and retains unresolved records.
 
+## Update filtering
+
+Settings → General → Update filtering controls discovery for both DSH and SEP in the managed desktop. Strong is the default and admits RC/stable; Medium admits Beta/RC/stable; Weak also admits Alpha. The selected channels do not depend on the installed version's channel. Only versions newer than the installed product are considered; drafts, unknown prerelease names and unverifiable metadata remain ineligible. Relaxing the filter does not authorize installation or bypass host, graph, compatibility or user-consent checks.
+
+The per-installation preference is committed to `sep-updates/update-preferences.json` in Electron user data before the UI acknowledges the change. Saving invalidates pending discovery and unconfirmed prompts, clears stale availability and checks both release feeds again. Already queued and explicitly confirmed work retains its authorization; use the existing cancellation action to cancel it. Failed saves retain the previous value; unreadable or malformed saved preferences stop discovery with an error rather than silently selecting a weaker policy. Existing installations without a preference use Strong.
+
+Weak or Medium can discover releases that the old RC-following policy hid. If optional background compatibility assessment is enabled, newly discovered DSH releases can trigger its separately budgeted model analysis. Changing the filter itself does not call a model; assessment remains optional and cannot install updates.
+
 ## Release-check information
 
 Discovery reports how many manifests it verified, how many match this platform, how many inspected releases lack a manifest, and whether the five-manifest download bound prevented further verification. With matching verified manifests and missing history, metadata-partial reports the comparison within verified manifests and the missing information separately. No newer eligible version in those manifests does not certify every public release or declare the installation latest. Missing manifests, exhausted metadata downloads and an empty non-draft release list are informational results; the desktop clears stale availability without displaying a check-failure badge. Network, origin, digest, JSON-validation and host-adaptation failures still produce errors. Metadata never authorizes package execution.

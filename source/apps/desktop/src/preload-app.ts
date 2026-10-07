@@ -4,6 +4,7 @@ import type { DesktopShortcutInput, ShortcutConfigSnapshot, ShortcutSaveResult }
 import { contextBridge, ipcRenderer, webUtils } from 'electron'
 import { DESKTOP_IPC, SCHEME, type DshDesktopProductApi, type DesktopUpdatePresentation } from './ipc.ts'
 import { PLATFORM_IPC } from './platform-ipc.ts'
+import type { DesktopUpdatePreferences } from '@deepseek-ai/dsh-client-ui-settings-general/types'
 import { markDocumentPlatform, syncWindowFullscreen } from './preload-platform.ts'
 import { syncNativeTheme } from './preload-theme.ts'
 import { syncWindowsAppearance } from './preload-windows.ts'
@@ -44,6 +45,15 @@ function createProductApi(): DshDesktopProductApi {
         const handle = (_event: Electron.IpcRendererEvent, snapshot: ShortcutConfigSnapshot): void => { listener(snapshot) }
         ipcRenderer.on(DESKTOP_IPC.shortcutsChanged, handle)
         return () => { ipcRenderer.off(DESKTOP_IPC.shortcutsChanged, handle) }
+      },
+    },
+    updatePreferences: {
+      get: () => ipcRenderer.invoke(DESKTOP_IPC.updatePreferencesGet) as Promise<DesktopUpdatePreferences | null>,
+      set: strength => ipcRenderer.invoke(DESKTOP_IPC.updatePreferencesSet, strength) as Promise<DesktopUpdatePreferences>,
+      subscribe(listener) {
+        const handle = (_event: Electron.IpcRendererEvent, preferences: DesktopUpdatePreferences): void => { listener(preferences) }
+        ipcRenderer.on(DESKTOP_IPC.updatePreferencesChanged, handle)
+        return () => { ipcRenderer.off(DESKTOP_IPC.updatePreferencesChanged, handle) }
       },
     },
     sepUpdates: {
