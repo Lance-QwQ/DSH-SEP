@@ -4,7 +4,7 @@
 
 为 DeepSeek Harness 增加四层记忆、本地 RAG、受管任务、受控文件修改、更新与恢复，以及可选点击增强。
 
-**最新下载：SEP 0.2.1-beta.2 · Windows x64 Beta，DSH 宿主 0.2.0-rc.2。** SEP 仍为 Beta，宿主 rc.2 不代表 SEP 已进入 RC。[下载及校验文件](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.2)。GitHub 是否公开以该 Release 页面为准；包内状态记录封包时点。
+**最新下载：SEP 0.2.1-beta.2 · Windows x64 Beta，DSH 宿主 0.2.0-rc.2。** SEP 仍为 Beta，宿主 rc.2 不代表 SEP 已进入 RC。[下载及校验文件](https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.2)。本版已公开，十项附件的服务器SHA-256、大小、上传状态及未登录读取均已核验；[发布回执](release/v0.2.1-beta.2/PUBLICATION.json)。包内准备状态保留封包时点，公开回执记录最终状态。
 
 ## 本版新增
 

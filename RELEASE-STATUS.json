@@ -1,18 +1,22 @@
 {
   "schema": 1,
-  "status": "sealed-windows-beta-preparation",
+  "status": "published-windows-beta",
   "product": "DSH SEP",
   "sepVersion": "0.2.1-beta.2",
   "hostVersion": "0.2.0-rc.2",
   "platform": "win32-x64",
   "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
   "prerelease": true,
-  "published": false,
+  "published": true,
   "dailyDeployment": true,
   "programFiles": 44986,
   "componentPackages": 678,
   "verification": "docs/VERIFICATION-RESULT.json",
   "archiveAttestation": "release/v0.2.1-beta.2/ARTIFACT-VERIFICATION.json",
   "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.2",
-  "scope": "Snapshot before publishing; live public publication receipt supersedes this field without changing sealed archives."
+  "scope": "Snapshot before publishing; live public publication receipt supersedes this field without changing sealed archives.",
+  "publishedAt": "2026-10-07T15:27:55Z",
+  "releaseTag": "v0.2.1-beta.2",
+  "sourceCommit": "46eab5cff714e155ad2b19bae43f68288c3b982a",
+  "publicReadback": "release/v0.2.1-beta.2/PUBLICATION.json"
 }

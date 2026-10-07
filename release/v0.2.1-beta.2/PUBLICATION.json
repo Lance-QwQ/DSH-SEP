@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "releaseTag": "v0.2.1-beta.2",
+  "sourceCommit": "46eab5cff714e155ad2b19bae43f68288c3b982a",
+  "sourceCheckpoint": "e626f4a5d25928c394ce8ca207da088918bbfcd5",
+  "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.2",
+  "releaseId": 405894057,
+  "draft": false,
+  "prerelease": true,
+  "publishedAt": "2026-10-07T15:27:55Z",
+  "publicReadback": true,
+  "assets": [
+    {
+      "id": 619039076,
+      "name": "ARTIFACT-VERIFICATION.json",
+      "size": 12389,
+      "state": "uploaded",
+      "digest": "sha256:8316c2f137d19e479e86851dea0df5a209af5a1a3d821b05294656114a6d9c3f",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/ARTIFACT-VERIFICATION.json"
+    },
+    {
+      "id": 619053278,
+      "name": "DSH-SEP-Full-0.2.1-beta.2-Windows.zip",
+      "size": 1195412205,
+      "state": "uploaded",
+      "digest": "sha256:53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/DSH-SEP-Full-0.2.1-beta.2-Windows.zip"
+    },
+    {
+      "id": 619039191,
+      "name": "DSH-SEP-Offline-Bridge-v0.2.1-beta.2-Windows-x64.zip",
+      "size": 11584297,
+      "state": "uploaded",
+      "digest": "sha256:b2efc39f84db62e66fade1cdf144241917186830dc8e436301ae909078039aff",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/DSH-SEP-Offline-Bridge-v0.2.1-beta.2-Windows-x64.zip"
+    },
+    {
+      "id": 619055385,
+      "name": "DSH-SEP-Only-0.2.1-beta.2-Windows.zip",
+      "size": 1147954284,
+      "state": "uploaded",
+      "digest": "sha256:c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/DSH-SEP-Only-0.2.1-beta.2-Windows.zip"
+    },
+    {
+      "id": 619039382,
+      "name": "DSH-SEP-Source-0.2.1-beta.2-Windows.zip",
+      "size": 61534715,
+      "state": "uploaded",
+      "digest": "sha256:47cf9321bbbe7dafa9625407bb7f0e005dfdea498fa221d8586629d0d67095b0",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/DSH-SEP-Source-0.2.1-beta.2-Windows.zip"
+    },
+    {
+      "id": 619039901,
+      "name": "DSH-SEP-Update-0.2.1-beta.2-Windows.zip",
+      "size": 4451400,
+      "state": "uploaded",
+      "digest": "sha256:5d68bbb0250632ff398aaeba92407302a04bf58e41e00730bd2ebbe1bbe12083",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/DSH-SEP-Update-0.2.1-beta.2-Windows.zip"
+    },
+    {
+      "id": 619040084,
+      "name": "dsh-sep-update.json",
+      "size": 1239,
+      "state": "uploaded",
+      "digest": "sha256:15bf77701f2c7c77f2c07ad25ca51449f0f598d189077108d8f24399a618dedf",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/dsh-sep-update.json"
+    },
+    {
+      "id": 619040223,
+      "name": "RELEASE-ASSETS-SHA256SUMS.txt",
+      "size": 883,
+      "state": "uploaded",
+      "digest": "sha256:79ec725de6bdc514b1f01e9c51200352b93fb5a6207bd6b8ba09dee660d0f7cd",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/RELEASE-ASSETS-SHA256SUMS.txt"
+    },
+    {
+      "id": 619040333,
+      "name": "RELEASE-README.md",
+      "size": 2998,
+      "state": "uploaded",
+      "digest": "sha256:482e5eefbd39fce22027667ee0ff40f268a6d781800bc86d2b568aac3d3ba78f",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/RELEASE-README.md"
+    },
+    {
+      "id": 619040501,
+      "name": "SHA256SUMS.txt",
+      "size": 539,
+      "state": "uploaded",
+      "digest": "sha256:fa90431f955f6f5ddf6ea700abf678a13bf1a434728aa07d817d7b087fa7936c",
+      "browser_download_url": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.2/SHA256SUMS.txt"
+    }
+  ],
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "dailyDeploymentAlreadyComplete": true,
+  "scope": "New Windows x64 SEP Beta release. Every expected asset server SHA/size/upload state and public tag target verified; prior Release assets unchanged.",
+  "transfer": {
+    "runId": 37643721134,
+    "url": "https://github.com/Lance-QwQ/DSH-SEP/actions/runs/37643721134",
+    "workflowCommit": "b4a5442048cabfb5e9911ec696e97a6dab71165b",
+    "status": "pass",
+    "scope": "Both cloud-generated archives matched the locally sealed hashes before upload; expected ten server assets were verified, owned temporary overlay removed. Initial failed transfer retained separately."
+  }
+}
