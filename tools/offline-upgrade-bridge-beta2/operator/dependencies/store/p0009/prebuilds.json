@@ -1,0 +1,12 @@
+{
+  "platform": "win32-x64-msvc",
+  "binaries": [
+    {
+      "backend": "napi",
+      "abi": "napi-v9",
+      "binaryTag": "napi-v9",
+      "node": ">=20",
+      "path": "prebuilt/win32-x64-msvc-napi-v9.node"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "label": "public-beta1",
+    "baseGraphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+    "targetGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+    "contractSha256": "7ee36b6e744722c17e14d7c5f9d0945a56d59745d3d49c9207bbd34ab641c4c5",
+    "changedFiles": 28
+  },
+  {
+    "label": "local-filter-beta1",
+    "baseGraphHash": "682529a8c5aa7858335036672e7cc0056d37090308f67fb3c9663c4dd38dbe1e",
+    "targetGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+    "contractSha256": "5d3ad63e3699b471018a197ede93833ffb1d3600676374c2dc89b178a01c00e8",
+    "changedFiles": 7
+  }
+]

@@ -22,6 +22,15 @@
       "documentation": "docs/UPDATE_FILTER.md",
       "verification": "docs/UPDATE-FILTER-VERIFICATION.json",
       "scope": "Source and approved local Windows deployment only; original Release ZIPs, tag and artifact/source attestations above remain historical and unchanged."
+    },
+    {
+      "revision": "offline-upgrade-bridge-beta2-20261007",
+      "sepVersion": "0.2.1-beta.2",
+      "hostVersion": "0.2.0-rc.2",
+      "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+      "bridgeManifestSha256": "ad91a7ee35566a9f03fbd336ee5d5f2652079436edb317983daaaa23cb6533f1",
+      "documentation": "docs/offline-upgrade-bridge-beta2-review.md",
+      "scope": "Current source identity overlays and fixed release bridge; historical Beta.1 source/archive bindings above remain unchanged. This source record does not claim publication or daily selection."
     }
   ]
 }

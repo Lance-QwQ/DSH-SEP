@@ -1,0 +1,3 @@
+import{readFile}from'node:fs/promises';import{join}from'node:path';import{verify}from"./shared/sep-update/update-admission.mjs";
+/** Called before ownership and again by verifyInputs while P2/native locks are held. */
+export async function verifyStoredConsent(op,plan){const key=await readFile(join(op.updatesDirectory,'control-key')),consent=verify(JSON.parse(await readFile(join(op.directory,'consent.json'),'utf8')),key),expected={planHash:plan.hash,reportHash:op.reportHash,graphHash:op.graphHashes.candidate};if(consent?.accepted!==true||consent.acceptedCompatibilityRisk!==true||Object.keys(expected).some(k=>consent[k]!==expected[k]))throw Error('SEP_PLAN_CONSENT');return expected}

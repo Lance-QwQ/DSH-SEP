@@ -10,6 +10,8 @@ DSH SEP 为 DeepSeek Harness 增加四层记忆、本地 RAG、受管任务、�
 
 对应 Windows 日常版已按确认计划切换，三轮真实启动、设置及正常退出 51 项通过；已部署更新器 29 项、源码核心 44 项通过，完整范围和失败历史见 [验证摘要](docs/UPDATE-FILTER-VERIFICATION.json)。本次同步源码与文档，**下方现有 Beta.1 下载包保持原封存内容，不包含这次新增设置**；SEP 没有改称 RC，也未发布新的安装版本。
 
+Beta.2 的固定版本离线升级桥已完成制作及安装后源码核验，工具源码在 [`tools/offline-upgrade-bridge-beta2`](tools/offline-upgrade-bridge-beta2/README.md)，范围见 [源码审查](docs/offline-upgrade-bridge-beta2-review.md)。它解决公开 Beta.1 无法通过旧内置更新器接纳新增通用设置组件的升级路径；仅接受列明的两份精确基图。**此源码记录不表示 Beta.2 已公开发布或日常程序已切换**；下方 Beta.1 资产仍保持封存。
+
 ## 选择包
 
 **当前下载发行：SEP 0.2.1-beta.1 · Windows x64 Beta，宿主 DSH 0.2.0-rc.2。** 已完成所述 Windows 范围的内容目录安装、更新与真实桌面验证。 Full／Only安装及Host冒烟55项、同宿主受控更新31项、真实Electron启动12项通过；这些证据绑定程序内容，不直接等于最终ZIP验收。内容验收见 [VERIFICATION-RESULT.json](docs/VERIFICATION-RESULT.json)，版本和程序图见 [RELEASE-STATUS.json](RELEASE-STATUS.json)。2026-10-01 的日常切换完成35项限定检查；本轮更新见下方，不发布Linux／macOS包。

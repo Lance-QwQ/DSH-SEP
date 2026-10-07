@@ -1,0 +1,19 @@
+import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store';
+import type { InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots';
+import type { UpdateFilterStrength } from '../types.ts';
+import type { DesktopUpdatePreferencesView } from './desktop-update-preferences-source.ts';
+/** Accepted preference and carrier actions supplied by the Desktop owner. */
+export interface UpdateFilterRowInjected {
+    hooks: {
+        updatePreferences: ObservableSnapshot<DesktopUpdatePreferencesView>;
+    };
+    setStrength(strength: UpdateFilterStrength): void;
+    reload(): void;
+}
+/**
+ * Render the managed update discovery preference.
+ * @param props - Accepted preferences, mutation callbacks and localized copy.
+ * @returns The preference row, or nothing when the carrier does not support it.
+ */
+export declare function UpdateFilterRow({ useUpdatePreferences, setStrength, reload, t }: PropsRuntime<'settings.general.item'> & PropsLocale<'settings'> & InjectFace<UpdateFilterRowInjected>): import("react").JSX.Element | null;
+//# sourceMappingURL=UpdateFilterRow.d.ts.map

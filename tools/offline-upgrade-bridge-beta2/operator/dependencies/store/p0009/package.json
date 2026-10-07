@@ -1,0 +1,28 @@
+{
+  "name": "node-addon-require-builtin-win32-x64-msvc",
+  "version": "0.1.6",
+  "description": "Prebuilt win32-x64-msvc native addon package for node-addon-require-builtin.",
+  "main": "./index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "prebuilds.json",
+    "prebuilt/"
+  ],
+  "dependencies": {
+    "node-addon-native-custom-loader": "0.1.6"
+  },
+  "license": "MIT"
+}

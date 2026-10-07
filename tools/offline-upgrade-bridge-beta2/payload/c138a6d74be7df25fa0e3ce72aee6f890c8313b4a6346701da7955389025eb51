@@ -1,0 +1,27 @@
+import type { DesktopUpdatePreferences, DesktopUpdatePreferencesBridge, UpdateFilterStrength } from '../types.ts';
+/** Shared observation of the main-process preference and pending UI work. */
+export interface DesktopUpdatePreferencesView {
+    readonly preferences?: DesktopUpdatePreferences | null;
+    readonly saving: boolean;
+    readonly failed: boolean;
+}
+/** Owns the optional preference carrier until the settings plugin unloads. */
+export declare class DesktopUpdatePreferencesSource {
+    private readonly bridge;
+    readonly store: import("@deepseek-ai/dsh-client-store").SnapshotStore<DesktopUpdatePreferencesView>;
+    private live;
+    private revision;
+    private readonly unsubscribe;
+    /** @param bridge - Managed Desktop bridge, absent in ordinary browsers. */
+    constructor(bridge: DesktopUpdatePreferencesBridge | undefined);
+    /** Read persisted preferences without replacing a newer carrier event. */
+    reload(): void;
+    /**
+     * Save one choice while retaining the last accepted value on failure.
+     * @param strength - User-selected discovery filter.
+     */
+    set(strength: UpdateFilterStrength): void;
+    /** Detach the carrier and ignore pending request completions. */
+    dispose(): void;
+}
+//# sourceMappingURL=desktop-update-preferences-source.d.ts.map

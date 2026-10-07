@@ -1,0 +1,460 @@
+{
+  "schema": 1,
+  "kind": "exact-same-host-file-contract",
+  "hostVersion": "0.2.0-rc.2",
+  "fromSepVersion": "0.2.1-beta.1",
+  "sepVersion": "0.2.1-beta.2",
+  "packageChanges": [
+    {
+      "id": "p0621",
+      "before": {
+        "id": "p0621",
+        "name": "dsh-system-enhancement-package",
+        "version": "0.2.1-beta.1",
+        "dependencies": {
+          "@deepseek-ai/cordis": "p0001",
+          "@deepseek-ai/dsh-client-ui-settings-memory": "p0601",
+          "@deepseek-ai/dsh-fs": "p0064",
+          "@deepseek-ai/dsh-storage-domain": "p0032",
+          "@deepseek-ai/dsh-tools": "p0036",
+          "@napi-rs/canvas": "p0622",
+          "fast-xml-parser": "p0624",
+          "fflate": "p0575",
+          "pdfjs-dist": "p0634",
+          "zod": "p0016"
+        }
+      },
+      "after": {
+        "id": "p0621",
+        "name": "dsh-system-enhancement-package",
+        "version": "0.2.1-beta.2",
+        "dependencies": {
+          "@deepseek-ai/cordis": "p0001",
+          "@deepseek-ai/dsh-client-ui-settings-memory": "p0601",
+          "@deepseek-ai/dsh-fs": "p0064",
+          "@deepseek-ai/dsh-storage-domain": "p0032",
+          "@deepseek-ai/dsh-tools": "p0036",
+          "@napi-rs/canvas": "p0622",
+          "fast-xml-parser": "p0624",
+          "fflate": "p0575",
+          "pdfjs-dist": "p0634",
+          "zod": "p0016"
+        }
+      }
+    }
+  ],
+  "changes": [
+    {
+      "path": "store/p0544/lib/client.js",
+      "packageName": "@deepseek-ai/dsh-client-ui-settings-general",
+      "before": {
+        "path": "store/p0544/lib/client.js",
+        "size": 53982,
+        "sha256": "6fbc10dda1fb4cb6a27f4523c6c737ab940c8b4a9e611c40aba41418cf217524",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0544/lib/client.js",
+        "size": 63748,
+        "sha256": "8d6893b8d73f0bb7ae76226b9538e4cd7529bafa1f56c5bcadc0a102c5e7354d",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0544/lib/types/client/UpdateFilterRow.d.ts",
+      "packageName": "@deepseek-ai/dsh-client-ui-settings-general",
+      "before": null,
+      "after": {
+        "path": "store/p0544/lib/types/client/UpdateFilterRow.d.ts",
+        "size": 1106,
+        "sha256": "bf20e02462b89209a481a1a30c00032c16088265ca14861c42f1a62078d9066a"
+      }
+    },
+    {
+      "path": "store/p0544/lib/types/client/desktop-update-preferences-source.d.ts",
+      "packageName": "@deepseek-ai/dsh-client-ui-settings-general",
+      "before": null,
+      "after": {
+        "path": "store/p0544/lib/types/client/desktop-update-preferences-source.d.ts",
+        "size": 1303,
+        "sha256": "c138a6d74be7df25fa0e3ce72aee6f890c8313b4a6346701da7955389025eb51"
+      }
+    },
+    {
+      "path": "store/p0544/lib/types/client/locales.d.ts",
+      "packageName": "@deepseek-ai/dsh-client-ui-settings-general",
+      "before": {
+        "path": "store/p0544/lib/types/client/locales.d.ts",
+        "size": 3036,
+        "sha256": "1baf02f66420f7b1f954c4a6a604c1f3efc29442f34666b1740b8dde5804049a",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0544/lib/types/client/locales.d.ts",
+        "size": 3856,
+        "sha256": "9d8b2deb7aec2c8c45eacf578c00bf59b7b657ba061b2ecfebe271dcfecb3811",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0544/lib/types/types.d.ts",
+      "packageName": "@deepseek-ai/dsh-client-ui-settings-general",
+      "before": {
+        "path": "store/p0544/lib/types/types.d.ts",
+        "size": 1290,
+        "sha256": "59971240e1e06c8b546013ab64d61ab74e15da1e621b4769192d2b205ce5eeb4",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0544/lib/types/types.d.ts",
+        "size": 1920,
+        "sha256": "35e5fa4dcf6b5dc538709f828b9e6abc8a25688dde4a211d55396e26ee102ac9",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/main.js",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/main.js",
+        "size": 390674,
+        "sha256": "3a1621cdfb41c86402b68ec6292e8f10a69e140736ed69cbac2ac676d628db7d",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/main.js",
+        "size": 391045,
+        "sha256": "13163643809682f3a556555dce717ee2c26cb420fe3a13ec1db04194a1e9c0f7",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/preload-app.cjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/preload-app.cjs",
+        "size": 42392,
+        "sha256": "74d91ae9bb6b5816753b09df265f338ef8b6a4e7d0d9d753de39f8fa0ca47a49",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/preload-app.cjs",
+        "size": 43072,
+        "sha256": "924835bb9f12e795bd118d839d237f042419466be21ad3fbbba7f70c6bc57b83",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/README.md",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/sep-update/README.md",
+        "size": 6707,
+        "sha256": "271b66faff9c1064a1f3d8a755329c5ef191c977a582fbc680e39fc9c21b1044",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/sep-update/README.md",
+        "size": 8194,
+        "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-core.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/sep-update/update-core.mjs",
+        "size": 7226,
+        "sha256": "727591afe76e944a12fcc6f7b90732417bc66d9decbef14cb8a263a29df075da",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-core.mjs",
+        "size": 7477,
+        "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-desktop.d.mts",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/sep-update/update-desktop.d.mts",
+        "size": 1210,
+        "sha256": "d8e95ee8d98cf4b48ba1b931174d8ca28072a5b0b6879511f0bfd1de4b7355b2",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-desktop.d.mts",
+        "size": 1517,
+        "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-desktop.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/sep-update/update-desktop.mjs",
+        "size": 16145,
+        "sha256": "9774d66bca8de18f773395dcbec7cc1b7c165b3bc4530950e9cb7cd882846183",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-desktop.mjs",
+        "size": 18747,
+        "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-filter.d.mts",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": null,
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-filter.d.mts",
+        "size": 665,
+        "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88"
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-filter.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": null,
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-filter.mjs",
+        "size": 1219,
+        "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69"
+      }
+    },
+    {
+      "path": "store/p0604/lib/sep-update/update-sep.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/sep-update/update-sep.mjs",
+        "size": 8487,
+        "sha256": "24646720759fd8d6b51dfe292e7bcc145f8e6767354ae513ecbb5fcff9693eae",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/sep-update/update-sep.mjs",
+        "size": 8605,
+        "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/README.md",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/types/sep-update/README.md",
+        "size": 6707,
+        "sha256": "271b66faff9c1064a1f3d8a755329c5ef191c977a582fbc680e39fc9c21b1044",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/README.md",
+        "size": 8194,
+        "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-core.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/types/sep-update/update-core.mjs",
+        "size": 7226,
+        "sha256": "727591afe76e944a12fcc6f7b90732417bc66d9decbef14cb8a263a29df075da",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-core.mjs",
+        "size": 7477,
+        "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-desktop.d.mts",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/types/sep-update/update-desktop.d.mts",
+        "size": 1210,
+        "sha256": "d8e95ee8d98cf4b48ba1b931174d8ca28072a5b0b6879511f0bfd1de4b7355b2",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-desktop.d.mts",
+        "size": 1517,
+        "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-desktop.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/types/sep-update/update-desktop.mjs",
+        "size": 16145,
+        "sha256": "9774d66bca8de18f773395dcbec7cc1b7c165b3bc4530950e9cb7cd882846183",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-desktop.mjs",
+        "size": 18747,
+        "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-filter.d.mts",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": null,
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-filter.d.mts",
+        "size": 665,
+        "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88"
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-filter.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": null,
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-filter.mjs",
+        "size": 1219,
+        "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69"
+      }
+    },
+    {
+      "path": "store/p0604/lib/types/sep-update/update-sep.mjs",
+      "packageName": "@deepseek-ai/dsh-desktop",
+      "before": {
+        "path": "store/p0604/lib/types/sep-update/update-sep.mjs",
+        "size": 8487,
+        "sha256": "24646720759fd8d6b51dfe292e7bcc145f8e6767354ae513ecbb5fcff9693eae",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0604/lib/types/sep-update/update-sep.mjs",
+        "size": 8605,
+        "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0620/README.md",
+      "packageName": "@deepseek-ai/dsh-recovery",
+      "before": {
+        "path": "store/p0620/README.md",
+        "size": 8211,
+        "sha256": "88ec96bbdbf16f711813dff6e68de59e23f20dc5410d5f3c606d2c230444b57d",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0620/README.md",
+        "size": 8211,
+        "sha256": "9fd3def07038d118b37493b64dea184b54552041413435330e7350a6a6047439",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0620/package.json",
+      "packageName": "@deepseek-ai/dsh-recovery",
+      "before": {
+        "path": "store/p0620/package.json",
+        "size": 1487,
+        "sha256": "6c542f150362b35f5955fa04474a2899d74599e62b23ad17bbf4287da40dbc45",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0620/package.json",
+        "size": 1509,
+        "sha256": "39e4d46c1fbf6b4b63c60e8731e31154aea6a5f2b227df36a3a0bd87a760e965",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0620/src/managed.mjs",
+      "packageName": "@deepseek-ai/dsh-recovery",
+      "before": {
+        "path": "store/p0620/src/managed.mjs",
+        "size": 9336,
+        "sha256": "bc953f110cd65bb919d3d2bd21d84433c713bacfdce70e775f4fec5eb4c0c229",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0620/src/managed.mjs",
+        "size": 9336,
+        "sha256": "4a156a54248a2c771d5506dd2f6b5dae57cd18072831cf1f297c8006efe38712",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0621/README.md",
+      "packageName": "dsh-system-enhancement-package",
+      "before": {
+        "path": "store/p0621/README.md",
+        "size": 15472,
+        "sha256": "9dc27029eccdb61cb5e6a7522c088cf64c0418e0d4a2e81d2ca46b60b7bfcd9b",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0621/README.md",
+        "size": 15472,
+        "sha256": "a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0621/package.json",
+      "packageName": "dsh-system-enhancement-package",
+      "before": {
+        "path": "store/p0621/package.json",
+        "size": 2531,
+        "sha256": "7966089a957875e1e1ce253539c19f5695b2de2460e78e475d7fb41d490a0266",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0621/package.json",
+        "size": 2553,
+        "sha256": "c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0638/README.md",
+      "packageName": "dsh-sep-plugin-group",
+      "before": {
+        "path": "store/p0638/README.md",
+        "size": 13389,
+        "sha256": "290a8ee19629c4b03ed2b2160898139e1a16cff2f07326014e5a5b4b58c76126",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0638/README.md",
+        "size": 13389,
+        "sha256": "22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+        "mode": 420
+      }
+    },
+    {
+      "path": "store/p0638/package.json",
+      "packageName": "dsh-sep-plugin-group",
+      "before": {
+        "path": "store/p0638/package.json",
+        "size": 1577,
+        "sha256": "4ccbba14fa6447c637ad932384575968360fe3eb8ca82cc059638560c9822c4f",
+        "mode": 420
+      },
+      "after": {
+        "path": "store/p0638/package.json",
+        "size": 1599,
+        "sha256": "9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+        "mode": 420
+      }
+    }
+  ]
+}

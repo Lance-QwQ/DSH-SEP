@@ -1,6 +1,6 @@
 {
   "name": "dsh-system-enhancement-package",
-  "version": "0.2.1-beta.1",
+  "version": "0.2.1-beta.2",
   "private": true,
   "description": "DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE (DSH SEP) — DSH系统增强套件: governed memory, retrieval and DeepSeek V4 understanding for DSH.",
   "type": "module",
@@ -70,9 +70,9 @@
     "upstreamCommit": "46a7f68b0922371ce7144b668b90e377d8e799f4",
     "r2Graph": "0b54ac82524c0a42db44d5b8a6ebbbca1773a28c8c361839d47f9c12760f35a3",
     "dailyDeployment": false,
-    "suiteVersion": "0.2.1-beta.1",
+    "suiteVersion": "0.2.1-beta.2",
     "hostVersion": "0.2.0-rc.2",
-    "scope": "This public package; historical upstream/base metadata retained separately."
+    "scope": "Public Windows Beta.2 update-filter release; historical source/base metadata retained separately."
   },
   "dshSepSourceBase": {
     "version": "0.1.0-alpha.14.rc2-flow.1",
