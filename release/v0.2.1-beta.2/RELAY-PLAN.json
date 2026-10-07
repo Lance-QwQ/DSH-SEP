@@ -1,0 +1,629 @@
+{
+  "schema": 1,
+  "tag": "v0.2.1-beta.2",
+  "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "bases": [
+    {
+      "kind": "Full",
+      "assetId": 603569854,
+      "baseName": "DSH-SEP-Full-0.2.1-beta.1-Windows.zip",
+      "baseSize": 1185531433,
+      "baseSha256": "8f00952553ac25601d819ba108c4709c239759d15365a9dfa460fe37aa19cda1",
+      "baseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Full-0.2.1-beta.1-Windows.zip",
+      "targetName": "DSH-SEP-Full-0.2.1-beta.2-Windows.zip",
+      "target": {
+        "sha256": "53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e",
+        "size": 1195412205,
+        "members": 53880
+      },
+      "replacements": [
+        {
+          "path": "manifest.json",
+          "blob": "blobs/557e5b03a0596f3983982a465f3c3fc9cacac09a3f36ee1a90f113977662370e",
+          "sha256": "557e5b03a0596f3983982a465f3c3fc9cacac09a3f36ee1a90f113977662370e",
+          "size": 4906965
+        },
+        {
+          "path": "graph.json",
+          "blob": "blobs/96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+          "sha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+          "size": 9124214
+        },
+        {
+          "path": "README.md",
+          "blob": "blobs/57fce9fcf8e4723ba5c6d87d0ee3a1b7da5a8e332770692576423ccba98ee16f",
+          "sha256": "57fce9fcf8e4723ba5c6d87d0ee3a1b7da5a8e332770692576423ccba98ee16f",
+          "size": 4768
+        },
+        {
+          "path": "RELEASE-STATUS.json",
+          "blob": "blobs/11c32c5a1defa2c6b31c335f2b77f23f93e49c7500375bfc66c615eb39b9fea6",
+          "sha256": "11c32c5a1defa2c6b31c335f2b77f23f93e49c7500375bfc66c615eb39b9fea6",
+          "size": 726
+        },
+        {
+          "path": "SOURCE-PROVENANCE.json",
+          "blob": "blobs/c96599ac0fee6177a9599318d214a36fc2395164a2a01af165f8f6c3b018c924",
+          "sha256": "c96599ac0fee6177a9599318d214a36fc2395164a2a01af165f8f6c3b018c924",
+          "size": 3739
+        },
+        {
+          "path": "docs/COMPATIBILITY_KNOWN_ISSUES.md",
+          "blob": "blobs/b4088af06d3b8efb235d8b709079196e74fa8c3bece880db92ca007231e96641",
+          "sha256": "b4088af06d3b8efb235d8b709079196e74fa8c3bece880db92ca007231e96641",
+          "size": 6159
+        },
+        {
+          "path": "docs/CONTENTS-SHA256SUMS.txt",
+          "blob": "blobs/42e12e50059b3019561822096503259d0d36168192de7a6b8eee415583bfc9f4",
+          "sha256": "42e12e50059b3019561822096503259d0d36168192de7a6b8eee415583bfc9f4",
+          "size": 70448
+        },
+        {
+          "path": "docs/DAILY-BETA2-VALIDATION.json",
+          "blob": "blobs/eb47344c553a79016af646c8b55339c39132d15d60b5c72849bebb0766315746",
+          "sha256": "eb47344c553a79016af646c8b55339c39132d15d60b5c72849bebb0766315746",
+          "size": 1378
+        },
+        {
+          "path": "docs/DOCS_INDEX.md",
+          "blob": "blobs/1d47b72ff422e18a4ec2a7946416564206f05466f8d289b16ead8e2e6e0047c1",
+          "sha256": "1d47b72ff422e18a4ec2a7946416564206f05466f8d289b16ead8e2e6e0047c1",
+          "size": 3558
+        },
+        {
+          "path": "docs/OFFLINE-UPGRADE-BETA2.md",
+          "blob": "blobs/2066b3636e754ed0de247dec78ba2eaf4e33d9ff7719cef728c491bd6c7b2a77",
+          "sha256": "2066b3636e754ed0de247dec78ba2eaf4e33d9ff7719cef728c491bd6c7b2a77",
+          "size": 2290
+        },
+        {
+          "path": "docs/RELEASE-NOTES.md",
+          "blob": "blobs/f87e008473be894cdab7fcc40c0445d2585974757240ba08c7cb06d9984c893c",
+          "sha256": "f87e008473be894cdab7fcc40c0445d2585974757240ba08c7cb06d9984c893c",
+          "size": 5546
+        },
+        {
+          "path": "docs/UPDATE-FILTER-VERIFICATION.json",
+          "blob": "blobs/2a7462b9babb4739e85f9bb50ce27eebeb9fc1e03afbfa77bb029290459f1d1b",
+          "sha256": "2a7462b9babb4739e85f9bb50ce27eebeb9fc1e03afbfa77bb029290459f1d1b",
+          "size": 11801
+        },
+        {
+          "path": "docs/UPDATE-SCOPE.md",
+          "blob": "blobs/f88db0af513a6292c5e826ab704b5e0ab345e1d7f1b6f61800013d4583425f84",
+          "sha256": "f88db0af513a6292c5e826ab704b5e0ab345e1d7f1b6f61800013d4583425f84",
+          "size": 3634
+        },
+        {
+          "path": "docs/UPDATE_FILTER.md",
+          "blob": "blobs/48a3813072dbb65d5ae717d6956640631a9654d7b1845c52ce150229d567d97f",
+          "sha256": "48a3813072dbb65d5ae717d6956640631a9654d7b1845c52ce150229d567d97f",
+          "size": 3139
+        },
+        {
+          "path": "docs/USER_GUIDE.md",
+          "blob": "blobs/183099db507ad5b035213e398644a2280861c6508e47da49e25daf9b05a5351c",
+          "sha256": "183099db507ad5b035213e398644a2280861c6508e47da49e25daf9b05a5351c",
+          "size": 8810
+        },
+        {
+          "path": "docs/VERIFICATION-BETA1.md",
+          "blob": "blobs/92587d8a54776e587c006d552b6074b5c185cfa82d6ee130f2a0437a37486384",
+          "sha256": "92587d8a54776e587c006d552b6074b5c185cfa82d6ee130f2a0437a37486384",
+          "size": 6490
+        },
+        {
+          "path": "docs/VERIFICATION-RESULT.json",
+          "blob": "blobs/6ba2a5e2e4ff097904b68b3171ca5d8b94ca135bd2baf347fa84a7a1acdbf697",
+          "sha256": "6ba2a5e2e4ff097904b68b3171ca5d8b94ca135bd2baf347fa84a7a1acdbf697",
+          "size": 621
+        },
+        {
+          "path": "docs/VERIFICATION.md",
+          "blob": "blobs/a3d87b006b6a557370148f568afac12ecc93020af510f23fcc90022308ab9ddf",
+          "sha256": "a3d87b006b6a557370148f568afac12ecc93020af510f23fcc90022308ab9ddf",
+          "size": 2750
+        },
+        {
+          "path": "docs/offline-upgrade-bridge-beta2-review.md",
+          "blob": "blobs/df5a81fac00844d0c3b3e9b20c66981a718bcb84880dc8b6648ce0e87a86929d",
+          "sha256": "df5a81fac00844d0c3b3e9b20c66981a718bcb84880dc8b6648ce0e87a86929d",
+          "size": 4750
+        },
+        {
+          "path": "templates.json",
+          "blob": "blobs/56f18a87bd7e16f45cad53c48fb70ed58ed29e8ac3ff708c6c02fe7b81f7ab90",
+          "sha256": "56f18a87bd7e16f45cad53c48fb70ed58ed29e8ac3ff708c6c02fe7b81f7ab90",
+          "size": 23121
+        },
+        {
+          "path": "payload/store/p0544/lib/client.js",
+          "blob": "blobs/8d6893b8d73f0bb7ae76226b9538e4cd7529bafa1f56c5bcadc0a102c5e7354d",
+          "sha256": "8d6893b8d73f0bb7ae76226b9538e4cd7529bafa1f56c5bcadc0a102c5e7354d",
+          "size": 63748
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/UpdateFilterRow.d.ts",
+          "blob": "blobs/bf20e02462b89209a481a1a30c00032c16088265ca14861c42f1a62078d9066a",
+          "sha256": "bf20e02462b89209a481a1a30c00032c16088265ca14861c42f1a62078d9066a",
+          "size": 1106
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/desktop-update-preferences-source.d.ts",
+          "blob": "blobs/c138a6d74be7df25fa0e3ce72aee6f890c8313b4a6346701da7955389025eb51",
+          "sha256": "c138a6d74be7df25fa0e3ce72aee6f890c8313b4a6346701da7955389025eb51",
+          "size": 1303
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/locales.d.ts",
+          "blob": "blobs/9d8b2deb7aec2c8c45eacf578c00bf59b7b657ba061b2ecfebe271dcfecb3811",
+          "sha256": "9d8b2deb7aec2c8c45eacf578c00bf59b7b657ba061b2ecfebe271dcfecb3811",
+          "size": 3856
+        },
+        {
+          "path": "payload/store/p0544/lib/types/types.d.ts",
+          "blob": "blobs/35e5fa4dcf6b5dc538709f828b9e6abc8a25688dde4a211d55396e26ee102ac9",
+          "sha256": "35e5fa4dcf6b5dc538709f828b9e6abc8a25688dde4a211d55396e26ee102ac9",
+          "size": 1920
+        },
+        {
+          "path": "payload/store/p0604/lib/main.js",
+          "blob": "blobs/13163643809682f3a556555dce717ee2c26cb420fe3a13ec1db04194a1e9c0f7",
+          "sha256": "13163643809682f3a556555dce717ee2c26cb420fe3a13ec1db04194a1e9c0f7",
+          "size": 391045
+        },
+        {
+          "path": "payload/store/p0604/lib/preload-app.cjs",
+          "blob": "blobs/924835bb9f12e795bd118d839d237f042419466be21ad3fbbba7f70c6bc57b83",
+          "sha256": "924835bb9f12e795bd118d839d237f042419466be21ad3fbbba7f70c6bc57b83",
+          "size": 43072
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/README.md",
+          "blob": "blobs/4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "size": 8194
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-core.mjs",
+          "blob": "blobs/71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "size": 7477
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-desktop.d.mts",
+          "blob": "blobs/ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "size": 1517
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-desktop.mjs",
+          "blob": "blobs/40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "size": 18747
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-filter.d.mts",
+          "blob": "blobs/dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "size": 665
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-filter.mjs",
+          "blob": "blobs/9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "size": 1219
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-sep.mjs",
+          "blob": "blobs/2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "size": 8605
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/README.md",
+          "blob": "blobs/4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "size": 8194
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-core.mjs",
+          "blob": "blobs/71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "size": 7477
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-desktop.d.mts",
+          "blob": "blobs/ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "size": 1517
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-desktop.mjs",
+          "blob": "blobs/40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "size": 18747
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-filter.d.mts",
+          "blob": "blobs/dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "size": 665
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-filter.mjs",
+          "blob": "blobs/9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "size": 1219
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-sep.mjs",
+          "blob": "blobs/2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "size": 8605
+        },
+        {
+          "path": "payload/store/p0620/README.md",
+          "blob": "blobs/9fd3def07038d118b37493b64dea184b54552041413435330e7350a6a6047439",
+          "sha256": "9fd3def07038d118b37493b64dea184b54552041413435330e7350a6a6047439",
+          "size": 8211
+        },
+        {
+          "path": "payload/store/p0620/package.json",
+          "blob": "blobs/39e4d46c1fbf6b4b63c60e8731e31154aea6a5f2b227df36a3a0bd87a760e965",
+          "sha256": "39e4d46c1fbf6b4b63c60e8731e31154aea6a5f2b227df36a3a0bd87a760e965",
+          "size": 1509
+        },
+        {
+          "path": "payload/store/p0620/src/managed.mjs",
+          "blob": "blobs/4a156a54248a2c771d5506dd2f6b5dae57cd18072831cf1f297c8006efe38712",
+          "sha256": "4a156a54248a2c771d5506dd2f6b5dae57cd18072831cf1f297c8006efe38712",
+          "size": 9336
+        },
+        {
+          "path": "payload/store/p0621/README.md",
+          "blob": "blobs/a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+          "sha256": "a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+          "size": 15472
+        },
+        {
+          "path": "payload/store/p0621/package.json",
+          "blob": "blobs/c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+          "sha256": "c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+          "size": 2553
+        },
+        {
+          "path": "payload/store/p0638/README.md",
+          "blob": "blobs/22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+          "sha256": "22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+          "size": 13389
+        },
+        {
+          "path": "payload/store/p0638/package.json",
+          "blob": "blobs/9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+          "sha256": "9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+          "size": 1599
+        }
+      ],
+      "removed": []
+    },
+    {
+      "kind": "Only",
+      "assetId": 603571482,
+      "baseName": "DSH-SEP-Only-0.2.1-beta.1-Windows.zip",
+      "baseSize": 1133354496,
+      "baseSha256": "e9a6fb2bd239f8316665e857ed37e3767d76afd9327ab9543b10029519c690db",
+      "baseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/download/v0.2.1-beta.1/DSH-SEP-Only-0.2.1-beta.1-Windows.zip",
+      "targetName": "DSH-SEP-Only-0.2.1-beta.2-Windows.zip",
+      "target": {
+        "sha256": "c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe",
+        "size": 1147954284,
+        "members": 33795
+      },
+      "replacements": [
+        {
+          "path": "manifest.json",
+          "blob": "blobs/a962e4313f21fcaadbfc65672299db1be8e5bd206db478b0bf710461f8a3d4df",
+          "sha256": "a962e4313f21fcaadbfc65672299db1be8e5bd206db478b0bf710461f8a3d4df",
+          "size": 3841866
+        },
+        {
+          "path": "graph.json",
+          "blob": "blobs/96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+          "sha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+          "size": 9124214
+        },
+        {
+          "path": "README.md",
+          "blob": "blobs/57fce9fcf8e4723ba5c6d87d0ee3a1b7da5a8e332770692576423ccba98ee16f",
+          "sha256": "57fce9fcf8e4723ba5c6d87d0ee3a1b7da5a8e332770692576423ccba98ee16f",
+          "size": 4768
+        },
+        {
+          "path": "RELEASE-STATUS.json",
+          "blob": "blobs/11c32c5a1defa2c6b31c335f2b77f23f93e49c7500375bfc66c615eb39b9fea6",
+          "sha256": "11c32c5a1defa2c6b31c335f2b77f23f93e49c7500375bfc66c615eb39b9fea6",
+          "size": 726
+        },
+        {
+          "path": "SOURCE-PROVENANCE.json",
+          "blob": "blobs/c96599ac0fee6177a9599318d214a36fc2395164a2a01af165f8f6c3b018c924",
+          "sha256": "c96599ac0fee6177a9599318d214a36fc2395164a2a01af165f8f6c3b018c924",
+          "size": 3739
+        },
+        {
+          "path": "SOURCE_REQUIREMENTS.json",
+          "blob": "blobs/8c6fa7e0db08792d414006d2fc77e5698e1de1681b9b6baabf174fb935c13768",
+          "sha256": "8c6fa7e0db08792d414006d2fc77e5698e1de1681b9b6baabf174fb935c13768",
+          "size": 6754757
+        },
+        {
+          "path": "docs/COMPATIBILITY_KNOWN_ISSUES.md",
+          "blob": "blobs/b4088af06d3b8efb235d8b709079196e74fa8c3bece880db92ca007231e96641",
+          "sha256": "b4088af06d3b8efb235d8b709079196e74fa8c3bece880db92ca007231e96641",
+          "size": 6159
+        },
+        {
+          "path": "docs/CONTENTS-SHA256SUMS.txt",
+          "blob": "blobs/42e12e50059b3019561822096503259d0d36168192de7a6b8eee415583bfc9f4",
+          "sha256": "42e12e50059b3019561822096503259d0d36168192de7a6b8eee415583bfc9f4",
+          "size": 70448
+        },
+        {
+          "path": "docs/DAILY-BETA2-VALIDATION.json",
+          "blob": "blobs/eb47344c553a79016af646c8b55339c39132d15d60b5c72849bebb0766315746",
+          "sha256": "eb47344c553a79016af646c8b55339c39132d15d60b5c72849bebb0766315746",
+          "size": 1378
+        },
+        {
+          "path": "docs/DOCS_INDEX.md",
+          "blob": "blobs/1d47b72ff422e18a4ec2a7946416564206f05466f8d289b16ead8e2e6e0047c1",
+          "sha256": "1d47b72ff422e18a4ec2a7946416564206f05466f8d289b16ead8e2e6e0047c1",
+          "size": 3558
+        },
+        {
+          "path": "docs/OFFLINE-UPGRADE-BETA2.md",
+          "blob": "blobs/2066b3636e754ed0de247dec78ba2eaf4e33d9ff7719cef728c491bd6c7b2a77",
+          "sha256": "2066b3636e754ed0de247dec78ba2eaf4e33d9ff7719cef728c491bd6c7b2a77",
+          "size": 2290
+        },
+        {
+          "path": "docs/RELEASE-NOTES.md",
+          "blob": "blobs/f87e008473be894cdab7fcc40c0445d2585974757240ba08c7cb06d9984c893c",
+          "sha256": "f87e008473be894cdab7fcc40c0445d2585974757240ba08c7cb06d9984c893c",
+          "size": 5546
+        },
+        {
+          "path": "docs/UPDATE-FILTER-VERIFICATION.json",
+          "blob": "blobs/2a7462b9babb4739e85f9bb50ce27eebeb9fc1e03afbfa77bb029290459f1d1b",
+          "sha256": "2a7462b9babb4739e85f9bb50ce27eebeb9fc1e03afbfa77bb029290459f1d1b",
+          "size": 11801
+        },
+        {
+          "path": "docs/UPDATE-SCOPE.md",
+          "blob": "blobs/f88db0af513a6292c5e826ab704b5e0ab345e1d7f1b6f61800013d4583425f84",
+          "sha256": "f88db0af513a6292c5e826ab704b5e0ab345e1d7f1b6f61800013d4583425f84",
+          "size": 3634
+        },
+        {
+          "path": "docs/UPDATE_FILTER.md",
+          "blob": "blobs/48a3813072dbb65d5ae717d6956640631a9654d7b1845c52ce150229d567d97f",
+          "sha256": "48a3813072dbb65d5ae717d6956640631a9654d7b1845c52ce150229d567d97f",
+          "size": 3139
+        },
+        {
+          "path": "docs/USER_GUIDE.md",
+          "blob": "blobs/183099db507ad5b035213e398644a2280861c6508e47da49e25daf9b05a5351c",
+          "sha256": "183099db507ad5b035213e398644a2280861c6508e47da49e25daf9b05a5351c",
+          "size": 8810
+        },
+        {
+          "path": "docs/VERIFICATION-BETA1.md",
+          "blob": "blobs/92587d8a54776e587c006d552b6074b5c185cfa82d6ee130f2a0437a37486384",
+          "sha256": "92587d8a54776e587c006d552b6074b5c185cfa82d6ee130f2a0437a37486384",
+          "size": 6490
+        },
+        {
+          "path": "docs/VERIFICATION-RESULT.json",
+          "blob": "blobs/6ba2a5e2e4ff097904b68b3171ca5d8b94ca135bd2baf347fa84a7a1acdbf697",
+          "sha256": "6ba2a5e2e4ff097904b68b3171ca5d8b94ca135bd2baf347fa84a7a1acdbf697",
+          "size": 621
+        },
+        {
+          "path": "docs/VERIFICATION.md",
+          "blob": "blobs/a3d87b006b6a557370148f568afac12ecc93020af510f23fcc90022308ab9ddf",
+          "sha256": "a3d87b006b6a557370148f568afac12ecc93020af510f23fcc90022308ab9ddf",
+          "size": 2750
+        },
+        {
+          "path": "docs/offline-upgrade-bridge-beta2-review.md",
+          "blob": "blobs/df5a81fac00844d0c3b3e9b20c66981a718bcb84880dc8b6648ce0e87a86929d",
+          "sha256": "df5a81fac00844d0c3b3e9b20c66981a718bcb84880dc8b6648ce0e87a86929d",
+          "size": 4750
+        },
+        {
+          "path": "templates.json",
+          "blob": "blobs/56f18a87bd7e16f45cad53c48fb70ed58ed29e8ac3ff708c6c02fe7b81f7ab90",
+          "sha256": "56f18a87bd7e16f45cad53c48fb70ed58ed29e8ac3ff708c6c02fe7b81f7ab90",
+          "size": 23121
+        },
+        {
+          "path": "payload/store/p0544/lib/client.js",
+          "blob": "blobs/8d6893b8d73f0bb7ae76226b9538e4cd7529bafa1f56c5bcadc0a102c5e7354d",
+          "sha256": "8d6893b8d73f0bb7ae76226b9538e4cd7529bafa1f56c5bcadc0a102c5e7354d",
+          "size": 63748
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/UpdateFilterRow.d.ts",
+          "blob": "blobs/bf20e02462b89209a481a1a30c00032c16088265ca14861c42f1a62078d9066a",
+          "sha256": "bf20e02462b89209a481a1a30c00032c16088265ca14861c42f1a62078d9066a",
+          "size": 1106
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/desktop-update-preferences-source.d.ts",
+          "blob": "blobs/c138a6d74be7df25fa0e3ce72aee6f890c8313b4a6346701da7955389025eb51",
+          "sha256": "c138a6d74be7df25fa0e3ce72aee6f890c8313b4a6346701da7955389025eb51",
+          "size": 1303
+        },
+        {
+          "path": "payload/store/p0544/lib/types/client/locales.d.ts",
+          "blob": "blobs/9d8b2deb7aec2c8c45eacf578c00bf59b7b657ba061b2ecfebe271dcfecb3811",
+          "sha256": "9d8b2deb7aec2c8c45eacf578c00bf59b7b657ba061b2ecfebe271dcfecb3811",
+          "size": 3856
+        },
+        {
+          "path": "payload/store/p0544/lib/types/types.d.ts",
+          "blob": "blobs/35e5fa4dcf6b5dc538709f828b9e6abc8a25688dde4a211d55396e26ee102ac9",
+          "sha256": "35e5fa4dcf6b5dc538709f828b9e6abc8a25688dde4a211d55396e26ee102ac9",
+          "size": 1920
+        },
+        {
+          "path": "payload/store/p0604/lib/main.js",
+          "blob": "blobs/13163643809682f3a556555dce717ee2c26cb420fe3a13ec1db04194a1e9c0f7",
+          "sha256": "13163643809682f3a556555dce717ee2c26cb420fe3a13ec1db04194a1e9c0f7",
+          "size": 391045
+        },
+        {
+          "path": "payload/store/p0604/lib/preload-app.cjs",
+          "blob": "blobs/924835bb9f12e795bd118d839d237f042419466be21ad3fbbba7f70c6bc57b83",
+          "sha256": "924835bb9f12e795bd118d839d237f042419466be21ad3fbbba7f70c6bc57b83",
+          "size": 43072
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/README.md",
+          "blob": "blobs/4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "size": 8194
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-core.mjs",
+          "blob": "blobs/71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "size": 7477
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-desktop.d.mts",
+          "blob": "blobs/ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "size": 1517
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-desktop.mjs",
+          "blob": "blobs/40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "size": 18747
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-filter.d.mts",
+          "blob": "blobs/dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "size": 665
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-filter.mjs",
+          "blob": "blobs/9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "size": 1219
+        },
+        {
+          "path": "payload/store/p0604/lib/sep-update/update-sep.mjs",
+          "blob": "blobs/2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "size": 8605
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/README.md",
+          "blob": "blobs/4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+          "size": 8194
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-core.mjs",
+          "blob": "blobs/71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+          "size": 7477
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-desktop.d.mts",
+          "blob": "blobs/ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+          "size": 1517
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-desktop.mjs",
+          "blob": "blobs/40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+          "size": 18747
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-filter.d.mts",
+          "blob": "blobs/dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+          "size": 665
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-filter.mjs",
+          "blob": "blobs/9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+          "size": 1219
+        },
+        {
+          "path": "payload/store/p0604/lib/types/sep-update/update-sep.mjs",
+          "blob": "blobs/2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+          "size": 8605
+        },
+        {
+          "path": "payload/store/p0620/README.md",
+          "blob": "blobs/9fd3def07038d118b37493b64dea184b54552041413435330e7350a6a6047439",
+          "sha256": "9fd3def07038d118b37493b64dea184b54552041413435330e7350a6a6047439",
+          "size": 8211
+        },
+        {
+          "path": "payload/store/p0620/package.json",
+          "blob": "blobs/39e4d46c1fbf6b4b63c60e8731e31154aea6a5f2b227df36a3a0bd87a760e965",
+          "sha256": "39e4d46c1fbf6b4b63c60e8731e31154aea6a5f2b227df36a3a0bd87a760e965",
+          "size": 1509
+        },
+        {
+          "path": "payload/store/p0620/src/managed.mjs",
+          "blob": "blobs/4a156a54248a2c771d5506dd2f6b5dae57cd18072831cf1f297c8006efe38712",
+          "sha256": "4a156a54248a2c771d5506dd2f6b5dae57cd18072831cf1f297c8006efe38712",
+          "size": 9336
+        },
+        {
+          "path": "payload/store/p0621/README.md",
+          "blob": "blobs/a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+          "sha256": "a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+          "size": 15472
+        },
+        {
+          "path": "payload/store/p0621/package.json",
+          "blob": "blobs/c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+          "sha256": "c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+          "size": 2553
+        },
+        {
+          "path": "payload/store/p0638/README.md",
+          "blob": "blobs/22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+          "sha256": "22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+          "size": 13389
+        },
+        {
+          "path": "payload/store/p0638/package.json",
+          "blob": "blobs/9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+          "sha256": "9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+          "size": 1599
+        }
+      ],
+      "removed": []
+    }
+  ],
+  "overlay": {
+    "name": "sep-beta2-transfer-overlay.zip",
+    "size": 4688961,
+    "sha256": "7f7b7e5131f56249878b8330574e287218263c22cd10cae5476b1c25fe45f03d"
+  },
+  "rewriterSha256": "f7cd1ad840b58119ded24e87f50862f50e05b06e2322ae0a82fc2e9d8eef2261"
+}

@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "releaseTag": "v0.2.1-beta.2",
+  "sepVersion": "0.2.1-beta.2",
+  "hostVersion": "0.2.0-rc.2",
+  "platform": "win32-x64",
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "archiveAudit": {
+    "schema": 1,
+    "status": "pass",
+    "archives": [
+      {
+        "name": "DSH-SEP-Full-0.2.1-beta.2-Windows.zip",
+        "size": 1195412205,
+        "sha256": "53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e",
+        "members": 53880,
+        "findings": [
+          {
+            "path": "payload/store/p0054/dist/webapi/key/import.js",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "b4e122bd70624cdbca8ca2e002e85540ac6f20e2c5c72c2b4b93e8e8ba4f2f5d",
+            "allowedExactTestFixture": true
+          },
+          {
+            "path": "payload/store/p0482/bin/libreoffice-kit.exe",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "052bf123e994e190c7bbb965c01ab1891a9a616ba7f1f48933a89142a6a3033e",
+            "allowedExactTestFixture": true
+          },
+          {
+            "path": "payload/store/retained_p0622/program/mergedlo.dll",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "ab197ef23b5b6475084ba9a8845b51921dc1ac5f5785920a444aac76aa4d5cd2",
+            "allowedExactTestFixture": true
+          }
+        ],
+        "crc": "pass"
+      },
+      {
+        "name": "DSH-SEP-Offline-Bridge-v0.2.1-beta.2-Windows-x64.zip",
+        "size": 11584297,
+        "sha256": "b2efc39f84db62e66fade1cdf144241917186830dc8e436301ae909078039aff",
+        "members": 1634,
+        "findings": [],
+        "crc": "pass"
+      },
+      {
+        "name": "DSH-SEP-Only-0.2.1-beta.2-Windows.zip",
+        "size": 1147954284,
+        "sha256": "c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe",
+        "members": 33795,
+        "findings": [
+          {
+            "path": "payload/store/p0054/dist/webapi/key/import.js",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "b4e122bd70624cdbca8ca2e002e85540ac6f20e2c5c72c2b4b93e8e8ba4f2f5d",
+            "allowedExactTestFixture": true
+          },
+          {
+            "path": "payload/store/p0482/bin/libreoffice-kit.exe",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "052bf123e994e190c7bbb965c01ab1891a9a616ba7f1f48933a89142a6a3033e",
+            "allowedExactTestFixture": true
+          },
+          {
+            "path": "payload/store/retained_p0622/program/mergedlo.dll",
+            "rule": "private-key",
+            "matchedSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+            "fileSha256": "ab197ef23b5b6475084ba9a8845b51921dc1ac5f5785920a444aac76aa4d5cd2",
+            "allowedExactTestFixture": true
+          }
+        ],
+        "crc": "pass"
+      },
+      {
+        "name": "DSH-SEP-Source-0.2.1-beta.2-Windows.zip",
+        "size": 61534715,
+        "sha256": "47cf9321bbbe7dafa9625407bb7f0e005dfdea498fa221d8586629d0d67095b0",
+        "members": 16925,
+        "findings": [],
+        "crc": "pass"
+      },
+      {
+        "name": "DSH-SEP-Update-0.2.1-beta.2-Windows.zip",
+        "size": 4451400,
+        "sha256": "5d68bbb0250632ff398aaeba92407302a04bf58e41e00730bd2ebbe1bbe12083",
+        "members": 25,
+        "findings": [],
+        "crc": "pass"
+      }
+    ],
+    "scope": "CRC, safe member layout, hash/size identity and selected secret/developer-home patterns. Fixed upstream test constant and three unchanged key-format parser header literals allowed only by whole-file and matched-byte hashes; no complete PEM key block in these literal-bearing files. Not a universal secret detector.",
+    "unexpectedFindings": 0,
+    "unknown": [],
+    "informational": "Target contains eight compiled CSS comments with D: build paths, disclosed in VERIFICATION.md; no user name/body/credential in those comments."
+  },
+  "sealedZipInstall": {
+    "schema": 1,
+    "status": "pass",
+    "targetGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+    "assertions": 18,
+    "rpcRequests": 11,
+    "archives": [
+      {
+        "kind": "Full",
+        "sha256": "53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e",
+        "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+        "payloadFiles": 44986,
+        "allBoundMembers": true
+      },
+      {
+        "kind": "Only",
+        "sha256": "c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe",
+        "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+        "payloadFiles": 24900,
+        "allBoundMembers": true
+      }
+    ],
+    "installations": [
+      {
+        "kind": "Full",
+        "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+        "regularProgramFiles": 44986,
+        "actualSepVersion": "0.2.1-beta.2",
+        "blankCredential": true,
+        "noPrivateImport": true
+      },
+      {
+        "kind": "Only",
+        "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+        "regularProgramFiles": 44986,
+        "actualSepVersion": "0.2.1-beta.2",
+        "blankCredential": true,
+        "noPrivateImport": true
+      }
+    ],
+    "checks": [
+      {
+        "name": "Full-manifest-version-and-graph",
+        "status": "pass"
+      },
+      {
+        "name": "Full-all-archive-members-manifest-bound",
+        "status": "pass"
+      },
+      {
+        "name": "Full-installed-empty-and-independent",
+        "status": "pass"
+      },
+      {
+        "name": "Full-installed-required-public-documents-exist",
+        "status": "pass"
+      },
+      {
+        "name": "Only-manifest-version-and-graph",
+        "status": "pass"
+      },
+      {
+        "name": "Only-all-archive-members-manifest-bound",
+        "status": "pass"
+      },
+      {
+        "name": "Only-installed-empty-and-independent",
+        "status": "pass"
+      },
+      {
+        "name": "Only-installed-required-public-documents-exist",
+        "status": "pass"
+      },
+      {
+        "name": "two-instances-paths-project-identity-isolated",
+        "status": "pass"
+      },
+      {
+        "name": "simultaneous-hosts-different-pid-port",
+        "status": "pass"
+      },
+      {
+        "name": "both-services-budget-ready-default100",
+        "status": "pass"
+      },
+      {
+        "name": "Full-memory-service-and-idle",
+        "status": "pass"
+      },
+      {
+        "name": "Only-memory-service-and-idle",
+        "status": "pass"
+      },
+      {
+        "name": "changing-first-instance-does-not-alter-second",
+        "status": "pass"
+      },
+      {
+        "name": "Full-owned-host-normal-close-and-pid-absence",
+        "status": "pass",
+        "source": "normal acceptance step"
+      },
+      {
+        "name": "second-host-survives-first-normal-exit",
+        "status": "pass"
+      },
+      {
+        "name": "Only-owned-host-normal-close-and-pid-absence",
+        "status": "pass",
+        "source": "normal acceptance step"
+      },
+      {
+        "name": "whole-official-npm-source-unchanged",
+        "status": "pass"
+      }
+    ],
+    "officialDonorUnchanged": true,
+    "resourceAudit": {
+      "status": "pass",
+      "path": "Both concurrent owned managed Hosts closed normally during acceptance, then PID absence confirmed. No forced cleanup, deadline recovery or broad process kill."
+    },
+    "scope": "Final sealed ZIP bytes, independent create-only extraction and installs, official npm donor, graph/support/document integrity, two concurrent managed Hosts and service RPC, normal shutdown. No private data import, credentials or model API; no Electron GUI interaction, daily changes or GitHub publication.",
+    "completedAt": "2026-10-07T15:06:04.034Z"
+  },
+  "sourceArchive": {
+    "status": "pass",
+    "sourceDeliveryFiles": 16924,
+    "bridgeRuntimeFiles": 1625,
+    "sourcePackageVersionsChecked": true,
+    "scope": "Every source archive member hash and full-file manifest; source bridge runtime inputs bound to installed bridge. Does not assert native/transitive reproducible rebuild.",
+    "sourcePackageVersions": {
+      "system-enhancement-package": "0.2.1-beta.2",
+      "recovery": "0.1.7-rc.2-sep.local.7",
+      "plugin-group": "0.1.7-rc.1-sep.local.6"
+    },
+    "runtimeReleaseManifestVersions": {
+      "system-enhancement-package": "0.2.1-beta.2",
+      "recovery": "0.1.7-rc.2-sep.local.7",
+      "plugin-group": "0.1.7-rc.1-sep.local.6"
+    },
+    "versionScope": "Authoring workspace package versions preserved where intentional; suite manifest, dependent exact peer constraints and recovery runtime binding use Beta.2; child package versions remain independent. The seven publication overlays are separately bound; package-version equality is not native rebuild evidence."
+  },
+  "updateMetadataParser": {
+    "status": "pass",
+    "targetCompiledParser": true,
+    "mediumDiscoversBeta2": true,
+    "defaultStrongFiltersBeta2": true,
+    "metadataSha256": "15bf77701f2c7c77f2c07ad25ca51449f0f598d189077108d8f24399a618dedf",
+    "scope": "Synthetic exact published metadata bytes, not live download or ordinary updater installation. Old Beta.1 ownership rejection remains intentional; manual bridge is required."
+  },
+  "bridgeArchive": {
+    "status": "pass",
+    "manifestSha256": "ad91a7ee35566a9f03fbd336ee5d5f2652079436edb317983daaaa23cb6533f1",
+    "runtimeFiles": 1625,
+    "dependencyInputs": 1510,
+    "cleanExtractionDependencyLinks": 73
+  },
+  "dailyDeployment": {
+    "schema": 1,
+    "status": "pass",
+    "versions": {
+      "dsh": "0.2.0-rc.2",
+      "sep": "0.2.1-beta.2"
+    },
+    "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+    "applyChecks": 11,
+    "nativeVerificationChecks": 39,
+    "nativeCycles": 2,
+    "selected": true,
+    "commit": "committed",
+    "businessEntry": "open",
+    "samePlanRecovery": "already-finalized",
+    "preserved": {
+      "allFinancialFields": true,
+      "unknownReservations": true,
+      "limits": true,
+      "credentials": true,
+      "privateOriginalBytes": true,
+      "userPluginsAndConfiguration": true,
+      "updateFilterPreferenceBytes": true
+    },
+    "ledgerByteOrderChanged": false,
+    "resourceAudit": {
+      "path": "Both native validation cycles normally quit; tracked launcher/Electron/Host descendants then absent. No forced cleanup.",
+      "remainingOwnedPids": []
+    },
+    "networkVerification": "Network guards confirmed in both launchers, Hosts and Electron processes; validation cannot establish unguarded external service connectivity. No model conversation was submitted.",
+    "compatibilityReport": {
+      "unknown": 875,
+      "incompatible": 0,
+      "hardBlocks": 0
+    },
+    "completedAt": "2026-10-07T14:40:26.824246+00:00",
+    "scope": "Local confirmed daily switch only. Windows x64; host remains rc.2 and SEP remains Beta. Fixed-scope checks do not validate every private plugin."
+  },
+  "preservedFailureHistory": {
+    "packagingDriverR1": "Owned build stopped due quadratic set construction; precomputed same set before any destination archive existed.",
+    "deltaR1": "Seven duplicate identical digest entries removed before release; original failed archive kept locally.",
+    "auditR1": "Six header matches across Full/Only independently attributed to three unchanged upstream parser/library string literals; exact file/match hashes and absence of complete PEM block bound in r2.",
+    "historicalGUI": "Five larger-suite failures remain in update-filter evidence; not declared repaired by this release."
+  },
+  "scope": "Windows x64 Beta only. Final byte-bound ZIP verification and limited installs, not RC/stable/all-private-plugin/all-platform acceptance. No real credentials or user conversations exported; specified pattern scan not universal secret detector."
+}

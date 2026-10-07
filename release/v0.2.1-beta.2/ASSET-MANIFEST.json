@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "releaseTag": "v0.2.1-beta.2",
+  "prerelease": true,
+  "releaseScope": "Windows x64 Beta",
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "assets": [
+    {
+      "name": "ARTIFACT-VERIFICATION.json",
+      "size": 12389,
+      "sha256": "8316c2f137d19e479e86851dea0df5a209af5a1a3d821b05294656114a6d9c3f"
+    },
+    {
+      "name": "DSH-SEP-Full-0.2.1-beta.2-Windows.zip",
+      "size": 1195412205,
+      "sha256": "53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e"
+    },
+    {
+      "name": "DSH-SEP-Offline-Bridge-v0.2.1-beta.2-Windows-x64.zip",
+      "size": 11584297,
+      "sha256": "b2efc39f84db62e66fade1cdf144241917186830dc8e436301ae909078039aff"
+    },
+    {
+      "name": "DSH-SEP-Only-0.2.1-beta.2-Windows.zip",
+      "size": 1147954284,
+      "sha256": "c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe"
+    },
+    {
+      "name": "DSH-SEP-Source-0.2.1-beta.2-Windows.zip",
+      "size": 61534715,
+      "sha256": "47cf9321bbbe7dafa9625407bb7f0e005dfdea498fa221d8586629d0d67095b0"
+    },
+    {
+      "name": "DSH-SEP-Update-0.2.1-beta.2-Windows.zip",
+      "size": 4451400,
+      "sha256": "5d68bbb0250632ff398aaeba92407302a04bf58e41e00730bd2ebbe1bbe12083"
+    },
+    {
+      "name": "dsh-sep-update.json",
+      "size": 1239,
+      "sha256": "15bf77701f2c7c77f2c07ad25ca51449f0f598d189077108d8f24399a618dedf"
+    },
+    {
+      "name": "RELEASE-ASSETS-SHA256SUMS.txt",
+      "size": 883,
+      "sha256": "79ec725de6bdc514b1f01e9c51200352b93fb5a6207bd6b8ba09dee660d0f7cd"
+    },
+    {
+      "name": "RELEASE-README.md",
+      "size": 2998,
+      "sha256": "482e5eefbd39fce22027667ee0ff40f268a6d781800bc86d2b568aac3d3ba78f"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 539,
+      "sha256": "fa90431f955f6f5ddf6ea700abf678a13bf1a434728aa07d817d7b087fa7936c"
+    }
+  ],
+  "bodySha256": "482e5eefbd39fce22027667ee0ff40f268a6d781800bc86d2b568aac3d3ba78f",
+  "publicationAuthorizedByUser": true
+}

@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "targetGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "assertions": 18,
+  "rpcRequests": 11,
+  "archives": [
+    {
+      "kind": "Full",
+      "sha256": "53dd75d2b98b22b2fae6c70e3c285d4090c0ed81dbe5d82669dec016ea75a84e",
+      "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+      "payloadFiles": 44986,
+      "allBoundMembers": true
+    },
+    {
+      "kind": "Only",
+      "sha256": "c36f91083f1efed79de530ab65ea9e5ab48cf873bed32d1068c2ad63716f3ebe",
+      "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+      "payloadFiles": 24900,
+      "allBoundMembers": true
+    }
+  ],
+  "installations": [
+    {
+      "kind": "Full",
+      "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+      "regularProgramFiles": 44986,
+      "actualSepVersion": "0.2.1-beta.2",
+      "blankCredential": true,
+      "noPrivateImport": true
+    },
+    {
+      "kind": "Only",
+      "graphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+      "regularProgramFiles": 44986,
+      "actualSepVersion": "0.2.1-beta.2",
+      "blankCredential": true,
+      "noPrivateImport": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "Full-manifest-version-and-graph",
+      "status": "pass"
+    },
+    {
+      "name": "Full-all-archive-members-manifest-bound",
+      "status": "pass"
+    },
+    {
+      "name": "Full-installed-empty-and-independent",
+      "status": "pass"
+    },
+    {
+      "name": "Full-installed-required-public-documents-exist",
+      "status": "pass"
+    },
+    {
+      "name": "Only-manifest-version-and-graph",
+      "status": "pass"
+    },
+    {
+      "name": "Only-all-archive-members-manifest-bound",
+      "status": "pass"
+    },
+    {
+      "name": "Only-installed-empty-and-independent",
+      "status": "pass"
+    },
+    {
+      "name": "Only-installed-required-public-documents-exist",
+      "status": "pass"
+    },
+    {
+      "name": "two-instances-paths-project-identity-isolated",
+      "status": "pass"
+    },
+    {
+      "name": "simultaneous-hosts-different-pid-port",
+      "status": "pass"
+    },
+    {
+      "name": "both-services-budget-ready-default100",
+      "status": "pass"
+    },
+    {
+      "name": "Full-memory-service-and-idle",
+      "status": "pass"
+    },
+    {
+      "name": "Only-memory-service-and-idle",
+      "status": "pass"
+    },
+    {
+      "name": "changing-first-instance-does-not-alter-second",
+      "status": "pass"
+    },
+    {
+      "name": "Full-owned-host-normal-close-and-pid-absence",
+      "status": "pass",
+      "source": "normal acceptance step"
+    },
+    {
+      "name": "second-host-survives-first-normal-exit",
+      "status": "pass"
+    },
+    {
+      "name": "Only-owned-host-normal-close-and-pid-absence",
+      "status": "pass",
+      "source": "normal acceptance step"
+    },
+    {
+      "name": "whole-official-npm-source-unchanged",
+      "status": "pass"
+    }
+  ],
+  "officialDonorUnchanged": true,
+  "resourceAudit": {
+    "status": "pass",
+    "path": "Both concurrent owned managed Hosts closed normally during acceptance, then PID absence confirmed. No forced cleanup, deadline recovery or broad process kill."
+  },
+  "scope": "Final sealed ZIP bytes, independent create-only extraction and installs, official npm donor, graph/support/document integrity, two concurrent managed Hosts and service RPC, normal shutdown. No private data import, credentials or model API; no Electron GUI interaction, daily changes or GitHub publication.",
+  "completedAt": "2026-10-07T15:06:04.034Z"
+}

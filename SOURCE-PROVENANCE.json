@@ -6,15 +6,15 @@
     "sourceHeadCommit": "639ed015397290b3745d163aafe02ffee4aa3f84",
     "hostVersion": "0.2.0-rc.2",
     "sourceSepVersionBeforePublicationOverlay": "0.2.0-beta.3-workflow.1",
-    "releaseSepVersion": "0.2.1-beta.1",
+    "releaseSepVersion": "0.2.1-beta.2",
     "baseProgramGraphSha256": "dba096eabda8ee22fa8ed3f6d4b98ab229b22b36e5e56f28ed068c54bca41b77",
     "scope": "Current tracked and non-ignored untracked project source, tests, lock files, compilation/type configuration, patches, vendored source and licenses. No original Git directory/history or private runtime state. Publication version overlays are applied separately. This snapshot alone does not prove reproducible native/transitive binary builds.",
-    "programGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
-    "publicationSourceVersionOverlay": "0.2.1-beta.1"
+    "programGraphSha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+    "publicationSourceVersionOverlay": "0.2.1-beta.2"
   },
-  "programGraphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
-  "sourceManifest": "Source delivery/SOURCE-MANIFEST.json",
-  "programBindings": "Source delivery/SOURCE-PROGRAM-BINDINGS.json",
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "sourceManifest": "SOURCE-DELIVERY-FILES.json",
+  "programBindings": "Source delivery/SOURCE-PROGRAM-BINDINGS.json (historical Beta.1 mapping; later exact deltas and bridge contracts separately bound)",
   "scope": "Modified host and SEP source exported without private Git history; package version metadata alone does not establish byte-equivalent rebuilds.",
   "sourceUpdates": [
     {
@@ -32,5 +32,27 @@
       "documentation": "docs/offline-upgrade-bridge-beta2-review.md",
       "scope": "Current source identity overlays and fixed release bridge; historical Beta.1 source/archive bindings above remain unchanged. This source record does not claim publication or daily selection."
     }
-  ]
+  ],
+  "historicalBeta1": {
+    "source": {
+      "schema": 1,
+      "upstreamRepository": "https://github.com/deepseek-ai/deepseek-harness",
+      "sourceHeadCommit": "639ed015397290b3745d163aafe02ffee4aa3f84",
+      "hostVersion": "0.2.0-rc.2",
+      "sourceSepVersionBeforePublicationOverlay": "0.2.0-beta.3-workflow.1",
+      "releaseSepVersion": "0.2.1-beta.1",
+      "baseProgramGraphSha256": "dba096eabda8ee22fa8ed3f6d4b98ab229b22b36e5e56f28ed068c54bca41b77",
+      "scope": "Current tracked and non-ignored untracked project source, tests, lock files, compilation/type configuration, patches, vendored source and licenses. No original Git directory/history or private runtime state. Publication version overlays are applied separately. This snapshot alone does not prove reproducible native/transitive binary builds.",
+      "programGraphSha256": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+      "publicationSourceVersionOverlay": "0.2.1-beta.1"
+    },
+    "programGraphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
+    "sourceManifest": "Source delivery/SOURCE-MANIFEST.json",
+    "programBindings": "Source delivery/SOURCE-PROGRAM-BINDINGS.json"
+  },
+  "currentSourceCheckpoint": "e626f4a5d25928c394ce8ca207da088918bbfcd5",
+  "currentVersions": {
+    "host": "0.2.0-rc.2",
+    "sep": "0.2.1-beta.2"
+  }
 }

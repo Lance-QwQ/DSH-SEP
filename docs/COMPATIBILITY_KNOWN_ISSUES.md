@@ -1,3 +1,7 @@
+# 0.2.1-beta.2 当前状态
+
+本次 Windows x64 Beta 新增[更新过滤设置](UPDATE_FILTER.md)及[固定版本离线升级桥](OFFLINE-UPGRADE-BETA2.md)。DSH保持0.2.0-rc.2；日常已切换，公开状态以Release页面为准。[当前验证](VERIFICATION.md)。以下原Beta.1版本数值、封包及发布状态是历史记录；通用功能与限制仍适用。
+
 # 兼容性与已知限制
 
 本版是 **SEP 0.2.1-beta.1 / DSH 0.2.0-rc.2 / Windows x64 Beta**。本版内容目录安装、受控更新和真实首启已限定通过；四份最终归档的CRC、SHA-256、脱敏与ZIP安装结论由随资产提供的包外 `ARTIFACT-VERIFICATION.json` 和 `SHA256SUMS.txt` 权威记录。内容验收见 [VERIFICATION.md](VERIFICATION.md) 和 [机器结果](VERIFICATION-RESULT.json)。

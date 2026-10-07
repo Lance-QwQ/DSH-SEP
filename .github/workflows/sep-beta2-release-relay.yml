@@ -1,0 +1,44 @@
+name: SEP Beta.2 verified archive transfer
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        type: string
+        required: true
+      expected_commit:
+        type: string
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: sep-beta2-fixed-transfer
+  cancel-in-progress: false
+jobs:
+  transfer:
+    if: github.repository == 'Lance-QwQ/DSH-SEP' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Reconstruct sealed archives, verify server hashes, keep Release draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ inputs.release_id }}
+          EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+          ACTUAL_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          python3 - <<'PY_RELAY'
+          import os,json,urllib.request,base64,hashlib,tempfile,pathlib,subprocess,sys,re
+          c=os.environ['EXPECTED_COMMIT'];assert re.fullmatch('[a-f0-9]{40}',c) and c==os.environ['ACTUAL_COMMIT']
+          bindings={'RELAY-PLAN.json': '75dd5684d9844290dfcaaa68db5a7327d6ea8c66486456504a1274eb788509a8', 'zip_rewrite.py': 'f7cd1ad840b58119ded24e87f50862f50e05b06e2322ae0a82fc2e9d8eef2261', 'relay.py': 'ccb99db7aa03759791564d1e8c43d0ef7f748b533619f6604e3c67b950615adc'}
+          with tempfile.TemporaryDirectory(prefix='sep-beta2-code-') as temp:
+              root=pathlib.Path(temp)
+              for name,expected in bindings.items():
+                  url='https://api.github.com/repos/Lance-QwQ/DSH-SEP/contents/release/v0.2.1-beta.2/'+name+'?ref='+c
+                  request=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'DSH-SEP-transfer'})
+                  with urllib.request.urlopen(request,timeout=60) as response:
+                      body=response.read(2*1024*1024+1);assert len(body)<=2*1024*1024
+                  value=json.loads(body);assert value['encoding']=='base64';data=base64.b64decode(value['content']);assert hashlib.sha256(data).hexdigest()==expected
+                  (root/name).write_bytes(data)
+              subprocess.run([sys.executable,str(root/'relay.py')],check=True,timeout=2400)
+          PY_RELAY

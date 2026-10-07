@@ -1,3 +1,7 @@
+# 0.2.1-beta.2 当前状态
+
+本次 Windows x64 Beta 新增[更新过滤设置](UPDATE_FILTER.md)及[固定版本离线升级桥](OFFLINE-UPGRADE-BETA2.md)。DSH保持0.2.0-rc.2；日常已切换，公开状态以Release页面为准。[当前验证](VERIFICATION.md)。以下原Beta.1版本数值、封包及发布状态是历史记录；通用功能与限制仍适用。
+
 # 使用手册 · Windows Beta
 
 [导航](DOCS_INDEX.md) · [安装](README.md) · [限制](COMPATIBILITY_KNOWN_ISSUES.md)

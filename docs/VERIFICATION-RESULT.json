@@ -1,83 +1,18 @@
 {
   "schema": 1,
   "status": "pass",
-  "platform": "win32-x64",
-  "sepVersion": "0.2.1-beta.1",
+  "sepVersion": "0.2.1-beta.2",
   "hostVersion": "0.2.0-rc.2",
-  "graphHash": "ec39d3b4294bf81c6fcd7b804ce380d1d5466c3d9d7bc117daabfbe189eaf65d",
-  "scope": "Final program-content candidate installations, controlled update and source export. Container CRC/hash/private-byte scans are independently attested by ARTIFACT-VERIFICATION.json alongside the final ZIPs; this file does not embed its own enclosing ZIP hash.",
-  "tests": [
-    {
-      "name": "install-validation-r1.json",
-      "status": "pass",
-      "evidenceSha256": "a48af7546e34a273911ff9366820ef8f73ca642924e12e15d6220bf248ea3155",
-      "checks": 55,
-      "scope": "Candidate Full/Only directories before final documentation binding and ZIP packaging. Real installed Host, native recovery/transport and read-only settings RPCs; no Electron GUI or model requests, no release discovery. Synthetic empty state only."
-    },
-    {
-      "name": "update-validation-r3/RESULT.json",
-      "status": "pass",
-      "evidenceSha256": "2dbdbbe18d4a82f8e32ea9f458956484f323021741ce56162e7c4b6dccada08e",
-      "checks": 31,
-      "scope": "Fresh D: synthetic installation. Real baseline updater preparation, empty-profile health, profile preservation, P2/native/Recovery publication, selected runtime start/close and idempotent recovery. No daily installation, model API, real credentials or GitHub writes."
-    },
-    {
-      "name": "desktop-validation-r3/RESULT.json",
-      "status": "pass",
-      "evidenceSha256": "cdfa6ea75137bdbec3bbcfb0882a69363958e990152398d5ca5d83d7d9fbaccd",
-      "checks": 12,
-      "scope": "Real Electron startup and isolated renderer on a new synthetic Full installation. No model request, no private data and no manual mouse/drag test."
-    },
-    {
-      "name": "source-export/EXPORT-AUDIT.json",
-      "status": "pass",
-      "evidenceSha256": "c15fc31a333ffddce4550ad9dd44a455b234b45841004da953718d4d90c08f54",
-      "checks": null,
-      "scope": "Independent exact output-tree inventory/hashes, original normal-source hashes, all raw exported bytes including outer metadata and relative-link target text, all declared SEP source-program bindings. Excluded runtime bodies and real environment files were never opened; no original Git history exported. Pattern scan cannot establish absence of every possible secret encoding. Native reproducible builds and all user-plugin runtime behavior are outside this audit."
-    },
-    {
-      "name": "source-export/SCAN-FINAL.json",
-      "status": "pass",
-      "evidenceSha256": "26c3615c53691db7154708f6aaf42fc90359dfd1123bbb50482501e5f25125f5",
-      "checks": null,
-      "scope": "Every final exported source byte and relative link target text scanned for specified developer-path, API/GitHub token and private-key header patterns. Single fixed upstream unit-test input allowed only by path+full-file-sha256+matched-sha256. Not a proof against arbitrary secret encodings."
-    }
-  ],
-  "notVerified": [
-    "All private/custom plugin runtime functions",
-    "Paid model quality and actual provider billing",
-    "Linux/macOS complete desktop distribution",
-    "Multi-day hardware and policy matrix",
-    "Official mandatory-status IPC in managed mode; nonfatal warning persists"
-  ],
-  "failedAttempts": [
-    {
-      "case": "update-r1",
-      "status": "fail",
-      "reason": "Synthetic Windows bundle used schema2 with partially absent POSIX modes; installer refused before destination creation."
-    },
-    {
-      "case": "update-r2",
-      "status": "fail",
-      "reason": "Test sent stale budget settings revision; correct conflict refusal. No update transaction started."
-    },
-    {
-      "case": "desktop-r1",
-      "status": "fail",
-      "reason": "Probe omitted the expected blank-key welcome flow."
-    },
-    {
-      "case": "desktop-r2",
-      "status": "fail",
-      "reason": "Probe expected scheme welcome URL; actual welcome document was a file URL."
-    },
-    {
-      "case": "candidate-closure-r1",
-      "status": "fail",
-      "reason": "Official source setup files were not yet bound as support; no unknown secrets or developer paths found."
-    }
-  ],
-  "modelCalls": 0,
-  "dailyChanged": false,
-  "githubPublished": false
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "programFiles": 44986,
+  "componentPackages": 678,
+  "scope": "Content and local confirmed daily deployment; final archives and distribution require external attestation. Counts overlap.",
+  "contentInstallChecks": 55,
+  "bridgePublicUpgradeChecks": 17,
+  "p2RegressionChecks": 27,
+  "dailyApplyChecks": 11,
+  "dailyNativeChecks": 39,
+  "dailyNativeCycles": 2,
+  "modelRequests": 0,
+  "verificationDocument": "VERIFICATION.md"
 }

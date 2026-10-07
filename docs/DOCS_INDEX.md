@@ -1,3 +1,7 @@
+# 0.2.1-beta.2 当前状态
+
+本次 Windows x64 Beta 新增[更新过滤设置](UPDATE_FILTER.md)及[固定版本离线升级桥](OFFLINE-UPGRADE-BETA2.md)。DSH保持0.2.0-rc.2；日常已切换，公开状态以Release页面为准。[当前验证](VERIFICATION.md)。以下原Beta.1版本数值、封包及发布状态是历史记录；通用功能与限制仍适用。
+
 # 文档导航 · 0.2.1-beta.1
 
 本套资料对应 **SEP 0.2.1-beta.1 / DSH 0.2.0-rc.2 / Windows x64 Beta**。内容目录安装55项、受控更新31项、真实Electron首启12项已通过；四份最终归档的CRC、SHA-256、脱敏审计和ZIP安装结论由随资产提供的包外 `ARTIFACT-VERIFICATION.json` 和 `SHA256SUMS.txt` 权威记录。封包阶段未发布GitHub或切换日常；之后日常已切换并完成35项限定检查。机器记录见 [版本与来源](../RELEASE-STATUS.json)、[内容目录验收](VERIFICATION-RESULT.json)及[文件内容校验清单](CONTENTS-SHA256SUMS.txt)。它不是三平台桌面发行或 SEP RC 声明。

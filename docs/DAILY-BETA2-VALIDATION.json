@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "versions": {
+    "dsh": "0.2.0-rc.2",
+    "sep": "0.2.1-beta.2"
+  },
+  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "applyChecks": 11,
+  "nativeVerificationChecks": 39,
+  "nativeCycles": 2,
+  "selected": true,
+  "commit": "committed",
+  "businessEntry": "open",
+  "samePlanRecovery": "already-finalized",
+  "preserved": {
+    "allFinancialFields": true,
+    "unknownReservations": true,
+    "limits": true,
+    "credentials": true,
+    "privateOriginalBytes": true,
+    "userPluginsAndConfiguration": true,
+    "updateFilterPreferenceBytes": true
+  },
+  "ledgerByteOrderChanged": false,
+  "resourceAudit": {
+    "path": "Both native validation cycles normally quit; tracked launcher/Electron/Host descendants then absent. No forced cleanup.",
+    "remainingOwnedPids": []
+  },
+  "networkVerification": "Network guards confirmed in both launchers, Hosts and Electron processes; validation cannot establish unguarded external service connectivity. No model conversation was submitted.",
+  "compatibilityReport": {
+    "unknown": 875,
+    "incompatible": 0,
+    "hardBlocks": 0
+  },
+  "completedAt": "2026-10-07T14:40:26.824246+00:00",
+  "scope": "Local confirmed daily switch only. Windows x64; host remains rc.2 and SEP remains Beta. Fixed-scope checks do not validate every private plugin."
+}
