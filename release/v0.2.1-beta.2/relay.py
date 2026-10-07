@@ -1,8 +1,8 @@
 """Fixed Beta.2 transfer, never publication or general update execution."""
 from pathlib import Path
-import os,json,hashlib,urllib.request,urllib.error,urllib.parse,zipfile,subprocess,tempfile,sys,re
+import os,json,hashlib,urllib.request,urllib.error,urllib.parse,zipfile,subprocess,tempfile,sys,re,time
 from zip_rewrite import rewrite,sha
-REPO='Lance-QwQ/DSH-SEP';API='https://api.github.com/repos/'+REPO;TOKEN=os.environ['GITHUB_TOKEN'];RELEASE_ID=int(os.environ['RELEASE_ID']);COMMIT=os.environ['EXPECTED_COMMIT'];ROOT=Path(__file__).resolve().parent
+REPO='Lance-QwQ/DSH-SEP';API='https://api.github.com/repos/'+REPO;TOKEN=os.environ['GITHUB_TOKEN'];RELEASE_ID=int(os.environ['RELEASE_ID']);COMMIT=os.environ['RELEASE_COMMIT'];ROOT=Path(__file__).resolve().parent
 assert re.fullmatch('[a-f0-9]{40}',COMMIT)
 def headers():return {'Authorization':'Bearer '+TOKEN,'Accept':'application/vnd.github+json','User-Agent':'DSH-SEP-fixed-beta2-transfer','X-GitHub-Api-Version':'2022-11-28'}
 def api(method,path,data=None):
@@ -49,10 +49,17 @@ with tempfile.TemporaryDirectory(prefix='sep-beta2-transfer-') as temp:
   target=W/row['targetName'];result=rewrite(base,target,replacements,set(row['removed']),row['baseSha256']);assert result==row['target'],'TARGET_BYTES_DIFFER'
   u=urllib.parse.urlsplit(r['upload_url'].split('{')[0]);assert u.scheme=='https' and u.netloc=='uploads.github.com' and u.path=='/repos/'+REPO+'/releases/'+str(RELEASE_ID)+'/assets'
   upload=urllib.parse.urlunsplit((u.scheme,u.netloc,u.path,urllib.parse.urlencode({'name':target.name}),''));quote=lambda x:'"'+x.replace('\\','\\\\').replace('"','\\"')+'"'
-  config='\n'.join(['url = '+quote(upload),'request = "POST"','header = '+quote('Authorization: Bearer '+TOKEN),'header = "Content-Type: application/zip"','header = "Expect:"','data-binary = '+quote('@'+str(target)),'connect-timeout = 30','max-time = 1800','silent','show-error','write-out = "\\n%{http_code}\\n"'])+'\n'
+  config='\n'.join(['url = '+quote(upload),'request = "POST"','header = '+quote('Authorization: Bearer '+TOKEN),'header = "Content-Type: application/zip"','header = "Expect:"','upload-file = '+quote(str(target)),'header = '+quote('Content-Length: '+str(row['target']['size'])),'http1.1','connect-timeout = 30','max-time = 1800','silent','show-error','write-out = "\\n%{http_code}\\n"'])+'\n'
   process=subprocess.run(['curl','--disable','--config','-'],input=config.encode(),capture_output=True,timeout=1830);assert len(process.stdout)<1024**2
   # Mutations are never blindly retried: inspect the draft even on a lost response.
-  fresh=release();uploaded=next((a for a in fresh['assets'] if a['name']==target.name),None);assert uploaded and exact(uploaded,row['target']),'UPLOAD_UNKNOWN_OR_HASH_MISMATCH'
+  fields=process.stdout.rsplit(b'\n',2);http=fields[-2].decode('ascii','replace') if len(fields)==3 else '000'
+  print(json.dumps({'phase':'upload-response','asset':target.name,'curlExit':process.returncode,'httpStatus':http}),flush=True)
+  uploaded=None
+  for attempt in range(12):
+   fresh=release();uploaded=next((a for a in fresh['assets'] if a['name']==target.name),None)
+   if uploaded and exact(uploaded,row['target']):break
+   if attempt<11:time.sleep(2)
+  assert uploaded and exact(uploaded,row['target']),'UPLOAD_UNKNOWN_OR_HASH_MISMATCH'
   print(json.dumps({'phase':'uploaded-and-verified','asset':target.name,'sha256':row['target']['sha256'],'curlExit':process.returncode}),flush=True)
  r=release()
  for row in plan['bases']:assert any(a['name']==row['targetName'] and exact(a,row['target']) for a in r['assets'])

@@ -8,6 +8,9 @@ on:
       expected_commit:
         type: string
         required: true
+      release_commit:
+        type: string
+        required: true
 permissions:
   contents: write
 concurrency:
@@ -23,6 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_ID: ${{ inputs.release_id }}
+          RELEASE_COMMIT: ${{ inputs.release_commit }}
           EXPECTED_COMMIT: ${{ inputs.expected_commit }}
           ACTUAL_COMMIT: ${{ github.sha }}
         shell: bash
@@ -30,7 +34,7 @@ jobs:
           python3 - <<'PY_RELAY'
           import os,json,urllib.request,base64,hashlib,tempfile,pathlib,subprocess,sys,re
           c=os.environ['EXPECTED_COMMIT'];assert re.fullmatch('[a-f0-9]{40}',c) and c==os.environ['ACTUAL_COMMIT']
-          bindings={'RELAY-PLAN.json': '75dd5684d9844290dfcaaa68db5a7327d6ea8c66486456504a1274eb788509a8', 'zip_rewrite.py': 'f7cd1ad840b58119ded24e87f50862f50e05b06e2322ae0a82fc2e9d8eef2261', 'relay.py': 'ccb99db7aa03759791564d1e8c43d0ef7f748b533619f6604e3c67b950615adc'}
+          bindings={'RELAY-PLAN.json': '75dd5684d9844290dfcaaa68db5a7327d6ea8c66486456504a1274eb788509a8', 'zip_rewrite.py': 'f7cd1ad840b58119ded24e87f50862f50e05b06e2322ae0a82fc2e9d8eef2261', 'relay.py': '66440f56b84d4cc7d8388601721b64412845989f5e6c56aa81da8482a6350829'}
           with tempfile.TemporaryDirectory(prefix='sep-beta2-code-') as temp:
               root=pathlib.Path(temp)
               for name,expected in bindings.items():
