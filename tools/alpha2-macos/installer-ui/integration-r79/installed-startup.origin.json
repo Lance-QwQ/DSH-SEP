@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "source": "installer-ui/integration/installed-startup.mjs",
+  "sourceSha256": "e1b4a288612d43b2b93f0ba6e27eeaa0c2f851f13016dfc33ca0f36d08eaa01b",
+  "result": "installer-ui/integration-r79/installed-startup.mjs",
+  "resultSha256": "be5fa6fb1271f7b64686a1d5cee4c91c8e7203a8cfd40720e6112d28c445bfe1",
+  "transforms": [
+    {
+      "from": "742c503ba230ee9dd92f54b8c4646af3385dd1d6259fdfdcbc2212f2ff020d13",
+      "to": "20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107",
+      "occurrences": 1
+    }
+  ],
+  "scope": "Exact r72 installed startup behavior. Only replace verified r61 payload archive with verified r74 archive; no path, deadline, action or cleanup changes."
+}

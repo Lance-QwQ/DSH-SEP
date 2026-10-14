@@ -1,0 +1,35 @@
+// Evidence-bound additive derivation. No product mutation, execution or upload.
+import assert from 'node:assert/strict';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {join,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {deriveSuccessorSources} from './derive-sources.mjs';
+const sourceRoot=fileURLToPath(new URL('../../',import.meta.url)),[evidenceRoot,mode]=process.argv.slice(2);
+assert(evidenceRoot);assert(mode===undefined||mode==='--verify');
+const sha=b=>createHash('sha256').update(b).digest('hex'),json=async p=>JSON.parse(await readFile(p,'utf8'));
+const auditBytes=await readFile(join(evidenceRoot,'AUDIT.json'));
+assert.equal(sha(auditBytes),'d83d1d267531ae62ebe3c82c3609d65089a7435d8567019eda7b4ef4494ab6da');
+const audit=JSON.parse(auditBytes),api=await json(join(evidenceRoot,'API-METADATA.json'));
+assert.equal(audit.status,'pass');assert.equal(audit.commit,'e2cdf833051e9ff0b451d0885549f38690220acd');assert.equal(api.commit,audit.commit);assert.equal(api.runId,audit.runId);assert.equal(audit.applicationStarted,false);assert.equal(audit.installationPerformed,false);
+assert.equal(audit.archive.sha256,'6043ddd8305009e9013de46f85f7660cdc775d4320987553808eb9f8ec01db4f');
+assert.equal(sha(await readFile(join(evidenceRoot,'API-METADATA.json'))),audit.apiMetadataSha256);
+const sourceMap=new Map();
+for(const p of ['package/restore-installer-application.mjs',...['run-full.mjs','main-result.test.mjs','installed-startup.mjs','test-main.m','installer-observer.m','ci-job.yml'].map(p=>'installer-ui/integration/'+p)])sourceMap.set(p,await readFile(join(sourceRoot,p)));
+const result=deriveSuccessorSources(sourceMap,{installerBuildCommit:audit.commit,installerArchiveSha256:audit.archive.sha256});
+const ids=[11933362884,11933432746,11933651586],labels=['evidence','part-one','part-two'];
+const pins={schema:1,status:'ready',scope:'Fixed r78 signed installer archive restore; new r79 install/startup outcomes remain not_run',commit:audit.commit,runId:audit.runId,artifact:audit.archive.name,assemblyPath:'_temp/installer-application/RESULT.json',inventoryPath:'_temp/installer-application/PACKAGE-INVENTORY.json',transportPath:'_temp/installer-transport/transport-manifest.json',assemblySha256:audit.assemblySha256,archiveSha256:audit.archive.sha256,archiveBytes:audit.archive.bytes,inventorySha256:audit.inventorySha256,treeSha256:audit.treeSha256,manifestSha256:audit.manifestSha256,artifacts:ids.map((id,i)=>{const row=api.artifacts.find(r=>r.id===id);assert(row);assert.equal(row.workflow_run.head_sha,audit.commit);assert.equal(row.workflow_run.id,audit.runId);return{label:labels[i],id,bytes:row.size_in_bytes,sha256:row.digest.slice(7)};})};
+const stringify=v=>Buffer.from(JSON.stringify(v,null,2)+'\n');
+const contractPath='installer-ui/integration/CONTRACT.json',contractBytes=await readFile(join(sourceRoot,contractPath));
+assert.equal(sha(contractBytes),'94036620fb9648d39cd24264bd410c5c4df267e2eddda3f48edca826eaa42565');
+result.files.push({path:'package/installer-restore-pins-r78.json',bytes:stringify(pins)});
+result.files.push({path:'installer-ui/integration-r79/ORIGIN.json',bytes:stringify({schema:1,status:'not_run',preparation:'derived',scope:'Mechanical test-operator successor; r72 behavior and limits retained. Actual r79 results cannot be inherited.',auditSha256:sha(auditBytes),bindings:result.bindings,contractSource:{path:contractPath,sha256:sha(contractBytes)},origins:result.origins})});
+const contract=JSON.parse(contractBytes);
+contract.installerBuild={commit:audit.commit,archiveSha256:audit.archive.sha256,manifestSha256:audit.manifestSha256,inventorySha256:audit.inventorySha256};
+contract.payloadBuild={commit:result.bindings.payloadBuildCommit,...audit.payload};
+contract.testCommit='not_run';
+result.files.push({path:'installer-ui/integration-r79/CONTRACT.json',bytes:stringify(contract)});
+result.files.push({path:'installer-ui/integration-r79/README.md',bytes:Buffer.from('# r79 fixed successor installer integration\n\nThis test operator targets the actual r78 installer archive and the unchanged, signed r74 application payload. The r78 build and archive audit passed; this r79 installation and startup sequence has not run. Build commit, test commit and payload commit are distinct.\n\nOrder: restore and verify the original installer; start and normally close its original byte-identical LaunchServices entry on an empty account; compile a separate test-main linked to the same five production modules; use actual controls and attached confirmation buttons to install; verify the installed payload and perform two LaunchServices startup/close cycles. The six result assertions, time limits, cleanup and unknown-owner handling are unchanged from r72.\n\nThe original installer window observation alone does not prove preview health. Button delivery uses a separate test entry, not external mouse interaction with the original main. Unknown cleanup remains blocked; there is no forced termination or reuse of a populated account. The native application has no Developer ID/notarization.\n\nReproduce derivation with `node installer-ui/integration-successor/generate-r79.mjs <verified-r78-evidence-directory> --verify`. ORIGIN.json pins every source and exact transformation. CI uses only ci-job.yml; no historical NI runner is included. The artifact token is restricted to the restore step.\n\nFinal evidence must bind the actual new integration and installed-startup RESULT.json hashes to this installer archive/manifest and payload PROGRAM/BOOTSTRAP/tree. Historical r72 evidence rows must not be reused.\n')});
+if(mode!=='--verify')await mkdir(join(sourceRoot,'installer-ui/integration-r79'));
+for(const file of result.files){const path=join(sourceRoot,file.path);if(mode==='--verify')assert.deepEqual(await readFile(path),file.bytes,file.path);else{await mkdir(dirname(path),{recursive:true});await writeFile(path,file.bytes,{flag:'wx'});}}
+console.log(JSON.stringify({status:'pass',action:mode==='--verify'?'verify-derivation':'prepare-derivation',native:'not_run',files:result.files.map(f=>({path:f.path,bytes:f.bytes.length,sha256:sha(f.bytes)})),bindings:result.bindings}));
