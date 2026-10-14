@@ -1,11 +1,11 @@
-name: SEP Alpha.2 macOS exact r74 app identity and project continuation
+name: SEP Alpha.2 macOS fixed app renderer grammar and project continuation
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  project-native-r75:
+  project-native-r77:
     runs-on: macos-15
     timeout-minutes: 25
     permissions:
@@ -21,8 +21,10 @@ jobs:
       - name: Verify exact test-only origins and identity contracts
         run: |
           set -euo pipefail
-          node tools/alpha2-macos/desktop/project-workflow-product/derive-inspector-identity.mjs --verify > "$RUNNER_TEMP/r75-origins.json"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/native-contract.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-authority-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-inspector-identity.test.mjs tools/alpha2-macos/package/successor-r74/candidate.test.mjs > "$RUNNER_TEMP/r75-contracts.tap" 2> "$RUNNER_TEMP/r75-contracts.stderr"
+          node tools/alpha2-macos/desktop/project-workflow-product/derive-inspector-identity.mjs --verify > "$RUNNER_TEMP/r77-origins.json"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/native-contract.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-authority-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-inspector-identity.test.mjs tools/alpha2-macos/package/successor-r74/candidate.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-renderer-grammar.test.mjs > "$RUNNER_TEMP/r77-contracts.tap" 2> "$RUNNER_TEMP/r77-contracts.stderr"
+      - name: Verify exact renderer grammar derivation
+        run: node tools/alpha2-macos/desktop/project-workflow-product/derive-renderer-grammar.mjs --verify > "$RUNNER_TEMP/r77-renderer-origin.json"
       - name: Restore exact signed r74 app without changing product bytes
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
@@ -30,28 +32,29 @@ jobs:
       - name: Two actual UI rounds on the same synthetic P2 data
         run: |
           set -euo pipefail
-          output="$RUNNER_TEMP/project-ui-native-r5"
+          output="$RUNNER_TEMP/project-ui-native-r6"
           mkdir "$output"
           /usr/bin/sw_vers > "$output/mac-version.txt"
           receipt="$RUNNER_TEMP/project-r74/RESULT.json"
           sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f1)
-          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r5.mjs "$receipt" "$sha" "$output/round1" "$output/data" 1
-          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r5.mjs "$receipt" "$sha" "$output/round2" "$output/data" 2
+          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r6.mjs "$receipt" "$sha" "$output/round1" "$output/data" 1
+          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r6.mjs "$receipt" "$sha" "$output/round2" "$output/data" 2
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: project-native-ui-r75-evidence
+          name: project-native-ui-r77-evidence
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/r75-origins.json
-            ${{ runner.temp }}/r75-contracts.tap
-            ${{ runner.temp }}/r75-contracts.stderr
+            ${{ runner.temp }}/r77-origins.json
+            ${{ runner.temp }}/r77-renderer-origin.json
+            ${{ runner.temp }}/r77-contracts.tap
+            ${{ runner.temp }}/r77-contracts.stderr
             ${{ runner.temp }}/project-r74/RESULT.json
             ${{ runner.temp }}/project-r74/*.log
             ${{ runner.temp }}/project-r74/PACKAGE-INVENTORY.json
             ${{ runner.temp }}/project-r74/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/project-ui-native-r5/*.txt
-            ${{ runner.temp }}/project-ui-native-r5/round1/*.json
-            ${{ runner.temp }}/project-ui-native-r5/round1/*.log
-            ${{ runner.temp }}/project-ui-native-r5/round2/*.json
-            ${{ runner.temp }}/project-ui-native-r5/round2/*.log
+            ${{ runner.temp }}/project-ui-native-r6/*.txt
+            ${{ runner.temp }}/project-ui-native-r6/round1/*.json
+            ${{ runner.temp }}/project-ui-native-r6/round1/*.log
+            ${{ runner.temp }}/project-ui-native-r6/round2/*.json
+            ${{ runner.temp }}/project-ui-native-r6/round2/*.log
