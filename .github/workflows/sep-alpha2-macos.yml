@@ -162,3 +162,26 @@ jobs:
             ${{ runner.temp }}/sep-task-isolation/work-*/*.receipt
           if-no-files-found: error
           retention-days: 14
+
+  apfs-controlled-files:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Three native APFS helper and adapter rounds
+        run: node tools/alpha2-macos/apfs-tree/run-tests.mjs "$(cd "$RUNNER_TEMP" && pwd -P)/sep-apfs-files"
+      - name: Preserve native receipts and logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-apfs-controlled-files
+          path: |
+            ${{ runner.temp }}/sep-apfs-files/*.json
+            ${{ runner.temp }}/sep-apfs-files/*.log
+          if-no-files-found: error
+          retention-days: 14

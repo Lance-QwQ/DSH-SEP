@@ -28,7 +28,7 @@ try{
  receipts.push({name:'unconfined-write-positive-control',status:'pass'});
  for(let round=1;round<=3;round++){
   stage='sandbox-round-'+round;const work=join(output,'work-'+round);await mkdir(work,{mode:0o700});const own=join(work,'own'),receipt=own+'.receipt';
-  const profile=`(version 1)\n(deny default)\n(allow process-exec)\n(allow process-fork)\n(allow sysctl-read)\n(allow file-read-metadata)\n(allow file-read* (subpath "/usr") (subpath "/System") (subpath "/bin") (subpath "/sbin") (literal ${literal(binary)}) (subpath ${literal(work)}))\n(allow file-write* (subpath ${literal(work)}) (literal "/dev/null"))\n(allow mach-lookup (global-name "com.apple.system.logger"))\n`;
+  const profile=`(version 1)\n(deny default)\n(allow process-exec)\n(allow process-fork)\n(allow sysctl-read)\n(allow file-read-metadata)\n(allow file-read* (literal "/") (subpath "/usr") (subpath "/System") (subpath "/bin") (subpath "/sbin") (literal ${literal(binary)}) (subpath ${literal(work)}))\n(allow file-write* (subpath ${literal(work)}) (literal "/dev/null"))\n(allow mach-lookup (global-name "com.apple.system.logger"))\n`;
   const policy=join(output,'round-'+round+'.sb');await writeFile(policy,profile,{flag:'wx'});
   const result=await command('/usr/bin/sandbox-exec',['-f',policy,binary,'sandbox',own,original,next,committed,port],'round-'+round);
   const parent=JSON.parse(result.stdout);assert(Number.isSafeInteger(parent.pid));
