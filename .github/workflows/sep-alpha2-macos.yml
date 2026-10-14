@@ -27,4 +27,5 @@ jobs:
             ${{ runner.temp }}/bootstrap-connected/RESULT.json
             ${{ runner.temp }}/bootstrap-connected/*.log
             ${{ runner.temp }}/bootstrap-connected/cases/**/*.log
+            ${{ runner.temp }}/bootstrap-connected/cases/**/*.jsonl
             ${{ runner.temp }}/bootstrap-connected/cases/**/cleanup.json

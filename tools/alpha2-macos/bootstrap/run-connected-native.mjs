@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';import {mkdir,readFile,writeFile,realpath} from 'node:fs/promises';import {join,resolve,dirname} from 'node:path';import {fileURLToPath} from 'node:url';import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {createHash} from 'node:crypto';
 const exec=promisify(execFile),hash=b=>createHash('sha256').update(b).digest('hex'),here=fileURLToPath(new URL('.',import.meta.url));
 assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');const out=resolve(process.argv[2]);assert.equal(await realpath(dirname(out)),dirname(out));await mkdir(out,{mode:0o700});const cases=join(out,'cases');await mkdir(cases,{mode:0o700});
-const observer=join(out,'application-observer'),source=join(here,'../package/application-observer.m');await exec('/usr/bin/clang',['-fobjc-arc','-framework','AppKit',source,'-o',observer],{timeout:30000,maxBuffer:1048576});
+const observer=join(out,'application-observer'),source=join(here,'../package/application-observer.m');await exec('/usr/bin/clang',['-fobjc-arc','-Wall','-Wextra','-Werror','-framework','AppKit','-lproc',source,'-o',observer],{timeout:30000,maxBuffer:1048576});
 const lock=join(out,'receipt-lock-fixture');await exec('/usr/bin/clang',['-Wall','-Wextra','-Werror',join(here,'receipt-lock-fixture.c'),'-o',lock],{timeout:30000,maxBuffer:1048576});
 let run;try{run=await exec(process.execPath,['--test',join(here,'connected-native.test.mjs')],{env:{...process.env,SEP_BOOTSTRAP_CONNECTED_ROOT:cases,SEP_BOOTSTRAP_CONNECTED_OBSERVER:observer,SEP_BOOTSTRAP_RECEIPT_LOCK:lock},timeout:240000,maxBuffer:4*1024*1024});}catch(e){run=e;}
 await writeFile(join(out,'native.log'),String(run.stdout??'')+'\n'+String(run.stderr??''),{flag:'wx'});

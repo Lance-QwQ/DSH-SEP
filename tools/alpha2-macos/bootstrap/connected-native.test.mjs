@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {mkdir,writeFile,readFile,chmod,copyFile,realpath,open,rename} from 'node:fs/promises';
+import {mkdir,writeFile,readFile,chmod,copyFile,realpath,open,rename,appendFile} from 'node:fs/promises';
 import {constants} from 'node:fs';import {join,dirname} from 'node:path';import {userInfo} from 'node:os';
 import {fileURLToPath} from 'node:url';import {spawn,execFile} from 'node:child_process';
 import {promisify} from 'node:util';import {createHash} from 'node:crypto';import {setTimeout as delay} from 'node:timers/promises';
@@ -30,10 +30,14 @@ for(const mode of ['long-running','reopen-quit','cancel-retry','startup-late','s
  const frames=async()=>(await readFile(join(root,'stdout.log'),'utf8')).split('\n').flatMap(line=>{try{return[JSON.parse(line)];}catch{return[];}});
  const event=async(kind,after=0)=>until(async()=>{const rows=await frames();const value=rows.find(x=>x.scope==='macos-app-v1-bootstrap'&&x.bootstrapPid===child.pid&&x.event===kind&&x.sequence>after);if(value)return value;if(exit)assert.fail('bootstrap exited before '+kind+': '+JSON.stringify({exit,rows}));});
  const helper=process.env.SEP_BOOTSTRAP_CONNECTED_OBSERVER;assert(helper);let birth;
- const observe=async(action)=>JSON.parse((await exec(helper,[action,String(child.pid),app,bundleId,...action==='snapshot'?[]:[String(birth)]],{timeout:5000,maxBuffer:65536})).stdout);
+ const observe=async(action,expected=birth)=>{
+  let result,failure;try{result=await exec(helper,[action,String(child.pid),app,bundleId,...action==='snapshot'?[]:[String(expected)]],{timeout:5000,maxBuffer:65536});}catch(error){result=error;failure=error;}
+  await appendFile(join(root,'observer.jsonl'),JSON.stringify({action,expectedBirth:expected??null,exitCode:result.code??0,stdout:String(result.stdout??''),stderr:String(result.stderr??'')})+'\n',{mode:0o600});
+  if(failure)throw failure;return JSON.parse(result.stdout);
+ };
  let cleanup={status:'not_needed'};
  try{
-  const owned=await event('owned');assert.match(owned.sessionId,/^[a-f0-9]{32}$/);assert.match(owned.generation,/^[a-f0-9]{32}$/);assert.equal(owned.resourcesConfirmedReleased,false);birth=(await observe('snapshot')).launchTime;assert(birth>0);
+  const owned=await event('owned');assert.match(owned.sessionId,/^[a-f0-9]{32}$/);assert.match(owned.generation,/^[a-f0-9]{32}$/);assert.equal(owned.resourcesConfirmedReleased,false);const snapshot=await observe('snapshot');assert.equal(snapshot.status,'pass');assert.equal(snapshot.birthSource,'proc_bsdinfo');birth=snapshot.launchTime;assert(birth>0);
   const latest=()=>readFile(latestPath,'utf8').then(JSON.parse);
   if(mode==='startup-late'||mode==='failed-startup'){
    const blocked=await event('blocked');assert.equal(blocked.desktopReady,false);assert.equal(blocked.resourcesConfirmedReleased,false);
@@ -52,7 +56,7 @@ for(const mode of ['long-running','reopen-quit','cancel-retry','startup-late','s
    assert.notEqual(newer.sessionId,owned.sessionId);assert.notEqual(newer.generation,owned.generation);
    const temp=join(stateRoot,'synthetic-newer-receipt.tmp');await writeFile(temp,JSON.stringify(newer)+'\n',{flag:'wx',mode:0o600});await rename(temp,latestPath);await releaseLock();
   }
-  if(mode==='long-running'){await delay(2400);assert.equal(exit,undefined);assert.equal((await latest()).phase,'running');}
+  if(mode==='long-running'){await assert.rejects(observe('quit',birth+1),error=>error.code===78&&JSON.parse(error.stdout).code==='SEP_APPLICATION_BIRTH');await delay(2400);assert.equal(exit,undefined);assert.equal((await latest()).phase,'running');}
   if(mode==='reopen-quit'){
    await exec('/usr/bin/open',[app],{timeout:5000});const activated=await event('activated',initial.sequence);assert.equal(activated.sessionId,owned.sessionId);assert.equal(activated.generation,owned.generation);assert.equal((await observe('snapshot')).launchTime,birth);
   }
