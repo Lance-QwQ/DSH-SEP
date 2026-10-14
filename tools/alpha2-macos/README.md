@@ -14,6 +14,8 @@
 
 本地执行示例：
 
+新增独立账本任务：捕获当前源码的四份预算相关模块原字节，使用现有 Alpha.2 锁文件固定的 zod 4.6.5 与完整性值。八类合成场景各执行三轮：默认值与取消、未知响应保留、设置 CAS 与保留消费、三档金额限制、跨进程并发、SIGKILL 后预算锁恢复、账本丢失及损坏不清零。该结果仅覆盖真实 Budget 与 SQLite 锁在 macOS 上的行为；不代替 P2 三域、记忆、实际宿主或全部进程清理的认证。
+
 ```sh
 node --test --test-reporter=tap tools/alpha2-macos/identity-contract.test.mjs
 node tools/alpha2-macos/run-native.mjs /absolute/canonical/apfs/new-test-root

@@ -1,5 +1,9 @@
 {
   "name": "sep-alpha2-macos-native-foundation",
+  "version": "0.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "zod": "4.6.5"
+  }
 }
