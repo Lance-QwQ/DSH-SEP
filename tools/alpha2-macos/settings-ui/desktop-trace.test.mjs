@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {runInNewContext} from 'node:vm';
+import {settingsTrace} from './desktop-trace.mjs';
+function fixture(){
+ let callback;const element={disabled:false,expanded:'false',getClientRects:()=>[{}],closest:()=>null,checkVisibility:()=>true,getAttribute(name){return name==='aria-expanded'?this.expanded:name==='aria-label'?'Account menu':null;}};
+ const root={inert:false,hasAttribute:()=>false};const context={window:{},performance:{timeOrigin:12345,now:()=>10},MutationObserver:class{constructor(fn){callback=fn;}observe(){}disconnect(){}},document:{readyState:'complete',documentElement:{},querySelector:s=>s==='#root'?root:null,querySelectorAll:s=>s==='button'?[element]:[]}};
+ return {context,element,root,change:()=>callback(),call:(command,action)=>JSON.parse(JSON.stringify(runInNewContext('('+settingsTrace.toString()+')('+JSON.stringify(command)+','+JSON.stringify(action)+')',context)))};
+}
+test('trace records only structural data, time origin and exact allowed entry action',()=>{const f=fixture(),r=f.call('start');assert.equal(r.snapshot.timeOrigin,12345);assert.equal(r.snapshot.account.expanded,'false');assert.equal(r.snapshot.dialogs,0);f.element.expanded='true';f.call('sample','account-after');const next=f.call('read');assert.equal(next.rows.at(-1).action,'account-after');assert.equal(next.rows.at(-1).state.account.expanded,'true');f.call('sample','SECRET body /private token');assert.equal(JSON.stringify(f.call('read')).includes('SECRET'),false);});
+test('mutation trace keeps a 128-row ring and only records structure changes',()=>{const f=fixture();f.call('start');for(let i=0;i<5;i++)f.change();assert.equal(f.call('read').total,1);for(let i=0;i<200;i++){f.root.inert=!f.root.inert;f.change();}const r=f.call('read');assert.equal(r.rows.length,128);assert.equal(r.total,201);assert.equal(r.truncated,true);});
+test('read after a new renderer reports absence instead of fabricating old trace',()=>{const f=fixture();const r=f.call('read');assert.equal(r.status,'missing');assert.equal(r.snapshot.timeOrigin,12345);assert.deepEqual(r.rows,[]);});

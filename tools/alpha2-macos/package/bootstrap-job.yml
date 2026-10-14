@@ -1,0 +1,37 @@
+native-bootstrap-contract:
+  runs-on: macos-15
+  timeout-minutes: 15
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Fixed carrier runtime and independent protocol contracts
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: |
+        node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/bootstrap-carrier-download"
+        mkdir "$RUNNER_TEMP/bootstrap-carrier"
+        ditto -x -k "$RUNNER_TEMP/bootstrap-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/bootstrap-carrier"
+        node --test --test-reporter=tap tools/alpha2-macos/bootstrap/session.test.mjs > "$RUNNER_TEMP/bootstrap-session.tap"
+    - name: Native AppKit synthetic contract, separate from product verification
+      run: |
+        node="$RUNNER_TEMP/bootstrap-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node"
+        "$node" tools/alpha2-macos/bootstrap/run-native.mjs "$RUNNER_TEMP/bootstrap-native"
+    - name: Preserve original native outcome including the planned RED
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-bootstrap-contract
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/bootstrap-session.tap
+          ${{ runner.temp }}/bootstrap-native/*.log
+          ${{ runner.temp }}/bootstrap-native/*.json
+          ${{ runner.temp }}/bootstrap-native/cases/**/*.log
+          ${{ runner.temp }}/bootstrap-carrier-download/DOWNLOAD-RECEIPT.json

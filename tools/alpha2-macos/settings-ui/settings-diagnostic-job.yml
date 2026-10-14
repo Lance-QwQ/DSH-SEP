@@ -14,7 +14,7 @@ settings-ui-fixed-package:
     - name: Verify test-only diagnostic and origin binding
       run: |
         mkdir "$RUNNER_TEMP/settings-diagnostic-unit"
-        node --test --test-reporter=tap tools/alpha2-macos/settings-ui/desktop-smoke.test.mjs tools/alpha2-macos/settings-ui/desktop-diagnostic.test.mjs tools/alpha2-macos/settings-ui/desktop-onboarding.test.mjs tools/alpha2-macos/settings-ui/desktop-probe-syntax.test.mjs > "$RUNNER_TEMP/settings-diagnostic-unit/tests.tap"
+        node --test --test-reporter=tap tools/alpha2-macos/settings-ui/desktop-smoke.test.mjs tools/alpha2-macos/settings-ui/desktop-diagnostic.test.mjs tools/alpha2-macos/settings-ui/desktop-onboarding.test.mjs tools/alpha2-macos/settings-ui/desktop-probe-syntax.test.mjs tools/alpha2-macos/settings-ui/desktop-trace.test.mjs > "$RUNNER_TEMP/settings-diagnostic-unit/tests.tap"
     - name: Download exact r28 image package with both archive hashes
       env:
         SEP_ARTIFACT_TOKEN: ${{ github.token }}
@@ -48,3 +48,4 @@ settings-ui-fixed-package:
           ${{ runner.temp }}/settings-fixed-smoke/RESULT.json
           ${{ runner.temp }}/settings-fixed-smoke/round-*/*.json
           ${{ runner.temp }}/settings-fixed-smoke/round-*/*.log
+          ${{ runner.temp }}/settings-fixed-smoke/round-*/*.png
