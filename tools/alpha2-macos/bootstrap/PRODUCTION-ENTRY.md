@@ -1,9 +1,12 @@
 # Fixed production bootstrap admission
 
-Status: implementation in progress. The existing non-test binary still refuses
-execution. Eight portable manifest shape tests have a recorded RED/GREEN cycle;
-the thirteen native bundle-admission definitions are awaiting their first macOS
-run. They are identity fixtures and never execute their placeholder Node file.
+Status: native implementation awaiting GREEN verification. Eight portable
+manifest shape tests have a recorded RED/GREEN cycle. Native r37 ran all thirteen
+bundle-admission definitions against the previous entry: every binary compiled,
+and all thirteen failed for the expected missing validation (not an environment
+error). The new native reader is now implemented; the real controller remains
+unconnected. These are identity fixtures and never execute their placeholder
+Node file.
 
 ## Fixed layout
 
@@ -29,6 +32,13 @@ closure item has exactly `path` and lowercase `sha256`. All paths are relative
 to Contents. The three role paths above are constants. `closure` contains the
 controller and every production runtime file in sorted unique path order; the
 controller's two hashes must agree. No test/fixture files are allowed there.
+The actual runtime file set must exactly equal this closure. Node reads are
+streaming and bounded to 256 MiB; the manifest is bounded to 256 KiB, individual
+scripts to 4 MiB and the closure to 64 MiB. Native directory traversal uses held
+directory descriptors, `openat`/`fstatat` without following links, and at most
+1024 files, 2048 entries and 32 levels. Files must be regular with one hard link;
+all visited directories and files must belong to this user or root and must not
+permit group/world writes. Hash reads recheck file identities and the root path.
 `production-manifest.mjs` is the packaging-time validation contract. Native
 admission independently enforces the contract before any execution.
 

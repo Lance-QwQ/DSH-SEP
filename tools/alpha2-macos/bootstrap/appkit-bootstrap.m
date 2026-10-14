@@ -13,8 +13,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-/* Synthetic AppKit/IPC probe only. No actual broker or production resource
- * manifest is connected, and the non-test build rejects execution. */
+/* Test builds expose only the synthetic AppKit/IPC probe. Non-test builds use
+ * fixed NSBundle admission; actual product controller connection is pending. */
 #ifdef SEP_BOOTSTRAP_TESTING
 static BOOL exact(NSDictionary *v, NSArray *keys) {
   return [v isKindOfClass:NSDictionary.class] && [[NSSet setWithArray:v.allKeys] isEqualToSet:[NSSet setWithArray:keys]];
@@ -236,6 +236,8 @@ static NSDictionary *descriptor(const char *path) {
   if(!snapshot(v[@"node"],256ULL*1024*1024,NULL,&a) || ![a isEqual:v[@"nodeSha256"]] || !snapshot(v[@"controller"],1024*1024,NULL,&b) || ![b isEqual:v[@"controllerSha256"]]) return nil;
   return v;
 }
+#else
+#include "production-config.inc.m"
 #endif
 int main(int argc,const char *argv[]) {
   @autoreleasepool {
@@ -246,8 +248,7 @@ int main(int argc,const char *argv[]) {
     Bootstrap *delegate=[Bootstrap new]; delegate.config=config; delegate.result=70;
     NSApp.delegate=delegate; [NSApp run]; trace("run-return"); return delegate.result;
 #else
-    (void)argc; (void)argv;
-    puts("{\"status\":\"blocked\",\"code\":\"SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED\",\"resourcesConfirmedReleased\":false}"); return 78;
+    (void)argv;return pProductionMain(argc);
 #endif
   }
 }
