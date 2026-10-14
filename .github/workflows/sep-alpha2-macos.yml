@@ -1,0 +1,37 @@
+name: SEP Alpha.2 macOS native foundation
+on:
+  push:
+    branches: ['codex/sep-alpha2-macos-20261014']
+    paths: ['tools/alpha2-macos/**', '.github/workflows/sep-alpha2-macos.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-foundation:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Portable identity contracts
+        run: node --test --test-reporter=tap tools/alpha2-macos/identity-contract.test.mjs
+      - name: Three native APFS and owner rounds
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-alpha2-macos-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          printf 'SEP_MACOS_OUTPUT=%s\n' "$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/run-native.mjs "$root"
+      - name: Preserve synthetic receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-native-foundation
+          path: |
+            ${{ env.SEP_MACOS_OUTPUT }}/RESULT.json
+            ${{ env.SEP_MACOS_OUTPUT }}/round-*/RESULT.json
+            ${{ env.SEP_MACOS_OUTPUT }}/round-*/worker.*.log
+          if-no-files-found: error
+          retention-days: 14

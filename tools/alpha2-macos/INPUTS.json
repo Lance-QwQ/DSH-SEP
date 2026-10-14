@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "sourceCommit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+  "scope": "unmodified owner primitives and native synthetic tests; no product release claim",
+  "files": [
+    {
+      "path": "captured/owner-posix.mjs",
+      "bytes": 6134,
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/owner-posix.mjs"
+      }
+    },
+    {
+      "path": "captured/owner-lease.mjs",
+      "bytes": 17920,
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/owner-lease.mjs"
+      }
+    },
+    {
+      "path": "identity-contract.test.mjs",
+      "bytes": 1809,
+      "sha256": "a16926784e02af12f66fbbab62bec2021c623a9c538a4e31e23ab71d33de3d1b",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "lease-worker.mjs",
+      "bytes": 764,
+      "sha256": "a05447719ebbb7fb72e3db760eb544095da214c40efe932f2cfbc7e9907c6161",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "run-native.mjs",
+      "bytes": 7020,
+      "sha256": "bfce1b404f7de20a285751d7c40b31a512a0de7505a82ae0ddfd4d84a5e6bf3a",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 1792,
+      "sha256": "612adcc61db9e7defee3e6d0006ccf252b810a83eae49869e37f568b52e209d4",
+      "origin": {
+        "kind": "scope declaration"
+      }
+    },
+    {
+      "path": "package.json",
+      "bytes": 90,
+      "sha256": "c15ec5e697a93a61f8471556c9941ea26c1b488fb9f1b61db91e99441c5cc5f0",
+      "origin": {
+        "kind": "test-only module boundary"
+      }
+    }
+  ]
+}
