@@ -5,11 +5,12 @@ const roles=['node','business','ownerLease','helper','electron','asar'];
 const exact=(v,keys)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join('|')===[...keys].sort().join('|');
 export function relativeProgramPath(p){if(typeof p!=='string'||p.length>4096||/[\\:\x00-\x1f\x7f]/.test(p)||p.split('/').some(x=>!x||x==='.'||x==='..'))fail('SEP_MAC_PROGRAM_PATH');return p;}
 export function validateProgramShape(p){
- const images=p?.schema===2,keys=['schema','validationScope','dshVersion','bundleRoot','hostRoot','appRoot','entries',...images?['capabilities']:[]];
- if(!exact(p,keys)||![1,2].includes(p.schema)||p.validationScope!=='isolated-macos-preview'||p.dshVersion!=='0.2.1-alpha.2'||!exact(p.entries,[...roles,...images?['attachmentHelper']:[]]))fail('SEP_MAC_PROGRAM_MANIFEST');
- if(images&&(!Array.isArray(p.capabilities)||p.capabilities.length!==1||p.capabilities[0]!=='governed-images'))fail('SEP_MAC_PROGRAM_MANIFEST');
- for(const k of ['bundleRoot','hostRoot','appRoot'])relativeProgramPath(p[k]);
+ const parsers=p?.schema===3,images=p?.schema===2||parsers,keys=['schema','validationScope','dshVersion','bundleRoot','hostRoot','appRoot','entries',...images?['capabilities']:[],...parsers?['parserRoot']:[]];
+ if(!exact(p,keys)||![1,2,3].includes(p.schema)||p.validationScope!=='isolated-macos-preview'||p.dshVersion!=='0.2.1-alpha.2'||!exact(p.entries,[...roles,...images?['attachmentHelper']:[],...parsers?['parserManifest']:[]]))fail('SEP_MAC_PROGRAM_MANIFEST');
+ if(images&&(!Array.isArray(p.capabilities)||JSON.stringify(p.capabilities)!==JSON.stringify(['governed-images',...parsers?['trusted-parsers']:[]])))fail('SEP_MAC_PROGRAM_MANIFEST');
+ for(const k of ['bundleRoot','hostRoot','appRoot',...parsers?['parserRoot']:[]])relativeProgramPath(p[k]);
  for(const k of Object.keys(p.entries)){const e=p.entries[k];if(!exact(e,['path','sha256'])||!/^[a-f0-9]{64}$/.test(e.sha256??''))fail('SEP_MAC_PROGRAM_MANIFEST');relativeProgramPath(e.path);}
+ if(parsers&&p.entries.parserManifest.path!==p.parserRoot+'/manifest.json')fail('SEP_MAC_PROGRAM_MANIFEST');
  return p;
 }
 const same=(a,b)=>a.dev===b.dev&&a.ino===b.ino&&a.size===b.size&&a.mtimeNs===b.mtimeNs&&a.ctimeNs===b.ctimeNs;
@@ -19,7 +20,7 @@ export async function loadProgram(path,expectedSha256){
  const s=await lstat(path);if(s.size>32768)fail('SEP_MAC_PROGRAM_MANIFEST');const bytes=await readFile(path);if(createHash('sha256').update(bytes).digest('hex')!==expectedSha256)fail('SEP_MAC_PROGRAM_CHANGED');let p;try{p=validateProgramShape(JSON.parse(bytes));}catch(e){if(e.code)throw e;fail('SEP_MAC_PROGRAM_MANIFEST');}
  const root=dirname(path);if(await realpath(root)!==root)fail('SEP_MAC_PROGRAM_PATH');const result={schema:p,root,manifestSha256:expectedSha256,entries:{}};
  async function location(relative){const x=resolve(root,relative);if(!x.startsWith(root+sep)||await realpath(x)!==x)fail('SEP_MAC_PROGRAM_PATH');return x;}
- for(const k of ['bundleRoot','hostRoot','appRoot']){const x=await location(p[k]);if(!(await lstat(x)).isDirectory())fail('SEP_MAC_PROGRAM_PATH');result[k]=x;}
+ for(const k of ['bundleRoot','hostRoot','appRoot',...p.schema===3?['parserRoot']:[]]){const x=await location(p[k]);if(!(await lstat(x)).isDirectory())fail('SEP_MAC_PROGRAM_PATH');result[k]=x;}
  for(const k of Object.keys(p.entries)){const e=p.entries[k],path=await location(e.path);if(await fileHash(path)!==e.sha256)fail('SEP_MAC_PROGRAM_CHANGED');result.entries[k]={path,sha256:e.sha256};}
  return Object.freeze(result);
 }

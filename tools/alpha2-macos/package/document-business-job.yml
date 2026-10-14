@@ -1,0 +1,73 @@
+native-document-business:
+  runs-on: macos-15
+  timeout-minutes: 35
+  permissions:
+    contents: read
+    actions: read
+  env:
+    SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
+    SEP_MAC_SETTINGS_UI: '1'
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Fixed native carrier and ASAR tool
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: |
+        node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/document-carrier-download"
+        mkdir "$RUNNER_TEMP/document-carrier"
+        ditto -x -k "$RUNNER_TEMP/document-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/document-carrier"
+        node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/document-asar-tool"
+    - name: Prepare real Host, settings and native capabilities
+      run: |
+        root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-document-business"
+        mkdir "$root"
+        echo "SEP_MAC_DOCUMENT_OUTPUT=$root" >> "$GITHUB_ENV"
+        node tools/alpha2-macos/package/prepare-business.mjs "$RUNNER_TEMP/document-carrier/DSH SEP.app" "$RUNNER_TEMP/document-asar-tool/node_modules/@electron/asar/lib/asar.js" "$GITHUB_WORKSPACE" "$root/prepared"
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/media/native-attachments.c -o "$root/native-attachments"
+        echo "SEP_OFFICIAL_HARNESS=$root/prepared/host" >> "$GITHUB_ENV"
+        echo "SEP_MAC_BUNDLE_ROOT=$root/prepared/host/sep-capture" >> "$GITHUB_ENV"
+        echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+        echo "SEP_MAC_ATTACHMENT_HELPER=$root/native-attachments" >> "$GITHUB_ENV"
+        echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
+        sw_vers > "$root/system.txt"
+        uname -a >> "$root/system.txt"
+    - name: Install fixed parser dependencies and immutable runtime
+      run: |
+        node tools/alpha2-macos/package/install-parser-dependencies.mjs "$RUNNER_TEMP/document-parser-dependencies"
+        runtime="$RUNNER_TEMP/document-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies"
+        export SEP_MAC_PARSER_PYTHON="$runtime/python/bin/python3.12"
+        export SEP_MAC_PARSER_PYTHON_HOME="$runtime/python"
+        export SEP_MAC_PARSER_DEPENDENCIES="$RUNNER_TEMP/document-parser-dependencies/node_modules"
+        SEP_MAC_BUNDLE_ROOT="$SEP_MAC_BUNDLE_ROOT/bundle" "$runtime/node/bin/node" tools/alpha2-macos/parser-integration/run-native.mjs "$RUNNER_TEMP/document-parser-assembly"
+        echo "SEP_PARSER_ASSEMBLY_FIXTURE=$RUNNER_TEMP/document-parser-assembly/fixture.json" >> "$GITHUB_ENV"
+    - name: Combined real Profile routes and two cold standalone starts
+      run: |
+        runtime="$RUNNER_TEMP/document-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies"
+        "$runtime/node/bin/node" tools/alpha2-macos/document-business/run-native.mjs "$SEP_MAC_DOCUMENT_OUTPUT/results"
+    - name: Preserve planned results, parser binding and startup diagnostics
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-document-business
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/sep-document-business/*.txt
+          ${{ runner.temp }}/sep-document-business/prepared/PREPARED.json
+          ${{ runner.temp }}/sep-document-business/results/*.log
+          ${{ runner.temp }}/sep-document-business/results/*.json
+          ${{ runner.temp }}/sep-document-business/results/contracts/ORIGIN-RECEIPT.json
+          ${{ runner.temp }}/sep-document-business/results/combined-standalone/**/*.log
+          ${{ runner.temp }}/sep-document-business/results/combined-standalone/**/round-*.json
+          ${{ runner.temp }}/sep-document-business/results/combined-standalone/**/PROFILE.json
+          ${{ runner.temp }}/document-parser-assembly/*.log
+          ${{ runner.temp }}/document-parser-assembly/*.json
+          ${{ runner.temp }}/document-parser-assembly/installed/manifest.json
+          ${{ runner.temp }}/document-parser-dependencies/RESULT.json
+          ${{ runner.temp }}/document-parser-dependencies/*.log
+          ${{ runner.temp }}/document-carrier-download/DOWNLOAD-RECEIPT.json

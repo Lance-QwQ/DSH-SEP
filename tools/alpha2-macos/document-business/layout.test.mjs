@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+const {businessLayout}=await import(process.env.SEP_DOCUMENT_BASELINE==='1'?'../media-business/profile-layout.mjs':'./profile-layout.mjs');
+const input={programRoot:'/program',hostRoot:'/program/host',bundleRoot:'/program/capture',dataRoot:'/private-data',projectRoot:'/project',helperPath:'/program/native-tree',helperSha256:'1'.repeat(64),attachmentHelperPath:'/program/native-attachments',attachmentHelperSha256:'2'.repeat(64),parser:{runtimeRoot:'/program/parser-runtime',manifestSha256:'3'.repeat(64),stateRoot:'/private-data/parser'}};
+test('combined overlay preserves images and settings while binding parser to the dedicated profile',()=>{
+ const result=businessLayout(input),rows=result.patch.flatMap(row=>row.insert??[]);assert.deepEqual(result.runtime.parser,input.parser);assert.deepEqual(result.record.parser,input.parser);assert.equal(result.runtime.business.media,true);assert.equal(result.runtime.business.capture,false);assert.equal(result.runtime.business.context,undefined);assert.deepEqual(result.runtime.business.vision,{enabled:true,allowUpload:true});assert.equal(rows.find(row=>row.id==='mac-sep-business').name,new URL('./runtime.mjs',import.meta.url).href);assert.equal(rows.find(row=>row.id==='mac-cold-attachments').name,new URL('../media-business/cold-attachments.mjs',import.meta.url).href);assert.equal(rows.find(row=>row.id==='mac-after-attachments-llm').name,new URL('../media-business/after-attachments-llm.mjs',import.meta.url).href);assert.equal(rows.find(row=>row.id==='mac-sep-settings').name,'file:///program/host/node_modules/@deepseek-ai/dsh-client-ui-settings-memory/lib/index.js');
+});
+test('parser state, extra fields and malformed manifest binding cannot be redirected',()=>{
+ for(const parser of [undefined,{...input.parser,stateRoot:'/project/parser'},{...input.parser,manifestSha256:'bad'},{...input.parser,untrustedOption:true},{...input.parser,runtimeRoot:'relative'}])assert.throws(()=>businessLayout({...input,parser}),{code:'SEP_MAC_DOCUMENT_PROFILE_INPUT'});
+});
