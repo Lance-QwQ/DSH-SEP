@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "definitions": 7,
+  "cleanupContracts": 4,
+  "inputs": [
+    {
+      "path": "FixedApplicationOpener.h",
+      "bytes": 196,
+      "sha256": "6c50cdd2b71f275b49552cc9822fa23cfeb56112e7b93f3a6f5a56530c7b40dc"
+    },
+    {
+      "path": "FixedApplicationOpener.m",
+      "bytes": 5366,
+      "sha256": "512e89b6a2dda7ebb37c5b6ea913bcb5a51be7ecc2cb9df472e723aa33e105f4"
+    },
+    {
+      "path": "FixedApplicationOpenerTests.m",
+      "bytes": 3356,
+      "sha256": "535acb0129de9dcf66c20cf20e680a5bafff69fa58e018f86be44c761146f199"
+    },
+    {
+      "path": "opener-fixture.m",
+      "bytes": 448,
+      "sha256": "6e3266b0330b84b582b2ed85efa3be272460d5ec9a2e8bed74af5f999a8f66b9"
+    },
+    {
+      "path": "opener-account.m",
+      "bytes": 436,
+      "sha256": "7792442571fad365478b5a0743e70ffc18fce33f8ffb79e790e184edceaee691"
+    },
+    {
+      "path": "opener-native.mjs",
+      "bytes": 8297,
+      "sha256": "9552c5d57a4337c092f7c2614d42de6a1c987048c7fdfc4e41a08983c8cacc62"
+    },
+    {
+      "path": "opener-green-ci-job.yml",
+      "bytes": 1192,
+      "sha256": "1fd1ebfece427c58f9b257ffacd494b7afb58e5484b9c60e0b4f27c348c3f141"
+    },
+    {
+      "path": "opener-cleanup.mjs",
+      "bytes": 420,
+      "sha256": "a7db18e4625bc839c778e2c7b4f877b71f787381fb5c59f5a4200aacd8e5fc44"
+    },
+    {
+      "path": "opener-cleanup.test.mjs",
+      "bytes": 1229,
+      "sha256": "acd43b43f09c1b7fcca74d8b7170be9a51d9d42e6070a2797fb808d953cdeaa0"
+    },
+    {
+      "path": "../native/InstallerUI.h",
+      "bytes": 921,
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    }
+  ],
+  "sourceEvidence": {
+    "run": 38634271006,
+    "job": 116093302707,
+    "auditSha256": "179b5b7acd7b513055ec2159161c3eb9bc69ca872adc13c4821a65757fbbd860",
+    "nativeRed": {
+      "passed": 5,
+      "failed": 2,
+      "notRun": 0
+    }
+  },
+  "implementation": "getpwuid fixed target; canonical paths; bounded identity-checked PROGRAM and BOOTSTRAP hashes from verified configuration; native strict/nested/all-architecture signature verification; fixed LaunchServices dispatch.",
+  "scope": "Only dispatch acknowledgement, not full installed SEP health. Tests use a signed synthetic short-lived application; no actual payload installation. Same-user arbitrary-code boundary remains.",
+  "notVerified": [
+    "candidate native compile and seven definitions",
+    "production installer composition",
+    "physical user input"
+  ]
+}
