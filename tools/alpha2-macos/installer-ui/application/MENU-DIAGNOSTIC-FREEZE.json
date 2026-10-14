@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "source-bound diagnostic only; no product or original assertion edit",
+  "inputs": [
+    {
+      "path": "menu-diagnostic.mjs",
+      "bytes": 3576,
+      "sha256": "d969b43a6b902fcc5eb0dee98cf9a7d2e82068a38d64b74c0783b92198e3ea62"
+    },
+    {
+      "path": "menu-diagnostic-ci-job.yml",
+      "bytes": 2159,
+      "sha256": "032049c782fac260df9f2018957fbf4328587098f241cc32e3a15e78a9e1e754"
+    },
+    {
+      "path": "InstallerApplication.m",
+      "bytes": 2150,
+      "sha256": "f8f0778e19d91e70f26a23492e4439c7df6138fa4428498d54a070c71befcc81"
+    },
+    {
+      "path": "InstallerApplication.h",
+      "bytes": 438,
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c"
+    },
+    {
+      "path": "InstallerApplicationTests.m",
+      "bytes": 7740,
+      "sha256": "269a7beb19608579feb34659c2d9a7fd393ccf79aa3ea741ebafc313df479af9"
+    }
+  ],
+  "originalSuite": {
+    "native": "r64",
+    "passed": 6,
+    "failed": 2
+  },
+  "sampling": "20/100/250ms after same menu performAction; entry time observed separately",
+  "notClaimed": [
+    "production fix",
+    "original eight passed",
+    "physical menu input"
+  ]
+}

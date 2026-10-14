@@ -1,0 +1,6 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{fixtureReleased}from'./opener-cleanup.mjs';
+const execution={code:0,signal:null,blocked:false},absent={fixtureAbsentAfter:true,fixtureTerminated:true,fixturePid:0,fixtureIdentityMatched:false};
+test('dispatch without an observed exact process remains unknown despite empty application enumeration',()=>assert.equal(fixtureReleased(execution,{...absent,dispatched:true}),false));
+test('exact observed dispatched process termination permits fixture cleanup',()=>assert.equal(fixtureReleased(execution,{...absent,dispatched:true,fixturePid:123,fixtureIdentityMatched:true}),true));
+test('refused dispatch with no process is safe to remove the unchanged fixture',()=>assert.equal(fixtureReleased(execution,{...absent,dispatched:false}),true));
+test('signal, deadline, missing dispatch evidence or surviving fixture do not permit cleanup',()=>{for(const[e,r]of[[{...execution,signal:'SIGTERM'},{...absent,dispatched:false}],[{...execution,blocked:true},{...absent,dispatched:false}],[execution,{...absent}],[execution,{...absent,dispatched:true,fixturePid:123,fixtureIdentityMatched:true,fixtureTerminated:false}]])assert.equal(fixtureReleased(e,r),false);});

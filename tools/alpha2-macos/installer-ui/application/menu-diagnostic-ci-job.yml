@@ -1,0 +1,39 @@
+native-installer-menu-diagnostic:
+  runs-on: macos-15
+  timeout-minutes: 10
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.21.0
+    - name: Derive bounded menu-event diagnostic without changing product
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-menu-diagnostic"
+        node tools/alpha2-macos/installer-ui/application/menu-diagnostic.mjs "$RUNNER_TEMP/installer-menu-diagnostic/application" > "$RUNNER_TEMP/installer-menu-diagnostic/DERIVATION.json"
+        clang -fobjc-arc -fblocks -Wall -Wextra -DSEP_INSTALLER_APPLICATION_TESTING=1 -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m "$RUNNER_TEMP/installer-menu-diagnostic/application/InstallerApplication.m" "$RUNNER_TEMP/installer-menu-diagnostic/application/InstallerApplicationTests.m" -o "$RUNNER_TEMP/installer-menu-diagnostic/tests" > "$RUNNER_TEMP/installer-menu-diagnostic/compile.log" 2>&1
+    - name: Observe fixed twenty, hundred and two-fifty millisecond samples
+      shell: bash
+      run: |
+        set +e
+        "$RUNNER_TEMP/installer-menu-diagnostic/tests" > "$RUNNER_TEMP/installer-menu-diagnostic/RESULT.json" 2> "$RUNNER_TEMP/installer-menu-diagnostic/TRACE.jsonl"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-menu-diagnostic/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-menu-diagnostic
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/installer-menu-diagnostic/*.json
+          ${{ runner.temp }}/installer-menu-diagnostic/*.jsonl
+          ${{ runner.temp }}/installer-menu-diagnostic/*.log
+          ${{ runner.temp }}/installer-menu-diagnostic/*.txt
+          ${{ runner.temp }}/installer-menu-diagnostic/application/*.m
+          ${{ runner.temp }}/installer-menu-diagnostic/application/ORIGIN.json
