@@ -31,7 +31,23 @@ static int same_file(const struct stat *a,const struct stat *b){return same_id(a
 static void id_string(const struct stat *s,char out[96]){snprintf(out,96,"%ju:%ju",(uintmax_t)s->st_dev,(uintmax_t)s->st_ino);}
 static void full_sync(int fd){need(fsync(fd)==0&&fcntl(fd,F_FULLFSYNC)==0,"SEP_INSTALL_DURABILITY");}
 static void dir_sync(int fd){need(fsync(fd)==0,"SEP_INSTALL_DURABILITY");}
-static void no_acl(int fd){acl_t acl=acl_get_fd_np(fd,ACL_TYPE_EXTENDED);need(acl!=NULL,"SEP_INSTALL_ACL");need(acl_valid(acl)==0,"SEP_INSTALL_ACL");acl_entry_t e;errno=0;int r=acl_get_entry(acl,ACL_FIRST_ENTRY,&e),saved=errno;acl_free(acl);need(r==-1&&saved==EINVAL,"SEP_INSTALL_ACL");}
+static void no_acl(int fd){
+ /* acl_get_fd_np conflates an absent FILESEC_ACL with stat/query errors.
+  * Read the fd's security record first, then query property presence. */
+ filesec_t security=filesec_init();need(security!=NULL,"SEP_INSTALL_ACL_READ");
+ struct stat s;int present=0;
+ if(fstatx_np(fd,&s,security)!=0||filesec_query_property(security,FILESEC_ACL,&present)!=0){filesec_free(security);fail("SEP_INSTALL_ACL_READ");}
+ if(!present){filesec_free(security);return;}
+ acl_t acl=NULL;int got=filesec_get_property(security,FILESEC_ACL,&acl);filesec_free(security);
+ need(got==0&&acl!=NULL,"SEP_INSTALL_ACL_READ");
+#ifdef _FILESEC_REMOVE_ACL
+ need(acl!=(acl_t)_FILESEC_REMOVE_ACL,"SEP_INSTALL_ACL_READ");
+#endif
+ need(acl_valid(acl)==0,"SEP_INSTALL_ACL_INVALID");acl_entry_t entry;errno=0;
+ int r=acl_get_entry(acl,ACL_FIRST_ENTRY,&entry),saved=errno;acl_free(acl);
+ if(r==0)fail("SEP_INSTALL_ACL");
+ need(r==-1&&saved==EINVAL,"SEP_INSTALL_ACL_ENUMERATION");
+}
 static int path_directory(const char *path){
  need(path&&path[0]=='/'&&strlen(path)<PATH_MAX&&path[1]&&path[strlen(path)-1]!='/',"SEP_INSTALL_PATH");
  char copy[PATH_MAX];strcpy(copy,path+1);int fd=open("/",O_RDONLY|O_DIRECTORY|O_CLOEXEC);need(fd>=0,"SEP_INSTALL_PATH");

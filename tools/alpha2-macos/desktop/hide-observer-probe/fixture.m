@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "policy-state.h"
+#include "json-bool.h"
 // Test-only single process, no descendants, network, credentials or product IO.
 static void policyLog(NSDictionary *value){NSData *d=[NSJSONSerialization dataWithJSONObject:value options:0 error:NULL];fwrite(d.bytes,1,d.length,stdout);fputc('\n',stdout);fflush(stdout);}
 static int readPolicy(void *context){
@@ -26,7 +27,7 @@ static bool setRegular(void *context){
 - (void)emit:(NSString *)event {
  struct proc_bsdinfo b={0};int n=proc_pidinfo(getpid(),PROC_PIDTBSDINFO,0,&b,sizeof(b));
  NSRunningApplication *a=NSRunningApplication.currentApplication;
- NSDictionary *v=@{@"event":event,@"pid":@(getpid()),@"bundlePath":NSBundle.mainBundle.bundlePath.stringByResolvingSymlinksInPath,@"bundleIdentifier":NSBundle.mainBundle.bundleIdentifier?:@"",@"birthValid":@(n==sizeof(b)&&b.pbi_pid==getpid()&&b.pbi_uid==geteuid()),@"birthSeconds":@(b.pbi_start_tvsec),@"birthMicroseconds":@(b.pbi_start_tvusec),@"activationPolicy":@(NSApp.activationPolicy),@"runningActivationPolicy":@(a.activationPolicy),@"finishedLaunching":@(a.finishedLaunching),@"active":@(NSApp.active),@"hidden":@(NSApp.hidden),@"visible":@(self.window.visible),@"windowCanHide":@(self.window.canHide),@"didHide":@(self.didHide),@"presentationOptions":@(NSApp.presentationOptions),@"systemPresentationOptions":@(NSApp.currentSystemPresentationOptions)};
+ NSDictionary *v=@{@"event":event,@"pid":@(getpid()),@"bundlePath":NSBundle.mainBundle.bundlePath.stringByResolvingSymlinksInPath,@"bundleIdentifier":NSBundle.mainBundle.bundleIdentifier?:@"",@"birthValid":probeJsonBool(n==sizeof(b)&&b.pbi_pid==getpid()&&b.pbi_uid==geteuid()),@"birthSeconds":@(b.pbi_start_tvsec),@"birthMicroseconds":@(b.pbi_start_tvusec),@"activationPolicy":@(NSApp.activationPolicy),@"runningActivationPolicy":@(a.activationPolicy),@"finishedLaunching":@(a.finishedLaunching),@"active":@(NSApp.active),@"hidden":@(NSApp.hidden),@"visible":@(self.window.visible),@"windowCanHide":@(self.window.canHide),@"didHide":@(self.didHide),@"presentationOptions":@(NSApp.presentationOptions),@"systemPresentationOptions":@(NSApp.currentSystemPresentationOptions)};
  NSData *d=[NSJSONSerialization dataWithJSONObject:v options:0 error:NULL];fwrite(d.bytes,1,d.length,stdout);fputc('\n',stdout);fflush(stdout);
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)note {

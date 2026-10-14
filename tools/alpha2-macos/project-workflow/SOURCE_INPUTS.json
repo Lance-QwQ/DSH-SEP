@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "purpose": "immutable-native-baseline-for-project-workflow-skeleton",
+  "derivedExtensions": "not_implemented",
+  "inputs": [
+    {
+      "path": "apfs-tree/native-tree.c",
+      "bytes": 19153,
+      "sha256": "9429bdb42aaa60dbfa432040bd52f64acb57c1bd721dddf50e0630a4b8c6564e"
+    },
+    {
+      "path": "apfs-tree/project-tree.mjs",
+      "bytes": 9919,
+      "sha256": "d7283d476851aa199b4cdbdc7b44015ffa96205918d9ef925cddd968c6aecca3"
+    },
+    {
+      "path": "transactions/mac-managed-project.mjs",
+      "bytes": 958,
+      "sha256": "9b4134b17587dc8623b9e6bc315f0882226e4f1a2334cad8972ab21810f8666b"
+    },
+    {
+      "path": "transactions/transaction-store.mjs",
+      "bytes": 22602,
+      "sha256": "f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba"
+    },
+    {
+      "path": "transactions/document-copies.mjs",
+      "bytes": 9181,
+      "sha256": "54bd2a133a6fdf713773e8dd890f247375b6a689b79b995f5e7251a3fcfdc7c5"
+    },
+    {
+      "path": "lifecycle/managed-project-lifecycle.mjs",
+      "bytes": 4259,
+      "sha256": "480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844"
+    },
+    {
+      "path": "profile/controlled-files.mjs",
+      "bytes": 12601,
+      "sha256": "400a6c84f94dc87efc40406dced9d38e71b22e3c4a285327d9e71f54c435a9ca"
+    }
+  ]
+}

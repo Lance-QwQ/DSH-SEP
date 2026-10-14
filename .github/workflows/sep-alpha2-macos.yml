@@ -1,4 +1,4 @@
-name: SEP Alpha.2 macOS native fixture and install transactions
+name: SEP Alpha.2 macOS install and native workflow verification
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
@@ -31,9 +31,58 @@ jobs:
             ${{ runner.temp }}/hide-observer-probe
             ${{ runner.temp }}/hide-analysis.tap
 
+  native-project-workflow-red:
+    runs-on: macos-15
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Verify fixed source and build native helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/project-workflow-native"
+          mkdir "$root"
+          echo "SEP_MAC_WORKFLOW_OUTPUT=$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/project-workflow/verify-inputs.mjs > "$root/SOURCE-VERIFIED.json"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+          echo "SEP_MAC_TREE_HELPER_SHA256=$(shasum -a 256 "$root/native-tree" | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
+          echo "SEP_MAC_WORKFLOW_TEST_ROOT=$root/fixtures" >> "$GITHUB_ENV"
+          sw_vers > "$root/system.txt"
+          uname -a >> "$root/system.txt"
+          node --version >> "$root/system.txt"
+      - name: Execute fixed native workflow cases (initial RED is expected failure)
+        shell: bash
+        run: |
+          set +e
+          node --test --test-reporter=tap --test-concurrency=1 --test-timeout=30000 tools/alpha2-macos/project-workflow/native-workflow.test.mjs > "$SEP_MAC_WORKFLOW_OUTPUT/native.tap" 2>&1
+          code=$?
+          printf '%s\n' "$code" > "$SEP_MAC_WORKFLOW_OUTPUT/EXIT-CODE.txt"
+          exit "$code"
+      - name: Preserve original scoped evidence even when RED
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-project-workflow-native-red
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.json
+            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.txt
+            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.tap
+            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/PREFLIGHT.json
+            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/CLEANUP.jsonl
+
   native-first-install:
     runs-on: macos-15
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -41,19 +90,75 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Fixed thirteen native first-install definitions after implementation
+      - name: Native empty ACL, nonempty ACL, and read-failure RED versus fixed implementation
+        run: node tools/alpha2-macos/installation/run-acl-native.mjs "$RUNNER_TEMP/first-install-acl" > "$RUNNER_TEMP/first-install-acl-runner.log" 2>&1
+      - name: Source overlap rejected before mutation RED versus fixed implementation
+        run: node tools/alpha2-macos/installation/run-layout-native.mjs "$RUNNER_TEMP/first-install-layout" > "$RUNNER_TEMP/first-install-layout-runner.log" 2>&1
+      - name: Original thirteen first-install transaction definitions
         run: |
           sw_vers > "$RUNNER_TEMP/first-install-environment.txt"
           uname -a >> "$RUNNER_TEMP/first-install-environment.txt"
           node tools/alpha2-macos/installation/run-native.mjs "$RUNNER_TEMP/first-install" > "$RUNNER_TEMP/first-install-runner.log" 2>&1
-      - name: Preserve original results including any compile or setup failure
+      - name: Preserve original ACL and transaction results
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-first-install-r47
+          name: sep-macos-first-install-r48
           if-no-files-found: error
           path: |
             ${{ runner.temp }}/first-install/RESULT.json
             ${{ runner.temp }}/first-install/native.log
             ${{ runner.temp }}/first-install-runner.log
             ${{ runner.temp }}/first-install-environment.txt
+            ${{ runner.temp }}/first-install-acl/*.json
+            ${{ runner.temp }}/first-install-acl/*.tap
+            ${{ runner.temp }}/first-install-acl/*.log
+            ${{ runner.temp }}/first-install-acl-runner.log
+            ${{ runner.temp }}/first-install-layout/*.json
+            ${{ runner.temp }}/first-install-layout/*.tap
+            ${{ runner.temp }}/first-install-layout/*.log
+            ${{ runner.temp }}/first-install-layout-runner.log
+  native-full-first-install:
+    needs: native-first-install
+    permissions:
+      contents: read
+      actions: read
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Restore exact unchanged r44 complete app
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/application-build"
+      - name: Verify source derivation for the separate narrow installed startup test
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';import assert from 'node:assert/strict';import{createHash}from'node:crypto';
+          const base='tools/alpha2-macos/package/',m=JSON.parse(fs.readFileSync(base+'exercise-installed-startup.origin.json')),h=s=>createHash('sha256').update(s).digest('hex');let s=fs.readFileSync(base+m.source,'utf8');assert.equal(h(s),m.sourceSha256);for(const t of m.transforms){assert.equal(s.split(t.before).length,2);s=s.replace(t.before,t.after);}assert.equal(h(s),m.resultSha256);assert.equal(s,fs.readFileSync(base+m.result,'utf8'));console.log(JSON.stringify({status:'pass',transforms:m.transforms.length,scope:m.scope}));
+          NODE
+      - name: Install full app to final fresh account path without starting it
+        run: node tools/alpha2-macos/installation/full-package-install.mjs "$RUNNER_TEMP/application-build" "$RUNNER_TEMP/full-first-install" > "$RUNNER_TEMP/full-first-install-runner.log" 2>&1
+      - name: Separate installed first boot and restart with final-path Profile binding
+        run: node tools/alpha2-macos/package/exercise-installed-startup.mjs "$RUNNER_TEMP/full-first-install" "$RUNNER_TEMP/installed-startup" > "$RUNNER_TEMP/installed-startup-runner.log" 2>&1
+      - name: Preserve full-package installation and narrow startup outcomes
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-full-first-install-r48
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/application-build/RESULT.json
+            ${{ runner.temp }}/application-build/*.log
+            ${{ runner.temp }}/full-first-install/*.json
+            ${{ runner.temp }}/full-first-install/*.log
+            ${{ runner.temp }}/full-first-install-runner.log
+            ${{ runner.temp }}/installed-startup/*.json
+            ${{ runner.temp }}/installed-startup/*.jsonl
+            ${{ runner.temp }}/installed-startup/*.log
+            ${{ runner.temp }}/installed-startup-runner.log

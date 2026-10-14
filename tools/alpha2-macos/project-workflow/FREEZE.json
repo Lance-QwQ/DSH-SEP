@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "status": "blocked",
+  "stage": "contract-and-native-test-skeleton",
+  "nativeDefinitions": 17,
+  "nativeAcceptance": "not_run",
+  "actualUserConfirmation": "not_run",
+  "adapter": "deliberate-fail-closed-placeholder",
+  "inputs": [
+    {
+      "path": "CONTRACT.json",
+      "bytes": 3803,
+      "sha256": "bbe670d463b0f5a880d1ca2fd1687ddefdb9a9b5cfc1de3d0fa066fe93d125a9"
+    },
+    {
+      "path": "native-ci-job.yml",
+      "bytes": 2233,
+      "sha256": "5b63ed97d783dffd598a01a3b52b20342b1a909fc369606fff6fb067015c8f46"
+    },
+    {
+      "path": "native-fixture.mjs",
+      "bytes": 7587,
+      "sha256": "ee9c22374ce87b5ae5e86473f5b96d7ad019f86ade3007588f274510d1a4e332"
+    },
+    {
+      "path": "native-workflow.test.mjs",
+      "bytes": 11649,
+      "sha256": "a9cd12ce226cf53e3a72e94b0a6f6de1384c99b44d836f788248518a5277ec8a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5798,
+      "sha256": "492809a038538d22e094590638ad787ceaedada20205896dbd86f03718d128da"
+    },
+    {
+      "path": "REPRODUCTION.md",
+      "bytes": 3894,
+      "sha256": "abe1d4897f5daf32ef6f117f4fc17764e9c7607a7f91a4b91e9ff58173c14909"
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "bytes": 1356,
+      "sha256": "66adc1999155ff6ac68ac2c730c0492581fcb1aaff9ea9c25d83f7616400d4e5"
+    },
+    {
+      "path": "verify-inputs.mjs",
+      "bytes": 2081,
+      "sha256": "37dc8c6f35468b4937fdc19261b1cd2baa1932067ecc3701f61ab2b6defec950"
+    },
+    {
+      "path": "workflow-adapter.mjs",
+      "bytes": 381,
+      "sha256": "e068da390fd321c6eed51f5c0dc14e06abe69a0c5c2bd370b8d16f53d1b71551"
+    }
+  ]
+}

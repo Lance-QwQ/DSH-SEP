@@ -20,6 +20,7 @@ const version=s=>[s.dev,s.ino,s.size,s.mode,s.nlink,s.mtimeNs,s.ctimeNs].join(':
 const env=()=>({PATH:'/usr/bin:/bin:/usr/sbin:/sbin',LANG:'en_US.UTF-8'});
 const target=plan=>join(plan.parent,'DSH SEP.app');
 const stage=plan=>join(plan.parent,'.dsh-sep-install-'+plan.transactionId,'staged.app');
+function separateSource(sourceApp,parent){if(typeof sourceApp!=='string'||typeof parent!=='string'||parent===sourceApp||parent.startsWith(sourceApp+'/'))fail('SEP_INSTALL_LAYOUT');}
 async function platform(){
  if(process.platform!=='darwin'||process.arch!=='arm64'||release()!=='24.6.0')fail('SEP_INSTALL_PLATFORM');
  const r=await exec('/usr/bin/sw_vers',['-buildVersion'],{env:env(),timeout:5000,maxBuffer:1024});
@@ -62,6 +63,7 @@ async function verifyApp(path,receipt){
 function sealed(value){const p={...value};delete p.planHash;return sha(JSON.stringify(p));}
 function validatePlan(plan){
  if(!exact(plan,['schema','kind','transactionId','sourceApp','sourceIdentity','parent','parentIdentity','dataRoot','receipt','helperSha256','planHash'])||plan.schema!==1||plan.kind!=='first-install'||!/^[a-f0-9]{32}$/.test(plan.transactionId??'')||!digest(plan.helperSha256)||!digest(plan.planHash)||plan.planHash!==sealed(plan)||!/^\d+:\d+$/.test(plan.sourceIdentity??'')||!/^\d+:\d+$/.test(plan.parentIdentity??''))fail('SEP_INSTALL_PLAN');
+ separateSource(plan.sourceApp,plan.parent);
  return JSON.parse(JSON.stringify(plan));
 }
 async function checkParent(plan){if(id(await directory(plan.parent))!==plan.parentIdentity)fail('SEP_INSTALL_PATH_CHANGED');}
@@ -123,6 +125,7 @@ async function finish(native,plan,state,onProgress){
 async function usingNative(plan,options,work){const native=await coordinator(plan,options.helperPath,options.helperSha256);let result,primary;try{result=await work(native);}catch(e){primary=e;}try{await native.close();}catch(e){throw error('SEP_INSTALL_CLEANUP_UNCONFIRMED');}if(primary)throw primary;return result;}
 export async function prepareFirstInstall(input){
  await platform();if(!exact(input,['sourceApp','parent','dataRoot','receipt','helperPath','helperSha256']))fail('SEP_INSTALL_ARGUMENT');
+ separateSource(input.sourceApp,input.parent);
  const parent=await directory(input.parent);if(parent.uid!==BigInt(process.getuid())||(parent.mode&0o022n)!==0n)fail('SEP_INSTALL_PATH');
  await absent(join(input.parent,'DSH SEP.app'),'SEP_INSTALL_TARGET_EXISTS');await dataAbsent(input.dataRoot);
  const source=await directory(input.sourceApp);await helperIdentity(input.helperPath,input.helperSha256);await verifyApp(input.sourceApp,input.receipt);

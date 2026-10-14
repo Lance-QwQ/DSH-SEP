@@ -66,6 +66,16 @@ native fixture is compiled. These are additional to the six interpretation
 contracts; they prove initialization decisions, not AppKit behavior or a
 successful hide. Four single-attempt hide cells and cleanup rules are unchanged.
 
+The r47 native fixture reached actual regular/visible/active/finished-launching
+state, then admission rejected numeric birthValid=1 against strict Boolean true.
+This was C logical-expression NSNumber boxing, with no hide issued. The fixture
+normally quit with exact child exit0. That failure is retained separately.
+The next test-only correction uses explicit numberWithBool for this one field;
+the runner still requires true. A shared helper's two real Foundation JSON
+roundtrip contracts run before any fixture instance. Other integer fields
+(PID, birth components, policy and presentation options) stay numeric; existing
+BOOL and C bool fields already emitted actual JSON booleans in r47.
+
 ## Apple documentation checked
 
 - [NSRunningApplication](https://developer.apple.com/documentation/appkit/nsrunningapplication?language=objc): time-varying properties refresh with the main run loop; a synchronous hidden read can be stale. This does not establish that a false hide return becomes success after initializing NSApplication.

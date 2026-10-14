@@ -44,7 +44,7 @@ async function main(output){
  const rows=[],inputs=[],origins=[],metadata={schema:1,scope:'test-only AppKit 2x2 hide comparison; no product mutation',node:process.version,platform:process.platform,arch:process.arch,productRetested:false};
  let failureCode;
  try{
-  for(const name of ['run-native.mjs','fixture.m','policy-state.h','policy-state.test.c','analysis.mjs','analysis.test.mjs']){const b=await readFile(join(here,name));inputs.push({file:name,sha256:hash(b),bytes:b.length});}
+  for(const name of ['run-native.mjs','fixture.m','policy-state.h','policy-state.test.c','json-bool.h','json-bool.test.m','analysis.mjs','analysis.test.mjs']){const b=await readFile(join(here,name));inputs.push({file:name,sha256:hash(b),bytes:b.length});}
   const source=await readFile(join(here,'../../package/application-observer.m'),'utf8');assert.equal(hash(source),originalSha);inputs.push({file:'../../package/application-observer.m',sha256:hash(source),bytes:Buffer.byteLength(source)});
   await json(join(output,'INPUTS.json'),inputs);
   metadata.swVers=(await command(output,'sw-vers','/usr/bin/sw_vers',[])).stdout;
@@ -54,6 +54,8 @@ async function main(output){
   for(const name of ['NSRunningApplication.h','NSApplication.h','NSWindow.h']){const bytes=await readFile(join(sdk,'System/Library/Frameworks/AppKit.framework/Headers',name));await writeFile(join(output,name),bytes,{flag:'wx'});metadata.headers.push({file:name,sha256:hash(bytes),bytes:bytes.length});}
   const policyBinary=join(output,'policy-test');await command(output,'compile-policy','/usr/bin/xcrun',['clang','-std=c11','-Wall','-Wextra','-Werror',join(here,'policy-state.test.c'),'-o',policyBinary]);
   const policy=await command(output,'policy-contracts',policyBinary,[]);for(const [key,n] of Object.entries({tests:5,pass:5,fail:0}))assert.match(policy.stdout,new RegExp('^# '+key+' '+n+'$','m'));
+  const boolBinary=join(output,'json-bool-test');await command(output,'compile-json-bool','/usr/bin/xcrun',['clang','-fobjc-arc','-framework','Foundation','-framework','CoreFoundation',join(here,'json-bool.test.m'),'-o',boolBinary]);
+  const boolean=await command(output,'json-bool-contracts',boolBinary,[]);for(const [key,n] of Object.entries({tests:2,pass:2,fail:0}))assert.match(boolean.stdout,new RegExp('^# '+key+' '+n+'$','m'));
   const fixtureBinary=join(output,'fixture-binary');await command(output,'compile-fixture','/usr/bin/xcrun',['clang','-fobjc-arc','-framework','AppKit','-framework','Foundation','-lproc',join(here,'fixture.m'),'-o',fixtureBinary]);
   for(const variant of variants){
    const generated=derive(source,variant),sourcePath=join(output,'observer-'+variant+'.m'),binary=join(output,'observer-'+variant);

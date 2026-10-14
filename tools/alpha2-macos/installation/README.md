@@ -2,6 +2,14 @@
 
 CI.md records the frozen r46 RED contract. On real macOS, all 13 fixtures first compiled and passed ad-hoc signature verification, then failed with SEP_INSTALL_NOT_IMPLEMENTED (run 38581365790, job 115911801127). This implementation now replaces those stubs; its native GREEN run is pending. The 13 definitions and fixture bytes remain unchanged.
 
+r47 compiled successfully and ran all 13: seven passed; six execution-path cases stopped at the initial native ACL check. The defect was treating a missing ACL property as a failed security read. Apple Libc's acl_get_fd_np returns NULL when filesec_get_property finds no FILESEC_ACL; that result alone cannot distinguish absence from a failed stat. The correction explicitly requires a successful fstatx_np and filesec_query_property before accepting absent ACL metadata. A present ACL still must validate and contain no entries; read/query/validation errors remain refusals.
+
+run-acl-native.mjs independently compiles the hash-pinned r47 acl-red-baseline.c and the corrected native source against the same three real-fd tests. Expected old result: one pass and two failures; expected corrected result: three passes. These definitions separately prove absent property acceptance, real chmod-created ACL refusal, and invalid-fd refusal. Raw observations preserve both property presence and the old API's return/errno. No original transaction expectation was changed.
+
+Primary references: [Apple acl_file.c](https://github.com/apple-oss-distributions/Libc/blob/main/posix1e/acl_file.c), [filesec.c](https://github.com/apple-oss-distributions/Libc/blob/main/gen/filesec.c), and [acl_entry.c](https://github.com/apple-oss-distributions/Libc/blob/main/posix1e/acl_entry.c). Native correction validation is pending.
+
+Root review also identified that an install parent inside the source app would let the native lease itself alter the source before a later recheck. Planning, execution, and recovery now reject equality or a descendant parent before starting the helper. A parent containing a separate candidate source remains allowed. run-layout-native.mjs preserves the original r47 JS bytes and runs three independent old/fixed comparisons against the corrected native helper. Tests bind the source inventory and require the installer lock to remain absent from the app. This regression is separate from the fixed 13 transaction definitions.
+
 This is an internal installation core, not an automatic updater or public installer command. It never starts an app and never adopts, clears or migrates existing account data. No frozen r44 application bytes or active daily program are modified.
 
 ## API and authority

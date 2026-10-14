@@ -30,6 +30,7 @@
 | r44 / 38576229021 | CAS 最小修复后，同一 7 项原生连接检查全部通过；真实 AppKit＋合成控制器，正常退出且无需测试清理，不等于完整业务。schema 4 实包两项直接启动通过；系统入口仍 1 fail / 2 not_run。实际产品清点 29,338 项，已在 D 盘下载并逐项核验，Windows 上未执行 Mac 程序。 |
 | r45 / 38578561007 | 两台独立 VM 恢复同一 r44 产品。隐藏调用身份校验通过，但 API 返回 false，系统入口 1 fail / 2 not_run；之后正常退出取得 closed 回执，不能倒推失败当场已完成外层进程审计。工作区诊断在早期 Inspector 身份聚合断言失败，尚未点击页面，后续收尾仍 blocked。6 项诊断契约通过不替代产品通过。 |
 | r46 / 38581365790 | 同一 r44 产品：10 项诊断契约及 1 轮 Inspector 辅助真实 DOM 检查通过。早期同 PID 的 appPath 为空且 isReady=false；欢迎页就绪后路径正确、isReady=true，随后才操作页面。工作区、32×14 徽标、独立方块及正常退出通过。首次安装 13 项真实签名夹具均因 NOT_IMPLEMENTED 失败，保留为实现前 RED。独立 AppKit hide 对照在首个夹具初始化时退出，hideCalls=0；其余 3 项 not_run，不能用于解释 Electron hide。 |
+| r47 / 38583534733 | 首装原 13 项实际运行，7 通过、6 在初始 ACL 检查提前失败；没有包发布成功声明。独立 hide 夹具通过 5 项 C 初始化及 6 项判定契约，真实窗口已 regular/visible/active/finishedLaunching，并正常退出；但 birthValid 被序列化为数字 1，严格布尔断言在 hide 前失败，实际调用仍为 0，其余 3 组 not_run。后继修正保留原断言，分别补 ACL 缺失/非空/读取失败及真实 Foundation 布尔序列化验证。 |
 
 r44 下载包：`application-r44-distribution/verified-package/DSH-SEP-macOS-Alpha2-application-preview.zip`，647,468,896 字节，SHA-256 `6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67`；树 `128885968401b628b2c21974d045a70a04233bc04a0bfd3aa943eba1ce4e5ebd`。下载核验收据为 `application-r44-distribution/verified-package/DOWNLOAD-VERIFIED.json`。r45/r46 的恢复只改变测试位置，未重建、重签或修补此产品。r46 原始工件分别封存在 `workspace-native-r46/`、`installation-red-r46/`、`hide-observer-r46/`，不能把三项混算为整个 CI 通过。
 
