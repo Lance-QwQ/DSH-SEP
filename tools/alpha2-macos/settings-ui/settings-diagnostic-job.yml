@@ -1,0 +1,50 @@
+settings-ui-fixed-package:
+  runs-on: macos-15
+  timeout-minutes: 30
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.19.0
+    - name: Verify test-only diagnostic and origin binding
+      run: |
+        mkdir "$RUNNER_TEMP/settings-diagnostic-unit"
+        node --test --test-reporter=tap tools/alpha2-macos/settings-ui/desktop-smoke.test.mjs tools/alpha2-macos/settings-ui/desktop-diagnostic.test.mjs > "$RUNNER_TEMP/settings-diagnostic-unit/tests.tap"
+    - name: Download exact r28 image package with both archive hashes
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/settings-ui/download-fixed-r28.mjs "$RUNNER_TEMP/settings-fixed-download"
+    - name: Extract already verified r28 product without rebuilding
+      run: |
+        mkdir "$RUNNER_TEMP/settings-fixed-product"
+        ditto -x -k "$RUNNER_TEMP/settings-fixed-download/input/DSH-SEP-macOS-Alpha2-preview.zip" "$RUNNER_TEMP/settings-fixed-product"
+        node --input-type=module <<'JS'
+        import {readFile,writeFile} from 'node:fs/promises';
+        import {join} from 'node:path';
+        import {verifyPackage} from './tools/alpha2-macos/package/package-inventory.mjs';
+        const receipt=JSON.parse(await readFile(join(process.env.RUNNER_TEMP,'settings-fixed-download/input/PACKAGE-INVENTORY.json'),'utf8'));
+        const result=await verifyPackage(join(process.env.RUNNER_TEMP,'settings-fixed-product/DSH-SEP-macOS-Alpha2-preview'),receipt);
+        await writeFile(join(process.env.RUNNER_TEMP,'settings-fixed-download/RESTORE.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+        JS
+    - name: Three same-data lifecycle and rendered-settings cycles
+      id: settings_smoke
+      run: |
+        node tools/alpha2-macos/settings-ui/desktop-smoke.mjs "$RUNNER_TEMP/settings-fixed-product/DSH-SEP-macOS-Alpha2-preview/PROGRAM.json" 22457aa1dbc3e9e5f0a0e54907885ba2707b1f5deb6078c8d5c487925d6759de "$RUNNER_TEMP/settings-fixed-smoke"
+    - name: Preserve fixed-product diagnostic receipts
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-settings-fixed-package
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/settings-diagnostic-unit/tests.tap
+          ${{ runner.temp }}/settings-fixed-download/DOWNLOAD-RECEIPT.json
+          ${{ runner.temp }}/settings-fixed-download/RESTORE.json
+          ${{ runner.temp }}/settings-fixed-smoke/RESULT.json
+          ${{ runner.temp }}/settings-fixed-smoke/round-*/*.json
+          ${{ runner.temp }}/settings-fixed-smoke/round-*/*.log

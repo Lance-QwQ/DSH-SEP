@@ -1,11 +1,12 @@
 // Test-only DOM actions inside the actual owned Electron renderer. This is not
 // physical mouse, Accessibility, or TCC certification. Never used on private data.
 import assert from 'node:assert/strict';import {randomUUID} from 'node:crypto';import {setTimeout as pause} from 'node:timers/promises';
+import {settingsDomSnapshot} from './desktop-diagnostic.mjs';
 const fail=code=>{throw Object.assign(Error(code),{code});};
 export async function probeSettingsPage({client,windowId,round}){
  assert(Number.isSafeInteger(windowId)&&windowId>0);assert([1,2,3].includes(round));
  async function page(expression){const nonce=randomUUID();await client.eval(`__sepFullProbe.settingsDom={nonce:${JSON.stringify(nonce)},status:'pending'};void __sepFullProbe.electron.BrowserWindow.fromId(${windowId}).webContents.executeJavaScript(${JSON.stringify(expression)}).then(value=>{__sepFullProbe.settingsDom={nonce:${JSON.stringify(nonce)},status:'pass',value};},()=>{__sepFullProbe.settingsDom={nonce:${JSON.stringify(nonce)},status:'fail'};});true`);const deadline=Date.now()+10000;while(Date.now()<deadline){const r=await client.eval('__sepFullProbe.settingsDom');if(r?.nonce!==nonce)fail('SETTINGS_DOM_NONCE');if(r.status==='pass')return r.value;if(r.status==='fail')fail('SETTINGS_DOM_EXECUTION');await pause(50);}fail('SETTINGS_DOM_DEADLINE');}
- async function wait(expression,code){const deadline=Date.now()+20000;while(Date.now()<deadline){const v=await page(expression);if(v)return v;await pause(100);}fail(code);}
+ async function wait(expression,code){const deadline=Date.now()+20000;while(Date.now()<deadline){const v=await page(expression);if(v)return v;await pause(100);}const error=Object.assign(Error(code),{code});error.diagnostic=await page('('+settingsDomSnapshot.toString()+')()').catch(()=>({diagnosticUnavailable:true}));throw error;}
  const modal='document.querySelector(\'[role="dialog"][data-shortcut-modal="settings"]\')';
  // Only observed, enabled semantic elements are eligible. No coordinates or
  // speculative clicking of other menus, sign-in, model or paid controls.
