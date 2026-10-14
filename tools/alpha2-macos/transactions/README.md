@@ -25,6 +25,12 @@ closing the controller reports `blocked`. This prototype has no automatic
 clearance operation for that state. Ordinary recovery cannot reinterpret an
 unknown execution as finished simply because the controller can reopen.
 
+The embedding runtime must close admission and drain **all** in-flight API
+calls before calling `close()`, including read-only `current` and `view` calls.
+The core serializes and waits for mutating operations; its `close()` receipt
+alone is not a whole-application drain or proof that independently started
+read-only native calls have exited.
+
 Publication writes a durable intent, creates and verifies a new generation,
 records publication, checks the target, and finally commits the generation,
 sequence and `committed` transaction state together. SQLite uses
