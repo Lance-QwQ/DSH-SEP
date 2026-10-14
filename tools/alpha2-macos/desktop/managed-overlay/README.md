@@ -4,6 +4,11 @@ This is a desktop adapter candidate, **not a complete SEP package**. The real
 macOS carrier build remains the native binary/runtime base. No Windows native
 module, desktop-host bootstrap, private Profile or GTK quit patch is imported.
 
+Current native status is recorded in [EVIDENCE-R22.md](../EVIDENCE-R22.md): managed
+refusal and package assembly passed; installed Full desktop smoke has one failed
+round and two not-run rounds. Earlier pending statements below are historical
+context and must not replace that current scope table.
+
 ## Inputs and adaptation
 
 `capture-r6.mjs` accepts the fixed Alpha.2 R6 desktop package through
@@ -163,4 +168,7 @@ explicitly emits `uncaughtException`, bypassing Node's monitor. The test observe
 also wraps that emission without adding an `uncaughtException` listener: adding
 one would change Electron's one-listener native-error policy. A real Node event
 regression proves the receiver, handler count and return value remain intact.
-This observation transport change awaits a new real Mac run.
+Run `38527092957` now verifies this observation transport on the actual packaged
+Mac app: the bound receipt contains `SEP_MAC_CONTROLLED_ENTRY_REQUIRED` and zero
+observed Node child dispatches. Final cleanup was test-owned SIGKILL, not a
+product shutdown. The separate integrated desktop lifecycle is still not passed.
