@@ -1,7 +1,7 @@
 // Trusted file-operation controller derived from the fixed Linux transaction
 // state machine. No arbitrary command or untrusted subprocess is dispatched.
 import {DatabaseSync} from 'node:sqlite';
-import {open,mkdir,lstat,realpath,rmdir} from 'node:fs/promises';
+import {open,mkdir,lstat,realpath,rmdir,readdir} from 'node:fs/promises';
 import {join,relative,isAbsolute,dirname} from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -26,12 +26,14 @@ async function database(path){
 
 export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
  if(!io||io.lockPath!==join(root,'.native.lock')||['tree','directory','syncDirectory','applyFile'].some(k=>typeof io[k]!=='function')||typeof onEvent!=='function')fail('SEP_PROJECT_CONFIG');
- const {syncDirectory,applyFile}=io;
+ let noteUncertainty=()=>{};
+ const native=async work=>{try{return await work();}catch(e){if(e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED')noteUncertainty();throw e;}};
+ const syncDirectory=path=>native(()=>io.syncDirectory(path)),applyFile=(path,input)=>native(()=>io.applyFile(path,input));
  // Preserve exact absence classification required by crash cleanup. Existing
  // paths still undergo the native no-follow verification; PATH is never
  // treated as ENOENT.
- const tree=async(path,options)=>{await lstat(path);return io.tree(path,options);};
- const directory=async(path,privateRoot)=>{await lstat(path);return io.directory(path,privateRoot);};
+ const tree=async(path,options)=>{await lstat(path);return native(()=>io.tree(path,options));};
+ const directory=async(path,privateRoot)=>{await lstat(path);const held=await native(()=>io.directory(path,privateRoot));return {stat:options=>native(()=>held.stat(options)),close:()=>native(()=>held.close())};};
  // Native operations from a dead controller may still hold this lock. Its
  // kernel release, not the controller PID disappearing, gates recovery.
  await syncDirectory(root);
@@ -45,8 +47,9 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
   for(const name of directories){const held=await directory(join(path,name),true);await held.close();await rmdir(join(path,name));}
   const held=await directory(path,true);await held.close();await rmdir(path);await syncDirectory(dirname(path));
  };
- const held=await directory(root,true),rootIdentity=identity(await held.stat({bigint:true}));
- let owner,db,active,controller,closePromise,documents,closing=false,closed=false,ownerIdentity,dbIdentity,startupInterrupted=false;
+ const held=await directory(root,true);let rootIdentity;
+ try{rootIdentity=identity(await held.stat({bigint:true}));}catch(e){try{await held.close();}catch(cleanup){if(e.code!=='SEP_PROJECT_CLEANUP_UNCONFIRMED'&&cleanup.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED')throw cleanup;}throw e;}
+ let owner,db,active,controller,closePromise,documents,closing=false,closed=false,ownerIdentity,dbIdentity,startupInterrupted=false,cleanupUnconfirmed=false;
  const pathFor=id=>join(root,'generations',String(id),'data');
  const meta=()=>{const row=db.prepare('SELECT value FROM metadata WHERE id=1').get();if(!row)fail('SEP_PROJECT_INITIALIZATION_INCOMPLETE');return parse(row.value);};
  const transaction=id=>{const row=db.prepare('SELECT value FROM transactions WHERE id=?').get(id);if(!row)fail('SEP_PROJECT_PLAN_INVALID');return parse(row.value);};
@@ -54,6 +57,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
  const setMeta=m=>db.prepare('INSERT INTO metadata(id,value) VALUES(1,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(JSON.stringify(m));
  const atomic=fn=>{db.exec('BEGIN IMMEDIATE');try{fn();db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}};
  const event=(name,t)=>{db.prepare('INSERT INTO events(kind,transaction_id) VALUES(?,?)').run(name,t?.id??null);onEvent(name);};
+ noteUncertainty=()=>{cleanupUnconfirmed=true;startupInterrupted=true;if(db&&!closed&&db.prepare('SELECT 1 FROM metadata').get())atomic(()=>setMeta({...meta(),nativeCleanupBlocked:true}));};
  const guard=async()=>{
   if(closed)fail('SEP_PROJECT_CLOSED');
   if(await realpath(root)!==root||identity(await lstat(root,{bigint:true}))!==rootIdentity)fail('SEP_PROJECT_PATH');
@@ -61,7 +65,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
   if(identity(await lstat(join(root,'owner.sqlite'),{bigint:true}))!==ownerIdentity||identity(await lstat(join(root,'state.sqlite'),{bigint:true}))!==dbIdentity)fail('SEP_PROJECT_PATH');
   owner.prepare('SELECT 1').get();
  };
- const ready=async()=>{await guard();await documents?.readable();const m=meta();if(m.pending||startupInterrupted)fail('SEP_PROJECT_RECOVERY_REQUIRED');return m;};
+ const ready=async()=>{await guard();await documents?.readable();const m=meta();if(m.pending||startupInterrupted||m.nativeCleanupBlocked)fail('SEP_PROJECT_RECOVERY_REQUIRED');return m;};
  const snapshot=async id=>{
   const row=db.prepare('SELECT value FROM generations WHERE id=?').get(id);if(!row)fail('SEP_PROJECT_BASELINE_CHANGED');
   const saved=parse(row.value),actual=await tree(pathFor(id));
@@ -87,7 +91,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
   if(hash(JSON.stringify(t.plan))!==planHash||t.plan.rootIdentity!==rootIdentity)fail('SEP_PROJECT_PLAN_INVALID');return t;
  };
  const recoverInternal=async()=>{
-  await guard();await documents?.readable();let m=meta();
+  await guard();if(meta().nativeCleanupBlocked)fail('SEP_PROJECT_CLEANUP_BLOCKED');await documents?.readable();let m=meta();
   if(db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.state')='cleanup_blocked'").get())fail('SEP_PROJECT_CLEANUP_BLOCKED');
   if(m.pending){
    const t=transaction(m.pending);
@@ -97,7 +101,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
    // record or newer business sequence is overwritten to make recovery pass.
    if(t.target!==t.plan.baseGeneration)await eraseTree(join(root,'generations',String(t.target)));
    await syncDirectory(join(root,'generations'));await removeCopies(t);
-   atomic(()=>{t.state='rolled_back';save(t);setMeta({...m,generation:t.plan.baseGeneration,pending:null});});event('rollback-durable',t);
+   atomic(()=>{if(t.target!==t.plan.baseGeneration)db.prepare('DELETE FROM generations WHERE id=?').run(t.target);t.state='rolled_back';save(t);setMeta({...m,generation:t.plan.baseGeneration,pending:null});});event('rollback-durable',t);
   }
   for(const row of db.prepare('SELECT value FROM transactions').all()){
    const t=parse(row.value);
@@ -126,24 +130,43 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
   ownerIdentity=identity(await lstat(join(root,'owner.sqlite'),{bigint:true}));
   db=await database(join(root,'state.sqlite'));db.exec('PRAGMA synchronous=FULL; PRAGMA fullfsync=ON; PRAGMA checkpoint_fullfsync=ON; PRAGMA journal_mode=DELETE; CREATE TABLE IF NOT EXISTS metadata(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS generations(id INTEGER PRIMARY KEY,value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS transactions(id TEXT PRIMARY KEY,value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY,kind TEXT NOT NULL,transaction_id TEXT)');
   dbIdentity=identity(await lstat(join(root,'state.sqlite'),{bigint:true}));
+  db.exec('CREATE TABLE IF NOT EXISTS bootstrap(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT NOT NULL)');
   if(!db.prepare('SELECT 1 FROM metadata').get()){
    if(!source||inside(root,source)||inside(source,root))fail('SEP_PROJECT_PATH');
-   await directory(source).then(h=>h.close());
-   const before=await tree(source);
+   await directory(source).then(h=>h.close());const before=await tree(source);
+   const prior=db.prepare('SELECT value FROM bootstrap WHERE id=1').get();
+   const writeBootstrap=b=>db.prepare('INSERT INTO bootstrap VALUES(1,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(JSON.stringify(b));
+   const expected={schema:1,rootIdentity,source,sourceSha256:before.sha256,sourceVersion:before.version,state:'intent'};
+   if(prior){
+    if(JSON.stringify(parse(prior.value))!==JSON.stringify(expected))fail('SEP_PROJECT_INITIALIZATION_INCOMPLETE');
+    // Only fully verifiable copies from this exact durable import intent may
+    // be removed. Unknown paths, changed bodies and partial corrupt bytes are
+    // retained for a separate recovery decision.
+    const permitted=new Map([['1',{path:'1',kind:'directory'}],['1/data',{path:'1/data',kind:'directory'}],...before.entries.map(x=>['1/data/'+x.path,{...x,path:'1/data/'+x.path}])]);
+    for(const name of ['generations','transactions']){
+     const folder=join(root,name);let snapshot;try{snapshot=await tree(folder);}catch(e){if(e.code==='ENOENT')continue;throw e;}
+     if(name==='transactions'?snapshot.entries.length!==0:snapshot.entries.some(x=>JSON.stringify(x)!==JSON.stringify(permitted.get(x.path))))fail('SEP_PROJECT_INITIALIZATION_INCOMPLETE');
+     await eraseTree(folder);
+    }
+   }else{
+    const known=new Set(['.native.lock','owner.sqlite','owner.sqlite-journal','owner.sqlite-wal','owner.sqlite-shm','state.sqlite','state.sqlite-journal','state.sqlite-wal','state.sqlite-shm']);
+    if((await readdir(root)).some(name=>!known.has(name)))fail('SEP_PROJECT_INITIALIZATION_INCOMPLETE');
+    atomic(()=>writeBootstrap(expected));event('bootstrap-intent-durable');
+   }
    await mkdir(join(root,'generations'),{mode:0o700});await mkdir(join(root,'transactions'),{mode:0o700});await mkdir(join(root,'generations','1'),{mode:0o700});await mkdir(pathFor(1),{mode:0o700});
    await tree(source,{copyTo:pathFor(1)});const after=await tree(source);
    if(before.version!==after.version)fail('SEP_PROJECT_TREE_CHANGED');const captured=await tree(pathFor(1));if(captured.sha256!==before.sha256)fail('SEP_PROJECT_TREE_CHANGED');
-   await syncDirectory(join(root,'generations','1'));await syncDirectory(join(root,'generations'));await syncDirectory(root);
-   atomic(()=>{db.prepare('INSERT INTO generations VALUES(1,?)').run(JSON.stringify(captured));setMeta({schema:1,rootIdentity,generation:1,sequence:0,pending:null});});event('initialized');
+   await syncDirectory(join(root,'generations','1'));await syncDirectory(join(root,'generations'));await syncDirectory(root);event('bootstrap-copy-durable');
+   atomic(()=>{db.prepare('INSERT INTO generations VALUES(1,?)').run(JSON.stringify(captured));setMeta({schema:1,rootIdentity,generation:1,sequence:0,pending:null});writeBootstrap({...expected,state:'committed'});});event('initialized');
   }
   const m=meta();if(m.schema!==1||m.rootIdentity!==rootIdentity)fail('SEP_PROJECT_PATH');
   documents=documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,save,event,io:{tree,directory,syncDirectory,applyFile,eraseTree}});
   startupInterrupted=db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.state') IN ('running','cleanup_blocked')").get()!==undefined;
   await guard();
   return {
-   bindDocumentAuthority(input){return exclusive(()=>documents.bind(input));},
-   reviewDocument(path){return exclusive(()=>documents.review(path));},
-   deleteDocument(input){return exclusive(()=>documents.purge(input));},
+   bindDocumentAuthority(input){return exclusive(()=>{if(meta().nativeCleanupBlocked)fail('SEP_PROJECT_CLEANUP_BLOCKED');return documents.bind(input);});},
+   reviewDocument(path){return exclusive(async()=>{await ready();return documents.review(path);});},
+   deleteDocument(input){return exclusive(()=>{if(meta().nativeCleanupBlocked)fail('SEP_PROJECT_CLEANUP_BLOCKED');return documents.purge(input);});},
    async current(){const m=await ready();await snapshot(m.generation);return {generation:m.generation,sequence:m.sequence,path:pathFor(m.generation)};},
    async plans(){await guard();return db.prepare("SELECT value FROM transactions WHERE json_extract(value,'$.state')='ready'").all().map(row=>parse(row.value)).map(t=>({planHash:t.planHash,kind:t.kind,createdAt:t.createdAt,expired:Date.now()-t.createdAt>=86400000,changes:t.plan.changes}));},
    async view(planHash){const m=await ready();if(planHash===undefined)return {path:pathFor(m.generation),...await snapshot(m.generation)};const t=lookup(planHash);if(t.state!=='ready'||t.plan.baseGeneration!==m.generation||t.plan.baseSequence!==m.sequence||Date.now()-t.createdAt>=86400000)fail('SEP_PROJECT_STALE_PLAN');const path=join(root,'transactions',t.id,'candidate'),actual=await tree(path);if(actual.sha256!==t.candidate.sha256||actual.version!==t.candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');return {path,...actual};},
@@ -165,7 +188,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
      const candidate=await tree(candidatePath);await syncDirectory(folder);
      if(signal?.aborted||internal.aborted)fail('SEP_PROJECT_CANCELLED');
      return await finishPlan(t,baseline,candidate);
-    }catch(e){t.state='aborted';save(t);await removeCopies(t);throw e;}
+    }catch(e){if(e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED'){t.state='cleanup_blocked';save(t);startupInterrupted=true;throw e;}t.state='aborted';save(t);await removeCopies(t);throw e;}
    });},
    planRestore(generation){return exclusive(async()=>{
     const m=await ready();if(!Number.isSafeInteger(generation)||generation<1)fail('SEP_PROJECT_PLAN_INVALID');
@@ -182,7 +205,7 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
     const candidate=join(root,'transactions',t.id,'candidate'),actual=await tree(candidate);
     documents.candidateAllowed(actual);
     if(actual.sha256!==t.candidate.sha256||actual.version!==t.candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');
-    t.target=Number(db.prepare('SELECT COALESCE(MAX(id),0)+1 AS id FROM generations').get().id);
+    t.target=Number(db.prepare("SELECT MAX(value)+1 AS id FROM (SELECT COALESCE(MAX(id),0) AS value FROM generations UNION ALL SELECT COALESCE(MAX(json_extract(value,'$.target')),0) AS value FROM transactions)").get().id);
     t.state='intent';atomic(()=>{save(t);db.prepare('INSERT INTO generations VALUES(?,?)').run(t.target,'null');setMeta({...m,pending:t.id});});event('intent-durable',t);
     await mkdir(join(root,'generations',String(t.target)),{mode:0o700});await mkdir(pathFor(t.target),{mode:0o700});
     await tree(candidate,{copyTo:pathFor(t.target)});const target=await tree(pathFor(t.target));
@@ -204,9 +227,9 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
    close(){return closePromise??=(async()=>{
     closing=true;controller?.abort();
     try{await active;}catch{} // Durable pending state is retained for recover().
-    const blocked=db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.state')='cleanup_blocked'").get()!==undefined;
+    const blocked=cleanupUnconfirmed||meta().nativeCleanupBlocked===true||db.prepare("SELECT 1 FROM transactions WHERE json_extract(value,'$.state')='cleanup_blocked'").get()!==undefined;
     closed=true;try{db.close();}finally{try{owner.close();}finally{await held.close();}}return {status:blocked?'blocked':'pass'};
    })();},
   };
- }catch(e){try{db?.close();}finally{try{owner?.close();}finally{await held.close();}}throw e;}
+ }catch(e){let cleanupError;try{db?.close();}catch(failure){cleanupError=failure;}try{owner?.close();}catch(failure){cleanupError??=failure;}closed=true;try{await held.close();}catch(failure){cleanupError??=failure;}if(e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED')throw e;throw cleanupError??e;}
 }

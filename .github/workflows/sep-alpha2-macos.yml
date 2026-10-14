@@ -203,6 +203,8 @@ jobs:
           echo "SEP_MAC_TX_OUTPUT=$root" >> "$GITHUB_ENV"
           xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
           shasum -a 256 "$root/native-tree" > "$root/native-tree.sha256"
+      - name: Replay exact source derivations
+        run: node --test --test-reporter=tap tools/alpha2-macos/transactions/origin.test.mjs > "$SEP_MAC_TX_OUTPUT/origin-replay.log" 2>&1
       - name: Three native SQLite and APFS transaction rounds
         run: |
           set +e
@@ -227,3 +229,59 @@ jobs:
             ${{ env.SEP_MAC_TX_OUTPUT }}/*.sha256
           if-no-files-found: error
           retention-days: 14
+
+  # Bind the immutable original artifact archive before extracting any executable.
+  # This job reuses the first native build; it does not repeat compilation or publish a Release.
+  desktop-carrier-smoke-existing:
+    runs-on: macos-15
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+    env:
+      SEP_CARRIER_ARCHIVE_SHA256: 63cc8bd74c5750911b668ce5a41aa15239db1a59911204355ec334d4fa4bc0b8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.19.0
+      - name: Fetch and verify immutable carrier archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api repos/Lance-QwQ/DSH-SEP/actions/artifacts/11871124360/zip > "$RUNNER_TEMP/sep-carrier-archive.zip"
+          test "$(shasum -a 256 "$RUNNER_TEMP/sep-carrier-archive.zip" | cut -d ' ' -f 1)" = "$SEP_CARRIER_ARCHIVE_SHA256"
+          mkdir "$RUNNER_TEMP/sep-carrier-input"
+          ditto -x -k "$RUNNER_TEMP/sep-carrier-archive.zip" "$RUNNER_TEMP/sep-carrier-input"
+      - name: Verify exact inner ZIP before extraction
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          INPUT="$RUNNER_TEMP/sep-carrier-input"
+          ACTUAL=$(shasum -a 256 "$INPUT/desktop-carrier.zip" | cut -d ' ' -f 1)
+          EXPECTED=$(node -e 'process.stdout.write(require(process.argv[1]).artifactSha256)' "$INPUT/BUILD-RESULT.json")
+          test "$ACTUAL" = "$EXPECTED"
+          node -e 'const r=require(process.argv[1]);if(r.status!=="pass"||r.officialCommit!=="d743267388641bc76f17c45ce8b4c231aed1d32c"||r.fullSepCertification!=="not_run") process.exit(1)' "$INPUT/BUILD-RESULT.json"
+          mkdir "$RUNNER_TEMP/sep-carrier-extracted"
+          ditto -x -k "$INPUT/desktop-carrier.zip" "$RUNNER_TEMP/sep-carrier-extracted"
+          mkdir "$RUNNER_TEMP/sep-carrier-build-receipts"
+          cp "$INPUT/BUILD-RESULT.json" "$INPUT/ORIGIN.json" "$RUNNER_TEMP/sep-carrier-build-receipts/"
+          printf '%s\n' "$ACTUAL" > "$RUNNER_TEMP/sep-carrier-build-receipts/inner-zip.sha256"
+      - name: Actual three-round native carrier smoke
+        run: node tools/alpha2-macos/desktop/smoke-carrier.mjs "$RUNNER_TEMP/sep-carrier-extracted/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
+      - name: Preserve each planned round and cleanup attribution
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-desktop-smoke-existing
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/sep-alpha2-desktop-smoke/
+            ${{ runner.temp }}/sep-carrier-build-receipts/
+  

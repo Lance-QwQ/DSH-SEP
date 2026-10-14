@@ -121,3 +121,58 @@ test('SIGKILL after first document copy removal resumes only the approved deleti
  const markers=JSON.parse(await readFile(join(f.parent,'authority.json'),'utf8'));await reopened.bindDocumentAuthority({identity:'synthetic-p2',read:async()=>markers});
  await reopened.recover();await assert.rejects(readFile(join((await reopened.current()).path,'a.txt')),e=>e.code==='ENOENT');
 });
+test('rolled-back target does not poison deletion inventory and its generation id is not reused',async()=>{
+ const f=await fixture();const p=await f.open();await p.close();await crash(f,'published-durable');
+ const reopened=await f.open();await reopened.recover();let markers=[];await reopened.bindDocumentAuthority({identity:'synthetic-p2',read:async()=>markers});
+ assert.equal((await reopened.reviewDocument('a.txt')).generationCopies,1);
+ const next=await reopened.planWrite({path:'a.txt',expectedSha256:sha('original'),text:'next'});const committed=await reopened.commit({planHash:next.planHash});assert.equal(committed.generation,3);
+ const review=await reopened.reviewDocument('a.txt');markers=[{id:'delete-after-rollback',owner:'project:synthetic',status:'purged',documentPath:'a.txt',planHash:'2'.repeat(64),managedPlanHash:review.planHash}];
+ await reopened.deleteDocument({marker:markers[0],expectedPlanHash:review.planHash});const restore=await reopened.planRestore(1);await reopened.commit({planHash:restore.planHash});
+ await assert.rejects(readFile(join((await reopened.current()).path,'a.txt')),e=>e.code==='ENOENT');
+});
+test('cancel after target publication retains recovery intent and does not poison later deletion',async()=>{
+ const f=await fixture(),ac=new AbortController();const p=await f.open({onEvent:event=>{if(event==='health-passed')ac.abort();}});
+ const plan=await p.planWrite({path:'a.txt',expectedSha256:sha('original'),text:'never-committed'});
+ await assert.rejects(p.commit({planHash:plan.planHash,signal:ac.signal}),e=>e.code==='SEP_PROJECT_CANCELLED');await p.close();
+ const reopened=await f.open();await reopened.recover();assert.equal((await reopened.current()).sequence,0);assert.equal((await reopened.reviewDocument('a.txt')).generationCopies,1);
+});
+test('first-import copy crash has a durable intent and can resume without replacing the original',async()=>{
+ const f=await fixture();await crash(f,'bootstrap-copy-durable','bootstrap');
+ const opened=await f.open();assert.equal((await opened.current()).generation,1);assert.equal(await readFile(join((await opened.current()).path,'a.txt'),'utf8'),'original');assert.equal(await readFile(join(f.source,'a.txt'),'utf8'),'original');
+});
+test('an unexplained initialization directory is retained and refused',async()=>{
+ const f=await fixture();await mkdir(join(f.root,'generations'),{mode:0o700});await writeFile(join(f.root,'generations','foreign.txt'),'must-retain',{mode:0o600});
+ await assert.rejects(f.open(),e=>e.code==='SEP_PROJECT_INITIALIZATION_INCOMPLETE');assert.equal(await readFile(join(f.root,'generations','foreign.txt'),'utf8'),'must-retain');
+});
+test('a changed source after interrupted first import is refused without removing the captured copy',async()=>{
+ const f=await fixture();await crash(f,'bootstrap-copy-durable','bootstrap');await writeFile(join(f.source,'a.txt'),'new source');
+ await assert.rejects(f.open(),e=>e.code==='SEP_PROJECT_INITIALIZATION_INCOMPLETE');assert.equal(await readFile(join(f.root,'generations','1','data','a.txt'),'utf8'),'original');
+});
+test('unknown bodies introduced into interrupted bootstrap are retained and refused',async()=>{
+ const f=await fixture();await crash(f,'bootstrap-copy-durable','bootstrap');const unknown=join(f.root,'generations','1','data','foreign.txt');await writeFile(unknown,'foreign',{mode:0o600});
+ await assert.rejects(f.open(),e=>e.code==='SEP_PROJECT_INITIALIZATION_INCOMPLETE');assert.equal(await readFile(unknown,'utf8'),'foreign');
+});
+test('a native cleanup-unknown report durably blocks admission and close cannot claim pass',async()=>{
+ const f=await fixture();let injected=false;
+ // Only the native completion boundary is fault-injected; the actual file
+ // write and all SQLite/copy/recovery operations still execute for real.
+ const io={...f.io,async applyFile(...args){const result=await f.io.applyFile(...args);if(!injected){injected=true;throw Object.assign(Error('unconfirmed native exit'),{code:'SEP_PROJECT_CLEANUP_UNCONFIRMED'});}return result;}};
+ const p=await openTrustedProject({root:f.root,source:f.source,io});
+ try{await assert.rejects(p.planWrite({path:'a.txt',expectedSha256:sha('original'),text:'unknown'}),e=>e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED');await assert.rejects(p.current(),e=>e.code==='SEP_PROJECT_RECOVERY_REQUIRED');}
+ finally{assert.equal((await p.close()).status,'blocked');}
+ const reopened=await f.open();await assert.rejects(reopened.current(),e=>e.code==='SEP_PROJECT_RECOVERY_REQUIRED');await assert.rejects(reopened.recover(),e=>e.code==='SEP_PROJECT_CLEANUP_BLOCKED');
+});
+test('read-only snapshot cleanup uncertainty also blocks future admission and close',async()=>{
+ const f=await fixture();let uncertain=false;const io={...f.io,async tree(...args){const result=await f.io.tree(...args);if(uncertain){uncertain=false;throw Object.assign(Error('injected native completion fault'),{code:'SEP_PROJECT_CLEANUP_UNCONFIRMED'});}return result;}};
+ const p=await openTrustedProject({root:f.root,source:f.source,io});try{uncertain=true;await assert.rejects(p.current(),e=>e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED');await assert.rejects(p.current(),e=>e.code==='SEP_PROJECT_RECOVERY_REQUIRED');}finally{assert.equal((await p.close()).status,'blocked');}
+ const reopened=await f.open();await assert.rejects(reopened.current(),e=>e.code==='SEP_PROJECT_RECOVERY_REQUIRED');
+});
+test('bootstrap cleanup preserves the original uncertainty when handle disposal also fails',async()=>{
+ const f=await fixture();let uncertain=false;const io={...f.io,async tree(...args){const result=await f.io.tree(...args);if(args[0]===f.source){uncertain=true;throw Object.assign(Error('primary'),{code:'SEP_PROJECT_CLEANUP_UNCONFIRMED'});}return result;},async directory(...args){const held=await f.io.directory(...args);return {stat:(...a)=>held.stat(...a),async close(){await held.close();if(uncertain)throw Object.assign(Error('secondary'),{code:'SEP_TEST_CLOSE'});}};}};
+ await assert.rejects(openTrustedProject({root:f.root,source:f.source,io}),e=>e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED');assert.equal(await readFile(join(f.source,'a.txt'),'utf8'),'original');
+});
+test('owner-directory observation failure closes the acquired native handle',async()=>{
+ const f=await fixture();let actual;const io={...f.io,async directory(...args){const held=await f.io.directory(...args);if(args[0]!==f.root)return held;actual=held;return {async stat(...a){await held.stat(...a);throw Object.assign(Error('observation uncertain'),{code:'SEP_PROJECT_CLEANUP_UNCONFIRMED'});},close:()=>held.close()};}};
+ try{await assert.rejects(openTrustedProject({root:f.root,source:f.source,io}),e=>e.code==='SEP_PROJECT_CLEANUP_UNCONFIRMED');await assert.rejects(actual.stat({bigint:true}),e=>e.code==='SEP_PROJECT_CLOSED');}
+ finally{await actual?.close();}
+});
