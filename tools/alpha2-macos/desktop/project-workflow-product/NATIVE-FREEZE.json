@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "test/operator source with five Windows Node contracts; actual new macOS package not_run",
+  "productBuildFreezeSha256": "9de1034a0d2ffa46112d73a3a3e1b8c7d8d36bba68bdbe9c2f2352a4b8d0c25c",
+  "tests": {
+    "definitions": 5,
+    "pass": 5,
+    "fail": 0,
+    "skip": 0,
+    "cancelled": 0,
+    "logPath": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-workflow-product-red-r1\\GREEN-native-uncertainty.tap",
+    "logSha256": "25eea55a0336a7b3d528212dcfff3bdf94551616af785a2550e85581bc3993ae"
+  },
+  "nativeApplication": "not_run",
+  "nativeConfirmation": "not_run",
+  "physicalInput": "not_run",
+  "installedRuntime": false,
+  "files": [
+    {
+      "path": "NATIVE-ORIGIN.json",
+      "bytes": 5555,
+      "sha256": "eddfe9ff6d1a25176483641cfdb4759971587e6a16c163f7040e24d83d27b2ec"
+    },
+    {
+      "path": "ax-capability.m",
+      "bytes": 440,
+      "sha256": "2c77c3a12e7ed60c9748132ecdc7de9328f28bb6cb2a34fe9a6213888d2a9335"
+    },
+    {
+      "path": "derive-native.mjs",
+      "bytes": 5160,
+      "sha256": "e8a2b8818d550641d749b06790bf0fd9e91c0945f18c9bf53f9c139ae7c69c11"
+    },
+    {
+      "path": "native-README.md",
+      "bytes": 3751,
+      "sha256": "060651af0ae071b327f4c35561e96263ceae7dd13ff5816671ec611f138b5179"
+    },
+    {
+      "path": "native-ci-step.yml",
+      "bytes": 1704,
+      "sha256": "edc9e1f83ca3fe73a2e19d4bc5241b6528076be739a6e15bba25c6ab516fc42a"
+    },
+    {
+      "path": "native-contract.mjs",
+      "bytes": 1186,
+      "sha256": "959315ad251c986f59aa86af67a10fa913adfa88a852fa5733dde6d7350da2d1"
+    },
+    {
+      "path": "native-contract.test.mjs",
+      "bytes": 3629,
+      "sha256": "9ae09478a6ea466b396509b6e79bc980a6041cedb448dd22ac4ee3ba74cb56b5"
+    },
+    {
+      "path": "native-data.mjs",
+      "bytes": 7759,
+      "sha256": "29fd8c149d259d1fdd3a2b10a4bb5291b5d7cbd98a08cbb607069de5a716d2de"
+    },
+    {
+      "path": "native-dom.mjs",
+      "bytes": 8579,
+      "sha256": "e20c8daf52ce79db06c4071f06caaf68af99ebb08cf738cf7e10604645734c72"
+    },
+    {
+      "path": "native-operator.mjs",
+      "bytes": 6324,
+      "sha256": "90c25e2b8d50d2d8c9bdc53fac72cf79686be5a38989907e53880e8096e01524"
+    },
+    {
+      "path": "native-worker.mjs",
+      "bytes": 14763,
+      "sha256": "3bbbaf4adf5100d6d60c2a0437907e7f6f704c9d87e3b23b4d890159d62a611c"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "../../settings-product/worker.mjs",
+      "bytes": 14199,
+      "sha256": "a45d1b20e17d5a5af219f3e0337a8d1512c11b8014da9a0c632f384e71c89e55"
+    },
+    {
+      "path": "../../settings-product/operator.mjs",
+      "bytes": 6325,
+      "sha256": "c8f803f69fb359386b9fc85a60896894f819295eab4f07c984e6a7a9d60a6665"
+    },
+    {
+      "path": "../../settings-ui/desktop-onboarding.mjs",
+      "bytes": 1397,
+      "sha256": "41ff0d9f92b3d844464ecb32e9896439cda0910c3c19cf3a70ff1080d96fdea1"
+    },
+    {
+      "path": "../workspace-diagnostic.mjs",
+      "bytes": 6296,
+      "sha256": "223edd0596d86cda5dd22d6522badc89bd3428474c294ef7accbcae8ce194f5e"
+    },
+    {
+      "path": "../smoke-inspector.mjs",
+      "bytes": 1685,
+      "sha256": "d6919ce43a828ed5bbb7ed912d496ce1b218ecd96f87028b195e5947e12a19c1"
+    },
+    {
+      "path": "../product-control/native-launch-runner.mjs",
+      "bytes": 7621,
+      "sha256": "447885ada24b09729a3e3f3c02c418e0a5c132eefb58017cd2d9a7411e65eb00"
+    },
+    {
+      "path": "../managed-broker/program-manifest.mjs",
+      "bytes": 4920,
+      "sha256": "43abb6048918236c13b8a95cb7e46764be3ffc2d9eb46e49089bf78916a04071"
+    }
+  ],
+  "prerequisite": "native-ci-step runs round1 to exact operator pass before round2. A generation marker alone is not process-exit proof.",
+  "command": "node native-operator.mjs assemblyRESULT RESULT_SHA freshRoundOutput sameSyntheticDataRoot 1|2"
+}

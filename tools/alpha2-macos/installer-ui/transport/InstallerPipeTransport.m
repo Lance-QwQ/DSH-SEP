@@ -4,6 +4,9 @@
 #import <fcntl.h>
 #import <unistd.h>
 #import <math.h>
+#import <errno.h>
+#import <limits.h>
+#import <string.h>
 
 static BOOL Exact(id value,NSArray *keys){return [value isKindOfClass:NSDictionary.class]&&[[NSSet setWithArray:[value allKeys]]isEqualToSet:[NSSet setWithArray:keys]];}
 static BOOL SEPTransportPattern(id value,NSString *pattern){if(![value isKindOfClass:NSString.class])return NO;NSRange range=[value rangeOfString:pattern options:NSRegularExpressionSearch];return range.location==0&&range.length==[value length];}
@@ -13,13 +16,20 @@ static BOOL SEPTransportBoolean(id value){return [value isKindOfClass:NSNumber.c
 static BOOL Integer(id value,double min,double max){if(![value isKindOfClass:NSNumber.class]||SEPTransportBoolean(value))return NO;double n=[value doubleValue];return isfinite(n)&&floor(n)==n&&n>=min&&n<=max;}
 static BOOL Path(id value){return [value isKindOfClass:NSString.class]&&[value hasPrefix:@"/"]&&[value length]<=2048&&[value rangeOfString:@"[\\x00-\\x1f\\x7f]" options:NSRegularExpressionSearch].location==NSNotFound;}
 static NSDictionary *Blocked(NSString *code){return @{@"status":@"blocked",@"phase":@"blocked",@"code":code};}
-static BOOL Role(NSDictionary *role){
+static BOOL SEPTransportSameFile(const struct stat *a,const struct stat *b){return a->st_dev==b->st_dev&&a->st_ino==b->st_ino&&a->st_mode==b->st_mode&&a->st_uid==b->st_uid&&a->st_gid==b->st_gid&&a->st_nlink==b->st_nlink&&a->st_size==b->st_size&&a->st_mtimespec.tv_sec==b->st_mtimespec.tv_sec&&a->st_mtimespec.tv_nsec==b->st_mtimespec.tv_nsec&&a->st_ctimespec.tv_sec==b->st_ctimespec.tv_sec&&a->st_ctimespec.tv_nsec==b->st_ctimespec.tv_nsec;}
+static BOOL SEPTransportRoleStat(const struct stat *s,BOOL executable){return S_ISREG(s->st_mode)&&s->st_nlink==1&&(s->st_uid==geteuid()||s->st_uid==0)&&!(s->st_mode&0022)&&(!executable||(s->st_mode&0111))&&s->st_size>0&&s->st_size<=1024LL*1024*1024;}
+static BOOL SEPTransportExactFDPath(int fd,NSString *path){char actual[PATH_MAX];return fcntl(fd,F_GETPATH,actual)==0&&[path isEqual:[NSFileManager.defaultManager stringWithFileSystemRepresentation:actual length:strlen(actual)]];}
+static BOOL Role(NSDictionary *role,BOOL executable){
  if(!Exact(role,@[@"path",@"sha256"])||!Path(role[@"path"])||!Digest(role[@"sha256"]))return NO;
- int fd=open([role[@"path"]fileSystemRepresentation],O_RDONLY|O_NOFOLLOW|O_CLOEXEC);if(fd<0)return NO;
- struct stat before,after;BOOL valid=fstat(fd,&before)==0&&S_ISREG(before.st_mode)&&before.st_size>0&&before.st_size<=1024LL*1024*1024;
+ NSString *path=role[@"path"];int flags=O_RDONLY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC;
+ int fd=open(path.fileSystemRepresentation,flags);if(fd<0)return NO;
+ struct stat before,after,named;BOOL valid=fstat(fd,&before)==0&&SEPTransportRoleStat(&before,executable)&&SEPTransportExactFDPath(fd,path)&&lstat(path.fileSystemRepresentation,&named)==0&&SEPTransportSameFile(&before,&named);
  CC_SHA256_CTX ctx;CC_SHA256_Init(&ctx);unsigned char block[65536];ssize_t count=0;
- while(valid&&(count=read(fd,block,sizeof(block)))>0)CC_SHA256_Update(&ctx,block,(CC_LONG)count);
- valid=valid&&count==0&&fstat(fd,&after)==0&&before.st_dev==after.st_dev&&before.st_ino==after.st_ino&&before.st_size==after.st_size&&before.st_mtimespec.tv_sec==after.st_mtimespec.tv_sec&&before.st_mtimespec.tv_nsec==after.st_mtimespec.tv_nsec&&before.st_ctimespec.tv_sec==after.st_ctimespec.tv_sec&&before.st_ctimespec.tv_nsec==after.st_ctimespec.tv_nsec;close(fd);
+ while(valid){do{count=read(fd,block,sizeof(block));}while(count<0&&errno==EINTR);if(count<=0)break;CC_SHA256_Update(&ctx,block,(CC_LONG)count);}
+ valid=valid&&count==0&&fstat(fd,&after)==0&&SEPTransportSameFile(&before,&after)&&SEPTransportExactFDPath(fd,path)&&lstat(path.fileSystemRepresentation,&named)==0&&SEPTransportSameFile(&after,&named);
+ // Reopen the named role, not only the already-held descriptor. No alias,
+ // hard-link, mode/owner or identity change may be promoted to launchable.
+ int current=valid?open(path.fileSystemRepresentation,flags):-1;valid=valid&&current>=0&&fstat(current,&named)==0&&SEPTransportSameFile(&after,&named)&&SEPTransportExactFDPath(current,path);if(current>=0)close(current);close(fd);
  unsigned char digest[CC_SHA256_DIGEST_LENGTH];CC_SHA256_Final(digest,&ctx);NSMutableString *hex=[NSMutableString new];for(int i=0;i<CC_SHA256_DIGEST_LENGTH;i++)[hex appendFormat:@"%02x",digest[i]];return valid&&[hex isEqual:role[@"sha256"]];
 }
 static BOOL ValidRequest(NSString *operation,NSDictionary *input){
@@ -57,19 +67,20 @@ static BOOL ValidResponse(NSDictionary *value,NSString *nonce,NSUInteger sequenc
 - (instancetype)initWithVerifiedConfiguration:(NSDictionary *)configuration manifestSHA:(NSString *)manifestSHA {
  if(!(self=[super init]))return nil;_buffer=[NSMutableData new];_phase=@"blocked";_code=@"SEP_INSTALLER_UI_CONFIGURATION";_exitCode=-1;
  if(!NSThread.isMainThread||![configuration isKindOfClass:NSDictionary.class]||!Digest(manifestSHA)||!Path(configuration[@"contents"]))return self;
- if(!Role(configuration[@"node"])||!Role(configuration[@"controller"])){_code=@"SEP_INSTALLER_UI_ROLE_CHANGED";return self;}
+ if(!Role(configuration[@"node"],YES)||!Role(configuration[@"controller"],NO)){_code=@"SEP_INSTALLER_UI_ROLE_CHANGED";return self;}
  unsigned char random[32];arc4random_buf(random,sizeof(random));NSMutableString *nonce=[NSMutableString new];for(NSUInteger i=0;i<sizeof(random);i++)[nonce appendFormat:@"%02x",random[i]];_nonce=[nonce copy];
  _task=[NSTask new];_task.executableURL=[NSURL fileURLWithPath:configuration[@"node"][@"path"]];_task.arguments=@[configuration[@"controller"][@"path"],_nonce,[manifestSHA copy]];_task.currentDirectoryURL=[NSURL fileURLWithPath:configuration[@"contents"]];_task.environment=@{@"PATH":@"/usr/bin:/bin",@"LANG":@"en_US.UTF-8"};
  _inputPipe=[NSPipe pipe];_outputPipe=[NSPipe pipe];_errorPipe=[NSPipe pipe];if(!_inputPipe||!_outputPipe||!_errorPipe){_code=@"SEP_INSTALLER_UI_PIPE";return self;}
  // Darwin per-descriptor suppression; no global SIGPIPE handler is changed.
  if(fcntl(_inputPipe.fileHandleForWriting.fileDescriptor,F_SETNOSIGPIPE,1)<0){_code=@"SEP_INSTALLER_UI_PIPE";return self;}
+ for(NSFileHandle *reader in @[_outputPipe.fileHandleForReading,_errorPipe.fileHandleForReading]){int flags=fcntl(reader.fileDescriptor,F_GETFL);if(flags<0||fcntl(reader.fileDescriptor,F_SETFL,flags|O_NONBLOCK)<0){_code=@"SEP_INSTALLER_UI_PIPE";return self;}}
  _task.standardInput=_inputPipe;_task.standardOutput=_outputPipe;_task.standardError=_errorPipe;
  __weak typeof(self) weak=self;
- _outputPipe.fileHandleForReading.readabilityHandler=^(NSFileHandle *handle){@autoreleasepool{NSData *data;@try{data=[handle readDataUpToLength:16385 error:nil];}@catch(NSException *e){(void)e;data=nil;}if(!data){handle.readabilityHandler=nil;dispatch_async(dispatch_get_main_queue(),^{[weak block:@"SEP_INSTALLER_UI_PIPE"];});return;}if(!data.length)handle.readabilityHandler=nil;
+ _outputPipe.fileHandleForReading.readabilityHandler=^(NSFileHandle *handle){@autoreleasepool{unsigned char bytes[16385];ssize_t count;do{count=read(handle.fileDescriptor,bytes,sizeof(bytes));}while(count<0&&errno==EINTR);if(count<0&&(errno==EAGAIN||errno==EWOULDBLOCK))return;if(count<0){handle.readabilityHandler=nil;dispatch_async(dispatch_get_main_queue(),^{[weak block:@"SEP_INSTALLER_UI_PIPE"];});return;}if(!count)handle.readabilityHandler=nil;NSData *data=[NSData dataWithBytes:bytes length:(NSUInteger)count];
   // Synchronize each bounded chunk with the owner thread, so the pipe itself
   // supplies backpressure instead of an unbounded queue of captured NSData.
   if(NSThread.isMainThread)[weak receive:data];else dispatch_sync(dispatch_get_main_queue(),^{[weak receive:data];});}};
- _errorPipe.fileHandleForReading.readabilityHandler=^(NSFileHandle *handle){@autoreleasepool{@try{NSData *data=[handle readDataUpToLength:65536 error:nil];if(!data){handle.readabilityHandler=nil;dispatch_async(dispatch_get_main_queue(),^{[weak block:@"SEP_INSTALLER_UI_PIPE"];});return;}if(!data.length)handle.readabilityHandler=nil;typeof(self) strong=weak;@synchronized(strong){strong.stderrBytesBounded=MIN((NSUInteger)65536,strong.stderrBytesBounded+MIN((NSUInteger)65536,data.length));}}@catch(NSException *e){(void)e;handle.readabilityHandler=nil;dispatch_async(dispatch_get_main_queue(),^{[weak block:@"SEP_INSTALLER_UI_PIPE"];});}}};
+ _errorPipe.fileHandleForReading.readabilityHandler=^(NSFileHandle *handle){@autoreleasepool{unsigned char bytes[65536];ssize_t count;do{count=read(handle.fileDescriptor,bytes,sizeof(bytes));}while(count<0&&errno==EINTR);if(count<0&&(errno==EAGAIN||errno==EWOULDBLOCK))return;if(count<0){handle.readabilityHandler=nil;dispatch_async(dispatch_get_main_queue(),^{[weak block:@"SEP_INSTALLER_UI_PIPE"];});return;}if(!count)handle.readabilityHandler=nil;typeof(self) strong=weak;@synchronized(strong){strong.stderrBytesBounded=MIN((NSUInteger)65536,strong.stderrBytesBounded+(NSUInteger)count);}}};
  _task.terminationHandler=^(NSTask *task){dispatch_async(dispatch_get_main_queue(),^{typeof(self) strong=weak;if(!strong)return;strong.processExited=YES;strong.exitCode=task.terminationStatus;strong.signalled=task.terminationReason==NSTaskTerminationReasonUncaughtSignal;[strong maybeTerminate];});};
  NSError *error=nil;BOOL launched=NO;@try{launched=[_task launchAndReturnError:&error];}@catch(NSException *e){(void)e;}
  if(!launched){_outputPipe.fileHandleForReading.readabilityHandler=nil;_errorPipe.fileHandleForReading.readabilityHandler=nil;_code=@"SEP_INSTALLER_UI_START_FAILED";[self closeInput];return self;}
@@ -111,5 +122,5 @@ static BOOL ValidResponse(NSDictionary *value,NSString *nonce,NSUInteger sequenc
 - (void)observeTermination:(void (^)(NSInteger,BOOL))observer {
  if(!NSThread.isMainThread)return;if(_terminationObserver||_terminationDelivered)return;_terminationObserver=[observer copy];[self maybeTerminate];
 }
-- (NSDictionary *)snapshot {NSUInteger stderr;@synchronized(self){stderr=_stderrBytesBounded;}NSMutableDictionary *value=[@{@"started":@(_started),@"phase":_phase,@"requestsDispatched":@(_requestsDispatched),@"pending":@(_completion!=nil),@"stdoutEOF":@(_stdoutEOF),@"processExited":@(_processExited),@"terminationDelivered":@(_terminationDelivered),@"stderrBytesBounded":@(stderr),@"exitCode":@(_exitCode),@"signalled":@(_signalled)}mutableCopy];if(_code)value[@"code"]=_code;return value;}
+- (NSDictionary *)snapshot {NSUInteger stderr;@synchronized(self){stderr=_stderrBytesBounded;}NSMutableDictionary *value=[@{@"started":_started?@YES:@NO,@"phase":_phase,@"requestsDispatched":@(_requestsDispatched),@"pending":_completion?@YES:@NO,@"stdoutEOF":_stdoutEOF?@YES:@NO,@"processExited":_processExited?@YES:@NO,@"terminationDelivered":_terminationDelivered?@YES:@NO,@"stderrBytesBounded":@(stderr),@"exitCode":@(_exitCode),@"signalled":_signalled?@YES:@NO}mutableCopy];if(_code)value[@"code"]=_code;return value;}
 @end

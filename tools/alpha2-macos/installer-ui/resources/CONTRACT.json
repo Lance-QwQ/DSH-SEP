@@ -1,7 +1,9 @@
 {
   "schema": 1,
-  "status": "not_run",
-  "stage": "implemented-native-green-pending",
+  "status": "pass",
+  "stage": "r63-native-signed-synthetic-verified",
+  "verificationScope": "Twelve fixed native definitions: signed synthetic payloads only. Full payload probe remains not_run until its own bound evidence exists.",
+  "greenEvidence": "r63 run 38631108180 / job 116082665761: 12 pass, 0 fail/skip/cancel. Two positive fixture builds contain 43 entries / 131707 bytes; intentional invalid-C failure preserves its classified receipt.",
   "redEvidence": "r60: 12/12 reached SEP_INSTALLER_RESOURCES_NOT_IMPLEMENTED, 0 setup errors/skips/cancellations; original inputs and logs retained outside the source tree",
   "entry": "assembleInstallerResources({ sourceApp, receipt, sourceRoot, contents })",
   "audience": "Trusted build-time assembler only; no user/model supplied runtime command, source path or destination selector",

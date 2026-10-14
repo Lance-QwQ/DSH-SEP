@@ -1,0 +1,170 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Test-only fixed r61 restoration and LaunchServices wrapper source; 19 Windows Node contracts; native wrapper not_run",
+  "createdUtc": "2026-10-14T20:26:33.5114081Z",
+  "sourceCommit": "157eef6bcaaee8db959f37ed267ff202b9bc206c",
+  "tests": {
+    "newDefinitions": 7,
+    "unchangedHideDefinitions": 12,
+    "definitions": 19,
+    "pass": 19,
+    "fail": 0,
+    "skip": 0,
+    "cancelled": 0,
+    "platform": "win32",
+    "node": "v24.21.0",
+    "syntaxEntries": 3
+  },
+  "red": {
+    "definitions": 7,
+    "pass": 1,
+    "fail": 6
+  },
+  "nativeLifecycle": "not_run",
+  "nativeUi": "not_run",
+  "nativeConfirmation": "not_run",
+  "physicalInteraction": "not_run",
+  "productModified": false,
+  "files": [
+    {
+      "path": "candidate-pins.json",
+      "bytes": 1163,
+      "sha256": "0083ce5ab7de7defcec3388f9a0e165df95479379a6b125662e83d2d8c368d16"
+    },
+    {
+      "path": "candidate-binding.mjs",
+      "bytes": 3954,
+      "sha256": "d5a4b7e22ea3c42a2a2dd56220e51f3ad396d3442e3581b9cfdafabe0896a6a4"
+    },
+    {
+      "path": "candidate.test.mjs",
+      "bytes": 5011,
+      "sha256": "d398cf4d877feacf9906c0c771d3a57a882e8eead87c16b13a94669ac85edfd3"
+    },
+    {
+      "path": "derive-candidate-lifecycle.mjs",
+      "bytes": 7564,
+      "sha256": "42e6004f35740563a94798218e53822ed64ca754051308aff617b1f2f611d2c4"
+    },
+    {
+      "path": "candidate-lifecycle.mjs",
+      "bytes": 6364,
+      "sha256": "2f7b2897913da354a8f006e3697e6d029ecf492b93c8f2291a22c74652f58730"
+    },
+    {
+      "path": "restore-project-application-r61.mjs",
+      "bytes": 7224,
+      "sha256": "d05dc152505e7117e1d1e26eb26477007f199e3eb17aa52dd1b0f9b087376cab"
+    },
+    {
+      "path": "CANDIDATE-ORIGIN.json",
+      "bytes": 12322,
+      "sha256": "863668a3ba8399e68e99035df3c5ed7ffe0f6f5edccaad0ddea1713551973e1e"
+    },
+    {
+      "path": "candidate-ci-step.yml",
+      "bytes": 1731,
+      "sha256": "6bdb1be9432b3c9c6fbf32180adf417ea2bb3340abcfa5e0e7cd27d60efd5664"
+    },
+    {
+      "path": "candidate-README.md",
+      "bytes": 4450,
+      "sha256": "41d936da59fed1559e13565b9314ed9283d450870b16fd945e226ee9e4f8feca"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "desktop/hide-effect-probe/observation.mjs",
+      "bytes": 2802,
+      "sha256": "9ec59c213ebff8a0f28a4ccd6338ae812ec276fd7ff2f84f9196149028bc1629"
+    },
+    {
+      "path": "desktop/hide-effect-probe/observation.test.mjs",
+      "bytes": 4181,
+      "sha256": "f6ff1c04b633db929357298c3d2ffb64cac767c840d61ffffa5ac2f7296d0c51"
+    },
+    {
+      "path": "desktop/hide-effect-probe/r48-cases.json",
+      "bytes": 26899,
+      "sha256": "f56423cf8bb52dcbac4c48c99b060c4c2482261b12b869208be64f69321005ff"
+    },
+    {
+      "path": "desktop/hide-effect-probe/derive.mjs",
+      "bytes": 2489,
+      "sha256": "34cc30c0ccde18e2b8d93a7785c191382930ec6c430b0c996f0f85446477cae0"
+    },
+    {
+      "path": "desktop/hide-effect-probe/derive.test.mjs",
+      "bytes": 921,
+      "sha256": "00f30dff1354ce4ebe6feed7feefaa7d09c9906f6c8d4263126fad63ddf26f76"
+    },
+    {
+      "path": "desktop/hide-effect-probe/run-product.mjs",
+      "bytes": 6092,
+      "sha256": "9bbd353116245fc01c9592657ce844f64a287b13f8924404b5f68e933a0e68ff"
+    },
+    {
+      "path": "desktop/run-command.mjs",
+      "bytes": 1826,
+      "sha256": "5d4c1708280ca79e1b874782dc4ec567570ac3af6c7def4d44f43841fa565691"
+    },
+    {
+      "path": "desktop/product-control/native-launch-runner.mjs",
+      "bytes": 7621,
+      "sha256": "447885ada24b09729a3e3f3c02c418e0a5c132eefb58017cd2d9a7411e65eb00"
+    },
+    {
+      "path": "package/exercise-application.mjs",
+      "bytes": 10341,
+      "sha256": "ecb9321b2c23ee9ef4e67117f31fbe6b86de9745c5f5a47994690c124e59d979"
+    },
+    {
+      "path": "package/package-inventory.mjs",
+      "bytes": 4020,
+      "sha256": "b72983c13528b2cf8f85d53c06c5440ca6bac583a593bafeaf12ef95c60c901a"
+    },
+    {
+      "path": "package/application-observer.m",
+      "bytes": 2998,
+      "sha256": "bb37b6fae94465da6646609f48d444fc16957f884dfb265c0044b7fce1d99995"
+    },
+    {
+      "path": "package/restore-fixed-application-r44.mjs",
+      "bytes": 6467,
+      "sha256": "b8eeaed8ca9843c77e94c0f12eff273c517a8a3429b3ae827e129b736c314645"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\RED.tap",
+      "bytes": 9210,
+      "sha256": "839d27040ba6ee6528bab354ed393a1b9ce3caef5f19c078e0edb9f5ff066eeb"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\RED.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\GREEN-r1.tap",
+      "bytes": 1818,
+      "sha256": "058109e61e07fe0cf2b26ab2b464380677579cdf7526bf971d6d951c5f7087d2"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\GREEN-r1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\GREEN-final19.tap",
+      "bytes": 4256,
+      "sha256": "52d609b15a2e43f435053d915205058ca510950fb618e9e5f559fd3756510c3e"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-candidate-lifecycle-r1\\GREEN-final19.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

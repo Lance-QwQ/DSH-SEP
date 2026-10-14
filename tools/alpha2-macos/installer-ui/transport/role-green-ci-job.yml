@@ -1,0 +1,39 @@
+native-installer-role-candidate:
+  runs-on: macos-15
+  timeout-minutes: 10
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.21.0
+    - name: Compile additional role replacement definitions
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-role-candidate"
+        shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/role-regressions.mjs > "$RUNNER_TEMP/installer-role-candidate/INPUTS.sha256"
+        clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m -o "$RUNNER_TEMP/installer-role-candidate/tests" > "$RUNNER_TEMP/installer-role-candidate/compile.log" 2>&1
+    - name: Run exact test-child role replacement probes
+      shell: bash
+      run: |
+        set +e
+        node tools/alpha2-macos/installer-ui/transport/role-regressions.mjs "$RUNNER_TEMP/installer-role-candidate/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-role-candidate/results" > "$RUNNER_TEMP/installer-role-candidate/RESULT.json" 2> "$RUNNER_TEMP/installer-role-candidate/stderr.log"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-role-candidate/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-role-candidate
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/installer-role-candidate/*.json
+          ${{ runner.temp }}/installer-role-candidate/*.log
+          ${{ runner.temp }}/installer-role-candidate/*.sha256
+          ${{ runner.temp }}/installer-role-candidate/*.txt
+          ${{ runner.temp }}/installer-role-candidate/results/*.stdout
+          ${{ runner.temp }}/installer-role-candidate/results/*.stderr

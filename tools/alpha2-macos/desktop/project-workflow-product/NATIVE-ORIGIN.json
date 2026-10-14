@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "scope": "test-only derived operator; no installed runtime mutation",
+  "origin": {
+    "worker": {
+      "sourceSha256": "a45d1b20e17d5a5af219f3e0337a8d1512c11b8014da9a0c632f384e71c89e55",
+      "resultSha256": "3bbbaf4adf5100d6d60c2a0437907e7f6f704c9d87e3b23b4d890159d62a611c",
+      "changes": [
+        {
+          "before": "from '../desktop/smoke-inspector.mjs'",
+          "after": "from '../smoke-inspector.mjs'"
+        },
+        {
+          "before": "import {probeSettingsPage} from '../settings-ui/desktop-probe.mjs';",
+          "after": "import {probeCurrentProject} from './native-dom.mjs';\nimport {prepareProjectRound,finishProjectRound} from './native-data.mjs';\nimport {fixtureResourcesUnknown} from './native-contract.mjs';"
+        },
+        {
+          "before": "scope:'one same-product settings DOM persistence round; Inspector-assisted, not physical input'",
+          "after": "scope:'one current-project derived-application DOM round; Inspector-assisted, not physical input'"
+        },
+        {
+          "before": "desktop/managed-broker/launch-full.mjs",
+          "after": "desktop/project-workflow-product/launch-full.mjs"
+        },
+        {
+          "before": "let app,control,client,pending=false",
+          "after": "let preparationUnknown=false;let app,control,client,pending=false"
+        },
+        {
+          "before": "  if(!app)return pending||control?.status().owned?",
+          "after": "  if(!app)return preparationUnknown||pending||control?.status().owned?"
+        },
+        {
+          "before": "  const runtime=join(dirname(dirname(input.programPath)),'Resources/product/runtime');",
+          "after": "  result.preparation=await prepareProjectRound(input);\n  const runtime=join(dirname(dirname(input.programPath)),'Resources/product/runtime');"
+        },
+        {
+          "before": "result.stage='settings';result.settings=await probeSettingsPage({client,windowId:workspace.id,round:input.round,diagnosticRoot:input.outputRoot});\n  assert.equal(result.settings.persistedFromPriorColdStart,input.round>1);",
+          "after": "result.stage='project';result.project=await probeCurrentProject({client,windowId:workspace.id,input,preparation:result.preparation});"
+        },
+        {
+          "before": "}catch(e){result.code=safeCode(e);result.errorType=e.name;if(e.diagnostic)result.diagnostic=e.diagnostic;}",
+          "after": "}catch(e){preparationUnknown=fixtureResourcesUnknown(e);result.code=safeCode(e);result.errorType=e.name;if(e.diagnostic)result.diagnostic=e.diagnostic;}"
+        },
+        {
+          "before": "result.cleanup=await cleanup();if(result.cleanup.status!=='pass')result.status='blocked';finalized=true;",
+          "after": "result.cleanup=await cleanup();if(result.cleanup.status!=='pass')result.status='blocked';\n  if(result.cleanup.status==='pass'&&result.preparation)try{result.finalState=await finishProjectRound(input,result.preparation);if(result.finalState.status!=='pass')result.status='fail';}catch(e){if(fixtureResourcesUnknown(e)){result.status='blocked';result.cleanup={status:'blocked',resourcesConfirmedReleased:false};}else result.status='fail';result.code=safeCode(e);}\n  finalized=true;"
+        }
+      ]
+    },
+    "operator": {
+      "sourceSha256": "c8f803f69fb359386b9fc85a60896894f819295eab4f07c984e6a7a9d60a6665",
+      "resultSha256": "90c25e2b8d50d2d8c9bdc53fac72cf79686be5a38989907e53880e8096e01524",
+      "changes": [
+        {
+          "before": "from '../desktop/product-control/native-launch-runner.mjs'",
+          "after": "from '../product-control/native-launch-runner.mjs'"
+        },
+        {
+          "before": "from '../desktop/managed-broker/program-manifest.mjs'",
+          "after": "from '../managed-broker/program-manifest.mjs'"
+        },
+        {
+          "before": "import {classifySettingsRound as classifyDiagnostic} from './contracts.mjs';",
+          "after": "import {classifyProjectRound as classifyDiagnostic} from './native-contract.mjs';"
+        },
+        {
+          "before": "![1,2,3].includes(round)",
+          "after": "![1,2].includes(round)"
+        },
+        {
+          "before": "['operator.mjs','worker.mjs','contracts.mjs','ORIGIN.json','../settings-ui/desktop-probe.mjs','../settings-ui/desktop-diagnostic.mjs','../settings-ui/desktop-onboarding.mjs','../settings-ui/desktop-trace.mjs','../settings-ui/desktop-screenshot.mjs','../desktop/smoke-inspector.mjs','../desktop/product-control/native-launch-runner.mjs','../desktop/managed-broker/program-manifest.mjs']",
+          "after": "['native-operator.mjs','native-worker.mjs','native-contract.mjs','NATIVE-ORIGIN.json','native-dom.mjs','native-data.mjs','../../settings-ui/desktop-onboarding.mjs','../smoke-inspector.mjs','../workspace-diagnostic.mjs','../product-control/native-launch-runner.mjs','../managed-broker/program-manifest.mjs']"
+        },
+        {
+          "before": "new URL('./worker.mjs',import.meta.url)",
+          "after": "new URL('./native-worker.mjs',import.meta.url)"
+        },
+        {
+          "before": "scope:'one actual unchanged-product settings DOM persistence round; distinct from Finder/physical input'",
+          "after": "scope:'one actual derived-product current-project DOM round; distinct from Finder/physical input'"
+        },
+        {
+          "before": "round:receipt,notVerified:[",
+          "after": "round:receipt,notVerified:['native confirmation selection and accepted result','physical current-project interaction',"
+        }
+      ]
+    }
+  }
+}

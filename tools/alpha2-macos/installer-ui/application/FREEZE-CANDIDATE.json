@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "Real menu/delegate and original UI composed; compile-time termination recorder still synthetic; no production main or installed app claim.",
+  "definitions": {
+    "original": 8
+  },
+  "inputs": [
+    {
+      "path": "InstallerApplication.h",
+      "bytes": 438,
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c"
+    },
+    {
+      "path": "InstallerApplication.m",
+      "bytes": 2150,
+      "sha256": "f8f0778e19d91e70f26a23492e4439c7df6138fa4428498d54a070c71befcc81"
+    },
+    {
+      "path": "InstallerApplicationTests.m",
+      "bytes": 7740,
+      "sha256": "269a7beb19608579feb34659c2d9a7fd393ccf79aa3ea741ebafc313df479af9"
+    },
+    {
+      "path": "ci-green-job.yml",
+      "bytes": 2148,
+      "sha256": "a09749e9b8f0663bc174e2edc9cf82073295ecadf6ead77d97305ce2b3d7e216"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 3436,
+      "sha256": "fb6eb2025974185a380f371cc7bc14a77fa5ab05d0e363d8165f546a07e8ef24"
+    }
+  ],
+  "redEvidence": {
+    "run": 38631108180,
+    "commit": "03324c2dd94f506a3fbfa584a816997d1a3a78d7",
+    "auditSha256": "5ba797c70f3b7fee1b35dd28847b098a3b05d292b088bcdf1e5efb52bf15430a"
+  },
+  "testDefinitionsUnchanged": true,
+  "notVerified": [
+    "native candidate GREEN",
+    "complete installer product",
+    "physical user interaction"
+  ]
+}
