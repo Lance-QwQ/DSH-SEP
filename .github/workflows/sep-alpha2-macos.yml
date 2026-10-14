@@ -390,3 +390,63 @@ jobs:
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.log
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256
+
+  native-business-composition:
+    runs-on: macos-15
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      actions: read
+    env:
+      SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Fixed native carrier and ASAR tool
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/business-carrier-download"
+          mkdir "$RUNNER_TEMP/business-carrier"
+          ditto -x -k "$RUNNER_TEMP/business-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/business-carrier"
+          node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/business-asar-tool"
+      - name: Prepare real Mac Host and exact SEP capture
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-business-native"
+          mkdir "$root"
+          echo "SEP_MAC_BUSINESS_OUTPUT=$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/package/prepare-business.mjs "$RUNNER_TEMP/business-carrier/DSH SEP.app" "$RUNNER_TEMP/business-asar-tool/node_modules/@electron/asar/lib/asar.js" "$GITHUB_WORKSPACE" "$root/prepared"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          echo "SEP_OFFICIAL_HARNESS=$root/prepared/host" >> "$GITHUB_ENV"
+          echo "SEP_MAC_BUNDLE_ROOT=$root/prepared/host/sep-capture" >> "$GITHUB_ENV"
+          echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+          echo "SEP_MAC_BUSINESS_TEST_ROOT=$root/business-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_PROFILE_TEST_ROOT=$root/profile-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_LIFECYCLE_TEST_ROOT=$root/lifecycle-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
+          echo "SEP_DESKTOP_TEST_ROOT=$root/desktop-unit" >> "$GITHUB_ENV"
+          mkdir "$root/desktop-unit"
+          sw_vers > "$root/system.txt"
+          uname -a >> "$root/system.txt"
+      - name: Native file and business composition
+        run: |
+          node --test --test-reporter=tap tools/alpha2-macos/lifecycle/lifecycle.test.mjs tools/alpha2-macos/profile/controlled-files.test.mjs tools/alpha2-macos/business/business.test.mjs tools/alpha2-macos/business/profile-layout.test.mjs tools/alpha2-macos/business/standalone.test.mjs > "$SEP_MAC_BUSINESS_OUTPUT/composition.tap"
+      - name: Broker ownership and actual child protocol
+        if: always() && env.SEP_MAC_BUSINESS_OUTPUT != ''
+        run: node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs > "$SEP_MAC_BUSINESS_OUTPUT/broker.tap"
+      - name: Preserve native receipts with explicit scope
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-native-business-composition
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/*.tap
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/*.txt
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/prepared/PREPARED.json
+            ${{ runner.temp }}/business-carrier-download/DOWNLOAD-RECEIPT.json

@@ -155,3 +155,30 @@ test('an inner deadline is not permanent cleanup failure after the actual invoca
  release();await active;let timer;const final=await Promise.race([p.controller.whenClosed(),new Promise(r=>{timer=setTimeout(()=>r({status:'not_closed'}),2000);})]);clearTimeout(timer);
  assert.equal(final.status,'pass');assert.equal((await p.controller.close()).resourcesConfirmedReleased,true);
 });
+
+test('trusted document capability purges managed generations and invalidates candidate observations',async()=>{
+ const f=await fixture(),p=await f.open(),exec=f.caller();let markers=[],escaped;
+ await p.controller.bindDocumentAuthority({identity:'synthetic-p2',read:async()=>markers});
+ await p.execute('read',{file_path:'a.txt'},exec);await p.execute('write',{file_path:'a.txt',content:'next'},exec);
+ const commit=await p.controller.review();await p.controller.commit({planHash:commit.planHash});
+ await p.execute('read',{file_path:'b.txt'},exec);await p.execute('write',{file_path:'b.txt',content:'candidate'},exec);
+ const review=await p.controller.withDocumentView(async(view,documents)=>{escaped=documents;assert.ok(view.entries.some(e=>e.path==='a.txt'));return documents.review('a.txt');});
+ await assert.rejects(escaped.review('a.txt'),code('SEP_MAC_DOCUMENT_SCOPE_CLOSED'));
+ await p.controller.withDocumentView(async(_view,documents)=>{markers=[{id:'delete-1',owner:'project:synthetic',status:'purged',documentPath:'a.txt',planHash:'1'.repeat(64),managedPlanHash:review.planHash}];return documents.delete({marker:markers[0],expectedPlanHash:review.planHash});});
+ assert.equal(p.controller.status().hasPendingPlan,false);assert.equal((await p.controller.plans()).length,0);
+ await assert.rejects(p.execute('write',{file_path:'b.txt',content:'stale'},exec),code('FS_NOT_OBSERVED'));
+ assert.equal((await p.execute('read',{file_path:'a.txt'},exec)).exists,false);
+ await p.controller.restore(1);const restore=await p.controller.review();await p.controller.commit({planHash:restore.planHash});
+ assert.equal((await p.execute('read',{file_path:'a.txt'},exec)).exists,false);assert.equal(await readFile(join(f.source,'a.txt'),'utf8'),'original');
+ for(const kind of ['bindDocumentAuthority','withDocumentView','deleteDocument'])await assert.rejects(p.execute(kind,{},exec),code('SEP_MAC_TOOL_UNAVAILABLE'));
+});
+
+test('document deletion requires independently bound authority and drains its whole trusted callback',async()=>{
+ const f=await fixture(),p=await f.open();let markers=[];await p.controller.bindDocumentAuthority({identity:'independent-p2',read:async()=>markers});
+ const review=await p.controller.withDocumentView((_view,documents)=>documents.review('a.txt'));
+ await assert.rejects(p.controller.withDocumentView((_view,documents)=>documents.delete({marker:{id:'forged',owner:'project:synthetic',status:'purged',documentPath:'a.txt',planHash:'2'.repeat(64)},expectedPlanHash:review.planHash})),code('SEP_PROJECT_DOCUMENT_AUTHORITY_INVALID'));
+ let began,release;const started=new Promise(r=>{began=r;}),hold=new Promise(r=>{release=r;});
+ const active=p.controller.withDocumentView(async(_view,documents,signal)=>{assert.equal(signal.aborted,false);began();await hold;return documents.review('a.txt');});await started;
+ const closing=await p.controller.close();assert.equal(closing.status,'blocked');assert.equal(closing.resourcesConfirmedReleased,false);release();await active;
+ assert.equal((await p.controller.whenClosed()).status,'pass');
+});

@@ -49,9 +49,16 @@ All public operations are serialized, including trusted `withView` callbacks.
 `withView(callback)` supplies `(verifiedView, lifetimeSignal)` and holds the
 Profile's admission until the callback settles. The callback must not call a
 queued method on this same Profile: doing so would wait on itself. It must not
-retain the view for later use. Document authority and document-deletion
-composition are not yet exposed by this service; the lower controller's
-governed deletion APIs remain a separate integration step.
+retain the view for later use. The successor service also exposes trusted
+`bindDocumentAuthority` and `withDocumentView`. The latter passes
+`(verifiedView, documentOperations, lifetimeSignal)`; only its ephemeral
+`review(path)` and `delete({marker, expectedPlanHash})` capabilities can reach
+the managed-copy deletion controller. The capability is revoked at callback
+exit and accepted operations are drained. P2 records its deletion marker and
+purges managed copies within that same callback. A restart with a durable
+marker but unfinished purge must bind/recover authority before asking for a
+new view. Deletion invalidates candidate selections and all observations.
+The model entry does not expose these capabilities; imported source remains.
 
 Closing synchronously refuses new admission, signals cancellation, waits for
 all accepted Profile calls, and then closes the lifecycle facade. Its response
@@ -70,7 +77,7 @@ SEP_MAC_PROFILE_TEST_ROOT=/absolute/path/to/synthetic-output \
 node --test profile/controlled-files.test.mjs
 ```
 
-The 18 tests use actual SQLite, native file operations and the real lifecycle
+The 20 tests use actual SQLite, native file operations and the real lifecycle
 facade. Caller identity is supplied by a test-owned authority map; these are
 service tests, not native Loader/Agent certification. One lifecycle test holds
 the completion boundary of a real verified read to exercise nested deadlines;

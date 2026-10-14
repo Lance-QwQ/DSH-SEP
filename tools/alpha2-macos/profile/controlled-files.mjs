@@ -20,7 +20,7 @@ const safeCode=(e,fallback)=>/^(?:SEP|FS)_[A-Z0-9_]{1,90}$/u.test(e?.code??'')?e
  * Model wiring receives execute only. authorize derives registered agent and
  * session identity from the host, never from the model's JSON arguments. */
 export async function createControlledFileProfile({project,source,authorize,closeDeadlineMs=5000}){
- if(!project||['view','current','plans','planWrite','review','commit','discard','planRestore','recover','close','whenClosed','status'].some(k=>typeof project[k]!=='function')||typeof authorize!=='function'||typeof source!=='string'||!isAbsolute(source)||resolve(source)!==source||!Number.isSafeInteger(closeDeadlineMs)||closeDeadlineMs<1||closeDeadlineMs>30000)fail('SEP_MAC_PROFILE_CONFIG');
+ if(!project||['view','current','plans','planWrite','review','commit','discard','planRestore','recover','bindDocumentAuthority','reviewDocument','deleteDocument','close','whenClosed','status'].some(k=>typeof project[k]!=='function')||typeof authorize!=='function'||typeof source!=='string'||!isAbsolute(source)||resolve(source)!==source||!Number.isSafeInteger(closeDeadlineMs)||closeDeadlineMs<1||closeDeadlineMs>30000)fail('SEP_MAC_PROFILE_CONFIG');
  const initial=await lstat(source,{bigint:true});if(!initial.isDirectory()||initial.isSymbolicLink()||await realpath(source)!==source)fail('SEP_MAC_PROFILE_CONFIG');const sourceIdentity=birth(initial);
  let tail=Promise.resolve(),pending=0,pendingPlan,reviewedPlan,needsSelection=(await project.plans()).length>0,phase='open',closeFlow,closeAttempt,terminal,closedResolve,watchingClose=false;
  const observations=new Map(),lifetime=new AbortController(),closed=new Promise(resolve=>{closedResolve=resolve;});
@@ -115,6 +115,13 @@ export async function createControlledFileProfile({project,source,authorize,clos
   status,close,whenClosed:()=>closed,
   current:()=>serial(()=>project.current()),plans:()=>serial(()=>project.plans()),
   withView:work=>serial(async()=>{selected();if(typeof work!=='function')fail('SEP_MAC_PROFILE_INPUT');return work(await project.view(pendingPlan),lifetime.signal);}),
+  bindDocumentAuthority:authority=>serial(async()=>{const result=await project.bindDocumentAuthority(authority);pendingPlan=undefined;clear();needsSelection=(await project.plans()).length>0;return result;}),
+  withDocumentView:work=>serial(async()=>{
+   selected();if(typeof work!=='function')fail('SEP_MAC_PROFILE_INPUT');const view=await project.view(pendingPlan);let live=true,operations=Promise.resolve();
+   const scoped=operation=>{if(!live)return Promise.reject(Object.assign(Error('SEP_MAC_DOCUMENT_SCOPE_CLOSED'),{code:'SEP_MAC_DOCUMENT_SCOPE_CLOSED'}));const result=operations.then(operation);operations=result.catch(()=>{});return result;};
+   const documents=Object.freeze({review:path=>scoped(()=>project.reviewDocument(filename(path))),delete:input=>scoped(async()=>{clear();const result=await project.deleteDocument(input);pendingPlan=undefined;needsSelection=true;needsSelection=(await project.plans()).length>0;return result;})});
+   try{return await work(view,documents,lifetime.signal);}finally{live=false;await operations;}
+  }),
   resume:input=>serial(async()=>{record(input,['planHash']);if(pendingPlan)fail('SEP_PROJECT_BUSY');if(typeof input.planHash!=='string')fail('SEP_PROJECT_PLAN_INVALID');await project.view(input.planHash);pendingPlan=input.planHash;needsSelection=false;clear();return {status:'pass',planHash:pendingPlan};}),
   review:()=>serial(async()=>{selected();if(!pendingPlan)fail('SEP_PROJECT_PLAN_INVALID');await project.view(pendingPlan);const result=await project.review(pendingPlan);reviewedPlan=pendingPlan;return result;}),
   commit:input=>serial(async()=>{record(input,['planHash']);selected();if(!pendingPlan||input.planHash!==pendingPlan)fail('SEP_PROJECT_STALE_PLAN');if(reviewedPlan!==pendingPlan)fail('SEP_MAC_REVIEW_REQUIRED');const result=await project.commit({planHash:pendingPlan,signal:lifetime.signal});pendingPlan=undefined;clear();needsSelection=(await project.plans()).length>0;return result;}),
