@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "run": 38643383890,
+  "commit": "155f324013fada4caf3ecd15a9631678d4d5c4a7",
+  "assemblySha256": "5aa8ddfc6b72141f494eb50e07cdced61e1fc89080368b9edf922389641f2704",
+  "assemblyBytes": 29900,
+  "inventorySha256": "f1059e9360fd48f84fab79ace0c23e50075b0ec345c4b0c58cac84ec2b3c771d",
+  "artifact": "DSH-SEP-macOS-Alpha2-project-preview.zip",
+  "archiveSha256": "20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107",
+  "archiveBytes": 647532416,
+  "treeSha256": "eadad5720380302d460bea68f77d9cdfdf5dc4f7b7f77dd9cf0d10df3f7713a1",
+  "programSha256": "e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834",
+  "bootstrapSha256": "ff97b34568f4cdf3d380191256b5523f1f27049b7e0c3a9afba16060da9fbc2b",
+  "artifacts": [
+    {
+      "label": "evidence",
+      "id": 11930969115,
+      "bytes": 1243417,
+      "sha256": "55381fb01daa15d544150daab7bf3d0c9a601fda15bb92f334b1221ee4a18a94"
+    },
+    {
+      "label": "part-one",
+      "id": 11931438815,
+      "bytes": 402654409,
+      "sha256": "5f8d48eb6360d03fd41f82d55a97d2f40ca5b6bb0efeb973e5f58140e4d3a11e"
+    },
+    {
+      "label": "part-two",
+      "id": 11930784273,
+      "bytes": 244879446,
+      "sha256": "494295eeab82e2aa126c7ae42e8a5c5b5a55c3f255ab6935e79e89e439d69723"
+    }
+  ]
+}
