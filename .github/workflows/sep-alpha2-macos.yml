@@ -1,54 +1,13 @@
-name: SEP Alpha.2 macOS installer admission and private transport
+name: SEP Alpha.2 macOS fixed installer resource assembly
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-installer-private-transport-red:
+  installer-resource-red:
     runs-on: macos-15
-    timeout-minutes: 12
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: 24.21.0
-      - name: Verify synthetic controller and compile native RED contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/installer-transport"
-          files=(tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs)
-          shasum -a 256 "${files[@]}" > "$RUNNER_TEMP/installer-transport/INPUTS.sha256"
-          node tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs "$RUNNER_TEMP/installer-transport/fixture-preflight" > "$RUNNER_TEMP/installer-transport/fixture-preflight.json" 2> "$RUNNER_TEMP/installer-transport/fixture-preflight.stderr"
-          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m -o "$RUNNER_TEMP/installer-transport/tests" > "$RUNNER_TEMP/installer-transport/compile.log" 2>&1
-      - name: Run fifteen real NSTask contracts against explicit missing implementation
-        shell: bash
-        run: |
-          set +e
-          "$RUNNER_TEMP/installer-transport/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-transport/fixtures" > "$RUNNER_TEMP/installer-transport/RESULT.json" 2> "$RUNNER_TEMP/installer-transport/stderr.log"
-          code=$?
-          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-transport/exit.txt"
-          exit "$code"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: native-installer-private-transport-red-r59
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-transport/*.json
-            ${{ runner.temp }}/installer-transport/*.log
-            ${{ runner.temp }}/installer-transport/*.sha256
-            ${{ runner.temp }}/installer-transport/*.txt
-            ${{ runner.temp }}/installer-transport/*.stderr
-
-  installer-admission-green:
-    runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -56,38 +15,16 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Twenty-nine unchanged fixed NSBundle admission definitions
-        run: node tools/alpha2-macos/installer-ui/admission/run-native.mjs "$RUNNER_TEMP/installer-admission" > "$RUNNER_TEMP/installer-admission.log" 2>&1
+      - name: Twelve signed fixture resource assembly RED definitions
+        run: node tools/alpha2-macos/installer-ui/resources/run-native.mjs "$RUNNER_TEMP/installer-resources" > "$RUNNER_TEMP/installer-resources.log" 2>&1
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-admission-r59
+          name: installer-resources-red-r60
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/installer-admission.log
-            ${{ runner.temp }}/installer-admission/*.json
-            ${{ runner.temp }}/installer-admission/*.tap
-            ${{ runner.temp }}/installer-admission/system.txt
-            ${{ runner.temp }}/installer-admission/cases/**/*.log
-            ${{ runner.temp }}/installer-admission/cases/**/hook.json
-
-  installer-static-closure:
-    runs-on: macos-15
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Nine static source closure definitions
-        run: |
-          mkdir "$RUNNER_TEMP/closure-cases"
-          SEP_INSTALLER_CLOSURE_ROOT="$RUNNER_TEMP/closure-cases" node --test --test-reporter=tap tools/alpha2-macos/installer-ui/runtime-closure.test.mjs > "$RUNNER_TEMP/closure.tap" 2>&1
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: installer-static-closure-r59
-          if-no-files-found: error
-          path: ${{ runner.temp }}/closure.tap
+            ${{ runner.temp }}/installer-resources.log
+            ${{ runner.temp }}/installer-resources/*.json
+            ${{ runner.temp }}/installer-resources/*.tap
+            ${{ runner.temp }}/installer-resources/cases/**/RESOURCES-BUILD.json
+            ${{ runner.temp }}/installer-resources/cases/**/*.log
