@@ -10,6 +10,8 @@
 
 原始 Darwin 进程身份使用 boot UUID 和 ps lstart 秒级出生时间；本阶段不证明高速 PID 复用安全，也不因此直接开放完整受保护 Profile。原生 App Sandbox、受信任提交与恢复、完整 Alpha.2 构建、桌面、Full/Only 安装、TCC、签名公证、在线付费模型仍未验收。
 
+后续独立 App Sandbox 可行性实验先以无沙箱控制证明同 UID 原本可以改写合成原文件，再将测试 App 与 Node 辅助工具按苹果原生 entitlement 规则本地签名，执行三轮。检查原文件对 App／Node／Shell 均不可写，传入的合成数据仍可写入 App 自有容器。该实验不是实际 SEP 生产工作器，不证明 Hardened Runtime、用户选择书签授权或全部第三方插件兼容；不能凭通过就开放完整 Profile。
+
 本地执行示例：
 
 ```sh

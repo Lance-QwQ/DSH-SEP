@@ -46,9 +46,41 @@
       }
     },
     {
+      "path": "sandbox-probe.m",
+      "bytes": 3887,
+      "sha256": "a4416fa217a1d34c309a4df3cb00e7258380484ba79b896be7bbc0d575caf3b5",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "sandbox-entitlements.plist",
+      "bytes": 233,
+      "sha256": "baa050bc06d89900bed3bb4954acdf2f17c4f47e259b1870f889d4a301fbcaf4",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "helper-entitlements.plist",
+      "bytes": 277,
+      "sha256": "89ef4cb8622d50576a600545812c12abc3c5ef29ee7c3e7113f8e79543114d24",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "run-sandbox-prototype.mjs",
+      "bytes": 6167,
+      "sha256": "a178eb330123ba9890eb4d4ed24da521b5744016f25980d8093458a76178f0be",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
       "path": "README.md",
-      "bytes": 1792,
-      "sha256": "612adcc61db9e7defee3e6d0006ccf252b810a83eae49869e37f568b52e209d4",
+      "bytes": 2284,
+      "sha256": "7058db91305f2bd3d089d1754bb9129660e89d5d52add867a2dbda0fb8457df5",
       "origin": {
         "kind": "scope declaration"
       }
