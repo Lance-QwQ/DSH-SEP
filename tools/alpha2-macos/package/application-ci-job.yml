@@ -1,0 +1,70 @@
+native-integrated-application:
+  runs-on: macos-15
+  timeout-minutes: 45
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Restore and verify fixed r33 product input
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/package/restore-app-base.mjs "$RUNNER_TEMP/application-base"
+    - name: Install the integrity-pinned pure JS ASAR tool
+      run: node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/application-asar-tool"
+    - name: Derive and sign fresh fixed-layout app, then verify its archive restore
+      id: assembly
+      run: |
+        node tools/alpha2-macos/package/assemble-application.mjs \
+          "$RUNNER_TEMP/application-base" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
+          "$RUNNER_TEMP/application-asar-tool/node_modules/@electron/asar/lib/asar.js" \
+          "$RUNNER_TEMP/application-build"
+    - name: Two direct launch definitions against the assembled and restored application
+      run: |
+        receipt="$RUNNER_TEMP/application-build/RESULT.json"
+        expected_sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f 1)
+        node tools/alpha2-macos/desktop/product-control/native-launch-runner.mjs \
+          "$receipt" "$expected_sha" "$RUNNER_TEMP/application-native-preflight"
+    - name: Actual LaunchServices lifecycle without Inspector or model requests
+      run: node tools/alpha2-macos/package/exercise-application.mjs "$RUNNER_TEMP/application-build" "$RUNNER_TEMP/application-lifecycle"
+    - name: Preserve exact outcomes and evidence, even when integration fails
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-evidence
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/application-base/RESULT.json
+          ${{ runner.temp }}/application-base/*.log
+          ${{ runner.temp }}/application-asar-tool/RESULT.json
+          ${{ runner.temp }}/application-build/RESULT.json
+          ${{ runner.temp }}/application-build/PACKAGE-INVENTORY.json
+          ${{ runner.temp }}/application-build/*.log
+          ${{ runner.temp }}/application-build/draft/APP-DRAFT.json
+          ${{ runner.temp }}/application-build/draft/*.log
+          ${{ runner.temp }}/application-build/desktop/RESULT.json
+          ${{ runner.temp }}/application-build/desktop/*.log
+          ${{ runner.temp }}/application-build/draft/DSH SEP.app/Contents/Resources/PROGRAM.json
+          ${{ runner.temp }}/application-build/draft/DSH SEP.app/Contents/Resources/BOOTSTRAP.json
+          ${{ runner.temp }}/application-lifecycle/RESULT.json
+          ${{ runner.temp }}/application-lifecycle/*.log
+          ${{ runner.temp }}/application-native-preflight/RESULT.json
+          ${{ runner.temp }}/application-native-preflight/INPUTS.json
+          ${{ runner.temp }}/application-native-preflight/WORKER-RESULT.json
+          ${{ runner.temp }}/application-native-preflight/CASE-*.json
+          ${{ runner.temp }}/application-native-preflight/*.log
+    - name: Keep the exact assembled candidate separate from lifecycle conclusions
+      if: always() && steps.assembly.outcome == 'success'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-candidate
+        compression-level: 0
+        if-no-files-found: error
+        path: ${{ runner.temp }}/application-build/DSH-SEP-macOS-Alpha2-application-preview.zip

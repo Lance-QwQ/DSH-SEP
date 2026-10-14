@@ -94,6 +94,9 @@ static NSDictionary *pVerifyBundle(NSBundle *bundle,NSString *expected,NSString 
   if(ok)ok=fstat(root,&after)==0 && pSame(before,after) && pLocation(root,contents);close(root);if(!ok)return nil;
   return @{@"contents":contents,@"node":[contents stringByAppendingPathComponent:value[@"node"][@"path"]],@"controller":[contents stringByAppendingPathComponent:value[@"controller"][@"path"]],@"programSha256":value[@"program"][@"sha256"]};
 }
+#ifdef SEP_BOOTSTRAP_PRODUCT_CONNECTED
+#include "production-runtime.inc.m"
+#endif
 #endif
 static int pProductionMain(int argc) {
 #ifdef SEP_BOOTSTRAP_MANIFEST_SHA256
@@ -101,8 +104,12 @@ static int pProductionMain(int argc) {
   if(argc!=1)failure=@"SEP_BOOTSTRAP_PRODUCTION_ARGUMENTS";
   else if(!pHash(expected))failure=@"SEP_BOOTSTRAP_MANIFEST_CHANGED";
   else config=pVerifyBundle(NSBundle.mainBundle,expected,&failure);
+#ifdef SEP_BOOTSTRAP_PRODUCT_CONNECTED
+  return pConnectedMain(config,config?nil:failure);
+#else
   NSMutableDictionary *receipt=[@{@"status":@"blocked",@"resourcesConfirmedReleased":@NO,@"code":config?@"SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED":failure?:@"SEP_BOOTSTRAP_RESOURCE_IDENTITY"} mutableCopy];
   if(config)receipt[@"manifestVerified"]=@YES;NSData *data=[NSJSONSerialization dataWithJSONObject:receipt options:0 error:NULL];if(data)fwrite(data.bytes,1,data.length,stdout);fputc('\n',stdout);return 78;
+#endif
 #else
   (void)argc;puts("{\"status\":\"blocked\",\"code\":\"SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED\",\"resourcesConfirmedReleased\":false}");return 78;
 #endif

@@ -1,0 +1,94 @@
+native-product-readiness-candidate:
+  runs-on: macos-15
+  timeout-minutes: 20
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Fixed reviewed carrier and integrity-locked ASAR tooling
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: |
+        node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/product-carrier-download"
+        mkdir "$RUNNER_TEMP/product-carrier"
+        ditto -x -k "$RUNNER_TEMP/product-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/product-carrier"
+        node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/product-asar-tools"
+    - name: Bind actual Mac inputs and reconstruct the frozen workspace and welcome chain
+      run: |
+        node tools/alpha2-macos/desktop/renderer-readiness/prepare-inputs.mjs \
+          "$RUNNER_TEMP/product-carrier/DSH SEP.app" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
+          "$RUNNER_TEMP/product-carrier-download" \
+          "$RUNNER_TEMP/product-workspace-inputs" \
+          "$RUNNER_TEMP/product-asar-tools/node_modules/@electron/asar/lib/asar.js"
+        node tools/alpha2-macos/desktop/renderer-readiness/welcome-prepare-inputs.mjs \
+          "$RUNNER_TEMP/product-workspace-inputs" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
+          "$RUNNER_TEMP/product-welcome-inputs"
+        node tools/alpha2-macos/desktop/renderer-readiness/welcome-build-candidate.mjs \
+          "$RUNNER_TEMP/product-workspace-inputs" \
+          "$RUNNER_TEMP/product-welcome-inputs" \
+          "$RUNNER_TEMP/product-welcome-base"
+    - name: Twenty product adapter and exact application edit contracts
+      env:
+        SEP_PRODUCT_MAIN_INPUT: ${{ runner.temp }}/product-welcome-base/asar/lib/main.js
+        SEP_RENDERER_READINESS_INPUTS: ${{ runner.temp }}/product-workspace-inputs
+        SEP_WELCOME_READINESS_INPUTS: ${{ runner.temp }}/product-welcome-inputs
+        SEP_PRODUCT_CONTROL_INPUTS: ${{ github.workspace }}/tools/alpha2-macos/desktop/product-control
+      run: |
+        node --test --test-reporter=tap \
+          tools/alpha2-macos/desktop/renderer-readiness/product-window-actions.test.mjs \
+          tools/alpha2-macos/desktop/renderer-readiness/product-derive.test.mjs \
+          tools/alpha2-macos/desktop/renderer-readiness/product-activation-composition.test.mjs \
+          tools/alpha2-macos/desktop/renderer-readiness/application-inputs.test.mjs > "$RUNNER_TEMP/product-tests.tap"
+    - name: Construct the product adapter candidate without modifying or launching an app
+      run: |
+        node tools/alpha2-macos/desktop/renderer-readiness/product-build-candidate.mjs \
+          "$RUNNER_TEMP/product-welcome-base/asar/lib/main.js" "$RUNNER_TEMP/product-candidate"
+    - name: Bind small evidence and precise native verification scope
+      if: always()
+      run: |
+        node --input-type=module <<'NODE'
+        import {readFile,writeFile} from 'node:fs/promises';
+        import {join} from 'node:path';
+        import {createHash} from 'node:crypto';
+        import assert from 'node:assert/strict';
+        const temp=process.env.RUNNER_TEMP, sha=b=>createHash('sha256').update(b).digest('hex');
+        const result={schema:1,status:'fail',scope:'twenty native product adapter contracts bound to actual Mac carrier inputs; no app launch',commit:process.env.GITHUB_SHA,inputs:[],notRun:['previous workspace 28 definitions','previous welcome 28 definitions','actual product ASAR assembly and signing','actual React/Electron readiness and physical focus','Finder launch'],productChanged:false};
+        try {
+          assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
+          for(const path of ['product-carrier-download/DOWNLOAD-RECEIPT.json','product-asar-tools/RESULT.json','product-workspace-inputs/INPUTS.json','product-welcome-inputs/INPUTS.json','product-welcome-base/CANDIDATE.json','product-candidate/CANDIDATE.json']) {
+            const bytes=await readFile(join(temp,path)), value=JSON.parse(bytes);
+            assert.equal(value.status,'pass');result.inputs.push({path,bytes:bytes.length,sha256:sha(bytes)});
+          }
+          const log=await readFile(join(temp,'product-tests.tap')), text=log.toString();
+          for(const [key,value] of Object.entries({tests:20,pass:20,fail:0,skipped:0,cancelled:0})) assert.match(text,new RegExp('^# '+key+' '+value+'\\r?$','m'));
+          result.tests={definitions:20,pass:20,fail:0,skipped:0,logSha256:sha(log)};
+          const job=await readFile(join(process.env.GITHUB_WORKSPACE,'tools/alpha2-macos/desktop/renderer-readiness/product-ci-job.yml'));
+          result.jobSha256=sha(job);result.status='pass';
+        } catch(error) {result.code='SEP_PRODUCT_NATIVE_EVIDENCE_INCOMPLETE';result.errorType=error.name;process.exitCode=1;}
+        await writeFile(join(temp,'PRODUCT-RESULT.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx',mode:0o600});
+        console.log(JSON.stringify({status:result.status,tests:result.tests,code:result.code}));
+        NODE
+    - name: Preserve small exact-source evidence
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-product-readiness-candidate
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/PRODUCT-RESULT.json
+          ${{ runner.temp }}/product-tests.tap
+          ${{ runner.temp }}/product-candidate/
+          ${{ runner.temp }}/product-workspace-inputs/INPUTS.json
+          ${{ runner.temp }}/product-workspace-inputs/signature.log
+          ${{ runner.temp }}/product-welcome-inputs/INPUTS.json
+          ${{ runner.temp }}/product-welcome-base/CANDIDATE.json
+          ${{ runner.temp }}/product-carrier-download/DOWNLOAD-RECEIPT.json
+          ${{ runner.temp }}/product-asar-tools/RESULT.json

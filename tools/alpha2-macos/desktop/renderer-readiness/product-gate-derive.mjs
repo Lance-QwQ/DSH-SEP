@@ -1,0 +1,5 @@
+import {createHash} from 'node:crypto';const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+export function deriveProductWelcomeGate(bytes){
+ if(sha(bytes)!=='7c89c6427908ebe7103f6e814c861f28fddc45b903334a0d411433309c555730')throw Error('SEP_PRODUCT_WELCOME_GATE_ORIGIN');
+ const from=' return Object.freeze({begin,accept,bridgeFailed,fail,navigation,waitForReady,windowShown,snapshot});',to=' // Activation may restore a hidden window only while its previously published\n // document remains current. This is not a visible UI-ready acknowledgement.\n function canActivate(){return !!(!fault&&published&&loaded&&document?.committed&&current());}\n return Object.freeze({begin,accept,bridgeFailed,fail,navigation,waitForReady,windowShown,snapshot,canActivate});',source=bytes.toString();if(source.split(from).length!==2)throw Error('SEP_PRODUCT_WELCOME_GATE_ANCHOR');const result=Buffer.from(source.replace(from,to));return{bytes:result,origin:{schema:1,kind:'product-welcome-gate',sourceSha256:sha(bytes),resultSha256:sha(result),changes:[{from,to,count:1,label:'separate hidden current document proof from visible readiness'}]}};
+}

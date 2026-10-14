@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "files": [
+    "bootstrap/controller.mjs",
+    "desktop/product-control/controller-bridge.mjs",
+    "desktop/product-control/controller-paths.mjs",
+    "desktop/product-control/launch-control.mjs",
+    "desktop/product-control/owned-observer.mjs",
+    "desktop/product-control/transport.cjs"
+  ]
+}

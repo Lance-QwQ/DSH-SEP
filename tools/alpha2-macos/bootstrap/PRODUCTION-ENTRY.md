@@ -1,12 +1,14 @@
 # Fixed production bootstrap admission
 
-Status: native implementation awaiting GREEN verification. Eight portable
+Status: native manifest admission verified; real controller connection pending. Eight portable
 manifest shape tests have a recorded RED/GREEN cycle. Native r37 ran all thirteen
 bundle-admission definitions against the previous entry: every binary compiled,
 and all thirteen failed for the expected missing validation (not an environment
-error). The new native reader is now implemented; the real controller remains
-unconnected. These are identity fixtures and never execute their placeholder
-Node file.
+error). In r38 the new reader exposed a compile-time collision between its
+private `pPath` name and an Apple SDK enum; this was renamed without relaxing
+tests. Native r39 (`38566612537` / `115860788495`) then passed all thirteen
+definitions with zero skips. These are identity fixtures and never execute their
+placeholder Node file. Actual controller connection and Finder remain separate.
 
 ## Fixed layout
 
@@ -77,3 +79,55 @@ Finder readiness or application lifecycle. Existing same-user code capable of
 modifying the installed program remains outside the trusted program boundary;
 hashing a file before a path-based spawn is not an atomic executable lease.
 Production integration must preserve the controlled loader's own hash checks.
+
+## Connected candidate after r40 RED
+
+The separate `SEP_BOOTSTRAP_PRODUCT_CONNECTED=1` build now has a candidate
+implementation in `production-runtime.inc.m`. Native GREEN has not yet been
+run. The thirteen admission contracts retain their unconnected compile mode.
+Native r40 (`38568832436` / `115868359955`) compiled all six connected tests;
+each failed at the expected missing-feature `PRODUCTION_NOT_CONNECTED` receipt,
+with zero skips. The exact original logs and artifact `11895769139` are retained.
+
+The connected candidate uses the fixed verified Node/controller pair, a private
+inherited FD 3, a fresh nonce, and actual PROGRAM digest. No argv or environment
+value can select a different runtime or state root. It derives the account home
+from the operating-system account record. Startup and requested shutdown each
+have a 60-second deadline. Ordinary running has no total lifetime deadline.
+The six synthetic-controller contracts use separately compiled 1800 ms phase
+deadlines; this is not a production setting or an environment override.
+
+After a real `ready` frame the native parent requests activation; it records
+`activated` only after the matching controller acknowledgment. Reopen targets
+the same generation. User cancellation returns to running. Normal window close
+does not imply host termination. A timeout or unknown cleanup keeps the native
+owner and channel alive and displays a nonmodal diagnostic; it never kills the
+controller or takes over an old generation. A poisoned channel cannot provide
+later cleanup proof. A non-poisoned late `closed` receipt can establish resource
+release only together with actual EOF and the exact child's normal exit.
+
+Resource release and successful operation are separate outcomes. A startup
+failure followed by verified cleanup and child exit 1 records `closed`,
+`resourcesConfirmedReleased:true`, `desktopReady:false`, and `outcome:failed`.
+The native diagnostic stays until acknowledged or normally quit; it then exits
+nonzero. A prior deadline remains a failed outcome even when late cleanup is
+confirmed. Successful ready/quitting/closed and child exit 0 exits normally.
+
+Structured native diagnostic lines carry an observation-only `sessionId`,
+sequence, child/parent PID, actual program hash, generation, phase, readiness,
+release flag and classified code. They never contain the channel nonce. The
+fixed `launcher/bootstrap-ui.json` receipt is published only after `owned`,
+under the user's private state root, as an atomic mode-0600 file. It rejects
+aliases, hardlinks, foreign owners and nonprivate directories. A separate
+nonblocking file lock plus session/generation compare-and-swap prevents an old
+session's late event from replacing a new owner's observation. This file is
+never an authorization, lease, or recovery credential. Diagnostic write failure
+cannot change the true cleanup outcome. It may leave the observation stale.
+
+`run-connected-native.mjs <fresh output>` executes six actual AppKit adapter
+contracts with a captured synthetic controller and the real normal-termination
+observer. It does not certify the actual product broker. Root package tests
+separately use LaunchServices, the same non-test application bytes, actual
+managed renderer readiness, exact bundle/PID/birth checks, and normal exit.
+Physical Finder input, Developer ID, notarization and arbitrary descendant
+ownership remain outside these adapter contracts.
