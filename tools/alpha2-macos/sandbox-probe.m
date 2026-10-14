@@ -35,7 +35,7 @@ int main(int argc, const char *argv[]) {
         NSString *shell = @"printf shell-work > \"$1\" || exit 3; if printf shell-escape > \"$2\"; then printf source-write-allowed; else printf source-write-denied; fi";
         NSDictionary *shellResult = child(@"/bin/sh", @[@"-c",shell,@"sep-probe",[work stringByAppendingPathComponent:@"shell-work.txt"],original]);
         NSDictionary *result = @{ @"schema": @1, @"uid": @(getuid()), @"home": home, @"work": work,
-            @"sourceWriteDenied": @(fd < 0 && (denied == EPERM || denied == EACCES)), @"errno": @(denied),
+            @"sourceWriteDenied": (fd < 0 && (denied == EPERM || denied == EACCES)) ? @YES : @NO, @"errno": @(denied),
             @"node": nodeResult, @"shell": shellResult, @"copyBytes": @(copy.length) };
         NSData *json = [NSJSONSerialization dataWithJSONObject:result options:0 error:&error];
         if (!json) return 67; [[NSFileHandle fileHandleWithStandardOutput] writeData:json];

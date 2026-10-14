@@ -47,8 +47,8 @@
     },
     {
       "path": "sandbox-probe.m",
-      "bytes": 3887,
-      "sha256": "a4416fa217a1d34c309a4df3cb00e7258380484ba79b896be7bbc0d575caf3b5",
+      "bytes": 3899,
+      "sha256": "2921867da5fd14afc972ad8c0a0e1aba3f975e21186aa951b953f0a1ab3f623e",
       "origin": {
         "kind": "native App Sandbox synthetic feasibility test; not production worker"
       }
