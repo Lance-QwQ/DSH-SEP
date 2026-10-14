@@ -1,6 +1,6 @@
-# Private installer transport: native RED candidate
+# Private installer transport
 
-This directory currently contains an explicit non-launching implementation stub. The fifteen fixed behavior definitions must fail on macOS before implementation. The local synthetic-controller preflight only validates test input generation; it is not evidence that NSTask or this transport works.
+r59 compiled the explicit non-launching stub and confirmed all fifteen fixed behavior definitions failed for missing implementation. The implementation candidate now replaces only that stub; native GREEN is pending. `FREEZE-RED.json` and `FREEZE-RED-R2.json` preserve the original and corrected test inputs; `FREEZE-CANDIDATE.json` identifies the implementation. Local synthetic-controller preflight validates test input generation only, not NSTask.
 
 The production interface is internal `SEPInstallerPipeTransport`, initialized with the result of `SEPInstallerVerifyMainBundle` and the compiled manifest hash. The admitted `node` and `controller` values are records `{path, sha256}`. There is no public executable-path argument, environment configuration, HTTP or model entry. The native test binary has a test-only command line for its Node executable and synthetic controller.
 
@@ -19,4 +19,4 @@ clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa InstallerPipeTransport.
 "$RUNNER_TEMP/tests" "$(command -v node)" "$PWD/controller-fixture.mjs" "$RUNNER_TEMP/fresh-fixtures"
 ```
 
-`ci-job.yml` binds all six implementation/test inputs, runs the fixture preflight, compiles actual Cocoa, and preserves the unmodified RED result, compile log and exit code. The stub must not be connected to the production installer.
+`ci-job.yml` records the historical RED workflow; `green-ci-job.yml` runs the unchanged definitions against the candidate. Both bind all six implementation/test inputs, run the fixture preflight, compile actual Cocoa, and preserve raw results, compile log and exit code. Production composition is a separate stage.

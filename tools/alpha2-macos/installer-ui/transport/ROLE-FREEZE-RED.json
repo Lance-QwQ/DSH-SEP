@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "stage": "additional role replacement RED, before hardening",
+  "definitions": 6,
+  "implementationSha256": "779c8484aa7fba00dc2de0e1d9f81067f227a96e638a70ecc7a1caa8e7656ad3",
+  "inputs": [
+    {
+      "path": "InstallerRoleTests.m",
+      "bytes": 4315,
+      "sha256": "e595b66a82b07d18135871c98b4db7490deac4ac41a6fc22ad01add466186ce4"
+    },
+    {
+      "path": "role-regressions.mjs",
+      "bytes": 2382,
+      "sha256": "2eabe68413c90c8e7ce721538792fe08026703c98835a0d88bb756b31623ef4c"
+    },
+    {
+      "path": "role-red-ci-job.yml",
+      "bytes": 2374,
+      "sha256": "8c122ca5dc9bcabcf574f282209613f8fd5d6ba5bd1510fbbb935c4577c5b99d"
+    }
+  ],
+  "original15Unchanged": true,
+  "scope": "separate actual Mac test binary; synthetic Node controller; FIFO deadline kills only the exact test child and is not production cleanup",
+  "notVerified": [
+    "actual native RED",
+    "role revalidation hardening",
+    "production installer"
+  ]
+}

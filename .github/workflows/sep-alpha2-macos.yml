@@ -1,82 +1,88 @@
-name: SEP Alpha.2 macOS current project application build
+name: SEP Alpha.2 macOS private transport implementation
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  project-application-build:
+  native-installer-private-transport:
     runs-on: macos-15
-    timeout-minutes: 40
+    timeout-minutes: 12
     permissions:
       contents: read
-      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: '24.21.0'
-      - name: Restore the exact r44 application without modifying it
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/project-base"
-      - name: Prepare integrity pinned pure JS ASAR tool
-        run: node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/project-asar-tool"
-      - name: Derive contract inputs from the actual fixed ASAR
+          node-version: 24.21.0
+      - name: Verify synthetic controller and compile unchanged native contracts
+        shell: bash
         run: |
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';import{pathToFileURL}from'node:url';
-          const root=process.env.RUNNER_TEMP,tool=await import(pathToFileURL(root+'/project-asar-tool/node_modules/@electron/asar/lib/asar.js'));
-          const archive=root+'/project-base/restored/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar',out=root+'/project-baseline';fs.mkdirSync(out,{mode:0o700});
-          for(const[name,path]of [['main.js','lib/main.js'],['preload.cjs','lib/preload-app.cjs']])fs.writeFileSync(out+'/'+name,tool.extractFile(archive,path,false),{flag:'wx'});
-          NODE
-      - name: Sixteen current project source and owned child contracts
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/installer-transport"
+          files=(tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs)
+          shasum -a 256 "${files[@]}" > "$RUNNER_TEMP/installer-transport/INPUTS.sha256"
+          node tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs "$RUNNER_TEMP/installer-transport/fixture-preflight" > "$RUNNER_TEMP/installer-transport/fixture-preflight.json" 2> "$RUNNER_TEMP/installer-transport/fixture-preflight.stderr"
+          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m -o "$RUNNER_TEMP/installer-transport/tests" > "$RUNNER_TEMP/installer-transport/compile.log" 2>&1
+      - name: Run fifteen unchanged real NSTask contracts against candidate implementation
+        shell: bash
         run: |
-          SEP_PROJECT_PRODUCT_BASELINE="$RUNNER_TEMP/project-baseline" node --experimental-vm-modules --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/relay.test.mjs tools/alpha2-macos/desktop/project-workflow-product/asar.test.mjs tools/alpha2-macos/desktop/project-workflow-product/owner.test.mjs tools/alpha2-macos/desktop/project-workflow-product/endpoint.test.mjs tools/alpha2-macos/desktop/project-workflow-product/overlay.test.mjs tools/alpha2-macos/desktop/project-workflow-product/client.test.mjs tools/alpha2-macos/desktop/project-workflow-product/origin.test.mjs > "$RUNNER_TEMP/project-contracts.tap" 2>&1
-          node --input-type=module <<'NODE'
-          import fs from'node:fs';import assert from'node:assert/strict';const text=fs.readFileSync(process.env.RUNNER_TEMP+'/project-contracts.tap','utf8');for(const[k,n]of Object.entries({tests:16,pass:16,fail:0,cancelled:0,skipped:0}))assert.match(text,new RegExp('^# '+k+' '+n+'$','m'));
-          NODE
-      - name: Assemble and sign a fresh application then verify archive restoration
-        id: assembly
-        run: node tools/alpha2-macos/package/assemble-project-application.mjs "$RUNNER_TEMP/project-base" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/project-asar-tool/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/project-build"
-      - name: Save build evidence even if a stage fails
+          set +e
+          "$RUNNER_TEMP/installer-transport/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-transport/fixtures" > "$RUNNER_TEMP/installer-transport/RESULT.json" 2> "$RUNNER_TEMP/installer-transport/stderr.log"
+          code=$?
+          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-transport/exit.txt"
+          exit "$code"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: project-application-r61-evidence
+          name: native-installer-private-transport
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/project-base/RESULT.json
-            ${{ runner.temp }}/project-base/*.log
-            ${{ runner.temp }}/project-asar-tool/RESULT.json
-            ${{ runner.temp }}/project-contracts.tap
-            ${{ runner.temp }}/project-build/RESULT.json
-            ${{ runner.temp }}/project-build/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/project-build/*.log
-            ${{ runner.temp }}/project-build/desktop/RESULT.json
-            ${{ runner.temp }}/project-build/desktop/*.log
-            ${{ runner.temp }}/project-build/draft/PROJECT-DRAFT.json
-            ${{ runner.temp }}/project-build/draft/DSH SEP.app/Contents/Resources/PROGRAM.json
-            ${{ runner.temp }}/project-build/draft/DSH SEP.app/Contents/Resources/BOOTSTRAP.json
-      - name: Split final archive into bounded immutable transport parts
-        if: always() && steps.assembly.outcome == 'success'
-        id: transport
-        run: node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/project-build" "$RUNNER_TEMP/project-transport"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always() && steps.transport.outcome == 'success'
+            ${{ runner.temp }}/installer-transport/*.json
+            ${{ runner.temp }}/installer-transport/*.log
+            ${{ runner.temp }}/installer-transport/*.sha256
+            ${{ runner.temp }}/installer-transport/*.txt
+            ${{ runner.temp }}/installer-transport/*.stderr
+
+  native-installer-role-red:
+    runs-on: macos-15
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          name: project-application-r61-part-one
-          compression-level: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.21.0
+      - name: Compile additional role replacement definitions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/installer-role-red"
+          shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/role-regressions.mjs > "$RUNNER_TEMP/installer-role-red/INPUTS.sha256"
+          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m -o "$RUNNER_TEMP/installer-role-red/tests" > "$RUNNER_TEMP/installer-role-red/compile.log" 2>&1
+      - name: Run exact test-child role replacement probes
+        shell: bash
+        run: |
+          set +e
+          node tools/alpha2-macos/installer-ui/transport/role-regressions.mjs "$RUNNER_TEMP/installer-role-red/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-role-red/results" > "$RUNNER_TEMP/installer-role-red/RESULT.json" 2> "$RUNNER_TEMP/installer-role-red/stderr.log"
+          code=$?
+          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-role-red/exit.txt"
+          exit "$code"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: native-installer-role-red
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/project-transport/transport-manifest.json
-            ${{ runner.temp }}/project-transport/*.0001.part
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always() && steps.transport.outcome == 'success'
-        with:
-          name: project-application-r61-part-two
-          compression-level: 0
-          if-no-files-found: error
-          path: ${{ runner.temp }}/project-transport/*.0002.part
+            ${{ runner.temp }}/installer-role-red/*.json
+            ${{ runner.temp }}/installer-role-red/*.log
+            ${{ runner.temp }}/installer-role-red/*.sha256
+            ${{ runner.temp }}/installer-role-red/*.txt
+            ${{ runner.temp }}/installer-role-red/results/*.stdout
+            ${{ runner.temp }}/installer-role-red/results/*.stderr
+
