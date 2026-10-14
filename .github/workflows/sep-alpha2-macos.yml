@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: native-installer-private-transport-red
+          name: native-installer-private-transport-red-r59
           if-no-files-found: error
           path: |
             ${{ runner.temp }}/installer-transport/*.json
@@ -61,7 +61,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-admission-r58
+          name: installer-admission-r59
           if-no-files-found: error
           path: |
             ${{ runner.temp }}/installer-admission.log
@@ -70,3 +70,24 @@ jobs:
             ${{ runner.temp }}/installer-admission/system.txt
             ${{ runner.temp }}/installer-admission/cases/**/*.log
             ${{ runner.temp }}/installer-admission/cases/**/hook.json
+
+  installer-static-closure:
+    runs-on: macos-15
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Nine static source closure definitions
+        run: |
+          mkdir "$RUNNER_TEMP/closure-cases"
+          SEP_INSTALLER_CLOSURE_ROOT="$RUNNER_TEMP/closure-cases" node --test --test-reporter=tap tools/alpha2-macos/installer-ui/runtime-closure.test.mjs > "$RUNNER_TEMP/closure.tap" 2>&1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: installer-static-closure-r59
+          if-no-files-found: error
+          path: ${{ runner.temp }}/closure.tap

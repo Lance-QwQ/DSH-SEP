@@ -27,7 +27,7 @@ int main(int argc,char **argv) {
 #ifdef SEP_INSTALLER_ADMISSION_REPORT
     receipt=config?@{@"status":@"pass",@"manifestVerified":@YES,@"config":config}:@{@"status":@"blocked",@"code":failure?:@"SEP_INSTALLER_ADMISSION_RESOURCE_IDENTITY"};
 #else
-    receipt=@{@"status":@"blocked",@"manifestVerified":@(config!=nil),@"code":config?@"SEP_INSTALLER_UI_NOT_CONNECTED":failure?:@"SEP_INSTALLER_ADMISSION_RESOURCE_IDENTITY"};
+    receipt=@{@"status":@"blocked",@"manifestVerified":(config?@YES:@NO),@"code":config?@"SEP_INSTALLER_UI_NOT_CONNECTED":failure?:@"SEP_INSTALLER_ADMISSION_RESOURCE_IDENTITY"};
 #endif
     NSData *data=[NSJSONSerialization dataWithJSONObject:receipt options:0 error:NULL];
     if(!data)return 71;fwrite(data.bytes,1,data.length,stdout);fputc('\n',stdout);

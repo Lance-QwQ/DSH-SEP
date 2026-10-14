@@ -26,7 +26,10 @@ process.stdin.on('data',async chunk=>{
   // Exact fixture descendant retains only stdout for 350ms. Parent exit is
   // intentionally earlier than pipe EOF; it owns no installer state.
   const holder=spawn(process.execPath,['-e','setTimeout(()=>process.exit(0),350)'],{stdio:['ignore',process.stdout,'ignore'],env:{PATH:'/usr/bin:/bin'}});holder.unref();
-  finish(frame(closed(q)));return;
+  // Do not call stdout.end(): its stream shutdown can itself produce EOF even
+  // while the inherited descriptor remains open in the holder. Terminate only
+  // this synthetic parent after its frame has flushed, leaving holder fd alive.
+  process.stdin.destroy();process.stdout.write(frame(closed(q)),()=>{clearTimeout(deadline);process.exit(0);});return;
  }
  if(mode==='race'){finish(frame(closed(q)));return;}
  if(mode==='wrong-nonce'){finish(frame({...preview(q),nonce:'d'.repeat(64)}));return;}
