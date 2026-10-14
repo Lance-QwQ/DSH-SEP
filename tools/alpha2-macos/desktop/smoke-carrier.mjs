@@ -19,7 +19,7 @@ async function connect(url){
  ws.addEventListener('message',event=>{const m=JSON.parse(event.data),p=pending.get(m.id);if(!p)return;pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error('INSPECTOR_RPC_FAILED')):p.resolve(m.result);});
  ws.addEventListener('close',()=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('INSPECTOR_CLOSED'));}pending.clear();});
  const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq,timer=setTimeout(()=>{pending.delete(id);reject(Error('INSPECTOR_RPC_DEADLINE'));},15000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}));});
- return {call,close:()=>ws.close(),eval:async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Error('INSPECTOR_EVALUATION_FAILED');return r.result?.value;}};
+ return {call,close:()=>ws.close(),eval:async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Object.assign(Error('INSPECTOR_EVALUATION_FAILED'),{diagnostic:{text:r.exceptionDetails.text,type:r.exceptionDetails.exception?.className,description:String(r.exceptionDetails.exception?.description??'').slice(0,2048)}});return r.result?.value;}};
 }
 function instrumentation(appPath,receipt){return `(()=>{
  const Module=process.getBuiltinModule('module'),require=Module.createRequire(${JSON.stringify(join(appPath,'Contents/Resources/app.asar/package.json'))});
@@ -43,7 +43,7 @@ for(let index=1;index<=3;index++){
   child.once('exit',(code,signal)=>{exit={code,signal};});
   for(const [name,stream]of [['stdout',child.stdout],['stderr',child.stderr]]){const log=createWriteStream(join(data,name+'.log'),{flags:'wx'});logs.push({log,done:finished(log).then(()=>true,()=>false)});stream.pipe(log);stream.on('data',b=>{endpoint??=b.toString().match(/Debugger listening on (ws:\/\/127\.0\.0\.1:\d+\/[a-z0-9-]+)/i)?.[1];});}
   await wait(()=>{if(exit)throw Error('DESKTOP_EARLY_EXIT');return endpoint;},30000,'INSPECTOR_NOT_STARTED');
-  client=await connect(endpoint);await client.call('Runtime.enable');assert.equal(await client.eval(instrumentation(app,receipt)),true);await client.call('Runtime.runIfWaitingForDebugger');
+  client=await connect(endpoint);await client.call('Runtime.enable');round.stage='attach-instrumentation';assert.equal(await client.eval(instrumentation(app,receipt)),true);await client.call('Runtime.runIfWaitingForDebugger');round.stage='desktop-ready';
   await wait(async()=>{if(exit)throw Error('DESKTOP_EARLY_EXIT');const state=await client.eval(snapshot);return state.ready&&state.windows.some(w=>w.visible&&!w.loading);},120000,'DESKTOP_NOT_READY');
   let state=await client.eval(snapshot);assert.equal(state.name,'DSH SEP');assert.equal(state.version,'0.2.1-alpha.2');assert.equal(state.userData,join(data,'electron'));assert.equal(state.home,join(data,'home'));round.identity='pass';
   // Use the native welcome API without storing a fake credential.
@@ -58,7 +58,7 @@ for(let index=1;index<=3;index++){
   await client.eval(`setImmediate(()=>__sepCarrierProbe.electron.app.quit());true`);client.close();client=undefined;
   await wait(()=>exit,45000,'DESKTOP_QUIT_DEADLINE');assert.deepEqual(exit,{code:0,signal:null});
   const final=JSON.parse(await readFile(receipt,'utf8'));assert.equal(final.code,0);assert.equal(final.uncaught,0);assert(final.hosts.length>0);assert(final.hosts.every(h=>h.shutdownComplete&&h.exit?.code===0&&h.exit?.signal===null));round.gracefulHostAcknowledged=true;round.status='pass';
- }catch(e){round.code=/^[A-Z_]+$/.test(e.message)?e.message:'DESKTOP_SMOKE_ASSERTION';round.errorType=e.name;process.exitCode=1;}
+ }catch(e){round.code=/^[A-Z_]+$/.test(e.message)?e.message:'DESKTOP_SMOKE_ASSERTION';round.errorType=e.name;if(e.diagnostic)await writeFile(join(data,'probe-failure.json'),JSON.stringify(e.diagnostic,null,2)+'\n');process.exitCode=1;}
  finally{client?.close();if(child&&!exit){cleanup.push({round:index,path:'test-owned-process-group-SIGKILL',pid:child.pid});try{process.kill(-child.pid,'SIGKILL');}catch{}await wait(()=>exit,10000,'TEST_CLEANUP_UNCONFIRMED').catch(()=>cleanup.push({round:index,status:'blocked'}));}
   const logDone=await Promise.race([Promise.all(logs.map(x=>x.done)),delay(5000).then(()=>undefined)]);if(!logDone?.every(Boolean)){cleanup.push({round:index,path:'test-log-drain',status:'blocked'});for(const x of logs)x.log.destroy();}
   round.exit=exit;rounds.push(round);await writeFile(join(out,'RESULT.json'),JSON.stringify({schema:1,status:rounds.every(r=>r.status==='pass')&&cleanup.length===0?'pass':'fail',scope:'actual native carrier and official Host in synthetic roots',rounds,cleanup,instrumentation:'Inspector records actual child process IPC without replacing results; direct BrowserWindow close and app activate/quit callbacks',notVerified:['full SEP protected Profile','real Dock mouse click','TCC permissions','Developer ID signing/notarization','public installer','paid models']},null,2)+'\n');
