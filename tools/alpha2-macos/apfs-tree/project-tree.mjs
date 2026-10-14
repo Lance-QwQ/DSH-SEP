@@ -82,6 +82,7 @@ export function createProjectTree({helperPath,helperSha256,lockPath,timeoutMs=30
   const body=remove?Buffer.alloc(0):Buffer.from(text);if(body.length>LIMITS.file)fail('SEP_PROJECT_LIMIT');
   const before=await capture(root),entry=before.public.entries.find(x=>x.path===path);
   if(expectedSha256==='absent'?entry||remove:!entry||entry.kind!=='file'||entry.sha256!==expectedSha256)fail('SEP_PROJECT_STALE_FILE');
+  if(!remove&&(before.public.bytes-(entry?.size??0)+body.length>LIMITS.bytes||before.public.entries.length+(entry?0:1)>LIMITS.entries))fail('SEP_PROJECT_LIMIT');
   const version=entry?before.observed.get(path):'absent',child=await session(['apply',root,path,version,remove?'delete':'write'],4096);
   try{child.send(remove?'':body.toString('hex')+'\n',true);const row=await child.next();if(row.phase!=='committed')fail('SEP_PROJECT_NATIVE_PROTOCOL');await child.finish();return {status:'committed'};}catch(e){await child.abort();throw e;}
  }

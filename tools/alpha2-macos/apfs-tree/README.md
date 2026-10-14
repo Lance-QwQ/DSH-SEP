@@ -18,6 +18,6 @@ Run on a real macOS arm64 machine:
 node run-tests.mjs /absolute/canonical/fresh/output
 ```
 
-The runner builds the native binary with `xcrun clang` and runs 30 native plus 7 adapter tests for three rounds, retaining all logs. Non-Mac execution returns `not_run`/78 before creating output.
+The runner builds the native binary with `xcrun clang` and runs 30 native plus 9 adapter tests for three rounds, retaining all logs. Non-Mac execution returns `not_run`/78 before creating output.
 
 For separately labelled POSIX development tests on Linux ext4, compile `cc -std=c11 -DSEP_POSIX_TEST -Wall -Wextra -Werror native-tree.c -o native-tree-posix`, then run `python3 test-native.py /absolute/native-tree-posix /absolute/fresh-test-root`; use `SEP_APFS_HELPER` and `SEP_APFS_TEST_ROOT` for `node --test project-tree.test.mjs`. The explicit test build has no production APFS claim and must not be shipped as the Mac binary.

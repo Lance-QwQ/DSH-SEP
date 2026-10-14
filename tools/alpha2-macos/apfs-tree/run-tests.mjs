@@ -22,6 +22,6 @@ try{
   await run('native-'+round,'/usr/bin/python3',[join(source,'test-native.py'),helper,join(root,'native-'+round)]);
   await run('wrapper-'+round,process.execPath,['--test',join(source,'project-tree.test.mjs')],{SEP_APFS_TEST_ROOT:join(root,'wrapper-'+round),SEP_APFS_HELPER:helper});
  }
- result.status='pass';result.counts={nativePerRound:30,wrapperPerRound:7,rounds:3};
+ result.status='pass';result.counts={nativePerRound:30,wrapperPerRound:9,rounds:3};
 }catch(e){result.code=/^[A-Za-z0-9_-]+$/u.test(e.message)?e.message:'FAILED';process.exitCode=1;}
 await writeFile(join(root,'RESULT.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx',mode:0o600});console.log(JSON.stringify(result));

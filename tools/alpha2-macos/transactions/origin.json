@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "scope": "trusted-file-transactions-only; no arbitrary Shell",
+  "platformVerification": "native APFS evidence required separately",
+  "derivations": [
+    {
+      "sourcePath": "tools/alpha2-portable/managed-project.mjs",
+      "sourceCommit": "930d081b1f7deb647948915432074f532eca2b62",
+      "sourceSha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "resultPath": "transaction-store.mjs",
+      "resultSha256": "eb83c64ce4de3eb2aaf1f27c683fc6525fee7d21dfe487096c4f7f659e0b3924",
+      "changes": [
+        {
+          "before": "// Experimental Linux controller; imported source is never overwritten. All\n// untrusted commands must go through this controller's namespace carrier.",
+          "after": "// Trusted file-operation controller derived from the fixed Linux transaction\n// state machine. No arbitrary command or untrusted subprocess is dispatched."
+        },
+        {
+          "before": "import {constants} from 'node:fs';\n",
+          "after": ""
+        },
+        {
+          "before": "import {open,mkdir,lstat,realpath,rm,readdir} from 'node:fs/promises';",
+          "after": "import {open,mkdir,lstat,realpath,rmdir} from 'node:fs/promises';"
+        },
+        {
+          "before": "import {join,relative,isAbsolute} from 'node:path';",
+          "after": "import {join,relative,isAbsolute,dirname} from 'node:path';"
+        },
+        {
+          "before": "import {randomUUID} from 'node:crypto';\nimport {runIsolated} from './linux-isolation.mjs';\nimport {directory,tree,hash,fail,syncDirectory} from './project-tree.mjs';\nimport {inspectSandbox} from './linux-process-owner.mjs';",
+          "after": "import {randomUUID,createHash} from 'node:crypto';\nconst hash=value=>createHash('sha256').update(value).digest('hex');\nconst fail=code=>{throw Object.assign(Error(code),{code});};"
+        },
+        {
+          "before": "export async function openManagedProject({root,source,isolation,onEvent=()=>{}}){\n if(process.platform!=='linux'||process.arch!=='x64')fail('SEP_PROJECT_UNAVAILABLE');\n if(!isolation||typeof onEvent!=='function')fail('SEP_PROJECT_CONFIG');",
+          "after": "export async function openTrustedProject({root,source,io,onEvent=()=>{}}){\n if(!io||io.lockPath!==join(root,'.native.lock')||['tree','directory','syncDirectory','applyFile'].some(k=>typeof io[k]!=='function')||typeof onEvent!=='function')fail('SEP_PROJECT_CONFIG');\n const {syncDirectory,applyFile}=io;\n // Preserve exact absence classification required by crash cleanup. Existing\n // paths still undergo the native no-follow verification; PATH is never\n // treated as ENOENT.\n const tree=async(path,options)=>{await lstat(path);return io.tree(path,options);};\n const directory=async(path,privateRoot)=>{await lstat(path);return io.directory(path,privateRoot);};\n // Native operations from a dead controller may still hold this lock. Its\n // kernel release, not the controller PID disappearing, gates recovery.\n await syncDirectory(root);\n const eraseTree=async path=>{\n  if(!inside(root,path)||path===root)fail('SEP_PROJECT_PATH');\n  let captured;try{captured=await tree(path);}catch(e){if(e.code==='ENOENT')return;throw e;}\n  for(const item of captured.entries)if(item.kind==='file')await applyFile(path,{path:item.path,expectedSha256:item.sha256,delete:true});\n  // No recursive rm. Native no-follow operations remove bodies; rmdir removes\n  // only now-empty directory skeletons and never traverses a symlink.\n  const directories=captured.entries.filter(x=>x.kind==='directory').map(x=>x.path).sort((a,b)=>b.split('/').length-a.split('/').length);\n  for(const name of directories){const held=await directory(join(path,name),true);await held.close();await rmdir(join(path,name));}\n  const held=await directory(path,true);await held.close();await rmdir(path);await syncDirectory(dirname(path));\n };"
+        },
+        {
+          "before": "for(const name of candidate?['work','candidate']:['work'])await rm(join(folder,name),{recursive:true,force:true});",
+          "after": "for(const name of candidate?['work','candidate']:['work'])await eraseTree(join(folder,name));"
+        },
+        {
+          "before": "if(t.target!==t.plan.baseGeneration)await rm(join(root,'generations',String(t.target)),{recursive:true,force:true});",
+          "after": "if(t.target!==t.plan.baseGeneration)await eraseTree(join(root,'generations',String(t.target)));"
+        },
+        {
+          "before": "if(t.state==='running'&&t.launch!=='not-dispatched'&&(await inspectSandbox(t.sandbox)).state!=='gone')fail('SEP_PROJECT_CLEANUP_BLOCKED');",
+          "after": "if(t.state==='running'&&(t.execution!=='trusted-file'||t.launch!=='not-dispatched'))fail('SEP_PROJECT_CLEANUP_BLOCKED');"
+        },
+        {
+          "before": "const t={id:randomUUID(),kind,state:'running',launch:'not-dispatched',createdAt:Date.now(),baseGeneration:m.generation,baseSequence:m.sequence};",
+          "after": "const t={id:randomUUID(),kind,state:'running',execution:'trusted-file',launch:'not-dispatched',createdAt:Date.now(),baseGeneration:m.generation,baseSequence:m.sequence};"
+        },
+        {
+          "before": "PRAGMA synchronous=FULL; PRAGMA journal_mode=DELETE;",
+          "after": "PRAGMA synchronous=FULL; PRAGMA fullfsync=ON; PRAGMA checkpoint_fullfsync=ON; PRAGMA journal_mode=DELETE;"
+        },
+        {
+          "before": "documents=documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,save,event});",
+          "after": "documents=documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,save,event,io:{tree,directory,syncDirectory,applyFile,eraseTree}});"
+        },
+        {
+          "before": "   run({command,timeoutMs=3000,signal,basePlanHash,readOnly=false,input='',reportOutput=false,maxInputBytes,maxOutputBytes}={}){return exclusive(async internal=>{\n    const m=await ready();if(signal?.aborted||internal.aborted)return {status:'aborted',reason:'cancelled'};\n    const baseline=await snapshot(m.generation);let workSource=pathFor(m.generation),workTree=baseline;\n    if(basePlanHash!==undefined){const prior=lookup(basePlanHash);if(prior.state!=='ready'||Date.now()-prior.createdAt>=86400000||prior.plan.baseGeneration!==m.generation||prior.plan.baseSequence!==m.sequence)fail('SEP_PROJECT_STALE_PLAN');workSource=join(root,'transactions',prior.id,'candidate');workTree=await tree(workSource);if(workTree.sha256!==prior.candidate.sha256||workTree.version!==prior.candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');}\n    const t=await newTransaction('business',m),folder=join(root,'transactions',t.id);\n    const abort=new AbortController(),cancel=()=>abort.abort();signal?.addEventListener('abort',cancel,{once:true});internal.addEventListener('abort',cancel,{once:true});\n    try{\n     await mkdir(join(folder,'work'),{mode:0o700});if(signal?.aborted||internal.aborted)abort.abort();\n     const result=await runIsolated({...isolation,source:workSource,scratch:join(folder,'work'),command,timeoutMs,signal:abort.signal,readOnly,input,maxInputBytes,maxOutputBytes,copySourceHash:readOnly?undefined:workTree.sha256,onSpawn:record=>{t.sandbox=record;t.launch='dispatch-authorized';save(t);}});\n     if(!result.exited){t.state='cleanup_blocked';save(t);startupInterrupted=true;return {status:'blocked',reason:'cleanup-blocked'};}\n     if(result.reason!=='exit'||result.code!==0||abort.signal.aborted){t.state='aborted';save(t);return {status:'aborted',reason:abort.signal.aborted?'cancelled':result.reason==='exit'?'tool-failed':result.reason,...readOnly&&reportOutput?{diagnostic:result.stderr}:{}};}\n     if(readOnly){t.state='aborted';save(t);return {status:'read',...(reportOutput?{output:result.stdout}:{})};}\n     await mkdir(join(folder,'candidate'),{mode:0o700});await tree(join(folder,'work'),{copyTo:join(folder,'candidate')});\n     const candidate=await tree(join(folder,'candidate'));await syncDirectory(folder);\n     if(abort.signal.aborted){t.state='aborted';save(t);return {status:'aborted',reason:'cancelled'};}\n     return {...await finishPlan(t,baseline,candidate),...(reportOutput?{output:result.stdout}:{})};\n    }catch(e){t.state='aborted';save(t);throw e;}\n    finally{signal?.removeEventListener('abort',cancel);internal.removeEventListener('abort',cancel);if(t.state!=='cleanup_blocked')await removeCopies(t,{candidate:t.state!=='ready'});}\n   });},\n",
+          "after": "   async run(){fail('SEP_MAC_SHELL_UNAVAILABLE');},\n   planWrite(input={}){return exclusive(async internal=>{\n    const {path,expectedSha256,text,signal,basePlanHash}=input;\n    if(typeof path!=='string'||!path||/[\\\\:\\x00-\\x1f\\x7f]/.test(path)||path.split('/').some(p=>!p||p==='.'||p==='..'||/[. ]$/.test(p))||typeof text!=='string'||!/^([a-f0-9]{64}|absent)$/.test(expectedSha256??'')||input.delete!==undefined)fail('SEP_PROJECT_WRITE_INPUT');\n    const m=await ready();if(signal?.aborted||internal.aborted)fail('SEP_PROJECT_CANCELLED');\n    const baseline=await snapshot(m.generation);let workSource=pathFor(m.generation),workTree=baseline;\n    if(basePlanHash!==undefined){const prior=lookup(basePlanHash);if(prior.state!=='ready'||Date.now()-prior.createdAt>=86400000||prior.plan.baseGeneration!==m.generation||prior.plan.baseSequence!==m.sequence)fail('SEP_PROJECT_STALE_PLAN');workSource=join(root,'transactions',prior.id,'candidate');workTree=await tree(workSource);if(workTree.sha256!==prior.candidate.sha256||workTree.version!==prior.candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');}\n    const existing=workTree.entries.find(e=>e.path===path);\n    if(expectedSha256==='absent'?existing!==undefined:existing?.kind!=='file'||existing.sha256!==expectedSha256)fail('SEP_PROJECT_STALE_VERSION');\n    const t=await newTransaction('trusted-write',m),folder=join(root,'transactions',t.id),candidatePath=join(folder,'candidate');\n    try{\n     await mkdir(candidatePath,{mode:0o700});await tree(workSource,{copyTo:candidatePath});\n     const copied=await tree(candidatePath);if(copied.sha256!==workTree.sha256)fail('SEP_PROJECT_TREE_CHANGED');\n     if(signal?.aborted||internal.aborted)fail('SEP_PROJECT_CANCELLED');\n     await applyFile(candidatePath,{path,expectedSha256,text});\n     const candidate=await tree(candidatePath);await syncDirectory(folder);\n     if(signal?.aborted||internal.aborted)fail('SEP_PROJECT_CANCELLED');\n     return await finishPlan(t,baseline,candidate);\n    }catch(e){t.state='aborted';save(t);await removeCopies(t);throw e;}\n   });},\n"
+        },
+        {
+          "before": "   async reviewCleanup(){\n    await guard();const m=meta(),items=[];\n    for(const row of db.prepare('SELECT value FROM transactions').all()){\n     const t=parse(row.value);if(t.state!=='cleanup_blocked')continue;\n     const observed=await inspectSandbox(t.sandbox);items.push({id:t.id,recordSha256:hash(row.value),owner:t.sandbox,observed});\n    }\n    if(!items.length||items.some(x=>x.observed.state!=='gone'))return {status:'blocked',reasons:items.map(x=>({id:x.id,...x.observed}))};\n    const plan={schema:1,rootIdentity,generation:m.generation,sequence:m.sequence,pending:m.pending,items};return {status:'pass',planHash:hash(JSON.stringify(plan)),transactions:items.map(x=>x.id)};\n   },\n   resolveCleanup({planHash}={}){return exclusive(async()=>{\n    await guard();const m=meta(),items=[];\n    for(const row of db.prepare('SELECT value FROM transactions').all()){\n     const t=parse(row.value);if(t.state!=='cleanup_blocked')continue;\n     const observed=await inspectSandbox(t.sandbox);items.push({id:t.id,recordSha256:hash(row.value),owner:t.sandbox,observed});\n    }\n    const plan={schema:1,rootIdentity,generation:m.generation,sequence:m.sequence,pending:m.pending,items};\n    if(!items.length||items.some(x=>x.observed.state!=='gone')||hash(JSON.stringify(plan))!==planHash)fail('SEP_PROJECT_CLEANUP_PLAN_INVALID');\n    for(const item of items){const t=transaction(item.id);await removeCopies(t);t.state='aborted';save(t);event('cleanup-confirmed-durable',t);}\n    return recoverInternal();\n   });},\n",
+          "after": "   async reviewCleanup(){await guard();return {status:'blocked',reason:'unknown-execution-requires-separate-owner-proof'};},\n   async resolveCleanup(){fail('SEP_PROJECT_CLEANUP_BLOCKED');},\n"
+        }
+      ]
+    },
+    {
+      "sourcePath": "tools/alpha2-portable/document-copies.mjs",
+      "sourceCommit": "930d081b1f7deb647948915432074f532eca2b62",
+      "sourceSha256": "cd5eaeb97e790c266ae0cb66da8d1759b9f9eeb0af46fffa876815edfee3a3cf",
+      "resultPath": "document-copies.mjs",
+      "resultSha256": "54bd2a133a6fdf713773e8dd890f247375b6a689b79b995f5e7251a3fcfdc7c5",
+      "changes": [
+        {
+          "before": "import {lstat,readdir,unlink,rm} from 'node:fs/promises';",
+          "after": "import {readdir} from 'node:fs/promises';"
+        },
+        {
+          "before": "import {tree,hash,fail,syncDirectory,directory} from './project-tree.mjs';",
+          "after": "import {createHash} from 'node:crypto';\nconst hash=value=>createHash('sha256').update(value).digest('hex');\nconst fail=code=>{throw Object.assign(Error(code),{code});};"
+        },
+        {
+          "before": "export function documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,save,event}){",
+          "after": "export function documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,save,event,io}){\n const {tree,directory,syncDirectory,applyFile,eraseTree}=io;"
+        },
+        {
+          "before": "await rm(item.folder,{recursive:true});",
+          "after": "await eraseTree(item.folder);"
+        },
+        {
+          "before": "const target=join(item.folder,selected.documentPath),s=await lstat(target,{bigint:true});if(!s.isFile()||s.isSymbolicLink()||s.nlink!==1n)fail('SEP_PROJECT_DOCUMENT_RECOVERY_INVALID');\n    const parent=await directory(dirname(target),true);try{await unlink('/proc/self/fd/'+parent.fd+'/'+selected.documentPath.split('/').at(-1));await parent.sync();}finally{await parent.close();}event('document-copy-unlinked');",
+          "after": "await applyFile(item.folder,{path:selected.documentPath,expectedSha256:original.sha256,delete:true});event('document-copy-unlinked');"
+        }
+      ]
+    }
+  ]
+}

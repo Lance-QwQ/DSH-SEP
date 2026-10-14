@@ -185,3 +185,45 @@ jobs:
             ${{ runner.temp }}/sep-apfs-files/*.log
           if-no-files-found: error
           retention-days: 14
+
+  trusted-file-transactions:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Compile actual APFS helper
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-file-transactions"
+          mkdir "$root"
+          echo "SEP_MAC_TX_OUTPUT=$root" >> "$GITHUB_ENV"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          shasum -a 256 "$root/native-tree" > "$root/native-tree.sha256"
+      - name: Three native SQLite and APFS transaction rounds
+        run: |
+          set +e
+          set -o pipefail
+          failed=0
+          for round in 1 2 3; do
+            SEP_MAC_TREE_HELPER="$SEP_MAC_TX_OUTPUT/native-tree" SEP_MAC_TRANSACTION_TEST_ROOT="$SEP_MAC_TX_OUTPUT/round-$round" node --test --test-reporter=tap tools/alpha2-macos/transactions/transactions.test.mjs > "$SEP_MAC_TX_OUTPUT/round-$round.log" 2>&1
+            rc=$?
+            cat "$SEP_MAC_TX_OUTPUT/round-$round.log"
+            printf '%s %s\n' "$round" "$rc" >> "$SEP_MAC_TX_OUTPUT/EXIT-CODES.txt"
+            if [ "$rc" != 0 ]; then failed=1; fi
+          done
+          exit "$failed"
+      - name: Preserve native transaction logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-trusted-file-transactions
+          path: |
+            ${{ env.SEP_MAC_TX_OUTPUT }}/*.log
+            ${{ env.SEP_MAC_TX_OUTPUT }}/*.txt
+            ${{ env.SEP_MAC_TX_OUTPUT }}/*.sha256
+          if-no-files-found: error
+          retention-days: 14

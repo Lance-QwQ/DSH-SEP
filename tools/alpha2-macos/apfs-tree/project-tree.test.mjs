@@ -45,3 +45,14 @@ test('helper hash mismatch refuses before data operations',async()=>{
  const source=await folder(),wrong=createProjectTree({helperPath,helperSha256:'0'.repeat(64),lockPath:join(root,'.native.lock')});
  await assert.rejects(wrong.tree(source),{code:'SEP_PROJECT_HELPER_CHANGED'});
 });
+test('creating file cannot exceed entry bound and leaves new target absent',async()=>{
+ const source=await folder();for(let i=0;i<1023;i++)await writeFile(join(source,'f'+i),'',{mode:0o600});
+ await assert.rejects(api.applyFile(source,{path:'overflow',expectedSha256:'absent',text:'extra'}),{code:'SEP_PROJECT_LIMIT'});
+ await assert.rejects(readFile(join(source,'overflow')),{code:'ENOENT'});
+});
+test('creating file cannot exceed total byte bound',async()=>{
+ const source=await folder();await writeFile(join(source,'note.txt'),Buffer.alloc(4194304),{mode:0o600});
+ for(let i=0;i<7;i++)await writeFile(join(source,'f'+i),Buffer.alloc(4194304),{mode:0o600});
+ await assert.rejects(api.applyFile(source,{path:'overflow',expectedSha256:'absent',text:'extra'}),{code:'SEP_PROJECT_LIMIT'});
+ await assert.rejects(readFile(join(source,'overflow')),{code:'ENOENT'});
+});
