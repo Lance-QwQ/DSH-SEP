@@ -28,7 +28,9 @@ this Node installer does not claim the stronger untrusted-project fd traversal
 boundary. It never receives original workspace/private memory roots.
 
 All installed files become read-only (executables 0555, other files 0444), all
-directories 0555. The output `manifest.json` contains relative paths, hashes,
+directories 0555. The generated `manifest.json` and `tool-runtime/package.json`
+receive explicit chmod 0444 after creation, including under installer umask 077.
+The output `manifest.json` contains relative paths, hashes,
 modes and input digests, with no source-machine paths. The returned
 `manifestSha256` must be pinned in the enclosing installation descriptor. Partial
 or failed assembly is retained as an unpublished candidate, never auto-deleted.
@@ -64,13 +66,14 @@ be changed into pass. The application must also drain consumers around parser
 calls before releasing their stores/P2 resources. No raw parser code, arbitrary
 executable arguments or environment enters either public parse API.
 
-`runtime.test.mjs` has eight filesystem/manifest definitions; POSIX tests use
+`runtime.test.mjs` has nine filesystem/manifest definitions, including assembly
+under umask 077 with the prior process mask restored in finally; POSIX tests use
 synthetic executable bodies and are not Darwin parser evidence. On Darwin its
 final pre-state rejection checks manifest failure; on Linux it checks the platform
 gate. `lifecycle.test.mjs` has five aggregate-boundary tests with controlled
 completion promises, including misleading early pass, unknown cleanup and child quarantine status; those
 tests do not claim real native process termination. `native.test.mjs` has four
-actual assembled-service definitions. Run them
+actual assembled-service definitions, for 18 definitions total. Run them
 with the same fixed carrier/dependency environment as `../parser/run-native-tests.mjs`:
 
 ```sh

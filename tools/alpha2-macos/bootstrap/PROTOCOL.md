@@ -50,19 +50,30 @@ and `status`. It owns no OS processes and performs no filesystem operations.
 
 ## Native RED harness
 
-`appkit-bootstrap.m` deliberately returns `SEP_BOOTSTRAP_NOT_IMPLEMENTED` until
-the native RED harness has run. It is not a releasable launcher. The test build
+The original `appkit-bootstrap.m` stub returned `SEP_BOOTSTRAP_NOT_IMPLEMENTED`.
+Native macOS run 38556022717 / job 115825236337 compiled successfully and all
+four fixed cases failed with that code, confirming the missing-feature RED.
+The current thin implementation is awaiting native GREEN verification. It is
+not a releasable launcher. The test build
 uses `SEP_BOOTSTRAP_TESTING`, an external synthetic descriptor, and a literal
 Node fixture; those test entry points must not be accepted by a production build.
 
-`run-native.mjs <fresh output>` compiles that stub into a separate
+`run-native.mjs <fresh output>` compiles the prototype into a separate
 `Bootstrap Contract.app` and runs four native contracts. Their planned results
 are clean activation/quit, cancelled quit then retry, exit without cleanup, and
-wrong nonce. The first native run is expected to fail because the implementation
-is missing. Record it without counting it as platform validation. No real host,
+wrong nonce. The original failed run is retained, without counting it as platform
+validation. No real host,
 private profile, parser or daily instance is invoked by this harness.
 
-After native RED is observed, the thin AppKit implementation can be added against
-these same fixed tests. Its later Finder `open` path, bundle identity/signing,
+The thin implementation targets these same four fixed tests. Its non-test build
+refuses execution with `SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED`. Its later Finder
+`open` path, bundle identity/signing,
 production fixed resource manifest and real broker adaptation need their own
 integration tests. Direct executable invocation here does not prove Finder.
+
+Blocked cases terminate only the exact unreaped, non-forking synthetic child as
+separate test cleanup. If wait ownership becomes unknown, no PID signal is sent.
+This is not permission to abandon an unknown production broker or release its
+lease. Program-path replacement between hash verification and spawn, sustained
+hostile IPC traffic, and unexpected descendants are outside this prototype's
+certified scope and require the production adapter's own tests.
