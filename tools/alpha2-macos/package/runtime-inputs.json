@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "files": [
+    "apfs-tree/project-tree.mjs",
+    "transactions/mac-managed-project.mjs",
+    "transactions/transaction-store.mjs",
+    "transactions/document-copies.mjs",
+    "lifecycle/managed-project-lifecycle.mjs",
+    "profile/controlled-files.mjs",
+    "captured/owner-lease.mjs",
+    "captured/owner-posix.mjs",
+    "business/standalone.mjs",
+    "business/profile-layout.mjs",
+    "business/runtime.mjs",
+    "business/profile-plugin.mjs",
+    "business/readonly-files.mjs",
+    "business/host-modules.mjs",
+    "business/bundle-modules.mjs",
+    "business/bounded-read.mjs",
+    "business/capture-runtime.mjs",
+    "business/consumers.mjs",
+    "business/documents.mjs",
+    "business/snapshot-scope.mjs",
+    "desktop/managed-broker/launch-full.mjs",
+    "desktop/managed-broker/program-manifest.mjs",
+    "desktop/managed-broker/launch-state.mjs",
+    "desktop/managed-broker/desktop-rpc.mjs",
+    "desktop/managed-broker/host-owner.mjs",
+    "desktop/managed-broker/business-host.mjs"
+  ]
+}

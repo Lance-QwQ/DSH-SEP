@@ -110,9 +110,13 @@ files. Each transformation records source/result hashes, occurrence count and
 target-file hash. All captured JS bare imports are reconciled: explicit Electron
 and Node builtins, the five fixed mapped modules, or eight explicitly allowed
 remaining specifiers whose actual resolved bytes must stay inside the extracted
-carrier tree. Unknown imports fail assembly. The real Mac negative probe for
-this repair is pending; its three local regression tests do not certify native
-loading. Diagnostic exception pauses are disabled before
+carrier tree. Unknown imports fail assembly. Native run 38523943093 reached the
+main-entry instrumentation after this repair, but the later refusal observer
+timed out in `Runtime.evaluate` with `awaitPromise: true`. The next probe uses
+synchronous observation and test-owned `app.exit` cleanup so Electron's startup
+error dialog cannot block the observer's Promise/microtask completion. The full
+negative check remains pending; reaching main does not prove successful business
+startup. Diagnostic exception pauses are disabled before
 resuming the expected product refusal, so a test pause cannot masquerade as a
 product hang.
 
