@@ -1,0 +1,30 @@
+native-bootstrap-production-admission:
+  runs-on: macos-15
+  timeout-minutes: 12
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Manifest and fixed application layout contracts
+      run: |
+        export SEP_DESKTOP_TEST_ROOT="$RUNNER_TEMP/app-program-contracts"
+        mkdir "$SEP_DESKTOP_TEST_ROOT"
+        node --test --test-reporter=tap tools/alpha2-macos/bootstrap/production-manifest.test.mjs tools/alpha2-macos/desktop/managed-broker/program-manifest.test.mjs tools/alpha2-macos/desktop/managed-broker/app-program.test.mjs tools/alpha2-macos/package/app-layout.test.mjs > "$RUNNER_TEMP/app-layout.tap"
+    - name: Native non-test binary admission, identity placeholders never executed
+      run: node tools/alpha2-macos/bootstrap/run-production-native.mjs "$RUNNER_TEMP/bootstrap-production-native"
+    - name: Preserve original outcomes including planned missing-feature RED
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-bootstrap-production-admission
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/app-layout.tap
+          ${{ runner.temp }}/bootstrap-production-native/RESULT.json
+          ${{ runner.temp }}/bootstrap-production-native/*.log
+          ${{ runner.temp }}/bootstrap-production-native/cases/**/*.log
