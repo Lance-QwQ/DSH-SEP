@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "scope": "test-only same real P2 authority restored before project inspection; original product unchanged",
+  "origin": {
+    "data": {
+      "sourceSha256": "29fd8c149d259d1fdd3a2b10a4bb5291b5d7cbd98a08cbb607069de5a716d2de",
+      "resultSha256": "ca9a0d4c2eb7c6723be5bd261c8d5be37cd3cc8a98f09f92eb8b6bd558505733",
+      "changes": [
+        {
+          "before": "import {fixtureResourcesUnknown} from './native-contract.mjs';",
+          "after": "import {fixtureResourcesUnknown} from './native-contract.mjs';\nimport {loadFixtureAuthority} from './native-p2-authority.mjs';"
+        },
+        {
+          "before": "async function withExisting(input,config,work){",
+          "after": "export async function withExisting(input,config,work){"
+        },
+        {
+          "before": " let project,profile,body,error,receipt;",
+          "after": " let project,profile,control,body,error,receipt;"
+        },
+        {
+          "before": "  project=wrapManagedProject(await openWorkflowProject(",
+          "after": "  const authority=await loadFixtureAuthority(config);control=await authority.openControl({storageRoot:join(config.businessRoot,'memory'),initialize:false,recoverDocumentDeletion:true});await control.recoverDocumentDeletions();\n  project=wrapManagedProject(await openWorkflowProject("
+        },
+        {
+          "before": "  const exec={signal:new AbortController().signal};",
+          "after": "  await project.bindDocumentAuthority(authority.macDocumentAuthority(control,config.source));\n  const exec={signal:new AbortController().signal};"
+        },
+        {
+          "before": "  if(fixtureResourcesUnknown(error))receipt={status:'blocked',resourcesConfirmedReleased:false,code:error.code};",
+          "after": "  if(fixtureResourcesUnknown(error))receipt={status:'blocked',resourcesConfirmedReleased:false,code:error.code};\n  // P2 remains owned until every project operation has really drained.\n  if(receipt.status==='pass'&&receipt.resourcesConfirmedReleased===true)try{await control?.close();}catch{receipt={status:'blocked',resourcesConfirmedReleased:false,code:'SEP_PROJECT_NATIVE_P2_CLOSE_BLOCKED'};}\n  receipt={...receipt,p2ConfirmedReleased:!control||receipt.status==='pass'&&receipt.resourcesConfirmedReleased===true};"
+        }
+      ]
+    },
+    "worker": {
+      "sourceSha256": "3bbbaf4adf5100d6d60c2a0437907e7f6f704c9d87e3b23b4d890159d62a611c",
+      "resultSha256": "70969e9da84f5cc3ba674de698124b649adf103d6a5361f4c7a16e6b765c39c8",
+      "changes": [
+        {
+          "before": "from './native-data.mjs'",
+          "after": "from './native-data-r2.mjs'"
+        },
+        {
+          "before": "result.status='pass';result.stage='complete';",
+          "after": "result.status='pass';result.stage='desktop-closed';"
+        },
+        {
+          "before": "try{result.finalState=await finishProjectRound(input,result.preparation);if(result.finalState.status!=='pass')result.status='fail';}",
+          "after": "try{result.stage='final-inspection';result.finalState=await finishProjectRound(input,result.preparation);if(result.finalState.status!=='pass')result.status='fail';else result.stage='complete';}"
+        }
+      ]
+    },
+    "operator": {
+      "sourceSha256": "90c25e2b8d50d2d8c9bdc53fac72cf79686be5a38989907e53880e8096e01524",
+      "resultSha256": "a3c6a90e7869125c36d3db1518b292911bcff5aa2eda320c820ec9191800e8bf",
+      "changes": [
+        {
+          "before": "['native-operator.mjs','native-worker.mjs','native-contract.mjs','NATIVE-ORIGIN.json','native-dom.mjs','native-data.mjs'",
+          "after": "['native-operator-r2.mjs','native-worker-r2.mjs','native-contract.mjs','NATIVE-ORIGIN.json','NATIVE-AUTHORITY-ORIGIN.json','derive-native-authority.mjs','native-dom.mjs','native-data-r2.mjs','native-p2-authority.mjs'"
+        },
+        {
+          "before": "new URL('./native-worker.mjs',import.meta.url)",
+          "after": "new URL('./native-worker-r2.mjs',import.meta.url)"
+        }
+      ]
+    }
+  }
+}

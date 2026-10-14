@@ -1,4 +1,4 @@
-# Installer integration status through r63
+# Installer integration status through r64
 
 The complete user installer is still under development. These fixed inputs
 were run on the limited macOS ARM64 test image, without private data or paid
@@ -15,6 +15,7 @@ model requests. They do not certify a physical Mac interaction or public release
 | r62, CI 38629984742 | Both native transport jobs failed compilation because two helper names collided with SDK typedefs. The original fifteen and six additional definitions were not executed. |
 | r63, CI 38631108180 | After only renaming those symbols, transport reached 9/15 passes and six failures. Six role-replacement definitions failed, including explicit fixture cleanup after FIFO/pending deadlines. Eight application lifecycle definitions reached genuine missing implementation failures. These remain repair work. |
 | r63, separate resource job 116082665761 | Resource assembly passed all twelve unchanged definitions, zero skipped/cancelled. This verifies signed synthetic payload assembly and the fixed runtime closure, not the full application payload or installation. |
+| r64, CI 38632614457 | The original fifteen private-transport definitions and six role-admission definitions passed natively. All 35 synthetic child receipts confirm normal drain and exit without forced cleanup. The application delegate remains 6/8: two menu-event assertions require diagnosis; do not infer an installed application or actual installer process-exit pass. Full-payload resources remain pending. |
 
 Current native admission verifies the compiled-in manifest, fixed executable
 roles and complete controller source closure. It deliberately does not claim
@@ -26,7 +27,8 @@ The AppKit layer includes visible plan confirmation, cancellation, recovery
 classification, a separate Open action and bounded close reporting. Its
 15-definition evidence uses actual Cocoa controls but programmatic actions and
 synthetic channel replies; it is neither physical input nor a complete install.
-The NSTask transport is now being implemented against the unchanged RED cases.
+The NSTask transport has passed the unchanged native definitions. Complete
+UI-to-controller installation and actual installer process exit remain pending.
 
 The source-closure review found that a comment between `import`/`require` and
 `(` could evade the original dynamic-dependency refusal. A new definition failed
@@ -34,7 +36,7 @@ before the fix and passed after it. No current module in the 16-file controller
 closure used that spelling. This is a narrow conservative static-source capture,
 not a general JavaScript parser or an arbitrary untrusted-code sandbox.
 
-Pending: actual private transport GREEN, full-payload resource assembly, production AppKit
+Pending: full-payload resource assembly, production AppKit
 entry and LaunchServices opener, final complete payload signing/archive restore,
 native installation through that UI, and same-data application startup from the
 installed path. Physical Finder/Dock, Developer ID/notarization, arbitrary macOS
