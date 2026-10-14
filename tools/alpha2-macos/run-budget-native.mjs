@@ -12,11 +12,11 @@ process.umask(0o077);await mkdir(root,{mode:0o700});
 const sha=b=>createHash('sha256').update(b).digest('hex'),inputs=JSON.parse(await readFile(new URL('INPUTS.json',import.meta.url)));
 for(const f of inputs.files)assert.equal(sha(await readFile(new URL(f.path,import.meta.url))),f.sha256,f.path);
 const {Budget}=await import('./captured/budget-ledger.js');
-const rows=[],cleanup=[],active=new Set(),scope=(taskId='task',rootSessionId='session')=>({kind:'task',taskId,rootSessionId,rootTurn:0});
+const rows=[],cleanup=[],active=new Map(),scope=(taskId='task',rootSessionId='session')=>({kind:'task',taskId,rootSessionId,rootTurn:0});
 function child(action,path,id){
   const c=spawn(process.execPath,[new URL('./budget-worker.mjs',import.meta.url).pathname,action,path,...id?[id]:[]],{env:{PATH:'/usr/bin:/bin',HOME:process.env.HOME,LANG:'C'},stdio:['pipe','pipe','pipe']});
-  active.add(c);let out='',err='',bytes=0,readyResolve,readyReject,doneResolve,doneReject;
-  const ready=new Promise((r,j)=>{readyResolve=r;readyReject=j;}),done=new Promise((r,j)=>{doneResolve=r;doneReject=j;});ready.catch(()=>{});done.catch(()=>{});
+  let out='',err='',bytes=0,readyResolve,readyReject,doneResolve,doneReject;
+  const ready=new Promise((r,j)=>{readyResolve=r;readyReject=j;}),done=new Promise((r,j)=>{doneResolve=r;doneReject=j;});ready.catch(()=>{});done.catch(()=>{});active.set(c,done);
   c.once('error',error=>{active.delete(c);readyReject(error);doneReject(error);});
   c.stdout.on('data',b=>{bytes+=b.length;if(bytes>8192){c.kill('SIGKILL');return;}out+=b;const line=out.split('\n')[0];try{const v=JSON.parse(line);if(v.status==='ready'&&v.pid===c.pid)readyResolve(v);}catch{}});
   c.stderr.on('data',b=>{bytes+=b.length;if(bytes>8192)c.kill('SIGKILL');else err+=b;});
@@ -69,6 +69,6 @@ for(const round of [1,2,3]){
     await assert.rejects(new Budget(path,{limit:100}).init(),{code:'BUDGET_CORRUPT'});assert.equal(await readFile(path,'utf8'),'{"version":');
   });
 }
-for(const c of active){cleanup.push({pid:c.pid,reason:'test-cleanup'});c.kill('SIGKILL');}
+for(const [c,done] of [...active]){const receipt={pid:c.pid,reason:'test-cleanup',cleanupConfirmed:false};cleanup.push(receipt);try{receipt.signalRequested=c.kill('SIGKILL');const exited=await bounded(done,2000);receipt.cleanupConfirmed=true;receipt.exit={code:exited.code,signal:exited.signal};}catch{receipt.cleanupUnconfirmed=true;}}
 const result={status:rows.length===24&&rows.every(r=>r.status==='pass')&&!cleanup.length?'pass':'fail',platform:process.platform,arch:process.arch,node:process.version,sourceCommit:inputs.sourceCommit,uniqueScenarios:8,rounds:3,rows,cleanup,scope:'actual unchanged Budget and SQLite mutex on native macOS; synthetic ledger, no invoice or paid calls',notVerified:['P2 three-domain storage','memory','Alpha.2 host integration','desktop','production worker','whole-process-tree cleanup']};
 await writeFile(join(root,'RESULT.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result));if(result.status!=='pass')process.exitCode=1;

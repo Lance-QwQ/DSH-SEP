@@ -19,6 +19,10 @@ jobs:
           node-version: '24.19.0'
       - name: Portable identity contracts
         run: node --test --test-reporter=tap tools/alpha2-macos/identity-contract.test.mjs
+      - name: Failed synthetic command retains diagnostic
+        run: |
+          export SEP_MACOS_DIAGNOSTIC_TEST_ROOT="$(cd "$RUNNER_TEMP" && pwd -P)/sep-diagnostic-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          node --test --test-reporter=tap tools/alpha2-macos/command-log.test.mjs
       - name: Three native APFS and owner rounds
         run: |
           root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-alpha2-macos-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"

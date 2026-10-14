@@ -91,8 +91,24 @@
     },
     {
       "path": "run-budget-native.mjs",
-      "bytes": 7628,
-      "sha256": "a6cb515d7269c66f63992a3872bd0c134772c9947276129c9a0c7a0a08eb223b",
+      "bytes": 7879,
+      "sha256": "8377a2971e5189c5e60c21e1ea80e4516dc51888065dc5215e3aebe60cdb1994",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "command-log.mjs",
+      "bytes": 800,
+      "sha256": "8ba79ed6e0b91b47631a0dac7a19b9b099ac1b280f492750d5eb9b9f375172c5",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "command-log.test.mjs",
+      "bytes": 826,
+      "sha256": "58f317d4335aaa5b0b516c6c09e19dd1bb5670b1322795603d9121f0e7b70b6a",
       "origin": {
         "kind": "new synthetic test fixture"
       }
@@ -123,8 +139,8 @@
     },
     {
       "path": "run-sandbox-prototype.mjs",
-      "bytes": 6167,
-      "sha256": "a178eb330123ba9890eb4d4ed24da521b5744016f25980d8093458a76178f0be",
+      "bytes": 5977,
+      "sha256": "c5df6ee68d68a738f9c715cbb8fe02898603529a5a447bd367c96a69c1317974",
       "origin": {
         "kind": "native App Sandbox synthetic feasibility test; not production worker"
       }
