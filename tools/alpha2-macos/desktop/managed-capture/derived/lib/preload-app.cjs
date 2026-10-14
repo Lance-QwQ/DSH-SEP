@@ -1,0 +1,882 @@
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-app.ts
+var import_electron7 = require("electron");
+
+// sep-origin/alpha2-desktop/apps/desktop/src/ipc.ts
+var DESKTOP_IPC = {
+  shortcutsInput: "dsh-desktop:shortcuts-input",
+  shortcutsCloseWindow: "dsh-desktop:shortcuts-close-window",
+  shortcutsGet: "dsh-desktop:shortcuts-get",
+  shortcutsEdit: "dsh-desktop:shortcuts-edit",
+  shortcutsChanged: "dsh-desktop:shortcuts-changed",
+  shortcutsRecording: "dsh-desktop:shortcuts-recording",
+  boot: "dsh-desktop:boot",
+  enterWorkspace: "dsh-desktop:enter-workspace",
+  onboardingActive: "dsh-desktop:onboarding-active",
+  onboardingApiKey: "dsh-desktop:onboarding-api-key",
+  bootFailed: "dsh-desktop:boot-failed",
+  browserAcquire: "dsh-desktop:browser-acquire",
+  browserRelease: "dsh-desktop:browser-release",
+  browserOpenRequested: "dsh-desktop:browser-open-requested",
+  directoryPick: "dsh-desktop:directory-pick",
+  deviceInfo: "dsh-desktop:device-info",
+  localeBootstrap: "dsh-desktop:locale-bootstrap",
+  localeChanged: "dsh-desktop:locale-changed",
+  updatePreferencesGet: "dsh-desktop:update-preferences-get",
+  updatePreferencesSet: "dsh-desktop:update-preferences-set",
+  updatePreferencesChanged: "dsh-desktop:update-preferences-changed",
+  sepUpdatesStatus: "dsh-desktop:sep-updates-status",
+  sepUpdatesOpen: "dsh-desktop:sep-updates-open",
+  sepUpdatesPresentation: "dsh-desktop:sep-updates-presentation",
+  updatesStatus: "dsh-desktop:updates-status",
+  updatesOpen: "dsh-desktop:updates-open",
+  updatesPresentation: "dsh-desktop:updates-presentation",
+  nativeThemeSet: "dsh-desktop:native-theme-set",
+  windowFullscreen: "dsh-desktop:window-fullscreen",
+  windowsAppearance: "dsh-desktop:windows-appearance",
+  windowsMenu: "dsh-desktop:windows-menu"
+};
+var SCHEME = "dsh-app";
+
+// sep-origin/alpha2-desktop/apps/desktop/src/platform-ipc.ts
+var PLATFORM_IPC = {
+  bootstrap: "dsh-platform:bootstrap",
+  localeChanged: "dsh-platform:locale-changed",
+  open: "dsh-platform:open",
+  bounds: "dsh-platform:bounds",
+  close: "dsh-platform:close"
+};
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-platform.ts
+var import_electron = require("electron");
+function markDocumentPlatform() {
+  const mark = () => {
+    document.documentElement.dataset.platform = process.platform;
+  };
+  const root = document.documentElement;
+  if (root === null) window.addEventListener("DOMContentLoaded", mark);
+  else mark();
+}
+function syncWindowFullscreen() {
+  if (process.platform !== "darwin" && process.platform !== "win32") return;
+  import_electron.ipcRenderer.on(DESKTOP_IPC.windowFullscreen, (_event, fullscreen) => {
+    const root = document.documentElement;
+    if (root === null) return;
+    if (fullscreen) root.dataset.fullscreen = "true";
+    else delete root.dataset.fullscreen;
+  });
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-theme.ts
+var import_electron2 = require("electron");
+var THEME_SOURCE_ATTRIBUTE = "data-ds-theme-source";
+function syncNativeTheme() {
+  let sent;
+  const send = () => {
+    const value = document.documentElement.getAttribute(THEME_SOURCE_ATTRIBUTE);
+    if (value === null || value === sent) return;
+    sent = value;
+    import_electron2.ipcRenderer.send(DESKTOP_IPC.nativeThemeSet, value);
+  };
+  const observe = () => {
+    new MutationObserver(send).observe(document.documentElement, { attributeFilter: [THEME_SOURCE_ATTRIBUTE] });
+    send();
+  };
+  if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", observe, { once: true });
+  else observe();
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/windows-layout.ts
+var WINDOWS_TITLEBAR_HEIGHT = 40;
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-windows.ts
+var import_electron4 = require("electron");
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-menu.ts
+var import_electron3 = require("electron");
+
+// sep-origin/alpha2-desktop/apps/desktop/src/locale.ts
+var en = {
+  cliCommandMenu: "Manage dsh Command\u2026",
+  cliCommandTitle: "Manage dsh Command",
+  cliCommandLocation: "Desktop command: {path}",
+  cliCommandSelected: "Current dsh command: {path}",
+  cliCommandTarget: "Current launcher target: {path}",
+  cliCommandShadowed: "Another dsh takes precedence. Remove or reorder that installation to use the Desktop command by default. You can also run the Desktop command by its full path.",
+  cliCommandSelectionUnknown: "Your shell command could not be verified. An alias or another dsh installation may take precedence.",
+  cliCommandInstalled: "The Desktop command is installed.",
+  cliCommandNotInstalled: "Add the Desktop command to your terminal.",
+  cliCommandBroken: "The Desktop command needs repair.",
+  cliCommandInstall: "Install",
+  cliCommandRepair: "Repair",
+  cliCommandRemove: "Remove",
+  cliCommandClose: "Close",
+  cliCommandSwitch: "Continue with the Desktop command?",
+  cliCommandPreserve: "An existing command will be preserved. Other installations and shell startup files will not be changed.",
+  cliCommandContinue: "Continue",
+  cliCommandInstallApp: "Install Desktop in your Applications folder before managing the dsh command.",
+  cliCommandUpdating: "An update is being installed. Manage the command after installation finishes.",
+  cliCommandNewTerminal: "Open a new terminal and run dsh --version.",
+  cliCommandRemoved: "Desktop command registration removed.",
+  cliCommandPreviousRestored: "The previous launcher has been restored.",
+  cliCommandOtherKept: "Other command installations have been left in place.",
+  cliCommandBackupKept: "A previous launcher is preserved at: {path}",
+  cliCommandChanged: "The command or PATH changed while this dialog was open. Open Manage dsh Command again to review the current state.",
+  cliCommandOwnershipError: "The command registration or backup changed. No unrelated command was removed.",
+  cliCommandFailed: "The command could not be updated. Check that the application is installed and the destination is writable, then retry.",
+  application: "Application",
+  fileMenu: "File",
+  closePage: "Close Page or Window",
+  aboutMenu: "About DeepSeek Harness",
+  aboutProduct: "DeepSeek Harness",
+  aboutVersion: "Version V{version}",
+  hideApplication: "Hide DeepSeek Harness",
+  hideOtherApplications: "Hide Others",
+  showAllApplications: "Show All",
+  quitApplication: "Quit DeepSeek Harness",
+  openApplication: "Open DeepSeek Harness",
+  quit: "Quit",
+  cancel: "Cancel",
+  quitTitle: "Quit DeepSeek Harness?",
+  quitActiveTasks: "Running tasks will be interrupted.",
+  quitScheduledTasks: "Scheduled tasks will not run while the app is closed.",
+  quitActiveAndScheduledTasks: "Running tasks will be interrupted, and scheduled tasks will not run while the app is closed.",
+  backgroundNoticeBody: "Running tasks will continue. You can reopen the window from the system tray.",
+  backgroundNoticeConfirm: "Confirm",
+  edit: "Edit",
+  menuBar: "Application menu",
+  delete: "Delete",
+  undo: "Undo",
+  redo: "Redo",
+  cut: "Cut",
+  copy: "Copy",
+  paste: "Paste",
+  selectAll: "Select All",
+  startupFailed: "DeepSeek Harness is unavailable",
+  fatalSummary: "The application could not start or stopped unexpectedly.",
+  startupAddressInUse: "Another DSH instance (such as dsh web or the desktop app) is running. They cannot start at the same time. Quit the other running DSH instance, then restart.",
+  diagnosticTruncated: "\u2026 Error details shortened.",
+  reportWrittenTo: "Diagnostic report: {path}",
+  startupReinstallAdvice: "If application files are missing or damaged, close the application and reinstall it. Your tasks are stored separately.",
+  exitApplication: "Exit",
+  restartApplication: "Restart",
+  recoveryOperationFailed: "The recovery operation failed",
+  disableThirdPartyPlugins: "Disable third-party plugins, back up profile patch, and restart",
+  welcomeTitle: "DeepSeek Harness",
+  welcomeBrand: "DeepSeek Harness",
+  welcomeTaglineBefore: "Welcome to ",
+  welcomeTaglineBrand: "DeepSeek Harness",
+  welcomeTaglineAfter: "",
+  welcomeDescription: "Build potential. Explore intelligence.",
+  welcomeAuthStarting: "Opening sign in\u2026",
+  welcomeAuthWaiting: "Browser didn\u2019t open automatically?",
+  welcomeAuthWaitingDescription: "Copy the sign-in link and open it in your browser to sign in.",
+  welcomeAuthExchanging: "Completing sign in\u2026",
+  welcomeAuthExpired: "Sign in timed out",
+  welcomeAuthExpiredDescription: "Sign in again to continue",
+  welcomeAuthFailed: "Could not complete sign in. Please try again.",
+  welcomeAuthCopyLink: "Copy sign-in link",
+  welcomeAuthCopied: "Copied",
+  welcomeAuthCopyFailed: "Could not copy. Try again.",
+  welcomeAuthCancel: "Cancel",
+  welcomeAuthRetry: "Sign in again",
+  welcomeSignIn: "Sign in",
+  welcomeApiKey: "Add API Key",
+  welcomeKeyTitle: "Add an API key to get started",
+  welcomeKeyDescription: "Configure official DeepSeek models to start using Harness",
+  welcomeKeyPlaceholder: "Enter API key",
+  welcomeKeySave: "Save and continue",
+  welcomeKeyLater: "Set up later",
+  welcomeKeyBack: "Back to sign in",
+  welcomeSessionExpired: "You have signed out of your account, please log in again.",
+  welcomeKeyBlank: "Enter an API key.",
+  welcomeKeyInvalid: "Enter the API key itself, without quotes, spaces, or an environment-variable assignment.",
+  welcomeKeyFailed: "Could not save the API key. Please try again.",
+  welcomeContinueFailed: "Could not open the workspace. Please try again.",
+  checkUpdatesMenu: "Check for Updates\u2026",
+  sepCheckHostUpdates: "Check DSH Updates\u2026",
+  sepCheckSuiteUpdates: "Check SEP Updates\u2026",
+  reloadPageMenu: "Reload Page",
+  restartAppHostMenu: "Restart App and Host",
+  sepPluginReport: "All-plugin update compatibility report\u2026",
+  sepCancelUpdate: "Cancel pending update",
+  sepManagedUpdates: "This installation is managed by DSH SEP. Use SEP Update Center to check compatibility and update while preserving your data and plugins.",
+  updateCheckFailedTitle: "Update Check Failed",
+  updateCheckFailed: "Could not check for updates. Please try again later.",
+  updateDownloadFailed: "Could not download the update. Please try again.",
+  updateInstallFailed: "Could not install the update. Please try again later.",
+  updateCheckNetworkFailed: "Could not check for updates. Check your connection and try again.",
+  updateDownloadNetworkFailed: "Could not download the update. Check your connection and try again.",
+  updateInstallNetworkFailed: "Could not install the update. Check your connection and try again.",
+  unknownError: "Unknown error",
+  updateCheckTitle: "Check for Updates",
+  updateCurrentDetail: "Current version: {version}",
+  updateCurrent: "You\u2019re up to date!",
+  updateChecking: "Checking for updates\u2026",
+  updateDownload: "Download update",
+  updateDownloadedTitle: "Version {version} is ready to install",
+  updateDownloadedDetail: "The app will close during the update and reopen automatically when it is complete.",
+  updateDownloadedDetailWindows: "The app will close temporarily during the update and reopen automatically when it is complete.\n\nThe update may take some time. Please wait and do not launch the app again during installation.",
+  updateClose: "Close",
+  updateAcknowledge: "OK",
+  updateLater: "Update later",
+  updateDownloading: "Downloading {percent}%\u2026",
+  updateVerifying: "Verifying update files\u2026",
+  updateInstalling: "Preparing to restart\u2026",
+  updateRetry: "Retry update",
+  updateActiveTasks: "Tasks are still in progress",
+  updateActiveTasksDetail: "Updating will stop the tasks in progress and restart the app. Continue?",
+  updateStopTasks: "Stop tasks and update",
+  updateTasksChanged: "New tasks have started. Confirm again to stop the tasks and update.",
+  updateTasksUnavailable: "Task status is unavailable. Try updating again when the workspace is ready.",
+  updateStopFailed: "Could not safely stop the tasks. The update has not been installed. Please try again later.",
+  updateTechnicalDetails: "View technical details",
+  updateTitle: "DeepSeek Harness Update",
+  updateAvailable: "New version available: {version}",
+  updateDetail: "Once the download is complete, you can install the update and restart the app.",
+  installAndRestart: "Install and Restart",
+  later: "Later",
+  updateFailedTitle: "Update Failed",
+  mandatoryTitle: "Update to continue",
+  mandatoryDetail: "This version is no longer supported. Update to continue. Tasks in progress will keep running until you confirm installation and restart.",
+  mandatoryUnavailable: "Could not check update requirements. Please try again later.",
+  policyLoginTitle: "Sign in to the test environment",
+  policyLoginRequired: "Sign in with Feishu to check update requirements for this test build. Signing in will not download or install an update.",
+  policyLogin: "Sign in with Feishu",
+  policyLoginFailed: "Feishu sign-in did not complete. Please try again.",
+  policyLoginLoading: "Loading sign-in page\u2026",
+  mandatoryNoRelease: "No compatible update was found. Check again or contact support.",
+  mandatoryRefresh: "Check again",
+  mandatoryPage: "Download from the official website",
+  mandatoryCopy: "Copy download link",
+  mandatoryPageFailed: "Could not open the official download page. Copy the link and open it in your browser.",
+  mandatoryActionFailed: "The action failed. Please try again. You can use the app again after the update is complete.",
+  mandatoryReady: "Update ready",
+  mandatoryVersion: "New version: {version}",
+  mandatoryReadyDetail: "The app will close during the update and reopen automatically when it is complete.",
+  mandatoryDeferred: "Tasks in progress will keep running. Complete the update before using the app again.",
+  mandatoryContinue: "Continue update",
+  mandatoryInspecting: "Checking tasks\u2026",
+  mandatoryStopping: "Stopping tasks\u2026",
+  mandatoryRestarting: "The app will restart shortly. Please wait.",
+  mandatoryDownloadFailed: "The update files could not be downloaded or prepared. Please retry.",
+  mandatoryInstallFailed: "The update has not been installed. Check the tasks again and retry.",
+  mandatoryOpenHelp: "Page didn\u2019t open?",
+  mandatoryReopen: "Open the official download page again",
+  mandatoryCopied: "Link copied",
+  mandatoryCopyFailed: "Could not copy the link. Select and copy it below.",
+  mandatoryAddress: "Download link",
+  mandatoryNotification: "Return to the application to confirm installation and restart."
+};
+var zh = {
+  cliCommandMenu: "\u7BA1\u7406 dsh \u547D\u4EE4\u2026",
+  cliCommandTitle: "\u7BA1\u7406 dsh \u547D\u4EE4",
+  cliCommandLocation: "Desktop \u547D\u4EE4\uFF1A{path}",
+  cliCommandSelected: "\u5F53\u524D dsh \u547D\u4EE4\uFF1A{path}",
+  cliCommandTarget: "\u5F53\u524D\u542F\u52A8\u5668\u76EE\u6807\uFF1A{path}",
+  cliCommandShadowed: "\u53E6\u4E00\u4E2A dsh \u7684\u4F18\u5148\u7EA7\u66F4\u9AD8\u3002\u8BF7\u79FB\u9664\u6216\u8C03\u6574\u8BE5\u5B89\u88C5\u7684\u987A\u5E8F\uFF0C\u4EE5\u9ED8\u8BA4\u4F7F\u7528 Desktop \u547D\u4EE4\uFF1B\u4E5F\u53EF\u4EE5\u901A\u8FC7\u5B8C\u6574\u8DEF\u5F84\u8FD0\u884C Desktop \u547D\u4EE4\u3002",
+  cliCommandSelectionUnknown: "\u65E0\u6CD5\u786E\u8BA4 shell \u4E2D\u7684\u547D\u4EE4\u3002\u522B\u540D\u6216\u53E6\u4E00\u4E2A dsh \u5B89\u88C5\u53EF\u80FD\u5177\u6709\u66F4\u9AD8\u4F18\u5148\u7EA7\u3002",
+  cliCommandInstalled: "Desktop \u547D\u4EE4\u5DF2\u5B89\u88C5\u3002",
+  cliCommandNotInstalled: "\u5C06 Desktop \u547D\u4EE4\u6DFB\u52A0\u5230\u7EC8\u7AEF\u3002",
+  cliCommandBroken: "Desktop \u547D\u4EE4\u9700\u8981\u4FEE\u590D\u3002",
+  cliCommandInstall: "\u5B89\u88C5",
+  cliCommandRepair: "\u4FEE\u590D",
+  cliCommandRemove: "\u79FB\u9664",
+  cliCommandClose: "\u5173\u95ED",
+  cliCommandSwitch: "\u7EE7\u7EED\u4F7F\u7528 Desktop \u547D\u4EE4\uFF1F",
+  cliCommandPreserve: "\u73B0\u6709\u547D\u4EE4\u4F1A\u88AB\u4FDD\u7559\uFF0C\u4E0D\u4F1A\u4FEE\u6539\u5176\u4ED6\u5B89\u88C5\u6216 shell \u542F\u52A8\u6587\u4EF6\u3002",
+  cliCommandContinue: "\u7EE7\u7EED",
+  cliCommandInstallApp: "\u8BF7\u5148\u5C06 Desktop \u5B89\u88C5\u5230\u201C\u5E94\u7528\u7A0B\u5E8F\u201D\u6587\u4EF6\u5939\uFF0C\u518D\u7BA1\u7406 dsh \u547D\u4EE4\u3002",
+  cliCommandUpdating: "\u6B63\u5728\u5B89\u88C5\u66F4\u65B0\u3002\u8BF7\u5728\u5B89\u88C5\u5B8C\u6210\u540E\u7BA1\u7406\u547D\u4EE4\u3002",
+  cliCommandNewTerminal: "\u6253\u5F00\u65B0\u7EC8\u7AEF\u5E76\u8FD0\u884C dsh --version\u3002",
+  cliCommandRemoved: "\u5DF2\u79FB\u9664 Desktop \u547D\u4EE4\u6CE8\u518C\u3002",
+  cliCommandPreviousRestored: "\u5DF2\u6062\u590D\u4E4B\u524D\u7684\u542F\u52A8\u5668\u3002",
+  cliCommandOtherKept: "\u5176\u4ED6\u547D\u4EE4\u5B89\u88C5\u4FDD\u6301\u4E0D\u53D8\u3002",
+  cliCommandBackupKept: "\u4E4B\u524D\u7684\u542F\u52A8\u5668\u4FDD\u7559\u5728\uFF1A{path}",
+  cliCommandChanged: "\u5BF9\u8BDD\u6846\u6253\u5F00\u671F\u95F4\u547D\u4EE4\u6216 PATH \u5DF2\u6539\u53D8\u3002\u8BF7\u91CD\u65B0\u6253\u5F00\u201C\u7BA1\u7406 dsh \u547D\u4EE4\u201D\u68C0\u67E5\u5F53\u524D\u72B6\u6001\u3002",
+  cliCommandOwnershipError: "\u547D\u4EE4\u6CE8\u518C\u6216\u5907\u4EFD\u5DF2\u6539\u53D8\uFF0C\u672A\u79FB\u9664\u65E0\u5173\u547D\u4EE4\u3002",
+  cliCommandFailed: "\u65E0\u6CD5\u66F4\u65B0\u547D\u4EE4\u3002\u8BF7\u68C0\u67E5\u5E94\u7528\u662F\u5426\u5DF2\u5B89\u88C5\u3001\u76EE\u6807\u4F4D\u7F6E\u662F\u5426\u53EF\u5199\uFF0C\u7136\u540E\u91CD\u8BD5\u3002",
+  application: "\u5E94\u7528",
+  fileMenu: "\u6587\u4EF6",
+  closePage: "\u5173\u95ED\u9875\u9762\u6216\u7A97\u53E3",
+  aboutMenu: "\u5173\u4E8E DeepSeek Harness",
+  aboutProduct: "DeepSeek Harness",
+  aboutVersion: "\u7248\u672C V{version}",
+  hideApplication: "\u9690\u85CF DeepSeek Harness",
+  hideOtherApplications: "\u9690\u85CF\u5176\u4ED6",
+  showAllApplications: "\u663E\u793A\u5168\u90E8",
+  quitApplication: "\u9000\u51FA DeepSeek Harness",
+  openApplication: "\u6253\u5F00 DeepSeek Harness",
+  quit: "\u9000\u51FA",
+  cancel: "\u53D6\u6D88",
+  quitTitle: "\u9000\u51FA DeepSeek Harness\uFF1F",
+  quitActiveTasks: "\u5F53\u524D\u6B63\u5728\u8FD0\u884C\u7684\u4EFB\u52A1\u5C06\u4F1A\u4E2D\u65AD",
+  quitScheduledTasks: "\u5E94\u7528\u5173\u95ED\u671F\u95F4\uFF0C\u5B9A\u65F6\u4EFB\u52A1\u4E0D\u4F1A\u8FD0\u884C",
+  quitActiveAndScheduledTasks: "\u5F53\u524D\u6B63\u5728\u8FD0\u884C\u7684\u4EFB\u52A1\u5C06\u4F1A\u4E2D\u65AD\uFF0C\u4E14\u5E94\u7528\u5173\u95ED\u671F\u95F4\uFF0C\u5B9A\u65F6\u4EFB\u52A1\u4E0D\u4F1A\u8FD0\u884C",
+  backgroundNoticeBody: "\u6B63\u5728\u8FD0\u884C\u7684\u4EFB\u52A1\u4E0D\u4F1A\u4E2D\u65AD\uFF0C\u53EF\u5728\u7CFB\u7EDF\u6258\u76D8\u4E2D\u91CD\u65B0\u6253\u5F00\u7A97\u53E3",
+  backgroundNoticeConfirm: "\u786E\u8BA4",
+  edit: "\u7F16\u8F91",
+  menuBar: "\u5E94\u7528\u83DC\u5355",
+  delete: "\u5220\u9664",
+  undo: "\u64A4\u9500",
+  redo: "\u91CD\u505A",
+  cut: "\u526A\u5207",
+  copy: "\u590D\u5236",
+  paste: "\u7C98\u8D34",
+  selectAll: "\u5168\u9009",
+  startupFailed: "DeepSeek Harness \u65E0\u6CD5\u4F7F\u7528",
+  fatalSummary: "\u5E94\u7528\u65E0\u6CD5\u542F\u52A8\u6216\u5DF2\u610F\u5916\u505C\u6B62\u3002",
+  startupAddressInUse: "\u6709\u5176\u4ED6\u6B63\u5728\u8FD0\u884C\u7684 DSH\uFF08\u5982\u5176\u4ED6 dsh web\u3001\u684C\u9762\u7AEF\uFF09\uFF0C\u65E0\u6CD5\u540C\u65F6\u542F\u52A8\uFF0C\u8BF7\u9000\u51FA\u5176\u4ED6\u6B63\u5728\u8FD0\u884C\u7684 DSH \u540E\u91CD\u542F\u3002",
+  diagnosticTruncated: "\u2026 \u9519\u8BEF\u8BE6\u60C5\u5DF2\u622A\u77ED\u3002",
+  reportWrittenTo: "\u8BCA\u65AD\u62A5\u544A\uFF1A{path}",
+  startupReinstallAdvice: "\u5982\u679C\u5E94\u7528\u6587\u4EF6\u7F3A\u5931\u6216\u635F\u574F\uFF0C\u8BF7\u5173\u95ED\u5E94\u7528\u5E76\u91CD\u65B0\u5B89\u88C5\u3002\u4EFB\u52A1\u6570\u636E\u5B58\u50A8\u5728\u72EC\u7ACB\u4F4D\u7F6E\u3002",
+  exitApplication: "\u9000\u51FA",
+  restartApplication: "\u91CD\u542F",
+  recoveryOperationFailed: "\u6062\u590D\u64CD\u4F5C\u5931\u8D25",
+  disableThirdPartyPlugins: "\u7981\u7528\u7B2C\u4E09\u65B9\u63D2\u4EF6\u3001\u5907\u4EFD profile patch \u5E76\u91CD\u542F",
+  welcomeTitle: "DeepSeek Harness",
+  welcomeBrand: "DeepSeek Harness",
+  welcomeTaglineBefore: "\u6B22\u8FCE\u4F7F\u7528 ",
+  welcomeTaglineBrand: "DeepSeek Harness",
+  welcomeTaglineAfter: "",
+  welcomeDescription: "\u7EC4\u88C5\u65E0\u9650\u53EF\u80FD\uFF0C\u5171\u63A2\u667A\u80FD\u4E0A\u9650",
+  welcomeAuthStarting: "\u6B63\u5728\u6253\u5F00\u767B\u5F55\u2026",
+  welcomeAuthWaiting: "\u6CA1\u6709\u81EA\u52A8\u6253\u5F00\u6D4F\u89C8\u5668\uFF1F",
+  welcomeAuthWaitingDescription: "\u590D\u5236\u767B\u5F55\u94FE\u63A5\uFF0C\u7528\u6D4F\u89C8\u5668\u624B\u52A8\u6253\u5F00\u5B8C\u6210\u767B\u5F55",
+  welcomeAuthExchanging: "\u6B63\u5728\u5B8C\u6210\u767B\u5F55\u2026",
+  welcomeAuthExpired: "\u767B\u5F55\u5DF2\u8D85\u65F6",
+  welcomeAuthExpiredDescription: "\u8BF7\u91CD\u65B0\u767B\u5F55\u540E\u7EE7\u7EED\u64CD\u4F5C",
+  welcomeAuthFailed: "\u767B\u5F55\u672A\u5B8C\u6210\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  welcomeAuthCopyLink: "\u590D\u5236\u767B\u5F55\u94FE\u63A5",
+  welcomeAuthCopied: "\u5DF2\u590D\u5236",
+  welcomeAuthCopyFailed: "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5",
+  welcomeAuthCancel: "\u53D6\u6D88",
+  welcomeAuthRetry: "\u91CD\u65B0\u767B\u5F55",
+  welcomeSignIn: "\u767B\u5F55",
+  welcomeApiKey: "\u6DFB\u52A0 API Key",
+  welcomeKeyTitle: "\u6DFB\u52A0\u4E00\u4E2A API Key \u5F00\u59CB\u4F7F\u7528",
+  welcomeKeyDescription: "\u914D\u7F6E DeepSeek \u5B98\u65B9\u6A21\u578B\uFF0C\u5373\u53EF\u5F00\u59CB\u4F7F\u7528",
+  welcomeKeyPlaceholder: "\u8F93\u5165 API \u5BC6\u94A5",
+  welcomeKeySave: "\u4FDD\u5B58\u5E76\u7EE7\u7EED",
+  welcomeKeyLater: "\u7A0D\u540E\u914D\u7F6E",
+  welcomeKeyBack: "\u8FD4\u56DE\u767B\u5F55",
+  welcomeSessionExpired: "\u767B\u5F55\u4FE1\u606F\u5DF2\u5931\u6548\uFF0C\u8BF7\u91CD\u65B0\u767B\u5F55",
+  welcomeKeyBlank: "\u8BF7\u8F93\u5165 API \u5BC6\u94A5\u3002",
+  welcomeKeyInvalid: "\u8BF7\u4EC5\u8F93\u5165 API \u5BC6\u94A5\uFF0C\u4E0D\u8981\u5305\u542B\u5F15\u53F7\u3001\u7A7A\u683C\u6216\u73AF\u5883\u53D8\u91CF\u8D4B\u503C\u3002",
+  welcomeKeyFailed: "\u65E0\u6CD5\u4FDD\u5B58 API \u5BC6\u94A5\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  welcomeContinueFailed: "\u65E0\u6CD5\u6253\u5F00\u5DE5\u4F5C\u533A\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  sepPluginReport: "\u5168\u63D2\u4EF6\u66F4\u65B0\u517C\u5BB9\u6027\u62A5\u544A\u2026",
+  sepCancelUpdate: "\u53D6\u6D88\u5F85\u6267\u884C\u66F4\u65B0",
+  sepManagedUpdates: "\u6B64\u5B89\u88C5\u7531 DSH SEP \u7BA1\u7406\u3002\u8BF7\u4F7F\u7528 SEP \u66F4\u65B0\u4E2D\u5FC3\u68C0\u67E5\u517C\u5BB9\u6027\u5E76\u66F4\u65B0\uFF0C\u4EE5\u4FDD\u7559\u7528\u6237\u6570\u636E\u548C\u5176\u4ED6\u63D2\u4EF6\u3002",
+  checkUpdatesMenu: "\u68C0\u67E5\u66F4\u65B0\u2026",
+  sepCheckHostUpdates: "\u68C0\u67E5 DSH \u672C\u4F53\u66F4\u65B0\u2026",
+  sepCheckSuiteUpdates: "\u68C0\u67E5 SEP \u672C\u4F53\u66F4\u65B0\u2026",
+  reloadPageMenu: "\u5237\u65B0\u9875\u9762",
+  restartAppHostMenu: "\u91CD\u542F\u5E94\u7528\u4E0E Host",
+  updateCheckFailedTitle: "\u66F4\u65B0\u68C0\u67E5\u5931\u8D25",
+  updateCheckFailed: "\u68C0\u67E5\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
+  updateDownloadFailed: "\u4E0B\u8F7D\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  updateInstallFailed: "\u5B89\u88C5\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
+  updateCheckNetworkFailed: "\u68C0\u67E5\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u7F51\u7EDC\u8FDE\u63A5\u540E\u91CD\u8BD5\u3002",
+  updateDownloadNetworkFailed: "\u4E0B\u8F7D\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u7F51\u7EDC\u8FDE\u63A5\u540E\u91CD\u8BD5\u3002",
+  updateInstallNetworkFailed: "\u5B89\u88C5\u66F4\u65B0\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u7F51\u7EDC\u8FDE\u63A5\u540E\u91CD\u8BD5\u3002",
+  unknownError: "\u672A\u77E5\u9519\u8BEF",
+  updateCheckTitle: "\u68C0\u67E5\u66F4\u65B0",
+  updateCurrentDetail: "\u5F53\u524D\u7248\u672C\uFF1A{version}",
+  updateCurrent: "\u5DF2\u662F\u6700\u65B0\u7248\u672C",
+  updateChecking: "\u6B63\u5728\u68C0\u67E5\u66F4\u65B0\u2026",
+  updateDownload: "\u4E0B\u8F7D\u66F4\u65B0",
+  updateDownloadedTitle: "\u65B0\u7248\u672C {version} \u5DF2\u51C6\u5907\u5C31\u7EEA",
+  updateDownloadedDetail: "\u66F4\u65B0\u671F\u95F4\u5E94\u7528\u5C06\u6682\u65F6\u5173\u95ED\uFF0C\u5B8C\u6210\u540E\u4F1A\u81EA\u52A8\u6253\u5F00\u3002",
+  updateDownloadedDetailWindows: "\u66F4\u65B0\u671F\u95F4\u5E94\u7528\u5C06\u6682\u65F6\u5173\u95ED\uFF0C\u5B8C\u6210\u540E\u4F1A\u81EA\u52A8\u6253\u5F00\u3002\n\n\u66F4\u65B0\u53EF\u80FD\u9700\u8981\u4E00\u4E9B\u65F6\u95F4\uFF0C\u8BF7\u8010\u5FC3\u7B49\u5F85\uFF0C\u671F\u95F4\u8BF7\u52FF\u91CD\u590D\u542F\u52A8\u5E94\u7528\u3002",
+  updateClose: "\u5173\u95ED",
+  updateAcknowledge: "\u786E\u5B9A",
+  updateLater: "\u7A0D\u540E\u66F4\u65B0",
+  updateDownloading: "\u6B63\u5728\u4E0B\u8F7D {percent}%\u2026",
+  updateVerifying: "\u6B63\u5728\u6821\u9A8C\u66F4\u65B0\u6587\u4EF6\u2026",
+  updateInstalling: "\u6B63\u5728\u51C6\u5907\u91CD\u542F\u2026",
+  updateRetry: "\u91CD\u8BD5\u66F4\u65B0",
+  updateActiveTasks: "\u4ECD\u6709\u8FDB\u884C\u4E2D\u7684\u4EFB\u52A1",
+  updateActiveTasksDetail: "\u66F4\u65B0\u5C06\u505C\u6B62\u8FDB\u884C\u4E2D\u7684\u4EFB\u52A1\u5E76\u91CD\u542F\u5E94\u7528\uFF0C\u662F\u5426\u7EE7\u7EED\uFF1F",
+  updateStopTasks: "\u505C\u6B62\u4EFB\u52A1\u5E76\u66F4\u65B0",
+  updateTasksChanged: "\u6709\u65B0\u4EFB\u52A1\u5F00\u59CB\u8FD0\u884C\uFF0C\u8BF7\u91CD\u65B0\u786E\u8BA4\u662F\u5426\u505C\u6B62\u4EFB\u52A1\u5E76\u66F4\u65B0\u3002",
+  updateTasksUnavailable: "\u65E0\u6CD5\u786E\u8BA4\u4EFB\u52A1\u72B6\u6001\uFF0C\u8BF7\u5728\u5DE5\u4F5C\u533A\u5C31\u7EEA\u540E\u91CD\u8BD5\u66F4\u65B0\u3002",
+  updateStopFailed: "\u672A\u80FD\u5B89\u5168\u505C\u6B62\u4EFB\u52A1\uFF0C\u66F4\u65B0\u5C1A\u672A\u5B89\u88C5\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
+  updateTechnicalDetails: "\u67E5\u770B\u6280\u672F\u8BE6\u60C5",
+  updateTitle: "DeepSeek Harness \u66F4\u65B0",
+  updateAvailable: "\u53D1\u73B0\u65B0\u7248\u672C {version}",
+  updateDetail: "\u4E0B\u8F7D\u5B8C\u6210\u540E\uFF0C\u53EF\u5B89\u88C5\u5E76\u91CD\u542F\u5E94\u7528\u3002",
+  installAndRestart: "\u5B89\u88C5\u5E76\u91CD\u542F",
+  later: "\u7A0D\u540E",
+  updateFailedTitle: "\u66F4\u65B0\u5931\u8D25",
+  mandatoryTitle: "\u8BF7\u66F4\u65B0\u540E\u7EE7\u7EED\u4F7F\u7528",
+  mandatoryDetail: "\u5F53\u524D\u7248\u672C\u5DF2\u505C\u6B62\u652F\u6301\uFF0C\u8BF7\u66F4\u65B0\u540E\u7EE7\u7EED\u4F7F\u7528\u3002\u786E\u8BA4\u5B89\u88C5\u5E76\u91CD\u542F\u524D\uFF0C\u8FDB\u884C\u4E2D\u7684\u4EFB\u52A1\u4F1A\u7EE7\u7EED\u8FD0\u884C\u3002",
+  mandatoryUnavailable: "\u6682\u65F6\u65E0\u6CD5\u68C0\u67E5\u66F4\u65B0\u8981\u6C42\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
+  policyLoginTitle: "\u767B\u5F55\u6D4B\u8BD5\u73AF\u5883",
+  policyLoginRequired: "\u6B64\u6D4B\u8BD5\u7248\u9700\u8981\u5148\u901A\u8FC7\u98DE\u4E66\u767B\u5F55\uFF0C\u624D\u80FD\u68C0\u67E5\u66F4\u65B0\u8981\u6C42\u3002\u767B\u5F55\u4E0D\u4F1A\u4E0B\u8F7D\u6216\u5B89\u88C5\u66F4\u65B0\u3002",
+  policyLogin: "\u901A\u8FC7\u98DE\u4E66\u767B\u5F55",
+  policyLoginFailed: "\u98DE\u4E66\u767B\u5F55\u672A\u5B8C\u6210\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  policyLoginLoading: "\u6B63\u5728\u52A0\u8F7D\u767B\u5F55\u9875\u9762\u2026",
+  mandatoryNoRelease: "\u6682\u672A\u627E\u5230\u9002\u7528\u7684\u66F4\u65B0\uFF0C\u8BF7\u91CD\u65B0\u68C0\u67E5\u6216\u8054\u7CFB\u652F\u6301\u4EBA\u5458\u3002",
+  mandatoryRefresh: "\u91CD\u65B0\u68C0\u67E5",
+  mandatoryPage: "\u524D\u5F80\u5B98\u7F51\u4E0B\u8F7D",
+  mandatoryCopy: "\u590D\u5236\u4E0B\u8F7D\u94FE\u63A5",
+  mandatoryPageFailed: "\u65E0\u6CD5\u6253\u5F00\u5B98\u7F51\u4E0B\u8F7D\u9875\u9762\uFF0C\u8BF7\u590D\u5236\u94FE\u63A5\u540E\u5728\u6D4F\u89C8\u5668\u4E2D\u6253\u5F00\u3002",
+  mandatoryActionFailed: "\u64CD\u4F5C\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5\u3002\u5B8C\u6210\u66F4\u65B0\u540E\u624D\u80FD\u7EE7\u7EED\u4F7F\u7528\u5E94\u7528\u3002",
+  mandatoryReady: "\u66F4\u65B0\u5DF2\u51C6\u5907\u5C31\u7EEA",
+  mandatoryVersion: "\u65B0\u7248\u672C\uFF1A{version}",
+  mandatoryReadyDetail: "\u66F4\u65B0\u671F\u95F4\u5E94\u7528\u5C06\u6682\u65F6\u5173\u95ED\uFF0C\u5B8C\u6210\u540E\u4F1A\u81EA\u52A8\u6253\u5F00\u3002",
+  mandatoryDeferred: "\u8FDB\u884C\u4E2D\u7684\u4EFB\u52A1\u4F1A\u7EE7\u7EED\u8FD0\u884C\u3002\u8BF7\u5B8C\u6210\u66F4\u65B0\u540E\u518D\u64CD\u4F5C\u5E94\u7528\u3002",
+  mandatoryContinue: "\u7EE7\u7EED\u66F4\u65B0",
+  mandatoryInspecting: "\u6B63\u5728\u68C0\u67E5\u4EFB\u52A1\u72B6\u6001\u2026",
+  mandatoryStopping: "\u6B63\u5728\u505C\u6B62\u4EFB\u52A1\u2026",
+  mandatoryRestarting: "\u5E94\u7528\u5373\u5C06\u91CD\u542F\uFF0C\u8BF7\u7A0D\u5019\u3002",
+  mandatoryDownloadFailed: "\u66F4\u65B0\u6587\u4EF6\u4E0B\u8F7D\u6216\u51C6\u5907\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5\u3002",
+  mandatoryInstallFailed: "\u66F4\u65B0\u5C1A\u672A\u5B89\u88C5\uFF0C\u8BF7\u91CD\u65B0\u68C0\u67E5\u4EFB\u52A1\u540E\u91CD\u8BD5\u3002",
+  mandatoryOpenHelp: "\u9875\u9762\u672A\u6253\u5F00\uFF1F",
+  mandatoryReopen: "\u91CD\u65B0\u524D\u5F80\u5B98\u7F51\u4E0B\u8F7D",
+  mandatoryCopied: "\u94FE\u63A5\u5DF2\u590D\u5236",
+  mandatoryCopyFailed: "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u9009\u62E9\u5E76\u590D\u5236\u4E0B\u65B9\u94FE\u63A5\u3002",
+  mandatoryAddress: "\u4E0B\u8F7D\u94FE\u63A5",
+  mandatoryNotification: "\u8FD4\u56DE\u5E94\u7528\u786E\u8BA4\u5B89\u88C5\u5E76\u91CD\u542F\u3002"
+};
+function resolveDesktopLocale(locale) {
+  return locale.toLowerCase().startsWith("zh") ? { id: "zh-CN", messages: zh } : { id: "en", messages: en };
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-menu.ts
+function installWindowsMenu() {
+  const host = document.createElement("div");
+  host.dataset.windowsMenu = "";
+  const shadow = host.attachShadow({ mode: "open" });
+  const style = document.createElement("style");
+  style.textContent = `
+    :host { position: fixed; top: 0; left: var(--dsh-windows-menu-start, 48px); z-index: 1100;
+      height: var(--dsh-windows-titlebar-height); display: flex; align-items: center;
+      font-family: var(--dsw-font-family); -webkit-app-region: no-drag; }
+    [role=menubar] { display: flex; gap: 2px; }
+    button { height: 28px; padding: 0 10px; border: 0; border-radius: 6px;
+      background: transparent; color: var(--dsw-alias-label-secondary);
+      font: inherit; font-size: 14px; cursor: default; }
+    button:hover, button[aria-expanded=true] { background: var(--dsw-alias-interactive-bg-hover);
+      color: var(--dsw-alias-label-primary); }
+    button:focus-visible { outline: 2px solid var(--dsw-alias-state-business-primary); outline-offset: -2px; }
+    :host-context(html[data-input-modality='pointer']) button:focus-visible { outline-color: transparent; }
+  `;
+  const bar = document.createElement("div");
+  bar.setAttribute("role", "menubar");
+  let restoreEditor = () => {
+  };
+  const rememberEditor = (event) => {
+    const target = event.composedPath()[0];
+    if (!(target instanceof HTMLElement) || target === host || shadow.contains(target)) return;
+    if (!(target instanceof HTMLInputElement) && !(target instanceof HTMLTextAreaElement) && !target.matches('[contenteditable="true"]')) return;
+    const selection = document.getSelection();
+    const ranges = selection === null ? [] : Array.from({ length: selection.rangeCount }, (_, i) => selection.getRangeAt(i).cloneRange());
+    const input = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement ? target : void 0;
+    const start = input?.selectionStart;
+    const end = input?.selectionEnd;
+    const direction = input?.selectionDirection;
+    restoreEditor = () => {
+      if (!target.isConnected) return;
+      target.focus({ preventScroll: true });
+      if (input !== void 0 && start != null && end != null) input.setSelectionRange(start, end, direction ?? void 0);
+      else if (selection !== null && ranges.length > 0) {
+        selection.removeAllRanges();
+        for (const range of ranges) selection.addRange(range);
+      }
+    };
+  };
+  document.addEventListener("focusout", rememberEditor, true);
+  const createButton = (name, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("role", "menuitem");
+    button.setAttribute("aria-haspopup", "menu");
+    button.setAttribute("aria-expanded", "false");
+    button.tabIndex = index === 0 ? 0 : -1;
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+    });
+    button.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+    });
+    const open = async () => {
+      if (button.getAttribute("aria-expanded") === "true") return;
+      const rect = button.getBoundingClientRect();
+      button.setAttribute("aria-expanded", "true");
+      if (document.activeElement === host) restoreEditor();
+      try {
+        await import_electron3.ipcRenderer.invoke(DESKTOP_IPC.windowsMenu, name, rect.left, rect.bottom);
+      } catch (error) {
+        console.error("Desktop caption menu failed", error);
+      } finally {
+        button.setAttribute("aria-expanded", "false");
+      }
+    };
+    button.addEventListener("click", () => {
+      void open();
+    });
+    button.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        const next = buttons[index === 0 ? 1 : 0];
+        button.tabIndex = -1;
+        next.tabIndex = 0;
+        next.focus();
+      } else if (event.key === "ArrowDown") {
+        event.preventDefault();
+        void open();
+      }
+    });
+    bar.append(button);
+    return button;
+  };
+  const buttons = [createButton("application", 0), createButton("edit", 1)];
+  shadow.append(style, bar);
+  const mount = () => {
+    if (document.querySelector("[data-shell-overlay]") === null) return;
+    document.body.append(host);
+    observer.disconnect();
+  };
+  const observer = new MutationObserver(mount);
+  observer.observe(document.body, { childList: true, subtree: true });
+  mount();
+  const update = () => {
+    const { messages } = resolveDesktopLocale(document.documentElement.lang);
+    bar.setAttribute("aria-label", messages.menuBar);
+    buttons[0].textContent = messages.application;
+    buttons[1].textContent = messages.edit;
+  };
+  update();
+  return {
+    update,
+    dispose: () => {
+      observer.disconnect();
+      document.removeEventListener("focusout", rememberEditor, true);
+      host.remove();
+    }
+  };
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-windows.ts
+function syncWindowsAppearance() {
+  if (process.platform !== "win32") return;
+  const mark = () => {
+    const root = document.documentElement;
+    root.dataset.windowsTitlebar = "";
+    root.style.setProperty("--dsh-windows-titlebar-height", `${WINDOWS_TITLEBAR_HEIGHT}px`);
+  };
+  if (document.documentElement !== null) mark();
+  const install = () => {
+    mark();
+    const root = document.documentElement;
+    const menu = installWindowsMenu();
+    const probe = document.createElement("span");
+    probe.style.cssText = "position:fixed;visibility:hidden;pointer-events:none;background-color:var(--dsw-specific-sidebar-fill);color:var(--dsw-alias-label-primary)";
+    document.body.append(probe);
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (context === null) throw new Error("Desktop caption requires a 2D canvas context");
+    const nativeColor = (color) => {
+      context.clearRect(0, 0, 1, 1);
+      context.fillStyle = color;
+      context.fillRect(0, 0, 1, 1);
+      const [red, green, blue, alpha] = context.getImageData(0, 0, 1, 1).data;
+      return `rgba(${red}, ${green}, ${blue}, ${Number(alpha) / 255})`;
+    };
+    let previous = "";
+    const send = () => {
+      const style = getComputedStyle(probe);
+      const color = nativeColor(style.backgroundColor);
+      const symbolColor = nativeColor(style.color);
+      const values = [root.lang, color, symbolColor];
+      const current = JSON.stringify(values);
+      if (current === previous) return;
+      previous = current;
+      menu.update();
+      import_electron4.ipcRenderer.send(DESKTOP_IPC.windowsAppearance, ...values);
+    };
+    const observer = new MutationObserver(send);
+    observer.observe(root, { attributes: true, attributeFilter: ["lang"] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["data-ds-dark-theme", "style"] });
+    observer.observe(document.head, { childList: true, subtree: true, characterData: true });
+    document.head.addEventListener("load", send, true);
+    window.addEventListener("pagehide", () => {
+      observer.disconnect();
+      menu.dispose();
+      probe.remove();
+      document.head.removeEventListener("load", send, true);
+    }, { once: true });
+    send();
+  };
+  if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", install, { once: true });
+  else install();
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-mandatory-overlay.ts
+var import_electron5 = require("electron");
+
+// sep-origin/alpha2-desktop/apps/desktop/src/mandatory-update-ipc.ts
+var MANDATORY_IPC = {
+  status: "dsh-desktop:mandatory-status",
+  state: "dsh-desktop:mandatory-state",
+  action: "dsh-desktop:mandatory-action"
+};
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-mandatory-overlay.ts
+function installMandatoryUpdateOverlay() {
+  let disposed = false;
+  let state;
+  let host;
+  let frame;
+  let port;
+  let closing;
+  const publish = () => {
+    port?.postMessage({ type: "dsh-mandatory-state", state });
+  };
+  const remove = () => {
+    port?.close();
+    port = void 0;
+    host?.remove();
+    host = void 0;
+    frame = void 0;
+  };
+  const render = () => {
+    if (state === void 0 || document.readyState === "loading") return;
+    if (!state.policy.blocking) {
+      if (frame === void 0 || closing !== void 0) return;
+      publish();
+      closing = setTimeout(remove, 150);
+      return;
+    }
+    clearTimeout(closing);
+    closing = void 0;
+    if (frame === void 0) {
+      host = document.createElement("div");
+      host.style.cssText = `position:fixed;top:${WINDOWS_TITLEBAR_HEIGHT}px;left:0;right:0;bottom:0;z-index:2147483647`;
+      const shadow = host.attachShadow({ mode: "closed" });
+      frame = document.createElement("iframe");
+      frame.title = state.locale.messages.mandatoryTitle;
+      frame.style.cssText = "display:block;width:100%;height:100%;border:0;background:transparent";
+      frame.src = "dsh-app://shell/mandatory-update.html";
+      shadow.append(frame);
+      document.documentElement.append(host);
+      frame.addEventListener("load", () => {
+        port?.close();
+        const channel = new MessageChannel();
+        port = channel.port1;
+        port.onmessage = message;
+        frame?.contentWindow?.postMessage({ type: "dsh-mandatory-connect" }, "dsh-app://shell", [channel.port2]);
+        publish();
+        frame?.focus();
+      });
+    }
+    publish();
+  };
+  const receive = (_event, next) => {
+    state = next;
+    render();
+  };
+  const message = (event) => {
+    const value = event.data;
+    if (typeof value !== "object" || value === null || !("type" in value)) return;
+    if (value.type !== "dsh-mandatory-action" || !("id" in value) || !Number.isSafeInteger(value.id) || !("action" in value) || !("version" in value) || !("revision" in value)) return;
+    const target = port;
+    if (target === void 0) return;
+    void import_electron5.ipcRenderer.invoke(MANDATORY_IPC.action, value.action, value.version, value.revision).then(
+      () => {
+        target.postMessage({ type: "dsh-mandatory-result", id: value.id, ok: true });
+      },
+      () => {
+        target.postMessage({ type: "dsh-mandatory-result", id: value.id, ok: false });
+      }
+    );
+  };
+  const blockBackgroundKey = (event) => {
+    if (frame === void 0 || state?.policy.blocking !== true || event.composedPath().some((target) => target instanceof HTMLElement && target.hasAttribute("data-windows-menu"))) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    frame.focus();
+  };
+  import_electron5.ipcRenderer.on(MANDATORY_IPC.state, receive);
+  void import_electron5.ipcRenderer.invoke(MANDATORY_IPC.status).then((initial) => {
+    if (!disposed && state === void 0) {
+      state = initial;
+      render();
+    }
+  }, () => {
+  });
+  window.addEventListener("keydown", blockBackgroundKey, true);
+  window.addEventListener("DOMContentLoaded", render, { once: true });
+  window.addEventListener("pagehide", () => {
+    disposed = true;
+    clearTimeout(closing);
+    remove();
+    import_electron5.ipcRenderer.off(MANDATORY_IPC.state, receive);
+    window.removeEventListener("keydown", blockBackgroundKey, true);
+    window.removeEventListener("DOMContentLoaded", render);
+  }, { once: true });
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-browser.ts
+var import_electron6 = require("electron");
+function createDesktopBrowserBridge() {
+  const listeners = /* @__PURE__ */ new Map();
+  import_electron6.ipcRenderer.on(DESKTOP_IPC.browserOpenRequested, (_event, request) => {
+    if (typeof request !== "object" || request === null || !("lease" in request) || !("url" in request) || typeof request.lease !== "string" || typeof request.url !== "string") return;
+    const callbacks = listeners.get(request.lease);
+    if (callbacks === void 0) return;
+    for (const callback of [...callbacks]) {
+      try {
+        callback(request.url);
+      } catch (error) {
+        console.error("Desktop browser link handler failed", error);
+      }
+    }
+  });
+  return {
+    acquire: (workspace) => import_electron6.ipcRenderer.invoke(DESKTOP_IPC.browserAcquire, workspace),
+    release: (lease) => import_electron6.ipcRenderer.invoke(DESKTOP_IPC.browserRelease, lease),
+    onOpenRequested(lease, listener) {
+      let callbacks = listeners.get(lease);
+      if (callbacks === void 0) {
+        callbacks = /* @__PURE__ */ new Set();
+        listeners.set(lease, callbacks);
+      }
+      callbacks.add(listener);
+      return () => {
+        callbacks.delete(listener);
+        if (callbacks.size === 0 && listeners.get(lease) === callbacks) listeners.delete(lease);
+      };
+    }
+  };
+}
+
+// sep-origin/alpha2-desktop/apps/desktop/src/preload-app.ts
+function createProductApi() {
+  return {
+    protocolVersion: 1,
+    browser: createDesktopBrowserBridge(),
+    deviceInfo: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.deviceInfo),
+    keyboard: {
+      closeWindow: (revision) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.shortcutsCloseWindow, revision),
+      subscribe: (listener) => {
+        const handle = (_event, input) => {
+          if (input.kind === "iframe") {
+            const element = document.activeElement;
+            if (!(element instanceof HTMLIFrameElement) || !element.isConnected || !element.matches("iframe[data-sidebar-browser-frame], iframe[data-html-preview]")) return;
+            if (input.frameName === "" || element.name !== input.frameName) return;
+          }
+          if (input.kind === "webview") {
+            const element = document.activeElement;
+            if (element?.matches("webview[data-sidebar-browser-frame]") !== true || !element.isConnected || input.frameName === "" || element.getAttribute("name") !== input.frameName) return;
+          }
+          listener(input);
+        };
+        import_electron7.ipcRenderer.on(DESKTOP_IPC.shortcutsInput, handle);
+        return () => {
+          import_electron7.ipcRenderer.off(DESKTOP_IPC.shortcutsInput, handle);
+        };
+      }
+    },
+    shortcuts: {
+      get: (definitions) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.shortcutsGet, definitions),
+      edit: (edit, revision) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.shortcutsEdit, edit, revision),
+      recording: (active) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.shortcutsRecording, active),
+      subscribe(listener) {
+        const handle = (_event, snapshot) => {
+          listener(snapshot);
+        };
+        import_electron7.ipcRenderer.on(DESKTOP_IPC.shortcutsChanged, handle);
+        return () => {
+          import_electron7.ipcRenderer.off(DESKTOP_IPC.shortcutsChanged, handle);
+        };
+      }
+    },
+    updatePreferences: {
+      get: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.updatePreferencesGet),
+      set: (strength) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.updatePreferencesSet, strength),
+      subscribe(listener) {
+        const handle = (_event, preferences) => {
+          listener(preferences);
+        };
+        import_electron7.ipcRenderer.on(DESKTOP_IPC.updatePreferencesChanged, handle);
+        return () => {
+          import_electron7.ipcRenderer.off(DESKTOP_IPC.updatePreferencesChanged, handle);
+        };
+      }
+    },
+    sepUpdates: {
+      status: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.sepUpdatesStatus),
+      open: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.sepUpdatesOpen),
+      subscribe(listener) {
+        const handle = (_event, state) => {
+          listener(state);
+        };
+        import_electron7.ipcRenderer.on(DESKTOP_IPC.sepUpdatesPresentation, handle);
+        return () => {
+          import_electron7.ipcRenderer.off(DESKTOP_IPC.sepUpdatesPresentation, handle);
+        };
+      }
+    },
+    updates: {
+      status: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.updatesStatus),
+      open: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.updatesOpen),
+      subscribe(listener) {
+        const handle = (_event, state) => {
+          listener(state);
+        };
+        import_electron7.ipcRenderer.on(DESKTOP_IPC.updatesPresentation, handle);
+        return () => {
+          import_electron7.ipcRenderer.off(DESKTOP_IPC.updatesPresentation, handle);
+        };
+      }
+    }
+  };
+}
+if (location.protocol === `${SCHEME}:` && location.hostname === "app") {
+  import_electron7.contextBridge.exposeInMainWorld("dshOnboarding", {
+    hasApiKey: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.onboardingApiKey),
+    setActive: (active) => {
+      import_electron7.ipcRenderer.send(DESKTOP_IPC.onboardingActive, active);
+    }
+  });
+  import_electron7.ipcRenderer.on(DESKTOP_IPC.enterWorkspace, () => {
+    const body = document.body;
+    const previous = body.getAttribute("tabindex");
+    body.tabIndex = -1;
+    body.focus({ preventScroll: true });
+    if (previous === null) body.removeAttribute("tabindex");
+    else body.setAttribute("tabindex", previous);
+  });
+  syncWindowsAppearance();
+  if (process.platform === "win32") installMandatoryUpdateOverlay();
+  import_electron7.contextBridge.exposeInMainWorld("__DSH_DIRECTORY_PICKER__", {
+    pick: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.directoryPick)
+  });
+  import_electron7.contextBridge.exposeInMainWorld("__DSH_HOST_PATHS__", {
+    pathFor: (file) => import_electron7.webUtils.getPathForFile(file)
+  });
+  import_electron7.contextBridge.exposeInMainWorld("dshDesktopBoot", {
+    ready: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.boot),
+    failed: (message) => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.bootFailed, message)
+  });
+  import_electron7.contextBridge.exposeInMainWorld("dshPlatform", {
+    open: (page, bounds) => import_electron7.ipcRenderer.invoke(PLATFORM_IPC.open, page, bounds),
+    setBounds: (bounds) => import_electron7.ipcRenderer.invoke(PLATFORM_IPC.bounds, bounds),
+    close: () => import_electron7.ipcRenderer.invoke(PLATFORM_IPC.close)
+  });
+}
+markDocumentPlatform();
+syncWindowFullscreen();
+syncNativeTheme();
+import_electron7.contextBridge.exposeInMainWorld("dshDesktop", location.protocol === `${SCHEME}:` && location.hostname === "app" && process.isMainFrame ? createProductApi() : { protocolVersion: 1 });
+if (location.protocol === `${SCHEME}:` && location.hostname === "app") {
+  import_electron7.contextBridge.exposeInMainWorld("__DSH_LOCALE__", {
+    read: () => import_electron7.ipcRenderer.invoke(DESKTOP_IPC.localeBootstrap),
+    onChange: (locale) => {
+      import_electron7.ipcRenderer.send(DESKTOP_IPC.localeChanged, locale);
+    }
+  });
+}

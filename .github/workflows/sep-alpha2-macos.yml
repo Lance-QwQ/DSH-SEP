@@ -239,6 +239,7 @@ jobs:
   # Bind the immutable original artifact archive before extracting any executable.
   # This job reuses the first native build; it does not repeat compilation or publish a Release.
   desktop-carrier-smoke-existing:
+    if: false
     runs-on: macos-15
     timeout-minutes: 25
     permissions:
@@ -290,4 +291,56 @@ jobs:
           path: |
             ${{ runner.temp }}/sep-alpha2-desktop-smoke/
             ${{ runner.temp }}/sep-carrier-build-receipts/
+  
+  desktop-managed-overlay:
+    runs-on: macos-15
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      actions: read
+    env:
+      SEP_MAC_OVERLAY_CAPTURE_SHA256: c7a1d78b577648ceaa6e94006e8d910cfaff579c1a23bdec240921c2d4f2c597
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.19.0
+      - name: Verify public derived capture and admission rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
+          mkdir "$RUNNER_TEMP/overlay-receipts"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+          cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
+      - name: Fetch fixed successful carrier artifact and derive inner digest
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/managed-carrier-download"
+      - name: Extract bound carrier and install integrity-pinned ASAR tool
+        run: |
+          mkdir "$RUNNER_TEMP/managed-carrier"
+          ditto -x -k "$RUNNER_TEMP/managed-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/managed-carrier"
+          node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/asar-tools"
+      - name: Assemble isolated managed overlay and verify native signature
+        run: node tools/alpha2-macos/desktop/managed-overlay/apply-to-carrier.mjs "$RUNNER_TEMP/managed-carrier/DSH SEP.app" "$RUNNER_TEMP/managed-capture" "$RUNNER_TEMP/managed-overlay-result" "$RUNNER_TEMP/asar-tools/node_modules/@electron/asar/lib/asar.js"
+      - name: Actual missing-connection refusal without ordinary Host startup
+        run: node tools/alpha2-macos/desktop/managed-overlay/probe-missing-connection.mjs "$RUNNER_TEMP/managed-overlay-result/DSH SEP.app" "$RUNNER_TEMP/managed-negative"
+      - name: Preserve receipts and cleanup attribution
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-managed-overlay
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/overlay-receipts/
+            ${{ runner.temp }}/managed-carrier-download/DOWNLOAD-RECEIPT.json
+            ${{ runner.temp }}/asar-tools/RESULT.json
+            ${{ runner.temp }}/managed-overlay-result/RESULT.json
+            ${{ runner.temp }}/managed-overlay-result/*.log
+            ${{ runner.temp }}/managed-negative/
   
