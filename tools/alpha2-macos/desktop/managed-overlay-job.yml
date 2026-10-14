@@ -21,7 +21,7 @@ desktop-managed-overlay:
         test "$(uname -m)" = arm64
         export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
         mkdir "$RUNNER_TEMP/overlay-receipts"
-        node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
         cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
     - name: Fetch fixed successful carrier artifact and derive inner digest
       env:

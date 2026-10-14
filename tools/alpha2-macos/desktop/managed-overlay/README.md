@@ -42,14 +42,15 @@ preparer is never a Mac installation authority.
 
 ## Isolated reproduction
 
-The local origin tests use raw R6 and remain local. CI runs 20 tests using only
+The local origin tests use raw R6 and remain local. CI runs 22 tests using only
 the public derived capture (no native desktop or paid model claims):
 
 ```sh
 SEP_MAC_MANAGED_CAPTURE="$RUNNER_TEMP/managed-inputs" node --test \
   tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs \
   tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs \
-  tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs
+  tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs \
+  tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs
 ```
 
 For actual assembly, use an independently hash-verified carrier artifact and a
@@ -72,6 +73,9 @@ Assembly copies the whole app to a fresh directory, retains native dependencies
 and runtime, and repacks ASAR using each original entry's unpacked flag. It
 checks every unchanged original file's bytes, executable flag and link metadata.
 The original ASAR/unpacked directories remain in the output for comparison.
+`ElectronAsarIntegrity` is rebound to the new ASAR header before signing; an
+existing header binding must match the original archive. The overlay does not
+change Electron fuse settings. See [Electron's ASAR integrity contract](https://www.electronjs.org/docs/latest/tutorial/asar-integrity).
 `package.json` is merged with the two JS dependency declarations and explicit
 overlay metadata; it is not replaced by the R6 source manifest. App re-signing is
 ad hoc, with deep verification; this is neither Developer ID signing nor
@@ -80,7 +84,7 @@ notarization. Relative framework links are retained by `ditto`.
 ## Current validation boundary
 
 The original 21 portable tests passed on Windows against the exact R6 inputs;
-the public capture adds two checks for a combined 23 local definitions. JavaScript
+the public capture and ASAR plist checks bring this to 25 local definitions. JavaScript
 syntax checks passed. Actual Mac ASAR assembly/signature verification, a native
 missing-connection startup check and a protocol-4 broker desktop cycle are still
 pending. The separate carrier probe exercises official Host startup and native

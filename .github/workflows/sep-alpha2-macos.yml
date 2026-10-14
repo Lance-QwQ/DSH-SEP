@@ -239,7 +239,6 @@ jobs:
   # Bind the immutable original artifact archive before extracting any executable.
   # This job reuses the first native build; it does not repeat compilation or publish a Release.
   desktop-carrier-smoke-existing:
-    if: false
     runs-on: macos-15
     timeout-minutes: 25
     permissions:
@@ -315,7 +314,7 @@ jobs:
           test "$(uname -m)" = arm64
           export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
           mkdir "$RUNNER_TEMP/overlay-receipts"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
           cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
       - name: Fetch fixed successful carrier artifact and derive inner digest
         env:
@@ -344,3 +343,44 @@ jobs:
             ${{ runner.temp }}/managed-overlay-result/*.log
             ${{ runner.temp }}/managed-negative/
   
+  controlled-profile-lifecycle:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Build fixed native APFS helper
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-profile-lifecycle"
+          mkdir "$root"
+          echo "SEP_MAC_PROFILE_OUTPUT=$root" >> "$GITHUB_ENV"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          shasum -a 256 "$root/native-tree" > "$root/native-tree.sha256"
+          sw_vers > "$root/system.txt"
+          uname -a >> "$root/system.txt"
+      - name: Three real profile and complete API drain rounds
+        run: |
+          set +e
+          failed=0
+          for round in 1 2 3; do
+            SEP_MAC_TREE_HELPER="$SEP_MAC_PROFILE_OUTPUT/native-tree" SEP_MAC_LIFECYCLE_TEST_ROOT="$SEP_MAC_PROFILE_OUTPUT/lifecycle-$round" SEP_MAC_PROFILE_TEST_ROOT="$SEP_MAC_PROFILE_OUTPUT/profile-$round" node --test --test-reporter=tap tools/alpha2-macos/lifecycle/lifecycle.test.mjs tools/alpha2-macos/profile/controlled-files.test.mjs > "$SEP_MAC_PROFILE_OUTPUT/round-$round.log" 2>&1
+            rc=$?
+            cat "$SEP_MAC_PROFILE_OUTPUT/round-$round.log"
+            printf '%s %s\n' "$round" "$rc" >> "$SEP_MAC_PROFILE_OUTPUT/EXIT-CODES.txt"
+            if [ "$rc" != 0 ]; then failed=1; fi
+          done
+          exit "$failed"
+      - name: Preserve each planned sample
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-profile-lifecycle
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.log
+            ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
+            ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256

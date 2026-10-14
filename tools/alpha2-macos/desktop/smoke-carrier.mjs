@@ -6,6 +6,7 @@ import {createWriteStream} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {setTimeout as delay} from 'node:timers/promises';
 import {finished} from 'node:stream/promises';
+import {instrumentAtAppEntry} from './inspector-entry.mjs';
 assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
 const [appArg,outArg]=process.argv.slice(2),app=await realpath(appArg),out=resolve(outArg),temp=await realpath(process.env.RUNNER_TEMP);
 assert(out.startsWith(temp+'/')&&app.startsWith(temp+'/'));
@@ -14,12 +15,12 @@ const executable=join(app,'Contents/MacOS/DSH SEP'),rounds=[],cleanup=[];
 const wait=async(fn,ms,code)=>{const end=Date.now()+ms;while(Date.now()<end){const r=await fn();if(r)return r;await delay(100);}throw Error(code);};
 async function connect(url){
  assert(/^ws:\/\/127\.0\.0\.1:\d+\/[a-z0-9-]+$/i.test(url));
- const ws=new WebSocket(url),pending=new Map();let seq=0;
+ const ws=new WebSocket(url),pending=new Map(),listeners=new Set();let seq=0;
  await new Promise((res,rej)=>{const timer=setTimeout(()=>rej(Error('INSPECTOR_CONNECT_DEADLINE')),5000);ws.addEventListener('open',()=>{clearTimeout(timer);res();},{once:true});ws.addEventListener('error',()=>{clearTimeout(timer);rej(Error('INSPECTOR_CONNECT_FAILED'));},{once:true});});
- ws.addEventListener('message',event=>{const m=JSON.parse(event.data),p=pending.get(m.id);if(!p)return;pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error('INSPECTOR_RPC_FAILED')):p.resolve(m.result);});
+ ws.addEventListener('message',event=>{const m=JSON.parse(event.data),p=pending.get(m.id);for(const listener of listeners)listener(m);if(!p)return;pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error('INSPECTOR_RPC_FAILED')):p.resolve(m.result);});
  ws.addEventListener('close',()=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('INSPECTOR_CLOSED'));}pending.clear();});
  const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq,timer=setTimeout(()=>{pending.delete(id);reject(Error('INSPECTOR_RPC_DEADLINE'));},15000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}));});
- return {call,close:()=>ws.close(),eval:async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Object.assign(Error('INSPECTOR_EVALUATION_FAILED'),{diagnostic:{text:r.exceptionDetails.text,type:r.exceptionDetails.exception?.className,description:String(r.exceptionDetails.exception?.description??'').slice(0,2048)}});return r.result?.value;}};
+ return {call,onEvent:fn=>{listeners.add(fn);return()=>listeners.delete(fn);},close:()=>ws.close(),eval:async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Object.assign(Error('INSPECTOR_EVALUATION_FAILED'),{diagnostic:{text:r.exceptionDetails.text,type:r.exceptionDetails.exception?.className,description:String(r.exceptionDetails.exception?.description??'').slice(0,2048)}});return r.result?.value;}};
 }
 function instrumentation(appPath,receipt){return `(()=>{
  const Module=process.getBuiltinModule('module'),require=Module.createRequire(${JSON.stringify(join(appPath,'Contents/Resources/app.asar/package.json'))});
@@ -43,7 +44,7 @@ for(let index=1;index<=3;index++){
   child.once('exit',(code,signal)=>{exit={code,signal};});
   for(const [name,stream]of [['stdout',child.stdout],['stderr',child.stderr]]){const log=createWriteStream(join(data,name+'.log'),{flags:'wx'});logs.push({log,done:finished(log).then(()=>true,()=>false)});stream.pipe(log);stream.on('data',b=>{endpoint??=b.toString().match(/Debugger listening on (ws:\/\/127\.0\.0\.1:\d+\/[a-z0-9-]+)/i)?.[1];});}
   await wait(()=>{if(exit)throw Error('DESKTOP_EARLY_EXIT');return endpoint;},30000,'INSPECTOR_NOT_STARTED');
-  client=await connect(endpoint);await client.call('Runtime.enable');round.stage='attach-instrumentation';assert.equal(await client.eval(instrumentation(app,receipt)),true);await client.call('Runtime.runIfWaitingForDebugger');round.stage='desktop-ready';
+  client=await connect(endpoint);await client.call('Runtime.enable');round.stage='attach-instrumentation';await instrumentAtAppEntry(client,async()=>{assert.equal(await client.eval(instrumentation(app,receipt)),true);});round.stage='desktop-ready';
   await wait(async()=>{if(exit)throw Error('DESKTOP_EARLY_EXIT');const state=await client.eval(snapshot);return state.ready&&state.windows.some(w=>w.visible&&!w.loading);},120000,'DESKTOP_NOT_READY');
   let state=await client.eval(snapshot);assert.equal(state.name,'DSH SEP');assert.equal(state.version,'0.2.1-alpha.2');assert.equal(state.userData,join(data,'electron'));assert.equal(state.home,join(data,'home'));round.identity='pass';
   // Use the native welcome API without storing a fake credential.
