@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "Frozen production composition inputs; module native checks passed separately, main and full app have not yet run.",
+  "compile": {
+    "macro": "SEP_INSTALLER_MANIFEST_SHA256",
+    "forbiddenMacro": "SEP_INSTALLER_APPLICATION_TESTING",
+    "frameworks": [
+      "Cocoa",
+      "Security"
+    ],
+    "executable": "DSH SEP Installer"
+  },
+  "inputs": [
+    {
+      "path": "installer-ui/native/InstallerUI.m",
+      "bytes": 16429,
+      "sha256": "c36fdc9877c19e3ec77ca5da1b05610285d591ec5f19b32e1331bf9637fdfb80"
+    },
+    {
+      "path": "installer-ui/native/InstallerUI.h",
+      "bytes": 921,
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    },
+    {
+      "path": "installer-ui/admission/installer-admission.m",
+      "bytes": 13801,
+      "sha256": "44849f556423d7e06fdfe054c2ecd40133f538aca9c39a1782a319e5657fa6c2"
+    },
+    {
+      "path": "installer-ui/admission/installer-admission.h",
+      "bytes": 433,
+      "sha256": "42d2ac595d84e943d7c2d62fd809b17c124a6aaa064b016063c1cdd6885e236c"
+    },
+    {
+      "path": "installer-ui/transport/InstallerPipeTransport.m",
+      "bytes": 15915,
+      "sha256": "d4d84f548bb6068bdd942064b9fc7036af1495a58715636e23f9702bb832ce23"
+    },
+    {
+      "path": "installer-ui/transport/InstallerPipeTransport.h",
+      "bytes": 494,
+      "sha256": "c1ece550711b546ddd5589199f3a7646b857b32f489394bc0729a91f96ea491c"
+    },
+    {
+      "path": "installer-ui/application/InstallerApplication.m",
+      "bytes": 2150,
+      "sha256": "f8f0778e19d91e70f26a23492e4439c7df6138fa4428498d54a070c71befcc81"
+    },
+    {
+      "path": "installer-ui/application/InstallerApplication.h",
+      "bytes": 438,
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c"
+    },
+    {
+      "path": "installer-ui/application/FixedApplicationOpener.m",
+      "bytes": 5366,
+      "sha256": "512e89b6a2dda7ebb37c5b6ea913bcb5a51be7ecc2cb9df472e723aa33e105f4"
+    },
+    {
+      "path": "installer-ui/application/FixedApplicationOpener.h",
+      "bytes": 196,
+      "sha256": "6c50cdd2b71f275b49552cc9822fa23cfeb56112e7b93f3a6f5a56530c7b40dc"
+    },
+    {
+      "path": "installer-ui/application/main.m",
+      "bytes": 3600,
+      "sha256": "6c6130bb261f84aac7abc8416895fcdec99dbdc072990b859612c458b6dfa2a1"
+    }
+  ],
+  "sourceEvidence": {
+    "run": 38635520085,
+    "auditSha256": "0e8798df5deaab5e1d68afc56ea52d3a61dc8430ddb962995031ccc83a923f10"
+  }
+}

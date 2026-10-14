@@ -1,79 +1,61 @@
-name: SEP Alpha.2 macOS installer native composition contracts
+name: SEP Alpha.2 macOS complete installer build
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-installer-application-ready-fixture:
+  installer-application:
     runs-on: macos-15
-    timeout-minutes: 10
+    timeout-minutes: 45
     permissions:
       contents: read
+      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: 24.21.0
-      - name: Derive event-bound fixture and compile unchanged implementation
-        shell: bash
+          node-version: '24.21.0'
+      - name: Compile exact six production sources without executing dummy admission
+        run: node tools/alpha2-macos/package/preflight-installer-native.mjs "$RUNNER_TEMP/installer-native-preflight"
+      - name: Restore exact r61 signed application payload
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
+      - name: Build sign and restore complete installer application
+        run: node tools/alpha2-macos/package/assemble-installer-application.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/installer-application"
+      - name: Split unchanged archive for bounded evidence transport
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/installer-application-ready"
-          node tools/alpha2-macos/installer-ui/application/derive-ready-tests.mjs "$RUNNER_TEMP/installer-application-ready/application" > "$RUNNER_TEMP/installer-application-ready/DERIVATION.json"
-          shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.m tools/alpha2-macos/installer-ui/application/InstallerApplication.h > "$RUNNER_TEMP/installer-application-ready/INPUTS.sha256"
-          clang -fobjc-arc -fblocks -Wall -Wextra -DSEP_INSTALLER_APPLICATION_TESTING=1 -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.m "$RUNNER_TEMP/installer-application-ready/application/InstallerApplicationTests.m" -o "$RUNNER_TEMP/installer-application-ready/tests" > "$RUNNER_TEMP/installer-application-ready/compile.log" 2>&1
-      - name: Execute original eight behaviors after actual fixture readiness
-        shell: bash
-        run: |
-          set +e
-          "$RUNNER_TEMP/installer-application-ready/tests" > "$RUNNER_TEMP/installer-application-ready/RESULT.json" 2> "$RUNNER_TEMP/installer-application-ready/TRACE.jsonl"
-          code=$?
-          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-application-ready/exit.txt"
-          exit "$code"
+          node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/installer-application" "$RUNNER_TEMP/installer-transport"
+          node -e 'const fs=require("node:fs"),assert=require("node:assert/strict");const m=JSON.parse(fs.readFileSync(process.argv[1]));assert.equal(m.parts.length,2);' "$RUNNER_TEMP/installer-transport/transport-manifest.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: native-installer-application-ready-fixture
+          name: installer-application-evidence-r69
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/installer-application-ready/*.json
-            ${{ runner.temp }}/installer-application-ready/*.jsonl
-            ${{ runner.temp }}/installer-application-ready/*.log
-            ${{ runner.temp }}/installer-application-ready/*.sha256
-            ${{ runner.temp }}/installer-application-ready/*.txt
-            ${{ runner.temp }}/installer-application-ready/application/*.m
-            ${{ runner.temp }}/installer-application-ready/application/ORIGIN.json
-  native-installer-opener-candidate:
-    runs-on: macos-15
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: 24.21.0
-      - name: Validate four fixture cleanup contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          node --test tools/alpha2-macos/installer-ui/application/opener-cleanup.test.mjs
-      - name: Run original seven native LaunchServices opener definitions
-        shell: bash
-        run: |
-          set -euo pipefail
-          node tools/alpha2-macos/installer-ui/application/opener-native.mjs "$RUNNER_TEMP/installer-opener-candidate"
+            ${{ runner.temp }}/installer-native-preflight/*.json
+            ${{ runner.temp }}/installer-native-preflight/*.log
+            ${{ runner.temp }}/project-r61/RESULT.json
+            ${{ runner.temp }}/project-r61/*.log
+            ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
+            ${{ runner.temp }}/installer-application/*.json
+            ${{ runner.temp }}/installer-application/*.log
+            ${{ runner.temp }}/installer-application/*.app.resources-build/*.log
+            ${{ runner.temp }}/installer-transport/*.json
+            tools/alpha2-macos/package/MAC-PREVIEW-USER-GUIDE.md
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
         with:
-          name: native-installer-opener-candidate
+          name: installer-application-part1-r69
+          compression-level: 0
           if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-opener-candidate/*.json
-            ${{ runner.temp }}/installer-opener-candidate/*.stdout
-            ${{ runner.temp }}/installer-opener-candidate/*.stderr
+          path: ${{ runner.temp }}/installer-transport/*.0001.part
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: installer-application-part2-r69
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/installer-transport/*.0002.part
