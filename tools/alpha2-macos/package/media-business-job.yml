@@ -59,4 +59,5 @@ native-media-business:
           ${{ runner.temp }}/sep-media-business/prepared/PREPARED.json
           ${{ runner.temp }}/sep-media-business/tests/standalone-*/round-*.log
           ${{ runner.temp }}/sep-media-business/settings-tests/**/*.log
+          ${{ runner.temp }}/sep-media-business/settings-tests/native-*/round-*.json
           ${{ runner.temp }}/media-carrier-download/DOWNLOAD-RECEIPT.json

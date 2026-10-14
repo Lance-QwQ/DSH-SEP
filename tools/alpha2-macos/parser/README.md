@@ -66,5 +66,10 @@ The r23 and r25 native runs retained two document-parser failures. The r25
 synthetic diagnostic identified `EPERM` in Node's `realpathSync` on `/Users`
 before entry evaluation; Node `-e` under the same policy succeeded. The next
 candidate adds only literal ancestor metadata and tests that ancestor listing
-and sibling content remain refused. This candidate still requires native replay.
+and sibling content remain refused. Native run `38548342883`, commit
+`1c2554dc4b3caa0bd2b8d13f483f48e6f654299f`, verified the repair: 6 contract,
+2 entry and 12 native checks passed with zero skips. Artifact `11886180099`
+SHA-256 is `2f7a315ec016d90deeae5fe9729c4f2e31b777befdba721838de4525683fa0d1`.
+These are isolated parser checks; business/context/document routes still need
+their own integration evidence. See `ASSEMBLY.md` for the production boundary.
 `diagnose-native.mjs` is a synthetic CI diagnostic, excluded from the product.

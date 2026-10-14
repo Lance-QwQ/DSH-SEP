@@ -44,7 +44,7 @@ desktop-managed-overlay:
         export SEP_TEST_ROOT="$RUNNER_TEMP"
         export SEP_DESKTOP_TEST_ROOT="$RUNNER_TEMP/broker-integration-tests"
         mkdir "$SEP_DESKTOP_TEST_ROOT"
-        node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs tools/alpha2-macos/desktop/managed-overlay/refusal-observer.test.mjs tools/alpha2-macos/desktop/smoke-helpers.test.mjs tools/alpha2-macos/desktop/inspector-live.test.mjs > "$RUNNER_TEMP/overlay-receipts/broker-integration.tap"
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs tools/alpha2-macos/desktop/managed-overlay/refusal-observer.test.mjs tools/alpha2-macos/desktop/smoke-helpers.test.mjs tools/alpha2-macos/desktop/inspector-live.test.mjs tools/alpha2-macos/settings-ui/desktop-smoke.test.mjs > "$RUNNER_TEMP/overlay-receipts/broker-integration.tap"
     - name: Assemble actual Mac governed-image package from verified program inputs
       id: full_build
       if: always() && steps.full_broker.outcome == 'success'
@@ -61,7 +61,7 @@ desktop-managed-overlay:
       if: always() && steps.full_build.outcome == 'success'
       run: |
         programSha=$(node -e 'process.stdout.write(JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")).programSha256)' "$RUNNER_TEMP/final-package/RESULT.json")
-        node tools/alpha2-macos/desktop/smoke-full.mjs "$RUNNER_TEMP/final-package/DSH-SEP-macOS-Alpha2-preview/PROGRAM.json" "$programSha" "$RUNNER_TEMP/full-native-smoke"
+        node tools/alpha2-macos/settings-ui/desktop-smoke.mjs "$RUNNER_TEMP/final-package/DSH-SEP-macOS-Alpha2-preview/PROGRAM.json" "$programSha" "$RUNNER_TEMP/full-native-smoke"
     - name: Confirm installed program unchanged after real use
       id: full_inventory
       if: always() && steps.full_smoke.outcome == 'success'

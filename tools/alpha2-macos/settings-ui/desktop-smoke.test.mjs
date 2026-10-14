@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
+import {deriveDesktopSmoke} from './desktop-smoke.mjs';
+test('rendered-settings probe is added to the pinned successful three-cycle lifecycle source',async()=>{const source=await readFile(new URL('../desktop/smoke-full.mjs',import.meta.url),'utf8'),out=deriveDesktopSmoke(source);assert.equal((out.match(/await probeSettingsPage\(/g)??[]).length,1);assert(out.includes("row.settingsPage=await probeSettingsPage({client,windowId:win.id,round:index});"));assert(!out.includes('import.meta.url'));assert(out.includes('backgroundSameHost'));assert(out.includes('gracefulOwnedResources'));});
+test('changed lifecycle source cannot silently change the UI test carrier',async()=>{const source=await readFile(new URL('../desktop/smoke-full.mjs',import.meta.url),'utf8');assert.throws(()=>deriveDesktopSmoke(source+'\n'),{code:'SEP_MAC_SETTINGS_SMOKE_ORIGIN'});});
