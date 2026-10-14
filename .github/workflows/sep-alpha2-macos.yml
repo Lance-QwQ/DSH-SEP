@@ -1,44 +1,11 @@
-name: SEP Alpha.2 macOS native installer controller
+name: SEP Alpha.2 macOS private project UI bridge
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-installer-entry:
-    runs-on: macos-15
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: 24.21.0
-      - name: Record exact native environment
-        run: |
-          sw_vers > "$RUNNER_TEMP/installer-entry-environment.txt"
-          uname -a >> "$RUNNER_TEMP/installer-entry-environment.txt"
-      - name: Queue quarantine and UTF-8 contracts (five)
-        run: node --test --test-reporter=tap tools/alpha2-macos/installer-entry/boundaries.test.mjs > "$RUNNER_TEMP/installer-boundaries.tap"
-      - name: Run native installer account and controller contract
-        run: node tools/alpha2-macos/installer-entry/run-native.mjs "$RUNNER_TEMP/installer-entry" > "$RUNNER_TEMP/installer-entry-runner.log" 2>&1
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: sep-macos-installer-entry-r53
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-boundaries.tap
-            ${{ runner.temp }}/installer-entry-environment.txt
-            ${{ runner.temp }}/installer-entry-runner.log
-            ${{ runner.temp }}/installer-entry/*.json
-            ${{ runner.temp }}/installer-entry/*.tap
-            ${{ runner.temp }}/installer-entry/*.log
-
-  native-recovery-list-red:
-    needs: native-installer-entry
+  native-project-workflow-ui:
     runs-on: macos-15
     timeout-minutes: 15
     steps:
@@ -49,15 +16,33 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Four separate recovery-list RED definitions
-        run: node tools/alpha2-macos/installer-entry/run-list-native.mjs "$RUNNER_TEMP/recovery-list" > "$RUNNER_TEMP/recovery-list-runner.log" 2>&1
+      - name: Verify host and compile frozen native helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          root="$RUNNER_TEMP/project-workflow-ui"
+          mkdir -m 700 "$root"
+          sw_vers > "$root/mac-version.txt"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          printf 'SEP_MAC_TREE_HELPER=%s\n' "$root/native-tree" >> "$GITHUB_ENV"
+          printf 'SEP_MAC_TREE_HELPER_SHA256=%s\n' "$(shasum -a 256 "$root/native-tree" | cut -d' ' -f1)" >> "$GITHUB_ENV"
+      - name: Run 26 contracts and three actual single Profile IPC scenarios
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tools/alpha2-macos/desktop/project-workflow-ui/run-native.mjs "$RUNNER_TEMP/project-workflow-ui/results"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: sep-macos-recovery-list-red-r53
+          name: macos-project-workflow-ui-r54
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/recovery-list-runner.log
-            ${{ runner.temp }}/recovery-list/*.json
-            ${{ runner.temp }}/recovery-list/*.tap
-            ${{ runner.temp }}/recovery-list/*.log
+            ${{ runner.temp }}/project-workflow-ui/mac-version.txt
+            ${{ runner.temp }}/project-workflow-ui/results/INPUTS.json
+            ${{ runner.temp }}/project-workflow-ui/results/RESULT.json
+            ${{ runner.temp }}/project-workflow-ui/results/*.tap
+            ${{ runner.temp }}/project-workflow-ui/results/*.stderr
+            ${{ runner.temp }}/project-workflow-ui/results/*-fixtures/CHILD-CLEANUP.jsonl
+            ${{ runner.temp }}/project-workflow-ui/results/*-fixtures/PREFLIGHT.json

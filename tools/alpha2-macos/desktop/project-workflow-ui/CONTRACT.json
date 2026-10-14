@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "portable contracts only; new current-project UI bridge candidate; original application and frozen workflow unchanged",
+  "authority": {
+    "issuer": "business-host private WeakMap",
+    "renderer": "intent only; no approval/controller/paths",
+    "confirmation": "parented native Electron dialog after exact current review was presented",
+    "binding": [
+      "programSha256",
+      "ownerGeneration",
+      "windowId",
+      "documentGeneration",
+      "projectId",
+      "reviewId",
+      "reviewSha256",
+      "planHash",
+      "baseGeneration",
+      "baseSequence",
+      "baseSha256",
+      "targetSha256",
+      "expiresAt"
+    ]
+  },
+  "api": {
+    "host": "openHostBridge({binding,source,controller,project,closeDeadlineMs}) -> request/closeAdmission/close/whenClosed/inspectQuit/status",
+    "main": "createMainBridge({rpc,getWindow,confirmNative,binding}) -> begin/call/presented/commit/navigate/closeAdmission/inspectQuit",
+    "transport": "createClient(port,binding); serveHost(port,host,binding), canonical frames on owned pipe only",
+    "electron": "installMainHandlers({ipcMain,webContents,bridge}); createPreloadApi(ipcRenderer); createNativeConfirmation(dialog)"
+  },
+  "limits": {
+    "frameBytes": 4096,
+    "maxPending": 8,
+    "maxReplyBytes": 524288,
+    "pageBytes": 2048,
+    "documentSlots": 1,
+    "retainedReplies": 2,
+    "reviewTtlMs": 300000
+  },
+  "workflowOperations": [
+    "status",
+    "plans",
+    "select",
+    "review",
+    "discard",
+    "restore",
+    "recover",
+    "generations",
+    "cancel"
+  ],
+  "privateOperations": [
+    "bind",
+    "revoke",
+    "page",
+    "confirmCommit"
+  ],
+  "noHttpRoute": true,
+  "noModelTool": true,
+  "noSecondStore": true,
+  "lifecycle": {
+    "closeAdmission": "reject new calls, revoke contexts and approvals, abort native confirmation",
+    "close": "trusted composition calls only after existing API runtime drain; actual workflow close receipt required",
+    "inspectQuit": "pending workflow request or native confirmation counts active",
+    "unknown": "blocked; no force kill or release claim"
+  },
+  "tests": {
+    "portable": "real workflow adapter with controlled storage boundary; synthetic BrowserWindow and native-dialog result",
+    "portableExpected": 26,
+    "nativeExpected": 3,
+    "native": "not_run; planned same real project/store/Profile plus owned child IPC; no synthetic transaction",
+    "fullApplication": "not_run",
+    "physicalFinder": "not_run",
+    "nativeConfirmationUi": "not_run"
+  }
+}

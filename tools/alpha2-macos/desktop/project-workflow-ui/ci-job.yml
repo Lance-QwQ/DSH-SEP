@@ -1,0 +1,37 @@
+  native-project-workflow-ui:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.21.0'
+      - name: Verify host and compile frozen native helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          root="$RUNNER_TEMP/project-workflow-ui"
+          mkdir -m 700 "$root"
+          sw_vers > "$root/mac-version.txt"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          printf 'SEP_MAC_TREE_HELPER=%s\n' "$root/native-tree" >> "$GITHUB_ENV"
+          printf 'SEP_MAC_TREE_HELPER_SHA256=%s\n' "$(shasum -a 256 "$root/native-tree" | cut -d' ' -f1)" >> "$GITHUB_ENV"
+      - name: Run 26 contracts and three actual single Profile IPC scenarios
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tools/alpha2-macos/desktop/project-workflow-ui/run-native.mjs "$RUNNER_TEMP/project-workflow-ui/results"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-project-workflow-ui
+          path: |
+            ${{ runner.temp }}/project-workflow-ui/mac-version.txt
+            ${{ runner.temp }}/project-workflow-ui/results/INPUTS.json
+            ${{ runner.temp }}/project-workflow-ui/results/RESULT.json
+            ${{ runner.temp }}/project-workflow-ui/results/*.tap
+            ${{ runner.temp }}/project-workflow-ui/results/*.stderr
+            ${{ runner.temp }}/project-workflow-ui/results/*-fixtures/CHILD-CLEANUP.jsonl
+            ${{ runner.temp }}/project-workflow-ui/results/*-fixtures/PREFLIGHT.json
