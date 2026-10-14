@@ -1,0 +1,15 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {EventEmitter} from 'node:events';import {PassThrough,Duplex} from 'node:stream';
+const mod=await import('./endpoint.mjs').catch(()=>({})),binding={nonce:'a'.repeat(64),programSha256:'b'.repeat(64),ownerGeneration:'generation-1'};
+function pair(){const a=new PassThrough(),b=new PassThrough(),ports=[Duplex.from({readable:a,writable:b}),Duplex.from({readable:b,writable:a})];for(const p of ports)p.on('error',()=>{});return ports;}
+const tick=()=>new Promise(setImmediate);
+test('owned endpoint initializes exact PROGRAM and installs four actual handlers for current window',async()=>{
+ assert.equal(typeof mod.openOwnedEndpoint,'function');const [port,peer]=pair(),frame={url:'dsh-app://app/index.html'},webContents=Object.assign(new EventEmitter(),{mainFrame:frame}),window={id:7,webContents,isDestroyed:()=>false,isVisible:()=>true},handlers=new Map(),ipcMain={handle:(k,v)=>handlers.set(k,v),removeHandler:k=>handlers.delete(k)};
+ let requests=[];peer.on('data',b=>{for(const line of b.toString().trim().split('\n')){const m=JSON.parse(line);requests.push(m);const payload={status:'pass',programSha256:binding.programSha256,ownerGeneration:binding.ownerGeneration};peer.write(JSON.stringify({schema:1,...binding,type:'response',id:m.id,payload})+'\n');}});
+ const pending=mod.openOwnedEndpoint({port,programSha256:binding.programSha256,ipcMain,getWindow:()=>window,confirmNative:async()=>({accepted:false,omissionsAcknowledged:false})});peer.write(JSON.stringify({schema:1,type:'initialize',...binding})+'\n');const endpoint=await pending;endpoint.attachWindow(window);endpoint.attachWindow(window);assert.equal(handlers.size,4);await handlers.get('sep-current-project:begin')({sender:webContents,senderFrame:frame});assert.equal(requests[0].method,'bind');assert.equal(requests[0].programSha256,binding.programSha256);endpoint.closeAdmission();assert.equal(handlers.size,0);assert.equal(endpoint.status().admissionOpen,false);port.destroy();peer.destroy();
+});
+test('wrong physical PROGRAM binding refuses endpoint before any handler is installed',async()=>{
+ assert.equal(typeof mod.openOwnedEndpoint,'function');const [port,peer]=pair();let installed=0;const p=assert.rejects(mod.openOwnedEndpoint({port,programSha256:'c'.repeat(64),ipcMain:{handle(){installed++;}},getWindow:()=>undefined,confirmNative:async()=>{}}),{code:'SEP_PROJECT_UI_BINDING'});peer.write(JSON.stringify({schema:1,type:'initialize',...binding})+'\n');await p;assert.equal(installed,0);port.destroy();peer.destroy();
+});
+test('partial initialize EOF refuses endpoint and creates no cleanup success',async()=>{
+ assert.equal(typeof mod.openOwnedEndpoint,'function');const [port,peer]=pair();const p=assert.rejects(mod.openOwnedEndpoint({port,programSha256:binding.programSha256,ipcMain:{},getWindow:()=>undefined,confirmNative:async()=>{}}),{code:'SEP_PROJECT_UI_CHANNEL'});peer.end('{"schema":1');await p;port.destroy();peer.destroy();await tick();
+});

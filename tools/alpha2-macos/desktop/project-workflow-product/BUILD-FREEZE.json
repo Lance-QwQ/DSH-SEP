@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Windows Node 24.21.0 product build candidate contracts only",
+  "tests": {
+    "definitions": 16,
+    "pass": 16,
+    "fail": 0,
+    "skip": 0,
+    "cancelled": 0,
+    "logPath": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-workflow-product-red-r1\\GREEN-build-freeze.tap",
+    "logSha256": "584b491d68f8d88824368c47626cd80b81c2cd8874fe6ab50c803065520ddb28"
+  },
+  "productRuntime": {
+    "count": 76,
+    "extraCount": 18,
+    "controllerReplaced": true,
+    "asarEdits": 8,
+    "hostEdits": 3
+  },
+  "nativeApplication": "not_run",
+  "nativeDialog": "not_run",
+  "physicalFinder": "not_run",
+  "excluded": [
+    "native-*",
+    "derive-native.mjs",
+    "ax-capability.m",
+    "NATIVE-ORIGIN.json"
+  ],
+  "files": [
+    {
+      "path": "BASELINE.json",
+      "bytes": 1095,
+      "sha256": "23f0980f94f49d6ca46e7c511e4942021bc59201c12b6b7bd07eb7d22f467362"
+    },
+    {
+      "path": "EXPORT-MAP.json",
+      "bytes": 5627,
+      "sha256": "a1871fc43c0dbbdfa2ead24f96af5bb9f283773b52a649458fcbe9e4fcb34d3d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6205,
+      "sha256": "38f5fa8e1d2874f9255e76fcfa0afbbf7a95c1541b90ee2a8d943ada194d9597"
+    },
+    {
+      "path": "RUNTIME-ORIGIN-r2.json",
+      "bytes": 18826,
+      "sha256": "5f37e88711b487d8e54a307fa36308b77cb89bc3a687719b3acdd17a368cce11"
+    },
+    {
+      "path": "RUNTIME-ORIGIN.json",
+      "bytes": 9887,
+      "sha256": "f1bfbdfec80aff0f541dc6e18b38abe5d7c5d9477fe8eb0dc3935b6417d41b7f"
+    },
+    {
+      "path": "apply-to-application.mjs",
+      "bytes": 7980,
+      "sha256": "b31f6733f33410b58fa5a2f893132361476a2b13957fcbdea724e2d23606f0e5"
+    },
+    {
+      "path": "asar.test.mjs",
+      "bytes": 1658,
+      "sha256": "81b5666ac2a266d687b13dde47a96e0e4042d437660cc39ed5a03b64235b1240"
+    },
+    {
+      "path": "baseline.test.mjs",
+      "bytes": 3325,
+      "sha256": "e85c9b7e69fc13151ab6b9f092e9dbaa4a2cbaac0e622e6bb13e4cd53678cf3c"
+    },
+    {
+      "path": "business-host.mjs",
+      "bytes": 3640,
+      "sha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb"
+    },
+    {
+      "path": "client.test.mjs",
+      "bytes": 1136,
+      "sha256": "6b95835c870aacb8ef0852140d62392af58364370cc1f9949f1fa5f2bd28605a"
+    },
+    {
+      "path": "controller.mjs",
+      "bytes": 2596,
+      "sha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361"
+    },
+    {
+      "path": "derive-asar.mjs",
+      "bytes": 2738,
+      "sha256": "4c1b31b2bb6abadac40006f63196df55c783a3a205ac82321ace04ea5ddf680c"
+    },
+    {
+      "path": "derive-runtime.mjs",
+      "bytes": 10626,
+      "sha256": "f8b24dfacde738ab442e98d06c82f85bd8ee3e56bcea021c06517403f20b5233"
+    },
+    {
+      "path": "endpoint.mjs",
+      "bytes": 3872,
+      "sha256": "c3e54a7f3e32c09d6e941730cb2e49f34a58d249df55ad456c448d88bb21c6b7"
+    },
+    {
+      "path": "endpoint.test.mjs",
+      "bytes": 3008,
+      "sha256": "24821a93457d7d188c1f9d09ef0d7b1aff0452e8c10a9b3eb18ce9a043920285"
+    },
+    {
+      "path": "fixture-business.mjs",
+      "bytes": 643,
+      "sha256": "7738601ba0b098372ee225a1c525239a714c97100a67f0f040c1981d56913083"
+    },
+    {
+      "path": "fixture-desktop.mjs",
+      "bytes": 937,
+      "sha256": "b9c6fbd09c4203d7318d24ce0c02796162c554d0e26c145c89fafd21aadbce95"
+    },
+    {
+      "path": "host-owner.mjs",
+      "bytes": 6302,
+      "sha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8"
+    },
+    {
+      "path": "launch-full.mjs",
+      "bytes": 9327,
+      "sha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069"
+    },
+    {
+      "path": "origin.test.mjs",
+      "bytes": 2886,
+      "sha256": "c8ca7486de39222dbf8d5c199503a6392d4d962a97cfefa705fe7346048ead0b"
+    },
+    {
+      "path": "overlay.mjs",
+      "bytes": 758,
+      "sha256": "c5451e02fdbbbc3ae288314c1f3bb1f9c0c4689ad06641f13f5f7e1f7430b594"
+    },
+    {
+      "path": "overlay.test.mjs",
+      "bytes": 1715,
+      "sha256": "60f325a612b7ce3250f2829c1b5758e0faae2b99f87179d91dc48cd4c0f8433c"
+    },
+    {
+      "path": "owner.test.mjs",
+      "bytes": 2110,
+      "sha256": "6ccb4830acc998a9c3b1bd488335a19f01e0ac987d56b3b8ae686d59c1fc9135"
+    },
+    {
+      "path": "package-inputs.mjs",
+      "bytes": 2793,
+      "sha256": "16688c98f058f994e40788a49cb74571f25bde0a27f6195645b33aaa87acd373"
+    },
+    {
+      "path": "preload-harness.mjs",
+      "bytes": 1131,
+      "sha256": "c8334efabadb83a31a99cdbfa7b1a464deebb1746eb25d336b873b2dab276597"
+    },
+    {
+      "path": "prepare-baseline.mjs",
+      "bytes": 2568,
+      "sha256": "c995e75b686fed5e7a02f1778d24fada739f4b10f31bb66b7e2c4aa36328c009"
+    },
+    {
+      "path": "profile-layout.mjs",
+      "bytes": 2050,
+      "sha256": "1de544f372f2540d6681999610678146aa6b4b16dd1a984d9f56de5a79d2d4f5"
+    },
+    {
+      "path": "profile-plugin.mjs",
+      "bytes": 3942,
+      "sha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49"
+    },
+    {
+      "path": "relay.mjs",
+      "bytes": 1847,
+      "sha256": "cae4901893c83a1aa03a7526d4d479bd165453790f900209a89491e716142db0"
+    },
+    {
+      "path": "relay.test.mjs",
+      "bytes": 2491,
+      "sha256": "cbbbc53a0ba3318358aecec8a6a63da80bbf051cf2029adbd58a67a65c2603ef"
+    },
+    {
+      "path": "standalone.mjs",
+      "bytes": 4764,
+      "sha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128"
+    },
+    {
+      "path": "ui/lib/client.js",
+      "bytes": 6682,
+      "sha256": "43c94f0026e722d7852e3c961241fa1e64119b68d7df878fded7007472d746d3"
+    },
+    {
+      "path": "ui/lib/index.js",
+      "bytes": 259,
+      "sha256": "63b2b2264c9265702fe435d2ed462d659106c760b033723d02d4ea4710e58e21"
+    },
+    {
+      "path": "ui/package.json",
+      "bytes": 535,
+      "sha256": "3781adcb5be9838b0afed260dfcb96d0bd919e000a832e2aa3ec00369b7f3550"
+    }
+  ]
+}
