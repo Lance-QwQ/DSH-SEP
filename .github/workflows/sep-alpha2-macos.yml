@@ -1,13 +1,13 @@
-name: SEP Alpha.2 macOS fixed installer and installed lifecycle
+name: SEP Alpha.2 macOS pending-plan startup admission
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-installer-integration:
+  native-pending-startup:
     runs-on: macos-15
-    timeout-minutes: 60
+    timeout-minutes: 20
     permissions:
       contents: read
       actions: read
@@ -18,35 +18,27 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Record actual native environment
-        run: |
-          set -euo pipefail
-          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installer-integration-system.txt"
-      - name: Restore one fixed signed installer archive
+      - name: Restore immutable r61 native dependency carrier
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/package/restore-installer-application.mjs "$RUNNER_TEMP/fixed-installer"
-      - name: Original lifecycle then real-button installation then installed first boot
         run: |
-          set -euo pipefail
-          result="$RUNNER_TEMP/fixed-installer/RESULT.json"
-          digest="$(shasum -a 256 "$result" | awk '{print $1}')"
-          node tools/alpha2-macos/installer-ui/integration/run-full.mjs "$result" "$digest" "$RUNNER_TEMP/installer-integration"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+          node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/pending-r61"
+      - name: Real Mac factory, P2, parser and pending review admission
+        run: |
+          node tools/alpha2-macos/desktop/project-workflow-product/pending-startup/run-native.mjs "$RUNNER_TEMP/pending-r61" "$RUNNER_TEMP/pending-native"
+      - name: Preserve exact inputs, original failures and close receipts
         if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: installer-integration-native-r72
+          name: sep-macos-pending-startup-r73
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/installer-integration-system.txt
-            ${{ runner.temp }}/fixed-installer/RESULT.json
-            ${{ runner.temp }}/fixed-installer/SOURCE-ASSEMBLY.json
-            ${{ runner.temp }}/fixed-installer/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/fixed-installer/*.log
-            ${{ runner.temp }}/installer-integration/*.json
-            ${{ runner.temp }}/installer-integration/*.jsonl
-            ${{ runner.temp }}/installer-integration/*.log
-            ${{ runner.temp }}/installer-integration/installed-receipt/*.json
-            ${{ runner.temp }}/installer-integration/installed-startup/*.json
-            ${{ runner.temp }}/installer-integration/installed-startup/*.jsonl
-            ${{ runner.temp }}/installer-integration/installed-startup/*.log
+            ${{ runner.temp }}/pending-native/RESULT.json
+            ${{ runner.temp }}/pending-native/INPUTS.json
+            ${{ runner.temp }}/pending-native/parser-fixture.json
+            ${{ runner.temp }}/pending-native/native.tap
+            ${{ runner.temp }}/pending-native/native.stderr
+            ${{ runner.temp }}/pending-native/receipts/*.json
+            ${{ runner.temp }}/pending-r61/RESULT.json
+            ${{ runner.temp }}/pending-r61/*.log
+            ${{ runner.temp }}/pending-r61/evidence/project-build/RESULT.json
