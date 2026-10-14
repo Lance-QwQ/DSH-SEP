@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "stage": "red-scaffold",
+  "entry": "SEPInstallerVerifyMainBundle(int argc, NSString **failure)",
+  "sourceOfPaths": "NSBundle.mainBundle only; argc must equal 1; no path or executable from environment or arguments",
+  "binary": "Contents/MacOS/DSH SEP Installer",
+  "manifest": "Contents/Resources/INSTALLER.json",
+  "compileTimeHash": "SEP_INSTALLER_MANIFEST_SHA256",
+  "manifestContract": "../manifest.mjs",
+  "nativeScope": [
+    "Exact INSTALLER manifest raw-byte hash and strict shape",
+    "Fixed Node, controller, entry helper and core helper hashes and executable role modes",
+    "Exact declared runtime file closure; no unlisted files or test entries",
+    "Payload directory identity, receipt raw hash, receipt metadata, PROGRAM and BOOTSTRAP raw hashes",
+    "No symlinks or regular-file hardlinks; owner must be effective uid or root; no group/world writable components",
+    "Native held-fd reads with before/after stat, F_GETPATH and reopen identity checks"
+  ],
+  "limits": {"manifestBytes": 262144, "receiptBytes": 33554432, "executableBytes": 268435456, "runtimeFileBytes": 4194304, "runtimeTotalBytes": 67108864, "runtimeFiles": 1024, "runtimeEntries": 2048, "runtimeDepth": 32},
+  "payloadFullInventory": "Deferred to fixed hash-bound trusted Node bundle configuration and controller preview; native layer does not claim this check",
+  "success": "Returns internally verified fixed-role paths and hashes; no child process started and no open descriptor transferred",
+  "revalidation": "This receipt is admission evidence, not a lasting filesystem capability; trusted Node must revalidate its manifest, closure and full payload before preview/install",
+  "testDefinitions": 29,
+  "testOnly": ["SEP_INSTALLER_ADMISSION_REPORT exposes verified config to synthetic tests", "SEP_INSTALLER_ADMISSION_TEST_HOOK exposes one fixed held-fd read boundary through owned fd 3; omitted from production"],
+  "nonTestProbe": "Always refuses SEP_INSTALLER_UI_NOT_CONNECTED even after successful admission; it is not an installer UI",
+  "isolationLimit": "Ad-hoc signing and same-user re-signing are not an isolation boundary; arbitrary same-user code is outside this guarantee"
+}

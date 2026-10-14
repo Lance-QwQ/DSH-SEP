@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "kind": "implementation-pending-reference",
+  "status": "not_run",
+  "source": "../../bootstrap/production-config.inc.m",
+  "sourceSha256": "b6500204cc88821be5668efa55da305ef4cfa398d6719b47ef65a60c56420990",
+  "manifestSource": "../manifest.mjs",
+  "manifestSourceSha256": "24a6ce86f6b1fe060e26345208d6779cb4d2261793cbf8d85af0b0d767572775",
+  "scope": "Read-only reference for native held-fd read/hash/location and runtime inventory primitives; no claim of mechanical derivation until implementation exists",
+  "changesPlanned": ["Installer manifest exact schema and fixed roles", "Installer executable NSBundle identity", "Receipt and payload manifest hashes", "Test-only immutable read-boundary rendezvous", "Bounded native reads and descriptor cleanup without spawning"]
+}
