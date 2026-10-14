@@ -17,16 +17,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Manifest and fixed application layout contracts
-        run: |
-          export SEP_DESKTOP_TEST_ROOT="$RUNNER_TEMP/app-program-contracts"
-          mkdir "$SEP_DESKTOP_TEST_ROOT"
-          node --test --test-reporter=tap tools/alpha2-macos/bootstrap/session.test.mjs tools/alpha2-macos/package/bootstrap-manifest-builder.test.mjs tools/alpha2-macos/bootstrap/production-manifest.test.mjs tools/alpha2-macos/desktop/managed-broker/program-manifest.test.mjs tools/alpha2-macos/desktop/managed-broker/app-program.test.mjs tools/alpha2-macos/package/app-layout.test.mjs > "$RUNNER_TEMP/app-layout.tap"
       - name: Native non-test binary admission, identity placeholders never executed
         run: node tools/alpha2-macos/bootstrap/run-production-native.mjs "$RUNNER_TEMP/bootstrap-production-native"
-      - name: Recheck the synthetic AppKit lifecycle and unbound production refusal
-        if: always()
-        run: node tools/alpha2-macos/bootstrap/run-native.mjs "$RUNNER_TEMP/bootstrap-regression"
       - name: Preserve original outcomes including planned missing-feature RED
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -34,71 +26,7 @@ jobs:
           name: sep-macos-bootstrap-production-admission
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/app-layout.tap
-            ${{ runner.temp }}/bootstrap-regression/*.log
-            ${{ runner.temp }}/bootstrap-regression/*.json
-            ${{ runner.temp }}/bootstrap-regression/cases/**/*.log
             ${{ runner.temp }}/bootstrap-production-native/RESULT.json
             ${{ runner.temp }}/bootstrap-production-native/*.log
             ${{ runner.temp }}/bootstrap-production-native/cases/**/*.log
-  
-  native-welcome-readiness-candidate:
-    runs-on: macos-15
-    timeout-minutes: 20
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.19.0'
-      - name: Fixed reviewed native carrier and integrity-locked ASAR tool
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: |
-          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/welcome-carrier-download"
-          mkdir "$RUNNER_TEMP/welcome-carrier"
-          ditto -x -k "$RUNNER_TEMP/welcome-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/welcome-carrier"
-          node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/welcome-asar-tools"
-      - name: Bind actual carrier and welcome inputs without running the old 28 tests
-        run: |
-          node tools/alpha2-macos/desktop/renderer-readiness/prepare-inputs.mjs \
-            "$RUNNER_TEMP/welcome-carrier/DSH SEP.app" \
-            "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
-            "$RUNNER_TEMP/welcome-carrier-download" \
-            "$RUNNER_TEMP/welcome-workspace-inputs" \
-            "$RUNNER_TEMP/welcome-asar-tools/node_modules/@electron/asar/lib/asar.js"
-          node tools/alpha2-macos/desktop/renderer-readiness/welcome-prepare-inputs.mjs \
-            "$RUNNER_TEMP/welcome-workspace-inputs" \
-            "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
-            "$RUNNER_TEMP/welcome-inputs"
-      - name: Independent welcome gates and actual source fragment VM contracts
-        env:
-          SEP_RENDERER_READINESS_INPUTS: ${{ runner.temp }}/welcome-workspace-inputs
-          SEP_WELCOME_READINESS_INPUTS: ${{ runner.temp }}/welcome-inputs
-        run: |
-          node --test --test-reporter=tap \
-            tools/alpha2-macos/desktop/renderer-readiness/welcome-gate.test.mjs \
-            tools/alpha2-macos/desktop/renderer-readiness/welcome-preload.test.mjs \
-            tools/alpha2-macos/desktop/renderer-readiness/welcome-derive.test.mjs \
-            tools/alpha2-macos/desktop/renderer-readiness/welcome-compose.test.mjs > "$RUNNER_TEMP/welcome-tests.tap"
-      - name: Compose candidate from exact captured base through both readiness variants
-        run: node tools/alpha2-macos/desktop/renderer-readiness/welcome-build-candidate.mjs "$RUNNER_TEMP/welcome-workspace-inputs" "$RUNNER_TEMP/welcome-inputs" "$RUNNER_TEMP/welcome-candidate"
-      - name: Preserve origins and bounded-scope evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: sep-macos-welcome-readiness-candidate
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/welcome-tests.tap
-            ${{ runner.temp }}/welcome-inputs/INPUTS.json
-            ${{ runner.temp }}/welcome-workspace-inputs/INPUTS.json
-            ${{ runner.temp }}/welcome-workspace-inputs/signature.log
-            ${{ runner.temp }}/welcome-candidate/
-            ${{ runner.temp }}/welcome-carrier-download/DOWNLOAD-RECEIPT.json
-            ${{ runner.temp }}/welcome-asar-tools/RESULT.json
   

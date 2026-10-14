@@ -9,18 +9,18 @@ static BOOL pExact(id v,NSArray *keys) {
 static BOOL pHash(id v) {
   return [v isKindOfClass:NSString.class] && [v length]==64 && [v rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdef"] invertedSet]].location==NSNotFound;
 }
-static BOOL pPath(NSString *v) {
+static BOOL sepBootstrapRelativePath(NSString *v) {
   if(![v isKindOfClass:NSString.class] || !v.length || v.length>1024) return NO;
   for(NSUInteger i=0;i<v.length;i++){unichar c=[v characterAtIndex:i];if(c<32 || c>126 || c=='\\' || c==':')return NO;}
   for(NSString *part in [v componentsSeparatedByString:@"/"])if(!part.length || [part isEqual:@"."] || [part isEqual:@".."] || [part hasSuffix:@"."] || [part hasSuffix:@" "])return NO;
   return YES;
 }
 static BOOL pRuntimePath(NSString *path) {
-  if(!pPath(path) || ![path hasPrefix:@"Resources/product/runtime/"])return NO;
+  if(!sepBootstrapRelativePath(path) || ![path hasPrefix:@"Resources/product/runtime/"])return NO;
   for(NSString *p in [path componentsSeparatedByString:@"/"]){NSString *s=p.lowercaseString;if([s isEqual:@"test"] || [s isEqual:@"tests"] || [s hasPrefix:@"fixture-"] || [s hasPrefix:@"fixture."] || [s containsString:@".test."])return NO;}
   return YES;
 }
-static BOOL pItem(id value) { return pExact(value,@[@"path",@"sha256"]) && pPath(value[@"path"]) && pHash(value[@"sha256"]); }
+static BOOL pItem(id value) { return pExact(value,@[@"path",@"sha256"]) && sepBootstrapRelativePath(value[@"path"]) && pHash(value[@"sha256"]); }
 static BOOL pShape(id v) {
   if(!pExact(v,@[@"schema",@"layout",@"program",@"node",@"controller",@"closure"]) || ![v[@"schema"] isKindOfClass:NSNumber.class] || CFGetTypeID((__bridge CFTypeRef)v[@"schema"])==CFBooleanGetTypeID() || ![v[@"schema"] isEqual:@1] || ![v[@"layout"] isEqual:@"macos-app-v1"])return NO;
   NSDictionary *paths=@{@"program":@"Resources/PROGRAM.json",@"node":@"Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",@"controller":@"Resources/product/runtime/bootstrap/controller.mjs"};
@@ -45,7 +45,7 @@ static BOOL pLocation(int fd,NSString *path) {
   char bytes[PATH_MAX];if(fcntl(fd,F_GETPATH,bytes))return NO;NSString *actual=[NSString stringWithUTF8String:bytes];return actual && [actual isEqual:path];
 }
 static int pOpen(int root,NSString *contents,NSString *relative,BOOL directory) {
-  if(!pPath(relative))return -1;int fd=fcntl(root,F_DUPFD_CLOEXEC,10);if(fd<0)return -1;
+  if(!sepBootstrapRelativePath(relative))return -1;int fd=fcntl(root,F_DUPFD_CLOEXEC,10);if(fd<0)return -1;
   NSArray *parts=[relative componentsSeparatedByString:@"/"];NSString *path=contents;
   for(NSUInteger i=0;i<parts.count;i++){
     BOOL dir=i+1<parts.count || directory;NSString *part=parts[i];int next=openat(fd,part.fileSystemRepresentation,O_RDONLY|O_NOFOLLOW|O_CLOEXEC|(dir?O_DIRECTORY:0));close(fd);fd=next;if(fd<0)return -1;
