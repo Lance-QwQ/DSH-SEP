@@ -1,4 +1,4 @@
-# Installer integration status through r64
+# Installer integration status through r68
 
 The complete user installer is still under development. These fixed inputs
 were run on the limited macOS ARM64 test image, without private data or paid
@@ -13,9 +13,12 @@ model requests. They do not certify a physical Mac interaction or public release
 | r59, CI 38628614197 | With only the probe boolean corrected, the unchanged admission 29/29 passed. The corrected transport fixture reached compilation and all original 15 definitions; the unimplemented transport produced 15 real RED failures. Nine static closure checks passed, including a new comment-separated dynamic-import refusal. |
 | r60, CI 38629317145 | Twelve resource-assembly definitions reached the missing implementation with signed synthetic payloads. All twelve were genuine RED, not functional passes. |
 | r62, CI 38629984742 | Both native transport jobs failed compilation because two helper names collided with SDK typedefs. The original fifteen and six additional definitions were not executed. |
-| r63, CI 38631108180 | After only renaming those symbols, transport reached 9/15 passes and six failures. Six role-replacement definitions failed, including explicit fixture cleanup after FIFO/pending deadlines. Eight application lifecycle definitions reached genuine missing implementation failures. These remain repair work. |
+| r63, CI 38631108180 | After only renaming those symbols, transport reached 9/15 passes and six failures. Six role-replacement definitions failed, including explicit fixture cleanup after FIFO/pending deadlines. Eight application lifecycle definitions reached genuine missing implementation failures. These historical failures remain preserved; later outcomes are recorded separately below. |
 | r63, separate resource job 116082665761 | Resource assembly passed all twelve unchanged definitions, zero skipped/cancelled. This verifies signed synthetic payload assembly and the fixed runtime closure, not the full application payload or installation. |
-| r64, CI 38632614457 | The original fifteen private-transport definitions and six role-admission definitions passed natively. All 35 synthetic child receipts confirm normal drain and exit without forced cleanup. The application delegate remains 6/8: two menu-event assertions require diagnosis; do not infer an installed application or actual installer process-exit pass. Full-payload resources remain pending. |
+| r64, CI 38632614457 | The original fifteen private-transport definitions and six role-admission definitions passed natively. All 35 synthetic child receipts confirm normal drain and exit without forced cleanup. The application delegate initially passed 6/8; the two failures are retained and addressed by the later test-carrier evidence below. |
+| r64, full-resource job 116087760608 | Resource assembly used the actual fixed r61 payload: 29,365 entries, 1,794,064,040 bytes. The real fixed controller completed list, preview, cancel, list and close. Account state was unchanged; closed receipt, stdout EOF and exact child exit 0 were verified without force. No installation confirmation, outer installer app signing or UI execution occurred in this job. |
+| r66, CI 38634271006 | The menu diagnostic passed 7/8: its first fixture remained in reading even after the real Quit action was delivered. The signed synthetic opener reached its expected RED: five refusals passed and its two positive cases failed with the stub. These are separate historical outcomes, not successes inferred from r68. |
+| r68, CI 38635520085 | All eight original application lifecycle behaviors passed with the unchanged production delegate and an exact, replayable test-only derivation that waits for actual preview and menu events. The fixed opener passed all seven definitions: two actual signed synthetic app dispatches and normal exits, plus five refusals. Neither suite installs the complete payload or proves original product process exit. |
 
 Current native admission verifies the compiled-in manifest, fixed executable
 roles and complete controller source closure. It deliberately does not claim
@@ -27,8 +30,13 @@ The AppKit layer includes visible plan confirmation, cancellation, recovery
 classification, a separate Open action and bounded close reporting. Its
 15-definition evidence uses actual Cocoa controls but programmatic actions and
 synthetic channel replies; it is neither physical input nor a complete install.
-The NSTask transport has passed the unchanged native definitions. Complete
-UI-to-controller installation and actual installer process exit remain pending.
+The NSTask transport has passed the unchanged native definitions. The fixed
+opener's native signature and exact-path checks now have seven-case evidence.
+Complete UI-to-controller installation and actual installer process exit remain
+pending. The production main and its six implementation/five header inputs are
+frozen in `application/PRODUCTION-SOURCES.json`; r69 complete build/integration
+is **not_run** in this status record. A dummy-manifest compile preflight, even
+if successful later, does not establish native admission, UI or installation.
 
 The source-closure review found that a comment between `import`/`require` and
 `(` could evade the original dynamic-dependency refusal. A new definition failed
@@ -36,10 +44,11 @@ before the fix and passed after it. No current module in the 16-file controller
 closure used that spelling. This is a narrow conservative static-source capture,
 not a general JavaScript parser or an arbitrary untrusted-code sandbox.
 
-Pending: full-payload resource assembly, production AppKit
-entry and LaunchServices opener, final complete payload signing/archive restore,
-native installation through that UI, and same-data application startup from the
-installed path. Physical Finder/Dock, Developer ID/notarization, arbitrary macOS
+Pending: compilation and execution of the frozen production AppKit composition,
+final complete installer signing/archive restore, native installation through
+that UI, and same-data application startup from the installed path as part of
+that complete chain. Prior application-only and first-install evidence remains
+separate. Physical Finder/Dock, Developer ID/notarization, arbitrary macOS
 versions, private environment continuation and paid model operation remain
 unverified. Only the dedicated Mac test branch is updated; main, Releases and
 the Windows daily program are unchanged.

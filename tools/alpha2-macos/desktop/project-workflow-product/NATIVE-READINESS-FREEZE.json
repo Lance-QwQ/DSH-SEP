@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Test-only r3 observable readiness; Windows portable contracts; actual r61 macOS two-round UI retry not_run",
+  "createdUtc": "2026-10-14T21:01:00.2019339Z",
+  "priorFreeze": {
+    "path": "NATIVE-AUTHORITY-FREEZE.json",
+    "sha256": "348be6155a24fb3080e544706e0f07f54703a667f0e0a8f13f1a2b9b196173b8",
+    "verifiedFiles": 10,
+    "unchanged": true
+  },
+  "originalFreeze": {
+    "path": "NATIVE-FREEZE.json",
+    "sha256": "cc996f79319b2b844234a67e918805b2f0ebd011a17a9cf94b1d35cc0846d30a",
+    "verifiedFiles": 11,
+    "verifiedDependencies": 7,
+    "unchanged": true
+  },
+  "r67Audit": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\project-native-ui-r67\\AUDIT.json",
+    "bytes": 9534,
+    "sha256": "44b13d1cced4c8b4cd9cea06c4edf56bdca626bcbc24dbf96be901a3ca12c1e9"
+  },
+  "r67Observed": {
+    "round1": "fail",
+    "code": "SEP_WORKSPACE_BRAND_UNAVAILABLE",
+    "round2": "not_run",
+    "normalCleanup": "pass",
+    "finalSameP2Inspection": "pass",
+    "historicalReactCause": "not_proven"
+  },
+  "tests": {
+    "immediateReadRed": {
+      "pass": 2,
+      "fail": 4,
+      "log": "RED.tap"
+    },
+    "preAbortedRed": {
+      "pass": 6,
+      "fail": 1,
+      "log": "RED-preaborted.tap"
+    },
+    "windowsContracts": {
+      "definitions": 15,
+      "pass": 15,
+      "fail": 0,
+      "skip": 0,
+      "cancelled": 0,
+      "node": "v24.21.0",
+      "log": "GREEN-final15.tap",
+      "scope": "Old contracts 5 + r2 derivation 1 + readiness 7 + r3 derivation and actual generated worker brand block 2"
+    },
+    "review": {
+      "status": "pass",
+      "scope": "Read-only peer review; no concrete blocker found; native execution remains required"
+    }
+  },
+  "nativeUi": "not_run",
+  "nativeConfirmation": "not_run",
+  "physicalInput": "not_run",
+  "productModified": false,
+  "files": [
+    {
+      "path": "native-readiness.mjs",
+      "bytes": 1828,
+      "sha256": "993fd49726d34efc080f6c70e8c98e30b9f506a422c555eec2d0157fdb79ee96"
+    },
+    {
+      "path": "native-readiness.test.mjs",
+      "bytes": 3495,
+      "sha256": "58837d54ed4c89474933ac9d12d0879423aab580852c0bd1792d476ea03a2394"
+    },
+    {
+      "path": "derive-native-readiness.mjs",
+      "bytes": 4888,
+      "sha256": "8e449f8ea4210270e9159baf20d8a1c4290bdb66258b82bb8adb1b4647b46861"
+    },
+    {
+      "path": "native-worker-r3.mjs",
+      "bytes": 15482,
+      "sha256": "4b76efbaa89f17db7908a04a0c628ca19585432bb9862e7168d3e35688a54603"
+    },
+    {
+      "path": "native-operator-r3.mjs",
+      "bytes": 6510,
+      "sha256": "7dfd70efc983200ebd25acbe8f2a0e057a7ce79ac73ef85a79dd56f06149f318"
+    },
+    {
+      "path": "native-dom-r3.mjs",
+      "bytes": 9408,
+      "sha256": "32798f21b8f2610389700a1108536981635e6f142a8993e5fc9cb6562acf1f38"
+    },
+    {
+      "path": "NATIVE-READINESS-ORIGIN.json",
+      "bytes": 5172,
+      "sha256": "ecbb6f22c07b6206ef13541c2d5aceb23cece1dd6da3c540d51df69026519786"
+    },
+    {
+      "path": "native-readiness-derive.test.mjs",
+      "bytes": 2873,
+      "sha256": "183845a48fcd29377b2dd93a99d3b6b2be3fe0a98c663872b6b5638c777a24d3"
+    },
+    {
+      "path": "native-readiness-README.md",
+      "bytes": 2800,
+      "sha256": "6fcad358805b699fb532088cab4d54f2b14b8d6f1919dfa1f5fa3e035f249da6"
+    },
+    {
+      "path": "native-readiness-ci-step.yml",
+      "bytes": 1815,
+      "sha256": "22a00e239b328bd8a0e8a0356d9b5049b88a22d05cc265ec2f9abc5b5495b63e"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-all15.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-all15.tap",
+      "bytes": 3601,
+      "sha256": "b5b660634b63ef043f35aaf4c399fcdc79d5f035486b1e99fe701335ea459806"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-final15.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-final15.tap",
+      "bytes": 3599,
+      "sha256": "8da8ca8fa00f488d7f1775ee0a5e511000e4cd4df899c6520377a75775501c2f"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-observer.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\GREEN-observer.tap",
+      "bytes": 1434,
+      "sha256": "22465c33cbd6505f8ad0f82540c75fb39bfd570c3401dbaff57f8a366ad6f95c"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\RED-preaborted.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\RED-preaborted.tap",
+      "bytes": 2373,
+      "sha256": "dfb8716bda4e15bd4276f30fd29eba5bc4ad0234da02dff2be3a1a76278d9862"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\RED.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-readiness-r3\\RED.tap",
+      "bytes": 5005,
+      "sha256": "a5f32d2b5a69cae1dce40311256524e6d4c846bc0e09155e37766cac52043f4b"
+    }
+  ],
+  "command": "node native-operator-r3.mjs verifiedRestoreRESULT verifiedRestoreRESULT_SHA freshRoundOutput sameSyntheticDataRoot 1|2",
+  "ci": "Stage these 10 files and this freeze plus unchanged r2 10 files and original 11+7 closure. Use native-readiness-ci-step.yml after exact r61 restore; round2 only after round1 pass. Archive BRAND-READINESS.json and DOM-READINESS-*.json along with all original evidence."
+}
