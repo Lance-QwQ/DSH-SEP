@@ -5,11 +5,9 @@ on:
 permissions:
   contents: read
 jobs:
-  native-bootstrap-production-admission:
+  native-connected-bootstrap:
     runs-on: macos-15
-    timeout-minutes: 12
-    permissions:
-      contents: read
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -17,16 +15,16 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Native non-test binary admission, identity placeholders never executed
-        run: node tools/alpha2-macos/bootstrap/run-production-native.mjs "$RUNNER_TEMP/bootstrap-production-native"
-      - name: Preserve original outcomes including planned missing-feature RED
+      - name: Non-test connected entry with synthetic controller and actual normal quit
+        run: node tools/alpha2-macos/bootstrap/run-connected-native.mjs "$RUNNER_TEMP/bootstrap-connected"
+      - name: Preserve original outcomes without rewriting expected RED as pass
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-bootstrap-production-admission
+          name: sep-macos-connected-bootstrap
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/bootstrap-production-native/RESULT.json
-            ${{ runner.temp }}/bootstrap-production-native/*.log
-            ${{ runner.temp }}/bootstrap-production-native/cases/**/*.log
-  
+            ${{ runner.temp }}/bootstrap-connected/RESULT.json
+            ${{ runner.temp }}/bootstrap-connected/*.log
+            ${{ runner.temp }}/bootstrap-connected/cases/**/*.log
+            ${{ runner.temp }}/bootstrap-connected/cases/**/cleanup.json
