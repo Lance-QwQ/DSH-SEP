@@ -393,12 +393,75 @@ jobs:
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256
 
-  native-trusted-parser:
+  native-business-composition:
+    if: false
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 35
     permissions:
       contents: read
       actions: read
+    env:
+      SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Fixed native carrier and ASAR tool
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/business-carrier-download"
+          mkdir "$RUNNER_TEMP/business-carrier"
+          ditto -x -k "$RUNNER_TEMP/business-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/business-carrier"
+          node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/business-asar-tool"
+      - name: Prepare real Mac Host and exact SEP capture
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-business-native"
+          mkdir "$root"
+          echo "SEP_MAC_BUSINESS_OUTPUT=$root" >> "$GITHUB_ENV"
+          echo "SEP_DESKTOP_TEST_ROOT=$root/desktop-unit" >> "$GITHUB_ENV"
+          mkdir "$root/desktop-unit"
+          node tools/alpha2-macos/package/prepare-business.mjs "$RUNNER_TEMP/business-carrier/DSH SEP.app" "$RUNNER_TEMP/business-asar-tool/node_modules/@electron/asar/lib/asar.js" "$GITHUB_WORKSPACE" "$root/prepared"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          echo "SEP_OFFICIAL_HARNESS=$root/prepared/host" >> "$GITHUB_ENV"
+          echo "SEP_MAC_BUNDLE_ROOT=$root/prepared/host/sep-capture" >> "$GITHUB_ENV"
+          echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+          echo "SEP_MAC_BUSINESS_TEST_ROOT=$root/business-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_PROFILE_TEST_ROOT=$root/profile-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_LIFECYCLE_TEST_ROOT=$root/lifecycle-tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
+          sw_vers > "$root/system.txt"
+          uname -a >> "$root/system.txt"
+      - name: Native file and business composition
+        run: |
+          node --test --test-reporter=tap tools/alpha2-macos/lifecycle/lifecycle.test.mjs tools/alpha2-macos/profile/controlled-files.test.mjs tools/alpha2-macos/business/business.test.mjs tools/alpha2-macos/business/profile-layout.test.mjs tools/alpha2-macos/business/standalone.test.mjs > "$SEP_MAC_BUSINESS_OUTPUT/composition.tap"
+      - name: Broker ownership and actual child protocol
+        if: always() && env.SEP_MAC_BUSINESS_OUTPUT != ''
+        run: node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs > "$SEP_MAC_BUSINESS_OUTPUT/broker.tap"
+      - name: Preserve native receipts with explicit scope
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-native-business-composition
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/*.tap
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/*.txt
+            ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/prepared/PREPARED.json
+            ${{ runner.temp }}/business-carrier-download/DOWNLOAD-RECEIPT.json
+
+  native-media-business:
+    runs-on: macos-15
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+    env:
+      SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -406,32 +469,44 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.19.0'
-      - name: Fixed native runtime carrier
+      - name: Fixed native carrier and ASAR tool
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
         run: |
-          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/parser-carrier-download"
-          mkdir "$RUNNER_TEMP/parser-carrier"
-          ditto -x -k "$RUNNER_TEMP/parser-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/parser-carrier"
-      - name: Install existing pinned parser dependency closure
-        run: node tools/alpha2-macos/package/install-parser-dependencies.mjs "$RUNNER_TEMP/parser-dependencies"
-      - name: Independent bounded native parser tests
+          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/media-carrier-download"
+          mkdir "$RUNNER_TEMP/media-carrier"
+          ditto -x -k "$RUNNER_TEMP/media-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/media-carrier"
+          node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/media-asar-tool"
+      - name: Prepare real Host and native project and attachment capabilities
         run: |
-          runtime="$RUNNER_TEMP/parser-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies"
-          export SEP_MAC_PARSER_PYTHON="$runtime/python/bin/python3.12"
-          export SEP_MAC_PARSER_PYTHON_HOME="$runtime/python"
-          export SEP_MAC_PARSER_DEPENDENCIES="$RUNNER_TEMP/parser-dependencies/node_modules"
-          export SEP_MAC_BUNDLE_ROOT="$GITHUB_WORKSPACE/tools/alpha2-macos/business-capture/bundle"
-          "$runtime/node/bin/node" tools/alpha2-macos/parser/run-native-tests.mjs "$RUNNER_TEMP/parser-native"
-      - name: Preserve planned samples including failures
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-media-business"
+          mkdir "$root"
+          echo "SEP_MAC_MEDIA_OUTPUT=$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/package/prepare-business.mjs "$RUNNER_TEMP/media-carrier/DSH SEP.app" "$RUNNER_TEMP/media-asar-tool/node_modules/@electron/asar/lib/asar.js" "$GITHUB_WORKSPACE" "$root/prepared"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/media/native-attachments.c -o "$root/native-attachments"
+          echo "SEP_OFFICIAL_HARNESS=$root/prepared/host" >> "$GITHUB_ENV"
+          echo "SEP_MAC_BUNDLE_ROOT=$root/prepared/host/sep-capture" >> "$GITHUB_ENV"
+          echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+          echo "SEP_MAC_ATTACHMENT_HELPER=$root/native-attachments" >> "$GITHUB_ENV"
+          echo "SEP_MAC_MEDIA_TEST_ROOT=$root/tests" >> "$GITHUB_ENV"
+          echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
+          sw_vers > "$root/system.txt"
+          uname -a >> "$root/system.txt"
+          node --version >> "$root/system.txt"
+          node -p 'process.platform+" "+process.arch' >> "$root/system.txt"
+      - name: Native governed image upload and persisted restart
+        run: |
+          node --test --test-reporter=tap tools/alpha2-macos/media-business/maintenance.test.mjs tools/alpha2-macos/media-business/vision.test.mjs tools/alpha2-macos/media-business/layout.test.mjs tools/alpha2-macos/media-business/loader.test.mjs tools/alpha2-macos/media-business/standalone.test.mjs > "$SEP_MAC_MEDIA_OUTPUT/composition.tap" 2>&1
+      - name: Preserve native inputs and outcomes
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-trusted-parser
+          name: sep-macos-media-business
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/parser-native/*.log
-            ${{ runner.temp }}/parser-native/*.json
-            ${{ runner.temp }}/parser-dependencies/RESULT.json
-            ${{ runner.temp }}/parser-dependencies/*.log
-            ${{ runner.temp }}/parser-carrier-download/DOWNLOAD-RECEIPT.json
+            ${{ runner.temp }}/sep-media-business/*.tap
+            ${{ runner.temp }}/sep-media-business/*.txt
+            ${{ runner.temp }}/sep-media-business/prepared/PREPARED.json
+            ${{ runner.temp }}/sep-media-business/tests/standalone-*/round-*.log
+            ${{ runner.temp }}/media-carrier-download/DOWNLOAD-RECEIPT.json

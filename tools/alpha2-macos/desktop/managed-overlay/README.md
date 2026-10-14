@@ -4,10 +4,11 @@ This is a desktop adapter candidate, **not a complete SEP package**. The real
 macOS carrier build remains the native binary/runtime base. No Windows native
 module, desktop-host bootstrap, private Profile or GTK quit patch is imported.
 
-Current native status is recorded in [EVIDENCE-R22.md](../EVIDENCE-R22.md): managed
-refusal and package assembly passed; installed Full desktop smoke has one failed
-round and two not-run rounds. Earlier pending statements below are historical
-context and must not replace that current scope table.
+Current native status is recorded in [EVIDENCE-R23.md](../EVIDENCE-R23.md): managed
+refusal, core package assembly and three installed core desktop cycles passed.
+The [r22 failed probe](../EVIDENCE-R22.md) remains historical evidence. Earlier
+pending statements below must not replace the current scope table; optional
+integrations and public Mac certification are still outside this result.
 
 ## Inputs and adaptation
 
