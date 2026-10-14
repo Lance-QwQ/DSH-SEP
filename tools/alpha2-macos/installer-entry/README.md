@@ -1,10 +1,10 @@
 # Fixed-account first-install controller
 
-Current status: RED scaffold, not implemented or native-verified. Original installation/first-install.mjs and install-native.c remain unchanged.
+Current status: the original 4 account + 18 controller definitions reached genuine missing-implementation RED on native macOS in r50. The implementation candidate is now written but not native-verified. Original installation/first-install.mjs, install-native.c and the r44 application remain unchanged.
 
 The contract separates an in-memory, read-only preview from explicit confirmation and durable execution. Cancelling a preview must leave the account, source, target and data unchanged. Confirmation must recheck candidate bytes and native fd-bound account/parent/data facts before any write.
 
-The future native account helper derives the real account from getpwuid, fixes Applications/DSH SEP.app and the existing alpha2-mac-finder-preview data root, and owns a separate private installer journal/lease. All governance paths and record reads/writes use held directory descriptors, no-follow identity checks and durable publication. Node string-path checks cannot replace that boundary.
+The native account helper derives the real account from getpwuid, fixes Applications/DSH SEP.app and the existing alpha2-mac-finder-preview data root, and owns a separate private installer journal/lease. Governance records use held directory descriptors, no-follow identity checks and durable publication. Node does not write these records. Files are bounded to 32 MiB, private single-link 0600; directories are 0700. Files use fsync and F_FULLFSYNC and directories use fsync. This does not claim survival of every storage or power-loss failure.
 
 Durability order:
 
@@ -17,6 +17,12 @@ Durability order:
 Confirmation without a lower plan cannot resume execution. A durably planned transaction can explicitly resume. An executing transaction delegates to core recovery and retains blocked when its journal is missing or unverifiable. A published target with later business data can only complete its known installation record; it cannot roll back or delete data. No method starts the application.
 
 The first controller version has no mid-copy cancellation. Closing admission is separate from ending accepted work. A close timeout or unknown native cleanup must remain blocked; whenClosed resolves only after actual closure.
+
+A lower-core cleanup uncertainty retains the upper native lease and blocks later admission. It cannot be converted to pass merely because the caller stopped waiting. Native primitives do not spawn descendants. Same-user external code remains a trusted operating-environment boundary; these journal protections do not sandbox arbitrary host code.
+
+Five separate portable boundary definitions cover quarantine of already queued work, ordinary close draining, every UTF-8 split of a Chinese account path, invalid UTF-8 rejection and byte limits. Initial production-equivalent extraction was 2 pass / 3 fail; corrected code is 5 pass. These are Windows Node results, not native macOS installation evidence.
+
+Recovery-list extension: listRecovery is an explicitly unimplemented scaffold awaiting a separate four-definition native RED. Its planned output is a bounded list of transaction IDs, phase and blocked/pass classification, without stored plans or paths. The UI must not read or enumerate governance paths itself. Original 22 definitions remain unchanged.
 
 Native CI has 4 account definitions plus 18 real signed-fixture/controller definitions. The latter cover read-only preview/cancel, wrong hash, changed source/target/data, prior data, aliased parent, durable bindings, corrupt approval, four real SIGKILL phase cases, concurrent lease, stale cancelled references, closed admission, unknown recovery and a lower-plan symlink attack. No mock storage or mocked core is used.
 

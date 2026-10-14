@@ -1,4 +1,3 @@
-// Test-only factory. This module must never enter a production runtime closure.
-export async function openTestInstallerController() {
-  throw Object.assign(Error('SEP_INSTALLER_NOT_IMPLEMENTED'), { code: 'SEP_INSTALLER_NOT_IMPLEMENTED' });
-}
+// Test-only factory; excluded from every production runtime closure.
+import {createController} from './controller-core.mjs';
+export const openTestInstallerController=config=>createController(config,true);

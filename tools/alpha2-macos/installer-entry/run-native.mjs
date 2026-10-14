@@ -9,7 +9,7 @@ const exec=promisify(execFile),here=fileURLToPath(new URL('.',import.meta.url)),
 assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
 const out=resolve(process.argv[2]);assert.equal(await realpath(dirname(out)),dirname(out));await mkdir(out,{mode:0o700});
 const result={schema:1,status:'fail',scope:'Trusted first-install controller/native account journal; signed synthetic payload, no application execution',definitions:22,groups:[],inputs:[],notVerified:['production NSBundle entry','AppKit installer UI','complete-package install through this controller','Gatekeeper/notarization','application launch','all crash windows']};
-const files=['controller.mjs','testing.mjs','account-native.c','CONTRACT.json','fixture.mjs','native-account.test.mjs','crash-worker.mjs','controller.test.mjs','run-native.mjs'];
+const files=['controller.mjs','controller-core.mjs','candidate.mjs','native-client.mjs','boundaries.mjs','testing.mjs','account-native.c','CONTRACT.json','fixture.mjs','native-account.test.mjs','crash-worker.mjs','controller.test.mjs','run-native.mjs'];
 async function compile(label,args){
   let value,error;try{value=await exec('/usr/bin/clang',args,{timeout:30000,maxBuffer:1048576});}catch(e){value=e;error=e;}
   await writeFile(join(out,label+'.log'),String(value.stdout??'')+'\n'+String(value.stderr??''),{flag:'wx'});
