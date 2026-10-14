@@ -1,6 +1,6 @@
 // Tests the installed bytes via LaunchServices. No inspector, fake ready frame,
 // test bootstrap switch, provider call or force-kill is used by this probe.
-import assert from 'node:assert/strict';import{readFile,writeFile,mkdir,realpath,lstat}from'node:fs/promises';
+import assert from 'node:assert/strict';import{readFile,writeFile,appendFile,mkdir,realpath,lstat}from'node:fs/promises';
 import{join,resolve,dirname}from'node:path';import{userInfo}from'node:os';import{spawn,execFile}from'node:child_process';import{promisify}from'node:util';import{setTimeout as delay}from'node:timers/promises';import{fileURLToPath}from'node:url';import{createHash}from'node:crypto';
 import{verifyPackage}from'./package-inventory.mjs';
 const exec=promisify(execFile),digest=b=>createHash('sha256').update(b).digest('hex');assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
@@ -9,7 +9,18 @@ const result={schema:1,status:'fail',scope:'actual restored app through LaunchSe
 const env={PATH:'/usr/bin:/bin:/usr/sbin:/sbin',HOME:userInfo().homedir,TMPDIR:process.env.TMPDIR,LANG:'en_US.UTF-8'},dataRoot=join(env.HOME,'Library/Application Support/DSH SEP/alpha2-mac-finder-preview'),receiptPath=join(dataRoot,'launcher/bootstrap-ui.json'),generationPath=join(dataRoot,'launcher/generation.json');
 const deadline=async(test,ms=90000)=>{const until=Date.now()+ms;while(Date.now()<until){const value=await test();if(value)return value;await delay(150);}throw Object.assign(Error('SEP_APPLICATION_PROBE_DEADLINE'),{code:'SEP_APPLICATION_PROBE_DEADLINE'});};
 async function json(path){try{return JSON.parse(await readFile(path,'utf8'));}catch(e){if(e.code==='ENOENT')return undefined;throw e;}}
-let current,app,inner,helper;async function observe(action,pid,path,birth){const r=await exec(helper,[action,String(pid),path,path===app?'app.dshsep.macos.alpha2.preview':'-',...birth===undefined?[]:[String(birth)]],{env,timeout:5000,maxBuffer:65536});return JSON.parse(r.stdout);}
+let current,app,inner,helper,observationSequence=0;
+async function observe(action,pid,path,birth){
+ const args=[action,String(pid),path,path===app?'app.dshsep.macos.alpha2.preview':'-',...birth===undefined?[]:[String(birth)]];
+ let command,failure;try{command=await exec(helper,args,{env,timeout:5000,maxBuffer:65536});}catch(error){failure=error;command=error;}
+ const stdout=String(command.stdout??''),stderr=String(command.stderr??'');let parsed=null;try{parsed=JSON.parse(stdout);}catch{}
+ // Preserve the native result before propagating any command/parse error. This
+ // diagnostic does not relax identities or repeat a failed hide request.
+ const observation={schema:1,sequence:++observationSequence,action,pid,bundlePath:path,args,expectedLaunchTimeArgument:birth===undefined?null:String(birth),exitCode:failure?(Number.isInteger(failure.code)?failure.code:null):0,signal:failure?.signal??null,errorCode:typeof failure?.code==='string'?failure.code:null,killed:failure?.killed===true,stdout,stderr,parsed};
+ await appendFile(join(out,'observation.jsonl'),JSON.stringify(observation)+'\n',{mode:0o600});
+ if(failure)throw failure;
+ return JSON.parse(stdout);
+}
 async function frames(path){return(await readFile(path,'utf8')).split('\n').flatMap(line=>{try{return[JSON.parse(line)];}catch{return[];}});}
 try{
  const assembly=await json(join(assembled,'RESULT.json'));assert.equal(assembly.status,'pass');app=assembly.restoredApplication;assert.equal(app,join(assembled,'restored/DSH SEP.app'));assert.equal(await realpath(app),app);inner=join(app,'Contents/Helpers/DSH SEP Desktop.app');
