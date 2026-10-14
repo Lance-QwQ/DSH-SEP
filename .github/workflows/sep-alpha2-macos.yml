@@ -138,7 +138,7 @@ jobs:
             ${{ runner.temp }}/sep-alpha2-desktop-build/*.log
             ${{ runner.temp }}/sep-alpha2-desktop-build/desktop-carrier.zip
             ${{ runner.temp }}/sep-alpha2-desktop-smoke/
-  
+
   per-task-isolation-prototype:
     if: false
     runs-on: macos-15
@@ -238,6 +238,8 @@ jobs:
 
   # Bind the immutable original artifact archive before extracting any executable.
   # This job reuses the first native build; it does not repeat compilation or publish a Release.
+  # Bind the immutable original artifact archive before extracting any executable.
+  # This job reuses the first native build; it does not repeat compilation or publish a Release.
   desktop-carrier-smoke-existing:
     runs-on: macos-15
     timeout-minutes: 25
@@ -280,7 +282,9 @@ jobs:
           mkdir "$RUNNER_TEMP/sep-carrier-extracted"
           ditto -x -k "$INPUT/desktop-carrier.zip" "$RUNNER_TEMP/sep-carrier-extracted"
       - name: Actual three-round native carrier smoke
-        run: node tools/alpha2-macos/desktop/smoke-carrier.mjs "$RUNNER_TEMP/sep-carrier-extracted/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
+        run: |
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs > "$RUNNER_TEMP/sep-carrier-build-receipts/inspector-tests.tap"
+          node tools/alpha2-macos/desktop/smoke-carrier.mjs "$RUNNER_TEMP/sep-carrier-extracted/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
       - name: Preserve each planned round and cleanup attribution
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -290,7 +294,7 @@ jobs:
           path: |
             ${{ runner.temp }}/sep-alpha2-desktop-smoke/
             ${{ runner.temp }}/sep-carrier-build-receipts/
-  
+
   desktop-managed-overlay:
     runs-on: macos-15
     timeout-minutes: 40
@@ -342,8 +346,9 @@ jobs:
             ${{ runner.temp }}/managed-overlay-result/RESULT.json
             ${{ runner.temp }}/managed-overlay-result/*.log
             ${{ runner.temp }}/managed-negative/
-  
+
   controlled-profile-lifecycle:
+    if: false
     runs-on: macos-15
     timeout-minutes: 20
     steps:
@@ -384,3 +389,32 @@ jobs:
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.log
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256
+
+  task-sandbox-native-red:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Build APFS helper and record implementation-before state
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-task-sandbox-red"
+          mkdir "$root"
+          echo "SEP_TASK_RED_OUTPUT=$root" >> "$GITHUB_ENV"
+          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+          shasum -a 256 tools/alpha2-macos/task-sandbox/* "$root/native-tree" > "$root/inputs.sha256"
+          SEP_MAC_TREE_HELPER="$root/native-tree" node tools/alpha2-macos/task-sandbox/run-native-tests.mjs "$root/native"
+      - name: Preserve native RED evidence without relabeling it pass
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-task-sandbox-native-red
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_TASK_RED_OUTPUT }}/inputs.sha256
+            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.log
+            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.json

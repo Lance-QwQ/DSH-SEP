@@ -84,10 +84,21 @@ notarization. Relative framework links are retained by `ditto`.
 ## Current validation boundary
 
 The original 21 portable tests passed on Windows against the exact R6 inputs;
-the public capture and ASAR plist checks bring this to 25 local definitions. JavaScript
-syntax checks passed. Actual Mac ASAR assembly/signature verification, a native
-missing-connection startup check and a protocol-4 broker desktop cycle are still
-pending. The separate carrier probe exercises official Host startup and native
+the public capture and ASAR plist checks bring this to 25 local definitions.
+Four additional test-only Inspector state/deadline checks passed locally. The
+initial `--inspect-brk` pause is before Electron finishes Node bootstrap: the
+old probe's early `require('electron')` failed with `testEnabled is not a function`.
+The revised probes wait at the packaged main module's first executable statement
+before installing passive observations. This diagnosis does not establish any
+DSH product startup failure or successful lifecycle result.
+
+Native run 38518239419 (commit `1d4bc059`) verified the previous assembler,
+integrity-pinned ASAR dependency installation and deep ad-hoc signature; 14,182
+unchanged entries were preserved. Its negative probe failed during Inspector
+evaluation and required test-owned SIGKILL cleanup. That run predates the ASAR
+plist helper and revised Inspector timing, which need their own native run.
+A successful missing-connection startup check and a protocol-4 broker desktop
+cycle are still pending. The separate carrier probe exercises official Host startup and native
 window callbacks, not this managed overlay. The next gate must run against the
 assembled app: controlled connection refusal, real broker identity/ready,
 close/background/reopen, accurate task inspection, graceful close and confirmed

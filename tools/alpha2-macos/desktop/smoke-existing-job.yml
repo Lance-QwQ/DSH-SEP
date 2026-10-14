@@ -42,7 +42,9 @@ desktop-carrier-smoke-existing:
         mkdir "$RUNNER_TEMP/sep-carrier-extracted"
         ditto -x -k "$INPUT/desktop-carrier.zip" "$RUNNER_TEMP/sep-carrier-extracted"
     - name: Actual three-round native carrier smoke
-      run: node tools/alpha2-macos/desktop/smoke-carrier.mjs "$RUNNER_TEMP/sep-carrier-extracted/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
+      run: |
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs > "$RUNNER_TEMP/sep-carrier-build-receipts/inspector-tests.tap"
+        node tools/alpha2-macos/desktop/smoke-carrier.mjs "$RUNNER_TEMP/sep-carrier-extracted/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
     - name: Preserve each planned round and cleanup attribution
       if: always()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
