@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "status": "ready",
+  "scope": "Fixed r71 signed archive restore only; native installation not yet verified",
+  "commit": "1b5bcfa5c8a88fda7ad5727ee104eef8f8f0ad04",
+  "runId": 38638474203,
+  "artifact": "DSH-SEP-macOS-Alpha2-installer-preview.zip",
+  "assemblyPath": "_temp/installer-application/RESULT.json",
+  "inventoryPath": "_temp/installer-application/PACKAGE-INVENTORY.json",
+  "transportPath": "_temp/installer-transport/transport-manifest.json",
+  "assemblySha256": "7c593b5f135f35de206faf1aa91e32eae56871cad23115999a7b8fc7cb525559",
+  "archiveSha256": "59550c42943c2b01a2bf770174d00d792304a5599f87387596ff99df8b0d49f1",
+  "archiveBytes": 692789908,
+  "inventorySha256": "0cb43cf851d3391c7f31534f9cf8ef2d3e255f43b4020c3ab57ed0a7f5165b42",
+  "treeSha256": "50bce90677b14ef51e42bca7096788b44cc1cb680c75eddffa28a3811f470854",
+  "manifestSha256": "ca2dd80696bd142e87b93ca3d326a65aaa6a92cf41537c2621fc0f351c9754f2",
+  "artifacts": [
+    { "label": "evidence", "id": 11929881746, "bytes": 1240187, "sha256": "cda00ed0f94d74cf6ad6ad80783197226f177a728510d2bdec01a70bf4f1ab2b" },
+    { "label": "part-one", "id": 11929956537, "bytes": 402653402, "sha256": "0dc3db07ab149a98cfac66d111070cd1ebe2d2cdc3d1aaae752f63e81de88166" },
+    { "label": "part-two", "id": 11930165948, "bytes": 290136942, "sha256": "d47982fb0214c1e49922ec632f574daac0f7ba772fcf877d637ebec8572bf13d" }
+  ]
+}

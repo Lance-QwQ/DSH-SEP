@@ -1,13 +1,13 @@
-name: SEP Alpha.2 macOS complete installer build
+name: SEP Alpha.2 macOS fixed installer and installed lifecycle
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  installer-application:
+  native-installer-integration:
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 60
     permissions:
       contents: read
       actions: read
@@ -18,50 +18,35 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Verify exact bundle layout and external evidence preservation
-        env:
-          SEP_INSTALLER_LAYOUT_TEST_ROOT: ${{ runner.temp }}/installer-layout-tests
-        run: node --test --test-reporter=tap tools/alpha2-macos/package/prepare-installer-signing.test.mjs > "$RUNNER_TEMP/installer-layout.tap" 2> "$RUNNER_TEMP/installer-layout.stderr"
-      - name: Compile exact six production sources without executing dummy admission
-        run: node tools/alpha2-macos/package/preflight-installer-native.mjs "$RUNNER_TEMP/installer-native-preflight"
-      - name: Restore exact r61 signed application payload
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
-      - name: Build sign and restore complete installer application
-        run: node tools/alpha2-macos/package/assemble-installer-application.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/installer-application"
-      - name: Split unchanged archive for bounded evidence transport
+      - name: Record actual native environment
         run: |
           set -euo pipefail
-          node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/installer-application" "$RUNNER_TEMP/installer-transport"
-          node -e 'const fs=require("node:fs"),assert=require("node:assert/strict");const m=JSON.parse(fs.readFileSync(process.argv[1]));assert.equal(m.parts.length,2);' "$RUNNER_TEMP/installer-transport/transport-manifest.json"
+          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installer-integration-system.txt"
+      - name: Restore one fixed signed installer archive
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/package/restore-installer-application.mjs "$RUNNER_TEMP/fixed-installer"
+      - name: Original lifecycle then real-button installation then installed first boot
+        run: |
+          set -euo pipefail
+          result="$RUNNER_TEMP/fixed-installer/RESULT.json"
+          digest="$(shasum -a 256 "$result" | awk '{print $1}')"
+          node tools/alpha2-macos/installer-ui/integration/run-full.mjs "$result" "$digest" "$RUNNER_TEMP/installer-integration"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-application-evidence-r71
+          name: installer-integration-native-r72
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/installer-layout.tap
-            ${{ runner.temp }}/installer-layout.stderr
-            ${{ runner.temp }}/installer-native-preflight/*.json
-            ${{ runner.temp }}/installer-native-preflight/*.log
-            ${{ runner.temp }}/project-r61/RESULT.json
-            ${{ runner.temp }}/project-r61/*.log
-            ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/installer-application/*.json
-            ${{ runner.temp }}/installer-application/*.log
-            ${{ runner.temp }}/installer-application/*.app.resources-build/*.log
-            ${{ runner.temp }}/installer-transport/*.json
-            tools/alpha2-macos/package/MAC-PREVIEW-USER-GUIDE.md
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: installer-application-part1-r71
-          compression-level: 0
-          if-no-files-found: error
-          path: ${{ runner.temp }}/installer-transport/*.0001.part
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: installer-application-part2-r71
-          compression-level: 0
-          if-no-files-found: error
-          path: ${{ runner.temp }}/installer-transport/*.0002.part
+            ${{ runner.temp }}/installer-integration-system.txt
+            ${{ runner.temp }}/fixed-installer/RESULT.json
+            ${{ runner.temp }}/fixed-installer/SOURCE-ASSEMBLY.json
+            ${{ runner.temp }}/fixed-installer/PACKAGE-INVENTORY.json
+            ${{ runner.temp }}/fixed-installer/*.log
+            ${{ runner.temp }}/installer-integration/*.json
+            ${{ runner.temp }}/installer-integration/*.jsonl
+            ${{ runner.temp }}/installer-integration/*.log
+            ${{ runner.temp }}/installer-integration/installed-receipt/*.json
+            ${{ runner.temp }}/installer-integration/installed-startup/*.json
+            ${{ runner.temp }}/installer-integration/installed-startup/*.jsonl
+            ${{ runner.temp }}/installer-integration/installed-startup/*.log
