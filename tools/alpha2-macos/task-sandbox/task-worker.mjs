@@ -65,7 +65,7 @@ export async function createTaskWorker(config,io){
   }
   function blocked(code){const {stdout,stderr}=texts();return publicReceipt('blocked',code,{mode:input.mode,stdout,stderr});}
   async function finish(){
-   if(finalizing||!ownerClosed)return;finalizing=true;clearTimeout(timer);input.signal?.removeEventListener('abort',cancel);
+   if(finalizing||!ownerClosed)return;finalizing=true;input.signal?.removeEventListener('abort',cancel);
    const ack=!receiptInvalid&&trustedReceipt(Buffer.concat(receiptChunks),input),text=texts();
    let code,clean=false,status='blocked';
    if(input.mode==='family')code='SEP_MAC_TASK_FAMILY_CLEANUP_UNCONFIRMED';
@@ -82,7 +82,7 @@ export async function createTaskWorker(config,io){
    // binding leaves the started marker and cannot authorize commit or reuse.
    try{await io.applyFile(prepared.authorityRoot,{path:marker,expectedSha256:hash(started),text:started+JSON.stringify({schema:1,state:clean?'closed':'blocked',status,code,resourcesConfirmedReleased:clean})+'\n'});}
    catch{clean=false;value=blocked('SEP_MAC_TASK_RECORD_UNCONFIRMED');}
-   state=clean?'closed':'blocked';respond(value);if(clean)closedResolve(value);
+   clearTimeout(timer);state=clean?'closed':'blocked';respond(value);if(clean)closedResolve(value);
   }
   try{
    owner=spawn(prepared.ownerPath,[input.mode,String(input.timeoutMs),String(input.graceMs),prepared.workRoot,'3',buildPolicy(prepared,input.mode),prepared.executable,...input.args],{cwd:prepared.workRoot,env:{HOME:prepared.workRoot,TMPDIR:prepared.workRoot,PATH:prepared.runtimeRoot,LANG:'C',LC_ALL:'C'},stdio:['pipe','pipe','pipe','pipe']});

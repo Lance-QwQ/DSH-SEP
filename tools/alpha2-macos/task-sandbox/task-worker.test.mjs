@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdir,mkdtemp,readFile,writeFile,copyFile,chmod,readdir} from 'node:fs/promises';
+import {mkdir,mkdtemp,readFile,writeFile,copyFile,chmod,readdir,lstat} from 'node:fs/promises';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {createServer} from 'node:net';
@@ -42,4 +42,11 @@ test('completion-record delay cannot disable response deadline or prematurely re
   const r=await bounded(worker.run({args:['echo'],timeoutMs:500,graceMs:50}));assert.equal(recordEntered,true);assert.equal(r.status,'blocked');assert.equal(r.code,'SEP_MAC_TASK_CLEANUP_DEADLINE');
   let closed=false;worker.whenClosed().then(()=>closed=true);await pause(10);assert.equal(closed,false);releaseRecord();assert.equal((await bounded(worker.whenClosed())).resourcesConfirmedReleased,true);assert.equal(r.status,'blocked');
  }finally{releaseRecord();}
+});
+test('aliases created during execution cannot grant original-file read write or hard-link mutation',async()=>{
+ const {worker,parent,config}=await fixture(),original=join(parent,'original'),control=join(parent,'unconfined'),controlWork=join(control,'work'),controlOriginal=join(control,'original');
+ await mkdir(control,{mode:0o700});await mkdir(controlWork,{mode:0o700});await writeFile(controlOriginal,'untouched',{mode:0o600});await writeFile(original,'untouched',{mode:0o600});
+ const positive=JSON.parse((await exec(probe,['aliases',controlWork,controlOriginal],{timeout:3000,maxBuffer:65536})).stdout);for(const n of Object.keys(positive))assert.equal(positive[n],0,n);assert.equal(await readFile(controlOriginal,'utf8'),'changed');
+ const r=await bounded(worker.run({args:['aliases',config.workRoot,original]}));assert.equal(r.status,'pass');const row=JSON.parse(r.stdout);
+ assert([0,1,13].includes(row.symlink));for(const k of ['symlinkRead','symlinkWrite','hardlinkRead','hardlinkWrite'])assert([1,2,13].includes(row[k]),k);assert([1,13].includes(row.hardlink));assert.equal(await readFile(original,'utf8'),'untouched');assert.equal((await lstat(original)).nlink,1);
 });
