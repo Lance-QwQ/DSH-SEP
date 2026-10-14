@@ -1,13 +1,13 @@
-name: SEP Alpha.2 macOS pending-plan startup admission
+name: SEP Alpha.2 macOS pending-aware app and two project UI rounds
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-pending-startup:
+  project-application-build:
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 45
     permissions:
       contents: read
       actions: read
@@ -18,27 +18,87 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Restore immutable r61 native dependency carrier
+      - name: Restore the exact r44 application without modifying it
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/project-base"
+      - name: Prepare integrity pinned pure JS ASAR tool
+        run: node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/project-asar-tool"
+      - name: Derive contract inputs from the actual fixed ASAR
         run: |
-          node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/pending-r61"
-      - name: Real Mac factory, P2, parser and pending review admission
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';import{pathToFileURL}from'node:url';
+          const root=process.env.RUNNER_TEMP,tool=await import(pathToFileURL(root+'/project-asar-tool/node_modules/@electron/asar/lib/asar.js'));
+          const archive=root+'/project-base/restored/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar',out=root+'/project-baseline';fs.mkdirSync(out,{mode:0o700});
+          for(const[name,path]of [['main.js','lib/main.js'],['preload.cjs','lib/preload-app.cjs']])fs.writeFileSync(out+'/'+name,tool.extractFile(archive,path,false),{flag:'wx'});
+          NODE
+      - name: Sixteen current project source and owned child contracts
         run: |
-          node tools/alpha2-macos/desktop/project-workflow-product/pending-startup/run-native.mjs "$RUNNER_TEMP/pending-r61" "$RUNNER_TEMP/pending-native"
-      - name: Preserve exact inputs, original failures and close receipts
+          SEP_PROJECT_PRODUCT_BASELINE="$RUNNER_TEMP/project-baseline" node --experimental-vm-modules --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/relay.test.mjs tools/alpha2-macos/desktop/project-workflow-product/asar.test.mjs tools/alpha2-macos/desktop/project-workflow-product/owner.test.mjs tools/alpha2-macos/desktop/project-workflow-product/endpoint.test.mjs tools/alpha2-macos/desktop/project-workflow-product/overlay.test.mjs tools/alpha2-macos/desktop/project-workflow-product/client.test.mjs tools/alpha2-macos/desktop/project-workflow-product/origin.test.mjs > "$RUNNER_TEMP/project-contracts.tap" 2>&1
+          node --input-type=module <<'NODE'
+          import fs from'node:fs';import assert from'node:assert/strict';const text=fs.readFileSync(process.env.RUNNER_TEMP+'/project-contracts.tap','utf8');for(const[k,n]of Object.entries({tests:16,pass:16,fail:0,cancelled:0,skipped:0}))assert.match(text,new RegExp('^# '+k+' '+n+'$','m'));
+          NODE
+      - name: Verify exact additive build and test carrier origins
+        run: node tools/alpha2-macos/package/verify-pending-operators.mjs > "$RUNNER_TEMP/pending-origins.json"
+      - name: Assemble and sign a fresh application then verify archive restoration
+        id: assembly
+        run: node tools/alpha2-macos/package/assemble-pending-application.mjs "$RUNNER_TEMP/project-base" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/project-asar-tool/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/project-build"
+      - name: Fifteen unchanged readiness contracts and two real project UI rounds
+        run: |
+          set -euo pipefail
+          output="$RUNNER_TEMP/project-ui-native-r4"
+          mkdir "$output"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/native-contract.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-authority-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness-derive.test.mjs > "$output/contracts.tap" 2> "$output/contracts.stderr"
+          node --input-type=module <<'NODE'
+          import fs from'node:fs';import assert from'node:assert/strict';const text=fs.readFileSync(process.env.RUNNER_TEMP+'/project-ui-native-r4/contracts.tap','utf8');for(const[k,n]of Object.entries({tests:15,pass:15,fail:0,cancelled:0,skipped:0}))assert.match(text,new RegExp('^# '+k+' '+n+'$','m'));
+          NODE
+          receipt="$RUNNER_TEMP/project-build/RESULT.json"
+          sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f1)
+          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r4.mjs "$receipt" "$sha" "$output/round1" "$output/data" 1
+          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r4.mjs "$receipt" "$sha" "$output/round2" "$output/data" 2
+      - name: Save build evidence even if a stage fails
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-pending-startup-r73
+          name: project-application-r74-evidence
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/pending-native/RESULT.json
-            ${{ runner.temp }}/pending-native/INPUTS.json
-            ${{ runner.temp }}/pending-native/parser-fixture.json
-            ${{ runner.temp }}/pending-native/native.tap
-            ${{ runner.temp }}/pending-native/native.stderr
-            ${{ runner.temp }}/pending-native/receipts/*.json
-            ${{ runner.temp }}/pending-r61/RESULT.json
-            ${{ runner.temp }}/pending-r61/*.log
-            ${{ runner.temp }}/pending-r61/evidence/project-build/RESULT.json
+            ${{ runner.temp }}/pending-origins.json
+            ${{ runner.temp }}/project-ui-native-r4/*.tap
+            ${{ runner.temp }}/project-ui-native-r4/*.stderr
+            ${{ runner.temp }}/project-ui-native-r4/round1/*.json
+            ${{ runner.temp }}/project-ui-native-r4/round1/*.log
+            ${{ runner.temp }}/project-ui-native-r4/round2/*.json
+            ${{ runner.temp }}/project-ui-native-r4/round2/*.log
+            ${{ runner.temp }}/project-base/RESULT.json
+            ${{ runner.temp }}/project-base/*.log
+            ${{ runner.temp }}/project-asar-tool/RESULT.json
+            ${{ runner.temp }}/project-contracts.tap
+            ${{ runner.temp }}/project-build/RESULT.json
+            ${{ runner.temp }}/project-build/PACKAGE-INVENTORY.json
+            ${{ runner.temp }}/project-build/*.log
+            ${{ runner.temp }}/project-build/desktop/RESULT.json
+            ${{ runner.temp }}/project-build/desktop/*.log
+            ${{ runner.temp }}/project-build/draft/PROJECT-DRAFT.json
+            ${{ runner.temp }}/project-build/draft/DSH SEP.app/Contents/Resources/PROGRAM.json
+            ${{ runner.temp }}/project-build/draft/DSH SEP.app/Contents/Resources/BOOTSTRAP.json
+      - name: Split final archive into bounded immutable transport parts
+        if: always() && steps.assembly.outcome == 'success'
+        id: transport
+        run: node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/project-build" "$RUNNER_TEMP/project-transport"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.transport.outcome == 'success'
+        with:
+          name: project-application-r74-part-one
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/project-transport/transport-manifest.json
+            ${{ runner.temp }}/project-transport/*.0001.part
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.transport.outcome == 'success'
+        with:
+          name: project-application-r74-part-two
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/project-transport/*.0002.part
