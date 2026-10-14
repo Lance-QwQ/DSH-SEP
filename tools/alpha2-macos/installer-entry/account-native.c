@@ -22,6 +22,10 @@
 static int home_fd=-1,gov_fd=-1,transactions_fd=-1,record_fd=-1,lock_fd=-1;
 static char home_path[PATH_MAX],txid[33];
 static struct stat home_id,gov_id,transactions_id,record_id,lock_id;
+struct listed_record {char id[33];struct stat identity;};
+static struct listed_record listed[64];
+static size_t listed_count=0;
+static int list_active=0;
 static void fail(const char *code){printf("ERR\t%s\n",code);fflush(stdout);exit(70);}
 static void need(int ok,const char *code){if(!ok)fail(code);}
 static int same_id(const struct stat*a,const struct stat*b){return a->st_dev==b->st_dev&&a->st_ino==b->st_ino;}
@@ -91,6 +95,29 @@ static void open_records(int create){
  if(create){need(mkdirat(transactions_fd,txid,0700)==0,"SEP_INSTALLER_JOURNAL");record_fd=child_dir(transactions_fd,txid,0,1);need(record_fd>=0&&fstat(record_fd,&record_id)==0,"SEP_INSTALLER_JOURNAL");sync_dir(transactions_fd);sync_dir(gov_fd);}
  check_bindings();
 }
+static int compare_record(const void*a,const void*b){return strcmp(((const struct listed_record*)a)->id,((const struct listed_record*)b)->id);}
+static void list_records(void){
+ need(!list_active&&gov_fd<0,"SEP_INSTALLER_PROTOCOL");list_active=1;check_home();
+ int support=support_dir(0);if(support<0){puts("OK\t");return;}
+ gov_fd=child_dir(support,"DSH SEP Installer",0,1);close(support);if(gov_fd<0){puts("OK\t");return;}
+ need(fstat(gov_fd,&gov_id)==0,"SEP_INSTALLER_JOURNAL");transactions_fd=child_dir(gov_fd,"transactions",0,1);need(transactions_fd>=0&&fstat(transactions_fd,&transactions_id)==0,"SEP_INSTALLER_JOURNAL");
+ lock_fd=openat(gov_fd,"lease",O_RDWR|O_NOFOLLOW|O_CLOEXEC);need(lock_fd>=0,"SEP_INSTALLER_JOURNAL");private_file(lock_fd);need(fstat(lock_fd,&lock_id)==0,"SEP_INSTALLER_JOURNAL");need(flock(lock_fd,LOCK_EX|LOCK_NB)==0,"SEP_INSTALLER_BUSY");check_bindings();
+ struct stat before,after;need(fstat(transactions_fd,&before)==0,"SEP_INSTALLER_JOURNAL");DIR*dir=fdopendir(dup(transactions_fd));need(dir!=NULL,"SEP_INSTALLER_JOURNAL");struct dirent*entry;
+ errno=0;while((entry=readdir(dir))!=NULL){const char*name=entry->d_name;if(!strcmp(name,".")||!strcmp(name,".."))continue;need(valid_id(name),"SEP_INSTALLER_JOURNAL");need(listed_count<64,"SEP_INSTALLER_LIMIT");
+  struct stat s,check;need(fstatat(transactions_fd,name,&s,AT_SYMLINK_NOFOLLOW)==0&&S_ISDIR(s.st_mode),"SEP_INSTALLER_JOURNAL");
+  int fd=openat(transactions_fd,name,O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC);need(fd>=0&&fstat(fd,&check)==0&&same_id(&s,&check),"SEP_INSTALLER_JOURNAL");private_dir(fd);close(fd);
+  need(fstatat(transactions_fd,name,&check,AT_SYMLINK_NOFOLLOW)==0&&same_file(&s,&check),"SEP_INSTALLER_JOURNAL");strcpy(listed[listed_count].id,name);listed[listed_count].identity=s;listed_count++;errno=0;
+ }
+ need(errno==0,"SEP_INSTALLER_JOURNAL");closedir(dir);need(fstat(transactions_fd,&after)==0&&same_file(&before,&after),"SEP_INSTALLER_JOURNAL");check_bindings();qsort(listed,listed_count,sizeof(listed[0]),compare_record);
+ printf("OK\t");for(size_t i=0;i<listed_count;i++){if(i)putchar(',');fputs(listed[i].id,stdout);}putchar('\n');
+}
+static void select_record(const char*id){
+ need(list_active&&gov_fd>=0&&valid_id(id),"SEP_INSTALLER_PROTOCOL");check_bindings();size_t found=listed_count;
+ for(size_t i=0;i<listed_count;i++)if(!strcmp(id,listed[i].id)){found=i;break;}
+ need(found<listed_count,"SEP_INSTALLER_JOURNAL");if(record_fd>=0){close(record_fd);record_fd=-1;}
+ struct stat before;need(fstatat(transactions_fd,id,&before,AT_SYMLINK_NOFOLLOW)==0&&same_id(&before,&listed[found].identity)&&S_ISDIR(before.st_mode),"SEP_INSTALLER_JOURNAL");
+ record_fd=openat(transactions_fd,id,O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC);need(record_fd>=0&&fstat(record_fd,&record_id)==0&&same_id(&before,&record_id),"SEP_INSTALLER_JOURNAL");private_dir(record_fd);strcpy(txid,id);check_bindings();
+}
 static void read_record(const char*key){
  check_bindings();const char*name=key_name(key);int fd=openat(record_fd,name,O_RDONLY|O_NOFOLLOW|O_CLOEXEC);
  if(fd<0){need(errno==ENOENT,"SEP_INSTALLER_JOURNAL");puts("OK\t-");return;}
@@ -117,10 +144,12 @@ int main(int argc,char**argv){
  if(!strcmp(mode,"inspect")){char*s=snapshot();puts(s);free(s);close(home_fd);return 0;}
  puts("OK\tready");fflush(stdout);char*line=malloc(FRAME_MAX+2U);need(line!=NULL,"SEP_INSTALLER_MEMORY");
  while(fgets(line,(int)FRAME_MAX+2,stdin)){size_t n=strlen(line);need(n&&line[n-1]=='\n',"SEP_INSTALLER_PROTOCOL");line[n-1]=0;char*rest=line,*command=strsep(&rest,"\t");
-  if(!strcmp(command,"BEGIN")&&rest&&gov_fd<0){size_t bytes;char*expected=unhex(rest,&bytes);char*now=snapshot();need(strlen(now)==bytes&&!memcmp(now,expected,bytes),"SEP_INSTALLER_PLAN_CHANGED");free(now);free(expected);open_records(1);need(!data_exists(),"SEP_INSTALLER_PLAN_CHANGED");int app=child_dir(home_fd,"Applications",1,0);need(app>=0,"SEP_INSTALLER_PATH");struct stat target;need(fstatat(app,"DSH SEP.app",&target,AT_SYMLINK_NOFOLLOW)<0&&errno==ENOENT,"SEP_INSTALLER_PLAN_CHANGED");close(app);puts("OK");}
-  else if(!strcmp(command,"OPEN")&&!rest&&gov_fd<0){open_records(0);puts("OK");}
+  if(!strcmp(command,"BEGIN")&&rest&&gov_fd<0&&!list_active){size_t bytes;char*expected=unhex(rest,&bytes);char*now=snapshot();need(strlen(now)==bytes&&!memcmp(now,expected,bytes),"SEP_INSTALLER_PLAN_CHANGED");free(now);free(expected);open_records(1);need(!data_exists(),"SEP_INSTALLER_PLAN_CHANGED");int app=child_dir(home_fd,"Applications",1,0);need(app>=0,"SEP_INSTALLER_PATH");struct stat target;need(fstatat(app,"DSH SEP.app",&target,AT_SYMLINK_NOFOLLOW)<0&&errno==ENOENT,"SEP_INSTALLER_PLAN_CHANGED");close(app);puts("OK");}
+  else if(!strcmp(command,"OPEN")&&!rest&&gov_fd<0&&!list_active){open_records(0);puts("OK");}
+  else if(!strcmp(command,"LIST")&&!rest&&gov_fd<0&&!list_active){list_records();}
+  else if(!strcmp(command,"SELECT")&&rest&&list_active){select_record(rest);puts("OK");}
   else if(!strcmp(command,"READ")&&rest&&record_fd>=0){read_record(rest);}
-  else if(!strcmp(command,"WRITE")&&rest&&record_fd>=0){char*key=strsep(&rest,"\t");need(rest&&strchr(rest,'\t')==NULL,"SEP_INSTALLER_PROTOCOL");write_record(key,rest);puts("OK");}
+  else if(!strcmp(command,"WRITE")&&rest&&record_fd>=0&&!list_active){char*key=strsep(&rest,"\t");need(rest&&strchr(rest,'\t')==NULL,"SEP_INSTALLER_PROTOCOL");write_record(key,rest);puts("OK");}
   else if(!strcmp(command,"QUIT")&&!rest){puts("OK\tclosed");fflush(stdout);break;}
   else fail("SEP_INSTALLER_PROTOCOL");
   need(fflush(stdout)==0,"SEP_INSTALLER_CHANNEL");

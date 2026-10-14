@@ -1,6 +1,6 @@
 # Installer controller native validation
 
-Historical r50 has 22 genuine missing-implementation failures and no setup failures, independently bound to INPUTS-r50 and the downloaded artifact. The current main controller/native implementation is a candidate awaiting its first native GREEN. Do not call it a product installer.
+Historical r50 has 22 genuine missing-implementation failures and no setup failures. In r53, the original 22 and all 5 boundary definitions passed; the independent list 4 failed exactly at its missing-implementation entry. Both runs have immutable artifacts and independently checked input hashes. The current list candidate awaits GREEN and regression of the original 22. Do not call it a product installer.
 
 Run on the already pinned native macOS 15.7.9 / 24G830 / Darwin 24.6.0 ARM64 image, Node 24.21.0:
 
@@ -10,11 +10,11 @@ Four native account definitions and eighteen controller definitions must all pas
 
 Required source closure additionally includes controller-core.mjs, candidate.mjs and native-client.mjs; unchanged installation/first-install.mjs, install-native.c, fixture.mjs; package/package-inventory.mjs, bootstrap-manifest-builder.mjs; desktop/managed-broker/program-manifest.mjs; bootstrap/production-manifest.mjs. The existing full source overlay contains these imports. No package runtime or original core is edited.
 
-After the original 22 pass, run the independent list extension RED:
+After the original 22 pass, run the independent list extension:
 
     node tools/alpha2-macos/installer-entry/run-list-native.mjs "$RUNNER_TEMP/installer-entry-list"
 
-It has four definitions. The current list method deliberately throws SEP_INSTALLER_RECOVERY_LIST_NOT_IMPLEMENTED; no claim of list acceptance is made. Its three populated-record cases use real completed signed-fixture installs, so failures before list invocation must be classified separately. Keep its RESULT/TAP distinct from the original 22.
+It has four unchanged definitions, now expected to pass. The r53 RED evidence retains the previous explicit SEP_INSTALLER_RECOVERY_LIST_NOT_IMPLEMENTED failures. Its three populated-record cases use real completed signed-fixture installs, so failures before list invocation must be classified separately. Keep its RESULT/TAP distinct from the original 22. Boundary tests may run independently with node --test boundaries.test.mjs (five definitions).
 
 The real signed fixture does not execute its app. Temporary test homes exist only under the runner's private output and are accepted exclusively by a separately compiled SEP_INSTALLER_ENTRY_TESTING helper and testing.mjs. The production helper must reject that argument. A production read-only account check may inspect the runner account but must not create files.
 

@@ -1,0 +1,30 @@
+native-installer-appkit-red:
+  runs-on: macos-15
+  timeout-minutes: 10
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - name: Compile actual AppKit RED contracts
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-appkit-red"
+        shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m > "$RUNNER_TEMP/installer-appkit-red/INPUTS.sha256"
+        clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m -o "$RUNNER_TEMP/installer-appkit-red/tests" > "$RUNNER_TEMP/installer-appkit-red/compile.log" 2>&1
+    - name: Execute expected RED without installing or launching a payload
+      shell: bash
+      run: |
+        set +e
+        "$RUNNER_TEMP/installer-appkit-red/tests" > "$RUNNER_TEMP/installer-appkit-red/RESULT.json" 2> "$RUNNER_TEMP/installer-appkit-red/stderr.log"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-appkit-red/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-appkit-red
+        if-no-files-found: error
+        path: ${{ runner.temp }}/installer-appkit-red/*

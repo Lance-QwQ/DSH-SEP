@@ -28,6 +28,7 @@
     "cancel": "Only {planHash}; invalidate in-memory preview, no journal/parent/target/data changes",
     "confirm": "Only {planHash}; exact current preview, native recheck, durable upper confirmation, durable bound core plan, execute",
     "resume": "Only {transactionId}; known own fixed journal, confirmation/core/state integrity, explicit recovery only",
+    "listRecovery": "No parameters; native lease-bound enumeration, fixed transaction IDs and status summaries only; logical corruption remains visible, native uncertainty rejects whole list",
     "close": "Close admission and wait accepted work/native closure; timeout or unknown returns blocked, never termination",
     "whenClosed": "Resolves only after real closure"
   },
@@ -49,6 +50,14 @@
     "native": "openat/fstatat/no-follow fd-bound reads and atomic writes; file fsync+F_FULLFSYNC, directory fsync; persistent exclusive lease",
     "noNodePathFallback": true
   },
+  "recoveryList": {
+    "maxTransactions": 64,
+    "maxReadBytes": 67108864,
+    "overflow": "Reject whole list, never truncate",
+    "missingGovernance": "Read-only empty list",
+    "nativeSession": "Cannot WRITE, BEGIN or OPEN after LIST",
+    "recoverableMeaning": "Validated recorded plan can be explicitly submitted to resume; lower recovery may still refuse"
+  },
   "phases": ["confirmed", "planned", "executing", "committed", "blocked"],
   "recovery": {
     "confirmedWithoutCore": "SEP_INSTALLER_PLAN_INCOMPLETE; no execution",
@@ -58,6 +67,6 @@
     "committed": "Reverify target and return receipt; no reinstallation",
     "unknown": "Preserve records, target and data; no reset or automatic migration"
   },
-  "testDefinitions": {"nativeAccount": 4, "controller": 18, "total": 22},
+  "testDefinitions": {"nativeAccount": 4, "controller": 18, "originalNative": 22, "recoveryList": 4, "portableBoundaries": 5, "total": 31},
   "notIncluded": ["production NSBundle/manifest entry", "AppKit UI", "installer packaging", "launching app", "updates", "uninstall", "private data migration", "Gatekeeper/notarization", "arbitrary cancellation during core copy"]
 }

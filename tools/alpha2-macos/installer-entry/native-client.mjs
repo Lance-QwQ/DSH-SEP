@@ -32,3 +32,20 @@ export async function openJournal(helper,home,transactionId,createSnapshot){
  }catch(e){await p.close();throw e;}
  return {close:p.close,async read(key){const r=await p.command('READ',key);if(r.length!==1)fail('SEP_INSTALLER_PROTOCOL');if(r[0]==='-')return null;if(r[0].length%2||r[0].length>MAX*2||!/^[a-f0-9]+$/.test(r[0]))fail('SEP_INSTALLER_PROTOCOL');return Buffer.from(r[0],'hex').toString('utf8');},async write(key,text){if(typeof text!=='string'||Buffer.byteLength(text)>MAX)fail('SEP_INSTALLER_LIMIT');const r=await p.command('WRITE',key,Buffer.from(text).toString('hex'));if(r.length)fail('SEP_INSTALLER_PROTOCOL');}};
 }
+export async function openRecoveryListing(helper,home){
+ const p=await started(helper,[...prefix(home),'session','0'.repeat(32)]);let ids;
+ try{
+  const first=parse(await p.response());if(first.length!==1||first[0]!=='ready')fail('SEP_INSTALLER_PROTOCOL');await helperIdentity(helper);
+  const r=await p.command('LIST');if(r.length!==1)fail('SEP_INSTALLER_PROTOCOL');ids=r[0]===''?[]:r[0].split(',');
+  if(ids.length>64||ids.some(id=>!/^[a-f0-9]{32}$/.test(id))||new Set(ids).size!==ids.length||JSON.stringify(ids)!==JSON.stringify([...ids].sort()))fail('SEP_INSTALLER_PROTOCOL');
+ }catch(e){await p.close();throw e;}
+ let usable=true,bytes=0;
+ async function command(...args){try{return await p.command(...args);}catch(e){usable=false;throw e;}}
+ return {ids:Object.freeze(ids),close:p.close,usable:()=>usable,
+  async select(id){if(!ids.includes(id))fail('SEP_INSTALLER_ARGUMENT');const r=await command('SELECT',id);if(r.length)fail('SEP_INSTALLER_PROTOCOL');},
+  async read(key){const r=await command('READ',key);if(r.length!==1)fail('SEP_INSTALLER_PROTOCOL');if(r[0]==='-')return null;
+   if(r[0].length%2||r[0].length>MAX*2||!/^[a-f0-9]+$/.test(r[0]))fail('SEP_INSTALLER_PROTOCOL');bytes+=r[0].length/2;if(bytes>64*1024*1024)fail('SEP_INSTALLER_LIMIT');
+   return Buffer.from(r[0],'hex').toString('utf8');
+  }
+ };
+}

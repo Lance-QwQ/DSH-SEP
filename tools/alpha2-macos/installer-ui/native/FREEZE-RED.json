@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "AppKit RED source candidate only, Windows cannot compile Cocoa",
+  "expectedDefinitions": 15,
+  "expectedImplementation": "missing UI stub; actual assertion failures required",
+  "compile": "not_run",
+  "nativeTests": "not_run",
+  "inputs": [
+    {
+      "path": "InstallerUI.h",
+      "bytes": 921,
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    },
+    {
+      "path": "InstallerUI.m",
+      "bytes": 494,
+      "sha256": "a76d08d4e224c0fd297a87bc89e1bc8b2d88ac65ea02772aa6f7b6dbfc12a2a9"
+    },
+    {
+      "path": "InstallerUITests.m",
+      "bytes": 13609,
+      "sha256": "2d30f53864082ca3e44396ed0ab7c7960c8b3292c1a205c87fc9f3f04fa9541c"
+    },
+    {
+      "path": "ci-job.yml",
+      "bytes": 1527,
+      "sha256": "0bd6afef97eac7464a688ca33ddadfedd98e3fdbcc953b0120efcff5396ce169"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1828,
+      "sha256": "3eb7bccffeca755ab00f7ff04f306aa2968823c7b2a85e2a0bd8e9dcf9beaf16"
+    }
+  ],
+  "notVerified": [
+    "fixed NSBundle production admission",
+    "actual child transport process",
+    "LaunchServices opening an installed payload",
+    "physical input"
+  ]
+}

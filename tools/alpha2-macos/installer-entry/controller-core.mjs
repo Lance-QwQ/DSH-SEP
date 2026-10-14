@@ -2,7 +2,7 @@ import {randomBytes} from 'node:crypto';
 import {join} from 'node:path';
 import {prepareFirstInstall,executeFirstInstall,recoverFirstInstall} from '../installation/first-install.mjs';
 import {platform,helperIdentity,verifyCandidate,error,fail,sha,exact,digest} from './candidate.mjs';
-import {inspectAccount,openJournal,bounded} from './native-client.mjs';
+import {inspectAccount,openJournal,openRecoveryListing,bounded} from './native-client.mjs';
 import {createAdmission} from './boundaries.mjs';
 
 const clone=v=>JSON.parse(JSON.stringify(v)),id=v=>typeof v==='string'&&/^[a-f0-9]{32}$/.test(v);
@@ -83,7 +83,27 @@ export async function createController(input,testMode=false){
   request(arg,'transactionId');const s=await snapshot();
   return withJournal(arg.transactionId,undefined,async journal=>{const b=await readBound(journal,arg.transactionId,s);if(b.state.phase==='confirmed'||b.state.phase==='blocked')fail('SEP_INSTALLER_PLAN_INCOMPLETE');return execute(journal,b.upper,b.core,b.state,b.state.phase!=='planned');});
  }
+ async function doListRecovery(){
+  const s=await snapshot();let listing;
+  try{listing=await openRecoveryListing(config.entryHelper,config.testHome);}catch(e){if(unknown(e))uncertain();throw e;}
+  let primary;const entries=[];
+  try{
+   for(const transactionId of listing.ids){
+    await listing.select(transactionId);
+    try{const b=await readBoundUnsafe(listing,transactionId,s);if(!['planned','executing','committed'].includes(b.state.phase))fail('SEP_INSTALLER_PLAN_INCOMPLETE');entries.push({transactionId,status:'pass',phase:b.state.phase,recoverable:true});}
+    catch(e){
+     // A logical record failure is visible per entry. A broken native channel,
+     // lease/path failure or a global read bound refuses the entire list.
+     if(!listing.usable()||unknown(e)||['SEP_INSTALLER_LIMIT','SEP_INSTALLER_PROTOCOL'].includes(e.code))throw e;
+     entries.push({transactionId,status:'blocked',phase:e.code==='SEP_INSTALLER_PLAN_INCOMPLETE'?'confirmed':'unknown',code:e.code==='SEP_INSTALLER_PLAN_INCOMPLETE'?e.code:'SEP_INSTALLER_JOURNAL',recoverable:false});
+    }
+   }
+  }catch(e){primary=e;}
+  if(unknown(primary)){uncertain();retained.add(listing);throw primary;}
+  try{await listing.close();}catch(e){uncertain();retained.add(listing);throw e;}
+  if(primary)throw primary;return {status:'pass',entries};
+ }
  let cleanup;
  function beginClose(){if(!cleanup)cleanup=admission.closeAdmission().then(()=>{if(admission.isQuarantined()||retained.size)return {status:'blocked',code:'SEP_INSTALLER_CLEANUP_UNCONFIRMED',resourcesReleased:false};finished=true;const r=receipt();resolveClosed(r);return r;});return cleanup;}
- return Object.freeze({preview:()=>admitted(doPreview),listRecovery:()=>admitted(()=>fail('SEP_INSTALLER_RECOVERY_LIST_NOT_IMPLEMENTED')),cancel:arg=>admitted(async()=>{request(arg,'planHash');if(!preview||preview.planHash!==arg.planHash)fail('SEP_INSTALLER_CONFIRMATION_MISMATCH');cancelled=arg.planHash;preview=undefined;return {status:'pass',phase:'cancelled'};}),confirm:arg=>admitted(()=>doConfirm(arg)),resume:arg=>admitted(()=>doResume(arg)),close:async()=>{if(finished)return receipt();try{return await bounded(beginClose(),5000,'SEP_INSTALLER_CLOSE_DEADLINE');}catch{return {status:'blocked',code:'SEP_INSTALLER_CLOSE_DEADLINE',resourcesReleased:false};}},whenClosed:()=>closed});
+ return Object.freeze({preview:()=>admitted(doPreview),listRecovery:()=>admitted(doListRecovery),cancel:arg=>admitted(async()=>{request(arg,'planHash');if(!preview||preview.planHash!==arg.planHash)fail('SEP_INSTALLER_CONFIRMATION_MISMATCH');cancelled=arg.planHash;preview=undefined;return {status:'pass',phase:'cancelled'};}),confirm:arg=>admitted(()=>doConfirm(arg)),resume:arg=>admitted(()=>doResume(arg)),close:async()=>{if(finished)return receipt();try{return await bounded(beginClose(),5000,'SEP_INSTALLER_CLOSE_DEADLINE');}catch{return {status:'blocked',code:'SEP_INSTALLER_CLOSE_DEADLINE',resourcesReleased:false};}},whenClosed:()=>closed});
 }
