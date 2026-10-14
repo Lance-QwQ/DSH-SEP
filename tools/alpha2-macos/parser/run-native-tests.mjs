@@ -24,5 +24,6 @@ const ownerPath=join(output,'task-owner'),helperPath=join(output,'native-tree');
 const fixture={output,runtimeRoot,ownerPath,ownerSha256:hash(await readFile(ownerPath)),helperPath,helperSha256:hash(await readFile(helperPath)),'context-python':{executable:pyexe,executableSha256:hash(await readFile(pyexe)),parserPath:context,parserSha256:hash(await readFile(context))},'document-node':{executable:node,executableSha256:hash(await readFile(node)),parserPath:entry,parserSha256:hash(await readFile(entry))}};
 const manifest=join(output,'fixture.json');await writeFile(manifest,JSON.stringify(fixture,null,2),{flag:'wx'});const errors=[];
 try{await command(process.execPath,['--test',join(source,'parser-contract.test.mjs')],'contract');}catch(e){errors.push(e);}
+try{await command(process.execPath,['--test',join(source,'document-entry.test.mjs')],'entry',{...process.env,SEP_PARSER_ENTRY_TEST_ROOT:join(output,'entry-cases')});}catch(e){errors.push(e);}
 try{await command(process.execPath,['--test',join(source,'parser-native.test.mjs')],'native',{...process.env,SEP_MAC_PARSER_FIXTURE:manifest});}catch(e){errors.push(e);}
 if(errors.length)throw new AggregateError(errors,'PARSER_TESTS_FAILED');

@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdir,mkdtemp,copyFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {spawn} from 'node:child_process';
+const root=process.env.SEP_PARSER_ENTRY_TEST_ROOT,bundle=process.env.SEP_MAC_BUNDLE_ROOT;assert(root&&bundle);await mkdir(root,{recursive:false,mode:0o700});
+async function run(bytes){const stage=await mkdtemp(join(root,'entry-'));await mkdir(join(stage,'suite'),{mode:0o700});await copyFile(new URL('./document-entry.mjs',import.meta.url),join(stage,'document-entry.mjs'));for(const name of ['parsers.js','parser-worker.js','errors.js'])await copyFile(join(bundle,'modules/system-enhancement-package/src',name),join(stage,'suite',name));await writeFile(join(stage,'package.json'),'{"type":"module"}');return new Promise((resolve,reject)=>{const child=spawn(process.execPath,[join(stage,'document-entry.mjs')],{stdio:['pipe','pipe','pipe']});let stdout='',stderr='';const timer=setTimeout(()=>{child.kill('SIGKILL');},10000);child.stdout.on('data',b=>{stdout+=b;if(stdout.length>1048576)child.kill('SIGKILL');});child.stderr.on('data',b=>{stderr+=b;if(stderr.length>4096)child.kill('SIGKILL');});child.once('error',reject);child.stdin.on('error',()=>{});child.once('close',(code,signal)=>{clearTimeout(timer);resolve({code,signal,stdout,stderr});});child.stdin.end(JSON.stringify({bytes:bytes.toString('base64'),extension:'.txt'}));});}
+test('the actual document entry retains valid UTF8 body output',async()=>{const r=await run(Buffer.from('synthetic body'));assert.equal(r.code,0);assert.equal(JSON.parse(r.stdout).parts[0].text,'synthetic body');});
+test('large valid base64 reaches the document limit rather than overflowing a regex',async()=>{const r=await run(Buffer.alloc(4*1024*1024,65));assert.equal(r.code,1);assert.equal(r.stderr,'TOO_LARGE');assert.equal(r.signal,null);});
