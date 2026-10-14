@@ -1,0 +1,24 @@
+native-hide-observer-probe:
+  runs-on: macos-15
+  timeout-minutes: 8
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Verify interpretation contracts
+      run: node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-observer-probe/analysis.test.mjs > "$RUNNER_TEMP/hide-analysis.tap"
+    - name: Observe each fresh AppKit fixture exactly once
+      run: node tools/alpha2-macos/desktop/hide-observer-probe/run-native.mjs "$RUNNER_TEMP/hide-observer-probe"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-hide-observer-probe
+        include-hidden-files: true
+        path: |
+          ${{ runner.temp }}/hide-observer-probe
+          ${{ runner.temp }}/hide-analysis.tap

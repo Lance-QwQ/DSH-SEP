@@ -9,6 +9,22 @@ import {connectSmokeInspector} from './smoke-inspector.mjs';
 const error=code=>Object.assign(Error(code),{code});
 const safeCode=e=>/^(SEP_|FULL_|P1_|P2_|BUDGET_|FS_|OWNER_)[A-Z0-9_]{1,90}$/.test(e?.code??e?.message??'')?e.code??e.message:'SEP_WORKSPACE_DIAGNOSTIC_ASSERTION';
 
+// Both samples are read-only. Early sampling binds the actual child PID, but
+// cannot authorize a UI action. The ready sample additionally requires the
+// exact installed app path and Electron readiness, after trusted welcome proof.
+export async function verifyWorkspaceInspector({phase,read,save,expectedPid,expectedAppPath}){
+ if(!['early','welcome-ready'].includes(phase))throw error('SEP_WORKSPACE_INSPECTOR_PHASE');
+ const observed=await read();
+ const sample={schema:1,phase,observedPid:observed?.observedPid??null,appPath:observed?.appPath??null,isReady:observed?.isReady??null,expectedPid,expectedAppPath};
+ await save('IDENTITY-'+phase+'.json',sample);
+ if(sample.observedPid!==expectedPid)throw error('SEP_WORKSPACE_INSPECTOR_PID');
+ if(phase==='welcome-ready'){
+  if(sample.appPath!==expectedAppPath)throw error('SEP_WORKSPACE_INSPECTOR_PATH');
+  if(sample.isReady!==true)throw error('SEP_WORKSPACE_INSPECTOR_NOT_READY');
+ }
+ return sample;
+}
+
 // This exact function executes inside the real welcome renderer. Observation
 // does not dispatch. The later dispatch repeats all visibility checks once.
 export function performWelcomeAction(id,dispatch=true){
@@ -56,10 +72,13 @@ async function main(){
   control=createLaunchControl({onEvent:e=>result.events.push(e)});result.stage='launch';pending=true;
   launchPromise=launchFull({programPath:input.programPath,programSha256:input.programSha256,dataRoot:input.dataRoot,diagnosticInspector:true,control}).then(value=>{app=value;pending=false;void app.whenClosed().then(async receipt=>{closed=receipt;if(finalized&&result.cleanup.status!=='pass')await save('LATE-CLEANUP.json',{status:receipt.status,receipt,originalStatus:result.status,notRetroactive:true}).catch(()=>{});});return value;},e=>{pending=false;throw e;});
   await bounded(launchPromise,100000);assert.equal(app.status,'running');result.generation=app.generation;result.desktopPid=app.desktopPid;result.hostPid=app.hostPid;
-  const endpoint=await until(()=>app.diagnostics().inspectorEndpoint,30000,'SEP_WORKSPACE_INSPECTOR_DEADLINE');client=await connectSmokeInspector(endpoint);
+  result.stage='inspector-early';const endpoint=await until(()=>app.diagnostics().inspectorEndpoint,30000,'SEP_WORKSPACE_INSPECTOR_DEADLINE');client=await connectSmokeInspector(endpoint);
   const asar=join(input.application,'Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar');
-  assert.equal(await client.eval(`(()=>{const require=process.getBuiltinModule('module').createRequire(${JSON.stringify(asar+'/package.json')});globalThis.__sepWorkspaceProbe={electron:require('electron')};return process.pid===${app.desktopPid}&&__sepWorkspaceProbe.electron.app.getAppPath()===${JSON.stringify(asar)};})()`),true);
-  result.stage='welcome';await until(()=>control.status().surface==='welcome',60000,'SEP_WORKSPACE_WELCOME_READY');
+  const readIdentity=()=>client.eval(`(()=>{const require=process.getBuiltinModule('module').createRequire(${JSON.stringify(asar+'/package.json')});globalThis.__sepWorkspaceProbe??={electron:require('electron')};return{observedPid:process.pid,appPath:__sepWorkspaceProbe.electron.app.getAppPath()??null,isReady:__sepWorkspaceProbe.electron.app.isReady()};})()`);
+  result.earlyIdentity=await verifyWorkspaceInspector({phase:'early',read:readIdentity,save,expectedPid:app.desktopPid,expectedAppPath:asar});
+  result.stage='welcome-ready';await until(()=>control.status().surface==='welcome',60000,'SEP_WORKSPACE_WELCOME_READY');
+  result.stage='inspector-ready';result.readyIdentity=await verifyWorkspaceInspector({phase:'welcome-ready',read:readIdentity,save,expectedPid:app.desktopPid,expectedAppPath:asar});
+  result.stage='welcome';
   const welcomeUrl=pathToFileURL(join(asar,'renderer/welcome.html')).href;
   const snapshots=()=>client.eval(`__sepWorkspaceProbe.electron.BrowserWindow.getAllWindows().map(w=>({id:w.id,visible:w.isVisible(),loading:w.webContents.isLoading(),surface:w.webContents.getURL()===${JSON.stringify(welcomeUrl)}?'welcome':w.webContents.getURL().startsWith('dsh-app://app/')?'workspace':'other'}))`);
   const welcome=await until(async()=>{const ws=(await snapshots()).filter(w=>w.visible&&!w.loading&&w.surface==='welcome');assert(ws.length<=1);return ws[0];},30000,'SEP_WORKSPACE_WELCOME_WINDOW');

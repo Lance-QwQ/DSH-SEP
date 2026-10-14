@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';
-import {performWelcomeAction} from './workspace-diagnostic-worker.mjs';
+import {performWelcomeAction,verifyWorkspaceInspector} from './workspace-diagnostic-worker.mjs';
 import {classifyDiagnostic} from './workspace-diagnostic.mjs';
 const complete={status:'pass',cleanup:{status:'pass',resourcesConfirmedReleased:true},workspaceReady:{surface:'workspace',ready:true,blocked:false},badge:{width:32,height:14,officialHarnessPreserved:true}};
 test('diagnostic pass requires its own workspace, dimensions and exact clean worker exit',()=>{
@@ -29,4 +29,25 @@ test('hidden, inert, disabled and ambiguous controls do not receive synthetic cl
 });
 test('unexpected controls cannot invoke account login, save-key or arbitrary DOM actions',()=>{
  for(const id of ['sign-in','save-key','anything']){const f=actionFixture();assert.throws(()=>f.invoke(id),e=>e.code==='SEP_WORKSPACE_ACTION_REJECTED');assert.equal(f.clicks(),0);}
+});
+test('Inspector identity is recorded before exact PID, path and ready acceptance',async()=>{
+ const observed={observedPid:101,appPath:'/fixed.app/Contents/Resources/app.asar',isReady:true},saved=[];
+ const receipt=await verifyWorkspaceInspector({phase:'welcome-ready',read:async()=>observed,save:async(name,value)=>saved.push({name,value}),expectedPid:101,expectedAppPath:observed.appPath});
+ assert.deepEqual(saved,[{name:'IDENTITY-welcome-ready.json',value:{schema:1,phase:'welcome-ready',...observed,expectedPid:101,expectedAppPath:observed.appPath}}]);assert.deepEqual(receipt,saved[0].value);
+});
+test('Inspector mismatches retain the original observation and never count as identity acceptance',async()=>{
+ for(const [patch,code] of [[{observedPid:102},'SEP_WORKSPACE_INSPECTOR_PID'],[{appPath:'/other/app.asar'},'SEP_WORKSPACE_INSPECTOR_PATH'],[{isReady:false},'SEP_WORKSPACE_INSPECTOR_NOT_READY']]){
+  const observed={observedPid:101,appPath:'/fixed/app.asar',isReady:true,...patch},saved=[];
+  await assert.rejects(verifyWorkspaceInspector({phase:'welcome-ready',read:async()=>observed,save:async(name,value)=>saved.push({name,value}),expectedPid:101,expectedAppPath:'/fixed/app.asar'}),e=>e.code===code);
+  assert.equal(saved.length,1);assert.equal(saved[0].name,'IDENTITY-welcome-ready.json');assert.deepEqual(saved[0].value,{schema:1,phase:'welcome-ready',...observed,expectedPid:101,expectedAppPath:'/fixed/app.asar'});
+ }
+});
+test('Inspector identity persistence failure cannot silently pass',async()=>{
+ const failure=Error('synthetic storage failure');
+ await assert.rejects(verifyWorkspaceInspector({phase:'welcome-ready',read:async()=>({observedPid:101,appPath:'/fixed/app.asar',isReady:true}),save:async()=>{throw failure;},expectedPid:101,expectedAppPath:'/fixed/app.asar'}),e=>e===failure);
+});
+test('early observation can retain unfinished app initialization but wrong PID always refuses',async()=>{
+ const seen=[];const read=async()=>({observedPid:101,appPath:null,isReady:false}),save=async(name,value)=>seen.push({name,value});
+ const early=await verifyWorkspaceInspector({phase:'early',read,save,expectedPid:101,expectedAppPath:'/fixed/app.asar'});assert.equal(early.phase,'early');assert.equal(early.isReady,false);assert.equal(seen[0].name,'IDENTITY-early.json');
+ await assert.rejects(verifyWorkspaceInspector({phase:'early',read,save,expectedPid:102,expectedAppPath:'/fixed/app.asar'}),e=>e.code==='SEP_WORKSPACE_INSPECTOR_PID');assert.equal(seen.length,2);
 });
