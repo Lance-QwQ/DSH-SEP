@@ -44,5 +44,8 @@ export const platformSupported=({platform,arch,version,build,darwin})=>platform=
 export function buildPolicy({workRoot,runtimeRoot,executable},mode){
  for(const p of [workRoot,runtimeRoot,executable])path(p);if(mode!=='single')fail('SEP_MAC_PARSER_INPUT');
  const quoted=p=>'"'+p+'"';
- return `(version 1)\n(deny default)\n${mode==='single'?'(deny process-fork)\n(allow process-exec (literal '+quoted(executable)+'))':'(allow process-fork)\n(allow process-exec)'}\n(allow sysctl-read)\n(allow file-read* (literal "/") (subpath "/usr/lib") (subpath "/System/Library") (subpath ${quoted(runtimeRoot)}) (subpath ${quoted(workRoot)}))\n(allow file-write* (subpath ${quoted(workRoot)}) (literal "/dev/null"))\n`;
+ const ancestors=new Set();for(const root of [runtimeRoot,workRoot]){let parent=posix.dirname(root);while(parent!=='/'){ancestors.add(parent);parent=posix.dirname(parent);}}
+ // Node realpath resolves every ancestor; metadata does not grant directory listing or content.
+ const metadata='(allow file-read-metadata '+[...ancestors].sort().map(p=>'(literal '+quoted(p)+')').join(' ')+')';
+ return `(version 1)\n(deny default)\n${metadata}\n${mode==='single'?'(deny process-fork)\n(allow process-exec (literal '+quoted(executable)+'))':'(allow process-fork)\n(allow process-exec)'}\n(allow sysctl-read)\n(allow file-read* (literal "/") (subpath "/usr/lib") (subpath "/System/Library") (subpath ${quoted(runtimeRoot)}) (subpath ${quoted(workRoot)}))\n(allow file-write* (subpath ${quoted(workRoot)}) (literal "/dev/null"))\n`;
 }

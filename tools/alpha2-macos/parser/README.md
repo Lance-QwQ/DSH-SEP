@@ -25,7 +25,9 @@ Config contains `runtimeRoot`, `scratchRoot`, `authorityRoot`, `ownerPath`,
 `authorityRoot/.native.lock`. The trusted package assembler provisions a
 read-only tool runtime from verified inputs. Each call creates a fresh private
 scratch directory. Only runtime/system libraries and that scratch are readable;
-only the scratch is writable. No source project or controller is mounted.
+only the scratch is writable. Node's realpath traversal receives metadata access
+to each literal ancestor of runtime/scratch; this does not grant ancestor directory
+listing or sibling file contents. No source project or controller is mounted.
 
 The parser carrier is mechanically derived from the already tested native
 single-process task carrier; `origin.json` replays every transformation. It
@@ -59,3 +61,10 @@ and compiles the existing native owner and APFS helper. It saves OS identity,
 compiler and test logs. Dependency acquisition belongs to the separate pinned
 SHA-512 installer; no dependency lifecycle scripts are run here. Portable
 contract tests are not evidence for Darwin policy or process cleanup.
+
+The r23 and r25 native runs retained two document-parser failures. The r25
+synthetic diagnostic identified `EPERM` in Node's `realpathSync` on `/Users`
+before entry evaluation; Node `-e` under the same policy succeeded. The next
+candidate adds only literal ancestor metadata and tests that ancestor listing
+and sibling content remain refused. This candidate still requires native replay.
+`diagnose-native.mjs` is a synthetic CI diagnostic, excluded from the product.

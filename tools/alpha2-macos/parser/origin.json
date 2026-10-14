@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "Trusted parser-only stdin/output limits, single-process policy; general task sources unchanged.",
+  "scope": "Trusted parser-only stdin/output limits, single-process policy and literal ancestor metadata for Node resolution; general task sources unchanged.",
   "derivations": [
     {
       "source": "task-contract.mjs",
@@ -22,6 +22,14 @@
         [
           "maxOutputBytes>1048576",
           "maxOutputBytes>12582912"
+        ],
+        [
+          "const quoted=p=>'\"'+p+'\"';",
+          "const quoted=p=>'\"'+p+'\"';\n const ancestors=new Set();for(const root of [runtimeRoot,workRoot]){let parent=posix.dirname(root);while(parent!=='/'){ancestors.add(parent);parent=posix.dirname(parent);}}\n // Node realpath resolves every ancestor; metadata does not grant directory listing or content.\n const metadata='(allow file-read-metadata '+[...ancestors].sort().map(p=>'(literal '+quoted(p)+')').join(' ')+')';"
+        ],
+        [
+          "(deny default)\\n${mode",
+          "(deny default)\\n${metadata}\\n${mode"
         ]
       ],
       "replaceAll": [
@@ -36,7 +44,7 @@
           "count": 2
         }
       ],
-      "resultSha256": "aa801818b0a56581472483a7a762b3660f81366d4bce363d85fb2ecbea196985"
+      "resultSha256": "f6e7c91ba71d2035991f3fb2a3475abcfb46c249c142097dd00eca797090ffd3"
     },
     {
       "source": "task-worker.mjs",
