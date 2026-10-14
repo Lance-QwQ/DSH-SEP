@@ -1,7 +1,8 @@
 {
   "schema": 1,
   "status": "not_run",
-  "stage": "red-scaffold",
+  "stage": "implemented-native-green-pending",
+  "redEvidence": "r60: 12/12 reached SEP_INSTALLER_RESOURCES_NOT_IMPLEMENTED, 0 setup errors/skips/cancellations; original inputs and logs retained outside the source tree",
   "entry": "assembleInstallerResources({ sourceApp, receipt, sourceRoot, contents })",
   "audience": "Trusted build-time assembler only; no user/model supplied runtime command, source path or destination selector",
   "target": "Contents must be absent; real existing parent; no aliases; outside payload and sourceRoot; refuse overwrite",

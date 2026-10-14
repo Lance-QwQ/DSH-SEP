@@ -6,11 +6,11 @@
 #import <math.h>
 
 static BOOL Exact(id value,NSArray *keys){return [value isKindOfClass:NSDictionary.class]&&[[NSSet setWithArray:[value allKeys]]isEqualToSet:[NSSet setWithArray:keys]];}
-static BOOL Pattern(id value,NSString *pattern){if(![value isKindOfClass:NSString.class])return NO;NSRange range=[value rangeOfString:pattern options:NSRegularExpressionSearch];return range.location==0&&range.length==[value length];}
-static BOOL Digest(id value){return Pattern(value,@"[a-f0-9]{64}");}
-static BOOL Transaction(id value){return Pattern(value,@"[a-f0-9]{32}");}
-static BOOL Boolean(id value){return [value isKindOfClass:NSNumber.class]&&CFGetTypeID((__bridge CFTypeRef)value)==CFBooleanGetTypeID();}
-static BOOL Integer(id value,double min,double max){if(![value isKindOfClass:NSNumber.class]||Boolean(value))return NO;double n=[value doubleValue];return isfinite(n)&&floor(n)==n&&n>=min&&n<=max;}
+static BOOL SEPTransportPattern(id value,NSString *pattern){if(![value isKindOfClass:NSString.class])return NO;NSRange range=[value rangeOfString:pattern options:NSRegularExpressionSearch];return range.location==0&&range.length==[value length];}
+static BOOL Digest(id value){return SEPTransportPattern(value,@"[a-f0-9]{64}");}
+static BOOL Transaction(id value){return SEPTransportPattern(value,@"[a-f0-9]{32}");}
+static BOOL SEPTransportBoolean(id value){return [value isKindOfClass:NSNumber.class]&&CFGetTypeID((__bridge CFTypeRef)value)==CFBooleanGetTypeID();}
+static BOOL Integer(id value,double min,double max){if(![value isKindOfClass:NSNumber.class]||SEPTransportBoolean(value))return NO;double n=[value doubleValue];return isfinite(n)&&floor(n)==n&&n>=min&&n<=max;}
 static BOOL Path(id value){return [value isKindOfClass:NSString.class]&&[value hasPrefix:@"/"]&&[value length]<=2048&&[value rangeOfString:@"[\\x00-\\x1f\\x7f]" options:NSRegularExpressionSearch].location==NSNotFound;}
 static NSDictionary *Blocked(NSString *code){return @{@"status":@"blocked",@"phase":@"blocked",@"code":code};}
 static BOOL Role(NSDictionary *role){
@@ -31,15 +31,15 @@ static BOOL ValidResponse(NSDictionary *value,NSString *nonce,NSUInteger sequenc
  NSArray *base=@[@"protocol",@"nonce",@"sequence",@"status",@"phase"];
  if(![value isKindOfClass:NSDictionary.class]||!Integer(value[@"protocol"],1,1)||![value[@"nonce"]isEqual:nonce]||!Integer(value[@"sequence"],sequence,sequence))return NO;
  NSString *phase=value[@"phase"],*status=value[@"status"];
- if([@[@"blocked",@"fail"]containsObject:status])return Exact(value,[base arrayByAddingObject:@"code"])&&[phase isEqual:@"blocked"]&&Pattern(value[@"code"],@"SEP_[A-Z0-9_]{1,90}");
+ if([@[@"blocked",@"fail"]containsObject:status])return Exact(value,[base arrayByAddingObject:@"code"])&&[phase isEqual:@"blocked"]&&SEPTransportPattern(value[@"code"],@"SEP_[A-Z0-9_]{1,90}");
  if(![status isEqual:@"pass"])return NO;
  NSDictionary *expected=@{@"preview":@"preview",@"listRecovery":@"recovery-list",@"confirm":@"committed",@"resume":@"committed",@"cancel":@"cancelled",@"close":@"closed"};if(![phase isEqual:expected[operation]])return NO;
  if([phase isEqual:@"cancelled"])return Exact(value,base);
- if([phase isEqual:@"closed"])return Exact(value,[base arrayByAddingObject:@"resourcesReleased"])&&Boolean(value[@"resourcesReleased"])&&[value[@"resourcesReleased"]boolValue];
- if([phase isEqual:@"preview"]){NSDictionary *p=value[@"preview"];return Exact(value,[base arrayByAddingObject:@"preview"])&&Exact(p,@[@"planHash",@"transactionId",@"target",@"dataRoot",@"entries",@"totalBytes",@"createApplications"])&&Digest(p[@"planHash"])&&Transaction(p[@"transactionId"])&&Path(p[@"target"])&&Path(p[@"dataRoot"])&&Integer(p[@"entries"],1,100000)&&Integer(p[@"totalBytes"],0,8589934592.0)&&Boolean(p[@"createApplications"]);}
- if([phase isEqual:@"committed"]){NSDictionary *p=value[@"installation"];return Exact(value,[base arrayByAddingObject:@"installation"])&&Exact(p,@[@"target",@"transactionId",@"applicationStarted"])&&Path(p[@"target"])&&Transaction(p[@"transactionId"])&&Boolean(p[@"applicationStarted"])&&![p[@"applicationStarted"]boolValue];}
+ if([phase isEqual:@"closed"])return Exact(value,[base arrayByAddingObject:@"resourcesReleased"])&&SEPTransportBoolean(value[@"resourcesReleased"])&&[value[@"resourcesReleased"]boolValue];
+ if([phase isEqual:@"preview"]){NSDictionary *p=value[@"preview"];return Exact(value,[base arrayByAddingObject:@"preview"])&&Exact(p,@[@"planHash",@"transactionId",@"target",@"dataRoot",@"entries",@"totalBytes",@"createApplications"])&&Digest(p[@"planHash"])&&Transaction(p[@"transactionId"])&&Path(p[@"target"])&&Path(p[@"dataRoot"])&&Integer(p[@"entries"],1,100000)&&Integer(p[@"totalBytes"],0,8589934592.0)&&SEPTransportBoolean(p[@"createApplications"]);}
+ if([phase isEqual:@"committed"]){NSDictionary *p=value[@"installation"];return Exact(value,[base arrayByAddingObject:@"installation"])&&Exact(p,@[@"target",@"transactionId",@"applicationStarted"])&&Path(p[@"target"])&&Transaction(p[@"transactionId"])&&SEPTransportBoolean(p[@"applicationStarted"])&&![p[@"applicationStarted"]boolValue];}
  if(!Exact(value,[base arrayByAddingObject:@"recoveries"])||![value[@"recoveries"]isKindOfClass:NSArray.class]||[value[@"recoveries"]count]>64)return NO;
- NSMutableSet *seen=[NSMutableSet new];for(NSDictionary *row in value[@"recoveries"]){if(![row isKindOfClass:NSDictionary.class])return NO;BOOL blocked=[row[@"phase"]isEqual:@"blocked"];if(!Exact(row,blocked?@[@"transactionId",@"phase",@"code"]:@[@"transactionId",@"phase"])||!Transaction(row[@"transactionId"])||[seen containsObject:row[@"transactionId"]]||![@[@"confirmed",@"planned",@"executing",@"committed",@"blocked"]containsObject:row[@"phase"]]||(blocked&&!Pattern(row[@"code"],@"SEP_[A-Z0-9_]{1,90}")))return NO;[seen addObject:row[@"transactionId"]];}return YES;
+ NSMutableSet *seen=[NSMutableSet new];for(NSDictionary *row in value[@"recoveries"]){if(![row isKindOfClass:NSDictionary.class])return NO;BOOL blocked=[row[@"phase"]isEqual:@"blocked"];if(!Exact(row,blocked?@[@"transactionId",@"phase",@"code"]:@[@"transactionId",@"phase"])||!Transaction(row[@"transactionId"])||[seen containsObject:row[@"transactionId"]]||![@[@"confirmed",@"planned",@"executing",@"committed",@"blocked"]containsObject:row[@"phase"]]||(blocked&&!SEPTransportPattern(row[@"code"],@"SEP_[A-Z0-9_]{1,90}")))return NO;[seen addObject:row[@"transactionId"]];}return YES;
 }
 
 @interface SEPInstallerPipeTransport ()

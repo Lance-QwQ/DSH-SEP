@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "stage": "native application lifecycle RED",
+  "definitions": 8,
+  "inputs": [
+    {
+      "path": "InstallerApplication.h",
+      "bytes": 438,
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c"
+    },
+    {
+      "path": "InstallerApplication.m",
+      "bytes": 728,
+      "sha256": "9a9f662cfef26f0b53991d61eb727acd0ad95e7c5854d76930a639efe9615cae"
+    },
+    {
+      "path": "InstallerApplicationTests.m",
+      "bytes": 7740,
+      "sha256": "269a7beb19608579feb34659c2d9a7fd393ccf79aa3ea741ebafc313df479af9"
+    },
+    {
+      "path": "ci-red-job.yml",
+      "bytes": 2056,
+      "sha256": "7cc7df291f11932a60b2054165d6342dc952a993c6cb7f3782623869c7e2a3f3"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 3436,
+      "sha256": "fb6eb2025974185a380f371cc7bc14a77fa5ab05d0e363d8165f546a07e8ef24"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "installer-ui/native/InstallerUI.h",
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    },
+    {
+      "path": "installer-ui/native/InstallerUI.m",
+      "sha256": "c36fdc9877c19e3ec77ca5da1b05610285d591ec5f19b32e1331bf9637fdfb80"
+    }
+  ],
+  "scope": "actual NSMenu/UI/window and application delegate methods; synthetic owner and compile-time termination recorder; no actual installed application",
+  "notVerified": [
+    "native RED",
+    "fixed LaunchServices opener",
+    "production composition",
+    "actual product process exit",
+    "physical input"
+  ]
+}
