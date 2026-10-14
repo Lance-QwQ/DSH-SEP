@@ -15,6 +15,7 @@ for await(const line of lines){
   if(scenario==='exit-without-proof'){socket.end();break;}
  }else if(value.kind==='activate')send('activated',{requestId:value.requestId});
  else if(value.kind==='requestQuit'){
+  if(scenario==='quit-no-reply')continue;
   if(scenario==='cancel-then-quit'&&quits++===0)send('quitCancelled',{requestId:value.requestId});
   else{send('quitting');send('closed',{status:'pass',resourcesConfirmedReleased:true});socket.end();break;}
  }else throw Error('SYNTHETIC_BOOTSTRAP_FRAME');

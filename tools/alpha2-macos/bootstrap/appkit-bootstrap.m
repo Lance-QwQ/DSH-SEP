@@ -61,9 +61,10 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
 @property(nonatomic,strong) NSTimer *timer;
 @property(nonatomic) int channel,childStatus,result;
 @property(nonatomic) pid_t child;
-@property(nonatomic) BOOL childExited,childUnconfirmed,channelEOF,desktopReady,activated,quitCancelled,closing,cleanReceipt,finished,cleanupStarted,cleanupKilled,protocolBroken;
+@property(nonatomic) BOOL childExited,childUnconfirmed,channelEOF,desktopReady,activated,quitCancelled,closing,cleanReceipt,finished,cleanupStarted,cleanupKilled,protocolBroken,terminationPending;
 @property(nonatomic) double deadline,cleanupDeadline;
 - (void)poll:(NSTimer *)timer;
+- (void)queueSyntheticQuit;
 @end
 @implementation Bootstrap
 - (void)block:(NSString *)code { if(!self.failure) self.failure=code; self.protocolBroken=YES; }
@@ -82,7 +83,12 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
   (void)sender; if(self.failure || self.finished) return NSTerminateCancel;
   if(!self.quit && self.generation) { self.quit=randomHex(12); [self send:@"requestQuit" extra:@{@"requestId":self.quit}]; }
+  self.terminationPending=YES;
   return NSTerminateLater;
+}
+- (void)queueSyntheticQuit {
+  /* Do not enter AppKit's nested modal loop inside the repeating timer itself. */
+  [NSRunLoop.mainRunLoop performInModes:@[NSDefaultRunLoopMode] block:^{ if(!self.finished && !self.failure) [NSApp terminate:nil]; }];
 }
 - (void)receive:(NSDictionary *)v {
   NSDictionary *extensions=@{@"owned":@[],@"ready":@[@"desktopReady"],@"activated":@[@"requestId"],@"quitCancelled":@[@"requestId"],@"quitting":@[],@"closed":@[@"status",@"resourcesConfirmedReleased"],@"blocked":@[@"code",@"resourcesConfirmedReleased"]};
@@ -98,12 +104,12 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
   }
   if([kind isEqual:@"activated"]) {
     if(!self.activation || ![v[@"requestId"] isEqual:self.activation]) { [self block:@"SEP_BOOTSTRAP_PROTOCOL"]; return; }
-    self.activation=nil; self.activated=YES; [NSApp terminate:nil]; return;
+    self.activation=nil; self.activated=YES; [self queueSyntheticQuit]; return;
   }
   if([kind isEqual:@"quitCancelled"]) {
     if(!self.quit || ![v[@"requestId"] isEqual:self.quit] || self.cleanReceipt || self.failure) { [self block:@"SEP_BOOTSTRAP_PROTOCOL"]; return; }
-    self.quit=nil; self.quitCancelled=YES; [NSApp replyToApplicationShouldTerminate:NO];
-    dispatch_async(dispatch_get_main_queue(),^{ if(!self.finished && !self.failure) [NSApp terminate:nil]; }); return;
+    self.quit=nil; self.quitCancelled=YES; self.terminationPending=NO; [NSApp replyToApplicationShouldTerminate:NO];
+    [self queueSyntheticQuit]; return;
   }
   if([kind isEqual:@"quitting"]) { if(self.cleanReceipt) [self block:@"SEP_BOOTSTRAP_PROTOCOL"]; else self.closing=YES; return; }
   if([kind isEqual:@"blocked"]) {
@@ -144,15 +150,17 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
   self.nonce=randomHex(32); self.channel=-1; self.child=-1;
   self.deadline=NSProcessInfo.processInfo.systemUptime+[self.config[@"deadlineMs"] doubleValue]/1000.0;
   if(![self spawnController]) [self block:@"SEP_BOOTSTRAP_SPAWN"]; else [self send:@"initialize" extra:@{}];
-  self.timer=[NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(poll:) userInfo:nil repeats:YES];
+  self.timer=[NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(poll:) userInfo:nil repeats:YES];
+  [NSRunLoop.mainRunLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 - (void)finish:(BOOL)pass {
   if(self.finished) return; self.finished=YES; [self.timer invalidate]; self.timer=nil;
   if(self.channel>=0) { close(self.channel); self.channel=-1; } self.result=pass?0:70;
   int exitStatus=self.childStatus; // Darwin wait macros require an addressable int.
-  NSMutableDictionary *receipt=[@{@"status":pass?@"pass":@"blocked",@"resourcesConfirmedReleased":@(pass),@"desktopReady":@(self.desktopReady),@"activated":@(self.activated),@"quitCancelled":@(self.quitCancelled),@"cleanControllerExit":@(self.childExited && WIFEXITED(exitStatus) && WEXITSTATUS(exitStatus)==0),@"scope":@"synthetic-bootstrap-contract"} mutableCopy];
-  if(!pass) { receipt[@"code"]=self.failure?:@"SEP_BOOTSTRAP_EXIT_UNCONFIRMED"; receipt[@"fixtureCleanup"]=@"separate-test-cleanup"; receipt[@"fixtureChildReaped"]=@(self.childExited || self.child<0); }
+  NSMutableDictionary *receipt=[@{@"status":pass?@"pass":@"blocked",@"resourcesConfirmedReleased":@(pass),@"desktopReady":@(self.desktopReady),@"activated":@(self.activated),@"quitCancelled":@(self.quitCancelled),@"cleanControllerExit":@((BOOL)(self.childExited && WIFEXITED(exitStatus) && WEXITSTATUS(exitStatus)==0)),@"scope":@"synthetic-bootstrap-contract"} mutableCopy];
+  if(!pass) { receipt[@"code"]=self.failure?:@"SEP_BOOTSTRAP_EXIT_UNCONFIRMED"; receipt[@"fixtureCleanup"]=@"separate-test-cleanup"; receipt[@"fixtureChildReaped"]=@((BOOL)(self.childExited || self.child<0)); }
   output(receipt);
+  if(self.terminationPending) { self.terminationPending=NO; [NSApp replyToApplicationShouldTerminate:pass]; }
   /* Leaving a blocked synthetic fixture is test cleanup, not a production
    * owner policy. A real unknown owner must retain quarantine and its lease. */
   [NSApp stop:nil];
@@ -172,7 +180,12 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
       unsigned char bytes[512]; ssize_t n=read(self.channel,bytes,sizeof bytes);
       if(n<0 && errno==EINTR) continue; if(n<0 && (errno==EAGAIN || errno==EWOULDBLOCK)) break;
       if(n<0) { [self block:@"SEP_BOOTSTRAP_CHANNEL"]; break; }
-      if(!n) { self.channelEOF=YES; if(self.incoming.length) [self block:@"SEP_BOOTSTRAP_FRAME"]; break; }
+      if(!n) {
+        self.channelEOF=YES;
+        // Finish our write half too: peer end() alone does not end its read half.
+        if(shutdown(self.channel,SHUT_WR) && errno!=ENOTCONN) [self block:@"SEP_BOOTSTRAP_CHANNEL"];
+        if(self.incoming.length) [self block:@"SEP_BOOTSTRAP_FRAME"]; break;
+      }
       for(ssize_t i=0;i<n && !self.protocolBroken;i++) {
         if(bytes[i]=='\n') {
           id v=[NSJSONSerialization JSONObjectWithData:self.incoming options:0 error:NULL]; [self.incoming setLength:0];
@@ -206,7 +219,7 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
 static NSDictionary *descriptor(const char *path) {
   NSData *bytes; if(!snapshot([NSString stringWithUTF8String:path],16384,&bytes,NULL)) return nil;
   NSDictionary *v=[NSJSONSerialization JSONObjectWithData:bytes options:0 error:NULL];
-  if(!exact(v,@[@"schema",@"scope",@"node",@"nodeSha256",@"controller",@"controllerSha256",@"programSha256",@"scenario",@"deadlineMs"]) || ![v[@"schema"] isEqual:@1] || ![v[@"scope"] isEqual:@"synthetic-bootstrap-contract"] || !hex(v[@"nodeSha256"],64) || !hex(v[@"controllerSha256"],64) || !hex(v[@"programSha256"],64) || ![@[@"clean",@"cancel-then-quit",@"exit-without-proof",@"wrong-nonce"] containsObject:v[@"scenario"]] || ![v[@"deadlineMs"] isKindOfClass:NSNumber.class] || [v[@"deadlineMs"] doubleValue]<100 || [v[@"deadlineMs"] doubleValue]>10000) return nil;
+  if(!exact(v,@[@"schema",@"scope",@"node",@"nodeSha256",@"controller",@"controllerSha256",@"programSha256",@"scenario",@"deadlineMs"]) || ![v[@"schema"] isEqual:@1] || ![v[@"scope"] isEqual:@"synthetic-bootstrap-contract"] || !hex(v[@"nodeSha256"],64) || !hex(v[@"controllerSha256"],64) || !hex(v[@"programSha256"],64) || ![@[@"clean",@"cancel-then-quit",@"exit-without-proof",@"wrong-nonce",@"quit-no-reply"] containsObject:v[@"scenario"]] || ![v[@"deadlineMs"] isKindOfClass:NSNumber.class] || [v[@"deadlineMs"] doubleValue]<100 || [v[@"deadlineMs"] doubleValue]>10000) return nil;
   NSString *a,*b;
   if(!snapshot(v[@"node"],256ULL*1024*1024,NULL,&a) || ![a isEqual:v[@"nodeSha256"]] || !snapshot(v[@"controller"],1024*1024,NULL,&b) || ![b isEqual:v[@"controllerSha256"]]) return nil;
   return v;

@@ -88,5 +88,39 @@ and executes one additional regression. Both no-argument launch and a complete
 external synthetic descriptor must return code 78 and
 `SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED`; the descriptor's side-effect marker
 must remain absent. Its `production-compile.log` and `production.log` remain
-separate from the original four native contract cases. This fifth test is pending
-native execution and does not imply a connected production launcher.
+separate from the original four native contract cases. This independent test
+passed in native r34 and is included again in the pending rerun; it does not imply
+a connected production launcher.
+
+## r34 diagnosis and modal deadline regression
+
+Native r34 compiled both binaries. Of the original four contract definitions,
+two refusal cases passed and the two positive cases reached the outer 15-second
+test timeout without a receipt. The independent non-test entry test passed.
+The outer timeout did not record the descendants' final state; CI teardown and
+unconfirmed fixture cleanup must not be described as zero residual processes.
+
+The positive path synchronously entered `terminate:` while executing the polling
+timer, then returned `NSTerminateLater`. AppKit switches to the modal run-loop
+mode, while `scheduledTimer` had registered only in default mode. Thus neither
+IPC progress nor the internal deadline could proceed. The replacement schedules
+termination on a later default-mode turn, registers the polling timer in common
+modes, and supplies the actual termination reply only after recording the result.
+This follows Apple's [terminateLater contract](https://developer.apple.com/documentation/appkit/nsapplication/terminatereply/terminatelater)
+and [run-loop timer modes](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html).
+
+A separate POSIX execution of the exact fixed Node fixture also established that
+its `socket.end()` leaves its read half open: the child remained running after
+the parent observed EOF and exited normally only after the parent closed its
+write half. The native transport now performs `shutdown(SHUT_WR)` after peer EOF;
+this never substitutes for the still-required actual child exit and clean receipt.
+This POSIX diagnostic is not macOS AppKit evidence.
+
+The current pending suite retains the four original cases and adds one native
+`quit-no-reply` case: the controller acknowledges activation but withholds its
+quit response. While AppKit awaits termination, the internal 500 ms fixture
+deadline must return blocked, and separately recorded fixture cleanup must reap
+the actual child within a seven-second test bound. The runner now reports five
+synthetic native definitions plus the one non-test refusal definition; the 12
+portable session definitions remain separate. No production total lifetime limit
+is introduced.

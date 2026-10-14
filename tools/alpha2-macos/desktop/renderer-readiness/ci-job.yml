@@ -1,0 +1,52 @@
+native-renderer-readiness-candidate:
+  runs-on: macos-15
+  timeout-minutes: 20
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Fixed reviewed native carrier and integrity-locked ASAR tool
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: |
+        node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/readiness-carrier-download"
+        mkdir "$RUNNER_TEMP/readiness-carrier"
+        ditto -x -k "$RUNNER_TEMP/readiness-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/readiness-carrier"
+        node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/readiness-asar-tools"
+    - name: Extract and hash-bind actual Mac ASAR plus frozen managed capture
+      run: |
+        node tools/alpha2-macos/desktop/renderer-readiness/prepare-inputs.mjs \
+          "$RUNNER_TEMP/readiness-carrier/DSH SEP.app" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
+          "$RUNNER_TEMP/readiness-carrier-download" \
+          "$RUNNER_TEMP/readiness-inputs" \
+          "$RUNNER_TEMP/readiness-asar-tools/node_modules/@electron/asar/lib/asar.js"
+    - name: Pure gate and actual-byte derivation contracts
+      env:
+        SEP_RENDERER_READINESS_INPUTS: ${{ runner.temp }}/readiness-inputs
+      run: |
+        node --test --test-reporter=tap \
+          tools/alpha2-macos/desktop/renderer-readiness/gate.test.mjs \
+          tools/alpha2-macos/desktop/renderer-readiness/preload-bridge.test.mjs \
+          tools/alpha2-macos/desktop/renderer-readiness/derive.test.mjs > "$RUNNER_TEMP/readiness-tests.tap"
+    - name: Create independent candidate without changing a product app
+      run: node tools/alpha2-macos/desktop/renderer-readiness/build-candidate.mjs "$RUNNER_TEMP/readiness-inputs" "$RUNNER_TEMP/readiness-candidate"
+    - name: Preserve exact origins and limited-scope evidence
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-renderer-readiness-candidate
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/readiness-tests.tap
+          ${{ runner.temp }}/readiness-inputs/INPUTS.json
+          ${{ runner.temp }}/readiness-inputs/signature.log
+          ${{ runner.temp }}/readiness-candidate/
+          ${{ runner.temp }}/readiness-carrier-download/DOWNLOAD-RECEIPT.json
+          ${{ runner.temp }}/readiness-asar-tools/RESULT.json
