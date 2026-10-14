@@ -49,7 +49,10 @@ static BOOL pcPublish(NSString *home,NSDictionary *value,BOOL *published) {
     if(ok){NSMutableData *bytes=[NSMutableData dataWithLength:(NSUInteger)before.st_size];size_t at=0;while(at<bytes.length){ssize_t n=read(old,(char *)bytes.mutableBytes+at,bytes.length-at);if(n<0 && errno==EINTR)continue;if(n<=0){ok=NO;break;}at+=(size_t)n;}if(ok)prior=[NSJSONSerialization JSONObjectWithData:bytes options:0 error:NULL];if(![prior isKindOfClass:NSDictionary.class] || !pcHex(prior[@"sessionId"],32) || !pcHex(prior[@"generation"],32))ok=NO;}
     close(old);
   }
-  if(ok && *published && (!hadOld || ![prior[@"sessionId"] isEqual:value[@"sessionId"]] || ![prior[@"generation"] isEqual:value[@"generation"]]))ok=NO;
+  // Only the original owned event may claim a latest slot. If that publication
+  // failed, a later ready/closed event must not overwrite another owner merely
+  // because this instance has never successfully written a receipt before.
+  if(ok && (*published || ![value[@"event"] isEqual:@"owned"]) && (!hadOld || ![prior[@"sessionId"] isEqual:value[@"sessionId"]] || ![prior[@"generation"] isEqual:value[@"generation"]]))ok=NO;
   if(ok && !*published && hadOld && [prior[@"generation"] isEqual:value[@"generation"]] && ![prior[@"sessionId"] isEqual:value[@"sessionId"]])ok=NO;
   NSData *data=ok?[NSJSONSerialization dataWithJSONObject:value options:0 error:NULL]:nil;if(!data || data.length>16384)ok=NO;
   NSString *temp=[NSString stringWithFormat:@".bootstrap-ui.%@.%@.tmp",value[@"sessionId"],value[@"sequence"]];int fd=ok?openat(dir,temp.fileSystemRepresentation,O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC,0600):-1;BOOL made=fd>=0;if(fd<0)ok=NO;

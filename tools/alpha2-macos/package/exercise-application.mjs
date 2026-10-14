@@ -15,7 +15,7 @@ try{
  const assembly=await json(join(assembled,'RESULT.json'));assert.equal(assembly.status,'pass');app=assembly.restoredApplication;assert.equal(app,join(assembled,'restored/DSH SEP.app'));assert.equal(await realpath(app),app);inner=join(app,'Contents/Helpers/DSH SEP Desktop.app');
  const inventory=await json(join(assembled,'PACKAGE-INVENTORY.json'));await verifyPackage(app,inventory);result.programSha256=assembly.programSha256;result.treeSha256=inventory.treeSha256;
  try{await lstat(dataRoot);throw Error('SEP_APPLICATION_DATA_NOT_FRESH');}catch(e){if(e.code!=='ENOENT')throw e;}
- helper=join(out,'application-observer');const helperSource=fileURLToPath(new URL('./application-observer.m',import.meta.url));result.observerSourceSha256=digest(await readFile(helperSource));await exec('/usr/bin/clang',['-fobjc-arc','-framework','AppKit',helperSource,'-o',helper],{env,timeout:120000});
+ helper=join(out,'application-observer');const helperSource=fileURLToPath(new URL('./application-observer.m',import.meta.url));result.observerSourceSha256=digest(await readFile(helperSource));await exec('/usr/bin/clang',['-fobjc-arc','-framework','AppKit','-lproc',helperSource,'-o',helper],{env,timeout:120000});
  const sessions=new Set(),generations=new Set();
  for(let index=0;index<3;index++){
   const cycle={index:index+1,status:'fail',startedAt:new Date().toISOString()},stdout=join(out,`cycle-${index+1}.stdout.log`),stderr=join(out,`cycle-${index+1}.stderr.log`);result.cycles.push(cycle);await writeFile(stdout,'',{flag:'wx',mode:0o600});await writeFile(stderr,'',{flag:'wx',mode:0o600});

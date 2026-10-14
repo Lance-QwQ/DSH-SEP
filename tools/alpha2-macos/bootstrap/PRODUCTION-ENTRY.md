@@ -83,8 +83,10 @@ Production integration must preserve the controlled loader's own hash checks.
 ## Connected candidate after r40 RED
 
 The separate `SEP_BOOTSTRAP_PRODUCT_CONNECTED=1` build now has a candidate
-implementation in `production-runtime.inc.m`. Native GREEN has not yet been
-run. The thirteen admission contracts retain their unconnected compile mode.
+implementation in `production-runtime.inc.m`. Native r43 passed the original
+six connected contracts; a seventh diagnostic-CAS regression failed at its
+intended assertion. Its fix awaits the same seven-contract GREEN run. The
+thirteen admission contracts retain their unconnected compile mode.
 Native r40 (`38568832436` / `115868359955`) compiled all six connected tests;
 each failed at the expected missing-feature `PRODUCTION_NOT_CONNECTED` receipt,
 with zero skips. The exact original logs and artifact `11895769139` are retained.
@@ -138,6 +140,21 @@ not later claim the latest slot over a different session's observation. A
 real native flock holder prevents that first write, and a synthetic replacement
 observation is installed under the lock. The application then quits normally;
 the test separately checks its actual closed/exit proof and the observation
-bytes. The current production implementation is deliberately unchanged pending
-this case's native RED evidence. The earlier r40 six failures and r41 six-case
-frozen candidate remain distinct; this seventh definition is not yet certified.
+bytes. Native r41 and r42 stopped before this assertion because the test
+observer used nullable `NSRunningApplication.launchDate` as process birth. Their
+original failures and unconfirmed cleanup receipts remain preserved. The test
+observer now reads kernel `proc_bsdinfo` birth twice, checks UID/PID and unchanged
+start seconds/microseconds, and still requires the exact registered application
+bundle identity. Normal hide/quit refuses an incorrect expected birth. Every
+observer result is recorded before assertions; no force termination was added.
+
+Native r43 (`38574839463` / `115889100903`) compiled and ran all seven definitions:
+six passed; the seventh failed at the expected newer-receipt preservation
+assertion, after real closed/exit confirmation. Its original artifact
+`11898662859` has SHA-256
+`ee130858dd04d2a4143f27590b39218c6d72bc08727016628aa9fe012cc522da`.
+The candidate fix permits only the original `owned` event to claim the latest
+slot. Later events must match an existing session and generation even when the
+first publication failed. This changes observation handling, not resource
+ownership or cleanup proof. The original seventh failure remains evidence;
+the fixed version has not yet been certified by the subsequent native run.

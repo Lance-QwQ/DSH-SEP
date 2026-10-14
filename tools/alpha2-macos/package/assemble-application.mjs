@@ -11,6 +11,7 @@ import {applyReadinessToApplication} from '../desktop/renderer-readiness/apply-t
 import {validateProgramShape,loadProgram,relativeProgramPath} from '../desktop/managed-broker/program-manifest.mjs';
 import {buildBootstrapManifest} from './bootstrap-manifest-builder.mjs';
 import {inventoryPackage,verifyPackage} from './package-inventory.mjs';
+import {deriveBrandIdentity} from '../desktop/brand-identity/derive.mjs';
 assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
 const [baseArg,sourceArg,captureArg,asarArg,outArg]=process.argv.slice(2);assert(outArg&&process.argv.length===7);
 const temp=await realpath(process.env.RUNNER_TEMP),git=await realpath(process.env.GITHUB_WORKSPACE),base=await realpath(baseArg),source=await realpath(sourceArg),capture=await realpath(captureArg),asar=await realpath(asarArg),out=resolve(outArg);
@@ -30,6 +31,11 @@ try{
  for(const name of files){relativeProgramPath(name);assert(/\.(?:c|m)?js$/.test(name)&&!/(?:^|\/)(?:tests?|fixtures?)(?:\/|\.)/.test(name));const from=join(source,name),stat=await lstat(from);assert(stat.isFile()&&!stat.isSymbolicLink()&&stat.nlink===1);assert.equal(await realpath(from),from);const bytes=await readFile(from),target=join(runtime,name);await mkdir(dirname(target),{recursive:true,mode:0o755});try{const before=await lstat(target);assert(before.isFile()&&!before.isSymbolicLink()&&before.nlink===1);assert.equal(await realpath(target),target);await chmod(target,0o600);}catch(e){if(e.code!=='ENOENT')throw e;}await writeFile(target,bytes,{mode:0o644});await chmod(target,0o644);result.inputs.push({path:name,sha256:hash(bytes)});}
  const runtimeInventory=await inventoryPackage(runtime);assert.deepEqual(runtimeInventory.entries.filter(e=>e.kind==='file').map(e=>e.path).sort(),[...files].sort());
  result.desktop=await applyReadinessToApplication({applicationRoot:app,captureRoot:capture,productControlRoot:join(source,'desktop/product-control'),evidenceRoot:join(out,'desktop'),asarPath:asar});assert.equal(result.desktop.status,'pass');
+ // The host-side brand is outside the signed inner Electron app. Derive it on
+ // this fresh draft before the outer signature and final inventory are made.
+ const brandRoot=join(contents,'Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-brand-official'),brandClient=join(brandRoot,'lib/client.js'),brandManifest=join(brandRoot,'package.json');
+ for(const file of [brandClient,brandManifest]){const st=await lstat(file);assert(st.isFile()&&!st.isSymbolicLink()&&st.nlink===1);assert.equal(await realpath(file),file);}
+ const brand=deriveBrandIdentity({client:await readFile(brandClient),manifest:await readFile(brandManifest)});await writeFile(brandClient,brand.client);assert.equal(await digest(brandClient),brand.origin.resultSha256);await save(join(out,'BRAND-ORIGIN.json'),brand.origin);result.brand={clientSha256:brand.origin.resultSha256,originSha256:await digest(join(out,'BRAND-ORIGIN.json')),sepCssPixels:{width:32,height:14},actualDomMeasurement:'not_run'};
  // Inner signing may change nested executable bytes. Hash only final files.
  const program=structuredClone(draft.programPlan);for(const entry of Object.values(program.entries))entry.sha256=await digest(join(contents,entry.path));validateProgramShape(program);
  const programPath=join(contents,'Resources/PROGRAM.json');await save(programPath,program);const programSha256=await digest(programPath);await loadProgram(programPath,programSha256);
