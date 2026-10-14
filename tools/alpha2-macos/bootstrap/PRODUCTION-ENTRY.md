@@ -124,10 +124,20 @@ session's late event from replacing a new owner's observation. This file is
 never an authorization, lease, or recovery credential. Diagnostic write failure
 cannot change the true cleanup outcome. It may leave the observation stale.
 
-`run-connected-native.mjs <fresh output>` executes six actual AppKit adapter
+`run-connected-native.mjs <fresh output>` now defines seven actual AppKit adapter
 contracts with a captured synthetic controller and the real normal-termination
 observer. It does not certify the actual product broker. Root package tests
 separately use LaunchServices, the same non-test application bytes, actual
 managed renderer readiness, exact bundle/PID/birth checks, and normal exit.
 Physical Finder input, Developer ID, notarization and arbitrary descendant
 ownership remain outside these adapter contracts.
+
+The additional seventh definition targets a review-discovered diagnostic CAS
+window: when the first `owned` receipt cannot be written, an old session must
+not later claim the latest slot over a different session's observation. A
+real native flock holder prevents that first write, and a synthetic replacement
+observation is installed under the lock. The application then quits normally;
+the test separately checks its actual closed/exit proof and the observation
+bytes. The current production implementation is deliberately unchanged pending
+this case's native RED evidence. The earlier r40 six failures and r41 six-case
+frozen candidate remain distinct; this seventh definition is not yet certified.
