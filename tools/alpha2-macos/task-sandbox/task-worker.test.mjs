@@ -34,3 +34,12 @@ test('escaped family child remains isolated and leader exit cannot certify clean
  let closed=false;worker.whenClosed().then(()=>closed=true);await pause(10);assert.equal(closed,false);const restarted=await createTaskWorker(config,io);await assert.rejects(restarted.run({args:['echo']}),{code:'SEP_MAC_TASK_ALREADY_USED'});
 });
 test('missing trusted-owner receipt cannot become cleanup pass and leaves durable blocker',async()=>{const {config,io}=await fixture(),bad={...config,ownerPath:probe,ownerSha256:hash(await readFile(probe))},worker=await createTaskWorker(bad,io);const r=await bounded(worker.run({args:['echo']}));assert.equal(r.status,'blocked');assert.equal(r.resourcesConfirmedReleased,false);assert((await readdir(config.authorityRoot)).some(n=>n.endsWith('.task.jsonl')));});
+test('completion-record delay cannot disable response deadline or prematurely resolve whenClosed',async()=>{
+ const {config,io}=await fixture();let releaseRecord,recordEntered=false;const gate=new Promise(r=>{releaseRecord=r;});
+ // The storage operation is real; delay only its completion notification.
+ const heldIO={...io,async applyFile(root,options){const r=await io.applyFile(root,options);if(options.text.includes('"state":"closed"')){recordEntered=true;await gate;}return r;}};
+ const worker=await createTaskWorker(config,heldIO);try{
+  const r=await bounded(worker.run({args:['echo'],timeoutMs:500,graceMs:50}));assert.equal(recordEntered,true);assert.equal(r.status,'blocked');assert.equal(r.code,'SEP_MAC_TASK_CLEANUP_DEADLINE');
+  let closed=false;worker.whenClosed().then(()=>closed=true);await pause(10);assert.equal(closed,false);releaseRecord();assert.equal((await bounded(worker.whenClosed())).resourcesConfirmedReleased,true);assert.equal(r.status,'blocked');
+ }finally{releaseRecord();}
+});
