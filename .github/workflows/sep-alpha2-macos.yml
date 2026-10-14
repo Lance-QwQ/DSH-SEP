@@ -96,6 +96,7 @@ jobs:
 
   # Merge this job into the already-authorized macOS test workflow; not a Release.
   desktop-carrier:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build-carrier]')
     runs-on: macos-15
     timeout-minutes: 90
     permissions:
@@ -121,6 +122,8 @@ jobs:
           echo "SEP_MAC_OFFICIAL_SOURCE=$SRC" >> "$GITHUB_ENV"
       - name: Native Alpha.2 carrier build
         run: node tools/alpha2-macos/desktop/build-carrier.mjs "$SEP_MAC_OFFICIAL_SOURCE" "$RUNNER_TEMP/sep-alpha2-desktop-build"
+      - name: Three actual native carrier rounds
+        run: node tools/alpha2-macos/desktop/smoke-carrier.mjs "$SEP_MAC_OFFICIAL_SOURCE/apps/desktop/.desktop-build/targets/mac-arm64/unsigned-artifacts/mac-arm64/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
       - name: Preserve actual carrier and receipts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -131,6 +134,7 @@ jobs:
             ${{ runner.temp }}/sep-alpha2-desktop-build/*.json
             ${{ runner.temp }}/sep-alpha2-desktop-build/*.log
             ${{ runner.temp }}/sep-alpha2-desktop-build/desktop-carrier.zip
+            ${{ runner.temp }}/sep-alpha2-desktop-smoke/
   
   per-task-isolation-prototype:
     runs-on: macos-15
@@ -153,6 +157,8 @@ jobs:
             ${{ runner.temp }}/sep-task-isolation/*.json
             ${{ runner.temp }}/sep-task-isolation/*.log
             ${{ runner.temp }}/sep-task-isolation/*.sb
+            ${{ runner.temp }}/sep-task-isolation/*.ips
+            ${{ runner.temp }}/sep-task-isolation/*.crash
             ${{ runner.temp }}/sep-task-isolation/work-*/*.receipt
           if-no-files-found: error
           retention-days: 14

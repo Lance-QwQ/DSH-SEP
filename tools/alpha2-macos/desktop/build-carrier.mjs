@@ -1,7 +1,7 @@
 // Actual Darwin build. This assembles a desktop carrier, not a complete SEP Profile.
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,realpath} from 'node:fs/promises';
-import {createWriteStream} from 'node:fs';
+import {readFile,writeFile,mkdir,realpath,stat} from 'node:fs/promises';
+import {createWriteStream,createReadStream} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {join,resolve,dirname} from 'node:path';
@@ -39,7 +39,6 @@ try{
  const archive=Buffer.from(await response.arrayBuffer());assert.equal(createHash('sha512').update(archive).digest('base64'),'SEVj0wtMKtJ8tIqpT/KzAtvOvI/2vyiBbCWJiG4UbOf3bzVPO8GkOOb16XaMMCqgpvet2CMpA81M+BQmy8FNng==');
  await writeFile(join(out,'pnpm.tgz'),archive,{flag:'wx'});await mkdir(join(out,'pnpm'));
  await run('pnpm-extract','tar',['-xzf',join(out,'pnpm.tgz'),'-C',join(out,'pnpm')]);
- const pnpm=join(out,'pnpm/package/bin/pnpm.cjs');
  // pnpm's own package may use mjs; choose only its manifest-declared executable.
  const manifest=JSON.parse(await readFile(join(out,'pnpm/package/package.json'),'utf8'));
  assert.equal(manifest.version,'11.28.5');const entry=join(out,'pnpm/package',manifest.bin.pnpm);assert(entry.startsWith(join(out,'pnpm/package')+'/'));
@@ -50,6 +49,7 @@ try{
  await run('plist','/usr/libexec/PlistBuddy',['-c','Print :CFBundleIdentifier',join(result.app,'Contents/Info.plist')]);
  assert.equal((await readFile(join(out,'plist.log'),'utf8')).trim(),'ai.dshsep.alpha2.preview');
  await run('export','ditto',['-c','-k','--sequesterRsrc','--keepParent',result.app,join(out,'desktop-carrier.zip')],source,300000);
- result.status='pass';result.artifact='desktop-carrier.zip';result.note='Official package command includes prepared and packaged native runtime smoke; actual UI smoke is separate.';
+ const artifact=join(out,'desktop-carrier.zip'),digest=createHash('sha256');for await(const bytes of createReadStream(artifact))digest.update(bytes);
+ result.status='pass';result.artifact='desktop-carrier.zip';result.artifactSha256=digest.digest('hex');result.artifactBytes=(await stat(artifact)).size;result.note='Official package command includes prepared and packaged native runtime smoke; actual UI smoke is separate.';
 }catch(e){result.code=/^[A-Z_]+$/.test(e.message)?e.message:'SEP_MAC_CARRIER_BUILD_FAILED';result.errorType=e.name;process.exitCode=1;}
 finally{await writeFile(join(out,'BUILD-RESULT.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({status:result.status,code:result.code,commands:commands.length}));}

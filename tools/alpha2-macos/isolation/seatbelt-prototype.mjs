@@ -1,7 +1,7 @@
 // Experimental compatibility probe ONLY. sandbox-exec is deprecated by Apple.
 // This is not wired into the production Profile or used as cleanup evidence.
 import assert from 'node:assert/strict';
-import {mkdir,readFile,writeFile,realpath} from 'node:fs/promises';
+import {mkdir,readFile,writeFile,realpath,readdir,copyFile} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFile} from 'node:child_process';
@@ -40,4 +40,9 @@ try{
   receipts.push({name:stage,status:'pass',leaderAlreadyExited:true,escapedChildIssuedLateWrites:true,policySha256:createHash('sha256').update(profile).digest('hex'),sample,resourceCleanup:'not-certified; bounded synthetic fixture self-exits'});
  }
  await writeFile(join(output,'RESULT.json'),JSON.stringify({status:'pass',platform:process.platform,arch:process.arch,receipts,scope:'deprecated Seatbelt per-task boundary feasibility ONLY',productionEnabled:false,allDescendantsReleased:'not_verified'},null,2)+'\n',{flag:'wx'});
-}catch(e){await writeFile(join(output,'FAILURE.json'),JSON.stringify({status:'fail',stage,receipts,errorType:e.name,code:e.code??'ASSERTION',message:e.message},null,2)+'\n',{flag:'wx'});throw e;}finally{if(server)await new Promise(r=>server.close(r));}
+}catch(e){
+ await command('/usr/bin/log',['show','--style','compact','--last','2m','--predicate','process == "late-writer" OR process == "sandbox-exec"'],'crash-diagnostic').catch(()=>{});
+ const reports=join(process.env.HOME,'Library/Logs/DiagnosticReports');
+ for(const name of await readdir(reports).catch(()=>[]))if(/^late-writer-[A-Za-z0-9_.-]+\.(ips|crash)$/.test(name))await copyFile(join(reports,name),join(output,name));
+ await writeFile(join(output,'FAILURE.json'),JSON.stringify({status:'fail',stage,receipts,errorType:e.name,code:e.code??'ASSERTION',signal:e.signal??null,message:e.message},null,2)+'\n',{flag:'wx'});throw e;
+}finally{if(server)await new Promise(r=>server.close(r));}
