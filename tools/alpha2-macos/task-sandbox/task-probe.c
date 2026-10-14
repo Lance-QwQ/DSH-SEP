@@ -18,7 +18,17 @@ int main(int argc,char **argv){
  if(!strcmp(argv[1],"sleep")){signal(SIGTERM,SIG_IGN);sleep(20);return 0;}
  if(!strcmp(argv[1],"flood")){char b[8192];memset(b,'x',sizeof b);for(int i=0;i<256;i++)if(write(1,b,sizeof b)<0)return 0;return 0;}
  if(!strcmp(argv[1],"fork")){errno=0;pid_t p=fork();if(p==0)_exit(42);int e=errno;if(p>0)waitpid(p,NULL,0);printf("{\"denied\":%s,\"errno\":%d}\n",p<0?"true":"false",e);return 0;}
- if(!strcmp(argv[1],"vfork")){errno=0;pid_t p=vfork();if(p==0)_exit(42);int e=errno;if(p>0)waitpid(p,NULL,0);printf("{\"denied\":%s,\"errno\":%d}\n",p<0?"true":"false",e);return 0;}
+ if(!strcmp(argv[1],"vfork")){errno=0;
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+  pid_t p=vfork(); // Deliberately test the deprecated process-creation path.
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+  if(p==0)_exit(42);int e=errno;if(p>0)waitpid(p,NULL,0);printf("{\"denied\":%s,\"errno\":%d}\n",p<0?"true":"false",e);return 0;
+ }
  if(!strcmp(argv[1],"spawn")){pid_t p=0;char *a[]={argv[0],"echo",NULL};int e=posix_spawn(&p,argv[0],NULL,NULL,a,environ);if(!e)waitpid(p,NULL,0);printf("{\"denied\":%s,\"errno\":%d}\n",e?"true":"false",e);return 0;}
  if(!strcmp(argv[1],"boundaries")&&argc==8){
   int own=put(argv[2]),original=put(argv[3]),controller=put(argv[4]),next=put(argv[5]);int f=open(argv[3],O_RDONLY),rd=f<0?errno:0;if(f>=0)close(f);

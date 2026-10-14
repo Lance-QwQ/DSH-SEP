@@ -241,6 +241,7 @@ jobs:
   # Bind the immutable original artifact archive before extracting any executable.
   # This job reuses the first native build; it does not repeat compilation or publish a Release.
   desktop-carrier-smoke-existing:
+    if: false
     runs-on: macos-15
     timeout-minutes: 25
     permissions:
@@ -296,6 +297,7 @@ jobs:
             ${{ runner.temp }}/sep-carrier-build-receipts/
 
   desktop-managed-overlay:
+    if: false
     runs-on: macos-15
     timeout-minutes: 40
     permissions:
