@@ -1,0 +1,30 @@
+native-installer-appkit:
+  runs-on: macos-15
+  timeout-minutes: 10
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - name: Compile unchanged 15 AppKit contracts against UI implementation
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-appkit"
+        shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m > "$RUNNER_TEMP/installer-appkit/INPUTS.sha256"
+        clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m -o "$RUNNER_TEMP/installer-appkit/tests" > "$RUNNER_TEMP/installer-appkit/compile.log" 2>&1
+    - name: Run actual controls with synthetic transport and explicit scope
+      shell: bash
+      run: |
+        set +e
+        "$RUNNER_TEMP/installer-appkit/tests" > "$RUNNER_TEMP/installer-appkit/RESULT.json" 2> "$RUNNER_TEMP/installer-appkit/stderr.log"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-appkit/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-appkit
+        if-no-files-found: error
+        path: ${{ runner.temp }}/installer-appkit/*

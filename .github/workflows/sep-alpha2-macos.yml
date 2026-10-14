@@ -1,52 +1,56 @@
-name: SEP Alpha.2 macOS fixed installer configuration
+name: SEP Alpha.2 macOS native installer UI
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  installer-config-green:
+  native-installer-appkit:
     runs-on: macos-15
-    timeout-minutes: 15
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Ten unchanged signed fixture configuration definitions
-        run: node tools/alpha2-macos/installer-ui/run-config-native.mjs "$RUNNER_TEMP/installer-config" > "$RUNNER_TEMP/installer-config.log" 2>&1
+      - name: Compile unchanged 15 AppKit contracts against UI implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/installer-appkit"
+          shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m > "$RUNNER_TEMP/installer-appkit/INPUTS.sha256"
+          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/native/InstallerUITests.m -o "$RUNNER_TEMP/installer-appkit/tests" > "$RUNNER_TEMP/installer-appkit/compile.log" 2>&1
+      - name: Run actual controls with synthetic transport and explicit scope
+        shell: bash
+        run: |
+          set +e
+          "$RUNNER_TEMP/installer-appkit/tests" > "$RUNNER_TEMP/installer-appkit/RESULT.json" 2> "$RUNNER_TEMP/installer-appkit/stderr.log"
+          code=$?
+          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-appkit/exit.txt"
+          exit "$code"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-config-r56
+          name: native-installer-appkit
           if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-config.log
-            ${{ runner.temp }}/installer-config/*.json
-            ${{ runner.temp }}/installer-config/*.tap
-  installer-admission-red:
+          path: ${{ runner.temp }}/installer-appkit/*
+
+  fixed-entry-options:
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          fetch-depth: 1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Twenty-nine native fixed NSBundle admission RED definitions
-        run: node tools/alpha2-macos/installer-ui/admission/run-native.mjs "$RUNNER_TEMP/installer-admission" > "$RUNNER_TEMP/installer-admission.log" 2>&1
+      - name: Six fixed entry invocation bindings
+        run: node --test --test-reporter=tap tools/alpha2-macos/installer-ui/entry-options.test.mjs > "$RUNNER_TEMP/entry-options.tap" 2>&1
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-admission-red-r56
+          name: installer-entry-options-r57
           if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-admission.log
-            ${{ runner.temp }}/installer-admission/*.json
-            ${{ runner.temp }}/installer-admission/*.tap
-            ${{ runner.temp }}/installer-admission/*.log
+          path: ${{ runner.temp }}/entry-options.tap
