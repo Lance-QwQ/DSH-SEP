@@ -42,15 +42,21 @@ preparer is never a Mac installation authority.
 
 ## Isolated reproduction
 
-The local origin tests use raw R6 and remain local. CI runs 22 tests using only
-the public derived capture (no native desktop or paid model claims):
+The local origin tests use raw R6 and remain local. The current public test
+command has 36 definitions, including five Inspector helper cases and three
+passive refusal-observer cases. Prior runs with fewer definitions remain
+historical evidence; the added cases need their own native receipt.
 
 ```sh
 SEP_MAC_MANAGED_CAPTURE="$RUNNER_TEMP/managed-inputs" node --test \
   tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs \
   tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs \
   tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs \
-  tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs
+  tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs \
+  tools/alpha2-macos/desktop/managed-overlay/desktop-dependencies.test.mjs \
+  tools/alpha2-macos/desktop/managed-overlay/desktop-imports.test.mjs \
+  tools/alpha2-macos/desktop/managed-overlay/refusal-observer.test.mjs \
+  tools/alpha2-macos/desktop/inspector-entry.test.mjs
 ```
 
 For actual assembly, use an independently hash-verified carrier artifact and a
@@ -143,3 +149,18 @@ assembled app: controlled connection refusal, real broker identity/ready,
 close/background/reopen, accurate task inspection, graceful close and confirmed
 resource release. Preserve failed samples and distinguish test cleanup from
 product cleanup. The overlay must not be reported as Full/Only accepted yet.
+
+Native runs 38523943093 and 38524739137 reached the managed main entry after
+the explicit ASAR ESM import adaptation, but the subsequent Inspector read
+timed out even with `awaitPromise:false`. The revised negative probe records a
+passive exception receipt before Electron can enter its native
+startup-error modal. Its nonce, PID and complete ASAR SHA-256 are verified by
+the external test process; any observed Node child dispatch rejects the proof.
+The observer leaves default failure handling intact. Test-owned SIGKILL after
+this negative is cleanup evidence only, never graceful product shutdown.
+Electron 44.7.0's [ESM startup loader](https://github.com/electron/electron/blob/v44.7.0/lib/browser/init.ts#L176)
+explicitly emits `uncaughtException`, bypassing Node's monitor. The test observer
+also wraps that emission without adding an `uncaughtException` listener: adding
+one would change Electron's one-listener native-error policy. A real Node event
+regression proves the receiver, handler count and return value remain intact.
+This observation transport change awaits a new real Mac run.

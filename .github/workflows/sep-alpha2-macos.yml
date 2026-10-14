@@ -331,26 +331,35 @@ jobs:
           ditto -x -k "$RUNNER_TEMP/managed-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/managed-carrier"
           node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/asar-tools"
       - name: Assemble isolated managed overlay and verify native signature
+        id: managed_overlay_build
         run: node tools/alpha2-macos/desktop/managed-overlay/apply-to-carrier.mjs "$RUNNER_TEMP/managed-carrier/DSH SEP.app" "$RUNNER_TEMP/managed-capture" "$RUNNER_TEMP/managed-overlay-result" "$RUNNER_TEMP/asar-tools/node_modules/@electron/asar/lib/asar.js"
       - name: Actual missing-connection refusal without ordinary Host startup
         run: node tools/alpha2-macos/desktop/managed-overlay/probe-missing-connection.mjs "$RUNNER_TEMP/managed-overlay-result/DSH SEP.app" "$RUNNER_TEMP/managed-negative"
       - name: Verify current broker and real Inspector helpers
+        id: full_broker
+        if: always() && steps.managed_overlay_build.outcome == 'success'
         run: |
           export SEP_TEST_ROOT="$RUNNER_TEMP"
           export SEP_DESKTOP_TEST_ROOT="$RUNNER_TEMP/broker-integration-tests"
           mkdir "$SEP_DESKTOP_TEST_ROOT"
           node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs tools/alpha2-macos/desktop/managed-overlay/refusal-observer.test.mjs tools/alpha2-macos/desktop/smoke-helpers.test.mjs tools/alpha2-macos/desktop/inspector-live.test.mjs > "$RUNNER_TEMP/overlay-receipts/broker-integration.tap"
       - name: Assemble actual Mac core package from verified program inputs
+        id: full_build
+        if: always() && steps.full_broker.outcome == 'success'
         env:
           SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
         run: |
           xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$RUNNER_TEMP/full-project-tree"
           node tools/alpha2-macos/package/assemble-full.mjs "$RUNNER_TEMP/managed-overlay-result" "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/full-project-tree" "$RUNNER_TEMP/asar-tools/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/final-package"
       - name: Three real installed Profile and desktop cycles
+        id: full_smoke
+        if: always() && steps.full_build.outcome == 'success'
         run: |
           programSha=$(node -e 'process.stdout.write(JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")).programSha256)' "$RUNNER_TEMP/final-package/RESULT.json")
           node tools/alpha2-macos/desktop/smoke-full.mjs "$RUNNER_TEMP/final-package/DSH-SEP-macOS-Alpha2-preview/PROGRAM.json" "$programSha" "$RUNNER_TEMP/full-native-smoke"
       - name: Confirm installed program unchanged after real use
+        id: full_inventory
+        if: always() && steps.full_smoke.outcome == 'success'
         run: |
           node --input-type=module <<'JS'
           import {readFile,writeFile} from 'node:fs/promises';
@@ -362,6 +371,7 @@ jobs:
           await writeFile(join(root,'POST-SMOKE.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
           JS
       - name: Preserve complete candidate only after installed smoke succeeds
+        if: always() && steps.full_inventory.outcome == 'success'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: sep-macos-core-preview-package
@@ -503,9 +513,12 @@ jobs:
             ${{ env.SEP_MAC_BUSINESS_OUTPUT }}/prepared/PREPARED.json
             ${{ runner.temp }}/business-carrier-download/DOWNLOAD-RECEIPT.json
 
-  native-attachment-io:
+  native-trusted-parser:
     runs-on: macos-15
-    timeout-minutes: 10
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -513,13 +526,32 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.19.0'
-      - name: Native private APFS attachment identity and deletion
-        run: node tools/alpha2-macos/media/run-native-tests.mjs "$RUNNER_TEMP/media-native"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - name: Fixed native runtime carrier
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/parser-carrier-download"
+          mkdir "$RUNNER_TEMP/parser-carrier"
+          ditto -x -k "$RUNNER_TEMP/parser-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/parser-carrier"
+      - name: Install existing pinned parser dependency closure
+        run: node tools/alpha2-macos/package/install-parser-dependencies.mjs "$RUNNER_TEMP/parser-dependencies"
+      - name: Independent bounded native parser tests
+        run: |
+          runtime="$RUNNER_TEMP/parser-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies"
+          export SEP_MAC_PARSER_PYTHON="$runtime/python/bin/python3.12"
+          export SEP_MAC_PARSER_PYTHON_HOME="$runtime/python"
+          export SEP_MAC_PARSER_DEPENDENCIES="$RUNNER_TEMP/parser-dependencies/node_modules"
+          export SEP_MAC_BUNDLE_ROOT="$GITHUB_WORKSPACE/tools/alpha2-macos/business-capture/bundle"
+          "$runtime/node/bin/node" tools/alpha2-macos/parser/run-native-tests.mjs "$RUNNER_TEMP/parser-native"
+      - name: Preserve planned samples including failures
         if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-attachment-io
+          name: sep-macos-trusted-parser
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/media-native/*.log
-            ${{ runner.temp }}/media-native/*.json
+            ${{ runner.temp }}/parser-native/*.log
+            ${{ runner.temp }}/parser-native/*.json
+            ${{ runner.temp }}/parser-dependencies/RESULT.json
+            ${{ runner.temp }}/parser-dependencies/*.log
+            ${{ runner.temp }}/parser-carrier-download/DOWNLOAD-RECEIPT.json
