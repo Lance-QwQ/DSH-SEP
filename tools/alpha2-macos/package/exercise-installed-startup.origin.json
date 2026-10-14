@@ -4,12 +4,16 @@
   "source": "exercise-application.mjs",
   "sourceSha256": "ecb9321b2c23ee9ef4e67117f31fbe6b86de9745c5f5a47994690c124e59d979",
   "result": "exercise-installed-startup.mjs",
-  "resultSha256": "4e302f515361104ce7079f37d29d3d9e801fb22709bd49695cbc59c68e39d618",
+  "resultSha256": "3c76a7e17ad8f095cc8d40ea51e2831d42ba4ccb3c2ccec623cdf7517e461275",
   "scope": "Narrower installed first-boot and restart test with final-path PROFILE binding; does not replace original three hide/reopen cycles",
   "transforms": [
     {
       "before": "// Tests the installed bytes via LaunchServices. No inspector, fake ready frame,",
       "after": "// Separate two-cycle installed first-boot/restart test; hide/reopen is NOT covered.\n// Tests the installed bytes via LaunchServices. No inspector, fake ready frame,"
+    },
+    {
+      "before": "import{verifyPackage}from'./package-inventory.mjs';",
+      "after": "import{verifyPackage}from'./package-inventory.mjs';\nimport{verifyInstalledProfileBinding}from'./installed-profile-binding.mjs';"
     },
     {
       "before": "scope:'actual restored app through LaunchServices, trusted committed UI readiness and normal lifecycle; empty account flow expects welcome',plannedCycles:3",
@@ -33,7 +37,7 @@
     },
     {
       "before": "  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};",
-      "after": "  const profileBytes=await readFile(join(dataRoot,'business/PROFILE.json')),profile=JSON.parse(profileBytes),profileSha=digest(profileBytes);assert.equal(profile.programRoot,join(app,'Contents'));assert.equal(profile.hostRoot,join(app,'Contents/Resources/product/payload/host'));assert.equal(profile.bundleRoot,join(app,'Contents/Resources/product/payload/host/sep-capture'));assert.equal(profile.helperPath,join(app,'Contents/Resources/product/runtime/native/apfs-tree'));assert.equal(profile.dataRoot,join(dataRoot,'business'));assert.equal(profile.source,join(dataRoot,'project'));if(firstProfileSha===null)firstProfileSha=profileSha;else assert.equal(profileSha,firstProfileSha);cycle.profile={sha256:profileSha,installedPathBound:true,sameAcrossRestart:index>0};\n  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};"
+      "after": "  const profileBytes=await readFile(join(dataRoot,'business/PROFILE.json')),profile=JSON.parse(profileBytes),profileSha=digest(profileBytes);verifyInstalledProfileBinding(profile,{programBytes:await readFile(join(app,'Contents/Resources/PROGRAM.json')),programSha256:assembly.programSha256,app,dataRoot});if(firstProfileSha===null)firstProfileSha=profileSha;else assert.equal(profileSha,firstProfileSha);cycle.profile={sha256:profileSha,installedPathBound:true,sameAcrossRestart:index>0};\n  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};"
     },
     {
       "before": "result.notVerified=['physical Finder or Dock mouse input'",

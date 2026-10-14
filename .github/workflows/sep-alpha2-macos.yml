@@ -1,41 +1,16 @@
-name: SEP Alpha.2 macOS install and native workflow verification
+name: SEP Alpha.2 macOS corrected native lifecycle probes
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-hide-observer-probe:
+  native-hide-effect-product:
     runs-on: macos-15
-    timeout-minutes: 8
+    timeout-minutes: 28
     permissions:
       contents: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Verify interpretation contracts
-        run: node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-observer-probe/analysis.test.mjs > "$RUNNER_TEMP/hide-analysis.tap"
-      - name: Observe each fresh AppKit fixture exactly once
-        run: node tools/alpha2-macos/desktop/hide-observer-probe/run-native.mjs "$RUNNER_TEMP/hide-observer-probe"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: native-hide-observer-probe
-          include-hidden-files: true
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/hide-observer-probe
-            ${{ runner.temp }}/hide-analysis.tap
-
-  native-project-workflow-red:
-    runs-on: macos-15
-    timeout-minutes: 12
-    permissions:
-      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -44,82 +19,32 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Verify fixed source and build native helper
+      - name: Verify actual-sample observation and origin contracts (12)
         shell: bash
         run: |
           set -euo pipefail
-          root="$(cd "$RUNNER_TEMP" && pwd -P)/project-workflow-native"
-          mkdir "$root"
-          echo "SEP_MAC_WORKFLOW_OUTPUT=$root" >> "$GITHUB_ENV"
-          node tools/alpha2-macos/project-workflow/verify-inputs.mjs > "$root/SOURCE-VERIFIED.json"
-          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
-          echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
-          echo "SEP_MAC_TREE_HELPER_SHA256=$(shasum -a 256 "$root/native-tree" | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
-          echo "SEP_MAC_WORKFLOW_TEST_ROOT=$root/fixtures" >> "$GITHUB_ENV"
-          sw_vers > "$root/system.txt"
-          uname -a >> "$root/system.txt"
-          node --version >> "$root/system.txt"
-      - name: Execute fixed native workflow cases (initial RED is expected failure)
-        shell: bash
-        run: |
-          set +e
-          node --test --test-reporter=tap --test-concurrency=1 --test-timeout=30000 tools/alpha2-macos/project-workflow/native-workflow.test.mjs > "$SEP_MAC_WORKFLOW_OUTPUT/native.tap" 2>&1
-          code=$?
-          printf '%s\n' "$code" > "$SEP_MAC_WORKFLOW_OUTPUT/EXIT-CODE.txt"
-          exit "$code"
-      - name: Preserve original scoped evidence even when RED
+          export TMPDIR="$RUNNER_TEMP/"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-effect-probe/observation.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/derive.test.mjs > "$RUNNER_TEMP/hide-effect-contracts.tap"
+      - name: Restore fixed r44 bytes without rebuild or signing changes
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/hide-effect-r44"
+      - name: Three distinct normal LaunchServices cycles with one hide each
+        run: node tools/alpha2-macos/desktop/hide-effect-probe/run-product.mjs "$RUNNER_TEMP/hide-effect-r44" "$RUNNER_TEMP/hide-effect-product"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-project-workflow-native-red
+          name: native-hide-effect-product
+          include-hidden-files: true
           if-no-files-found: error
           path: |
-            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.json
-            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.txt
-            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.tap
-            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/PREFLIGHT.json
-            ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/CLEANUP.jsonl
+            ${{ runner.temp }}/hide-effect-contracts.tap
+            ${{ runner.temp }}/hide-effect-product
+            ${{ runner.temp }}/hide-effect-r44/RESULT.json
+            ${{ runner.temp }}/hide-effect-r44/PACKAGE-INVENTORY.json
+            ${{ runner.temp }}/hide-effect-r44/*.log
 
-  native-first-install:
-    runs-on: macos-15
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Native empty ACL, nonempty ACL, and read-failure RED versus fixed implementation
-        run: node tools/alpha2-macos/installation/run-acl-native.mjs "$RUNNER_TEMP/first-install-acl" > "$RUNNER_TEMP/first-install-acl-runner.log" 2>&1
-      - name: Source overlap rejected before mutation RED versus fixed implementation
-        run: node tools/alpha2-macos/installation/run-layout-native.mjs "$RUNNER_TEMP/first-install-layout" > "$RUNNER_TEMP/first-install-layout-runner.log" 2>&1
-      - name: Original thirteen first-install transaction definitions
-        run: |
-          sw_vers > "$RUNNER_TEMP/first-install-environment.txt"
-          uname -a >> "$RUNNER_TEMP/first-install-environment.txt"
-          node tools/alpha2-macos/installation/run-native.mjs "$RUNNER_TEMP/first-install" > "$RUNNER_TEMP/first-install-runner.log" 2>&1
-      - name: Preserve original ACL and transaction results
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: sep-macos-first-install-r48
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/first-install/RESULT.json
-            ${{ runner.temp }}/first-install/native.log
-            ${{ runner.temp }}/first-install-runner.log
-            ${{ runner.temp }}/first-install-environment.txt
-            ${{ runner.temp }}/first-install-acl/*.json
-            ${{ runner.temp }}/first-install-acl/*.tap
-            ${{ runner.temp }}/first-install-acl/*.log
-            ${{ runner.temp }}/first-install-acl-runner.log
-            ${{ runner.temp }}/first-install-layout/*.json
-            ${{ runner.temp }}/first-install-layout/*.tap
-            ${{ runner.temp }}/first-install-layout/*.log
-            ${{ runner.temp }}/first-install-layout-runner.log
   native-full-first-install:
-    needs: native-first-install
     permissions:
       contents: read
       actions: read
@@ -132,6 +57,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
+      - name: Fixed manifest profile path regression contracts (six)
+        run: node --test --test-reporter=tap tools/alpha2-macos/package/installed-profile-binding.test.mjs > "$RUNNER_TEMP/installed-profile-binding.tap"
       - name: Restore exact unchanged r44 complete app
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
@@ -150,9 +77,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-full-first-install-r48
+          name: sep-macos-full-first-install-r49
           if-no-files-found: error
           path: |
+            ${{ runner.temp }}/installed-profile-binding.tap
             ${{ runner.temp }}/application-build/RESULT.json
             ${{ runner.temp }}/application-build/*.log
             ${{ runner.temp }}/full-first-install/*.json

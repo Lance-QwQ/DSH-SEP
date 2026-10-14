@@ -1,0 +1,38 @@
+native-hide-effect-product:
+  runs-on: macos-15
+  timeout-minutes: 28
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+        fetch-depth: 1
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Verify actual-sample observation and origin contracts (12)
+      shell: bash
+      run: |
+        set -euo pipefail
+        export TMPDIR="$RUNNER_TEMP/"
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-effect-probe/observation.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/derive.test.mjs > "$RUNNER_TEMP/hide-effect-contracts.tap"
+    - name: Restore fixed r44 bytes without rebuild or signing changes
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/hide-effect-r44"
+    - name: Three distinct normal LaunchServices cycles with one hide each
+      run: node tools/alpha2-macos/desktop/hide-effect-probe/run-product.mjs "$RUNNER_TEMP/hide-effect-r44" "$RUNNER_TEMP/hide-effect-product"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-hide-effect-product
+        include-hidden-files: true
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/hide-effect-contracts.tap
+          ${{ runner.temp }}/hide-effect-product
+          ${{ runner.temp }}/hide-effect-r44/RESULT.json
+          ${{ runner.temp }}/hide-effect-r44/PACKAGE-INVENTORY.json
+          ${{ runner.temp }}/hide-effect-r44/*.log

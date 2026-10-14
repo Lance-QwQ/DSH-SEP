@@ -1,8 +1,8 @@
 # macOS 完整包制作：当前为集成候选
 
-目标是 DSH 0.2.1-alpha.2 + SEP 的 Mac ARM64 完整包。**最新 r44 schema 4 应用已装配、签名、归档恢复并下载逐字节核验；r46 在同一产品上完成一轮真实欢迎页→工作区及 32×14 SEP 徽标测量，正常退出，无强制清理。尚不能标记完整 Mac 包就绪：无 Inspector 的系统入口隐藏／重开未通过、首次安装事务仍在实现、项目管理入口和 Shell/MCP 仍有限制。** 原生解析与组合业务的 51 项属于 r33，不能无条件归到后继包。各代原始失败不改写；模块通过、诊断变体通过与最终产品验证分别计证。
+目标是 DSH 0.2.1-alpha.2 + SEP 的 Mac ARM64 完整包。**最新 r44 schema 4 应用已装配、签名、归档恢复并下载逐字节核验；r46 在同一产品上完成一轮真实欢迎页→工作区及 32×14 SEP 徽标测量，正常退出，无强制清理。r48 首装核心 19 项通过，完整应用已安装 committed、29,338 项清点和签名通过。尚不能标记完整 Mac 包就绪：安装后两轮启动、无 Inspector 的隐藏／重开尚未通过，用户安装与项目管理入口仍在开发，Shell/MCP 仍有限制。** 原生解析与组合业务的 51 项属于 r33，不能无条件归到后继包。各代原始失败不改写；模块通过、诊断变体通过与最终产品验证分别计证。
 
-## 最新补充：r23–r46
+## 最新补充：r23–r48
 
 | 代次 / CI | 实际结果及范围 |
 | --- | --- |
@@ -31,6 +31,8 @@
 | r45 / 38578561007 | 两台独立 VM 恢复同一 r44 产品。隐藏调用身份校验通过，但 API 返回 false，系统入口 1 fail / 2 not_run；之后正常退出取得 closed 回执，不能倒推失败当场已完成外层进程审计。工作区诊断在早期 Inspector 身份聚合断言失败，尚未点击页面，后续收尾仍 blocked。6 项诊断契约通过不替代产品通过。 |
 | r46 / 38581365790 | 同一 r44 产品：10 项诊断契约及 1 轮 Inspector 辅助真实 DOM 检查通过。早期同 PID 的 appPath 为空且 isReady=false；欢迎页就绪后路径正确、isReady=true，随后才操作页面。工作区、32×14 徽标、独立方块及正常退出通过。首次安装 13 项真实签名夹具均因 NOT_IMPLEMENTED 失败，保留为实现前 RED。独立 AppKit hide 对照在首个夹具初始化时退出，hideCalls=0；其余 3 项 not_run，不能用于解释 Electron hide。 |
 | r47 / 38583534733 | 首装原 13 项实际运行，7 通过、6 在初始 ACL 检查提前失败；没有包发布成功声明。独立 hide 夹具通过 5 项 C 初始化及 6 项判定契约，真实窗口已 regular/visible/active/finishedLaunching，并正常退出；但 birthValid 被序列化为数字 1，严格布尔断言在 hide 前失败，实际调用仍为 0，其余 3 组 not_run。后继修正保留原断言，分别补 ACL 缺失/非空/读取失败及真实 Foundation 布尔序列化验证。 |
+| r48 / 38586423216 | 首装固定 19＝13 事务＋3 ACL＋3 源目录保护，全部原生通过、0 跳过；旧 ACL 1 pass/2 fail、旧布局 0 pass/3 fail 单列，不加入通过数。独立 AppKit 的 13 项契约通过；4 次单次 hide 均返回 false，但同一 PID/出生时间的独立状态及目标 didHide 事件证明实际已隐藏，4 例正常退出。保留原 hideStatus=fail，另外记录 observedHide=pass，不倒推 Electron 产品已通过。项目管理 17 项均在真实 native 初始化后因缺实现失败，17 份既有 Profile 清理通过；这不是新 workflow 通过。完整包安装及后续启动结果单独记录，不能由小夹具通过推出。 |
+| r48 完整安装 / 115929851383 | 未改变的 r44 应用经真实事务安装到账户最终目录，committed；29,338 项、1,793,925,844 字节及签名核验一致。首启实际 ready＋activated 已出现，但探针硬编码了错误的 helper 路径，首轮 fail、第二轮 not_run。实际 PROFILE helper 与固定 PROGRAM.entries.helper 一致。失败后的受控正常退出回执单列；失败分支未完成外层退出/进程缺失检查，不能据此宣称完整收尾或两轮通过。 |
 
 r44 下载包：`application-r44-distribution/verified-package/DSH-SEP-macOS-Alpha2-application-preview.zip`，647,468,896 字节，SHA-256 `6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67`；树 `128885968401b628b2c21974d045a70a04233bc04a0bfd3aa943eba1ce4e5ebd`。下载核验收据为 `application-r44-distribution/verified-package/DOWNLOAD-VERIFIED.json`。r45/r46 的恢复只改变测试位置，未重建、重签或修补此产品。r46 原始工件分别封存在 `workspace-native-r46/`、`installation-red-r46/`、`hide-observer-r46/`，不能把三项混算为整个 CI 通过。
 
@@ -80,7 +82,7 @@ r33 文档／图片／设置实包：内 ZIP SHA-256 `61794443c47753b64d2bf770d9
 
 ## 未完成事项
 
-r44 已完成独立 `macos-app-v1` 实包及诊断 CAS 修复的 7 项原生复验；原生固定包内准入 13 项、产品／broker 70 项和页面来源／VM 20 项仍是各自固定输入的既有证据。r46 的一轮 Inspector 辅助欢迎页→工作区／32×14 徽标测量已通过；无 Inspector 的系统入口三轮尚未通过。首次安装进入实现前原生 RED 之后的开发，尚无安装成功声明。项目审阅、确认、恢复及导入入口的具体缺口记录于 `desktop/PROJECT-WORKFLOW-GAPS.md`。未执行项目保持未验证，不将源码或模块结果代替实际产品运行；旧包不随源码前进重新获得后继能力。
+r44 已完成独立 `macos-app-v1` 实包及诊断 CAS 修复的 7 项原生复验；原生固定包内准入 13 项、产品／broker 70 项和页面来源／VM 20 项仍是各自固定输入的既有证据。r46 的一轮 Inspector 辅助欢迎页→工作区／32×14 徽标测量已通过；无 Inspector 的系统入口三轮尚未通过。r48 首装核心与完整应用安装已通过；安装后两轮启动须修正测试路径断言后另验，尚无用户安装器交付声明。项目审阅、确认、恢复及导入入口的具体缺口记录于 `desktop/PROJECT-WORKFLOW-GAPS.md`。未执行项目保持未验证，不将源码或模块结果代替实际产品运行；旧包不随源码前进重新获得后继能力。
 
 设置页面历史异常归因及实际交互认证；Finder/AppKit 系统入口隐藏与重开；项目管理和真实 React 提交回执；Shell/MCP 业务隔离及可证实收尾；AX/TCC 点击与评测平台入口；Full/Only 安装卸载、恢复。左上角 SEP 方块的实际 DOM 尺寸已有 r46 单轮证据，不能替代物理操作或多轮完整桌面验收。context 仅允许显式公共合成快照，默认不挂载，不能将私人项目重标为公共来放行。Developer ID、公证、物理桌面交互、私人环境接续和付费模型均未认证。
 

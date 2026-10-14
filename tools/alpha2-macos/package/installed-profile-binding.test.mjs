@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{posix}from'node:path';
+import{verifyInstalledProfileBinding}from'./installed-profile-binding.mjs';
+const programBytes=await readFile(new URL('./installed-program-r44.json',import.meta.url)),program=JSON.parse(programBytes);
+const binding={programBytes,programSha256:'fbe989745254464885c390b7d6e55fd3883674faa26b705ea74833240c07d713',app:'/Users/synthetic/Applications/DSH SEP.app',dataRoot:'/Users/synthetic/Library/Application Support/DSH SEP/alpha2-mac-finder-preview'};
+const root=posix.join(binding.app,'Contents'),valid=()=>({programRoot:root,hostRoot:posix.join(root,program.hostRoot),bundleRoot:posix.join(root,program.bundleRoot),helperPath:posix.join(root,program.entries.helper.path),helperSha256:program.entries.helper.sha256,dataRoot:posix.join(binding.dataRoot,'business'),source:posix.join(binding.dataRoot,'project')});
+test('actual fixed r44 manifest accepts final installed Profile binding',()=>assert.deepEqual(verifyInstalledProfileBinding(valid(),binding),{installedPathBound:true}));
+test('historical hard-coded helper path is rejected instead of required',()=>assert.throws(()=>verifyInstalledProfileBinding({...valid(),helperPath:posix.join(root,'Resources/product/runtime/native/apfs-tree')},binding)));
+test('download directory binding is not accepted after installation',()=>assert.throws(()=>verifyInstalledProfileBinding({...valid(),programRoot:'/Users/synthetic/Downloads/DSH SEP.app/Contents'},binding)));
+test('a different helper digest is rejected',()=>assert.throws(()=>verifyInstalledProfileBinding({...valid(),helperSha256:'0'.repeat(64)},binding)));
+test('manifest bytes must match independent receipt before any path inference',()=>assert.throws(()=>verifyInstalledProfileBinding(valid(),{...binding,programBytes:Buffer.from(programBytes.toString()+' ')})));
+test('different business data root remains rejected',()=>assert.throws(()=>verifyInstalledProfileBinding({...valid(),dataRoot:'/Users/synthetic/other-business'},binding)));
