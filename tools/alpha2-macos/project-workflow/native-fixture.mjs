@@ -5,8 +5,8 @@ import {appendFile, mkdir, mkdtemp, readFile, realpath, writeFile} from 'node:fs
 import {dirname, isAbsolute, join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
-import {openMacManagedProject} from '../transactions/mac-managed-project.mjs';
-import {wrapManagedProject} from '../lifecycle/managed-project-lifecycle.mjs';
+import {openWorkflowProject as openMacManagedProject} from './project-factory.mjs';
+import {wrapManagedProject} from './derived-lifecycle.mjs';
 import {createControlledFileProfile} from '../profile/controlled-files.mjs';
 import {openProjectWorkflow} from './workflow-adapter.mjs';
 

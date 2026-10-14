@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "owner-exclusive-read-only-generation-and-bounded-plan-preview",
+  "core": {
+    "sourceSha256": "f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba",
+    "resultSha256": "80794421a6b158d4f3259408a5bdcf01e9d4cd699ab199d72b23a4e9d6e48a97",
+    "transforms": [
+      {
+        "before": "import {documentCopies} from './document-copies.mjs';",
+        "after": "import {documentCopies} from '../transactions/document-copies.mjs';\nimport {previewPlan} from './preview.mjs';"
+      },
+      {
+        "before": "   async current(){",
+        "after": "   listGenerations(input){return exclusive(async()=>{\n    if(!input||Object.keys(input).sort().join(',')!=='after,limit'||!Number.isSafeInteger(input.after)||input.after<0||!Number.isSafeInteger(input.limit)||input.limit<1||input.limit>32)fail('SEP_MAC_WORKFLOW_INPUT');\n    const m=await ready();await snapshot(m.generation);\n    const rows=db.prepare('SELECT id FROM generations WHERE id>? ORDER BY id LIMIT ?').all(input.after,input.limit+1),items=[];\n    for(const row of rows.slice(0,input.limit)){const value=await snapshot(row.id);items.push({generation:row.id,current:row.id===m.generation,sha256:value.sha256});}\n    return {items,nextAfter:rows.length>input.limit?items.at(-1).generation:null};\n   });},\n   inspectPlan(input){return exclusive(async internal=>{\n    if(!input||Object.keys(input).sort().join(',')!=='planHash,signal'||!input.signal||typeof input.signal.aborted!=='boolean')fail('SEP_MAC_WORKFLOW_INPUT');\n    const signal=AbortSignal.any([input.signal,internal]),cancelled=()=>{if(signal.aborted)fail('SEP_PROJECT_CANCELLED');};\n    cancelled();const m=await ready(),t=lookup(input.planHash);\n    if(t.state!=='ready'||t.plan.baseGeneration!==m.generation||t.plan.baseSequence!==m.sequence||Date.now()-t.createdAt>=86400000)fail('SEP_PROJECT_STALE_PLAN');\n    const baseline=await snapshot(m.generation),candidatePath=join(root,'transactions',t.id,'candidate'),candidate=await tree(candidatePath);\n    if(candidate.sha256!==t.candidate.sha256||candidate.version!==t.candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');\n    const preview=await previewPlan({before:{path:pathFor(m.generation),...baseline},after:{path:candidatePath,...candidate},changes:t.plan.changes,signal});\n    cancelled();const afterBase=await snapshot(m.generation),afterCandidate=await tree(candidatePath),now=await ready();\n    if(now.generation!==m.generation||now.sequence!==m.sequence||afterBase.version!==baseline.version)fail('SEP_PROJECT_BASELINE_CHANGED');\n    if(afterCandidate.sha256!==candidate.sha256||afterCandidate.version!==candidate.version)fail('SEP_PROJECT_CANDIDATE_CHANGED');\n    cancelled();return {plan:{planHash:t.planHash,kind:t.kind,baseGeneration:m.generation,baseSequence:m.sequence,baseSha256:baseline.sha256,targetSha256:candidate.sha256},...preview};\n   });},\n   async current(){"
+      }
+    ]
+  },
+  "lifecycle": {
+    "sourceSha256": "480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844",
+    "resultSha256": "4705776b87cf49be55a8d6d77a7a2fdbc55b49c44d3e554a42627ab17628ecd3",
+    "transforms": [
+      {
+        "before": "const readMethods=new Set(['current','plans','view','review','reviewCleanup','reviewDocument']);",
+        "after": "const readMethods=new Set(['current','plans','view','review','reviewCleanup','reviewDocument','listGenerations','inspectPlan']);"
+      }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "status": "blocked",
-  "implementation": "contract-and-native-test-skeleton",
+  "status": "not_run",
+  "implementation": "isolated-origin-pinned-control-layer-candidate-native-acceptance-pending",
   "projectScope": "one-existing-controlled-project",
   "publicationTarget": "managed-generation-only",
   "originalSourceWritable": false,
@@ -9,7 +9,7 @@
   "ordinaryToolManagementAccess": false,
   "methods": {
     "status": {"input": {}, "body": false},
-    "plans": {"input": {}, "body": false},
+    "plans": {"input": {}, "body": false, "maximumPlans": 256, "maximumChangesPerPlan": 256, "maximumUtf8JsonBytes": 262144, "overflow": "reject-entire-response-no-silent-truncation"},
     "select": {"input": {"planHash": "sha256"}, "effect": "select-existing-ready-plan"},
     "review": {"input": {"planHash": "sha256"}, "effect": "bounded-read-only-preview"},
     "commit": {"input": {"reviewId": "opaque-id", "planHash": "sha256", "approval": "non-serializable-user-capability"}, "effect": "publish-managed-generation"},
@@ -27,8 +27,11 @@
     "rendererJsonIsAuthority": false,
     "confirmation": "explicit-user-action-after-summary-rendered-in-current-bound-window",
     "approvalIssuer": "trusted-main-or-local-controller-private-capability",
-    "approvalBinding": ["projectId", "ownerGeneration", "windowId", "documentGeneration", "reviewId", "reviewSha256", "planHash", "baseGeneration", "baseSequence", "targetSha256", "omissionsAcknowledged"],
+    "approvalBinding": ["projectId", "ownerGeneration", "windowId", "documentGeneration", "reviewId", "reviewSha256", "planHash", "baseGeneration", "baseSequence", "baseSha256", "targetSha256", "expiresAt", "omissionsAcknowledged"],
     "approvalConsumption": "once-after-admission-and-current-review-recheck-before-commit",
+    "cancelWhileConsuming": "approval-may-already-be-consumed-but-no-commit-dispatch-after-cancel-or-close; fresh-review-and-confirmation-required",
+    "cancelAfterDispatch": "COMMIT_IN_FLIGHT-not-rollback; existing-transaction-and-close-drain-rules-apply",
+    "crossProcess": "opaque-objects-never-serialized; future-owned-IPC-must-validate-exact-window-confirmation-and-issue-capability-inside-business-host",
     "revocation": ["cancel", "close", "navigation", "window-destruction", "owner-restart", "selection-change", "candidate-change", "baseline-change", "review-expiry"]
   },
   "review": {
@@ -53,7 +56,10 @@
     "missingExtension": "blocked-no-fallback-SQLite-open-or-directory-enumeration"
   },
   "evidence": {
+    "initialNativeRed": "r48-17-feature-failures-after-real-preflight; separately-audited",
     "nativeAcceptance": "not_run",
+    "auxiliaryPosix": "17-fixed-definitions-replayed-through-explicit-test-only-Linux-factory/preflight-derivation; not-APFS-acceptance",
+    "supplementalDefinitions": {"preview": 9, "origin": 2, "control": 5},
     "nativeUserConfirmationUi": "not_run",
     "syntheticAuthorityOnly": true,
     "previousTransactionsEvidence": "separate-not-counted-as-this-feature",
