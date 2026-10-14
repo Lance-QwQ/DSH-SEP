@@ -1,16 +1,15 @@
-name: SEP Alpha.2 macOS native diagnostic and install RED
+name: SEP Alpha.2 macOS native fixture and install transactions
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-fixed-workspace:
+  native-hide-observer-probe:
+    runs-on: macos-15
+    timeout-minutes: 8
     permissions:
       contents: read
-      actions: read
-    runs-on: macos-15
-    timeout-minutes: 25
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -18,31 +17,23 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Restore unchanged r44 app and verify complete inventory and signature
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/application-build"
-      - name: Independent early and ready identity samples before real DOM actions
-        run: |
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/workspace-diagnostic.test.mjs > "$RUNNER_TEMP/application-workspace-contracts.tap"
-          receipt="$RUNNER_TEMP/application-build/RESULT.json"
-          expected_sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f 1)
-          node tools/alpha2-macos/desktop/workspace-diagnostic.mjs "$receipt" "$expected_sha" "$RUNNER_TEMP/application-workspace-diagnostic"
-      - name: Preserve original identity, DOM, and cleanup evidence
+      - name: Verify interpretation contracts
+        run: node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-observer-probe/analysis.test.mjs > "$RUNNER_TEMP/hide-analysis.tap"
+      - name: Observe each fresh AppKit fixture exactly once
+        run: node tools/alpha2-macos/desktop/hide-observer-probe/run-native.mjs "$RUNNER_TEMP/hide-observer-probe"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-fixed-workspace-r46
+          name: native-hide-observer-probe
+          include-hidden-files: true
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/application-build/RESULT.json
-            ${{ runner.temp }}/application-build/*.log
-            ${{ runner.temp }}/application-workspace-contracts.tap
-            ${{ runner.temp }}/application-workspace-diagnostic/*.json
-            ${{ runner.temp }}/application-workspace-diagnostic/*.log
-  native-first-install-red:
+            ${{ runner.temp }}/hide-observer-probe
+            ${{ runner.temp }}/hide-analysis.tap
+
+  native-first-install:
     runs-on: macos-15
-    timeout-minutes: 25
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -50,42 +41,19 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Thirteen real signed-fixture RED cases before implementation
+      - name: Fixed thirteen native first-install definitions after implementation
         run: |
           sw_vers > "$RUNNER_TEMP/first-install-environment.txt"
           uname -a >> "$RUNNER_TEMP/first-install-environment.txt"
           node tools/alpha2-macos/installation/run-native.mjs "$RUNNER_TEMP/first-install" > "$RUNNER_TEMP/first-install-runner.log" 2>&1
-      - name: Preserve RED logs and exact inputs without executing a fixture app
+      - name: Preserve original results including any compile or setup failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sep-macos-first-install-red-r46
+          name: sep-macos-first-install-r47
           if-no-files-found: error
           path: |
             ${{ runner.temp }}/first-install/RESULT.json
             ${{ runner.temp }}/first-install/native.log
             ${{ runner.temp }}/first-install-runner.log
             ${{ runner.temp }}/first-install-environment.txt
-  native-hide-observer:
-    runs-on: macos-15
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Four independent ordinary AppKit windows and observer initialization comparison
-        run: |
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/hide-observer-probe/analysis.test.mjs > "$RUNNER_TEMP/hide-observer-contracts.tap"
-          node tools/alpha2-macos/desktop/hide-observer-probe/run-native.mjs "$RUNNER_TEMP/hide-observer-probe"
-      - name: Preserve observations and per-case cleanup without claiming an Electron fix
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: sep-macos-hide-observer-r46
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/hide-observer-contracts.tap
-            ${{ runner.temp }}/hide-observer-probe

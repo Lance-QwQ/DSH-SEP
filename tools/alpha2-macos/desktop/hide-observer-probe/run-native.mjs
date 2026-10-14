@@ -44,7 +44,7 @@ async function main(output){
  const rows=[],inputs=[],origins=[],metadata={schema:1,scope:'test-only AppKit 2x2 hide comparison; no product mutation',node:process.version,platform:process.platform,arch:process.arch,productRetested:false};
  let failureCode;
  try{
-  for(const name of ['run-native.mjs','fixture.m','analysis.mjs','analysis.test.mjs']){const b=await readFile(join(here,name));inputs.push({file:name,sha256:hash(b),bytes:b.length});}
+  for(const name of ['run-native.mjs','fixture.m','policy-state.h','policy-state.test.c','analysis.mjs','analysis.test.mjs']){const b=await readFile(join(here,name));inputs.push({file:name,sha256:hash(b),bytes:b.length});}
   const source=await readFile(join(here,'../../package/application-observer.m'),'utf8');assert.equal(hash(source),originalSha);inputs.push({file:'../../package/application-observer.m',sha256:hash(source),bytes:Buffer.byteLength(source)});
   await json(join(output,'INPUTS.json'),inputs);
   metadata.swVers=(await command(output,'sw-vers','/usr/bin/sw_vers',[])).stdout;
@@ -52,6 +52,8 @@ async function main(output){
   const sdk=(await command(output,'sdk','/usr/bin/xcrun',['--show-sdk-path'])).stdout.trim();
   metadata.sdk=sdk;metadata.headers=[];
   for(const name of ['NSRunningApplication.h','NSApplication.h','NSWindow.h']){const bytes=await readFile(join(sdk,'System/Library/Frameworks/AppKit.framework/Headers',name));await writeFile(join(output,name),bytes,{flag:'wx'});metadata.headers.push({file:name,sha256:hash(bytes),bytes:bytes.length});}
+  const policyBinary=join(output,'policy-test');await command(output,'compile-policy','/usr/bin/xcrun',['clang','-std=c11','-Wall','-Wextra','-Werror',join(here,'policy-state.test.c'),'-o',policyBinary]);
+  const policy=await command(output,'policy-contracts',policyBinary,[]);for(const [key,n] of Object.entries({tests:5,pass:5,fail:0}))assert.match(policy.stdout,new RegExp('^# '+key+' '+n+'$','m'));
   const fixtureBinary=join(output,'fixture-binary');await command(output,'compile-fixture','/usr/bin/xcrun',['clang','-fobjc-arc','-framework','AppKit','-framework','Foundation','-lproc',join(here,'fixture.m'),'-o',fixtureBinary]);
   for(const variant of variants){
    const generated=derive(source,variant),sourcePath=join(output,'observer-'+variant+'.m'),binary=join(output,'observer-'+variant);
@@ -81,6 +83,7 @@ async function main(output){
     const count=events.length;child.stdin.write('snapshot\n');row.fixture=await until(()=>events.slice(count).find(e=>e.event==='snapshot'),2000,'HIDE_FIXTURE_SNAPSHOT');assert.equal(invalid,false);
    }catch(e){row.failure=e.code??e.message;throw e;}
    finally{
+    row.initialization=events.filter(e=>['policyInitial','policyAfter','policyRequest','policyDecision'].includes(e.event));row.pid??=child.pid??null;
     if(!exit)child.stdin.write('quit\n');
     try{await until(()=>exit,5000,'HIDE_FIXTURE_CLOSE_UNKNOWN');}catch{releaseUnknown(child);}
     row.cleanup={...row.cleanup,...exit,terminated:events.some(e=>e.event==='willTerminate')&&events.some(e=>e.event==='quitRequested')&&!events.some(e=>['fixtureDeadline','inputEOF','invalidInput'].includes(e.event))};

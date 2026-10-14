@@ -53,6 +53,19 @@ of NSRunningApplication.h, NSApplication.h and NSWindow.h. Native compilation
 and the four AppKit cases remain not_run until the coordinator executes CI.
 Six portable evidence-classification tests have separate RED/GREEN logs.
 
+The r46 fixture exited 78 before ready, snapshot or hide. Its only explicit
+return 78 was the unconditional policy-setter Boolean gate. Initial/after
+policy values were absent, so the original failure is retained and its exact
+cause is not assumed. The r47 test fixture logs policyInitial, optional
+policyRequest (including returned Boolean), policyAfter and policyDecision.
+It requests regular only when the observed initial policy is not regular;
+admission uses the actual after-state, and ready still requires both actual
+policy views regular, visible, active, not hidden and finished launching.
+The same pure C policy-state helper has five state contracts, run before the
+native fixture is compiled. These are additional to the six interpretation
+contracts; they prove initialization decisions, not AppKit behavior or a
+successful hide. Four single-attempt hide cells and cleanup rules are unchanged.
+
 ## Apple documentation checked
 
 - [NSRunningApplication](https://developer.apple.com/documentation/appkit/nsrunningapplication?language=objc): time-varying properties refresh with the main run loop; a synchronous hidden read can be stale. This does not establish that a false hide return becomes success after initializing NSApplication.

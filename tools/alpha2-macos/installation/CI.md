@@ -1,6 +1,6 @@
 # First-install native RED contract
 
-Run on the same pinned macOS 15.7.9 ARM64 runner with Node 24.21.0. This initial source intentionally returns `SEP_INSTALL_NOT_IMPLEMENTED`; all 13 tests must fail at that missing implementation, after their real signed schema4 fixture is built. Setup/compiler/signing failures do not count as RED.
+Run on the same pinned macOS 15.7.9 ARM64 runner with Node 24.21.0. The historical r46 source intentionally returned `SEP_INSTALL_NOT_IMPLEMENTED`; all 13 tests failed at that missing implementation after their real signed schema4 fixture was built. Setup/compiler/signing failures do not count as RED. The r47 candidate implements the same API and is awaiting native verification; its implementation must not be described as passing until the original definitions have actually run successfully.
 
 ```
 node tools/alpha2-macos/installation/run-native.mjs "$RUNNER_TEMP/first-install"

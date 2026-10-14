@@ -3,7 +3,17 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "policy-state.h"
 // Test-only single process, no descendants, network, credentials or product IO.
+static void policyLog(NSDictionary *value){NSData *d=[NSJSONSerialization dataWithJSONObject:value options:0 error:NULL];fwrite(d.bytes,1,d.length,stdout);fputc('\n',stdout);fflush(stdout);}
+static int readPolicy(void *context){
+ unsigned *reads=context;int policy=(int)NSApp.activationPolicy;
+ policyLog(@{@"event":(*reads)++==0?@"policyInitial":@"policyAfter",@"pid":@(getpid()),@"activationPolicy":@(policy),@"runningActivationPolicy":@(NSRunningApplication.currentApplication.activationPolicy)});return policy;
+}
+static bool setRegular(void *context){
+ (void)context;BOOL accepted=[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+ policyLog(@{@"event":@"policyRequest",@"pid":@(getpid()),@"requestedPolicy":@(NSApplicationActivationPolicyRegular),@"accepted":@(accepted),@"activationPolicy":@(NSApp.activationPolicy)});return accepted;
+}
 @interface ProbeDelegate : NSObject <NSApplicationDelegate>
 @property(strong) NSWindow *window;
 @property(strong) NSTimer *timer;
@@ -28,7 +38,7 @@
  self.timer=[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(tick:) userInfo:nil repeats:YES];
 }
 - (void)tick:(NSTimer *)timer {
- if(!self.ready&&self.window.visible&&NSApp.active&&!NSApp.hidden&&NSRunningApplication.currentApplication.finishedLaunching){self.ready=YES;[self emit:@"ready"];}
+ if(!self.ready&&self.window.visible&&NSApp.active&&!NSApp.hidden&&NSApp.activationPolicy==NSApplicationActivationPolicyRegular&&NSRunningApplication.currentApplication.activationPolicy==NSApplicationActivationPolicyRegular&&NSRunningApplication.currentApplication.finishedLaunching){self.ready=YES;[self emit:@"ready"];}
  char bytes[128];ssize_t n=read(STDIN_FILENO,bytes,sizeof(bytes));
  if(n>0)[self.input appendBytes:bytes length:(NSUInteger)n];
  if(self.input.length>1024){[self emit:@"invalidInput"];[NSApp terminate:nil];return;}
@@ -45,6 +55,8 @@
 - (void)applicationWillTerminate:(NSNotification *)note {[self.timer invalidate];[self emit:@"willTerminate"];}
 @end
 int main(void){@autoreleasepool{
- [NSApplication sharedApplication];if(![NSApp setActivationPolicy:NSApplicationActivationPolicyRegular])return 78;
+ [NSApplication sharedApplication];unsigned reads=0;ProbePolicyState initial=probePolicyState(readPolicy,setRegular,&reads);
+ policyLog(@{@"event":@"policyDecision",@"pid":@(getpid()),@"initial":@(initial.initial),@"after":@(initial.after),@"setterAttempted":@(initial.attempted),@"setterAccepted":initial.attempted?@(initial.setterAccepted):NSNull.null,@"regular":@(initial.regular)});
+ if(!initial.regular)return 78;
  ProbeDelegate *delegate=ProbeDelegate.new;NSApp.delegate=delegate;[NSApp run];return 0;
 }}
