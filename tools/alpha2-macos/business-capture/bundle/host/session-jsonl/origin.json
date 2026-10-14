@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "upstreamPackage": "@deepseek-ai/dsh-session-persistence-jsonl",
+  "version": "0.2.1-alpha.1",
+  "officialTag": "dsh-v0.2.1-alpha.1",
+  "officialCommit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "files": [
+    {
+      "path": "index.js",
+      "sourceSha256": "0845707017acc2b4a8a75eab2244fa3fd88587b8094ab32014321dce7ca1e31b",
+      "sha256": "9585e6f005e2fa6842a2ab7e8c6b2f4a2457bb39e4524e8de33e0321516bbeaa",
+      "sourceSize": 142847,
+      "size": 142846,
+      "replacements": [
+        {
+          "from": "from \"@deepseek-ai/dsh-session-format-catalog\"",
+          "to": "from \"../../lib/session-catalog.js\"",
+          "count": 1
+        },
+        {
+          "from": "from \"@deepseek-ai/dsh-session\"",
+          "to": "from \"../../lib/session-vocabulary.js\"",
+          "count": 1
+        },
+        {
+          "from": "from \"@deepseek-ai/dsh-session-persistence\"",
+          "to": "from \"../../lib/session-storage-validation.js\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "worker.cjs",
+      "sourceSha256": "757966129e1f07d3bea188d384ed53fdd80e167fa0d5a32a64df9848b3265f0e",
+      "sha256": "44ea2407cef4e90ed2ebec44f86359b6f32853ab94e8b6a1b78564267b21a50e",
+      "sourceSize": 558485,
+      "size": 558503,
+      "replacements": [
+        {
+          "from": "(\"../package.json\")",
+          "to": "(\"@deepseek-ai/dsh-llm/package.json\")",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "licenseSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+  "scope": "Owned provider fork: three ESM import substitutions and one worker metadata reference. Worker vocabulary remains native-only; historical SEP events are refused before publication."
+}

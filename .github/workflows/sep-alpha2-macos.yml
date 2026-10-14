@@ -319,7 +319,7 @@ jobs:
           test "$(uname -m)" = arm64
           export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
           mkdir "$RUNNER_TEMP/overlay-receipts"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-dependencies.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-dependencies.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-imports.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
           cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
       - name: Fetch fixed successful carrier artifact and derive inner digest
         env:
@@ -403,7 +403,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.19.0'
@@ -420,6 +420,8 @@ jobs:
           root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-business-native"
           mkdir "$root"
           echo "SEP_MAC_BUSINESS_OUTPUT=$root" >> "$GITHUB_ENV"
+          echo "SEP_DESKTOP_TEST_ROOT=$root/desktop-unit" >> "$GITHUB_ENV"
+          mkdir "$root/desktop-unit"
           node tools/alpha2-macos/package/prepare-business.mjs "$RUNNER_TEMP/business-carrier/DSH SEP.app" "$RUNNER_TEMP/business-asar-tool/node_modules/@electron/asar/lib/asar.js" "$GITHUB_WORKSPACE" "$root/prepared"
           xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
           echo "SEP_OFFICIAL_HARNESS=$root/prepared/host" >> "$GITHUB_ENV"
@@ -429,8 +431,6 @@ jobs:
           echo "SEP_MAC_PROFILE_TEST_ROOT=$root/profile-tests" >> "$GITHUB_ENV"
           echo "SEP_MAC_LIFECYCLE_TEST_ROOT=$root/lifecycle-tests" >> "$GITHUB_ENV"
           echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
-          echo "SEP_DESKTOP_TEST_ROOT=$root/desktop-unit" >> "$GITHUB_ENV"
-          mkdir "$root/desktop-unit"
           sw_vers > "$root/system.txt"
           uname -a >> "$root/system.txt"
       - name: Native file and business composition

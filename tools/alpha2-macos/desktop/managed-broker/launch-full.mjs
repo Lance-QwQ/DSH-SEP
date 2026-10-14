@@ -4,12 +4,12 @@ const fail=code=>{throw Object.assign(Error(code),{code});};const code=e=>/^(SEP
 async function privateDirectory(path){if(!isAbsolute(path)||resolve(path)!==path)fail('SEP_MAC_DATA_PATH');await mkdir(path,{recursive:true,mode:0o700});const st=await lstat(path);if(!st.isDirectory()||st.isSymbolicLink()||await realpath(path)!==path||st.uid!==process.getuid()||(st.mode&0o077)!==0)fail('SEP_MAC_DATA_PERMISSIONS');}
 /** Isolated-preview launcher. Exact direct child acknowledgments are checked;
  * this is not a system-wide process-tree or same-user hostile-code sandbox. */
-export async function launchFull({programPath,programSha256,dataRoot,desktopArgs=[]}){
- if(process.platform!=='darwin'||process.arch!=='arm64')fail('SEP_MAC_PLATFORM');if(!Array.isArray(desktopArgs)||desktopArgs.length)fail('SEP_MAC_LAUNCH_ARGUMENT');
+export async function launchFull({programPath,programSha256,dataRoot,desktopArgs=[],diagnosticInspector=false}){
+ if(process.platform!=='darwin'||process.arch!=='arm64')fail('SEP_MAC_PLATFORM');if(!Array.isArray(desktopArgs)||desktopArgs.length||typeof diagnosticInspector!=='boolean')fail('SEP_MAC_LAUNCH_ARGUMENT');
  const p=await loadProgram(programPath,programSha256);dataRoot=resolve(dataRoot);if(dataRoot===p.root||dataRoot.startsWith(p.root+'/'))fail('SEP_MAC_DATA_INSIDE_PROGRAM');
  await privateDirectory(dataRoot);const stateRoot=join(dataRoot,'launcher');await privateDirectory(stateRoot);const statePath=join(stateRoot,'generation.json'),generation=randomBytes(16).toString('hex');
  const {acquireOwnerFile}=await import(pathToFileURL(p.entries.ownerLease.path));
- let lease,owner,rpc,desktop,desktopExit,closing,finishedResolve;const finished=new Promise(r=>{finishedResolve=r;}),keepAlive=setInterval(()=>{},1000);let stateWritten=false;
+ let lease,owner,rpc,desktop,desktopExit,closing,finishedResolve,inspectorEndpoint,diagnosticTail='';const finished=new Promise(r=>{finishedResolve=r;}),keepAlive=setInterval(()=>{},1000);let stateWritten=false;
  const state=phase=>({schema:1,generation,phase,programSha256,launcherPid:process.pid,businessPid:owner?.status().pid??null,desktopPid:desktop?.pid??null,resourcesConfirmedReleased:phase==='closed'});
  async function close({requestDesktop=false}={}){
   if(closing)return closing;
@@ -35,10 +35,10 @@ export async function launchFull({programPath,programSha256,dataRoot,desktopArgs
   owner=createHostOwner({nodeExecutable:p.entries.node.path,modulePath:p.entries.business.path,moduleSha256:p.entries.business.sha256,input:{programRoot:p.root,hostRoot:p.hostRoot,bundleRoot:p.bundleRoot,dataRoot:businessRoot,projectRoot,helperPath:p.entries.helper.path,helperSha256:p.entries.helper.sha256,initialize,shutdownMs:5000},env});
   await owner.start();await lease.assertOwned();await persistGeneration(statePath,state('active'));rpc=await openDesktopRpc({projectDir:projectRoot,owner});
   const connectionFile=join(stateRoot,'connection-'+generation+'.json'),fh=await open(connectionFile,'wx',0o600);try{await fh.writeFile(JSON.stringify({desktop:rpc.connection})+'\n');await fh.sync();}finally{await fh.close();}
-  desktop=spawn(p.entries.electron.path,['--sep-recovery-connection='+connectionFile],{cwd:projectRoot,env:{...env,DSH_SEP_DATA_ROOT:dataRoot,DSH_DESKTOP_DSH_DIR:p.hostRoot,DSH_DESKTOP_NODE_BINARY:p.entries.node.path,DSH_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe']});desktop.stdout.resume();desktop.stderr.resume();
+  desktop=spawn(p.entries.electron.path,[...(diagnosticInspector?['--inspect=127.0.0.1:0']:[]),'--sep-recovery-connection='+connectionFile],{cwd:projectRoot,env:{...env,DSH_SEP_DATA_ROOT:dataRoot,DSH_DESKTOP_DSH_DIR:p.hostRoot,DSH_DESKTOP_NODE_BINARY:p.entries.node.path,DSH_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe']});desktop.stdout.resume();desktop.stderr.resume();if(diagnosticInspector)desktop.stderr.on('data',b=>{diagnosticTail=(diagnosticTail+b).slice(-8192);inspectorEndpoint??=diagnosticTail.match(/Debugger listening on (ws:\/\/127\.0\.0\.1:\d+\/[a-z0-9-]+)/i)?.[1];});
   desktop.once('error',()=>{desktopExit={code:null,signal:null,spawnError:true};void close();});desktop.once('exit',(code,signal)=>{desktopExit={code,signal};});desktop.once('close',()=>{void close();});
   await persistGeneration(statePath,state('active'));process.on('SIGTERM',onSignal);process.on('SIGINT',onSignal);
-  return Object.freeze({status:'running',generation,desktopPid:desktop.pid,hostPid:owner.status().pid,close,whenClosed:()=>finished});
+  return Object.freeze({status:'running',generation,desktopPid:desktop.pid,hostPid:owner.status().pid,close,whenClosed:()=>finished,...(diagnosticInspector?{diagnostics:()=>({inspectorEndpoint,desktopExit,host:owner.status(),stderrTail:diagnosticTail})}:{})});
  }catch(e){const result=await close({requestDesktop:true});if(result.status!=='pass'){process.stderr.write(JSON.stringify({status:'blocked',code:code(e),cleanup:'SEP_MAC_SHUTDOWN_UNCONFIRMED'})+'\n');return Object.freeze({status:'blocked',code:code(e),close,whenClosed:()=>finished});}throw e;}
 }
 if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.url){

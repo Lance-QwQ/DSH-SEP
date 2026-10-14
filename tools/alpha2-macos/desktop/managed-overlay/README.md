@@ -96,12 +96,23 @@ devDependencies into main. The existing managed capture did not ship this bare
 package at app root. This supersedes the earlier hypothesis that every managed
 failure was only Inspector timing.
 
-The new assembler bridges five explicit R6 desktop imports to the same fixed
+The first assembler repair bridged five explicit R6 desktop imports to the same fixed
 carrier's `dsh/node_modules` using ASAR-internal relative links, after exact name
 and Alpha.2 version checks. Existing app dependencies and host bytes are not
-replaced. Each added link and source-manifest hash is recorded. This change needs
-the next real Mac negative probe; local dependency-planner tests alone do not
-prove successful native loading. Diagnostic exception pauses are disabled before
+replaced. Each added link and source-manifest hash is recorded. Native run
+38522299567 confirmed assembly but demonstrated that Electron's ESM package
+resolution still did not follow those ASAR directory links, although CJS found
+the package. That attempt remains failed.
+
+The current repair adds nine exact static-import transformations across three
+fixed capture files, targeting the same archive's real `dsh/node_modules` lib
+files. Each transformation records source/result hashes, occurrence count and
+target-file hash. All captured JS bare imports are reconciled: explicit Electron
+and Node builtins, the five fixed mapped modules, or eight explicitly allowed
+remaining specifiers whose actual resolved bytes must stay inside the extracted
+carrier tree. Unknown imports fail assembly. The real Mac negative probe for
+this repair is pending; its three local regression tests do not certify native
+loading. Diagnostic exception pauses are disabled before
 resuming the expected product refusal, so a test pause cannot masquerade as a
 product hang.
 

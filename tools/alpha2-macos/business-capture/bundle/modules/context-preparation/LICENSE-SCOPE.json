@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "package": "dsh-sep-context-preparation",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "license": "MIT",
+  "includePatterns": [
+    "index.mjs",
+    "context_resolver.py",
+    "README.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "originalFiles": [
+    {
+      "path": "context_resolver.py",
+      "baselineSha256": "a5ecf6c75e891d4973a1e5bf0395f9eb18a632c109e8c1ac3944b865b11bc38d",
+      "bytes": 8527
+    },
+    {
+      "path": "index.mjs",
+      "baselineSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+      "bytes": 6827
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "1bede77865d1cf1b7f186c6f9ccfd24d0328ea8a18b27dd0c665f6341a03cc6e",
+      "bytes": 646
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "8ec3534eb5f82d651f3227f0ba85d5f477611ce2a1107a7555b8fb8114a7ef55",
+      "bytes": 3251
+    }
+  ],
+  "terms": "Only the listed locally authored scope is designated under the custom license. Existing third-party, vendor and prior valid grants take priority and are not revoked. Scope listing records this release selection, not legal ownership certification. Manifest hashes below describe pre-overlay metadata; implementation bytes are unchanged.",
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

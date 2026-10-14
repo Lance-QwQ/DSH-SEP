@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "package": "dsh-sep-trusted-evaluation-entry",
+  "version": "0.1.0-alpha.15.dsh-alpha2.1",
+  "license": "MIT",
+  "includePatterns": [
+    "entry.mjs",
+    "index.mjs",
+    "evaluation/**",
+    "README.md",
+    "package.json"
+  ],
+  "excludePatterns": [
+    "node_modules/**"
+  ],
+  "baselineGraphSha256": "ffb961a17b4202ec753e70bc5fd0e4de0ccf697df4155ee4c369d9e48be56f6c",
+  "originalFiles": [
+    {
+      "path": "entry.mjs",
+      "baselineSha256": "0881fe345f06d839ed307f52ac750a3ca2e7e883e235a14b6db3aa3604ceca85",
+      "bytes": 6283
+    },
+    {
+      "path": "evaluation/admission.py",
+      "baselineSha256": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+      "bytes": 2095
+    },
+    {
+      "path": "evaluation/compile_patch.py",
+      "baselineSha256": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+      "bytes": 1207
+    },
+    {
+      "path": "evaluation/deadline.py",
+      "baselineSha256": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+      "bytes": 796
+    },
+    {
+      "path": "evaluation/evaluation.py",
+      "baselineSha256": "8556ea13291f2718baab030895c0b7e23027fb3b51459dbcb9ec734bdad19a24",
+      "bytes": 7862
+    },
+    {
+      "path": "evaluation/grade_worker.py",
+      "baselineSha256": "d051be7bc14c037684d7241801d34dbfc65898e647fda963a1c2d86e6a63b3c8",
+      "bytes": 3324
+    },
+    {
+      "path": "evaluation/index.mjs",
+      "baselineSha256": "e9f7d316036fd291cbbe878fe57dd8addf6885773f182ad0f20abf81041f3810",
+      "bytes": 13075
+    },
+    {
+      "path": "evaluation/lifecycle_worker.py",
+      "baselineSha256": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+      "bytes": 3315
+    },
+    {
+      "path": "evaluation/lifecycle-manifest.json",
+      "baselineSha256": "f73ace89fddebf78dd1391ab040affa092cfd7f8984b4c8345b694ecc163a07f",
+      "bytes": 790
+    },
+    {
+      "path": "evaluation/lifecycle.py",
+      "baselineSha256": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+      "bytes": 12319
+    },
+    {
+      "path": "evaluation/official.py",
+      "baselineSha256": "40244b074a173338599624724af0b36aa969271e1264b1d70b2a1f54cc319f40",
+      "bytes": 9958
+    },
+    {
+      "path": "evaluation/package.json",
+      "baselineSha256": "e889d80c73016c2f532affb4012a7e1554dc08423582d31f4ee42d1b0e1ce87c",
+      "bytes": 441
+    },
+    {
+      "path": "evaluation/README.md",
+      "baselineSha256": "d1c23b934d3b6865341b80c442c46d886f28ee8a2f6a423ab095f35cdcef2d85",
+      "bytes": 9652
+    },
+    {
+      "path": "evaluation/supervisor.py",
+      "baselineSha256": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b",
+      "bytes": 9959
+    },
+    {
+      "path": "index.mjs",
+      "baselineSha256": "6756b3d6e39d12e24f2586c23f9d7d13d702e2ce05f26c80f35c3a2cdec23c71",
+      "bytes": 1009
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "33b3adbacdaa2df6b1d8513281327deef9ceed73a6d9b66fe02218541c6ed146",
+      "bytes": 659
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "780455478f11fbf78122491f26a29ad761f454f8ba15561a3728bd126421fd1d",
+      "bytes": 8290
+    }
+  ],
+  "terms": "Only the listed locally authored scope is designated under the custom license. Existing third-party, vendor and prior valid grants take priority and are not revoked. Scope listing records this release selection, not legal ownership certification. Manifest hashes below describe pre-overlay metadata; implementation bytes are unchanged.",
+  "licenseRevision": {
+    "distribution": "20260921-mit-alpha",
+    "copyright": "2026 DSH SEP contributors",
+    "authorizedBy": "Project owner explicitly approved MIT for original SEP contributions and Windows Alpha publication with disclosed known issues.",
+    "previousLicenseSha256": "cd9cc9395194fafd280dbdfcc510c193dc3d2784a85260540eb8b56d4e27b90a",
+    "sourceDistributionGraphSha256": "a2d3c02193007261560a35a564a786145c4424f0c4a1b28f46e0f6c5a43803a8",
+    "thirdPartyTermsUnchanged": true
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "source": "bundle/lib/p1-runtime.js",
+  "sha256": "7b76f227ca66e45f0f17f26e6d10267949d1f6d0cf387555c0e37d9679d599a2",
+  "changes": [
+    {
+      "before": "import {z} from 'zod';",
+      "after": "import {z} from 'zod';\nimport {businessConfig,createGovernedConsumers} from './governed-consumers.js';"
+    },
+    {
+      "before": "name='dsh-sep-p1-runtime'",
+      "after": "name='dsh-sep-business-runtime'"
+    },
+    {
+      "before": "provide=['sepP1Runtime']",
+      "after": "provide=['sepBusinessRuntime']"
+    },
+    {
+      "before": "profile:z.record(z.string(),z.unknown()),p1:p1Config,",
+      "after": "profile:z.record(z.string(),z.unknown()),p1:p1Config,business:businessConfig,"
+    },
+    {
+      "before": "if(ctx.get('sepP1Runtime')||ctx.get('suiteEnhancements'))",
+      "after": "if(ctx.get('sepBusinessRuntime')||ctx.get('sepP1Runtime')||ctx.get('suiteEnhancements'))"
+    },
+    {
+      "before": "cleanupProblem;",
+      "after": "cleanupProblem,consumers;"
+    },
+    {
+      "before": "await native?.dispose();await policy?.dispose();await store?.close();await profile?.dispose();",
+      "after": "await native?.dispose();await consumers?.close();await policy?.dispose();await store?.close();await profile?.dispose();"
+    },
+    {
+      "before": "sources:[],recoveryProjectId:project.id",
+      "after": "sources:config.business.sources,...config.business.userProfile?{userProfile:config.business.userProfile}:{},recoveryProjectId:project.id"
+    },
+    {
+      "before": "{enabled:true,recoveryHost:ctx.recoveryHost}",
+      "after": "{enabled:true,followRegisteredProjects:false,recoveryHost:ctx.recoveryHost}"
+    },
+    {
+      "before": "return {p1:{...p1.status(),budget:await p1.budgetStatus(exec)}};",
+      "after": "return {p1:{...p1.status(),budget:await p1.budgetStatus(exec)},consumers:consumers.status(selected)};"
+    },
+    {
+      "before": "  phase='ready';",
+      "after": "  consumers=await createGovernedConsumers(ctx,{config:config.business,scope,store,storage,control:ctx.get('sepStorageControl'),p1,signal:lifetime.signal,enter,track,mount});\n  phase='ready';"
+    },
+    {
+      "before": "p1:config.p1,shutdownMs:config.shutdownMs",
+      "after": "p1:config.p1,business:config.business,shutdownMs:config.shutdownMs"
+    },
+    {
+      "before": "scope:'explicit cold P1 fragment; complete business Profile remains blocked'",
+      "after": "scope:'explicit cold shared-consumers fragment; complete business Profile remains blocked'"
+    },
+    {
+      "before": "ctx.provide('sepP1Runtime'",
+      "after": "ctx.provide('sepBusinessRuntime'"
+    },
+    {
+      "before": "p1:p1.status(),completeProfileStatus:'blocked'",
+      "after": "p1:p1.status(),consumers:consumers.status(),completeProfileStatus:'blocked'"
+    },
+    {
+      "before": "/** Explicit cold P1 fragment, not the complete SEP business entry.",
+      "after": "/** Explicit cold shared-consumers fragment, not the complete SEP business entry."
+    }
+  ]
+}

@@ -1,0 +1,3065 @@
+{
+  "schema": 1,
+  "sourceCommit": "930d081b1f7deb647948915432074f532eca2b62",
+  "scope": "fixed owned SEP runtime source closure; optional consumers remain disabled until separately adapted",
+  "inputs": [
+    {
+      "path": "LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/THIRD-PARTY-NOTICES.md",
+      "sha256": "a1c941e784eedadeed94d93af45f40efc722db58201264051d63f7a051cbf46c",
+      "bytes": 2522,
+      "sourcePath": "bundle/THIRD-PARTY-NOTICES.md",
+      "sourceSha256": "a1c941e784eedadeed94d93af45f40efc722db58201264051d63f7a051cbf46c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/automatic-memory/index.js",
+      "sha256": "37ff35b7a311528bf5f19f676afee6514a413ee3bf1e64a58a8c543d957483fd",
+      "bytes": 18187,
+      "sourcePath": "bundle/host/automatic-memory/index.js",
+      "sourceSha256": "37ff35b7a311528bf5f19f676afee6514a413ee3bf1e64a58a8c543d957483fd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/automatic-memory/origin.json",
+      "sha256": "8f90427efbd42a14e82faa8d353222345c2b92fe83e7f6288c651f8e97245fcd",
+      "bytes": 2503,
+      "sourcePath": "bundle/host/automatic-memory/origin.json",
+      "sourceSha256": "8f90427efbd42a14e82faa8d353222345c2b92fe83e7f6288c651f8e97245fcd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/computer-click/index.js",
+      "sha256": "ac2a6a95741d5e99594dd01aa04be29c2218115c58deff1c6b7d23b0b260431c",
+      "bytes": 12892,
+      "sourcePath": "bundle/host/computer-click/index.js",
+      "sourceSha256": "ac2a6a95741d5e99594dd01aa04be29c2218115c58deff1c6b7d23b0b260431c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/computer-click/origin.json",
+      "sha256": "b2a4c00c6d60bb6728f6f4e07cfcb115d9675772824ef03e79e6b74d825d49e4",
+      "bytes": 1297,
+      "sourcePath": "bundle/host/computer-click/origin.json",
+      "sourceSha256": "b2a4c00c6d60bb6728f6f4e07cfcb115d9675772824ef03e79e6b74d825d49e4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/context-preparation/index.mjs",
+      "sha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+      "bytes": 7016,
+      "sourcePath": "bundle/host/context-preparation/index.mjs",
+      "sourceSha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/context-preparation/origin.json",
+      "sha256": "cb4d9ea838ec188622f74d0a31781517efa3a3b3aed1b708c02aa25519165267",
+      "bytes": 1442,
+      "sourcePath": "bundle/host/context-preparation/origin.json",
+      "sourceSha256": "cb4d9ea838ec188622f74d0a31781517efa3a3b3aed1b708c02aa25519165267",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/document-source/index.js",
+      "sha256": "cc6b470338ab4afc76fc18cfbf6279bca71ad37544ce9e7921aace20d340b750",
+      "bytes": 4313,
+      "sourcePath": "bundle/host/document-source/index.js",
+      "sourceSha256": "cc6b470338ab4afc76fc18cfbf6279bca71ad37544ce9e7921aace20d340b750",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/document-source/origin.json",
+      "sha256": "7e65e27adfe2f8a157d2ba96f9abfb7cbf04714ae7734848a01861e8bace11a7",
+      "bytes": 1116,
+      "sourcePath": "bundle/host/document-source/origin.json",
+      "sourceSha256": "7e65e27adfe2f8a157d2ba96f9abfb7cbf04714ae7734848a01861e8bace11a7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/backend-paths.mjs",
+      "sha256": "80aa07f8c83ba63bb25d6d2bdabeac0b8a17530a0d85aa75e5a5dd105848d29e",
+      "bytes": 596,
+      "sourcePath": "bundle/host/evaluation-entry/backend-paths.mjs",
+      "sourceSha256": "80aa07f8c83ba63bb25d6d2bdabeac0b8a17530a0d85aa75e5a5dd105848d29e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/entry.mjs",
+      "sha256": "2fed151e7d5a85af798b35c6fdfcd13b01333c2661764520577da86513c1f86a",
+      "bytes": 6545,
+      "sourcePath": "bundle/host/evaluation-entry/entry.mjs",
+      "sourceSha256": "2fed151e7d5a85af798b35c6fdfcd13b01333c2661764520577da86513c1f86a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/entry.origin.json",
+      "sha256": "8ee500460c2666e0208347d3a940c441206523d23b66b400963527ae857bb83a",
+      "bytes": 6273,
+      "sourcePath": "bundle/host/evaluation-entry/entry.origin.json",
+      "sourceSha256": "8ee500460c2666e0208347d3a940c441206523d23b66b400963527ae857bb83a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/evaluation.mjs",
+      "sha256": "a7ca9d0a341cd7e6bce8e449f775c46e49956e5240bdebc5bd795ba42d5ba3e1",
+      "bytes": 13060,
+      "sourcePath": "bundle/host/evaluation-entry/evaluation.mjs",
+      "sourceSha256": "a7ca9d0a341cd7e6bce8e449f775c46e49956e5240bdebc5bd795ba42d5ba3e1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/evaluation.origin.json",
+      "sha256": "e93dbffad3e5595546b81eee1108b656220abf473d640c2acf5f2b50f8383c02",
+      "bytes": 858,
+      "sourcePath": "bundle/host/evaluation-entry/evaluation.origin.json",
+      "sourceSha256": "e93dbffad3e5595546b81eee1108b656220abf473d640c2acf5f2b50f8383c02",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/evaluation-entry/index.js",
+      "sha256": "fa91d880b3d14e45aae22aa585f088475663ad8aa950ecbae8ec74e4b04f9168",
+      "bytes": 1157,
+      "sourcePath": "bundle/host/evaluation-entry/index.js",
+      "sourceSha256": "fa91d880b3d14e45aae22aa585f088475663ad8aa950ecbae8ec74e4b04f9168",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/layered-memory/index.js",
+      "sha256": "5061e63f10bb0aa2aeb76956eeab870cd910132b79d0695a1299c4e440c128bf",
+      "bytes": 36945,
+      "sourcePath": "bundle/host/layered-memory/index.js",
+      "sourceSha256": "5061e63f10bb0aa2aeb76956eeab870cd910132b79d0695a1299c4e440c128bf",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/layered-memory/origin.json",
+      "sha256": "1399fbc1f11931b41bae5e4f43ad238178c12252e126bc92b7e34e955a8e3864",
+      "bytes": 3870,
+      "sourcePath": "bundle/host/layered-memory/origin.json",
+      "sourceSha256": "1399fbc1f11931b41bae5e4f43ad238178c12252e126bc92b7e34e955a8e3864",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/p1-policy/alpha2-subagent.js",
+      "sha256": "f58d84b0b043b1da64f8be061a4e8545e5a04421798913ecae54019d96e5ba6c",
+      "bytes": 1571,
+      "sourcePath": "tools/alpha2-adaptation/alpha2-subagent.js",
+      "sourceSha256": "f58d84b0b043b1da64f8be061a4e8545e5a04421798913ecae54019d96e5ba6c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/p1-policy/index.js",
+      "sha256": "00816ae8048e82d33cd27929f9715e4a958211059efbb2e4f6c69ecaaaf64d50",
+      "bytes": 30607,
+      "sourcePath": "bundle/host/p1-policy/index.js",
+      "sourceSha256": "318f9c6469353809e7ae073777646b487e961a7d4fa2e2f5ffbe0bd052e78bf2",
+      "transformations": [
+        {
+          "before": "import {z} from 'zod';",
+          "after": "import {z} from 'zod';\nimport {startSuiteActivation} from './alpha2-subagent.js';",
+          "count": 1
+        },
+        {
+          "before": "ctx.subagents.start('spawn',",
+          "after": "startSuiteActivation(ctx,",
+          "count": 1
+        },
+        {
+          "before": "const cwd=agent?.session?.header?.cwd;",
+          "after": "const cwd=agent?.session&&ctx.get('workingDirectory').get(agent.session);",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "bundle/host/p1-policy/origin.json",
+      "sha256": "514985b7f946eb4079d29ed9f37f39a86991a16a01099e5a4ee473695ecedb1a",
+      "bytes": 7287,
+      "sourcePath": "bundle/host/p1-policy/origin.json",
+      "sourceSha256": "514985b7f946eb4079d29ed9f37f39a86991a16a01099e5a4ee473695ecedb1a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/plugin-group/index.mjs",
+      "sha256": "ff9e815c45b0f09cb1ee533c54b0224ea177c23aa546f0bae779c2b7c49fb387",
+      "bytes": 7942,
+      "sourcePath": "bundle/host/plugin-group/index.mjs",
+      "sourceSha256": "670c827722e6fba45abfd778b637e32cbf67e1d226d19b8c366f2411242399df",
+      "transformations": [
+        {
+          "before": "session?.header?.cwd??''",
+          "after": "ctx.get('workingDirectory').get(session)??''",
+          "count": 2
+        },
+        {
+          "before": "session.header.cwd??''",
+          "after": "ctx.get('workingDirectory').get(session)??''",
+          "count": 1
+        },
+        {
+          "before": "realpath(session.header.cwd)",
+          "after": "realpath(ctx.get('workingDirectory').get(session))",
+          "count": 3
+        },
+        {
+          "before": "const cwd=exec?.agent?.session?.header?.cwd;",
+          "after": "const cwd=exec?.agent?.session&&ctx.get('workingDirectory').get(exec.agent.session);",
+          "count": 1
+        },
+        {
+          "before": "p=>cwd&&inside(p.root,cwd)",
+          "after": "p=>cwd&&inside(p.root,cwd)&&isAbsolute(session.header.cwd??'')&&inside(p.root,session.header.cwd)",
+          "count": 1
+        },
+        {
+          "before": "p=>inside(p.root,cwd)",
+          "after": "p=>inside(p.root,cwd)&&isAbsolute(session.header.cwd??'')&&inside(p.root,session.header.cwd)",
+          "count": 2
+        },
+        {
+          "before": "p=>inside(p.root,canonical)",
+          "after": "p=>inside(p.root,canonical)&&isAbsolute(exec.agent.session.header.cwd??'')&&inside(p.root,exec.agent.session.header.cwd)",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "bundle/host/plugin-group/origin.json",
+      "sha256": "b5c82ad27b7a11b7f5733c010e2dc970cba58fff488b955f842f1c8f91eb3ef1",
+      "bytes": 1752,
+      "sourcePath": "bundle/host/plugin-group/origin.json",
+      "sourceSha256": "b5c82ad27b7a11b7f5733c010e2dc970cba58fff488b955f842f1c8f91eb3ef1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/protected-files/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/host/protected-files/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/protected-files/index.js",
+      "sha256": "615246c45a5fca72420f9c3052bf7c3bebd19b7578200f2695dcf86a164e7511",
+      "bytes": 91185,
+      "sourcePath": "bundle/host/protected-files/index.js",
+      "sourceSha256": "615246c45a5fca72420f9c3052bf7c3bebd19b7578200f2695dcf86a164e7511",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/protected-files/origin.json",
+      "sha256": "a29933eb013ed24890c24bc8f90b08f4c17fc4ca59a9d16ea250b9b79337a9c3",
+      "bytes": 4448,
+      "sourcePath": "bundle/host/protected-files/origin.json",
+      "sourceSha256": "a29933eb013ed24890c24bc8f90b08f4c17fc4ca59a9d16ea250b9b79337a9c3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/session-jsonl/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/host/session-jsonl/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/session-jsonl/index.js",
+      "sha256": "9585e6f005e2fa6842a2ab7e8c6b2f4a2457bb39e4524e8de33e0321516bbeaa",
+      "bytes": 142846,
+      "sourcePath": "bundle/host/session-jsonl/index.js",
+      "sourceSha256": "9585e6f005e2fa6842a2ab7e8c6b2f4a2457bb39e4524e8de33e0321516bbeaa",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/session-jsonl/origin.json",
+      "sha256": "9ebc62dd65899ac605a362edf134049dbf90b199c4b266ce5c7f8278121b12a8",
+      "bytes": 1753,
+      "sourcePath": "bundle/host/session-jsonl/origin.json",
+      "sourceSha256": "9ebc62dd65899ac605a362edf134049dbf90b199c4b266ce5c7f8278121b12a8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/host/session-jsonl/worker.cjs",
+      "sha256": "44ea2407cef4e90ed2ebec44f86359b6f32853ab94e8b6a1b78564267b21a50e",
+      "bytes": 558503,
+      "sourcePath": "bundle/host/session-jsonl/worker.cjs",
+      "sourceSha256": "44ea2407cef4e90ed2ebec44f86359b6f32853ab94e8b6a1b78564267b21a50e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/application-shutdown.js",
+      "sha256": "badd3702fa4d34f17f8f8b3081e6e5169f684bf9d5bc9be8381046890c4e00f3",
+      "bytes": 1776,
+      "sourcePath": "bundle/lib/application-shutdown.js",
+      "sourceSha256": "badd3702fa4d34f17f8f8b3081e6e5169f684bf9d5bc9be8381046890c4e00f3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/attachment-maintenance-cli.js",
+      "sha256": "0bd22677f98cb1d321678c3c61448889160803cec6b824db7fba716b6c7478f2",
+      "bytes": 1381,
+      "sourcePath": "bundle/lib/attachment-maintenance-cli.js",
+      "sourceSha256": "0bd22677f98cb1d321678c3c61448889160803cec6b824db7fba716b6c7478f2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/attachment-maintenance.js",
+      "sha256": "c03025681d2b3a65872cb57e1b4f5befcdc48e01a600a714c26e0a5c4c9c9eb6",
+      "bytes": 8177,
+      "sourcePath": "bundle/lib/attachment-maintenance.js",
+      "sourceSha256": "c03025681d2b3a65872cb57e1b4f5befcdc48e01a600a714c26e0a5c4c9c9eb6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/business-runtime-origin.json",
+      "sha256": "649c7c690e4f621855eca3605f5d75970791fd9eb8c7e1d865fca09af09444a5",
+      "bytes": 3002,
+      "sourcePath": "bundle/lib/business-runtime-origin.json",
+      "sourceSha256": "649c7c690e4f621855eca3605f5d75970791fd9eb8c7e1d865fca09af09444a5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/business-runtime.js",
+      "sha256": "8131ea71ba52e693f5a7962973507eabc4d79e466960b35ff9366c24b1be50e6",
+      "bytes": 11059,
+      "sourcePath": "bundle/lib/business-runtime.js",
+      "sourceSha256": "8131ea71ba52e693f5a7962973507eabc4d79e466960b35ff9366c24b1be50e6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/compaction-group.js",
+      "sha256": "b2af35ea9f0924d86e563b19e694b8e996c2f3f2ddf74d5c8482eb8b597716d9",
+      "bytes": 3466,
+      "sourcePath": "bundle/lib/compaction-group.js",
+      "sourceSha256": "b2af35ea9f0924d86e563b19e694b8e996c2f3f2ddf74d5c8482eb8b597716d9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/configuration-budget.js",
+      "sha256": "0c16d88601bcc667dad659c70f44c78356877fe646cb2520e48b22fd13dc1a27",
+      "bytes": 1748,
+      "sourcePath": "bundle/lib/configuration-budget.js",
+      "sourceSha256": "0c16d88601bcc667dad659c70f44c78356877fe646cb2520e48b22fd13dc1a27",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/configuration.js",
+      "sha256": "56c6a6d9c8fb50ad978b760e341fb0e288751f1a319e59413402dbfe0b0d8931",
+      "bytes": 1774,
+      "sourcePath": "bundle/lib/configuration.js",
+      "sourceSha256": "56c6a6d9c8fb50ad978b760e341fb0e288751f1a319e59413402dbfe0b0d8931",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/consumer-cleanup.js",
+      "sha256": "712b0cb69b09549653fcfe2bfc4e2565611f56c7e80b2007750214329b05d157",
+      "bytes": 1480,
+      "sourcePath": "bundle/lib/consumer-cleanup.js",
+      "sourceSha256": "712b0cb69b09549653fcfe2bfc4e2565611f56c7e80b2007750214329b05d157",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/controlled-installation.js",
+      "sha256": "1f83c4725a5d7f32dfcfff51af348bd9231abc966df0eed97ad5759df9456293",
+      "bytes": 6423,
+      "sourcePath": "bundle/lib/controlled-installation.js",
+      "sourceSha256": "1f83c4725a5d7f32dfcfff51af348bd9231abc966df0eed97ad5759df9456293",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/failure-diagnostic.js",
+      "sha256": "932341b11ab9a2b92072736f10d5813d9f0cd38f9120a5689ad664d2832d5454",
+      "bytes": 536,
+      "sourcePath": "bundle/lib/failure-diagnostic.js",
+      "sourceSha256": "932341b11ab9a2b92072736f10d5813d9f0cd38f9120a5689ad664d2832d5454",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/file-protection.js",
+      "sha256": "524e61b75c800642d4bbcaee53c7fd997e1af2aea951700ba9869fd71c839ba2",
+      "bytes": 8105,
+      "sourcePath": "bundle/lib/file-protection.js",
+      "sourceSha256": "524e61b75c800642d4bbcaee53c7fd997e1af2aea951700ba9869fd71c839ba2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/governed-consumers.js",
+      "sha256": "7627137297e25907705ceb1de52155b007dc846fe61d75920c158c9e3d922eb5",
+      "bytes": 5761,
+      "sourcePath": "bundle/lib/governed-consumers.js",
+      "sourceSha256": "7627137297e25907705ceb1de52155b007dc846fe61d75920c158c9e3d922eb5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/index.js",
+      "sha256": "f26d811085d6238ecadc1c69dbb744e4c26f76393c203508bf43a14367f7bd6d",
+      "bytes": 838,
+      "sourcePath": "bundle/lib/index.js",
+      "sourceSha256": "f26d811085d6238ecadc1c69dbb744e4c26f76393c203508bf43a14367f7bd6d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/native-attachments.js",
+      "sha256": "5d26bce8025328c7831e0a2cef2ddfbf485369aef2e6eb948f6504b16536672a",
+      "bytes": 1659,
+      "sourcePath": "bundle/lib/native-attachments.js",
+      "sourceSha256": "5d26bce8025328c7831e0a2cef2ddfbf485369aef2e6eb948f6504b16536672a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/native-compaction.js",
+      "sha256": "8ce9835a635eb182a18721d69265d2dba0f0341a66597e0676a664dc5de6e08d",
+      "bytes": 10455,
+      "sourcePath": "bundle/lib/native-compaction.js",
+      "sourceSha256": "8ce9835a635eb182a18721d69265d2dba0f0341a66597e0676a664dc5de6e08d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/native-settings-installation.js",
+      "sha256": "b4421e7d8a097a9ee6bf62e751bb661f1531763fd5881e7d2f0cbb776a14ee39",
+      "bytes": 6508,
+      "sourcePath": "bundle/lib/native-settings-installation.js",
+      "sourceSha256": "b4421e7d8a097a9ee6bf62e751bb661f1531763fd5881e7d2f0cbb776a14ee39",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/native-settings-installation.origin.json",
+      "sha256": "343d9a5f4d85c240246df72520641d0f15c2d32deace0df7d64a0ca852497130",
+      "bytes": 4264,
+      "sourcePath": "bundle/lib/native-settings-installation.origin.json",
+      "sourceSha256": "343d9a5f4d85c240246df72520641d0f15c2d32deace0df7d64a0ca852497130",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/native-settings-ui.js",
+      "sha256": "fce0dfbbd30c73cd6cc26a74adb4a5c044ddeb9a5ab15104bfb2a2d5c892d87d",
+      "bytes": 2373,
+      "sourcePath": "bundle/lib/native-settings-ui.js",
+      "sourceSha256": "fce0dfbbd30c73cd6cc26a74adb4a5c044ddeb9a5ab15104bfb2a2d5c892d87d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/p1-runtime.js",
+      "sha256": "7b76f227ca66e45f0f17f26e6d10267949d1f6d0cf387555c0e37d9679d599a2",
+      "bytes": 10450,
+      "sourcePath": "bundle/lib/p1-runtime.js",
+      "sourceSha256": "7b76f227ca66e45f0f17f26e6d10267949d1f6d0cf387555c0e37d9679d599a2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/project-binding.js",
+      "sha256": "be53b6f01cb1839b82967d16513a5654225230edc2bec617d58eccc48385ff21",
+      "bytes": 9108,
+      "sourcePath": "bundle/lib/project-binding.js",
+      "sourceSha256": "be53b6f01cb1839b82967d16513a5654225230edc2bec617d58eccc48385ff21",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/protected-file-tools.js",
+      "sha256": "b7a1fdf9de2b17ec6447a71de3fd55c176f5394a74b4c7b1ac91be1bcc8f4ebc",
+      "bytes": 2701,
+      "sourcePath": "bundle/lib/protected-file-tools.js",
+      "sourceSha256": "b7a1fdf9de2b17ec6447a71de3fd55c176f5394a74b4c7b1ac91be1bcc8f4ebc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/protected-profile.js",
+      "sha256": "712983fbf4d8fbd844850e311e63f3e44b6a8f4af7d8b14875ed68d1a8ae34c8",
+      "bytes": 6723,
+      "sourcePath": "bundle/lib/protected-profile.js",
+      "sourceSha256": "712983fbf4d8fbd844850e311e63f3e44b6a8f4af7d8b14875ed68d1a8ae34c8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/protected-runtime.js",
+      "sha256": "c02373ad20a791606ef73421f98b82456ad89c89b1c89a8860f023521b6aca03",
+      "bytes": 2415,
+      "sourcePath": "bundle/lib/protected-runtime.js",
+      "sourceSha256": "c02373ad20a791606ef73421f98b82456ad89c89b1c89a8860f023521b6aca03",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/recovery-authority.js",
+      "sha256": "6693bc70572af6d4bf7d78f128554a265727592df47ef38d21064667aeb227f7",
+      "bytes": 3043,
+      "sourcePath": "bundle/lib/recovery-authority.js",
+      "sourceSha256": "6693bc70572af6d4bf7d78f128554a265727592df47ef38d21064667aeb227f7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-catalog.js",
+      "sha256": "16842ddd4702b7dc12e915d1dd8017eb847652c01a6d06d2e4bbe3db20aeffa9",
+      "bytes": 3024,
+      "sourcePath": "bundle/lib/session-catalog.js",
+      "sourceSha256": "16842ddd4702b7dc12e915d1dd8017eb847652c01a6d06d2e4bbe3db20aeffa9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-parent-proof.js",
+      "sha256": "256e76e43c3156605005a40c7809718fc1649f8ff6ef12ee4a2e2f25c3613cdd",
+      "bytes": 3799,
+      "sourcePath": "bundle/lib/session-parent-proof.js",
+      "sourceSha256": "256e76e43c3156605005a40c7809718fc1649f8ff6ef12ee4a2e2f25c3613cdd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-persistence.js",
+      "sha256": "8e9663203b2fc573e905734ed776b0bb7e47a99fb80ff09f6ff5de2c4b7a426c",
+      "bytes": 1908,
+      "sourcePath": "bundle/lib/session-persistence.js",
+      "sourceSha256": "8e9663203b2fc573e905734ed776b0bb7e47a99fb80ff09f6ff5de2c4b7a426c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-storage-validation.js",
+      "sha256": "f769d93572d44d91ee99f7ec73201af31b284f5bc7e0ccc6fde52df0751c73a1",
+      "bytes": 1285,
+      "sourcePath": "bundle/lib/session-storage-validation.js",
+      "sourceSha256": "f769d93572d44d91ee99f7ec73201af31b284f5bc7e0ccc6fde52df0751c73a1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-v4.js",
+      "sha256": "82f690b3f4433bd0369bdb345b85f82c6d315bae3fb5ba99f5f0723b68b19d8f",
+      "bytes": 3311,
+      "sourcePath": "bundle/lib/session-v4.js",
+      "sourceSha256": "82f690b3f4433bd0369bdb345b85f82c6d315bae3fb5ba99f5f0723b68b19d8f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/session-vocabulary.js",
+      "sha256": "d65e4dca1dc952bf66afa5185f15c9f16f9cd1d01849ef9d1cba0a6c59f26db3",
+      "bytes": 393,
+      "sourcePath": "bundle/lib/session-vocabulary.js",
+      "sourceSha256": "d65e4dca1dc952bf66afa5185f15c9f16f9cd1d01849ef9d1cba0a6c59f26db3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/settings-consumers.js",
+      "sha256": "cf964919de8d7dde9703e34f5634ff1e9c95b47c44b025e0849b7b52298c970f",
+      "bytes": 16512,
+      "sourcePath": "bundle/lib/settings-consumers.js",
+      "sourceSha256": "cf964919de8d7dde9703e34f5634ff1e9c95b47c44b025e0849b7b52298c970f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/settings-consumers.origin.json",
+      "sha256": "f774636c8ae734d0f783f94ae42e702dec108d480fe13fa5c44433b89c052bcb",
+      "bytes": 21635,
+      "sourcePath": "bundle/lib/settings-consumers.origin.json",
+      "sourceSha256": "f774636c8ae734d0f783f94ae42e702dec108d480fe13fa5c44433b89c052bcb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/settings-runtime.js",
+      "sha256": "d3b5e436f87325fc01934a0733b22bea48f14be7503deb7b9793f845927f4b05",
+      "bytes": 13423,
+      "sourcePath": "bundle/lib/settings-runtime.js",
+      "sourceSha256": "d3b5e436f87325fc01934a0733b22bea48f14be7503deb7b9793f845927f4b05",
+      "transformations": []
+    },
+    {
+      "path": "bundle/lib/settings-runtime.origin.json",
+      "sha256": "1b1eccfab9759d91c1a9f3091f0fdc3aa150e30487837f7e2f10287ac5297911",
+      "bytes": 15649,
+      "sourcePath": "bundle/lib/settings-runtime.origin.json",
+      "sourceSha256": "1b1eccfab9759d91c1a9f3091f0fdc3aa150e30487837f7e2f10287ac5297911",
+      "transformations": []
+    },
+    {
+      "path": "bundle/licenses/DSH-MIT.txt",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/licenses/DSH-MIT.txt",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/context-preparation/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/LICENSE-SCOPE.json",
+      "sha256": "c1e70266bd3c7473dde1a2c9e78037bdb9b5d5a3694590d75fa67aa7998b7d82",
+      "bytes": 1878,
+      "sourcePath": "bundle/modules/context-preparation/LICENSE-SCOPE.json",
+      "sourceSha256": "c1e70266bd3c7473dde1a2c9e78037bdb9b5d5a3694590d75fa67aa7998b7d82",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/LICENSE-SCOPE.md",
+      "sha256": "8e7246d71e698b14ffff3927dc4d0756c87cc470b7898ba67da83013e093c7a2",
+      "bytes": 772,
+      "sourcePath": "bundle/modules/context-preparation/LICENSE-SCOPE.md",
+      "sourceSha256": "8e7246d71e698b14ffff3927dc4d0756c87cc470b7898ba67da83013e093c7a2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/README.md",
+      "sha256": "8ec3534eb5f82d651f3227f0ba85d5f477611ce2a1107a7555b8fb8114a7ef55",
+      "bytes": 3251,
+      "sourcePath": "bundle/modules/context-preparation/README.md",
+      "sourceSha256": "8ec3534eb5f82d651f3227f0ba85d5f477611ce2a1107a7555b8fb8114a7ef55",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/context_resolver.py",
+      "sha256": "a5ecf6c75e891d4973a1e5bf0395f9eb18a632c109e8c1ac3944b865b11bc38d",
+      "bytes": 8527,
+      "sourcePath": "bundle/modules/context-preparation/context_resolver.py",
+      "sourceSha256": "a5ecf6c75e891d4973a1e5bf0395f9eb18a632c109e8c1ac3944b865b11bc38d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/index.mjs",
+      "sha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+      "bytes": 6827,
+      "sourcePath": "bundle/modules/context-preparation/index.mjs",
+      "sourceSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/context-preparation/package.json",
+      "sha256": "82bf4dcf9deea83ef895d19ff391a18a2b2afd44feb023d26f6f17a92e43b2e1",
+      "bytes": 464,
+      "sourcePath": "bundle/modules/context-preparation/package.json",
+      "sourceSha256": "82bf4dcf9deea83ef895d19ff391a18a2b2afd44feb023d26f6f17a92e43b2e1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/plugin-group/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/LICENSE-SCOPE.json",
+      "sha256": "a0e816e94382561782b667f6a6c24f9a2a7e3332e4706147ff88c81c8c20758f",
+      "bytes": 3774,
+      "sourcePath": "bundle/modules/plugin-group/LICENSE-SCOPE.json",
+      "sourceSha256": "a0e816e94382561782b667f6a6c24f9a2a7e3332e4706147ff88c81c8c20758f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/LICENSE-SCOPE.md",
+      "sha256": "9b249157497bab592f86d2a845a7094be53414645910e687a7ca1f623d4acc1f",
+      "bytes": 799,
+      "sourcePath": "bundle/modules/plugin-group/LICENSE-SCOPE.md",
+      "sourceSha256": "9b249157497bab592f86d2a845a7094be53414645910e687a7ca1f623d4acc1f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/README.md",
+      "sha256": "22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+      "bytes": 13389,
+      "sourcePath": "bundle/modules/plugin-group/README.md",
+      "sourceSha256": "22ffd54877d60260e852bf824021406d1705f9a2a4867e6d1ee64ce2d2705302",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/THIRD_PARTY_NOTICES.md",
+      "sha256": "ea9d57d97f23a10e3d4ab01f6199e7f7fb4b1527acc538d816bee26049097a82",
+      "bytes": 2547,
+      "sourcePath": "bundle/modules/plugin-group/THIRD_PARTY_NOTICES.md",
+      "sourceSha256": "ea9d57d97f23a10e3d4ab01f6199e7f7fb4b1527acc538d816bee26049097a82",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/package.json",
+      "sha256": "9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+      "bytes": 1599,
+      "sourcePath": "bundle/modules/plugin-group/package.json",
+      "sourceSha256": "9f0447ee7332c2c878cca5b75cfca9717ad0919dd3cf6507e3d03e33b62a5081",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/adapters.mjs",
+      "sha256": "12f591f60a4e8fba05918c0d0131889f5ba57ec4de56670d45a53c702acdac43",
+      "bytes": 2566,
+      "sourcePath": "bundle/modules/plugin-group/source/adapters.mjs",
+      "sourceSha256": "12f591f60a4e8fba05918c0d0131889f5ba57ec4de56670d45a53c702acdac43",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/history-expansion.mjs",
+      "sha256": "cf6999e569bbdbd7730c5fe5d31145d12ac5a819422378f026ead59772b6c809",
+      "bytes": 5871,
+      "sourcePath": "bundle/modules/plugin-group/source/history-expansion.mjs",
+      "sourceSha256": "cf6999e569bbdbd7730c5fe5d31145d12ac5a819422378f026ead59772b6c809",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/history-generation.mjs",
+      "sha256": "7ca67e797c07bf14a618dafacc425850045e3071b32b4d8d11700fce6d2c6780",
+      "bytes": 2226,
+      "sourcePath": "bundle/modules/plugin-group/source/history-generation.mjs",
+      "sourceSha256": "7ca67e797c07bf14a618dafacc425850045e3071b32b4d8d11700fce6d2c6780",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/history-review-cli.mjs",
+      "sha256": "b753ace9c67661d56c3ed9588deae98022af0d021dda0eb97b59ee8a9775cd36",
+      "bytes": 2138,
+      "sourcePath": "bundle/modules/plugin-group/source/history-review-cli.mjs",
+      "sourceSha256": "b753ace9c67661d56c3ed9588deae98022af0d021dda0eb97b59ee8a9775cd36",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/history-review.mjs",
+      "sha256": "5cf17b042805b94d64193dfe1f0c969fd50fc38b9008c72ae8f139e55bacf8c3",
+      "bytes": 5889,
+      "sourcePath": "bundle/modules/plugin-group/source/history-review.mjs",
+      "sourceSha256": "5cf17b042805b94d64193dfe1f0c969fd50fc38b9008c72ae8f139e55bacf8c3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/index.mjs",
+      "sha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+      "bytes": 7202,
+      "sourcePath": "bundle/modules/plugin-group/source/index.mjs",
+      "sourceSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/lcm-worker.mjs",
+      "sha256": "fb7f0b4caebaad555a6114e99c9403054c80b9cd143dceed5f20e9710f428ecc",
+      "bytes": 2285,
+      "sourcePath": "bundle/modules/plugin-group/source/lcm-worker.mjs",
+      "sourceSha256": "fb7f0b4caebaad555a6114e99c9403054c80b9cd143dceed5f20e9710f428ecc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/lossless-compaction.mjs",
+      "sha256": "76cd5da8d7d6c62d51150e2ccfa453db0ebd67863e87e68c9b83a3a246bd785f",
+      "bytes": 5105,
+      "sourcePath": "bundle/modules/plugin-group/source/lossless-compaction.mjs",
+      "sourceSha256": "76cd5da8d7d6c62d51150e2ccfa453db0ebd67863e87e68c9b83a3a246bd785f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/lossless-integrity-worker.mjs",
+      "sha256": "ea6db7679640579a67938d342568b8210ae042dfb490c4a88730226ebb5f644e",
+      "bytes": 2203,
+      "sourcePath": "bundle/modules/plugin-group/source/lossless-integrity-worker.mjs",
+      "sourceSha256": "ea6db7679640579a67938d342568b8210ae042dfb490c4a88730226ebb5f644e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/lossless-plugin.mjs",
+      "sha256": "3b76dc3bae3458f532f48e4b0a9f128086b9972771942333197ce87f0716e741",
+      "bytes": 858,
+      "sourcePath": "bundle/modules/plugin-group/source/lossless-plugin.mjs",
+      "sourceSha256": "3b76dc3bae3458f532f48e4b0a9f128086b9972771942333197ce87f0716e741",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/policies.mjs",
+      "sha256": "ba724f7e751fb159b718ee3315a2e4d97a1939bd29d15cef75a40ea5ec49b9bb",
+      "bytes": 3892,
+      "sourcePath": "bundle/modules/plugin-group/source/policies.mjs",
+      "sourceSha256": "ba724f7e751fb159b718ee3315a2e4d97a1939bd29d15cef75a40ea5ec49b9bb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/prework.mjs",
+      "sha256": "1d39819234d570ab8372f5eba6b661c7262251c1c324a087e3ab5968d1077890",
+      "bytes": 4871,
+      "sourcePath": "bundle/modules/plugin-group/source/prework.mjs",
+      "sourceSha256": "1d39819234d570ab8372f5eba6b661c7262251c1c324a087e3ab5968d1077890",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/source/rex-bridge.mjs",
+      "sha256": "ac0463c5714ccc964a277af6f1601a83d087fb4d7e44206b3090a6dff24e43a0",
+      "bytes": 1005,
+      "sourcePath": "bundle/modules/plugin-group/source/rex-bridge.mjs",
+      "sourceSha256": "ac0463c5714ccc964a277af6f1601a83d087fb4d7e44206b3090a6dff24e43a0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/LICENSE",
+      "sha256": "b88a085e19252796c5ba424a8bfe8eb0d4a0af3b89e4460a0dc334a634a995c0",
+      "bytes": 1090,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/LICENSE",
+      "sourceSha256": "b88a085e19252796c5ba424a8bfe8eb0d4a0af3b89e4460a0dc334a634a995c0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/SEP-LOCAL-CHANGES.md",
+      "sha256": "3c62e6fc0ed5c8267d4fbd35e703493000089912b8329a6273b40aa4de677c51",
+      "bytes": 1106,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/SEP-LOCAL-CHANGES.md",
+      "sourceSha256": "3c62e6fc0ed5c8267d4fbd35e703493000089912b8329a6273b40aa4de677c51",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/assemble-debug.js",
+      "sha256": "f4ed0fde0d38a478f9fa5c4e06986bcbfce13ed53c89669a0c5255ca335323ab",
+      "bytes": 5023,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/assemble-debug.js",
+      "sourceSha256": "f4ed0fde0d38a478f9fa5c4e06986bcbfce13ed53c89669a0c5255ca335323ab",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/assemble-fallback.js",
+      "sha256": "68c4f14aae2e830ab5af9eb0280bbd3959da22e6f8ac732a23634acdd279d50f",
+      "bytes": 14534,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/assemble-fallback.js",
+      "sourceSha256": "68c4f14aae2e830ab5af9eb0280bbd3959da22e6f8ac732a23634acdd279d50f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/assembler.js",
+      "sha256": "3cb4c42e5c7c8a78f21862cec46d384a8719260a2eaffdc93f11604e6c463263",
+      "bytes": 67169,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/assembler.js",
+      "sourceSha256": "3cb4c42e5c7c8a78f21862cec46d384a8719260a2eaffdc93f11604e6c463263",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/batch-dedup.js",
+      "sha256": "2c9f243f632d41921ccad9e7e316db055d685a83f13d2716a2aba608d2057887",
+      "bytes": 55567,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/batch-dedup.js",
+      "sourceSha256": "2c9f243f632d41921ccad9e7e316db055d685a83f13d2716a2aba608d2057887",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/bootstrap-budget.js",
+      "sha256": "18dfc15fe8a9cf6d1a3bd05e4543d6741a44486f6810fcaffd78c64fb05d40b7",
+      "bytes": 2036,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/bootstrap-budget.js",
+      "sourceSha256": "18dfc15fe8a9cf6d1a3bd05e4543d6741a44486f6810fcaffd78c64fb05d40b7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/args.js",
+      "sha256": "f2039b41785ba34bdfe9aada8df0f18e9732c3954f935e3ed9bb7a9644456b5e",
+      "bytes": 15197,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/args.js",
+      "sourceSha256": "f2039b41785ba34bdfe9aada8df0f18e9732c3954f935e3ed9bb7a9644456b5e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/config-file.js",
+      "sha256": "79f7769faf335cd6a369ff24a55769bedb2e1cc7c65e97bbd9d3307d93b3fa0c",
+      "bytes": 16943,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/config-file.js",
+      "sourceSha256": "79f7769faf335cd6a369ff24a55769bedb2e1cc7c65e97bbd9d3307d93b3fa0c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/database.js",
+      "sha256": "815959d235a75af637a532f6c22a66927c0b8631dfa4e41fbd232327563cef80",
+      "bytes": 1135,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/database.js",
+      "sourceSha256": "815959d235a75af637a532f6c22a66927c0b8631dfa4e41fbd232327563cef80",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/main.js",
+      "sha256": "f6b5af994540bf157bc1f5de8d1888ec2cfd0f66cfa8817d39c64ce789c5163c",
+      "bytes": 10407,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/main.js",
+      "sourceSha256": "f6b5af994540bf157bc1f5de8d1888ec2cfd0f66cfa8817d39c64ce789c5163c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/migrate-sessions.js",
+      "sha256": "d2ecf4b560c788c0057a90b8ed73c0dfdc8bda5e8f0685fe7078ff5d68eb4488",
+      "bytes": 5285,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/migrate-sessions.js",
+      "sourceSha256": "d2ecf4b560c788c0057a90b8ed73c0dfdc8bda5e8f0685fe7078ff5d68eb4488",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/output.js",
+      "sha256": "0627e9a842e942a602546901464f6da060a441b1105e5eb87d305103f8a85cf6",
+      "bytes": 3311,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/output.js",
+      "sourceSha256": "0627e9a842e942a602546901464f6da060a441b1105e5eb87d305103f8a85cf6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/paths.js",
+      "sha256": "61468533d141a7c8478d4ed4fef8b749bab73b921aaea2e50e554c31aaca14d2",
+      "bytes": 2485,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/paths.js",
+      "sourceSha256": "61468533d141a7c8478d4ed4fef8b749bab73b921aaea2e50e554c31aaca14d2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/queries.js",
+      "sha256": "8846475a26e9d82c27c70ca7d90445c12fccfd28b4b5a8d970804242daa0f90c",
+      "bytes": 22800,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/queries.js",
+      "sourceSha256": "8846475a26e9d82c27c70ca7d90445c12fccfd28b4b5a8d970804242daa0f90c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/cli/summary-queries.js",
+      "sha256": "0469d0677823599621b767f191aa0ec346192a1e9a087a3ae26b174500d35499",
+      "bytes": 8494,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/cli/summary-queries.js",
+      "sourceSha256": "0469d0677823599621b767f191aa0ec346192a1e9a087a3ae26b174500d35499",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/compaction-guards.js",
+      "sha256": "9c464c2573b057eb74373dca7e8be3c352c26af2d03c298d2bf0642da42c4ff4",
+      "bytes": 8886,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/compaction-guards.js",
+      "sourceSha256": "9c464c2573b057eb74373dca7e8be3c352c26af2d03c298d2bf0642da42c4ff4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/compaction-telemetry.js",
+      "sha256": "f006e2d4df5e4880c895a7a2623e1302f82d47bb5893d6a34c5f9b8c63ca2355",
+      "bytes": 10213,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/compaction-telemetry.js",
+      "sourceSha256": "f006e2d4df5e4880c895a7a2623e1302f82d47bb5893d6a34c5f9b8c63ca2355",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/compaction.js",
+      "sha256": "7814f3b08d9437b804fa2b6373ad8034a9f570c8e6490ff0c5215b6fe0618673",
+      "bytes": 85023,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/compaction.js",
+      "sourceSha256": "7814f3b08d9437b804fa2b6373ad8034a9f570c8e6490ff0c5215b6fe0618673",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/context-threshold.js",
+      "sha256": "10974bf27f4777398d033a43c0c1f111e3b5215ddf5ccf5d3e09b6ef55b83930",
+      "bytes": 13207,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/context-threshold.js",
+      "sourceSha256": "10974bf27f4777398d033a43c0c1f111e3b5215ddf5ccf5d3e09b6ef55b83930",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/db/config.js",
+      "sha256": "54032ce2eaa3fd7aac18a36b92e5ee207e30c3021dad153928810fa9f2dc0d6d",
+      "bytes": 25722,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/db/config.js",
+      "sourceSha256": "54032ce2eaa3fd7aac18a36b92e5ee207e30c3021dad153928810fa9f2dc0d6d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/db/connection.js",
+      "sha256": "ac533613db59f15720cc45161d787cc13275c9aa7854017ab7b3b0b123a37961",
+      "bytes": 5374,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/db/connection.js",
+      "sourceSha256": "ac533613db59f15720cc45161d787cc13275c9aa7854017ab7b3b0b123a37961",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/db/features.js",
+      "sha256": "44434748416c67a39437eac23faa6ccd8acd3a323768b291285f5680e8b64c7f",
+      "bytes": 1401,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/db/features.js",
+      "sourceSha256": "44434748416c67a39437eac23faa6ccd8acd3a323768b291285f5680e8b64c7f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/db/migration.js",
+      "sha256": "cc407b39982ebcb44de589692c75de6489ffcc15a2673eaf4e795034165a1f46",
+      "bytes": 63609,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/db/migration.js",
+      "sourceSha256": "cc407b39982ebcb44de589692c75de6489ffcc15a2673eaf4e795034165a1f46",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/engine.js",
+      "sha256": "210f22b59118f1e3575d43430eff711af680b1085a610cc6d0ae7ffc8d9b697d",
+      "bytes": 240399,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/engine.js",
+      "sourceSha256": "210f22b59118f1e3575d43430eff711af680b1085a610cc6d0ae7ffc8d9b697d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/estimate-tokens.js",
+      "sha256": "bfdd40effdcb2821098294b61a502704ca8b2dc304bb249a3ae9aea07412c3dd",
+      "bytes": 9841,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/estimate-tokens.js",
+      "sourceSha256": "bfdd40effdcb2821098294b61a502704ca8b2dc304bb249a3ae9aea07412c3dd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/expansion-auth.js",
+      "sha256": "8c9f555e81489318ff8a0fc671987c93cda4c3ac63c422768e158418cc001188",
+      "bytes": 10398,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/expansion-auth.js",
+      "sourceSha256": "8c9f555e81489318ff8a0fc671987c93cda4c3ac63c422768e158418cc001188",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/expansion-policy.js",
+      "sha256": "05e762e5f28ba3257815fcacb43c9b6fae1a26688b460f2884425672faa03264",
+      "bytes": 8642,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/expansion-policy.js",
+      "sourceSha256": "05e762e5f28ba3257815fcacb43c9b6fae1a26688b460f2884425672faa03264",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/expansion.js",
+      "sha256": "9b07677d26fed6e0006c69c336654929bfe141fd4e12f1c3589893a7352059fa",
+      "bytes": 11186,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/expansion.js",
+      "sourceSha256": "9b07677d26fed6e0006c69c336654929bfe141fd4e12f1c3589893a7352059fa",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/focus-briefs.js",
+      "sha256": "bae8bea7d7a6b7da14e156e90a9ad94601772dbd1cfa78e621434ca870c4cc28",
+      "bytes": 34984,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/focus-briefs.js",
+      "sourceSha256": "bae8bea7d7a6b7da14e156e90a9ad94601772dbd1cfa78e621434ca870c4cc28",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/heartbeat-filter.js",
+      "sha256": "8ccb3b855ff31d480e8a6a64e07d56d2809b484a088cfd27925d86bcb19ab2fb",
+      "bytes": 5925,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/heartbeat-filter.js",
+      "sourceSha256": "8ccb3b855ff31d480e8a6a64e07d56d2809b484a088cfd27925d86bcb19ab2fb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/large-file-interceptor.js",
+      "sha256": "d96ffe9302e6a2d62b984f5321a0424bf79ff2343bf405e26afd014d5d8ddf0c",
+      "bytes": 33565,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/large-file-interceptor.js",
+      "sourceSha256": "d96ffe9302e6a2d62b984f5321a0424bf79ff2343bf405e26afd014d5d8ddf0c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/large-files.js",
+      "sha256": "1fe99e5e090c76291654c954b85ed510d6a733c4df0c9a4dc659c07d45c975a7",
+      "bytes": 15744,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/large-files.js",
+      "sourceSha256": "1fe99e5e090c76291654c954b85ed510d6a733c4df0c9a4dc659c07d45c975a7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/lcm-file-log.js",
+      "sha256": "00b212f6bab986e79b23254b50d0ed54bbbb685ea75f071b91e48fdbd6cab46f",
+      "bytes": 11230,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/lcm-file-log.js",
+      "sourceSha256": "00b212f6bab986e79b23254b50d0ed54bbbb685ea75f071b91e48fdbd6cab46f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/lcm-log.js",
+      "sha256": "e4f5b603ea8c8bb7ed727d6587fb5d5cb2843c0b7db8719ecc1d06dd08cd504d",
+      "bytes": 4159,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/lcm-log.js",
+      "sourceSha256": "e4f5b603ea8c8bb7ed727d6587fb5d5cb2843c0b7db8719ecc1d06dd08cd504d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/live-coverage.js",
+      "sha256": "f8e296e8522431559a0520bf9d401e52f39ddfe87c7e2d244132ee1ac1109915",
+      "bytes": 36569,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/live-coverage.js",
+      "sourceSha256": "f8e296e8522431559a0520bf9d401e52f39ddfe87c7e2d244132ee1ac1109915",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/message-content.js",
+      "sha256": "c9d52456f94b8fb98d7511753e26744b192fbe0fabcbfa1a0fa077c93ce5bad7",
+      "bytes": 28263,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/message-content.js",
+      "sourceSha256": "c9d52456f94b8fb98d7511753e26744b192fbe0fabcbfa1a0fa077c93ce5bad7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/message-signatures.js",
+      "sha256": "b46bdfbb1baeaf863f029c32b71784daff58fb6575ede8ceff9214b472ff3b92",
+      "bytes": 8107,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/message-signatures.js",
+      "sourceSha256": "b46bdfbb1baeaf863f029c32b71784daff58fb6575ede8ceff9214b472ff3b92",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/migrate-sessions.js",
+      "sha256": "f2837989dc04c0b513f17f51eb755460bd057c8441e49af57b291b30bca120ec",
+      "bytes": 14523,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/migrate-sessions.js",
+      "sourceSha256": "f2837989dc04c0b513f17f51eb755460bd057c8441e49af57b291b30bca120ec",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-bridge.js",
+      "sha256": "a19cc4cfffd5ce98bc57c33722ff538db9582cfa34dc0f78cd5dd3c7058234d5",
+      "bytes": 238,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-bridge.js",
+      "sourceSha256": "a19cc4cfffd5ce98bc57c33722ff538db9582cfa34dc0f78cd5dd3c7058234d5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-inbound-metadata.js",
+      "sha256": "51538186697624381a9520ebd29a9b9c193b124a8e48836df30edb2fac7cefdf",
+      "bytes": 29552,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-inbound-metadata.js",
+      "sourceSha256": "51538186697624381a9520ebd29a9b9c193b124a8e48836df30edb2fac7cefdf",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-sender-metadata.js",
+      "sha256": "5f94e0943a7c4c50d63996ade85fd91f67b8e99fb76b3754befb2099931a98dc",
+      "bytes": 2095,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/openclaw-sender-metadata.js",
+      "sourceSha256": "5f94e0943a7c4c50d63996ade85fd91f67b8e99fb76b3754befb2099931a98dc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/package.json",
+      "sha256": "5ef867714c0133726985fdda71dc72b6ad8cb6c2217d0d54a508049b8fb9b5e9",
+      "bytes": 228,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/package.json",
+      "sourceSha256": "5ef867714c0133726985fdda71dc72b6ad8cb6c2217d0d54a508049b8fb9b5e9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-coordinator.js",
+      "sha256": "aa4533e09879896953d2ad2bc40b2d8e2a987a48129962d7f3ef63dbd53b3a3f",
+      "bytes": 35854,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-coordinator.js",
+      "sourceSha256": "aa4533e09879896953d2ad2bc40b2d8e2a987a48129962d7f3ef63dbd53b3a3f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-planner.js",
+      "sha256": "6d97989fc5ad28d27f02039f1a993a6e8d154b3761830c1a9707ea2416589ddf",
+      "bytes": 11953,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-planner.js",
+      "sourceSha256": "6d97989fc5ad28d27f02039f1a993a6e8d154b3761830c1a9707ea2416589ddf",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-publisher.js",
+      "sha256": "6b264411a7b50e688ea73bc2878c616d5112db1fc1eaf68331903ab9412ec6b8",
+      "bytes": 12288,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-publisher.js",
+      "sourceSha256": "6b264411a7b50e688ea73bc2878c616d5112db1fc1eaf68331903ab9412ec6b8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-worker.js",
+      "sha256": "2b285659500c9277755a26127dea9be84b7771b8408292fcdc9b239ec83e7ec9",
+      "bytes": 6279,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/pending-summary-worker.js",
+      "sourceSha256": "2b285659500c9277755a26127dea9be84b7771b8408292fcdc9b239ec83e7ec9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/index.js",
+      "sha256": "4bd476731f4a158f83d7d565fdae701790dafcfaa0ec9b76f71700b085a3c7d2",
+      "bytes": 67258,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/index.js",
+      "sourceSha256": "4bd476731f4a158f83d7d565fdae701790dafcfaa0ec9b76f71700b085a3c7d2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-command.js",
+      "sha256": "3013d04938b9e89417687721cca1f14dc0a22a8b6160089377e862ccdbd1df19",
+      "bytes": 111797,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-command.js",
+      "sourceSha256": "3013d04938b9e89417687721cca1f14dc0a22a8b6160089377e862ccdbd1df19",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-db-backup.js",
+      "sha256": "126ac310c09ac08b8a242cfcb04b56e2fcae4dc0d5ad955d8827fb5b1ba21937",
+      "bytes": 2342,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-db-backup.js",
+      "sourceSha256": "126ac310c09ac08b8a242cfcb04b56e2fcae4dc0d5ad955d8827fb5b1ba21937",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-apply.js",
+      "sha256": "aff1dc62c969c7787e8ba6d54e04a4b07ecc33588d9fba566cd3f1816ddf5b60",
+      "bytes": 15585,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-apply.js",
+      "sourceSha256": "aff1dc62c969c7787e8ba6d54e04a4b07ecc33588d9fba566cd3f1816ddf5b60",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-cleaners.js",
+      "sha256": "c5cbf290892283df933a0fea0beb6bc9ab315aa63a14427ee01ce0ac965a2a30",
+      "bytes": 19647,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-cleaners.js",
+      "sourceSha256": "c5cbf290892283df933a0fea0beb6bc9ab315aa63a14427ee01ce0ac965a2a30",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-maintenance.js",
+      "sha256": "656749b130a3fb39e3c8401aebd826bb38a2a7f8a8e0b49dfbd5148692748650",
+      "bytes": 5342,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-maintenance.js",
+      "sourceSha256": "656749b130a3fb39e3c8401aebd826bb38a2a7f8a8e0b49dfbd5148692748650",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-rollover-splits.js",
+      "sha256": "4a0a6e71bc751b0b0c00d59185e3c54eb37fe41cf6e1c575933e27994dc4ca8b",
+      "bytes": 25285,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-rollover-splits.js",
+      "sourceSha256": "4a0a6e71bc751b0b0c00d59185e3c54eb37fe41cf6e1c575933e27994dc4ca8b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-shared.js",
+      "sha256": "8d35328fbe4c1a20ace92b07c0f9afb688a5ba93e2e93c621509eb76e5817009",
+      "bytes": 6733,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-doctor-shared.js",
+      "sourceSha256": "8d35328fbe4c1a20ace92b07c0f9afb688a5ba93e2e93c621509eb76e5817009",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-version-doctor.js",
+      "sha256": "764c5208edba3daa899c773bf0ae6903c06c6e18c78d32c57c1eff09339809d5",
+      "bytes": 3832,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/lcm-version-doctor.js",
+      "sourceSha256": "764c5208edba3daa899c773bf0ae6903c06c6e18c78d32c57c1eff09339809d5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/openclaw-agent-ids.js",
+      "sha256": "85b5aaf55736ecf8d696c4b5fbadb9ac34379d691e26ea5337bf1163d4abf1de",
+      "bytes": 1217,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/openclaw-agent-ids.js",
+      "sourceSha256": "85b5aaf55736ecf8d696c4b5fbadb9ac34379d691e26ea5337bf1163d4abf1de",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/shared-init.js",
+      "sha256": "8d590d90c005d80e565300398323f0788cc8f9f13bff0839f95e2984f662c6de",
+      "bytes": 585,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/plugin/shared-init.js",
+      "sourceSha256": "8d590d90c005d80e565300398323f0788cc8f9f13bff0839f95e2984f662c6de",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/prompt-recall.js",
+      "sha256": "4ad89f167b41a6363c733f3761ddfc07bdcda17963261ce037b5ba306348f01e",
+      "bytes": 6280,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/prompt-recall.js",
+      "sourceSha256": "4ad89f167b41a6363c733f3761ddfc07bdcda17963261ce037b5ba306348f01e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/prune.js",
+      "sha256": "a668312bf49a17854370d392393e46f61d2c163dd07dca93418fb44ddca9f68d",
+      "bytes": 10063,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/prune.js",
+      "sourceSha256": "a668312bf49a17854370d392393e46f61d2c163dd07dca93418fb44ddca9f68d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/raw-id-replay-filter.js",
+      "sha256": "940459e19f489da18f1d8bf8eedb473b148d02f8936f13cbfa99285a1c64e329",
+      "bytes": 12454,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/raw-id-replay-filter.js",
+      "sourceSha256": "940459e19f489da18f1d8bf8eedb473b148d02f8936f13cbfa99285a1c64e329",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/read-tool-recovery.js",
+      "sha256": "344a5de54c24990c508877a13523d8d5a1c29ccf8beacc2a841088055dbcc05c",
+      "bytes": 2011,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/read-tool-recovery.js",
+      "sourceSha256": "344a5de54c24990c508877a13523d8d5a1c29ccf8beacc2a841088055dbcc05c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/reconcile-plan.js",
+      "sha256": "fbe537f09d1c09fc3f4f71a1a73e828f1170813fa826dae1fe05e3d8e1a24fb9",
+      "bytes": 2439,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/reconcile-plan.js",
+      "sourceSha256": "fbe537f09d1c09fc3f4f71a1a73e828f1170813fa826dae1fe05e3d8e1a24fb9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/replay-metadata.js",
+      "sha256": "75a4abc201c7033864f1eeebd777028ef3fd743a1334d8165b4cd84a7a4e5e79",
+      "bytes": 8862,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/replay-metadata.js",
+      "sourceSha256": "75a4abc201c7033864f1eeebd777028ef3fd743a1334d8165b4cd84a7a4e5e79",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/retrieval.js",
+      "sha256": "998aedd38ee9b965e70de0f955c3ef2af33c97fc45ba9bea80863725208fc523",
+      "bytes": 18976,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/retrieval.js",
+      "sourceSha256": "998aedd38ee9b965e70de0f955c3ef2af33c97fc45ba9bea80863725208fc523",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/runtime-model.js",
+      "sha256": "5423fd86c09b2f370d0e0b64d61ba112cfb2828679fd003d6fc53c7a5e29fe64",
+      "bytes": 2416,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/runtime-model.js",
+      "sourceSha256": "5423fd86c09b2f370d0e0b64d61ba112cfb2828679fd003d6fc53c7a5e29fe64",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/session-patterns.js",
+      "sha256": "c5e96972ee5b196f742c55b357e963fc853f5a01bbb9387906f5da6900ab2cfe",
+      "bytes": 1877,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/session-patterns.js",
+      "sourceSha256": "c5e96972ee5b196f742c55b357e963fc853f5a01bbb9387906f5da6900ab2cfe",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/stable-event-key.js",
+      "sha256": "8cb11c8ff35a2b5b6f3c760055cc15f15e9b3eac8de928dac5e474b5d833a3b5",
+      "bytes": 1616,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/stable-event-key.js",
+      "sourceSha256": "8cb11c8ff35a2b5b6f3c760055cc15f15e9b3eac8de928dac5e474b5d833a3b5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/startup-banner-log.js",
+      "sha256": "146ef28832d268b56ed5b38dbd6851ede027c9abc41386701a8d3527034c7d7c",
+      "bytes": 886,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/startup-banner-log.js",
+      "sourceSha256": "146ef28832d268b56ed5b38dbd6851ede027c9abc41386701a8d3527034c7d7c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/compaction-maintenance-store.js",
+      "sha256": "7cb95f61e5d15a2f7cb39b1854fd93887178c4accdf5d42e7152af9d62c3b589",
+      "bytes": 14512,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/compaction-maintenance-store.js",
+      "sourceSha256": "7cb95f61e5d15a2f7cb39b1854fd93887178c4accdf5d42e7152af9d62c3b589",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/compaction-telemetry-store.js",
+      "sha256": "3d22bcaaa9a9acebe59531dde968f475451b26a4c53f744d85d374ce105af6bf",
+      "bytes": 5486,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/compaction-telemetry-store.js",
+      "sourceSha256": "3d22bcaaa9a9acebe59531dde968f475451b26a4c53f744d85d374ce105af6bf",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/conversation-scope.js",
+      "sha256": "540ea1897998b8f10751f4d6facdb943dfde523667f533f44e04d44958e8d57a",
+      "bytes": 854,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/conversation-scope.js",
+      "sourceSha256": "540ea1897998b8f10751f4d6facdb943dfde523667f533f44e04d44958e8d57a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/conversation-store.js",
+      "sha256": "62ce581b4595773c1aba3b62a9033a1a225c8cbd2d7596b3f928618c3d0783e1",
+      "bytes": 64296,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/conversation-store.js",
+      "sourceSha256": "62ce581b4595773c1aba3b62a9033a1a225c8cbd2d7596b3f928618c3d0783e1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/focus-brief-store.js",
+      "sha256": "556ea8d6941899707d69f38cc656c3d396679c8479c35f6ccc8d9724bdd8babd",
+      "bytes": 13838,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/focus-brief-store.js",
+      "sourceSha256": "556ea8d6941899707d69f38cc656c3d396679c8479c35f6ccc8d9724bdd8babd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/fts5-sanitize.js",
+      "sha256": "7930e73d9aba5b44d9ecd88f6b8682a324a3739f307eaf364bb1f3872b6c0186",
+      "bytes": 1935,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/fts5-sanitize.js",
+      "sourceSha256": "7930e73d9aba5b44d9ecd88f6b8682a324a3739f307eaf364bb1f3872b6c0186",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/full-text-fallback.js",
+      "sha256": "b21a92d4d2a64982b4b6ca417945e57e82cdbfdec73ae8f900650c4eb023ebd9",
+      "bytes": 2490,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/full-text-fallback.js",
+      "sourceSha256": "b21a92d4d2a64982b4b6ca417945e57e82cdbfdec73ae8f900650c4eb023ebd9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/full-text-sort.js",
+      "sha256": "91ceab76d9a09deb0ef68c0caa4bd8e5586f1c2c33143c01bdc80836322da6b1",
+      "bytes": 715,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/full-text-sort.js",
+      "sourceSha256": "91ceab76d9a09deb0ef68c0caa4bd8e5586f1c2c33143c01bdc80836322da6b1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/index.js",
+      "sha256": "ed64a7649175a39060600d17fdf3c86d8f0412509cbe70630ee26e1e8db88a97",
+      "bytes": 350,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/index.js",
+      "sourceSha256": "ed64a7649175a39060600d17fdf3c86d8f0412509cbe70630ee26e1e8db88a97",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/message-identity.js",
+      "sha256": "bf593c54c0b752cffefc924393b5003b1a06c78b689a6fd6cf78a356acc3136e",
+      "bytes": 591,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/message-identity.js",
+      "sourceSha256": "bf593c54c0b752cffefc924393b5003b1a06c78b689a6fd6cf78a356acc3136e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/parse-utc-timestamp.js",
+      "sha256": "0502aa253c4de1846ab19d27d79c7dc923674ec2a71b7e8afff81a891fcd0417",
+      "bytes": 809,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/parse-utc-timestamp.js",
+      "sourceSha256": "0502aa253c4de1846ab19d27d79c7dc923674ec2a71b7e8afff81a891fcd0417",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/pending-summary-store.js",
+      "sha256": "bfb6866cbcfcae7d42a2b3b154d9e6f238b7d8c563186f98c986214cd8b065ad",
+      "bytes": 26553,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/pending-summary-store.js",
+      "sourceSha256": "bfb6866cbcfcae7d42a2b3b154d9e6f238b7d8c563186f98c986214cd8b065ad",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/pending-summary-types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "bytes": 11,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/pending-summary-types.js",
+      "sourceSha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/search-regex.js",
+      "sha256": "52f94e841cc90e9870e468e33815cd39b25fa0fa5b8a90b972fd08dfc3f46c8d",
+      "bytes": 844,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/search-regex.js",
+      "sourceSha256": "52f94e841cc90e9870e468e33815cd39b25fa0fa5b8a90b972fd08dfc3f46c8d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/store/summary-store.js",
+      "sha256": "7851891845258a5cde8b9d571def1608fbd423f025fee58679fd58bb5b48a2b0",
+      "bytes": 53368,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/store/summary-store.js",
+      "sourceSha256": "7851891845258a5cde8b9d571def1608fbd423f025fee58679fd58bb5b48a2b0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/structured-anchor-identity.js",
+      "sha256": "bff836917936bfc2ca52e699a198c401498d9d252b2fd28edfbe2bd9aa7a6416",
+      "bytes": 1538,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/structured-anchor-identity.js",
+      "sourceSha256": "bff836917936bfc2ca52e699a198c401498d9d252b2fd28edfbe2bd9aa7a6416",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/summarize.js",
+      "sha256": "ee3974ed750996945942e4f3591990f41d9e938657f2ae3ba1d25fbf004a9268",
+      "bytes": 74695,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/summarize.js",
+      "sourceSha256": "ee3974ed750996945942e4f3591990f41d9e938657f2ae3ba1d25fbf004a9268",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/summary-fallback.js",
+      "sha256": "ef0fa648d750e9312e84ad71f24fefaa26769c9e81dec4e39f480d10dd1a47df",
+      "bytes": 5498,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/summary-fallback.js",
+      "sourceSha256": "ef0fa648d750e9312e84ad71f24fefaa26769c9e81dec4e39f480d10dd1a47df",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/token-accounting.js",
+      "sha256": "6eb76fb96fb9c9a5a6642b44fcd71f78ceab6f69f8a146690556df72dcc80672",
+      "bytes": 5800,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/token-accounting.js",
+      "sourceSha256": "6eb76fb96fb9c9a5a6642b44fcd71f78ceab6f69f8a146690556df72dcc80672",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tool-pairing.js",
+      "sha256": "1a331946552e063e8bb6bbf79b4d376b5876e7464861d59abca2d10e12c48bc4",
+      "bytes": 12203,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tool-pairing.js",
+      "sourceSha256": "1a331946552e063e8bb6bbf79b4d376b5876e7464861d59abca2d10e12c48bc4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tool-result-blocks.js",
+      "sha256": "7080a26f5d03d715127a1cbe2704b639c34b78d6e8845bfee8115c77f1c01264",
+      "bytes": 1456,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tool-result-blocks.js",
+      "sourceSha256": "7080a26f5d03d715127a1cbe2704b639c34b78d6e8845bfee8115c77f1c01264",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/common.js",
+      "sha256": "d8e83fa5a6c058cf92f3f94c19a33bfb11793f182d9715889061fa1d656f3c87",
+      "bytes": 1012,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/common.js",
+      "sourceSha256": "d8e83fa5a6c058cf92f3f94c19a33bfb11793f182d9715889061fa1d656f3c87",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-conversation-scope.js",
+      "sha256": "4d406667d3c16e2630584e2ac3db48ea98258086ba2c46f17e73bf99bd69aca7",
+      "bytes": 11076,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-conversation-scope.js",
+      "sourceSha256": "4d406667d3c16e2630584e2ac3db48ea98258086ba2c46f17e73bf99bd69aca7",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-describe-id.js",
+      "sha256": "9d2d113de1e7a63d43e8c8fbbe1c6f1d69ce669680d449dfbbd3171747d0839e",
+      "bytes": 2461,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-describe-id.js",
+      "sourceSha256": "9d2d113de1e7a63d43e8c8fbbe1c6f1d69ce669680d449dfbbd3171747d0839e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-describe-tool.js",
+      "sha256": "6a3c17b22e00f2d13968c6d53a8ea3b9e78833b081c90c9768c3b334daf60784",
+      "bytes": 16890,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-describe-tool.js",
+      "sourceSha256": "6a3c17b22e00f2d13968c6d53a8ea3b9e78833b081c90c9768c3b334daf60784",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-delegation.js",
+      "sha256": "4457802199a635aa91c078d2ea06b589bff3e1cff8600dce757b29cd3c1f1928",
+      "bytes": 18797,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-delegation.js",
+      "sourceSha256": "4457802199a635aa91c078d2ea06b589bff3e1cff8600dce757b29cd3c1f1928",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-tool.js",
+      "sha256": "93e12704ba62c153c72490309915c3078e7ad23dc195df81dbd49127c03fd3bf",
+      "bytes": 33077,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-query-tool.js",
+      "sourceSha256": "93e12704ba62c153c72490309915c3078e7ad23dc195df81dbd49127c03fd3bf",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.delegation.js",
+      "sha256": "116f37e2a572a88bd017a55454da7c343e9a89e0dc7e3f5444dc228f5b237121",
+      "bytes": 15685,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.delegation.js",
+      "sourceSha256": "116f37e2a572a88bd017a55454da7c343e9a89e0dc7e3f5444dc228f5b237121",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.js",
+      "sha256": "8c0a8b453a1e002011a97ade714c02ce551ca138e82dccf6d7f2786f8499c39e",
+      "bytes": 18492,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expand-tool.js",
+      "sourceSha256": "8c0a8b453a1e002011a97ade714c02ce551ca138e82dccf6d7f2786f8499c39e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expansion-deadline.js",
+      "sha256": "18e243529ac45ac630649ef02fc9364569e89b123de81149233798718c4b698e",
+      "bytes": 1592,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expansion-deadline.js",
+      "sourceSha256": "18e243529ac45ac630649ef02fc9364569e89b123de81149233798718c4b698e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expansion-recursion-guard.js",
+      "sha256": "05fab23ddc96c982a02f8887fa03ce4ee99671f7048c322e5b83820c89dbfc2e",
+      "bytes": 9843,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-expansion-recursion-guard.js",
+      "sourceSha256": "05fab23ddc96c982a02f8887fa03ce4ee99671f7048c322e5b83820c89dbfc2e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-grep-tool.js",
+      "sha256": "1313fe7e80b9128c4d54792e6feceab6a0203eba1c5035a15010fe0ba9c2aba9",
+      "bytes": 13655,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/tools/lcm-grep-tool.js",
+      "sourceSha256": "1313fe7e80b9128c4d54792e6feceab6a0203eba1c5035a15010fe0ba9c2aba9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/transaction-mutex.js",
+      "sha256": "5d7209d8a5f360d5288535ef8a8bd30a5a6f25741dfc7225911fb50b5df45c61",
+      "bytes": 6104,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/transaction-mutex.js",
+      "sourceSha256": "5d7209d8a5f360d5288535ef8a8bd30a5a6f25741dfc7225911fb50b5df45c61",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/transcript-anchor-audit.js",
+      "sha256": "7cb306db45ef29e4c7f911a514f2520ae9eab658aaea196097002cdc62b0d47e",
+      "bytes": 5734,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/transcript-anchor-audit.js",
+      "sourceSha256": "7cb306db45ef29e4c7f911a514f2520ae9eab658aaea196097002cdc62b0d47e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/transcript-repair.js",
+      "sha256": "58e810577ae0b3c086d531ba4e7dcb0c23a32c82015dc0721bf05909fc2eac9a",
+      "bytes": 19459,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/transcript-repair.js",
+      "sourceSha256": "58e810577ae0b3c086d531ba4e7dcb0c23a32c82015dc0721bf05909fc2eac9a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/transcript.js",
+      "sha256": "57569ed9fcbef40129d91e0f375fb9f84453e22801bee388ff8c89eee8b6de54",
+      "bytes": 9345,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/transcript.js",
+      "sourceSha256": "57569ed9fcbef40129d91e0f375fb9f84453e22801bee388ff8c89eee8b6de54",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/types.js",
+      "sha256": "c9a0b9026f2dad6e7d4788db1e16eaafadb2a69d95f6ea9b5f83f4150974d757",
+      "bytes": 190,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/types.js",
+      "sourceSha256": "c9a0b9026f2dad6e7d4788db1e16eaafadb2a69d95f6ea9b5f83f4150974d757",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/user-replay.js",
+      "sha256": "6c938e9640b8148189677c7ccc65bf6edb7aab97ff235ee504124b52c73f01cd",
+      "bytes": 2445,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/user-replay.js",
+      "sourceSha256": "6c938e9640b8148189677c7ccc65bf6edb7aab97ff235ee504124b52c73f01cd",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/lossless-claw/value-utils.js",
+      "sha256": "118abba61f0c8a4037ebf5994ad1a2f8ad128c7fe702f876bae4f88785214ddc",
+      "bytes": 2001,
+      "sourcePath": "bundle/modules/plugin-group/vendor/lossless-claw/value-utils.js",
+      "sourceSha256": "118abba61f0c8a4037ebf5994ad1a2f8ad128c7fe702f876bae4f88785214ddc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/mem0/LICENSE",
+      "sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "bytes": 11349,
+      "sourcePath": "bundle/modules/plugin-group/vendor/mem0/LICENSE",
+      "sourceSha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/mem0/index.js",
+      "sha256": "832335cbf6cdd384745353290779f844530a0665321240485e9758f390a92a59",
+      "bytes": 56360,
+      "sourcePath": "bundle/modules/plugin-group/vendor/mem0/index.js",
+      "sourceSha256": "832335cbf6cdd384745353290779f844530a0665321240485e9758f390a92a59",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/mem0/package.json",
+      "sha256": "e4bc73e6a1e4ef48807fc580b514ffe44e9af2602f15f1e6d48cdfe84ae69a76",
+      "bytes": 197,
+      "sourcePath": "bundle/modules/plugin-group/vendor/mem0/package.json",
+      "sourceSha256": "e4bc73e6a1e4ef48807fc580b514ffe44e9af2602f15f1e6d48cdfe84ae69a76",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/pinchbench/LICENSE",
+      "sha256": "f942b9b066da3d762e171514094917a887fe76cf72d057e2884f03fed5f6b2b0",
+      "bytes": 1067,
+      "sourcePath": "bundle/modules/plugin-group/vendor/pinchbench/LICENSE",
+      "sourceSha256": "f942b9b066da3d762e171514094917a887fe76cf72d057e2884f03fed5f6b2b0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/pinchbench/selected-sources.json",
+      "sha256": "36405515b9d7c4fe1f31f0bdc35ec43d7e785d6a75fe0289be703decf0967db8",
+      "bytes": 1069,
+      "sourcePath": "bundle/modules/plugin-group/vendor/pinchbench/selected-sources.json",
+      "sourceSha256": "36405515b9d7c4fe1f31f0bdc35ec43d7e785d6a75fe0289be703decf0967db8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_csv_cities_filter.md",
+      "sha256": "fa674cffb51a6cd944e332994c83c7e1e3f7ffe05a2ded8767a400a0c2c74488",
+      "bytes": 8346,
+      "sourcePath": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_csv_cities_filter.md",
+      "sourceSha256": "fa674cffb51a6cd944e332994c83c7e1e3f7ffe05a2ded8767a400a0c2c74488",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_sanity.md",
+      "sha256": "a6912dc746a88faba7557266da7ccd55fb5b02313701c276dffe6ff9e6e9059c",
+      "bytes": 1500,
+      "sourcePath": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_sanity.md",
+      "sourceSha256": "a6912dc746a88faba7557266da7ccd55fb5b02313701c276dffe6ff9e6e9059c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_summary.md",
+      "sha256": "4b708aad0439834a514e5ccb4c424c22c2ff29a4a4f2cc2013b3cfbc837b52f2",
+      "bytes": 8707,
+      "sourcePath": "bundle/modules/plugin-group/vendor/pinchbench/tasks/task_summary.md",
+      "sourceSha256": "4b708aad0439834a514e5ccb4c424c22c2ff29a4a4f2cc2013b3cfbc837b52f2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/modules/session-migration/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/README.md",
+      "sha256": "45121f78820b7df4ae82ae8a32b0cba755dbccec3c416057ed84cdf666a00360",
+      "bytes": 4730,
+      "sourcePath": "bundle/modules/session-migration/README.md",
+      "sourceSha256": "45121f78820b7df4ae82ae8a32b0cba755dbccec3c416057ed84cdf666a00360",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/package.json",
+      "sha256": "3537c6ac6a436e353ee022dc0a41c0abfc3bbe6044d234190bfe4c5476b2d868",
+      "bytes": 1000,
+      "sourcePath": "bundle/modules/session-migration/package.json",
+      "sourceSha256": "3537c6ac6a436e353ee022dc0a41c0abfc3bbe6044d234190bfe4c5476b2d868",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/extensions.mjs",
+      "sha256": "75c4fb9845d9c5627434c173dcc1249636997004bf21d03351100583c266c12e",
+      "bytes": 3435,
+      "sourcePath": "bundle/modules/session-migration/src/extensions.mjs",
+      "sourceSha256": "75c4fb9845d9c5627434c173dcc1249636997004bf21d03351100583c266c12e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/index.d.mts",
+      "sha256": "ef6166ca7242d834f7db4939f762519aca2ff0b2fbcfdf69addede75526e03a3",
+      "bytes": 1109,
+      "sourcePath": "bundle/modules/session-migration/src/index.d.mts",
+      "sourceSha256": "ef6166ca7242d834f7db4939f762519aca2ff0b2fbcfdf69addede75526e03a3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/index.mjs",
+      "sha256": "010d548740c7a7502f89774f26606c85763228e0d7a1c05b46bb46b2e68ab0db",
+      "bytes": 4123,
+      "sourcePath": "bundle/modules/session-migration/src/index.mjs",
+      "sourceSha256": "010d548740c7a7502f89774f26606c85763228e0d7a1c05b46bb46b2e68ab0db",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/vendor/v0-v1.mjs",
+      "sha256": "7930a62f26369cb0c4a19b0c885f6d91a955ae0700297380b9aaca199be31935",
+      "bytes": 104798,
+      "sourcePath": "bundle/modules/session-migration/src/vendor/v0-v1.mjs",
+      "sourceSha256": "7930a62f26369cb0c4a19b0c885f6d91a955ae0700297380b9aaca199be31935",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/vendor/v1-v2.mjs",
+      "sha256": "b5363da32888d5ab00b3820b2cf6ee342c1b5dfa535a404f70ce8d3778c63b6b",
+      "bytes": 34134,
+      "sourcePath": "bundle/modules/session-migration/src/vendor/v1-v2.mjs",
+      "sourceSha256": "b5363da32888d5ab00b3820b2cf6ee342c1b5dfa535a404f70ce8d3778c63b6b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/src/vendor/v2-v3.mjs",
+      "sha256": "c5085d40cd3eae39982a7a1c799998dbea7da90254a63d16ed4571d2e6e14c5f",
+      "bytes": 36210,
+      "sourcePath": "bundle/modules/session-migration/src/vendor/v2-v3.mjs",
+      "sourceSha256": "c5085d40cd3eae39982a7a1c799998dbea7da90254a63d16ed4571d2e6e14c5f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/session-migration/vendor-provenance.json",
+      "sha256": "0fd2dd7de774db14c30cbbaf77b3793b919adef1562b5fb2606f05e06067a7c0",
+      "bytes": 1986,
+      "sourcePath": "bundle/modules/session-migration/vendor-provenance.json",
+      "sourceSha256": "0fd2dd7de774db14c30cbbaf77b3793b919adef1562b5fb2606f05e06067a7c0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/LICENSE-SCOPE.json",
+      "sha256": "f2a24079bac9cb2873c610e46c0694ddb378c798bf823587d16c699a246551b8",
+      "bytes": 12760,
+      "sourcePath": "bundle/modules/system-enhancement-package/LICENSE-SCOPE.json",
+      "sourceSha256": "f2a24079bac9cb2873c610e46c0694ddb378c798bf823587d16c699a246551b8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/LICENSE-SCOPE.md",
+      "sha256": "022f702405991c59e5e32ada11cba14a9899cbbb2f63afc67ad056665dade903",
+      "bytes": 858,
+      "sourcePath": "bundle/modules/system-enhancement-package/LICENSE-SCOPE.md",
+      "sourceSha256": "022f702405991c59e5e32ada11cba14a9899cbbb2f63afc67ad056665dade903",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/README.md",
+      "sha256": "a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+      "bytes": 15472,
+      "sourcePath": "bundle/modules/system-enhancement-package/README.md",
+      "sourceSha256": "a1994d3acc37231cc8815b326de5852e52e76313fc5d7f9d3fa8f670258ab5df",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/THIRD_PARTY_NOTICES.md",
+      "sha256": "fc02e1c248ead4b04bf1cbdc78f4e318bbd7a94b1f5d6395e585aa828958ca9e",
+      "bytes": 2837,
+      "sourcePath": "bundle/modules/system-enhancement-package/THIRD_PARTY_NOTICES.md",
+      "sourceSha256": "fc02e1c248ead4b04bf1cbdc78f4e318bbd7a94b1f5d6395e585aa828958ca9e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/cordis.patch.yml",
+      "sha256": "20e7d4046eb8dafd2861e5720155f10adeae3d3b0e2f7e48b41232891df88668",
+      "bytes": 410,
+      "sourcePath": "bundle/modules/system-enhancement-package/cordis.patch.yml",
+      "sourceSha256": "20e7d4046eb8dafd2861e5720155f10adeae3d3b0e2f7e48b41232891df88668",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/budget-policy-20260927.md",
+      "sha256": "0c339afd90ed32b95025e2e8c5159087571529a57ea5d8df8a433dbe1dcc8a11",
+      "bytes": 5518,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/budget-policy-20260927.md",
+      "sourceSha256": "0c339afd90ed32b95025e2e8c5159087571529a57ea5d8df8a433dbe1dcc8a11",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/owner-portability.md",
+      "sha256": "4e3441279b1316149d4381691bffce6e1d470c6456c45fead289b94ac9c60d03",
+      "bytes": 1928,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/owner-portability.md",
+      "sourceSha256": "4e3441279b1316149d4381691bffce6e1d470c6456c45fead289b94ac9c60d03",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.i18n.yaml",
+      "sha256": "d03f7c2e47164a0f5bb32289cad0ea72ceceb19f801aeb8517c2cce4658aff78",
+      "bytes": 1392,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.i18n.yaml",
+      "sourceSha256": "d03f7c2e47164a0f5bb32289cad0ea72ceceb19f801aeb8517c2cce4658aff78",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.md",
+      "sha256": "95997a62e0c6809a51d3372d24fe38b2c0727a51dd55a10c00f8c1ca75b5d2e6",
+      "bytes": 6997,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.md",
+      "sourceSha256": "95997a62e0c6809a51d3372d24fe38b2c0727a51dd55a10c00f8c1ca75b5d2e6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.zh.md",
+      "sha256": "1891ffd10f5cede4f7ee52230c22922f86b5f552589cf7ced8bc6d09aab770df",
+      "bytes": 6063,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/safe-change-workflow.zh.md",
+      "sourceSha256": "1891ffd10f5cede4f7ee52230c22922f86b5f552589cf7ced8bc6d09aab770df",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/session-budget.md",
+      "sha256": "d3935c19c183585713eeee6278f82d5cda719f099c1e4c0936973764c149fb08",
+      "bytes": 2756,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/session-budget.md",
+      "sourceSha256": "d3935c19c183585713eeee6278f82d5cda719f099c1e4c0936973764c149fb08",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/update-assessment.i18n.yaml",
+      "sha256": "6d464c7a16b8e1a1da69dd22775fc779047bd9d477521a602d2b5ef36dabb063",
+      "bytes": 854,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/update-assessment.i18n.yaml",
+      "sourceSha256": "6d464c7a16b8e1a1da69dd22775fc779047bd9d477521a602d2b5ef36dabb063",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/update-assessment.md",
+      "sha256": "68b24e9d07b4b2444ceb5d0a9e3908e367632777c7466d2766b2e08ba612f2b6",
+      "bytes": 5653,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/update-assessment.md",
+      "sourceSha256": "68b24e9d07b4b2444ceb5d0a9e3908e367632777c7466d2766b2e08ba612f2b6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/docs/update-assessment.zh.md",
+      "sha256": "567f25afcc8d0ec6e2af6871e72a6a974637f98fd0360bb92405621e97179a1b",
+      "bytes": 4815,
+      "sourcePath": "bundle/modules/system-enhancement-package/docs/update-assessment.zh.md",
+      "sourceSha256": "567f25afcc8d0ec6e2af6871e72a6a974637f98fd0360bb92405621e97179a1b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/DSH-RAG-MIT.txt",
+      "sha256": "ca448b0d1e97ebda348510e06bcb5b210f8ee3ec9aa28e890d2af799bc6c93a1",
+      "bytes": 1063,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/DSH-RAG-MIT.txt",
+      "sourceSha256": "ca448b0d1e97ebda348510e06bcb5b210f8ee3ec9aa28e890d2af799bc6c93a1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/anynum-1.0.1-LICENSE",
+      "sha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/anynum-1.0.1-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/fast-xml-builder-1.3.1-LICENSE",
+      "sha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/fast-xml-builder-1.3.1-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/fast-xml-parser-5.11.1-LICENSE",
+      "sha256": "7883225d5e84a6bbb9b170c3d891b4bf6d6259cee869c86bd86381a927071745",
+      "bytes": 1073,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/fast-xml-parser-5.11.1-LICENSE",
+      "sourceSha256": "7883225d5e84a6bbb9b170c3d891b4bf6d6259cee869c86bd86381a927071745",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/fflate-0.8.3-LICENSE",
+      "sha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551",
+      "bytes": 1069,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/fflate-0.8.3-LICENSE",
+      "sourceSha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/is-unsafe-2.0.2-LICENSE",
+      "sha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/is-unsafe-2.0.2-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/napi-rs-canvas-1.0.8-LICENSE",
+      "sha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "bytes": 1075,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/napi-rs-canvas-1.0.8-LICENSE",
+      "sourceSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+      "sha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "bytes": 1075,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/napi-rs-canvas-win32-x64-msvc-1.0.8-UPSTREAM-LICENSE",
+      "sourceSha256": "8802fecf9da4367bc23bcf20b21cc143785fc6c92b152f3fa7fbe6ce08d344d6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+      "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "bytes": 1064,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/nodable-entities-3.0.0-UPSTREAM-LICENSE",
+      "sourceSha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/path-expression-matcher-1.6.2-LICENSE",
+      "sha256": "75486ea0af9309140ca6e2c401d7e67bea8f4892344e5707f6394dc5e83dfc44",
+      "bytes": 1056,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/path-expression-matcher-1.6.2-LICENSE",
+      "sourceSha256": "75486ea0af9309140ca6e2c401d7e67bea8f4892344e5707f6394dc5e83dfc44",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/pdfjs-dist-6.2.108-LICENSE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "bytes": 10174,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/pdfjs-dist-6.2.108-LICENSE",
+      "sourceSha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/strnum-2.4.2-LICENSE",
+      "sha256": "2aa16be0f4fad003a352a955a43314e9d1d8deef7034060a82ac9c49f32b81e2",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/strnum-2.4.2-LICENSE",
+      "sourceSha256": "2aa16be0f4fad003a352a955a43314e9d1d8deef7034060a82ac9c49f32b81e2",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/xml-naming-0.3.0-LICENSE",
+      "sha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/xml-naming-0.3.0-LICENSE",
+      "sourceSha256": "8e75fc0e776c62ccadb8178ece8d3daa9ba7601fb0a49b2dfb0ea9a7a5c0aa07",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/licenses/zod-4.4.3-LICENSE",
+      "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
+      "bytes": 1072,
+      "sourcePath": "bundle/modules/system-enhancement-package/licenses/zod-4.4.3-LICENSE",
+      "sourceSha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/package.json",
+      "sha256": "c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+      "bytes": 2553,
+      "sourcePath": "bundle/modules/system-enhancement-package/package.json",
+      "sourceSha256": "c2b990c9d379b9d6c188eb3ec194c9885b2340a4c5888a47369e33e730fc42f0",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/access-queue.js",
+      "sha256": "d9655a0340c670008fb463526978a3e3ba72a3a8a4effc311350157b310a13a5",
+      "bytes": 534,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/access-queue.js",
+      "sourceSha256": "d9655a0340c670008fb463526978a3e3ba72a3a8a4effc311350157b310a13a5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/automatic-layered-memory.js",
+      "sha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+      "bytes": 17964,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/automatic-layered-memory.js",
+      "sourceSha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/automatic-memory.js",
+      "sha256": "37b2dcac6157e03fc88a5103081c412c16f580058d3b26378f4188f5a4b922c4",
+      "bytes": 19184,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/automatic-memory.js",
+      "sourceSha256": "37b2dcac6157e03fc88a5103081c412c16f580058d3b26378f4188f5a4b922c4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/automation-settings.js",
+      "sha256": "5e832328b4827ebb1a79fcc696a6a21d76604b00ca7056372226531013004511",
+      "bytes": 2459,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/automation-settings.js",
+      "sourceSha256": "5e832328b4827ebb1a79fcc696a6a21d76604b00ca7056372226531013004511",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-continuity.js",
+      "sha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8",
+      "bytes": 1626,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-continuity.js",
+      "sourceSha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-ledger.js",
+      "sha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475",
+      "bytes": 19699,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-ledger.js",
+      "sourceSha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-legacy-reconcile.js",
+      "sha256": "dfd2d44ab81980a5f0830e4d0924f33d8811244940c4570c6fbb2fec1256e44c",
+      "bytes": 10526,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-legacy-reconcile.js",
+      "sourceSha256": "dfd2d44ab81980a5f0830e4d0924f33d8811244940c4570c6fbb2fec1256e44c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-lock.js",
+      "sha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5",
+      "bytes": 5885,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-lock.js",
+      "sourceSha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-pricing.js",
+      "sha256": "59bf838c9c101436346967cafe2b731ed26afa6881114220c2a43fa1addce58a",
+      "bytes": 6061,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-pricing.js",
+      "sourceSha256": "59bf838c9c101436346967cafe2b731ed26afa6881114220c2a43fa1addce58a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-request.js",
+      "sha256": "ca27e79b68db4e847ecab12cdb3d76c606a61f96ba255d2644e7a390c79f0e3b",
+      "bytes": 3312,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-request.js",
+      "sourceSha256": "ca27e79b68db4e847ecab12cdb3d76c606a61f96ba255d2644e7a390c79f0e3b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-scope.js",
+      "sha256": "dbc192a71fff57baaf688715bc3502ba15a29f739b69246c467f91f980860573",
+      "bytes": 5405,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-scope.js",
+      "sourceSha256": "dbc192a71fff57baaf688715bc3502ba15a29f739b69246c467f91f980860573",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/budget-settings-service.js",
+      "sha256": "487665ce7d2d9f0f3b29fb5dbd84598f4d1a48d5be4e1b59a67ddca882a3627c",
+      "bytes": 3271,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/budget-settings-service.js",
+      "sourceSha256": "487665ce7d2d9f0f3b29fb5dbd84598f4d1a48d5be4e1b59a67ddca882a3627c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/computer-click.js",
+      "sha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+      "bytes": 12638,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/computer-click.js",
+      "sourceSha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/deepseek.js",
+      "sha256": "b54f88513bef5783b6c1a106ac9638d6f17c3d35144104729314df5ab004e8bc",
+      "bytes": 6221,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/deepseek.js",
+      "sourceSha256": "b54f88513bef5783b6c1a106ac9638d6f17c3d35144104729314df5ab004e8bc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/document-cli.js",
+      "sha256": "edbd80ca76b489ddf98e37e58d8ec74a0610d02552116c56a9e6b799b2b8caa1",
+      "bytes": 7619,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/document-cli.js",
+      "sourceSha256": "edbd80ca76b489ddf98e37e58d8ec74a0610d02552116c56a9e6b799b2b8caa1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/document-source-win32.ps1",
+      "sha256": "63864b2c3c1b1cf8b7eea2216f1792ba0c49af297a469cf9686b9ecb0cee9552",
+      "bytes": 7669,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/document-source-win32.ps1",
+      "sourceSha256": "63864b2c3c1b1cf8b7eea2216f1792ba0c49af297a469cf9686b9ecb0cee9552",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/document-source.js",
+      "sha256": "da0af1088f4e9b3e0e311c631a63ca06d4257cb14a2862c9ed09c2cc743f5b9c",
+      "bytes": 3922,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/document-source.js",
+      "sourceSha256": "da0af1088f4e9b3e0e311c631a63ca06d4257cb14a2862c9ed09c2cc743f5b9c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/documents.js",
+      "sha256": "4a5aabeea2b3e3805415a6c239f6bc8d01a6cc8806b66b944c23086c589199cc",
+      "bytes": 12216,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/documents.js",
+      "sourceSha256": "4a5aabeea2b3e3805415a6c239f6bc8d01a6cc8806b66b944c23086c589199cc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/errors.js",
+      "sha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3",
+      "bytes": 443,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/errors.js",
+      "sourceSha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/index.js",
+      "sha256": "5ed066004dfc0beddaff18f621557cae0b4a89396470861a8b88a79f2af05bfb",
+      "bytes": 20941,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/index.js",
+      "sourceSha256": "5ed066004dfc0beddaff18f621557cae0b4a89396470861a8b88a79f2af05bfb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/layer-policy.js",
+      "sha256": "3963c15421951c0728baedef89bef4abf921f45e51ec063f1c779078e7951f84",
+      "bytes": 5133,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/layer-policy.js",
+      "sourceSha256": "3963c15421951c0728baedef89bef4abf921f45e51ec063f1c779078e7951f84",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/layered-memory.js",
+      "sha256": "2e9c22aa8b041942335842c190b96feb17c911db82acba5c9f70702913d7235d",
+      "bytes": 36419,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/layered-memory.js",
+      "sourceSha256": "2e9c22aa8b041942335842c190b96feb17c911db82acba5c9f70702913d7235d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/media.js",
+      "sha256": "6873d53ce70c84dc158d9528ee68e6497381b94feae3469e78c391afe092eec3",
+      "bytes": 2175,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/media.js",
+      "sourceSha256": "6873d53ce70c84dc158d9528ee68e6497381b94feae3469e78c391afe092eec3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/memory-commit.js",
+      "sha256": "10766372e2cc2b5cba67e0a3d7850e1c36c37de05816992bffa1e530903dcabe",
+      "bytes": 819,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/memory-commit.js",
+      "sourceSha256": "10766372e2cc2b5cba67e0a3d7850e1c36c37de05816992bffa1e530903dcabe",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/memory-context.js",
+      "sha256": "e9b38e37cdee181cbae23106c5bfac22170ef3bde766570f64d2f8fd1c4283ce",
+      "bytes": 6953,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/memory-context.js",
+      "sourceSha256": "e9b38e37cdee181cbae23106c5bfac22170ef3bde766570f64d2f8fd1c4283ce",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/memory-settings-service.js",
+      "sha256": "f2c08998ca06216aecde46b54acfa5fb3f906d1d657bf37e1412481c465607b3",
+      "bytes": 2985,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/memory-settings-service.js",
+      "sourceSha256": "f2c08998ca06216aecde46b54acfa5fb3f906d1d657bf37e1412481c465607b3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/memory.js",
+      "sha256": "3249ab50a531ad07295c115fdc409dfc846c8e3d34014918c873daf93eb8203f",
+      "bytes": 4273,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/memory.js",
+      "sourceSha256": "3249ab50a531ad07295c115fdc409dfc846c8e3d34014918c873daf93eb8203f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/native-image-budget.js",
+      "sha256": "2ec59128ae035c12ca4efd7e4e6954671bca706a71058454881cf4fd89edd668",
+      "bytes": 3012,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/native-image-budget.js",
+      "sourceSha256": "2ec59128ae035c12ca4efd7e4e6954671bca706a71058454881cf4fd89edd668",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/owner-lease.mjs",
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "bytes": 17920,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/owner-lease.mjs",
+      "sourceSha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/owner-posix.mjs",
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "bytes": 6134,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/owner-posix.mjs",
+      "sourceSha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p1-failures.js",
+      "sha256": "dc1e84e76426ac6506d544a6785c2b6f2b2327eea48b03870a3ab9860ba8dc36",
+      "bytes": 3847,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p1-failures.js",
+      "sourceSha256": "dc1e84e76426ac6506d544a6785c2b6f2b2327eea48b03870a3ab9860ba8dc36",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p1.js",
+      "sha256": "3e4e8d836137186a77213f0ebc7ea8700cfaa1d360e3f6d745fdd1f1cb00184a",
+      "bytes": 26852,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p1.js",
+      "sourceSha256": "3e4e8d836137186a77213f0ebc7ea8700cfaa1d360e3f6d745fdd1f1cb00184a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-admission.js",
+      "sha256": "69f885292c614b6566f7240dc325c8dd5db0290095e0579a2780a0d34b640eca",
+      "bytes": 6324,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-admission.js",
+      "sourceSha256": "69f885292c614b6566f7240dc325c8dd5db0290095e0579a2780a0d34b640eca",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-budget.js",
+      "sha256": "81d4f009866ad2275dd2a42f20d6e780503f840ed2d63b41ee3bf32ce8ce8efe",
+      "bytes": 11731,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-budget.js",
+      "sourceSha256": "81d4f009866ad2275dd2a42f20d6e780503f840ed2d63b41ee3bf32ce8ce8efe",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-candidates.js",
+      "sha256": "1816d1edc0b06683b6b1e16b89296695c47b15dde35f5438d112ba50677c0f82",
+      "bytes": 24528,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-candidates.js",
+      "sourceSha256": "1816d1edc0b06683b6b1e16b89296695c47b15dde35f5438d112ba50677c0f82",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-capture-win32.ps1",
+      "sha256": "7184cf4b91ac508debc2d1c0e58bf9305e431fe22281b083315fb90a24f52029",
+      "bytes": 23435,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-capture-win32.ps1",
+      "sourceSha256": "7184cf4b91ac508debc2d1c0e58bf9305e431fe22281b083315fb90a24f52029",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-capture.js",
+      "sha256": "29959e2d90fcfe72338b55d159a77ab56a8421eaf9f15af00aeee8a7591988d5",
+      "bytes": 11725,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-capture.js",
+      "sourceSha256": "29959e2d90fcfe72338b55d159a77ab56a8421eaf9f15af00aeee8a7591988d5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-cli.js",
+      "sha256": "bb1c9f5fe924839cc4ba3970ee6296ce15d410eb061cbaa6a1d889087bf89a47",
+      "bytes": 6315,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-cli.js",
+      "sourceSha256": "bb1c9f5fe924839cc4ba3970ee6296ce15d410eb061cbaa6a1d889087bf89a47",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-copies.js",
+      "sha256": "16949c813af77ac92dc7846c8cd1c25a0f5e70629de39b14a13934320c9eb051",
+      "bytes": 20495,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-copies.js",
+      "sourceSha256": "16949c813af77ac92dc7846c8cd1c25a0f5e70629de39b14a13934320c9eb051",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-governance.js",
+      "sha256": "dbd5036549160c57af185cb6775dfe1a2c5a5a975ec4cc16e4f0b7535e51aafe",
+      "bytes": 4618,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-governance.js",
+      "sourceSha256": "dbd5036549160c57af185cb6775dfe1a2c5a5a975ec4cc16e4f0b7535e51aafe",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-health.js",
+      "sha256": "a88a1e3d2481b674cbdae3780bdcf33ae61dc9aa37da4fcd944d5b588359d4c9",
+      "bytes": 17881,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-health.js",
+      "sourceSha256": "a88a1e3d2481b674cbdae3780bdcf33ae61dc9aa37da4fcd944d5b588359d4c9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-lifecycle.js",
+      "sha256": "b626bee0a48855c056c434cd804aa2217d2294ac4baf61720b045c9cdfd2f22d",
+      "bytes": 3186,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-lifecycle.js",
+      "sourceSha256": "b626bee0a48855c056c434cd804aa2217d2294ac4baf61720b045c9cdfd2f22d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-metadata-retention.js",
+      "sha256": "654593d0c69518c59acf955c40e035efb2ae685263030d38eb94b718b5439e1f",
+      "bytes": 22252,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-metadata-retention.js",
+      "sourceSha256": "654593d0c69518c59acf955c40e035efb2ae685263030d38eb94b718b5439e1f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-metadata.js",
+      "sha256": "f2285db1a6f2bdbafecc4c1a87d7b369bc8175b341460bd3a7d540f4c014b3c6",
+      "bytes": 11596,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-metadata.js",
+      "sourceSha256": "f2285db1a6f2bdbafecc4c1a87d7b369bc8175b341460bd3a7d540f4c014b3c6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-presentation.js",
+      "sha256": "bee7b3b6834500bd6f803ff579ebf95b943687822d03719b62515a5eed905ee4",
+      "bytes": 7083,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-presentation.js",
+      "sourceSha256": "bee7b3b6834500bd6f803ff579ebf95b943687822d03719b62515a5eed905ee4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-publication.js",
+      "sha256": "4c52788bcf469fb66c9a93366c801118b963ab78893a7e4165396b9422a3ac0e",
+      "bytes": 18780,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-publication.js",
+      "sourceSha256": "4c52788bcf469fb66c9a93366c801118b963ab78893a7e4165396b9422a3ac0e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-restore-cli.js",
+      "sha256": "97ee602486b91c196b7596eef9f38f131250d1644a3d9e6b29cb7ed11da0c03f",
+      "bytes": 3129,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-restore-cli.js",
+      "sourceSha256": "97ee602486b91c196b7596eef9f38f131250d1644a3d9e6b29cb7ed11da0c03f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-restore.js",
+      "sha256": "e8d00e9c5c742bfb94b0b5ebe5269f0668e2a7d3bdd8ef7659f4b91637073c3a",
+      "bytes": 24773,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-restore.js",
+      "sourceSha256": "e8d00e9c5c742bfb94b0b5ebe5269f0668e2a7d3bdd8ef7659f4b91637073c3a",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-retention-cli.js",
+      "sha256": "0f5d1ce7297e58177f008e07af21bd677c42dce17e30548f2f33f04e2a459133",
+      "bytes": 5652,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-retention-cli.js",
+      "sourceSha256": "0f5d1ce7297e58177f008e07af21bd677c42dce17e30548f2f33f04e2a459133",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-retention.js",
+      "sha256": "defed25e495d6c08d41d8ea683595573d2dd3b61533ac7ef6afba9c482db7874",
+      "bytes": 11489,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-retention.js",
+      "sourceSha256": "defed25e495d6c08d41d8ea683595573d2dd3b61533ac7ef6afba9c482db7874",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption-terminal.js",
+      "sha256": "1160069340437e3593e9e3412a781f7edcd9d51d1c5cf3e067e43d4b76fdc9c5",
+      "bytes": 6353,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption-terminal.js",
+      "sourceSha256": "1160069340437e3593e9e3412a781f7edcd9d51d1c5cf3e067e43d4b76fdc9c5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/adoption.js",
+      "sha256": "081d2c5665fd6982e3ac271224b0a28f93197631c0e7081f7edc95bfc6133640",
+      "bytes": 30437,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/adoption.js",
+      "sourceSha256": "081d2c5665fd6982e3ac271224b0a28f93197631c0e7081f7edc95bfc6133640",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/artifacts.js",
+      "sha256": "5815fcbf1b8f5544f8d14a56c82ae92c452af45e9d865989171f3ddfd0b20397",
+      "bytes": 22275,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/artifacts.js",
+      "sourceSha256": "5815fcbf1b8f5544f8d14a56c82ae92c452af45e9d865989171f3ddfd0b20397",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/backups.js",
+      "sha256": "5ec0431cb1327e122e815b800f30ce072216b4b19b5b298aa4587659b54278d5",
+      "bytes": 41095,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/backups.js",
+      "sourceSha256": "5ec0431cb1327e122e815b800f30ce072216b4b19b5b298aa4587659b54278d5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/cli.js",
+      "sha256": "4572162dcd1533ef9f2fc9fc5f4a0873728846152a77acf3d2a036e3f2429908",
+      "bytes": 1882,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/cli.js",
+      "sourceSha256": "4572162dcd1533ef9f2fc9fc5f4a0873728846152a77acf3d2a036e3f2429908",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/config-binding.js",
+      "sha256": "9ad8b29b57cc55cabd90b2fdcdf1c72b0a7c8df9e7ef26127ed063c92bf517dc",
+      "bytes": 3482,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/config-binding.js",
+      "sourceSha256": "9ad8b29b57cc55cabd90b2fdcdf1c72b0a7c8df9e7ef26127ed063c92bf517dc",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/control.js",
+      "sha256": "dfe42a1e75f6a594964481f0c0b83bba0aec6adcff2b6043b9d8a79866cf36d1",
+      "bytes": 37535,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/control.js",
+      "sourceSha256": "dfe42a1e75f6a594964481f0c0b83bba0aec6adcff2b6043b9d8a79866cf36d1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/document-governance.js",
+      "sha256": "579e66698c842e09f46afb3589de1215a1a70d69ec2ed16e62e886eebf0cc331",
+      "bytes": 1870,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/document-governance.js",
+      "sourceSha256": "579e66698c842e09f46afb3589de1215a1a70d69ec2ed16e62e886eebf0cc331",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/health.js",
+      "sha256": "977c563937e22c0014f65eb24e4d5a781168658b5a2a458a6e187d779e0c0356",
+      "bytes": 15173,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/health.js",
+      "sourceSha256": "977c563937e22c0014f65eb24e4d5a781168658b5a2a458a6e187d779e0c0356",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/host-admission.js",
+      "sha256": "92cfae3e3afe8f35a44ab79b378884c10ddd466d720b63f2fb38f0331d804e0c",
+      "bytes": 5461,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/host-admission.js",
+      "sourceSha256": "92cfae3e3afe8f35a44ab79b378884c10ddd466d720b63f2fb38f0331d804e0c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/install-inputs.js",
+      "sha256": "cfa0104c97a9c0c5e9530c39291304b26540ee9b24069743f3cd5bc92165f2f9",
+      "bytes": 9436,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/install-inputs.js",
+      "sourceSha256": "cfa0104c97a9c0c5e9530c39291304b26540ee9b24069743f3cd5bc92165f2f9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/migrations.js",
+      "sha256": "d5bb052215bc41de47cce08369777f39be55cf98a45874000ca8e4249cb6d108",
+      "bytes": 6832,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/migrations.js",
+      "sourceSha256": "d5bb052215bc41de47cce08369777f39be55cf98a45874000ca8e4249cb6d108",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/recovery-maintenance.js",
+      "sha256": "b90a947ed846bcf8114d582aab45345f1d11f90062607765ea1f4d26bbb0c68c",
+      "bytes": 3748,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/recovery-maintenance.js",
+      "sourceSha256": "b90a947ed846bcf8114d582aab45345f1d11f90062607765ea1f4d26bbb0c68c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/storage-location.js",
+      "sha256": "36cb638eaee80384bc8fe847fb8c81f6cfc2e9deed0fd70da03493549d0eb7ff",
+      "bytes": 2290,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/storage-location.js",
+      "sourceSha256": "36cb638eaee80384bc8fe847fb8c81f6cfc2e9deed0fd70da03493549d0eb7ff",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/storage.js",
+      "sha256": "2149555587ccc1f2df85fc76782433598112af912bc1c583bda3904037e1a709",
+      "bytes": 6091,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/storage.js",
+      "sourceSha256": "2149555587ccc1f2df85fc76782433598112af912bc1c583bda3904037e1a709",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/p2/updater.js",
+      "sha256": "17e399e9c9906ad610dc7f7516709310d164f2d7532af0bb8984b3e224e5b605",
+      "bytes": 25926,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/p2/updater.js",
+      "sourceSha256": "17e399e9c9906ad610dc7f7516709310d164f2d7532af0bb8984b3e224e5b605",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/parser-worker.js",
+      "sha256": "f064624031f0d09511579f288d9fcbf370a2707f6883af0d46adaf973a2f0d6f",
+      "bytes": 7563,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/parser-worker.js",
+      "sourceSha256": "f064624031f0d09511579f288d9fcbf370a2707f6883af0d46adaf973a2f0d6f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/parsers.js",
+      "sha256": "13ea4678c4554ee4e422eebff90af760452eeda701571b3686a66b8ccc5f6599",
+      "bytes": 3590,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/parsers.js",
+      "sourceSha256": "13ea4678c4554ee4e422eebff90af760452eeda701571b3686a66b8ccc5f6599",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/provider-diagnostics.js",
+      "sha256": "6cd466a9ad5be31884992df0c26d5ab475bfbc1020cb103771d5d7f6376ba0a6",
+      "bytes": 660,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/provider-diagnostics.js",
+      "sourceSha256": "6cd466a9ad5be31884992df0c26d5ab475bfbc1020cb103771d5d7f6376ba0a6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/rag.js",
+      "sha256": "7ccc2618b83c01f6a02061b3f3b107c560b83cddf05f747843bddb8c1d127e3d",
+      "bytes": 3510,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/rag.js",
+      "sourceSha256": "7ccc2618b83c01f6a02061b3f3b107c560b83cddf05f747843bddb8c1d127e3d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/recovery-binding.js",
+      "sha256": "a42cb14ddd8d7df319e5af727ad1d32f4cae7ee92fff56c9a5b448a2709418be",
+      "bytes": 4113,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/recovery-binding.js",
+      "sourceSha256": "a42cb14ddd8d7df319e5af727ad1d32f4cae7ee92fff56c9a5b448a2709418be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/scope.js",
+      "sha256": "7365862e781dd934d5c4d2b258ff8eb1965ef331778cbe94c67d3d51e463188e",
+      "bytes": 12833,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/scope.js",
+      "sourceSha256": "2f3562e636383cf7474777689ed7c851b0922d0cdfac48bb8003feb06d40d8a3",
+      "transformations": [
+        {
+          "before": "const cwd = exec.agent?.session?.header?.cwd;",
+          "after": "const cwd = this.recoveryOptions.workingDirectory?.get(exec.agent?.session);",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/sep-safe-change/closeout.js",
+      "sha256": "b0bee1e9139ff19b794e4c5017b730025b05d04789d64a0d1f4018707e95749f",
+      "bytes": 6298,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/sep-safe-change/closeout.js",
+      "sourceSha256": "b0bee1e9139ff19b794e4c5017b730025b05d04789d64a0d1f4018707e95749f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/sep-safe-change/confirmation.js",
+      "sha256": "9270edf6402e5d6140a2907aad2fc32b682f929ec315542bc1f97f522d765ea4",
+      "bytes": 5412,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/sep-safe-change/confirmation.js",
+      "sourceSha256": "9270edf6402e5d6140a2907aad2fc32b682f929ec315542bc1f97f522d765ea4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/sep-safe-change/index.js",
+      "sha256": "c49906ece878e250a0a2d83763d24c62d0a59720c74c5959ab7c50b031392181",
+      "bytes": 7424,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/sep-safe-change/index.js",
+      "sourceSha256": "c49906ece878e250a0a2d83763d24c62d0a59720c74c5959ab7c50b031392181",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/sep-safe-change/safe-change.js",
+      "sha256": "5c92d6817669191eff760d63f27451277f79882149e92df5a9dd7004099f68e9",
+      "bytes": 9844,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/sep-safe-change/safe-change.js",
+      "sourceSha256": "5c92d6817669191eff760d63f27451277f79882149e92df5a9dd7004099f68e9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/sep-safe-change/validation.js",
+      "sha256": "efa96e61f0eda5e605a104af93d23c602c5a298059846e8c066e9838fa219039",
+      "bytes": 5362,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/sep-safe-change/validation.js",
+      "sourceSha256": "efa96e61f0eda5e605a104af93d23c602c5a298059846e8c066e9838fa219039",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/session-events.js",
+      "sha256": "4e8720ec4778a6c69301b100ff1eadfb3a318aaf5788c310345dd79e59dc4e19",
+      "bytes": 1277,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/session-events.js",
+      "sourceSha256": "4e8720ec4778a6c69301b100ff1eadfb3a318aaf5788c310345dd79e59dc4e19",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/source-provenance.js",
+      "sha256": "71e95d59004ac9e9f83c249e37d23a2109154c98af35745a0267a39e835fe329",
+      "bytes": 2235,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/source-provenance.js",
+      "sourceSha256": "71e95d59004ac9e9f83c249e37d23a2109154c98af35745a0267a39e835fe329",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/store.js",
+      "sha256": "bbe0c638db814275a2d605564a55739052d2d902e0d9cf2e9dbbd673bb95dbcb",
+      "bytes": 4946,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/store.js",
+      "sourceSha256": "bbe0c638db814275a2d605564a55739052d2d902e0d9cf2e9dbbd673bb95dbcb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/update-assessment-service.js",
+      "sha256": "9b2938deb5c0c35a25e4d14cddc443c705619bbb5ba22b0e018c030de95b1286",
+      "bytes": 6704,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/update-assessment-service.js",
+      "sourceSha256": "9b2938deb5c0c35a25e4d14cddc443c705619bbb5ba22b0e018c030de95b1286",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/update-assessment.js",
+      "sha256": "b572cde965af96cc4c1ade3997c2b5108b4cf9907fd0183ae7aabca154c21fe9",
+      "bytes": 7997,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/update-assessment.js",
+      "sourceSha256": "b572cde965af96cc4c1ade3997c2b5108b4cf9907fd0183ae7aabca154c21fe9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/src/vendor/bm25.js",
+      "sha256": "4bdea400e13e17df9541731bcc523b96da84c02a51df23c8c8d59b6e2aaa0e10",
+      "bytes": 3290,
+      "sourcePath": "bundle/modules/system-enhancement-package/src/vendor/bm25.js",
+      "sourceSha256": "4bdea400e13e17df9541731bcc523b96da84c02a51df23c8c8d59b6e2aaa0e10",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/system-enhancement-package/tools/budget-reconcile.mjs",
+      "sha256": "64905f9eb17f33be0cbf3770ae13a97763856e48787fdccd75d30fbc0d21186e",
+      "bytes": 3063,
+      "sourcePath": "bundle/modules/system-enhancement-package/tools/budget-reconcile.mjs",
+      "sourceSha256": "64905f9eb17f33be0cbf3770ae13a97763856e48787fdccd75d30fbc0d21186e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/LICENSE-DSH-UPSTREAM.txt",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/modules/task-checkpoint/LICENSE-DSH-UPSTREAM.txt",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/LICENSE-SEP-SUPPLEMENT.txt",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/task-checkpoint/LICENSE-SEP-SUPPLEMENT.txt",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/lib/fold-DriVjcWm.js",
+      "sha256": "956c934bfa225ded12564d73740b756d0c8605455edcbeb3c56b0ccb6164fceb",
+      "bytes": 7181,
+      "sourcePath": "bundle/modules/task-checkpoint/lib/fold-DriVjcWm.js",
+      "sourceSha256": "956c934bfa225ded12564d73740b756d0c8605455edcbeb3c56b0ccb6164fceb",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/lib/fold.js",
+      "sha256": "5f4764b2dcbfecc3ca670d0b90985521b6f702d12aa273ea15875d8ba6c7f51e",
+      "bytes": 137,
+      "sourcePath": "bundle/modules/task-checkpoint/lib/fold.js",
+      "sourceSha256": "5f4764b2dcbfecc3ca670d0b90985521b6f702d12aa273ea15875d8ba6c7f51e",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/lib/format.js",
+      "sha256": "cfeecb73d81fd2c0238a30227fa8e7c72ad9167f4679dfd7aadc1d128992cd0b",
+      "bytes": 3231,
+      "sourcePath": "bundle/modules/task-checkpoint/lib/format.js",
+      "sourceSha256": "cfeecb73d81fd2c0238a30227fa8e7c72ad9167f4679dfd7aadc1d128992cd0b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/lib/index.js",
+      "sha256": "628853bb26c57b1d84a8b531910ecf5385896690c25839d857f654e6fc5b7a18",
+      "bytes": 21284,
+      "sourcePath": "bundle/modules/task-checkpoint/lib/index.js",
+      "sourceSha256": "628853bb26c57b1d84a8b531910ecf5385896690c25839d857f654e6fc5b7a18",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/lib/invariant.js",
+      "sha256": "e628a3cdc12fdb6e07b64c4620c268b06d06b8f89da04f54fb0f6c4bc708004f",
+      "bytes": 1072,
+      "sourcePath": "bundle/modules/task-checkpoint/lib/invariant.js",
+      "sourceSha256": "e628a3cdc12fdb6e07b64c4620c268b06d06b8f89da04f54fb0f6c4bc708004f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/task-checkpoint/package.json",
+      "sha256": "676ee34c439a8113d45d045f59ea89495de02fb33263366a45bb9d6ad4b70d4d",
+      "bytes": 1824,
+      "sourcePath": "bundle/modules/task-checkpoint/package.json",
+      "sourceSha256": "676ee34c439a8113d45d045f59ea89495de02fb33263366a45bb9d6ad4b70d4d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/tool-worker/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/LICENSE-SCOPE.json",
+      "sha256": "361e7b1a100ccf576c98b50aa9bd2020e2a1d9088e8fb215e4f0eea998e0e531",
+      "bytes": 2337,
+      "sourcePath": "bundle/modules/tool-worker/LICENSE-SCOPE.json",
+      "sourceSha256": "361e7b1a100ccf576c98b50aa9bd2020e2a1d9088e8fb215e4f0eea998e0e531",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/LICENSE-SCOPE.md",
+      "sha256": "420e60c56e05b5c9969241169f99f54e93e0bc0d138ff585dbf30cb01265be1c",
+      "bytes": 777,
+      "sourcePath": "bundle/modules/tool-worker/LICENSE-SCOPE.md",
+      "sourceSha256": "420e60c56e05b5c9969241169f99f54e93e0bc0d138ff585dbf30cb01265be1c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/README.md",
+      "sha256": "6b1a719db8f7702ba4b405e2ca55f64655a18f1908dd5b9af3f5bef7ea76ee90",
+      "bytes": 9860,
+      "sourcePath": "bundle/modules/tool-worker/README.md",
+      "sourceSha256": "6b1a719db8f7702ba4b405e2ca55f64655a18f1908dd5b9af3f5bef7ea76ee90",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/README.zh.md",
+      "sha256": "3015e336f00b9b0bdd2568ebebebf0ec6c6955c351b54ef5f72f99d5a60b50e1",
+      "bytes": 7967,
+      "sourcePath": "bundle/modules/tool-worker/README.zh.md",
+      "sourceSha256": "3015e336f00b9b0bdd2568ebebebf0ec6c6955c351b54ef5f72f99d5a60b50e1",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/index.js",
+      "sha256": "79b27565d6b502842ce95a692076b61f8fdd62979ae1c9bb6c75f043ba2d918f",
+      "bytes": 15164,
+      "sourcePath": "bundle/modules/tool-worker/index.js",
+      "sourceSha256": "79b27565d6b502842ce95a692076b61f8fdd62979ae1c9bb6c75f043ba2d918f",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/json.js",
+      "sha256": "7674c44bfdfa499e8f0aabc516b432ac1971bb05b7f518f98e9a72e452f55d13",
+      "bytes": 2322,
+      "sourcePath": "bundle/modules/tool-worker/json.js",
+      "sourceSha256": "7674c44bfdfa499e8f0aabc516b432ac1971bb05b7f518f98e9a72e452f55d13",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/package.json",
+      "sha256": "23ae6a35bf427831ea099371606b122f7219d036d060316793caf529125ecb02",
+      "bytes": 797,
+      "sourcePath": "bundle/modules/tool-worker/package.json",
+      "sourceSha256": "23ae6a35bf427831ea099371606b122f7219d036d060316793caf529125ecb02",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/tool-worker/worker.js",
+      "sha256": "be42d21706d72e9af61214d6d0abda35a36ac6937f4341da927127126fdc9b38",
+      "bytes": 1445,
+      "sourcePath": "bundle/modules/tool-worker/worker.js",
+      "sourceSha256": "be42d21706d72e9af61214d6d0abda35a36ac6937f4341da927127126fdc9b38",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/LICENSE",
+      "sha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "bytes": 1077,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/LICENSE",
+      "sourceSha256": "95f98fc3f3a9b378be70fe9a09d674205c5d90b6b1a4f6e5065d01a87060c882",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/LICENSE-SCOPE.json",
+      "sha256": "e20b2fd63fa396891271c9a9cb4a50d182dda0013fc398ad5e32b0201c792780",
+      "bytes": 4060,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/LICENSE-SCOPE.json",
+      "sourceSha256": "e20b2fd63fa396891271c9a9cb4a50d182dda0013fc398ad5e32b0201c792780",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/LICENSE-SCOPE.md",
+      "sha256": "e529a56e96ea1a422945090c2501ee807e5fbfeab5c55b76c826f7be688efc60",
+      "bytes": 785,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/LICENSE-SCOPE.md",
+      "sourceSha256": "e529a56e96ea1a422945090c2501ee807e5fbfeab5c55b76c826f7be688efc60",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/README.md",
+      "sha256": "a05424d57ee01198ea2df1b8d2a13b3fb04f357d50a60c0aefc40ae8cecf25d4",
+      "bytes": 8448,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/README.md",
+      "sourceSha256": "a05424d57ee01198ea2df1b8d2a13b3fb04f357d50a60c0aefc40ae8cecf25d4",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/entry.mjs",
+      "sha256": "c6ed6f797bac4efe3e1f4838910c849b487ea856d8dc066aba8c9ffeb899cfc9",
+      "bytes": 6318,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/entry.mjs",
+      "sourceSha256": "c6ed6f797bac4efe3e1f4838910c849b487ea856d8dc066aba8c9ffeb899cfc9",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/README.md",
+      "sha256": "4e8d4d81edb85f93737d787e9f77e13658bcaac63895633ffe7f2aa2b4391631",
+      "bytes": 9594,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/README.md",
+      "sourceSha256": "4e8d4d81edb85f93737d787e9f77e13658bcaac63895633ffe7f2aa2b4391631",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/admission.py",
+      "sha256": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+      "bytes": 2095,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/admission.py",
+      "sourceSha256": "4c63f9bd61a78ce31362253987329612d94afae5a2333a055f952a3ad19d50ed",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/compile_patch.py",
+      "sha256": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+      "bytes": 1207,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/compile_patch.py",
+      "sourceSha256": "b33496958d6c8e4f01a8951b17c8de2a3b30468084a4c2e1d14e75b109b2759c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/deadline.py",
+      "sha256": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+      "bytes": 796,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/deadline.py",
+      "sourceSha256": "a770c891fbc6a2576cb6152eb96ac1e0341fd399b3c44ba2ff0c2f60d4f96af8",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/evaluation.py",
+      "sha256": "211361c814cac15d902228d0717b66db24e17713b69d7647ab6d0a62a1daae2d",
+      "bytes": 7745,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/evaluation.py",
+      "sourceSha256": "211361c814cac15d902228d0717b66db24e17713b69d7647ab6d0a62a1daae2d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/grade_worker.py",
+      "sha256": "6b9bf456751f8204ff588b6d5fe37df58663236653119d9f9c9ba4eb2f3a8226",
+      "bytes": 3267,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/grade_worker.py",
+      "sourceSha256": "6b9bf456751f8204ff588b6d5fe37df58663236653119d9f9c9ba4eb2f3a8226",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/index.mjs",
+      "sha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+      "bytes": 12957,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/index.mjs",
+      "sourceSha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle-manifest.json",
+      "sha256": "4a9bc4512b431a669c22c6eaed8d7ab2d908e1b3d06f9ff7f1150ddded73c818",
+      "bytes": 791,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle-manifest.json",
+      "sourceSha256": "4a9bc4512b431a669c22c6eaed8d7ab2d908e1b3d06f9ff7f1150ddded73c818",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle.py",
+      "sha256": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+      "bytes": 12319,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle.py",
+      "sourceSha256": "c82e9cf58c5ba57a7a4d8e972ff072d14acd259966313fb86a09491034330f4d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle_worker.py",
+      "sha256": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+      "bytes": 3315,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/lifecycle_worker.py",
+      "sourceSha256": "dffd90a70ec0cc52f0a2afef34e53ab6a032be2f8ee7fa3cf944c0b3c7bc39e5",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/official.py",
+      "sha256": "6c08f6308371a273f62f772c65574b5f9efc28c133fafd2d766a9b13994eb015",
+      "bytes": 9795,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/official.py",
+      "sourceSha256": "6c08f6308371a273f62f772c65574b5f9efc28c133fafd2d766a9b13994eb015",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/package.json",
+      "sha256": "e889d80c73016c2f532affb4012a7e1554dc08423582d31f4ee42d1b0e1ce87c",
+      "bytes": 441,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/package.json",
+      "sourceSha256": "e889d80c73016c2f532affb4012a7e1554dc08423582d31f4ee42d1b0e1ce87c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/evaluation/supervisor.py",
+      "sha256": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b",
+      "bytes": 9959,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/evaluation/supervisor.py",
+      "sourceSha256": "e22bd2c2ced491451855c65fc6927c3576626a5f4c2a29b4fb66ddef4e2dc92b",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/index.mjs",
+      "sha256": "6756b3d6e39d12e24f2586c23f9d7d13d702e2ce05f26c80f35c3a2cdec23c71",
+      "bytes": 1009,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/index.mjs",
+      "sourceSha256": "6756b3d6e39d12e24f2586c23f9d7d13d702e2ce05f26c80f35c3a2cdec23c71",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/trusted-evaluation-entry/package.json",
+      "sha256": "9612c3d466a8bee975c2a4456b0a487f613af97e983a10576930a4465a80669c",
+      "bytes": 822,
+      "sourcePath": "bundle/modules/trusted-evaluation-entry/package.json",
+      "sourceSha256": "9612c3d466a8bee975c2a4456b0a487f613af97e983a10576930a4465a80669c",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/ui-settings-memory/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "sourcePath": "bundle/modules/ui-settings-memory/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/ui-settings-memory/README.md",
+      "sha256": "c4da450be48c149e78eb7aa8dc184d366aef46cd3af55a8cdd2eb7d95e89099d",
+      "bytes": 5484,
+      "sourcePath": "bundle/modules/ui-settings-memory/README.md",
+      "sourceSha256": "c4da450be48c149e78eb7aa8dc184d366aef46cd3af55a8cdd2eb7d95e89099d",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/ui-settings-memory/lib/client.js",
+      "sha256": "3b3d66ffc510e997ce215084eb43b7805a1926e008dd2edaa80b90817b624092",
+      "bytes": 103681,
+      "sourcePath": "bundle/modules/ui-settings-memory/lib/client.js",
+      "sourceSha256": "3b3d66ffc510e997ce215084eb43b7805a1926e008dd2edaa80b90817b624092",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/ui-settings-memory/lib/index.js",
+      "sha256": "5d0db86c8ce69a8765e888b08716150a476a907e9c0eda9a1dc8bd323665ea06",
+      "bytes": 8421,
+      "sourcePath": "bundle/modules/ui-settings-memory/lib/index.js",
+      "sourceSha256": "5d0db86c8ce69a8765e888b08716150a476a907e9c0eda9a1dc8bd323665ea06",
+      "transformations": []
+    },
+    {
+      "path": "bundle/modules/ui-settings-memory/package.json",
+      "sha256": "0e56a02fc208c53a67efc7e86b1dad5c64a522533a8d3da818bf38711f904452",
+      "bytes": 2330,
+      "sourcePath": "bundle/modules/ui-settings-memory/package.json",
+      "sourceSha256": "0e56a02fc208c53a67efc7e86b1dad5c64a522533a8d3da818bf38711f904452",
+      "transformations": []
+    },
+    {
+      "path": "package.json",
+      "sha256": "c3c1532fac53c66e2e1621c3c9976f7dd1f9b35234f01e453c70956547893c42",
+      "bytes": 8235,
+      "sourcePath": "package.json",
+      "sourceSha256": "c3c1532fac53c66e2e1621c3c9976f7dd1f9b35234f01e453c70956547893c42",
+      "transformations": []
+    }
+  ]
+}

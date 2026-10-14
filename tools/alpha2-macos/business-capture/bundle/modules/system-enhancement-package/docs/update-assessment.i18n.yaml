@@ -1,0 +1,19 @@
+# Bilingual-pair consistency record for update-assessment.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, update its counterpart and recompute with
+# scripts/translation-pairing-record.ts. This nested pair is outside the corpus CLI scope.
+/background-dsh-update-assessment:
+  en: 45853506742dbded
+  zh: b0392577da66dcba
+/background-dsh-update-assessment/trigger-and-evidence:
+  en: a7ecf6a61514372c
+  zh: 542fcb72efa2d94c
+/background-dsh-update-assessment/cost-and-cancellation:
+  en: d63fc2bd7afb23ee
+  zh: 15c548c027228fc3
+/background-dsh-update-assessment/persistence-and-recovery:
+  en: 544abbfd314c44c6
+  zh: dafc68c6ce456f0d
+/background-dsh-update-assessment/host-and-client-integration:
+  en: 457d9ebc08380d95
+  zh: 4f2a673e1ac8d520

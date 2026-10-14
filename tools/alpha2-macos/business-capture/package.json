@@ -1,0 +1,231 @@
+{
+  "name": "dsh-sep-bundle",
+  "version": "0.2.1-beta.3-bundle.24",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "DSH SEP bundle admission candidate; full business activation awaits dependency and host adaptation verification.",
+  "main": "./bundle/lib/index.js",
+  "exports": {
+    ".": "./bundle/lib/index.js",
+    "./package.json": "./package.json",
+    "./configuration": "./bundle/lib/configuration.js",
+    "./configuration-budget": "./bundle/lib/configuration-budget.js",
+    "./session-v4-review": "./bundle/lib/session-v4.js",
+    "./session-persistence": "./bundle/lib/session-persistence.js",
+    "./file-protection": "./bundle/lib/file-protection.js",
+    "./recovery-authority": "./bundle/lib/recovery-authority.js",
+    "./protected-file-tools": "./bundle/lib/protected-file-tools.js",
+    "./project-binding": "./bundle/lib/project-binding.js",
+    "./protected-profile": "./bundle/lib/protected-profile.js",
+    "./compaction-group": "./bundle/lib/compaction-group.js",
+    "./protected-runtime": "./bundle/lib/protected-runtime.js",
+    "./native-compaction": "./bundle/lib/native-compaction.js",
+    "./p1-runtime": "./bundle/lib/p1-runtime.js",
+    "./business-runtime": "./bundle/lib/business-runtime.js",
+    "./controlled-installation": "./bundle/lib/controlled-installation.js",
+    "./settings-runtime": "./bundle/lib/settings-runtime.js",
+    "./native-settings-installation": "./bundle/lib/native-settings-installation.js",
+    "./application-shutdown": "./bundle/lib/application-shutdown.js",
+    "./context-preparation": "./bundle/host/context-preparation/index.mjs",
+    "./attachment-maintenance": "./bundle/lib/attachment-maintenance.js",
+    "./native-attachments": "./bundle/lib/native-attachments.js"
+  },
+  "files": [
+    "bundle/lib",
+    "bundle/cordis.patch.yml",
+    "bundle/contracts",
+    "bundle/README.md",
+    "LICENSE",
+    "bundle/modules",
+    "bundle/licenses",
+    "bundle/THIRD-PARTY-NOTICES.md",
+    "bundle/config",
+    "bundle/host"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lance-QwQ/DSH-SEP.git"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./bundle/cordis.patch.yml"
+    }
+  },
+  "dshSepBundle": {
+    "schema": 1,
+    "stage": "entry-only",
+    "businessActivation": "blocked-until-verified",
+    "preparedRuntime": "modules-only",
+    "runtimeContract": "./bundle/contracts/modules.json",
+    "configurationContract": "./bundle/contracts/configuration.json",
+    "sessionPersistenceContract": "./bundle/contracts/session-persistence.json",
+    "filesystemProtectionContract": "./bundle/contracts/file-protection.json",
+    "fileConsumerContract": "./bundle/contracts/file-consumers.json",
+    "projectBindingContract": "./bundle/contracts/project-binding.json",
+    "protectedProfileContract": "./bundle/contracts/protected-profile.json",
+    "compactionGroupContract": "./bundle/contracts/compaction-group.json",
+    "nativeCompactionContract": "./bundle/contracts/native-compaction.json",
+    "p1RuntimeContract": "./bundle/contracts/p1-runtime.json",
+    "businessRuntimeContract": "./bundle/contracts/business-runtime.json",
+    "settingsInstallationContract": "./bundle/contracts/settings-installation.json",
+    "hostDependencyContract": "./bundle/contracts/host-dependencies.json",
+    "nativeSettingsContract": "./bundle/contracts/native-settings-installation.json",
+    "contextPreparationContract": "bundle/contracts/context-preparation.json"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "1.0.8",
+    "@sinclair/typebox": "0.34.41",
+    "fast-xml-parser": "5.11.1",
+    "fflate": "0.8.3",
+    "pdfjs-dist": "6.2.108",
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.5-alpha.1",
+    "@deepseek-ai/cordis-plugin-loader": "1.0.6-alpha.1",
+    "@deepseek-ai/dsh-attachment-local": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-agent": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-brand": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-locale": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-ui-settings": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-ui-sidebar": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-compaction-basic": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-fs": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-invariants": "0.2.0-rc.2 || 0.2.1-alpha.1",
+    "@deepseek-ai/dsh-llm": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-session": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-session-format": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-session-persistence": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-session-persistence-jsonl": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-storage-domain": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-subagent": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-tools": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-util-values": "0.2.1-alpha.1",
+    "@deepseek-ai/schemastery": "3.18.5-alpha.1",
+    "react": "18.3.1",
+    "@deepseek-ai/dsh-session-format-v3-to-v4": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-compaction-image-offload": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-session-format-catalog": "0.2.1-alpha.1",
+    "@deepseek-ai/node-addon-system": "0.1.2",
+    "koffi": "3.1.1",
+    "@deepseek-ai/dsh-fs-local": "0.2.1-alpha.1",
+    "chokidar": "4.0.3",
+    "@deepseek-ai/dsh-fs-observation-policy": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-tool-fs": "0.2.1-alpha.1",
+    "@deepseek-ai/dsh-sandbox-policy": "0.2.1-alpha.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-agent": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-brand": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-connection": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-locale": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-primitives": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-settings": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-sidebar": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-slots": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-compaction-basic": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-fs": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-invariants": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-llm": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-format": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-persistence": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-persistence-jsonl": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-storage-domain": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-subagent": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-util-values": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-format-v3-to-v4": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-compaction-image-offload": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-format-catalog": {
+      "optional": true
+    },
+    "@deepseek-ai/node-addon-system": {
+      "optional": true
+    },
+    "koffi": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-fs-local": {
+      "optional": true
+    },
+    "chokidar": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-fs-observation-policy": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tool-fs": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-sandbox-policy": {
+      "optional": true
+    },
+    "@deepseek-ai/cordis-plugin-loader": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-attachment-local": {
+      "optional": true
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/context-preparation/index.mjs",
+  "sourceSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+  "changes": [
+    {
+      "old": "import {isAbsolute,relative,resolve} from 'node:path';",
+      "new": "import {isAbsolute,relative,resolve,toNamespacedPath} from 'node:path';"
+    },
+    {
+      "old": "fileURLToPath(new URL('./context_resolver.py',import.meta.url))",
+      "new": "toNamespacedPath(fileURLToPath(new URL('../../modules/context-preparation/context_resolver.py',import.meta.url)))"
+    },
+    {
+      "old": "apply(ctx,config={}){",
+      "new": "apply(ctx,config={},ownership){"
+    },
+    {
+      "old": "  async execute(args,exec){",
+      "new": "  async execute(args,exec){\n   const release=ownership?.enter('callback');try{"
+    },
+    {
+      "old": "[lifetime.signal,...(exec.signal?[exec.signal]:[])]",
+      "new": "[lifetime.signal,...ownership?[ownership.signal]:[],...(exec.signal?[exec.signal]:[])]"
+    },
+    {
+      "old": "try{return await active;}finally{active=null;}",
+      "new": "try{return await active;}finally{active=null;}\n   }finally{release?.();}"
+    }
+  ],
+  "resultSha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+  "scope": "Only Windows namespace path and actual companion relocation; public snapshot, scope, cancellation, output and timeout guards unchanged"
+}

@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/plugin-group/source/index.mjs",
+  "sourceSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+  "changes": [
+    {
+      "old": "from './history-expansion.mjs'",
+      "new": "from '../../modules/plugin-group/source/history-expansion.mjs'"
+    },
+    {
+      "old": "from './prework.mjs'",
+      "new": "from '../../modules/plugin-group/source/prework.mjs'"
+    },
+    {
+      "old": "from'./adapters.mjs'",
+      "new": "from '../../modules/plugin-group/source/adapters.mjs'"
+    },
+    {
+      "old": "from'./policies.mjs'",
+      "new": "from '../../modules/plugin-group/source/policies.mjs'"
+    },
+    {
+      "old": "inject=['suiteEnhancements']",
+      "new": "inject=['agents']"
+    },
+    {
+      "old": "apply(ctx,input={})",
+      "new": "apply(ctx,input={},ownership)"
+    },
+    {
+      "old": "config=schema.parse(input),lifetime=new AbortController(),active=new Set();",
+      "new": "config=schema.parse(input),local=new AbortController(),lifetime={signal:AbortSignal.any([local.signal,ownership.signal]),abort:()=>local.abort()},active=new Set();"
+    },
+    {
+      "old": "const track=fn=>{const work=Promise.resolve().then(fn);active.add(work);return work.finally(()=>active.delete(work));}",
+      "new": "const track=fn=>{const release=ownership.enter('callback'),work=Promise.resolve().then(fn);active.add(work);return work.finally(()=>{active.delete(work);release();});}"
+    }
+  ],
+  "resultSha256": "670c827722e6fba45abfd778b637e32cbf67e1d226d19b8c366f2411242399df",
+  "scope": "Trusted shared-runtime ownership required; scoped service becomes usable only after runtime admission; no second storage/budget owner"
+}
