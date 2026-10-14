@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "stage": "native fixed LaunchServices opener RED",
+  "definitions": 7,
+  "modes": [
+    "valid",
+    "home-ignored",
+    "different-target",
+    "wrong-program",
+    "wrong-bootstrap",
+    "signature-changed",
+    "alias-target"
+  ],
+  "expectedStub": {
+    "passed": 5,
+    "failed": 2,
+    "notRun": 0
+  },
+  "inputs": [
+    {
+      "path": "FixedApplicationOpener.h",
+      "bytes": 196,
+      "sha256": "6c50cdd2b71f275b49552cc9822fa23cfeb56112e7b93f3a6f5a56530c7b40dc"
+    },
+    {
+      "path": "FixedApplicationOpener.m",
+      "bytes": 392,
+      "sha256": "def61051497394babbd8095ea6392bd919cae0747c5b54b9d2b88f21ad673c67"
+    },
+    {
+      "path": "FixedApplicationOpenerTests.m",
+      "bytes": 3356,
+      "sha256": "535acb0129de9dcf66c20cf20e680a5bafff69fa58e018f86be44c761146f199"
+    },
+    {
+      "path": "opener-fixture.m",
+      "bytes": 448,
+      "sha256": "6e3266b0330b84b582b2ed85efa3be272460d5ec9a2e8bed74af5f999a8f66b9"
+    },
+    {
+      "path": "opener-account.m",
+      "bytes": 436,
+      "sha256": "7792442571fad365478b5a0743e70ffc18fce33f8ffb79e790e184edceaee691"
+    },
+    {
+      "path": "opener-native.mjs",
+      "bytes": 8367,
+      "sha256": "9f326bcf0f0572de3651e24304897342d9d5b724fca65031fe266cda77fb4379"
+    },
+    {
+      "path": "opener-red-ci-job.yml",
+      "bytes": 960,
+      "sha256": "3f312b3f9335ca4133541898224bed7423e27a70c5565dd4c4795e89456d947c"
+    }
+  ],
+  "dependency": {
+    "path": "installer-ui/native/InstallerUI.h",
+    "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+  },
+  "scope": "Signed synthetic short-lived AppKit application in otherwise absent getpwuid account ~/Applications/DSH SEP.app. Exact app PID/path and actual termination observed. No full SEP application health claim.",
+  "cleanup": "Only remove exact test-owned tree after unchanged inventory and verified synthetic app absent/terminated. Unknown owner retained; no kill. Runner account Applications directory, if created, is retained.",
+  "notVerified": [
+    "native RED reached",
+    "implementation",
+    "production installer composition",
+    "physical user input"
+  ]
+}

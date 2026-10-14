@@ -1,195 +1,11 @@
-name: SEP Alpha.2 macOS fixed project product execution
+name: SEP Alpha.2 macOS installed application opener contracts
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  project-launchservices:
-    runs-on: macos-15
-    timeout-minutes: 30
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Restore exact signed r61 candidate
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          export TMPDIR="$RUNNER_TEMP/"
-          node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
-      - name: Fixed candidate bindings and unchanged r49 hide contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          export SEP_PROJECT_R61_RECEIPT="$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json"
-          export SEP_PROJECT_CANDIDATE_TEST_ROOT="$RUNNER_TEMP/project-candidate-contracts"
-          mkdir "$SEP_PROJECT_CANDIDATE_TEST_ROOT"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/candidate.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/observation.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/derive.test.mjs > "$RUNNER_TEMP/project-candidate-contracts.tap" 2> "$RUNNER_TEMP/project-candidate-contracts.stderr"
-      - name: Three LaunchServices cycles with one hide and fresh observed effect each
-        shell: bash
-        run: |
-          set -euo pipefail
-          export TMPDIR="$RUNNER_TEMP/"
-          node tools/alpha2-macos/desktop/project-workflow-product/candidate-lifecycle.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/project-lifecycle-r61"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: project-launchservices-r64
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/project-r61/RESULT.json
-            ${{ runner.temp }}/project-r61/*.log
-            ${{ runner.temp }}/project-r61/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/project-candidate-contracts.tap
-            ${{ runner.temp }}/project-candidate-contracts.stderr
-            ${{ runner.temp }}/project-lifecycle-r61/**/*.json
-            ${{ runner.temp }}/project-lifecycle-r61/**/*.log
-            ${{ runner.temp }}/project-lifecycle-r61/**/*.stdout
-            ${{ runner.temp }}/project-lifecycle-r61/**/*.stderr
-            ${{ runner.temp }}/project-lifecycle-r61/*.stdout
-            ${{ runner.temp }}/project-lifecycle-r61/*.stderr
-  project-native-ui:
-    runs-on: macos-15
-    timeout-minutes: 30
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Restore exact r61 application and verify archive and signatures
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
-      - name: Bind verified restore receipt for the two actual UI rounds
-        run: |
-          set -euo pipefail
-          echo "SEP_PROJECT_UI_SOURCE=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_ASSEMBLY_RESULT=$RUNNER_TEMP/project-r61/RESULT.json" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_ASSEMBLY_SHA256=$(shasum -a 256 "$RUNNER_TEMP/project-r61/RESULT.json" | cut -d ' ' -f1)" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_OPERATOR_NODE=$(command -v node)" >> "$GITHUB_ENV"
-      - name: Derived current-project application UI and same-Profile migration
-        shell: bash
-        run: |
-          set -euo pipefail
-          : "${SEP_PROJECT_UI_SOURCE:?absolute tools/alpha2-macos source root required}"
-          : "${SEP_PROJECT_UI_ASSEMBLY_RESULT:?exact new assembly RESULT required}"
-          : "${SEP_PROJECT_UI_ASSEMBLY_SHA256:?assembly RESULT SHA required}"
-          : "${SEP_PROJECT_UI_OPERATOR_NODE:?verified operator Node required}"
-          output="$RUNNER_TEMP/project-ui-native"
-          mkdir "$output"
-          /usr/bin/sw_vers > "$output/mac-version.txt"
-          /usr/bin/clang -framework ApplicationServices "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/ax-capability.m" -o "$output/ax-capability"
-          "$output/ax-capability" > "$output/AX-CAPABILITY.json"
-          "$SEP_PROJECT_UI_OPERATOR_NODE" --test --test-reporter=tap "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-contract.test.mjs" > "$output/contracts.tap" 2> "$output/contracts.stderr"
-          "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round1" "$output/data" 1
-          "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round2" "$output/data" 2
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: project-native-ui-r64
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/project-r61/RESULT.json
-            ${{ runner.temp }}/project-r61/*.log
-            ${{ runner.temp }}/project-r61/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/project-ui-native/*.json
-            ${{ runner.temp }}/project-ui-native/*.tap
-            ${{ runner.temp }}/project-ui-native/*.stderr
-            ${{ runner.temp }}/project-ui-native/*.txt
-            ${{ runner.temp }}/project-ui-native/round1/*.json
-            ${{ runner.temp }}/project-ui-native/round1/*.log
-            ${{ runner.temp }}/project-ui-native/round2/*.json
-            ${{ runner.temp }}/project-ui-native/round2/*.log
-  installer-full-resources:
-    runs-on: macos-15
-    timeout-minutes: 30
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.21.0'
-      - name: Restore exact r61 application and verify archive and signatures
-        env:
-          SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
-      - name: Full signed payload assembly and private child preview cancel list and normal close
-        run: node tools/alpha2-macos/installer-ui/resources/full-payload-probe.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/installer-full-resources" > "$RUNNER_TEMP/installer-full-resources.log" 2>&1
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: installer-full-resources-r64
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/project-r61/RESULT.json
-            ${{ runner.temp }}/project-r61/*.log
-            ${{ runner.temp }}/project-r61/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/installer-full-resources.log
-            ${{ runner.temp }}/installer-full-resources/*.json
-            ${{ runner.temp }}/installer-full-resources/Installer.app/Contents/RESOURCES-BUILD.json
-            ${{ runner.temp }}/installer-full-resources/Installer.app.resources-build/*.log
-  native-installer-private-transport:
-    runs-on: macos-15
-    timeout-minutes: 12
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: 24.21.0
-      - name: Verify synthetic controller and compile unchanged native contracts
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/installer-transport"
-          files=(tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs)
-          shasum -a 256 "${files[@]}" > "$RUNNER_TEMP/installer-transport/INPUTS.sha256"
-          node tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs "$RUNNER_TEMP/installer-transport/fixture-preflight" > "$RUNNER_TEMP/installer-transport/fixture-preflight.json" 2> "$RUNNER_TEMP/installer-transport/fixture-preflight.stderr"
-          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m -o "$RUNNER_TEMP/installer-transport/tests" > "$RUNNER_TEMP/installer-transport/compile.log" 2>&1
-      - name: Run fifteen unchanged real NSTask contracts against candidate implementation
-        shell: bash
-        run: |
-          set +e
-          "$RUNNER_TEMP/installer-transport/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-transport/fixtures" > "$RUNNER_TEMP/installer-transport/RESULT.json" 2> "$RUNNER_TEMP/installer-transport/stderr.log"
-          code=$?
-          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-transport/exit.txt"
-          exit "$code"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: native-installer-private-transport
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-transport/*.json
-            ${{ runner.temp }}/installer-transport/*.log
-            ${{ runner.temp }}/installer-transport/*.sha256
-            ${{ runner.temp }}/installer-transport/*.txt
-            ${{ runner.temp }}/installer-transport/*.stderr
-  native-installer-role-candidate:
+  native-installer-opener-red:
     runs-on: macos-15
     timeout-minutes: 10
     permissions:
@@ -201,64 +17,17 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 24.21.0
-      - name: Compile additional role replacement definitions
+      - name: Run seven fixed native LaunchServices opener RED definitions
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/installer-role-candidate"
-          shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/role-regressions.mjs > "$RUNNER_TEMP/installer-role-candidate/INPUTS.sha256"
-          clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerRoleTests.m -o "$RUNNER_TEMP/installer-role-candidate/tests" > "$RUNNER_TEMP/installer-role-candidate/compile.log" 2>&1
-      - name: Run exact test-child role replacement probes
-        shell: bash
-        run: |
-          set +e
-          node tools/alpha2-macos/installer-ui/transport/role-regressions.mjs "$RUNNER_TEMP/installer-role-candidate/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-role-candidate/results" > "$RUNNER_TEMP/installer-role-candidate/RESULT.json" 2> "$RUNNER_TEMP/installer-role-candidate/stderr.log"
-          code=$?
-          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-role-candidate/exit.txt"
-          exit "$code"
+          node tools/alpha2-macos/installer-ui/application/opener-native.mjs "$RUNNER_TEMP/installer-opener-red"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: native-installer-role-candidate
+          name: native-installer-opener-red
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/installer-role-candidate/*.json
-            ${{ runner.temp }}/installer-role-candidate/*.log
-            ${{ runner.temp }}/installer-role-candidate/*.sha256
-            ${{ runner.temp }}/installer-role-candidate/*.txt
-            ${{ runner.temp }}/installer-role-candidate/results/*.stdout
-            ${{ runner.temp }}/installer-role-candidate/results/*.stderr
-  native-installer-application-candidate:
-    runs-on: macos-15
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - name: Compile fixed UI plus candidate application delegate
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/installer-application-candidate"
-          shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.h tools/alpha2-macos/installer-ui/application/InstallerApplication.m tools/alpha2-macos/installer-ui/application/InstallerApplicationTests.m > "$RUNNER_TEMP/installer-application-candidate/INPUTS.sha256"
-          clang -fobjc-arc -fblocks -Wall -Wextra -DSEP_INSTALLER_APPLICATION_TESTING=1 -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.m tools/alpha2-macos/installer-ui/application/InstallerApplicationTests.m -o "$RUNNER_TEMP/installer-application-candidate/tests" > "$RUNNER_TEMP/installer-application-candidate/compile.log" 2>&1
-      - name: Run eight unchanged native menu and termination contracts
-        shell: bash
-        run: |
-          set +e
-          "$RUNNER_TEMP/installer-application-candidate/tests" > "$RUNNER_TEMP/installer-application-candidate/RESULT.json" 2> "$RUNNER_TEMP/installer-application-candidate/stderr.log"
-          code=$?
-          printf '%s\n' "$code" > "$RUNNER_TEMP/installer-application-candidate/exit.txt"
-          exit "$code"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: native-installer-application-candidate
-          if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/installer-application-candidate/*.json
-            ${{ runner.temp }}/installer-application-candidate/*.log
-            ${{ runner.temp }}/installer-application-candidate/*.sha256
-            ${{ runner.temp }}/installer-application-candidate/*.txt
+            ${{ runner.temp }}/installer-opener-red/*.json
+            ${{ runner.temp }}/installer-opener-red/*.stdout
+            ${{ runner.temp }}/installer-opener-red/*.stderr
