@@ -14,6 +14,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 async function fileHash(path){const h=createHash('sha256');for await(const b of createReadStream(path))h.update(b);return h.digest('hex');}
 assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');
 const [overlayArg,repositoryArg,sourceArg,helperArg,asarArg,outArg]=process.argv.slice(2);assert(outArg);
+assert([undefined,'0','1'].includes(process.env.SEP_MAC_IMAGE_PACKAGE));const images=process.env.SEP_MAC_IMAGE_PACKAGE==='1';
 const temp=await realpath(process.env.RUNNER_TEMP),overlay=await realpath(overlayArg),repository=await realpath(repositoryArg),source=await realpath(sourceArg),helper=await realpath(helperArg),asarPath=await realpath(asarArg),out=resolve(outArg);
 for(const p of [overlay,helper,asarPath,out])assert(p.startsWith(temp+'/'));assert.equal(await realpath(dirname(out)),dirname(out));
 await mkdir(out,{mode:0o700});process.umask(0o077);
@@ -28,12 +29,17 @@ try{
  const payload=join(packageRoot,'payload');await mkdir(payload,{mode:0o755});const host=join(payload,'host');await rename(join(extract,'dsh'),host);
  const hostManifest=JSON.parse(await readFile(join(host,'node_modules/@deepseek-ai/dsh/package.json'),'utf8'));assert.equal(hostManifest.version,'0.2.1-alpha.2');
  const captured=join(host,'sep-capture');await installCapture(join(source,'business-capture'),captured,process.env.SEP_MAC_BUSINESS_CAPTURE_SHA256);const captureBytes=await readFile(join(captured,'CAPTURE.json'));result.captureSha256=sha(captureBytes);
- const list=JSON.parse(await readFile(new URL('./runtime-inputs.json',import.meta.url),'utf8'));assert.equal(list.schema,1);assert.equal(new Set(list.files).size,list.files.length);const mac=join(payload,'mac'),inputs=[];
+ if(images){const {prepareSettingsUi}=await import('../settings-ui/adapter.mjs');result.settingsUi=(await prepareSettingsUi({hostRoot:host,bundleRoot:captured})).receipt;}
+ const list=JSON.parse(await readFile(new URL('./runtime-inputs.json',import.meta.url),'utf8'));assert.equal(list.schema,1);
+ if(images){const extra=JSON.parse(await readFile(new URL('./image-runtime-inputs.json',import.meta.url),'utf8'));assert.equal(extra.schema,1);list.files.push(...extra.files);}
+ assert.equal(new Set(list.files).size,list.files.length);const mac=join(payload,'mac'),inputs=[];
  for(const name of list.files){assert(!name.split('/').some(p=>!p||p==='.'||p==='..'));const from=join(source,name),stat=await lstat(from);assert(stat.isFile()&&!stat.isSymbolicLink());const target=join(mac,name);await mkdir(dirname(target),{recursive:true,mode:0o755});await copyFile(from,target);inputs.push({path:name,sha256:await fileHash(target)});}
  const native=join(payload,'native');await mkdir(native,{mode:0o755});const helperTarget=join(native,'project-tree');await copyFile(helper,helperTarget);await chmod(helperTarget,0o555);
+ let attachmentHelper;
+ if(images){const provided=process.env.SEP_MAC_ATTACHMENT_HELPER;assert(provided&&provided.startsWith(temp+'/'));assert.equal(await realpath(provided),provided);assert((await lstat(provided)).isFile());attachmentHelper=join(native,'attachment-tree');await copyFile(provided,attachmentHelper);await chmod(attachmentHelper,0o555);}
  const node=join(resources,'runtime/primary-runtime/dependencies/node/bin/node');assert((await lstat(node)).isFile());await run('verify-node',node,['--version']);
- const manifest={schema:1,validationScope:'isolated-macos-preview',dshVersion:'0.2.1-alpha.2',bundleRoot:'payload/host/sep-capture',hostRoot:'payload/host',appRoot:'DSH SEP.app',entries:{}};
- for(const [role,path]of Object.entries({node,business:join(mac,'business/standalone.mjs'),ownerLease:join(mac,'captured/owner-lease.mjs'),helper:helperTarget,electron:join(app,'Contents/MacOS/DSH SEP'),asar:join(resources,'app.asar')}))manifest.entries[role]={path:relative(packageRoot,path),sha256:await fileHash(path)};
+ const manifest={schema:images?2:1,validationScope:'isolated-macos-preview',dshVersion:'0.2.1-alpha.2',bundleRoot:'payload/host/sep-capture',hostRoot:'payload/host',appRoot:'DSH SEP.app',...images?{capabilities:['governed-images']}:{},entries:{}};
+ for(const [role,path]of Object.entries({node,business:join(mac,images?'media-business/standalone.mjs':'business/standalone.mjs'),ownerLease:join(mac,'captured/owner-lease.mjs'),helper:helperTarget,...images?{attachmentHelper}:{},electron:join(app,'Contents/MacOS/DSH SEP'),asar:join(resources,'app.asar')}))manifest.entries[role]={path:relative(packageRoot,path),sha256:await fileHash(path)};
  validateProgramShape(manifest);const program=JSON.stringify(manifest,null,2)+'\n',programSha256=sha(program);await writeFile(join(packageRoot,'PROGRAM.json'),program,{flag:'wx',mode:0o444});
  const command=`#!/bin/sh\nset -eu\nroot=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)\nnode="$root/${manifest.entries.node.path}"\nactual=$(/usr/bin/shasum -a 256 "$node" | /usr/bin/cut -d ' ' -f 1)\n[ "$actual" = '${manifest.entries.node.sha256}' ] || { echo SEP_MAC_NODE_CHANGED >&2; exit 1; }\nexec "$node" "$root/payload/mac/desktop/managed-broker/launch-full.mjs" "$root/PROGRAM.json" '${programSha256}' "$HOME/Library/Application Support/DSH SEP/alpha2-mac-preview"\n`;
  await writeFile(join(packageRoot,'DSH SEP.command'),command,{flag:'wx',mode:0o755});await chmod(join(packageRoot,'DSH SEP.command'),0o755);
@@ -42,6 +48,6 @@ try{
  // placed inside packageRoot. Identity/data are created by the launcher later.
  const inventory=await inventoryPackage(packageRoot);await writeFile(join(out,'PACKAGE-INVENTORY.json'),JSON.stringify(inventory,null,2)+'\n',{flag:'wx'});await verifyPackage(packageRoot,inventory);
  const archive=join(out,'DSH-SEP-macOS-Alpha2-preview.zip');await run('archive','/usr/bin/ditto',['-c','-k','--sequesterRsrc','--keepParent',packageRoot,archive]);
- result.status='pass';Object.assign(result,{packageRoot,programSha256,inputs,treeSha256:inventory.treeSha256,artifact:'DSH-SEP-macOS-Alpha2-preview.zip',artifactSha256:await fileHash(archive),artifactBytes:(await lstat(archive)).size,notVerified:['integrated native desktop startup until separate smoke passes','Developer ID/notarization','physical desktop and TCC interaction','paid provider calls','arbitrary process-family cleanup','Finder app bootstrap','production automatic updates']});
+ result.status='pass';Object.assign(result,{capabilities:images?['governed-images']:[],packageRoot,programSha256,inputs,treeSha256:inventory.treeSha256,artifact:'DSH-SEP-macOS-Alpha2-preview.zip',artifactSha256:await fileHash(archive),artifactBytes:(await lstat(archive)).size,notVerified:['integrated native desktop startup until separate smoke passes','Developer ID/notarization','physical desktop and TCC interaction','paid provider calls','arbitrary process-family cleanup','Finder app bootstrap','production automatic updates']});
 }catch(e){result.code=/^[A-Z][A-Z0-9_]+$/.test(e?.code??'')?e.code:'SEP_MAC_PACKAGE_ASSEMBLY_FAILED';result.errorType=e.name;result.diagnostic=String(e.message).slice(0,300);process.exitCode=1;}
 finally{await writeFile(join(out,'RESULT.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({status:result.status,code:result.code,artifact:result.artifact}));}

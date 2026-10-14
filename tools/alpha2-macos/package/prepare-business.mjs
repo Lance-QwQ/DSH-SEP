@@ -13,5 +13,7 @@ await mkdir(out,{mode:0o700});const asar=await import(pathToFileURL(asarPath));a
 const host=join(out,'host');await rename(join(out,'extracted/dsh'),host);assert.equal(JSON.parse(await readFile(join(host,'node_modules/@deepseek-ai/dsh/package.json'),'utf8')).version,'0.2.1-alpha.2');
 const bundle=join(host,'sep-capture');await installCapture(join(repo,'tools/alpha2-macos/business-capture'),bundle,process.env.SEP_MAC_BUSINESS_CAPTURE_SHA256);const capture=await readFile(join(bundle,'CAPTURE.json')),sha=createHash('sha256').update(capture).digest('hex');
 assert.match(process.env.SEP_MAC_BUSINESS_CAPTURE_SHA256??'',/^[a-f0-9]{64}$/);assert.equal(sha,process.env.SEP_MAC_BUSINESS_CAPTURE_SHA256);
-await writeFile(join(out,'PREPARED.json'),JSON.stringify({schema:1,status:'pass',scope:'native Host dependency extraction and exact SEP source capture',host,bundle,captureSha256:sha},null,2)+'\n',{flag:'wx'});
+assert([undefined,'0','1'].includes(process.env.SEP_MAC_SETTINGS_UI));let settingsUi;
+if(process.env.SEP_MAC_SETTINGS_UI==='1'){const {prepareSettingsUi}=await import('../settings-ui/adapter.mjs');settingsUi=await prepareSettingsUi({hostRoot:host,bundleRoot:bundle});}
+await writeFile(join(out,'PREPARED.json'),JSON.stringify({schema:1,status:'pass',scope:'native Host dependency extraction and exact SEP source capture',host,bundle,captureSha256:sha,settingsUi:settingsUi?.receipt},null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({status:'pass',captureSha256:sha}));

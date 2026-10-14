@@ -4,6 +4,7 @@ const file=new URL('../business/standalone.test.mjs',import.meta.url);let source
 const swaps=[
  ['real native macOS official web profile','real native macOS image web profile'],
  ['SEP_MAC_BUSINESS_TEST_ROOT','SEP_MAC_MEDIA_TEST_ROOT',2],
+ ["assert.equal(ready.authenticatedUrlPresent,true);","assert.equal(ready.authenticatedUrlPresent,true);assert.deepEqual(ready.settings,{status:'pass',fiberActive:true,clientAdvertised:true,staticClientServed:true,memoryAvailable:true,budgetAvailable:true});"],
  ['helperSha256:hash(await readFile(process.env.SEP_MAC_TREE_HELPER)),initialize:true','helperSha256:hash(await readFile(process.env.SEP_MAC_TREE_HELPER)),attachmentHelperPath:process.env.SEP_MAC_ATTACHMENT_HELPER,attachmentHelperSha256:hash(await readFile(process.env.SEP_MAC_ATTACHMENT_HELPER)),initialize:true'],
  ["new URL('./standalone-probe.mjs',import.meta.url)","new URL("+JSON.stringify(new URL('./standalone-probe.mjs',import.meta.url).href)+")"],
  ['import.meta.url',JSON.stringify(import.meta.url)],

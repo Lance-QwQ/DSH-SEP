@@ -6,6 +6,7 @@ native-media-business:
     actions: read
   env:
     SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
+    SEP_MAC_SETTINGS_UI: '1'
   steps:
     - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       with:
@@ -34,6 +35,7 @@ native-media-business:
         echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
         echo "SEP_MAC_ATTACHMENT_HELPER=$root/native-attachments" >> "$GITHUB_ENV"
         echo "SEP_MAC_MEDIA_TEST_ROOT=$root/tests" >> "$GITHUB_ENV"
+        echo "SEP_MAC_SETTINGS_TEST_ROOT=$root/settings-tests" >> "$GITHUB_ENV"
         echo "SEP_MAC_PROGRAM_ROOT=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
         sw_vers > "$root/system.txt"
         uname -a >> "$root/system.txt"
@@ -42,6 +44,9 @@ native-media-business:
     - name: Native governed image upload and persisted restart
       run: |
         node --test --test-reporter=tap tools/alpha2-macos/media-business/maintenance.test.mjs tools/alpha2-macos/media-business/vision.test.mjs tools/alpha2-macos/media-business/layout.test.mjs tools/alpha2-macos/media-business/loader.test.mjs tools/alpha2-macos/media-business/standalone.test.mjs > "$SEP_MAC_MEDIA_OUTPUT/composition.tap" 2>&1
+    - name: Native required settings mount and real authenticated mutation
+      run: |
+        node --test --test-reporter=tap tools/alpha2-macos/settings-ui/adapter.test.mjs tools/alpha2-macos/settings-ui/required.test.mjs tools/alpha2-macos/settings-ui/native.test.mjs > "$SEP_MAC_MEDIA_OUTPUT/settings.tap" 2>&1
     - name: Preserve native inputs and outcomes
       if: always()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -53,4 +58,5 @@ native-media-business:
           ${{ runner.temp }}/sep-media-business/*.txt
           ${{ runner.temp }}/sep-media-business/prepared/PREPARED.json
           ${{ runner.temp }}/sep-media-business/tests/standalone-*/round-*.log
+          ${{ runner.temp }}/sep-media-business/settings-tests/**/*.log
           ${{ runner.temp }}/media-carrier-download/DOWNLOAD-RECEIPT.json
