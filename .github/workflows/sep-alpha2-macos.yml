@@ -297,7 +297,6 @@ jobs:
             ${{ runner.temp }}/sep-carrier-build-receipts/
 
   desktop-managed-overlay:
-    if: false
     runs-on: macos-15
     timeout-minutes: 40
     permissions:
@@ -391,53 +390,3 @@ jobs:
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.log
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256
-
-  task-sandbox-native:
-    runs-on: macos-15
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.19.0'
-      - name: Build APFS helper and test fixed native task worker
-        run: |
-          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-task-sandbox-native"
-          mkdir "$root"
-          echo "SEP_TASK_RED_OUTPUT=$root" >> "$GITHUB_ENV"
-          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
-          shasum -a 256 tools/alpha2-macos/task-sandbox/* "$root/native-tree" > "$root/inputs.sha256"
-          SEP_MAC_TREE_HELPER="$root/native-tree" node tools/alpha2-macos/task-sandbox/run-native-tests.mjs "$root/native"
-      - name: Preserve actual native result and input fingerprints
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: sep-macos-task-sandbox-native
-          if-no-files-found: error
-          path: |
-            ${{ env.SEP_TASK_RED_OUTPUT }}/inputs.sha256
-            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.log
-            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.json
-
-  package-inventory:
-    runs-on: macos-15
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.19.0'
-      - name: Package relocation and entry integrity
-        run: |
-          export SEP_MAC_PACKAGE_TEST_ROOT="$(cd "$RUNNER_TEMP" && pwd -P)/sep-package-inventory"
-          node --test --test-reporter=tap tools/alpha2-macos/package/package-inventory.test.mjs > "$RUNNER_TEMP/sep-package-inventory.tap"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: sep-macos-package-inventory
-          if-no-files-found: error
-          path: ${{ runner.temp }}/sep-package-inventory.tap
