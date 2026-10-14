@@ -1,13 +1,13 @@
-name: SEP Alpha.2 macOS fixed app renderer grammar and project continuation
+name: SEP Alpha.2 macOS successor installer build with fixed r74 payload
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  project-native-r77:
+  installer-application:
     runs-on: macos-15
-    timeout-minutes: 25
+    timeout-minutes: 45
     permissions:
       contents: read
       actions: read
@@ -18,43 +18,58 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Verify exact test-only origins and identity contracts
-        run: |
-          set -euo pipefail
-          node tools/alpha2-macos/desktop/project-workflow-product/derive-inspector-identity.mjs --verify > "$RUNNER_TEMP/r77-origins.json"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/native-contract.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-authority-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-readiness-derive.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-inspector-identity.test.mjs tools/alpha2-macos/package/successor-r74/candidate.test.mjs tools/alpha2-macos/desktop/project-workflow-product/native-renderer-grammar.test.mjs > "$RUNNER_TEMP/r77-contracts.tap" 2> "$RUNNER_TEMP/r77-contracts.stderr"
-      - name: Verify exact renderer grammar derivation
-        run: node tools/alpha2-macos/desktop/project-workflow-product/derive-renderer-grammar.mjs --verify > "$RUNNER_TEMP/r77-renderer-origin.json"
-      - name: Restore exact signed r74 app without changing product bytes
+      - name: Verify exact bundle layout and external evidence preservation
+        env:
+          SEP_INSTALLER_LAYOUT_TEST_ROOT: ${{ runner.temp }}/installer-layout-tests
+        run: node --test --test-reporter=tap tools/alpha2-macos/package/prepare-installer-signing.test.mjs > "$RUNNER_TEMP/installer-layout.tap" 2> "$RUNNER_TEMP/installer-layout.stderr"
+      - name: Verify exact successor payload acceptance and refusal contracts
+        run: node --test --test-reporter=tap tools/alpha2-macos/package/successor-r74/candidate.test.mjs > "$RUNNER_TEMP/successor-candidate.tap" 2> "$RUNNER_TEMP/successor-candidate.stderr"
+      - name: Record native build environment
+        run: '{ sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/successor-system.txt"'
+      - name: Compile exact six production sources without executing dummy admission
+        run: node tools/alpha2-macos/package/preflight-installer-native.mjs "$RUNNER_TEMP/installer-native-preflight"
+      - name: Restore exact r74 signed application payload
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
         run: node tools/alpha2-macos/package/successor-r74/restore-application.mjs "$RUNNER_TEMP/project-r74"
-      - name: Two actual UI rounds on the same synthetic P2 data
+      - name: Build sign and restore complete installer application
+        run: node tools/alpha2-macos/package/successor-r74/assemble-installer-application.mjs "$RUNNER_TEMP/project-r74/evidence/project-build/RESULT.json" 5aa8ddfc6b72141f494eb50e07cdced61e1fc89080368b9edf922389641f2704 "$RUNNER_TEMP/project-r74" "$RUNNER_TEMP/installer-application"
+      - name: Split unchanged archive for bounded evidence transport
         run: |
           set -euo pipefail
-          output="$RUNNER_TEMP/project-ui-native-r6"
-          mkdir "$output"
-          /usr/bin/sw_vers > "$output/mac-version.txt"
-          receipt="$RUNNER_TEMP/project-r74/RESULT.json"
-          sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f1)
-          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r6.mjs "$receipt" "$sha" "$output/round1" "$output/data" 1
-          node tools/alpha2-macos/desktop/project-workflow-product/native-operator-r6.mjs "$receipt" "$sha" "$output/round2" "$output/data" 2
+          node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/installer-application" "$RUNNER_TEMP/installer-transport"
+          node -e 'const fs=require("node:fs"),assert=require("node:assert/strict");const m=JSON.parse(fs.readFileSync(process.argv[1]));assert.equal(m.parts.length,2);' "$RUNNER_TEMP/installer-transport/transport-manifest.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: project-native-ui-r77-evidence
+          name: installer-application-evidence-r78
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/r77-origins.json
-            ${{ runner.temp }}/r77-renderer-origin.json
-            ${{ runner.temp }}/r77-contracts.tap
-            ${{ runner.temp }}/r77-contracts.stderr
+            ${{ runner.temp }}/successor-system.txt
+            ${{ runner.temp }}/successor-candidate.tap
+            ${{ runner.temp }}/successor-candidate.stderr
+            ${{ runner.temp }}/installer-layout.tap
+            ${{ runner.temp }}/installer-layout.stderr
+            ${{ runner.temp }}/installer-native-preflight/*.json
+            ${{ runner.temp }}/installer-native-preflight/*.log
             ${{ runner.temp }}/project-r74/RESULT.json
             ${{ runner.temp }}/project-r74/*.log
-            ${{ runner.temp }}/project-r74/PACKAGE-INVENTORY.json
             ${{ runner.temp }}/project-r74/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/project-ui-native-r6/*.txt
-            ${{ runner.temp }}/project-ui-native-r6/round1/*.json
-            ${{ runner.temp }}/project-ui-native-r6/round1/*.log
-            ${{ runner.temp }}/project-ui-native-r6/round2/*.json
-            ${{ runner.temp }}/project-ui-native-r6/round2/*.log
+            ${{ runner.temp }}/installer-application/*.json
+            ${{ runner.temp }}/installer-application/*.log
+            ${{ runner.temp }}/installer-application/*.app.resources-build/*.log
+            ${{ runner.temp }}/installer-transport/*.json
+            tools/alpha2-macos/package/MAC-PREVIEW-USER-GUIDE.md
+            tools/alpha2-macos/package/SUCCESSOR-INSTALLER-BUILD.md
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: installer-application-part1-r78
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/installer-transport/*.0001.part
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: installer-application-part2-r78
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/installer-transport/*.0002.part
