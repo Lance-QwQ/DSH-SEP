@@ -1,0 +1,13 @@
+# r33 close-caller diagnostic variant
+
+Commit `7aa4b2113d1b858d4f7358a9cfbd93e780a2de5b`, run `38557966121`, job `115831710234` executed the predefined two-round diagnostic plan. Six native transform/contract checks and both actual desktop cycles passed; no test cleanup was required.
+
+The original r28 archive pair and complete restored tree were verified before changes. The diagnostic changed exactly one file: `payload/host/node_modules/@deepseek-ai/dsh-client-ui-settings-general/lib/client.js`, from SHA-256 `1a2ef0d71656473fa3aafcc7281de681423a10b218be782f06e93bf4d8d4435e` (52,333 bytes) to `1ee3a61ad4c0f8f3726f24e7b3b9c70957ad9f04dba53bde2066da3eb8f065ea` (53,722 bytes). The other 24,226 inventory entries were unchanged. SOURCE.json's nine transformations were independently replayed locally against the pinned original bytes and exactly matched the recorded derived hash.
+
+PROGRAM.json remains `22457aa1dbc3e9e5f0a0e54907885ba2707b1f5deb6078c8d5c487925d6759de`: it binds seven executable/manifest entries and the host location, and does not directly bind this client file. The separate derived tree is `f2fd208faaa304ccd262fcb232c8fba02380e9174d3cf8f516b0537ffa19a396`; POST-RUN.json confirms that tree remained unchanged during execution. This is explicitly **diagnostic-variant evidence, not unchanged r28 product evidence**.
+
+Both rounds recorded only `root-mounted`, then the test's intentional `header` close followed by `store-close` with `open:true`. There was no `onboarding-appeared`, `explicit-onboarding`, `modal-layer`, `mask`, `section` or root-unmount record. The automatic settings closure did **not** reproduce. Round 2 did verify persistence of recall=false and default limit=80 from round 1, followed by normal background/reopen/exit behavior within this diagnostic variant.
+
+The earlier r29–r32 failures remain unresolved. r32 established that the settings dialog appeared for 18 ms and disappeared without a renderer reload; r33 does not identify that historical close caller or prove a fix. Instrumentation can alter timing even though callbacks remain memoized and preserve their original arguments, result and exception. The predefined diagnostic is complete; no additional blind repetition or speculative product change follows from its two passes.
+
+Artifact `11891270427`, 9661 bytes, SHA-256 `a689091c6d2e8d7a1df229f0c0d1a009f2c9ab9644b63ad89730a6d03e2b1d64`, preserves the original identity receipts, exact delta, post-run audit, six-test log and both native round records. Physical input, AX/TCC, real model calls and public-release certification remain outside this evidence.
