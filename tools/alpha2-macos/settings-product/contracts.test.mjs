@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {classifySettingsRound} from './contracts.mjs';
+const receipt=()=>({status:'pass',cleanup:{status:'pass',resourcesConfirmedReleased:true},badge:{width:32,height:14,officialHarnessPreserved:true},workspaceReady:{surface:'workspace',ready:true,blocked:false},settings:{status:'pass',recallFalse:true,defaultLimitCny:80,dialogClosed:true,persistedFromPriorColdStart:false}});
+const exit={code:0,signal:null};
+test('one complete actual page round with normal cleanup passes',()=>assert.equal(classifySettingsRound(receipt(),exit).status,'pass'));
+test('workspace-only pass is not settings certification',()=>{const r=receipt();delete r.settings;assert.equal(classifySettingsRound(r,exit).status,'fail');});
+test('failed settings with a healthy workspace does not pass',()=>{const r=receipt();r.settings.status='fail';assert.equal(classifySettingsRound(r,exit).status,'fail');});
+test('settings without confirmed saved values or closed dialog cannot pass',()=>{for(const key of ['recallFalse','dialogClosed']){const r=receipt();r.settings[key]=false;assert.equal(classifySettingsRound(r,exit).status,'fail');}const r=receipt();r.settings.defaultLimitCny=100;assert.equal(classifySettingsRound(r,exit).status,'fail');});
+test('unknown cleanup stays blocked even if the page succeeded',()=>{const r=receipt();r.cleanup.resourcesConfirmedReleased=false;assert.equal(classifySettingsRound(r,exit).status,'blocked');});
+test('missing worker exit cannot be promoted by a page receipt',()=>assert.equal(classifySettingsRound(receipt(),null).status,'blocked'));
+test('nonzero actual worker exit stays fail',()=>assert.equal(classifySettingsRound(receipt(),{code:1,signal:null}).status,'fail'));

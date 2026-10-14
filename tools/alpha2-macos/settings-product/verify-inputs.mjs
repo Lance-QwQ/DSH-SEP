@@ -1,0 +1,15 @@
+// Source binding is independent of actual desktop test acceptance.
+import{readFile}from'node:fs/promises';import{createHash}from'node:crypto';import{dirname,resolve,join}from'node:path';import{fileURLToPath,pathToFileURL}from'node:url';import assert from'node:assert/strict';import{deriveDiagnostic}from'./derive.mjs';
+const here=dirname(fileURLToPath(import.meta.url)),sha=b=>createHash('sha256').update(b).digest('hex');
+export async function verifyInputs(){
+ const manifest=JSON.parse(await readFile(join(here,'SOURCE_INPUTS.json'),'utf8')),freezeBytes=await readFile(join(here,'FREEZE.json')),freeze=JSON.parse(freezeBytes),inputs=[];
+ const required=['desktop/workspace-diagnostic.mjs','desktop/workspace-diagnostic-worker.mjs','desktop/smoke-inspector.mjs','desktop/product-control/native-launch-runner.mjs','desktop/managed-broker/program-manifest.mjs','desktop/run-command.mjs','settings-ui/desktop-probe.mjs','settings-ui/desktop-diagnostic.mjs','settings-ui/desktop-onboarding.mjs','settings-ui/desktop-trace.mjs','settings-ui/desktop-screenshot.mjs','settings-ui/EVIDENCE-R33.md','package/package-inventory.mjs','package/restore-fixed-application-r44.mjs'].sort();assert.deepEqual(manifest.inputs.map(v=>v.path).sort(),required);
+ const owned=['build-derived.mjs','ci-job.yml','contracts.mjs','contracts.test.mjs','derive.mjs','derive.test.mjs','operator.mjs','ORIGIN.json','README.md','run-product.mjs','series.mjs','series.test.mjs','SOURCE_INPUTS.json','verify-inputs.mjs','worker.mjs'].sort();assert.deepEqual(freeze.inputs.map(v=>v.path).sort(),owned);
+ for(const row of manifest.inputs){assert(/^(?:desktop|settings-ui|package)\/[A-Za-z0-9./-]+\.(?:mjs|md)$/.test(row.path)&&!row.path.split('/').includes('..'));const b=await readFile(join(here,'..',row.path));assert.equal(b.length,row.bytes);assert.equal(sha(b),row.sha256);inputs.push(row);}
+ for(const row of freeze.inputs){assert(/^[A-Za-z0-9_.-]+\.(?:mjs|json|md|yml)$/.test(row.path));const b=await readFile(join(here,row.path));assert.equal(b.length,row.bytes);assert.equal(sha(b),row.sha256);}
+ assert.equal(sha(await readFile(join(here,'contracts.test.mjs'))),'303b4ae267288131370601c455e0ed45ba9c38250bbbfe9fecf7a7e4f961ce72');
+ const derived=deriveDiagnostic({worker:await readFile(join(here,'../desktop/workspace-diagnostic-worker.mjs'),'utf8'),operator:await readFile(join(here,'../desktop/workspace-diagnostic.mjs'),'utf8')}),origin=JSON.parse(await readFile(join(here,'ORIGIN.json'),'utf8'));
+ for(const name of ['worker','operator']){assert.equal(await readFile(join(here,name+'.mjs'),'utf8'),derived.outputs[name]);assert.deepEqual(origin[name],derived.origin[name]);}
+ return {schema:1,status:'pass',scope:'fixed test code/source/derivation only',freezeSha256:sha(freezeBytes),inputs,candidate:freeze.inputs,derived:{worker:derived.origin.worker.resultSha256,operator:derived.origin.operator.resultSha256},nativeProductAcceptance:'not_run'};
+}
+if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.url)console.log(JSON.stringify(await verifyInputs(),null,2));

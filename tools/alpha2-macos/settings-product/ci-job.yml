@@ -1,0 +1,42 @@
+native-settings-fixed-r44:
+  runs-on: macos-15
+  timeout-minutes: 35
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+        fetch-depth: 1
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Bind sources and execute seven original plus four new operator contracts
+      shell: bash
+      run: |
+        set -euo pipefail
+        node tools/alpha2-macos/settings-product/verify-inputs.mjs > "$RUNNER_TEMP/settings-source.json"
+        node --test --test-reporter=tap tools/alpha2-macos/settings-product/contracts.test.mjs tools/alpha2-macos/settings-product/derive.test.mjs tools/alpha2-macos/settings-product/series.test.mjs > "$RUNNER_TEMP/settings-contracts.tap"
+    - name: Restore exact r44 app without rebuild or signing changes
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/settings-fixed-r44"
+    - name: Three same-data cold-start settings DOM rounds on unchanged product
+      run: node tools/alpha2-macos/settings-product/run-product.mjs "$RUNNER_TEMP/settings-fixed-r44" "$RUNNER_TEMP/settings-product"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-settings-fixed-r44
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/settings-source.json
+          ${{ runner.temp }}/settings-contracts.tap
+          ${{ runner.temp }}/settings-fixed-r44/RESULT.json
+          ${{ runner.temp }}/settings-fixed-r44/*.log
+          ${{ runner.temp }}/settings-product/RESULT.json
+          ${{ runner.temp }}/settings-product/SOURCE-VERIFIED.json
+          ${{ runner.temp }}/settings-product/*.log
+          ${{ runner.temp }}/settings-product/round-*/*.json
+          ${{ runner.temp }}/settings-product/round-*/*.log
+          ${{ runner.temp }}/settings-product/round-*/*.png

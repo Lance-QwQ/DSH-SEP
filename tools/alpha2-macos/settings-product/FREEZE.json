@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "nativeProductAcceptance": "not_run",
+  "fixedContracts": 7,
+  "newDefinitions": 4,
+  "plannedNativeRounds": 3,
+  "productModified": false,
+  "inputs": [
+    {
+      "path": "ORIGIN.json",
+      "bytes": 7866,
+      "sha256": "c2a345e624127cba434a4bfbfcdb2ff675604b42faa7390d3b9c6d1b58708d77"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3912,
+      "sha256": "d79c39f16c0136b77f7f9cd9fa17ebe1bb9d5f5f6562db1c32d22a9e05354524"
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "bytes": 2477,
+      "sha256": "e801db649065d6b51ef72a7a5df9ab17a289584ed06e6ab35b11677995b33a1f"
+    },
+    {
+      "path": "build-derived.mjs",
+      "bytes": 813,
+      "sha256": "eda358cb7a19b539b4ee39350afc863c6b66a7927eeae8447a55b9fef2039bd6"
+    },
+    {
+      "path": "ci-job.yml",
+      "bytes": 2096,
+      "sha256": "851de9d797c51574d8dc31d5abf4b105caf6b71a5ac833114466f9b5745b06dc"
+    },
+    {
+      "path": "contracts.mjs",
+      "bytes": 477,
+      "sha256": "933ae3deef78e602a1374b2ebef1772803032d5de6e69f37011a9d59c9721d3b"
+    },
+    {
+      "path": "contracts.test.mjs",
+      "bytes": 1759,
+      "sha256": "303b4ae267288131370601c455e0ed45ba9c38250bbbfe9fecf7a7e4f961ce72"
+    },
+    {
+      "path": "derive.mjs",
+      "bytes": 6971,
+      "sha256": "f18e082ad7bcfe098e331aa991cdce8a7a21ccb5e1aff07c7805fb3e65459cc8"
+    },
+    {
+      "path": "derive.test.mjs",
+      "bytes": 1711,
+      "sha256": "9f5989622f2739942f9e34c25c2ce66e9ceb0b8e1dfcadfc7bbfd2c6c6ca6dd9"
+    },
+    {
+      "path": "operator.mjs",
+      "bytes": 6325,
+      "sha256": "c8f803f69fb359386b9fc85a60896894f819295eab4f07c984e6a7a9d60a6665"
+    },
+    {
+      "path": "run-product.mjs",
+      "bytes": 5868,
+      "sha256": "2a846ecdea024228159327bfa50f78ca90afe707b1928ab7fca1bc1c08175b06"
+    },
+    {
+      "path": "series.mjs",
+      "bytes": 991,
+      "sha256": "e7abd90e1361b53ad9f5fa037326e8cef94bc4a54de863f24e45e1b5b22ae43c"
+    },
+    {
+      "path": "series.test.mjs",
+      "bytes": 1686,
+      "sha256": "ed47ad53405f0e747cd02c077f30dc572430f6401784449be62afd9b27a5fa08"
+    },
+    {
+      "path": "verify-inputs.mjs",
+      "bytes": 3072,
+      "sha256": "9e3ac5458ec1e52edc3213e050624106b41524a7cd8d199dec5b44c28a1ec058"
+    },
+    {
+      "path": "worker.mjs",
+      "bytes": 14199,
+      "sha256": "a45d1b20e17d5a5af219f3e0337a8d1512c11b8014da9a0c632f384e71c89e55"
+    }
+  ]
+}
