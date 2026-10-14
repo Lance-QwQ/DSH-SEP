@@ -76,12 +76,36 @@ The original ASAR/unpacked directories remain in the output for comparison.
 `ElectronAsarIntegrity` is rebound to the new ASAR header before signing; an
 existing header binding must match the original archive. The overlay does not
 change Electron fuse settings. See [Electron's ASAR integrity contract](https://www.electronjs.org/docs/latest/tutorial/asar-integrity).
-`package.json` is merged with the two JS dependency declarations and explicit
+`package.json` is merged with the two captured JS dependency declarations and explicit
 overlay metadata; it is not replaced by the R6 source manifest. App re-signing is
 ad hoc, with deep verification; this is neither Developer ID signing nor
 notarization. Relative framework links are retained by `ditto`.
 
 ## Current validation boundary
+
+Latest native evidence: run 38519791762 completed the separate original carrier's
+three actual macOS desktop cycles. This proves official Host readiness,
+close-to-background, native activate callback reopening and acknowledged normal
+exit for that carrier; it does not certify this overlay or physical Dock clicks.
+
+Managed runs through 38521351369 successfully assembled and ad-hoc verified the
+app, but did not reach its main entry. The final exception trace identifies a
+real packaging omission: R6 main and `update-profile.mjs` import
+`@deepseek-ai/dsh-app-boot`, whereas the original official desktop bundles its
+devDependencies into main. The existing managed capture did not ship this bare
+package at app root. This supersedes the earlier hypothesis that every managed
+failure was only Inspector timing.
+
+The new assembler bridges five explicit R6 desktop imports to the same fixed
+carrier's `dsh/node_modules` using ASAR-internal relative links, after exact name
+and Alpha.2 version checks. Existing app dependencies and host bytes are not
+replaced. Each added link and source-manifest hash is recorded. This change needs
+the next real Mac negative probe; local dependency-planner tests alone do not
+prove successful native loading. Diagnostic exception pauses are disabled before
+resuming the expected product refusal, so a test pause cannot masquerade as a
+product hang.
+
+The paragraphs below retain the earlier evidence generations as history.
 
 The original 21 portable tests passed on Windows against the exact R6 inputs;
 the public capture and ASAR plist checks bring this to 25 local definitions.

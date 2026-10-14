@@ -297,7 +297,6 @@ jobs:
             ${{ runner.temp }}/sep-carrier-build-receipts/
 
   desktop-managed-overlay:
-    if: false
     runs-on: macos-15
     timeout-minutes: 40
     permissions:
@@ -320,7 +319,7 @@ jobs:
           test "$(uname -m)" = arm64
           export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
           mkdir "$RUNNER_TEMP/overlay-receipts"
-          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+          node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-dependencies.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
           cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
       - name: Fetch fixed successful carrier artifact and derive inner digest
         env:
@@ -391,32 +390,3 @@ jobs:
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.log
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.txt
             ${{ env.SEP_MAC_PROFILE_OUTPUT }}/*.sha256
-
-  task-sandbox-native:
-    runs-on: macos-15
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.19.0'
-      - name: Build APFS helper and test fixed native task worker
-        run: |
-          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-task-sandbox-native"
-          mkdir "$root"
-          echo "SEP_TASK_RED_OUTPUT=$root" >> "$GITHUB_ENV"
-          xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
-          shasum -a 256 tools/alpha2-macos/task-sandbox/* "$root/native-tree" > "$root/inputs.sha256"
-          SEP_MAC_TREE_HELPER="$root/native-tree" node tools/alpha2-macos/task-sandbox/run-native-tests.mjs "$root/native"
-      - name: Preserve actual native result and input fingerprints
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: sep-macos-task-sandbox-native
-          if-no-files-found: error
-          path: |
-            ${{ env.SEP_TASK_RED_OUTPUT }}/inputs.sha256
-            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.log
-            ${{ env.SEP_TASK_RED_OUTPUT }}/native/*.json

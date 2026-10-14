@@ -25,3 +25,6 @@ test('instrumentation failure removes breakpoint without resuming product code',
  const f=fixture([{method:'Debugger.paused',params:{hitBreakpoints:['app-entry']}}]);await assert.rejects(instrumentAtAppEntry(f.client,()=>{throw Error('fixture');},{timeoutMs:1000}),{message:'fixture'});
  assert.equal(f.calls.at(-1)[0],'Debugger.removeBreakpoint');assert.equal(f.calls.filter(x=>x[0]==='Debugger.resume').length,0);
 });
+test('diagnostic exception pausing is disabled before resuming real app execution',async()=>{
+ const f=fixture([{method:'Debugger.paused',params:{hitBreakpoints:['app-entry']}}]);await instrumentAtAppEntry(f.client,()=>{}, {timeoutMs:1000,diagnoseExceptions:true});assert.deepEqual(f.calls.slice(-3).map(x=>x[0]),['Debugger.setPauseOnExceptions','Debugger.removeBreakpoint','Debugger.resume']);assert.equal(f.calls.at(-3)[1].state,'none');
+});

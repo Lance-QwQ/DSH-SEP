@@ -16,7 +16,7 @@ export async function instrumentAtAppEntry(client,instrument,{timeoutMs=30000,di
   if(typeof breakpointId!=='string')throw Error('INSPECTOR_APP_ENTRY_BINDING');
   await client.call('Runtime.runIfWaitingForDebugger');
   for(;;){const paused=await next();if(paused.hitBreakpoints?.includes(breakpointId))break;await client.call('Debugger.resume');}
-  await instrument();await client.call('Debugger.removeBreakpoint',{breakpointId});removed=true;await client.call('Debugger.resume');
+  await instrument();if(diagnoseExceptions)await client.call('Debugger.setPauseOnExceptions',{state:'none'});await client.call('Debugger.removeBreakpoint',{breakpointId});removed=true;await client.call('Debugger.resume');
  }catch(error){error.diagnostic={...error.diagnostic,entryTrace:trace,breakpointId};throw error;}
  finally{off();if(breakpointId&&!removed)await client.call('Debugger.removeBreakpoint',{breakpointId}).catch(()=>{});}
 }
