@@ -77,3 +77,16 @@ This is not permission to abandon an unknown production broker or release its
 lease. Program-path replacement between hash verification and spawn, sustained
 hostile IPC traffic, and unexpected descendants are outside this prototype's
 certified scope and require the production adapter's own tests.
+
+The five-second overall deadline belongs only to this synthetic contract. A
+production launcher must use separate bounded startup and shutdown phases;
+ordinary background operation and long tasks must have no overall lifetime
+deadline inherited from this fixture.
+
+The runner now separately compiles the same source **without** the test macro
+and executes one additional regression. Both no-argument launch and a complete
+external synthetic descriptor must return code 78 and
+`SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED`; the descriptor's side-effect marker
+must remain absent. Its `production-compile.log` and `production.log` remain
+separate from the original four native contract cases. This fifth test is pending
+native execution and does not imply a connected production launcher.

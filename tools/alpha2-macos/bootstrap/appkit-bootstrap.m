@@ -149,7 +149,8 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
 - (void)finish:(BOOL)pass {
   if(self.finished) return; self.finished=YES; [self.timer invalidate]; self.timer=nil;
   if(self.channel>=0) { close(self.channel); self.channel=-1; } self.result=pass?0:70;
-  NSMutableDictionary *receipt=[@{@"status":pass?@"pass":@"blocked",@"resourcesConfirmedReleased":@(pass),@"desktopReady":@(self.desktopReady),@"activated":@(self.activated),@"quitCancelled":@(self.quitCancelled),@"cleanControllerExit":@(self.childExited && WIFEXITED(self.childStatus) && WEXITSTATUS(self.childStatus)==0),@"scope":@"synthetic-bootstrap-contract"} mutableCopy];
+  int exitStatus=self.childStatus; // Darwin wait macros require an addressable int.
+  NSMutableDictionary *receipt=[@{@"status":pass?@"pass":@"blocked",@"resourcesConfirmedReleased":@(pass),@"desktopReady":@(self.desktopReady),@"activated":@(self.activated),@"quitCancelled":@(self.quitCancelled),@"cleanControllerExit":@(self.childExited && WIFEXITED(exitStatus) && WEXITSTATUS(exitStatus)==0),@"scope":@"synthetic-bootstrap-contract"} mutableCopy];
   if(!pass) { receipt[@"code"]=self.failure?:@"SEP_BOOTSTRAP_EXIT_UNCONFIRMED"; receipt[@"fixtureCleanup"]=@"separate-test-cleanup"; receipt[@"fixtureChildReaped"]=@(self.childExited || self.child<0); }
   output(receipt);
   /* Leaving a blocked synthetic fixture is test cleanup, not a production
@@ -186,7 +187,8 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
     if(pid==self.child) { self.childExited=YES; self.childStatus=status; }
     else if(pid<0 && errno!=EINTR) { self.childUnconfirmed=YES; [self block:@"SEP_BOOTSTRAP_WAIT_UNCONFIRMED"]; }
   }
-  if(!self.protocolBroken && self.cleanReceipt && self.childExited && self.channelEOF && WIFEXITED(self.childStatus) && WEXITSTATUS(self.childStatus)==0) { [self finish:YES]; return; }
+  int exitStatus=self.childStatus;
+  if(!self.protocolBroken && self.cleanReceipt && self.childExited && self.channelEOF && WIFEXITED(exitStatus) && WEXITSTATUS(exitStatus)==0) { [self finish:YES]; return; }
   if(!self.protocolBroken && self.childExited && self.channelEOF) [self block:@"SEP_BOOTSTRAP_EXIT_UNCONFIRMED"];
   double now=NSProcessInfo.processInfo.systemUptime;
   if(!self.protocolBroken && now>=self.deadline) [self block:@"SEP_BOOTSTRAP_DEADLINE"];
