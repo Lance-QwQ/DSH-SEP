@@ -26,4 +26,5 @@ const manifest=join(output,'fixture.json');await writeFile(manifest,JSON.stringi
 try{await command(process.execPath,['--test',join(source,'parser-contract.test.mjs')],'contract');}catch(e){errors.push(e);}
 try{await command(process.execPath,['--test',join(source,'document-entry.test.mjs')],'entry',{...process.env,SEP_PARSER_ENTRY_TEST_ROOT:join(output,'entry-cases')});}catch(e){errors.push(e);}
 try{await command(process.execPath,['--test',join(source,'parser-native.test.mjs')],'native',{...process.env,SEP_MAC_PARSER_FIXTURE:manifest});}catch(e){errors.push(e);}
+if(errors.length){try{await command(process.execPath,[join(source,'diagnose-native.mjs'),manifest],'native-diagnostic');}catch(e){errors.push(e);}}
 if(errors.length)throw new AggregateError(errors,'PARSER_TESTS_FAILED');
