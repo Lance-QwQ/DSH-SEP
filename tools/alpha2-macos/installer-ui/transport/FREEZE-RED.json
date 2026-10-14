@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "stage": "installer-private-transport-native-red",
+  "status": "not_run",
+  "definitions": 15,
+  "implementation": "explicit non-launching RED stub",
+  "sourceInputs": [
+    {
+      "path": "InstallerPipeTransport.h",
+      "bytes": 494,
+      "sha256": "c1ece550711b546ddd5589199f3a7646b857b32f489394bc0729a91f96ea491c"
+    },
+    {
+      "path": "InstallerPipeTransport.m",
+      "bytes": 1005,
+      "sha256": "42ab73e34434836781acf189dc51151d2aa63ecf451b5353dabf4a6a7e64802c"
+    },
+    {
+      "path": "InstallerPipeTransportTests.m",
+      "bytes": 12634,
+      "sha256": "c19fb9ddfaf925beddfe38ececc1f2716f87dc3431401c0518e45397c3e961ab"
+    },
+    {
+      "path": "controller-fixture.mjs",
+      "bytes": 3911,
+      "sha256": "8723d9243997cce31dcb19f524585cabb5c97ef1ed60684c4a39a8ca5b55c2dd"
+    },
+    {
+      "path": "fixture-preflight.mjs",
+      "bytes": 3064,
+      "sha256": "e960550597684ebf7706d6a5b2f8003a59e9aee8afa9d945a8159644dbdf1016"
+    },
+    {
+      "path": "ci-job.yml",
+      "bytes": 2618,
+      "sha256": "4b9113566dfda0b2d6eef5730d71f3a1b77df2fa4c133719a39af2644723a4aa"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3353,
+      "sha256": "f5e2a63fcee6c707787fa138d3c73e8b2f843145e4fbb0227b66076774aab184"
+    }
+  ],
+  "dependency": {
+    "path": "installer-ui/native/InstallerUI.h",
+    "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+  },
+  "fixturePreflight": {
+    "scope": "Windows synthetic data generation only; no NSTask or POSIX inherited-pipe evidence",
+    "sha256": "42290c06701403009ba29fc8d3b1ca709fc7cc74bc3042fb1cc71b7e515a2df7"
+  },
+  "notVerified": [
+    "actual Mac RED execution",
+    "actual NSTask implementation",
+    "production NSBundle transport integration",
+    "real payload installation"
+  ],
+  "historicalFixturePreflight": {
+    "path": "installer-transport-fixture-local-r1",
+    "outcome": "failed before result: Windows does not retain POSIX inherited stdout ordering; Mac requirement preserved"
+  },
+  "dailyChanged": false,
+  "githubPushed": false
+}

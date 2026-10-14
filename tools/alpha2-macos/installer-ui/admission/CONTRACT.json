@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "status": "not_run",
-  "stage": "red-scaffold",
+  "stage": "green-candidate-after-native-red",
   "entry": "SEPInstallerVerifyMainBundle(int argc, NSString **failure)",
   "sourceOfPaths": "NSBundle.mainBundle only; argc must equal 1; no path or executable from environment or arguments",
   "binary": "Contents/MacOS/DSH SEP Installer",
@@ -16,7 +16,7 @@
     "No symlinks or regular-file hardlinks; owner must be effective uid or root; no group/world writable components",
     "Native held-fd reads with before/after stat, F_GETPATH and reopen identity checks"
   ],
-  "limits": {"manifestBytes": 262144, "receiptBytes": 33554432, "executableBytes": 268435456, "runtimeFileBytes": 4194304, "runtimeTotalBytes": 67108864, "runtimeFiles": 1024, "runtimeEntries": 2048, "runtimeDepth": 32},
+  "limits": {"manifestBytes": 262144, "receiptBytes": 33554432, "nodeBytes": 268435456, "helperBytes": 16777216, "runtimeFileBytes": 4194304, "runtimeTotalBytes": 67108864, "runtimeFiles": 1024, "runtimeEntries": 2048, "runtimeDepth": 32},
   "payloadFullInventory": "Deferred to fixed hash-bound trusted Node bundle configuration and controller preview; native layer does not claim this check",
   "success": "Returns internally verified fixed-role paths and hashes; no child process started and no open descriptor transferred",
   "revalidation": "This receipt is admission evidence, not a lasting filesystem capability; trusted Node must revalidate its manifest, closure and full payload before preview/install",
