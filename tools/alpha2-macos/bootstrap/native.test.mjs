@@ -20,5 +20,5 @@ for(const scenario of ['clean','cancel-then-quit','exit-without-proof','wrong-no
  const expected=['clean','cancel-then-quit'].includes(scenario)?'pass':'blocked';assert.equal(receipt.status,expected,receipt.code);assert.equal(receipt.resourcesConfirmedReleased,expected==='pass');
  if(expected==='pass'){assert.equal(receipt.desktopReady,true);assert.equal(receipt.activated,true);assert.equal(receipt.cleanControllerExit,true);assert.equal(receipt.quitCancelled,scenario==='cancel-then-quit');assert.equal(run.code,undefined);}
  else{assert.notEqual(run.code,undefined);assert.equal(receipt.fixtureCleanup,'separate-test-cleanup');}
- if(scenario==='quit-no-reply'){assert.equal(receipt.code,'SEP_BOOTSTRAP_DEADLINE');assert.equal(receipt.activated,true);assert.equal(receipt.fixtureChildReaped,true);assert(Date.now()-started<7000,'modal deadline did not complete within the fixture cleanup bound');}
+ if(scenario==='quit-no-reply'){assert.equal(receipt.code,'SEP_BOOTSTRAP_DEADLINE');assert.equal(receipt.activated,true);assert.equal(receipt.fixtureChildReaped,true);assert.equal(run.code,70);assert.match(run.stderr,/stage=finish-receipt mode=modal/);assert.match(run.stderr,/stage=stop-default mode=default/);assert.match(run.stderr,/stage=run-return /);assert(Date.now()-started<7000,'modal deadline did not complete within the fixture cleanup bound');}
 });

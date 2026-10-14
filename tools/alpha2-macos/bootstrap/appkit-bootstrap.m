@@ -34,6 +34,14 @@ static void output(NSDictionary *v) {
   NSData *b=[NSJSONSerialization dataWithJSONObject:v options:0 error:NULL];
   if(b) fwrite(b.bytes,1,b.length,stdout); fputc('\n',stdout); fflush(stdout);
 }
+static void trace(const char *stage) {
+  NSString *mode=NSRunLoop.currentRunLoop.currentMode;
+  const char *kind=[mode isEqual:NSDefaultRunLoopMode]?"default":[mode isEqual:NSModalPanelRunLoopMode]?"modal":"other";
+  fprintf(stderr,"SEP_BOOTSTRAP_TRACE stage=%s mode=%s uptime=%.3f\n",stage,kind,NSProcessInfo.processInfo.systemUptime); fflush(stderr);
+}
+static void wakeApplication(void) {
+  [NSApp postEvent:[NSEvent otherEventWithType:NSEventTypeApplicationDefined location:NSZeroPoint modifierFlags:0 timestamp:0 windowNumber:0 context:nil subtype:0 data1:0 data2:0] atStart:NO];
+}
 static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString **digest) {
   if(![path isKindOfClass:NSString.class] || ![path hasPrefix:@"/"] || [path rangeOfCharacterFromSet:NSCharacterSet.controlCharacterSet].location!=NSNotFound) return NO;
   char canonical[PATH_MAX];
@@ -84,6 +92,7 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
   (void)sender; if(self.failure || self.finished) return NSTerminateCancel;
   if(!self.quit && self.generation) { self.quit=randomHex(12); [self send:@"requestQuit" extra:@{@"requestId":self.quit}]; }
   self.terminationPending=YES;
+  trace("quit-pending");
   return NSTerminateLater;
 }
 - (void)queueSyntheticQuit {
@@ -160,11 +169,14 @@ static BOOL snapshot(NSString *path,uint64_t maximum,NSData **contents,NSString 
   NSMutableDictionary *receipt=[@{@"status":pass?@"pass":@"blocked",@"resourcesConfirmedReleased":@(pass),@"desktopReady":@(self.desktopReady),@"activated":@(self.activated),@"quitCancelled":@(self.quitCancelled),@"cleanControllerExit":@((BOOL)(self.childExited && WIFEXITED(exitStatus) && WEXITSTATUS(exitStatus)==0)),@"scope":@"synthetic-bootstrap-contract"} mutableCopy];
   if(!pass) { receipt[@"code"]=self.failure?:@"SEP_BOOTSTRAP_EXIT_UNCONFIRMED"; receipt[@"fixtureCleanup"]=@"separate-test-cleanup"; receipt[@"fixtureChildReaped"]=@((BOOL)(self.childExited || self.child<0)); }
   output(receipt);
-  if(self.terminationPending) { self.terminationPending=NO; [NSApp replyToApplicationShouldTerminate:pass]; }
+  trace("finish-receipt");
+  if(self.terminationPending) { self.terminationPending=NO; trace("termination-reply"); [NSApp replyToApplicationShouldTerminate:pass]; trace("termination-reply-returned"); }
   /* Leaving a blocked synthetic fixture is test cleanup, not a production
    * owner policy. A real unknown owner must retain quarantine and its lease. */
-  [NSApp stop:nil];
-  [NSApp postEvent:[NSEvent otherEventWithType:NSEventTypeApplicationDefined location:NSZeroPoint modifierFlags:0 timestamp:0 windowNumber:0 context:nil subtype:0 data1:0 data2:0] atStart:NO];
+  // stop: called inside the modal loop stops only that loop. Defer the fixture's
+  // outer-loop stop until reply(NO) has unwound to the default mode.
+  [NSRunLoop.mainRunLoop performInModes:@[NSDefaultRunLoopMode] block:^{ trace("stop-default"); [NSApp stop:nil]; wakeApplication(); }];
+  wakeApplication();
 }
 - (void)poll:(NSTimer *)timer {
   (void)timer;
@@ -232,7 +244,7 @@ int main(int argc,const char *argv[]) {
     if(!config) { output(@{@"status":@"blocked",@"code":@"SEP_BOOTSTRAP_CONFIG",@"resourcesConfirmedReleased":@NO,@"fixtureCleanup":@"separate-test-cleanup"}); return 78; }
     [NSApplication sharedApplication]; [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
     Bootstrap *delegate=[Bootstrap new]; delegate.config=config; delegate.result=70;
-    NSApp.delegate=delegate; [NSApp run]; return delegate.result;
+    NSApp.delegate=delegate; [NSApp run]; trace("run-return"); return delegate.result;
 #else
     (void)argc; (void)argv;
     puts("{\"status\":\"blocked\",\"code\":\"SEP_BOOTSTRAP_PRODUCTION_NOT_CONNECTED\",\"resourcesConfirmedReleased\":false}"); return 78;

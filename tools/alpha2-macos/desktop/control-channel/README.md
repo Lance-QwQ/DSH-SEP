@@ -32,7 +32,22 @@ candidate passes all nine on Windows Node 24.21.0. Logs and the original stub
 are retained under the D: `control-channel` artifact directory. This result does
 not certify native fd behavior.
 
-## Native probe, awaiting CI
+## Native probe
+
+The first native run r35 (38561472234, job 115843327738) passed the nine pure
+contracts and fixture assembly/signature checks. The first real Electron case
+reported fd3 as a socket but failed with ENOENT before any acknowledgment; it was
+blocked after separate test cleanup and the other three cases were not run.
+This is not successful duplex evidence. The original artifact and logs remain in
+the `control-native-r35` artifact directory.
+
+The candidate correction uses Electron's `original-fs` only when hashing the
+physical app.asar. Electron's patched `node:fs` views that path as an archive
+directory. The parent still requires the independently built ASAR hash, now also
+checking the fixture's physical hash receipt. No hash check is removed. Fixed
+stage names identify subsequent failure boundaries without paths/error bodies.
+The corrected native probe is awaiting CI; the transport module is unchanged.
+Reference: https://www.electronjs.org/docs/latest/tutorial/asar-archives#treating-an-asar-archive-as-a-normal-file
 
 `ci-job.yml` uses the existing fixed-carrier downloader, artifact 11871124360 and
 outer SHA `63cc8bd74c5750911b668ce5a41aa15239db1a59911204355ec334d4fa4bc0b8`.

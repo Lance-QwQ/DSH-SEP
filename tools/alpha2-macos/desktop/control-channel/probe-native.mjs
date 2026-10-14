@@ -42,6 +42,7 @@ for(const mode of ['duplex','wrong-nonce','replay','eof']){
     if(mode==='duplex'){assert.equal(row.channel.state,'blocked');assert.equal(row.channel.code,'SEP_CONTROL_EOF');row.peerEofObserved=true;}
     // stdout is evidence of the fixture environment only, never an acknowledgment.
     const lines=stdout.trim().split('\n').filter(x=>x.startsWith('SEP_CONTROL_FIXTURE '));assert.equal(lines.length,1);row.fixture=JSON.parse(lines[0].slice('SEP_CONTROL_FIXTURE '.length));
+    assert.equal(row.fixture.physicalProgramSha256,build.resultAsarSha256);assert.equal(row.fixture.stage,'terminal');
     assert.equal(row.fixture.status,'pass');assert.equal(row.fixture.pid,child.pid);assert.equal(row.fixture.packaged,true);assert.equal(row.fixture.platform,'darwin');assert.equal(row.fixture.arch,'arm64');assert.match(row.fixture.electron,/^\d+\.\d+\.\d+/);assert.equal(row.fixture.rendererLoaded,true);assert.equal(row.fixture.rendererNodeAccess,false);assert.equal(row.fixture.rendererControlApi,false);assert.equal(row.fixture.rendererTextSha256,hash('SEP fd3 fixture'));assert(!overflow);row.status='pass';
   }catch(error){row.code=row.exit===null?'SEP_CONTROL_EXIT_DRAIN_UNKNOWN':typeof error.code==='string'&&/^SEP_CONTROL_[A-Z_]+$/.test(error.code)?error.code:'SEP_CONTROL_PROBE_FAILED';if(row.exit===null)row.status='blocked';row.errorType=error.name;row.mainExitObserved=exited;row.channel=channel?.status()??null;
   }finally{

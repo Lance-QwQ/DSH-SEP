@@ -124,3 +124,15 @@ the actual child within a seven-second test bound. The runner now reports five
 synthetic native definitions plus the one non-test refusal definition; the 12
 portable session definitions remain separate. No production total lifetime limit
 is introduced.
+
+In native r35 the original four definitions passed, as did non-test refusal and
+the 12 portable session definitions. The new no-reply case produced the correct
+blocked deadline receipt and reaped its exact child, but the outer AppKit process
+remained until the test timeout, so that definition failed. This was not a missing
+deadline callback: the remaining defect was calling `stop:` while still inside
+the modal loop after `reply(NO)`. Apple's [stop contract](https://developer.apple.com/documentation/appkit/nsapplication/stop%28_%3A%29?language=objc)
+states that this stops the modal loop rather than the main loop. The new candidate
+defers the fixture's outer-loop stop to default mode and posts an actual wake
+event. Bounded diagnostic stage/mode lines and a required ordinary code-70 return
+now distinguish that path from an external timeout kill. Native confirmation is
+pending; the seven-second assertion and all five native definitions remain.
