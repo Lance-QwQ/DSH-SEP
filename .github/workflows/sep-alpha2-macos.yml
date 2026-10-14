@@ -93,3 +93,66 @@ jobs:
             ${{ env.SEP_MACOS_SANDBOX_OUTPUT }}/*.log
           if-no-files-found: error
           retention-days: 14
+
+  # Merge this job into the already-authorized macOS test workflow; not a Release.
+  desktop-carrier:
+    runs-on: macos-15
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.19.0
+      - name: Prepare fixed official source in ephemeral storage
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          SRC="$RUNNER_TEMP/sep-alpha2-official-source"
+          git init "$SRC"
+          git -C "$SRC" remote add origin https://github.com/deepseek-ai/deepseek-harness.git
+          git -C "$SRC" fetch --depth 1 origin d743267388641bc76f17c45ce8b4c231aed1d32c
+          git -C "$SRC" checkout --detach FETCH_HEAD
+          echo "SEP_MAC_OFFICIAL_SOURCE=$SRC" >> "$GITHUB_ENV"
+      - name: Native Alpha.2 carrier build
+        run: node tools/alpha2-macos/desktop/build-carrier.mjs "$SEP_MAC_OFFICIAL_SOURCE" "$RUNNER_TEMP/sep-alpha2-desktop-build"
+      - name: Preserve actual carrier and receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-desktop-carrier
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/sep-alpha2-desktop-build/*.json
+            ${{ runner.temp }}/sep-alpha2-desktop-build/*.log
+            ${{ runner.temp }}/sep-alpha2-desktop-build/desktop-carrier.zip
+  
+  per-task-isolation-prototype:
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Bounded escaped-child boundary prototype
+        run: node tools/alpha2-macos/isolation/seatbelt-prototype.mjs "$(cd "$RUNNER_TEMP" && pwd -P)/sep-task-isolation"
+      - name: Preserve prototype evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-macos-per-task-isolation-prototype
+          path: |
+            ${{ runner.temp }}/sep-task-isolation/*.json
+            ${{ runner.temp }}/sep-task-isolation/*.log
+            ${{ runner.temp }}/sep-task-isolation/*.sb
+            ${{ runner.temp }}/sep-task-isolation/work-*/*.receipt
+          if-no-files-found: error
+          retention-days: 14
