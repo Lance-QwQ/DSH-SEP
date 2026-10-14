@@ -13,6 +13,7 @@ import {assembleInstallerResources} from '../installer-ui/resources/assemble-res
 import {buildInstallerManifest,loadInstallerConfiguration} from '../installer-ui/bundle-config.mjs';
 import {verifyCandidate} from '../installer-entry/candidate.mjs';
 import {inventoryPackage,verifyPackage} from './package-inventory.mjs';
+import {prepareInstallerSigning} from './prepare-installer-signing.mjs';
 
 const sources=['installer-ui/application/main.m','installer-ui/native/InstallerUI.m','installer-ui/admission/installer-admission.m','installer-ui/transport/InstallerPipeTransport.m','installer-ui/application/InstallerApplication.m','installer-ui/application/FixedApplicationOpener.m'];
 const headers=['installer-ui/native/InstallerUI.h','installer-ui/admission/installer-admission.h','installer-ui/transport/InstallerPipeTransport.h','installer-ui/application/InstallerApplication.h','installer-ui/application/FixedApplicationOpener.h'];
@@ -60,6 +61,7 @@ try{
  for(const row of captured){const after=await capture(row.path);if(after.sha256!==row.sha256||after.identity!==row.identity||await digest(join(captureRoot,row.path))!==row.sha256)fail('SEP_INSTALLER_NATIVE_SOURCE');}
  if(await digest(pinPath)!==result.nativePinsSha256)fail('SEP_INSTALLER_NATIVE_SOURCE');
  const manifestBefore=await readFile(resource.manifestPath),built=await buildInstallerManifest(contents);assert.equal(hash(manifestBefore),resource.manifestSha256);assert.deepEqual(JSON.parse(manifestBefore),built);
+ result.signingLayout=await prepareInstallerSigning({contents,evidencePath:join(out,'RESOURCES-BUILD.json'),resource});
  // Only the outer app is signed. Never --deep re-sign Node, helpers, payload or
  // any previously hash-bound role. Verification may inspect nested signatures.
  await run('sign-outer','/usr/bin/codesign',['--force','--sign','-',app]);await run('verify-outer','/usr/bin/codesign',['--verify','--deep','--strict','--verbose=2',app]);

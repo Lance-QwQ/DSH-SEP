@@ -1,13 +1,13 @@
-name: SEP Alpha.2 macOS current project observable readiness
+name: SEP Alpha.2 macOS complete installer build
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  project-native-ui-readiness:
+  installer-application:
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 45
     permissions:
       contents: read
       actions: read
@@ -18,48 +18,50 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.21.0'
-      - name: Restore the exact r61 application with signatures and inventory
+      - name: Verify exact bundle layout and external evidence preservation
+        env:
+          SEP_INSTALLER_LAYOUT_TEST_ROOT: ${{ runner.temp }}/installer-layout-tests
+        run: node --test --test-reporter=tap tools/alpha2-macos/package/prepare-installer-signing.test.mjs > "$RUNNER_TEMP/installer-layout.tap" 2> "$RUNNER_TEMP/installer-layout.stderr"
+      - name: Compile exact six production sources without executing dummy admission
+        run: node tools/alpha2-macos/package/preflight-installer-native.mjs "$RUNNER_TEMP/installer-native-preflight"
+      - name: Restore exact r61 signed application payload
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
         run: node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
-      - name: Bind this verified restore receipt
+      - name: Build sign and restore complete installer application
+        run: node tools/alpha2-macos/package/assemble-installer-application.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/installer-application"
+      - name: Split unchanged archive for bounded evidence transport
         run: |
           set -euo pipefail
-          echo "SEP_PROJECT_UI_SOURCE=$GITHUB_WORKSPACE/tools/alpha2-macos" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_ASSEMBLY_RESULT=$RUNNER_TEMP/project-r61/RESULT.json" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_ASSEMBLY_SHA256=$(shasum -a 256 "$RUNNER_TEMP/project-r61/RESULT.json" | cut -d ' ' -f1)" >> "$GITHUB_ENV"
-          echo "SEP_PROJECT_UI_OPERATOR_NODE=$(command -v node)" >> "$GITHUB_ENV"
-      - name: Current project two-round UI with observable readiness
-        shell: bash
-        run: |
-          set -euo pipefail
-          : "${SEP_PROJECT_UI_SOURCE:?absolute source root}"
-          : "${SEP_PROJECT_UI_ASSEMBLY_RESULT:?verified restore RESULT}"
-          : "${SEP_PROJECT_UI_ASSEMBLY_SHA256:?restore RESULT SHA}"
-          : "${SEP_PROJECT_UI_OPERATOR_NODE:?verified Node}"
-          output="$RUNNER_TEMP/project-ui-native-r3"
-          mkdir "$output"
-          /usr/bin/sw_vers > "$output/mac-version.txt"
-          /usr/bin/clang -framework ApplicationServices "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/ax-capability.m" -o "$output/ax-capability"
-          "$output/ax-capability" > "$output/AX-CAPABILITY.json"
-          "$SEP_PROJECT_UI_OPERATOR_NODE" --test --test-reporter=tap "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-contract.test.mjs" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-authority-derive.test.mjs" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-readiness.test.mjs" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-readiness-derive.test.mjs" > "$output/contracts.tap" 2> "$output/contracts.stderr"
-          "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator-r3.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round1" "$output/data" 1
-          "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator-r3.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round2" "$output/data" 2
+          node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/installer-application" "$RUNNER_TEMP/installer-transport"
+          node -e 'const fs=require("node:fs"),assert=require("node:assert/strict");const m=JSON.parse(fs.readFileSync(process.argv[1]));assert.equal(m.parts.length,2);' "$RUNNER_TEMP/installer-transport/transport-manifest.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: project-native-ui-readiness-r70
+          name: installer-application-evidence-r71
           if-no-files-found: error
           path: |
+            ${{ runner.temp }}/installer-layout.tap
+            ${{ runner.temp }}/installer-layout.stderr
+            ${{ runner.temp }}/installer-native-preflight/*.json
+            ${{ runner.temp }}/installer-native-preflight/*.log
             ${{ runner.temp }}/project-r61/RESULT.json
             ${{ runner.temp }}/project-r61/*.log
-            ${{ runner.temp }}/project-r61/PACKAGE-INVENTORY.json
             ${{ runner.temp }}/project-r61/evidence/project-build/RESULT.json
-            ${{ runner.temp }}/project-ui-native-r3/*.json
-            ${{ runner.temp }}/project-ui-native-r3/*.tap
-            ${{ runner.temp }}/project-ui-native-r3/*.stderr
-            ${{ runner.temp }}/project-ui-native-r3/*.txt
-            ${{ runner.temp }}/project-ui-native-r3/round1/*.json
-            ${{ runner.temp }}/project-ui-native-r3/round1/*.log
-            ${{ runner.temp }}/project-ui-native-r3/round2/*.json
-            ${{ runner.temp }}/project-ui-native-r3/round2/*.log
+            ${{ runner.temp }}/installer-application/*.json
+            ${{ runner.temp }}/installer-application/*.log
+            ${{ runner.temp }}/installer-application/*.app.resources-build/*.log
+            ${{ runner.temp }}/installer-transport/*.json
+            tools/alpha2-macos/package/MAC-PREVIEW-USER-GUIDE.md
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: installer-application-part1-r71
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/installer-transport/*.0001.part
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: installer-application-part2-r71
+          compression-level: 0
+          if-no-files-found: error
+          path: ${{ runner.temp }}/installer-transport/*.0002.part
