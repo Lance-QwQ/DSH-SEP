@@ -676,6 +676,227 @@
     ]
   },
   "installer": {
-    "status": "pending"
+    "status": "ready",
+    "sourceCommit": "b455d4249d0961a260566c92c9afea6184bf4e13",
+    "runId": 38713934011,
+    "artifacts": [
+      {
+        "id": 11962497869,
+        "name": "native-current-installer-evidence",
+        "bytes": 3677545,
+        "sha256": "326257b747317f751267090a96812ff7ebbb6c827e12f2ee24b2f64b7bf91227",
+        "members": [
+          {
+            "path": "installer-system.txt",
+            "bytes": 276,
+            "sha256": "490c5fc2b3ed238e2c1fa2deffd3274aa7559ee475a20d75e082eaf587e6056d"
+          },
+          {
+            "path": "current-payload-input/APP-BUILD-REVALIDATION.json",
+            "bytes": 1442,
+            "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+          },
+          {
+            "path": "current-payload-input/DOWNLOAD-RESULT.json",
+            "bytes": 1019,
+            "sha256": "f9561a0eaff032b5aa6c7f8da2dc2ad22ad732bb6005ede3d7682dd5a5602a24"
+          },
+          {
+            "path": "current-payload-input/APP-POST-VERIFICATION.json",
+            "bytes": 3923,
+            "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+          },
+          {
+            "path": "current-payload-input/DOWNLOAD-VERIFIED.json",
+            "bytes": 471,
+            "sha256": "97db74b17c8190da64eb42d6c4c150604ef047c62c0ceb23b0ce96c74b8c7cb7"
+          },
+          {
+            "path": "current-payload-input/RESULT.json",
+            "bytes": 29896,
+            "sha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05"
+          },
+          {
+            "path": "current-payload-input/PACKAGE-INVENTORY.json",
+            "bytes": 8860625,
+            "sha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3"
+          },
+          {
+            "path": "current-payload-input/download-verifier.log",
+            "bytes": 32,
+            "sha256": "75c6565f02caab77f79fecd1d802749fa2c20268ddc78e6593149ee084ad6cb2"
+          },
+          {
+            "path": "current-payload-restored/APP-BUILD-REVALIDATION.json",
+            "bytes": 1442,
+            "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+          },
+          {
+            "path": "current-payload-restored/APP-POST-VERIFICATION.json",
+            "bytes": 3923,
+            "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+          },
+          {
+            "path": "current-payload-restored/PACKAGE-INVENTORY.json",
+            "bytes": 8860625,
+            "sha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3"
+          },
+          {
+            "path": "current-payload-restored/RESULT.json",
+            "bytes": 20580,
+            "sha256": "99256f90f1c326cb57be2fc0d8ec89885ba7c0297fd97c5359ab827fd0323db8"
+          },
+          {
+            "path": "current-payload-restored/SOURCE-ASSEMBLY.json",
+            "bytes": 29896,
+            "sha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05"
+          },
+          {
+            "path": "current-payload-restored/extract.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-payload-restored/signature.log",
+            "bytes": 3634,
+            "sha256": "dde5a52ee03a4798023d593b4c6f4f71a2c7f4168c067b65045b80c7e4d4e873"
+          },
+          {
+            "path": "current-installer/PACKAGE-INVENTORY.json",
+            "bytes": 10013962,
+            "sha256": "505463e90235c51f5838af57f4346dffeee3d38c763154f18d700fcbc2ece0ad"
+          },
+          {
+            "path": "current-installer/RESOURCES-BUILD.json",
+            "bytes": 4025,
+            "sha256": "0aba4206aa6ad29d228d7333dc60c655e4535edc795ff695573659d93337c161"
+          },
+          {
+            "path": "current-installer/RESOURCES.json",
+            "bytes": 4025,
+            "sha256": "0aba4206aa6ad29d228d7333dc60c655e4535edc795ff695573659d93337c161"
+          },
+          {
+            "path": "current-installer/RESULT.json",
+            "bytes": 26126,
+            "sha256": "fa3a1ddfc9dd4bdc06d6085c92685e447efd301f80cf35c818712dcf2b221572"
+          },
+          {
+            "path": "current-installer/archive.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/compile-installer.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/coreHelper-build.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/entryHelper-build.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/info.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/installer-info.json",
+            "bytes": 373,
+            "sha256": "6808efaa22f482f21ea5b453cbaf20cd753ac97bc6952887a1258ed578a56428"
+          },
+          {
+            "path": "current-installer/restore.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/sign-outer.log",
+            "bytes": 96,
+            "sha256": "752b7778b590b11b4a3f25a41bc9796a2743069b3511aa8f2d8bdb4bdb1ea5bb"
+          },
+          {
+            "path": "current-installer/verify-outer.log",
+            "bytes": 184,
+            "sha256": "d01797f75bc443dfd28c983095c45e64f49ca353b5511d0a5f01b7175fd0e5be"
+          },
+          {
+            "path": "current-installer/verify-restored.log",
+            "bytes": 202,
+            "sha256": "8fde14619f81d767bc3f191f09d5c7147fbd6387c63fa920ce8e891323b5d7d8"
+          }
+        ]
+      },
+      {
+        "id": 11962737416,
+        "name": "native-current-installer-part-one",
+        "bytes": 402654419,
+        "sha256": "4abde269b9cba210b8fece9a34e24f008327d89ea93c773abd6ac51d6c1c9429",
+        "members": [
+          {
+            "path": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0001.part",
+            "bytes": 402653184,
+            "sha256": "c7702a14d82b493ef1019026202828af7c490199cfc1036b68a5f04b7f807ff8"
+          },
+          {
+            "path": "transport-manifest.json",
+            "bytes": 879,
+            "sha256": "771d1626abe0d283e4bebb5c32ae2604b19d1e8069b6845abc6f4e33cb71827a"
+          }
+        ]
+      },
+      {
+        "id": 11963056804,
+        "name": "native-current-installer-part-two",
+        "bytes": 290150452,
+        "sha256": "6523ded74c6c0483666a14f9503968999e6da43a81cac42e041e92a68d947882",
+        "members": [
+          {
+            "path": "transport-manifest.json",
+            "bytes": 879,
+            "sha256": "771d1626abe0d283e4bebb5c32ae2604b19d1e8069b6845abc6f4e33cb71827a"
+          },
+          {
+            "path": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0002.part",
+            "bytes": 290149217,
+            "sha256": "53e1f1fc12b8ec97cbc9cb5c91cbb2d358b2738d546e585a98d3427aceac892a"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "RESULT.json",
+        "artifactId": 11962497869,
+        "member": "current-installer/RESULT.json"
+      },
+      {
+        "name": "PACKAGE-INVENTORY.json",
+        "artifactId": 11962497869,
+        "member": "current-installer/PACKAGE-INVENTORY.json"
+      }
+    ],
+    "parts": [
+      {
+        "index": 1,
+        "artifactId": 11962737416,
+        "member": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0001.part",
+        "bytes": 402653184,
+        "sha256": "c7702a14d82b493ef1019026202828af7c490199cfc1036b68a5f04b7f807ff8"
+      },
+      {
+        "index": 2,
+        "artifactId": 11963056804,
+        "member": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0002.part",
+        "bytes": 290149217,
+        "sha256": "53e1f1fc12b8ec97cbc9cb5c91cbb2d358b2738d546e585a98d3427aceac892a"
+      }
+    ]
   }
 }

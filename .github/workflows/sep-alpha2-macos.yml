@@ -1,11 +1,11 @@
-name: SEP macOS fixed current-payload installer build
+name: SEP macOS fixed installer actual install and two application cycles
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-current-installer:
+  native-current-installed-lifecycle:
     runs-on: macos-15
     timeout-minutes: 60
     permissions:
@@ -21,89 +21,35 @@ jobs:
       - name: Record actual native environment
         run: |
           set -euo pipefail
-          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installer-system.txt"
-      - name: Fetch independently pinned current application and its verification
+          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installed-lifecycle-system.txt"
+      - name: Fetch independently pinned current installer
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/native-revalidation/installer-download.mjs payload "$RUNNER_TEMP/current-payload-input"
-      - name: Restore and verify exact current payload on native filesystem
-        run: node tools/alpha2-macos/native-revalidation/installer-restore-local.mjs payload "$RUNNER_TEMP/current-payload-input" "$RUNNER_TEMP/current-payload-restored"
-      - name: Build new installer from fixed payload
+        run: node tools/alpha2-macos/native-revalidation/installer-download.mjs installer "$RUNNER_TEMP/current-installer-input"
+      - name: Restore exact installer and verify signature and inventory
+        run: node tools/alpha2-macos/native-revalidation/installer-restore-local.mjs installer "$RUNNER_TEMP/current-installer-input" "$RUNNER_TEMP/current-installer-restored"
+      - name: Actual installer lifecycle controls then installed application two cycles
         run: |
           set -euo pipefail
-          pin="$(node -p "require('./tools/alpha2-macos/native-revalidation/installer-pins.json').payload.assemblySha256")"
-          node tools/alpha2-macos/native-revalidation/installer-build.mjs "$RUNNER_TEMP/current-payload-restored/SOURCE-ASSEMBLY.json" "$pin" "$RUNNER_TEMP/current-payload-restored" "$RUNNER_TEMP/current-installer"
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFile,writeFile,realpath} from 'node:fs/promises';
-          import {join} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const root=join(process.env.RUNNER_TEMP,'current-installer');
-          const r=JSON.parse(await readFile(join(root,'RESOURCES.json'),'utf8'));
-          assert.equal(r.status,'pass');
-          const dir=join(root,'DSH SEP Installer.app.resources-build');
-          assert.equal(await realpath(dir),dir);assert.equal(r.evidenceRoot,dir);
-          for(const role of ['coreHelper','entryHelper']){
-            const bytes=await readFile(join(dir,role+'.log'));
-            assert.equal(createHash('sha256').update(bytes).digest('hex'),r.compilers.find(x=>x.role===role).logSha256);
-            await writeFile(join(root,role+'-build.log'),bytes,{flag:'wx',mode:0o600});
-          }
-          NODE
-      - name: Retain bounded compiler diagnostics on build failure
-        if: failure()
-        run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFile,writeFile,realpath,lstat} from 'node:fs/promises';
-          import {join} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const root=join(process.env.RUNNER_TEMP,'current-installer');
-          try { assert.equal(await realpath(root),root); } catch(e) { if(e.code==='ENOENT')process.exit(0);throw e; }
-          const dir=join(root,'DSH SEP Installer.app.resources-build');
-          try { assert.equal(await realpath(dir),dir); } catch(e) { if(e.code==='ENOENT')process.exit(0);throw e; }
-          const rows=[];
-          for(const role of ['coreHelper','entryHelper']){
-            const p=join(dir,role+'.log');let st;
-            try { st=await lstat(p); } catch(e) { if(e.code==='ENOENT')continue;throw e; }
-            assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=16777216);
-            const bytes=await readFile(p);assert.equal(bytes.length,st.size);
-            const name='diagnostic-'+role+'-build.log';
-            await writeFile(join(root,name),bytes,{flag:'wx',mode:0o600});
-            rows.push({role,name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
-          }
-          await writeFile(join(root,'COMPILER-FAILURE-DIAGNOSTICS.json'),JSON.stringify({schema:1,status:'diagnostic-only',rows})+'\n',{flag:'wx',mode:0o600});
-          NODE
-      - name: Split exact installer for bounded transfer
-        run: node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/current-installer" "$RUNNER_TEMP/current-installer-transport"
+          receipt="$RUNNER_TEMP/current-installer-restored/RESULT.json"
+          digest="$(shasum -a 256 "$receipt" | awk '{print $1}')"
+          node tools/alpha2-macos/native-revalidation/installer-run-full.mjs "$receipt" "$digest" "$RUNNER_TEMP/current-installed-lifecycle"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: native-current-installer-evidence
+          name: native-current-installed-lifecycle-evidence
           if-no-files-found: error
           retention-days: 30
           path: |
-            ${{ runner.temp }}/installer-system.txt
-            ${{ runner.temp }}/current-payload-input/*.json
-            ${{ runner.temp }}/current-payload-input/*.log
-            ${{ runner.temp }}/current-payload-restored/*.json
-            ${{ runner.temp }}/current-payload-restored/*.log
-            ${{ runner.temp }}/current-installer/*.json
-            ${{ runner.temp }}/current-installer/*.log
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: native-current-installer-part-one
-          if-no-files-found: error
-          retention-days: 30
-          compression-level: 0
-          path: |
-            ${{ runner.temp }}/current-installer-transport/*.0001.part
-            ${{ runner.temp }}/current-installer-transport/transport-manifest.json
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: native-current-installer-part-two
-          if-no-files-found: error
-          retention-days: 30
-          compression-level: 0
-          path: |
-            ${{ runner.temp }}/current-installer-transport/*.0002.part
-            ${{ runner.temp }}/current-installer-transport/transport-manifest.json
+            ${{ runner.temp }}/installed-lifecycle-system.txt
+            ${{ runner.temp }}/current-installer-input/*.json
+            ${{ runner.temp }}/current-installer-input/*.log
+            ${{ runner.temp }}/current-installer-restored/*.json
+            ${{ runner.temp }}/current-installer-restored/*.log
+            ${{ runner.temp }}/current-installed-lifecycle/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/*.jsonl
+            ${{ runner.temp }}/current-installed-lifecycle/*.log
+            ${{ runner.temp }}/current-installed-lifecycle/installed-receipt/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.jsonl
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.log
