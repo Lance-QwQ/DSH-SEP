@@ -25,12 +25,6 @@ closing the controller reports `blocked`. This prototype has no automatic
 clearance operation for that state. Ordinary recovery cannot reinterpret an
 unknown execution as finished simply because the controller can reopen.
 
-The embedding runtime must close admission and drain **all** in-flight API
-calls before calling `close()`, including read-only `current` and `view` calls.
-The core serializes and waits for mutating operations; its `close()` receipt
-alone is not a whole-application drain or proof that independently started
-read-only native calls have exited.
-
 Publication writes a durable intent, creates and verifies a new generation,
 records publication, checks the target, and finally commits the generation,
 sequence and `committed` transaction state together. SQLite uses
@@ -85,3 +79,13 @@ while real file operations and SQLite run; those cases verify the controller's
 handling of an unknown receipt, not an actual unkillable operating-system
 process. The final acquired-handle case observes the real native handle after
 initialization rejects. Darwin CI must run these same inputs separately.
+
+## Exact document review binding
+
+Starting a new deletion intent requires `expectedPlanHash` to be the 64-character
+lowercase SHA-256 of the reviewed managed-copy inventory. A missing or malformed
+hash is `SEP_PROJECT_DOCUMENT_PLAN_REQUIRED`; a changed inventory is
+`SEP_PROJECT_DOCUMENT_PLAN_CHANGED`. A P2 marker alone cannot authorize taking a
+fresh inventory. Startup obtains the hash from the independently verified P2
+review. An existing durable deletion intent can resume its verified deletion
+prefix without a new review; a completed intent stays idempotent.

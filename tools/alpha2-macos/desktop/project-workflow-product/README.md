@@ -30,3 +30,13 @@ The first original-r44 RED has five definitions: three pass and two fail for the
 Files beginning `native-`, `derive-native.mjs`, and `ax-capability.m` are separate test/operator work. They are excluded from the product build freeze and installed runtime. The read-only AX capability probe uses Apple's AXIsProcessTrusted without requesting permission or changing TCC. Its Boolean reports that process only, not confirmation completion: https://developer.apple.com/documentation/applicationservices/1460720-axisprocesstrusted.
 
 Next acceptance must prove simultaneous real Electron fd3/fd4, actual renderer/preload/main routing, unchanged source and same Profile, native dialog cancellation and accepted result binding, stale navigation refusal, close/quit-pending inspection, restored inventory, and exact normal child exit. Programmatic native dialog interaction must be labeled automated; it does not prove physical interaction. Any unavailable GUI automation is reported separately, not replaced by a monkeypatched `showMessageBox` result.
+
+## Runtime origin generations
+
+[RUNTIME-ORIGIN-STATUS.json](RUNTIME-ORIGIN-STATUS.json) identifies the current
+six-file record, `RUNTIME-ORIGIN-r2.json`, and its exact digest. The older
+`RUNTIME-ORIGIN.json` describes only the four broker/controller outputs and is
+historical. Both original records retain their bytes. `derive-runtime.mjs`
+reproduces the six current files from pinned inputs; the record is not a native
+test result or a manifest of every runtime dependency. Changes to shared
+business/Profile/attachment modules need separate source and test bindings.

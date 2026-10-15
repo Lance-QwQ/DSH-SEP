@@ -8,7 +8,7 @@
     {
       "source": "desktop/project-workflow-product/pending-startup/profile.mjs",
       "target": "desktop/project-workflow-product/pending-startup/profile.mjs",
-      "sha256": "9a249baa4b24d957befffb178cfb5d2765dc62ed87e797d8e1126c5314f37ff3",
+      "sha256": "b0ea9db35cabead3d75b7945274fceafd441855ceb54ff80cce358a86606660d",
       "bytes": 1126
     },
     {
@@ -32,7 +32,7 @@
     {
       "source": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
       "target": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
-      "sha256": "6e9925175a820192c9a7419dbae583816984838a243cfa3f643365b3301f7d45",
+      "sha256": "46a759af30cb282e12c7c751f41ba7cce49f4ce88517f3fcab2ae5719f6c48fb",
       "bytes": 3528
     },
     {
@@ -53,5 +53,12 @@
       "sha256": "81bb84d4ea395059d449e28531fcfe7ac0a53e07b202a153d90bc4d59fc760a4",
       "bytes": 870
     }
-  ]
+  ],
+  "verificationScope": "current-source-byte-binding-only; not native acceptance",
+  "nativeVerification": "not_run",
+  "historicalManifest": {
+    "path": "package-inputs-r73.json",
+    "sha256": "57f37a985f925a5940106a51ee2aa46dcd0a3599379735a89c23d3aa1e9f3a5f",
+    "sourceCommit": "a9b06f135a8a3529921e6fa6e04d6e66bc4ff904"
+  }
 }

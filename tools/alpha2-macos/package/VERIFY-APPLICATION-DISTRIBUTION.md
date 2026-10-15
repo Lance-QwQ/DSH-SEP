@@ -35,3 +35,7 @@ File identity checks compare device/inode/size/mtime/birth identity across path 
 Nine fixed synthetic ZIP definitions are in `verify-application-distribution.test.py`. They cover exact reconstruction, outer-hash mismatch, cross-run artifact rejection, missing digest rejection, assembly/manifest mismatch, part path escape, modified part bytes, whole-archive mismatch, and no overwrite.
 
 Logs are retained under the D: distribution directory's `operator-tests`: initial implementation absent (`red-r2.log`, 8 assertion failures and 1 expected missing-implementation error), first implementation failure (`green.log`, Windows stat representation), final `green-r2.log` (9/9). The finalized nine definitions were unchanged during implementation. These are local transport tests, not macOS tests.
+
+## Reproducing synthetic transport tests
+
+Both Python test files require an existing absolute `SEP_DISTRIBUTION_TEST_ROOT`; it is their fixture directory, not the fixed production download directory. Use `python -B` to avoid source-tree bytecode caches. Complete commands and the preserved-output policy are in [TESTING.md](TESTING.md). These tests need no token, network connection or macOS host and do not run the production CLI.

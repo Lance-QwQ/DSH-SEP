@@ -111,7 +111,8 @@ export async function openTrustedProject({root,source,io,onEvent=()=>{}}){
     await removeCopies(t);if(['running','ready'].includes(t.state)){t.state='aborted';save(t);}
    }
   }
-  startupInterrupted=false;m=meta();await snapshot(m.generation);return {status:'pass',action:m.pending?'blocked':'reconciled',generation:m.generation,sequence:m.sequence};
+  m=meta();if(m.pending)fail('SEP_PROJECT_RECOVERY_BLOCKED');
+  await snapshot(m.generation);startupInterrupted=false;return {status:'pass',action:'reconciled',generation:m.generation,sequence:m.sequence};
  };
  const newTransaction=async(kind,m)=>{
   const t={id:randomUUID(),kind,state:'running',execution:'trusted-file',launch:'not-dispatched',createdAt:Date.now(),baseGeneration:m.generation,baseSequence:m.sequence};save(t);

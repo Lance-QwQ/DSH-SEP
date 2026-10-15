@@ -34,8 +34,9 @@ export async function apply(ctx,input){
  const status=()=>JSON.parse(JSON.stringify({phase,status:phase==='closed'||phase==='active'?'pass':'blocked',pending:pending.size,consumers:consumers?.status(),p1:p1?.status(),compaction:native?.status()??{status:'not_run'},documents:'governed-managed-copies; imported-source-retained',context:'disabled',vision:'disabled',evaluation:'disabled',computerClick:'disabled',fullMacCertification:'blocked',resourcesConfirmedReleased:phase==='closed',unavailable:['untrusted-shell','MCP','context-parser','visual-attachments','AX-click','evaluation','original-source-deletion','automatic-installation']}));
  async function finish(){
   phase='closing';abort.abort();
-  // This is a dedicated host: every source-scoped Agent belongs to this owner.
-  for(const a of ctx.agents.list())if(a.session.header.cwd===config.source)a.cancel({kind:'disposed'});
+  // This runtime owns a dedicated host, including malformed or stale-scope
+  // agents. A cwd mismatch must not let accepted work escape shutdown.
+  for(const a of ctx.agents.list())a.cancel({kind:'disposed'});
   // Never close storage below an accepted call that still uses it.
   while(pending.size)await new Promise(r=>setTimeout(r,10));
   const failures=[];
@@ -60,9 +61,9 @@ export async function apply(ctx,input){
  ctx.on('llm/stream',async function*(options,next){available();yield* next(options);});
  // Native UI sessions omit maxTokens. Bind an explicit Profile default before
  // native prepareCall records the request; explicit proposals still reach P1
- // unchanged and can be refused. Never alter another project's agents.
+ // unchanged and can be refused. Foreign or malformed agents are rejected.
  ctx.on('agent/request',async(payload,next)=>{
-  const agent=payload.agent;if(!agent||ctx.agents.get(agent.id)!==agent||agent.session.header.cwd!==config.source)return next();
+  const agent=payload.agent;if(!agent||ctx.agents.get(agent.id)!==agent||agent.session?.header?.cwd!==config.source)fail('SEP_MAC_AGENT_SCOPE');
   const release=enter();try{payload.signal.throwIfAborted();const proposed=await next();available();payload.signal.throwIfAborted();return proposed.maxTokens===undefined?{...proposed,maxTokens:config.p1.profileLimits?.maxOutputTokens??2048}:proposed;}finally{release();}
  });
  ctx.effect(()=>async()=>{await close();});

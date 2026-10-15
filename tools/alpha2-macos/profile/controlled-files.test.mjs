@@ -182,3 +182,35 @@ test('document deletion requires independently bound authority and drains its wh
  const closing=await p.controller.close();assert.equal(closing.status,'blocked');assert.equal(closing.resourcesConfirmedReleased,false);release();await active;
  assert.equal((await p.controller.whenClosed()).status,'pass');
 });
+
+
+test('model read strips raw filesystem paths after a real managed-view race',async()=>{
+ const f=await fixture();let moved;
+ const p=await f.open({wrapCore:core=>({...core,async view(...args){
+  const value=await core.view(...args);
+  if(!moved){moved={from:join(value.path,'a.txt'),to:join(f.parent,'displaced-a.txt')};await rename(moved.from,moved.to);}
+  return value;
+ }})});
+ try{
+  await assert.rejects(p.execute('read',{file_path:'a.txt'},f.caller()),e=>{
+   assert.equal(e.code,'FS_IO_ERROR');assert.equal(e.message,'FS_IO_ERROR');
+   assert.equal(e.path,undefined);assert.equal(e.syscall,undefined);assert.equal(e.cause,undefined);
+   assert.ok(!String(e.stack).includes(f.parent));assert.ok(!JSON.stringify(e).includes(f.parent));return true;
+  });
+ }finally{if(moved)await rename(moved.to,moved.from);}
+ // Restoring bytes does not restore inode timestamps: the real transaction
+ // baseline must continue rejecting the changed generation, with a safe code.
+ await assert.rejects(p.execute('read',{file_path:'a.txt'},f.caller()),code('SEP_PROJECT_BASELINE_CHANGED'));
+ assert.equal(p.controller.status().pending,0);
+});
+
+test('model errors retain classification without trusted-provider message or attached metadata',async()=>{
+ const f=await fixture(),privatePath=join(f.parent,'private-body'),p=await f.open({authorize:async()=>{
+  throw Object.assign(Error('native failure '+privatePath),{code:'SEP_MAC_AGENT_SCOPE',path:privatePath,cause:Error(privatePath),secret:privatePath});
+ }});
+ await assert.rejects(p.execute('read',{file_path:'a.txt'},f.caller()),e=>{
+  assert.equal(e.code,'SEP_MAC_AGENT_SCOPE');assert.equal(e.message,'SEP_MAC_AGENT_SCOPE');
+  for(const key of ['path','cause','secret'])assert.equal(e[key],undefined);
+  assert.ok(!String(e.stack).includes(privatePath));assert.deepEqual(Object.keys(e),['code']);return true;
+ });
+});

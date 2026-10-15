@@ -1,5 +1,11 @@
 # macOS controlled file Profile service
 
+Current repair status (2026-10-15): the code-only model errors and directory
+close fixes were exercised with the real POSIX test helper, SQLite and
+lifecycle in isolated WSL. Native macOS/APFS replay and a new installed Mac
+package containing these changes remain not_run; historical Mac results
+bind the earlier frozen bytes. See [current repair scope](../MACOS-LOW-REVIEW-RESPONSE.md).
+
 This is the trusted service between the host's tool registration layer and the
 managed transaction controller. It does not mount a Loader, start a model,
 install an application, or provide arbitrary Shell isolation.
@@ -30,7 +36,7 @@ absolute prefixes, backslashes, control characters or ambiguous suffixes are
 refused. Reads return bounded strict UTF-8 (32 KiB maximum) from the current
 managed candidate/generation; the original import is never the physical read
 target. Both whole-view verification and held-file identity/content checks
-surround the read. Returned content is data, not instruction or authorization.
+surround the read. Returned content is data, not instruction or authorization. The model-facing execute boundary rebuilds errors from their bounded SEP/FS classification only; raw filesystem messages, paths, causes and stack traces are not passed through. Unknown native errors become FS_IO_ERROR. Trusted controller operations retain their separate diagnostic boundary.
 
 Each session earns its own observation when a successful read returns. A
 verified missing file under an existing parent returns `version: "absent"`,
@@ -77,7 +83,7 @@ SEP_MAC_PROFILE_TEST_ROOT=/absolute/path/to/synthetic-output \
 node --test profile/controlled-files.test.mjs
 ```
 
-The 20 tests use actual SQLite, native file operations and the real lifecycle
+The 22 tests use actual SQLite, native file operations and the real lifecycle
 facade. Caller identity is supplied by a test-owned authority map; these are
 service tests, not native Loader/Agent certification. One lifecycle test holds
 the completion boundary of a real verified read to exercise nested deadlines;

@@ -1,0 +1,21 @@
+# Step fragment for the authorized dedicated Mac test workflow, not a standalone job.
+# Requires macOS arm64, checkout, Node 24, GITHUB_SHA and actions artifact read token.
+- name: Restore immutable native r44 dependencies
+  env:
+    SEP_ARTIFACT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/mac-r44"
+    node tools/alpha2-macos/native-revalidation/application-environment.mjs "$RUNNER_TEMP/mac-r44" "$RUNNER_TEMP/mac-environment"
+# Root inserts core native regression step here using mac-environment/ENV.json.
+- name: Actual Loader and blank Profile native pre-build validation
+  run: |
+    node tools/alpha2-macos/native-revalidation/application-verify.mjs fixed "$RUNNER_TEMP/mac-r44" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/mac-current-native"
+- name: Integrity-verified ASAR tool closure
+  run: |
+    node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/mac-asar"
+- name: Rebuild current application and verify exact installed runtime bytes
+  run: |
+    node tools/alpha2-macos/native-revalidation/application-build.mjs "$RUNNER_TEMP/mac-r44" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/mac-asar/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/mac-current-application" "$RUNNER_TEMP/mac-current-native"
+    node tools/alpha2-macos/native-revalidation/application-verify.mjs built "$RUNNER_TEMP/mac-current-application" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/mac-installed-native"
+# Upload only evidence JSON/log/TAP and the final zip (not restored/draft app trees).
+# Root selects artifact naming and pins the resulting hashes for installer CI.

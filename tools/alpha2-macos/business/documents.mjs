@@ -26,23 +26,26 @@ export function macDocumentAuthority(control,source){return {identity:control.id
 }};}
 export function macDocumentFactory({source,local,syncDirectory}){return options=>{
  if(options.scope.projects.length!==1||options.scope.projects[0].key!==hash(source))fail('SEP_MAC_DOCUMENT_PROJECT_IDENTITY');
- let reviewed;
  const current=()=>{const value=local.getStore();if(!value?.documentOps)fail('SEP_MAC_DOCUMENT_ACCESS_REQUIRED');return value;};
  const adapter={async inspectSource(input){
   const view=current(),path=within(view.path,input)??within(source,input);if(!path)fail('SEP_MAC_DOCUMENT_PATH');
-  reviewed=await view.documentOps.review(path);const entry=view.entries.find(e=>e.path===path),physical=join(view.path,path);
+  const reviewed=await view.documentOps.review(path);const entry=view.entries.find(e=>e.path===path),physical=join(view.path,path);
   if(!entry)return {status:'missing',path:physical,managedCopies:reviewed};
   if(entry.kind!=='file')fail('SEP_MAC_DOCUMENT_PATH');const s=await lstat(physical,{bigint:true});
   if(!s.isFile()||s.isSymbolicLink()||s.nlink!==1n||s.size!==BigInt(entry.size))fail('SOURCE_CHANGED');
   return {status:'present',path:physical,sha256:entry.sha256,identity:{volumeSerialNumber:String(s.dev),fileId:String(s.ino)},managedCopies:reviewed};
  },deleteReviewedSource(){fail('SEP_MAC_ORIGINAL_SOURCE_RETAINED');}};
  const manager=createDocumentManager({...options,sourceAdapter:adapter,facility:{...options.facility,async applyDocumentDeletion(marker){
+  // Resume may skip inspectSource after P2 has persisted its marker. Always
+  // bind the original verified P2 review, never an optional in-memory preview.
+  const approved=(await macDocumentAuthority(options.control,source).read()).find(m=>m.id===marker.id&&m.planHash===marker.planHash&&m.owner===marker.owner&&m.documentPath===marker.documentPath);
+  if(!approved)fail('SEP_MAC_DOCUMENT_PLAN_UNVERIFIED');
   await options.facility.applyDocumentDeletion(marker);
-  await current().documentOps.delete({marker,expectedPlanHash:reviewed?.planHash});
+  await current().documentOps.delete({marker,expectedPlanHash:approved.managedPlanHash});
  }}});
  return {async execute(project,args,exec){
   if(args.deleteSource===true)fail('SEP_MAC_ORIGINAL_SOURCE_RETAINED');
-  reviewed=undefined;const result=await manager.execute(project,args,exec);
+  const result=await manager.execute(project,args,exec);
   if(result.status==='preview'){await syncDirectory(join(options.control.root,'document-plans'));await syncDirectory(options.control.root);}
   return result.status==='preview'?{...result,excludedFromDeletion:[...result.excludedFromDeletion,'imported_original_source'],managedCopyPolicy:'all historical generations and all uncommitted candidates; uncommitted plans are invalidated'}:{...result,retainedSourceScope:'imported-original-source-only'};
  }};

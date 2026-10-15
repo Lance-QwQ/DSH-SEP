@@ -1,5 +1,5 @@
 import {frozen,transform,hash,fail} from './derive.mjs';
-export const origin=Object.freeze({path:'../business/runtime.mjs',sha256:'0c413885016af096c35b5ab6b4f81856562a8127df0173d9d48429f50ece0a1e',media:{path:'../media-business/runtime.mjs',sha256:'2f4d5b391874e0643c77716c8d6d53f702cccba66287fa3c5c282cace32cb426'}});
+export const origin=Object.freeze({path:'../business/runtime.mjs',sha256:'8148341384289ea23050112e70355dd26a52741c45ce7b715d3699ccbbf09409',media:{path:'../media-business/runtime.mjs',sha256:'1326e33aac1a98fe851ff83c4cbb8c38d698b0bfc8cb521ddccfa4aabbec0e10'}});
 export const filename=new URL(origin.path,import.meta.url);
 const original=await frozen(filename,origin.sha256);
 await frozen(new URL(origin.media.path,import.meta.url),origin.media.sha256);

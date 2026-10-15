@@ -1,6 +1,6 @@
 import {frozen,transform,evaluate} from '../../../document-business/derive.mjs';
 const file=new URL('../../../profile/controlled-files.mjs',import.meta.url);
-const source=await frozen(file,'400a6c84f94dc87efc40406dced9d38e71b22e3c4a285327d9e71f54c435a9ca');
+const source=await frozen(file,'0d2fc521ab44e8a6644c85ebc7254c351ca093cd028f6fcdfff6512a67284771');
 const derived=transform(source,[{before:'  current:()=>serial(()=>project.current()),plans:()=>serial(()=>project.plans()),',after:`  current:()=>serial(()=>project.current()),plans:()=>serial(()=>project.plans()),
   startupIdentity:()=>serial(async()=>{
    const before=await project.current(),snapshot=await project.view(pendingPlan),plans=await project.plans(),after=await project.current();

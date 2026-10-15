@@ -90,6 +90,11 @@ export async function createControlledFileProfile({project,source,authorize,clos
   pendingPlan=result.planHash;clear();
   try{if(previous)await project.discard(previous);}catch(e){pendingPlan=undefined;needsSelection=true;throw e;}
   cancelled(exec?.signal);return {path,updated:true,staged:true};
+ }).catch(e=>{
+  // Model-facing errors carry classification only. Native errors may include
+  // managed paths in message/path/stack/cause even when their code is safe.
+  const code=safeCode(e,'FS_IO_ERROR'),clean=Object.assign(Error(code),{code});
+  clean.stack='Error: '+code;throw clean;
  });}
  function status(){const admissionOpen=phase==='open'&&project.status().admissionOpen;return Object.freeze({phase:phase==='open'&&!admissionOpen?'blocked':phase,admissionOpen,pending,needsSelection,hasPendingPlan:!!pendingPlan,resourcesConfirmedReleased:phase==='closed'});}
  function completed(receipt){

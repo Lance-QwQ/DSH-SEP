@@ -1,11 +1,17 @@
 # Native installer integration candidate
 
-`PLAN.md` is the implementation contract. Individual layers now exist and have
-separate native evidence; the assembled end-user installer is not yet certified.
-See `STATUS.md` for current results and preserved failed attempts. In particular,
-the AppKit controls have been exercised with a synthetic transport, fixed
-NSBundle admission has been tested without launching a controller, and the Node
-session has been tested separately. These do not establish their combined path.
+Current delivered evidence is the r78 installer / r79 acceptance described in
+[STATUS.md](STATUS.md) and the [artifact index](../package/MAC-PREVIEW-EVIDENCE.md).
+The separate r79 test entry connected unchanged production modules, the actual
+controller, private pipes and real AppKit controls: six installation assertions
+passed, followed by two installed-product startup/restart cycles with normal
+closure. This is not physical input certification of the original installer.
+Full Mac certification remains blocked. The low-priority review changes in the
+current source are not retroactively included in that signed installer.
+
+`PLAN.md` remains the implementation contract. The originally separate layer
+tests below are retained as history; they must not replace the later, explicitly
+bounded integration result.
 
 `protocol.mjs` accepts only `preview`, `listRecovery`, `confirm`, `cancel`,
 `resume` and `close`. A request binds protocol version, a 256-bit session nonce,
@@ -24,9 +30,9 @@ bound plan and account validation.
 
 The sequence supplied to these validators must come from the exact owned
 parent/child state machine, not from the received message. No renderer, HTTP,
-model or public command-line bridge is present. Full-package installation through
-the combined native bundle, actual controller, private pipes and AppKit window
-remains not_run. The per-layer evidence below must not be promoted to that claim.
+model or public command-line bridge is present. The original-entry physical confirmation path remains not_run. The separate
+r79 integration result above does not promote isolated layer tests into full
+original-entry certification.
 
 Local development observed 10/10 and then 14/14 missing-implementation failures,
 14/14 initial successes, followed by 3 new boundary failures in 17 definitions

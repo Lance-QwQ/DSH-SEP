@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {validateRuntimeReceipt,tapCounts,assertTapPass} from './application-contract.mjs';
+const rows=()=>Array.from({length:84},(_,i)=>({path:'runtime/'+i+'.mjs',source:'runtime/'+i+'.mjs',sha256:i.toString(16).padStart(64,'0')}));
+test('application binds all 84 current source bytes independent of receipt order',()=>{const r=rows();assert.equal(validateRuntimeReceipt([...r].reverse(),r),84);});
+test('missing runtime row cannot preserve application binding',()=>{const r=rows();assert.throws(()=>validateRuntimeReceipt(r.slice(1),r),/SEP_NATIVE_APPLICATION_RUNTIME/);});
+test('duplicate runtime path cannot preserve application binding',()=>{const r=rows();r[1]={...r[0]};assert.throws(()=>validateRuntimeReceipt(r,rows()),/SEP_NATIVE_APPLICATION_RUNTIME/);});
+test('changed runtime bytes cannot preserve application binding',()=>{const r=rows();r[0].sha256='f'.repeat(64);assert.throws(()=>validateRuntimeReceipt(r,rows()),/SEP_NATIVE_APPLICATION_RUNTIME/);});
+test('changed runtime source mapping cannot preserve application binding',()=>{const r=rows();r[0].source='other.mjs';assert.throws(()=>validateRuntimeReceipt(r,rows()),/SEP_NATIVE_APPLICATION_RUNTIME/);});
+test('unrecognized runtime receipt fields are rejected',()=>{const r=rows();r[0].pass=true;assert.throws(()=>validateRuntimeReceipt(r,rows()),/SEP_NATIVE_APPLICATION_RUNTIME/);});
+const tap='# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n';
+test('TAP requires exact complete zero-failure count',()=>{assert.deepEqual(tapCounts(tap),{tests:8,pass:8,fail:0,skipped:0,cancelled:0});assert.doesNotThrow(()=>assertTapPass(tap,8));});
+test('skips or cancellations do not count as native pass',()=>{assert.throws(()=>assertTapPass(tap.replace('# skipped 0','# skipped 1'),8),/SEP_NATIVE_APPLICATION_TESTS/);assert.throws(()=>assertTapPass(tap.replace('# cancelled 0','# cancelled 1'),8),/SEP_NATIVE_APPLICATION_TESTS/);});
+test('missing or duplicate terminal counts cannot count as pass',()=>{assert.throws(()=>assertTapPass(tap.replace('# fail 0\n',''),8),/SEP_NATIVE_APPLICATION_TESTS/);assert.throws(()=>assertTapPass(tap+'# pass 8\n',8),/SEP_NATIVE_APPLICATION_TESTS/);});

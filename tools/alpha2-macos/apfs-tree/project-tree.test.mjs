@@ -56,3 +56,16 @@ test('creating file cannot exceed total byte bound',async()=>{
  await assert.rejects(api.applyFile(source,{path:'overflow',expectedSha256:'absent',text:'extra'}),{code:'SEP_PROJECT_LIMIT'});
  await assert.rejects(readFile(join(source,'overflow')),{code:'ENOENT'});
 });
+
+
+test('directory close drains the already accepted stat without losing its response',{timeout:4000},async()=>{
+ const source=await folder(),held=await api.directory(source,true),reading=held.stat({bigint:true}),closing=held.close();
+ const [stat]=await Promise.all([reading,closing]);assert.equal(typeof stat.ino,'bigint');
+ await assert.rejects(held.stat(),{code:'SEP_PROJECT_CLOSED'});await held.close();
+});
+
+test('concurrent close callers await the same actual native exit',{timeout:4000},async()=>{
+ const source=await folder(),held=await api.directory(source,true);let firstFinished=false;
+ const first=held.close().then(()=>{firstFinished=true;});await held.close();
+ assert.equal(firstFinished,true);await first;
+});

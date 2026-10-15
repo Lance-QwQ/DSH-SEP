@@ -2,8 +2,8 @@
   "schema": 1,
   "scope": "owner-exclusive-read-only-generation-and-bounded-plan-preview",
   "core": {
-    "sourceSha256": "f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba",
-    "resultSha256": "80794421a6b158d4f3259408a5bdcf01e9d4cd699ab199d72b23a4e9d6e48a97",
+    "sourceSha256": "a98d2ecbc7148815959d97a4b4c20085dbc3a46bb377f9ed830cec0faae90ea8",
+    "resultSha256": "63b264fda7e7c92a05f1c92697e359a878a4f1495a112845247cce361cc25f90",
     "transforms": [
       {
         "before": "import {documentCopies} from './document-copies.mjs';",

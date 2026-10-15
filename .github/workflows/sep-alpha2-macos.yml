@@ -1,11 +1,11 @@
-name: SEP Alpha.2 macOS successor installer and installed lifecycle
+name: SEP macOS current-source native revalidation and application
 on:
   push:
     branches: [codex/sep-alpha2-macos-20261014]
 permissions:
   contents: read
 jobs:
-  native-installer-integration-r79:
+  native-current-application:
     runs-on: macos-15
     timeout-minutes: 60
     permissions:
@@ -21,32 +21,79 @@ jobs:
       - name: Record actual native environment
         run: |
           set -euo pipefail
-          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installer-integration-r79-system.txt"
-      - name: Restore one fixed signed installer archive
+          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/native-system.txt"
+      - name: Restore exact historical application as dependency carrier
         env:
           SEP_ARTIFACT_TOKEN: ${{ github.token }}
-        run: node tools/alpha2-macos/package/restore-installer-application-r78.mjs "$RUNNER_TEMP/fixed-installer-r79"
-      - name: Original lifecycle then real-button installation then installed first boot
+        run: node tools/alpha2-macos/package/restore-fixed-application-r44.mjs "$RUNNER_TEMP/fixed-r44"
+      - name: Prepare verified native dependencies
         run: |
           set -euo pipefail
-          result="$RUNNER_TEMP/fixed-installer-r79/RESULT.json"
-          digest="$(shasum -a 256 "$result" | awk '{print $1}')"
-          node tools/alpha2-macos/installer-ui/integration-r79/run-full.mjs "$result" "$digest" "$RUNNER_TEMP/installer-integration-r79"
+          node tools/alpha2-macos/native-revalidation/application-environment.mjs "$RUNNER_TEMP/fixed-r44" "$RUNNER_TEMP/native-environment"
+          node --input-type=module <<'NODE'
+          import {readFileSync,appendFileSync} from 'node:fs';
+          const e=JSON.parse(readFileSync(process.env.RUNNER_TEMP+'/native-environment/ENV.json','utf8'));
+          const keys=['SEP_OFFICIAL_HARNESS','SEP_MAC_BUNDLE_ROOT'];
+          for(const key of keys){if(typeof e[key]!=='string'||/[\r\n]/.test(e[key]))throw Error('ENV_PATH_INVALID');appendFileSync(process.env.GITHUB_ENV,key+'='+e[key]+'\n');}
+          NODE
+      - name: Native source regression gate
+        run: |
+          set -euo pipefail
+          temp="$(cd "$RUNNER_TEMP" && pwd -P)"
+          node tools/alpha2-macos/native-revalidation/run-native.mjs "$temp/native-regression"
+      - name: Real Loader pending recovery and document visual gate
+        run: node tools/alpha2-macos/native-revalidation/application-verify.mjs fixed "$RUNNER_TEMP/fixed-r44" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/native-business"
+      - name: Install fixed build tool
+        run: node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/asar-tool"
+      - name: Build and independently restore current application
+        run: node tools/alpha2-macos/native-revalidation/application-build.mjs "$RUNNER_TEMP/fixed-r44" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/asar-tool/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/current-app" "$RUNNER_TEMP/native-business"
+      - name: Revalidate actual built application runtime and native dependencies
+        run: node tools/alpha2-macos/native-revalidation/application-verify.mjs built "$RUNNER_TEMP/current-app" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/native-built"
+      - name: Split exact application archive for bounded transfer
+        run: node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/current-app" "$RUNNER_TEMP/current-app-transport"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: installer-integration-native-r79
+          name: native-current-application-evidence
           if-no-files-found: error
+          retention-days: 30
           path: |
-            ${{ runner.temp }}/installer-integration-r79-system.txt
-            ${{ runner.temp }}/fixed-installer-r79/RESULT.json
-            ${{ runner.temp }}/fixed-installer-r79/SOURCE-ASSEMBLY.json
-            ${{ runner.temp }}/fixed-installer-r79/PACKAGE-INVENTORY.json
-            ${{ runner.temp }}/fixed-installer-r79/*.log
-            ${{ runner.temp }}/installer-integration-r79/*.json
-            ${{ runner.temp }}/installer-integration-r79/*.jsonl
-            ${{ runner.temp }}/installer-integration-r79/*.log
-            ${{ runner.temp }}/installer-integration-r79/installed-receipt/*.json
-            ${{ runner.temp }}/installer-integration-r79/installed-startup/*.json
-            ${{ runner.temp }}/installer-integration-r79/installed-startup/*.jsonl
-            ${{ runner.temp }}/installer-integration-r79/installed-startup/*.log
+            ${{ runner.temp }}/native-system.txt
+            ${{ runner.temp }}/fixed-r44/RESULT.json
+            ${{ runner.temp }}/fixed-r44/*.log
+            ${{ runner.temp }}/native-environment/*.json
+            ${{ runner.temp }}/native-regression/*.json
+            ${{ runner.temp }}/native-regression/*.log
+            ${{ runner.temp }}/native-regression/workflow/CLEANUP.jsonl
+            ${{ runner.temp }}/native-business/*.json
+            ${{ runner.temp }}/native-business/*.log
+            ${{ runner.temp }}/native-business/*/native.tap
+            ${{ runner.temp }}/native-business/*/receipts/*.json
+            ${{ runner.temp }}/native-built/*.json
+            ${{ runner.temp }}/native-built/*.log
+            ${{ runner.temp }}/native-built/*/native.tap
+            ${{ runner.temp }}/native-built/*/receipts/*.json
+            ${{ runner.temp }}/current-app-REVALIDATION.json
+            ${{ runner.temp }}/current-app-build.log
+            ${{ runner.temp }}/current-app/*.json
+            ${{ runner.temp }}/current-app/*.log
+            ${{ runner.temp }}/current-app/desktop/*.json
+            ${{ runner.temp }}/current-app/desktop/*.log
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-current-application-part-one
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+          path: |
+            ${{ runner.temp }}/current-app-transport/*.0001.part
+            ${{ runner.temp }}/current-app-transport/transport-manifest.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-current-application-part-two
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+          path: |
+            ${{ runner.temp }}/current-app-transport/*.0002.part
+            ${{ runner.temp }}/current-app-transport/transport-manifest.json

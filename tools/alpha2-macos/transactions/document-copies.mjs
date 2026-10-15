@@ -55,7 +55,10 @@ export function documentCopies({root,rootIdentity,db,guard,meta,setMeta,atomic,s
   await guard();const selected=proof(marker),markers=await verifiedAuthority();if(!markers.some(m=>same(m,selected)))fail('SEP_PROJECT_DOCUMENT_AUTHORITY_INVALID');
   let record=records().find(r=>r.marker.id===selected.id);if(record?.status==='complete')return {status:'deleted',id:selected.id};
   if(!record){
-   const reviewed=await inventory(selected.documentPath);if(expectedPlanHash!==undefined&&reviewed.planHash!==expectedPlanHash)fail('SEP_PROJECT_DOCUMENT_PLAN_CHANGED');
+   // A new deletion intent must bind the inventory that was actually reviewed.
+   // Only an existing durable intent may resume without fresh confirmation.
+   if(typeof expectedPlanHash!=='string'||!/^[a-f0-9]{64}$/.test(expectedPlanHash))fail('SEP_PROJECT_DOCUMENT_PLAN_REQUIRED');
+   const reviewed=await inventory(selected.documentPath);if(reviewed.planHash!==expectedPlanHash)fail('SEP_PROJECT_DOCUMENT_PLAN_CHANGED');
    record={schema:1,marker:selected,status:'intent',versions:reviewed.versions,plan:reviewed.plan,planHash:reviewed.planHash};atomic(()=>store(record));event('document-intent-durable');
   }
   if(hash(JSON.stringify(record.plan))!==record.planHash||record.plan.rootIdentity!==rootIdentity||record.plan.path!==selected.documentPath)fail('SEP_PROJECT_DOCUMENT_RECOVERY_INVALID');

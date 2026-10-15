@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const fail=()=>{throw Object.assign(new Error('SEP_MAC_WORKFLOW_ORIGIN_CHANGED'),{code:'SEP_MAC_WORKFLOW_ORIGIN_CHANGED'});};
-const BASE={core:'f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba',lifecycle:'480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844'};
+const BASE={core:'a98d2ecbc7148815959d97a4b4c20085dbc3a46bb377f9ed830cec0faae90ea8',lifecycle:'480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844'};
 const additions=`   listGenerations(input){return exclusive(async()=>{
     if(!input||Object.keys(input).sort().join(',')!=='after,limit'||!Number.isSafeInteger(input.after)||input.after<0||!Number.isSafeInteger(input.limit)||input.limit<1||input.limit>32)fail('SEP_MAC_WORKFLOW_INPUT');
     const m=await ready();await snapshot(m.generation);

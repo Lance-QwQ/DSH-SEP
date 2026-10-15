@@ -1,6 +1,13 @@
 # Fixed-account first-install controller
 
-Current status: the original 4 account + 18 controller definitions passed on native macOS in r53, together with all 5 portable boundary definitions. The separate 4 recovery-list definitions reached genuine missing-implementation RED in that run. The list implementation candidate is now written and awaits native GREEN plus the original 22 regression checks. Original installation/first-install.mjs, install-native.c and the r44 application remain unchanged.
+Current controller status: r55 passed the original 22 native definitions, five
+portable boundary definitions and four recovery-list definitions (31 total).
+The r53 missing-implementation failures remain historical evidence. Later r79
+used the actual controller in a separate installer test entry: six installation
+assertions plus two installed-product startup/restart cycles passed. See the
+[installer status](../installer-ui/STATUS.md) and [artifact bindings](../package/MAC-PREVIEW-EVIDENCE.md).
+These results do not certify physical confirmation in the original installer,
+the current unbuilt source changes, or all macOS environments.
 
 The contract separates an in-memory, read-only preview from explicit confirmation and durable execution. Cancelling a preview must leave the account, source, target and data unchanged. Confirmation must recheck candidate bytes and native fd-bound account/parent/data facts before any write.
 
@@ -28,4 +35,4 @@ In the list summary, recoverable:true means the validated recorded plan may be s
 
 Native CI has 4 account definitions plus 18 real signed-fixture/controller definitions. The latter cover read-only preview/cancel, wrong hash, changed source/target/data, prior data, aliased parent, durable bindings, corrupt approval, four real SIGKILL phase cases, concurrent lease, stale cancelled references, closed admission, unknown recovery and a lower-plan symlink attack. No mock storage or mocked core is used.
 
-Public AppKit installer, final bundle manifest, complete-package verification through this new controller and downloaded Gatekeeper experience remain later stages.
+The native installer bundle and its manifest now have the separately bound r78/r79 evidence above. Developer ID/notarization, downloaded Gatekeeper experience and original-entry physical confirmation remain unverified; no bypass is provided.

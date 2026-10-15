@@ -1,6 +1,6 @@
 import {frozen,transform} from '../../../document-business/derive.mjs';
 export const filename=new URL('../../../business/runtime.mjs',import.meta.url);
-export const originalCore=await frozen(filename,'0c413885016af096c35b5ab6b4f81856562a8127df0173d9d48429f50ece0a1e');
+export const originalCore=await frozen(filename,'8148341384289ea23050112e70355dd26a52741c45ce7b715d3699ccbbf09409');
 export function derivePendingRuntime(source,{document=false}={}){
  return transform(source,[
   {before:"import {createSnapshotScope} from './snapshot-scope.mjs';",after:"import {createSnapshotScope} from '../desktop/project-workflow-product/pending-startup/snapshot-scope.mjs';"},

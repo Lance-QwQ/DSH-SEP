@@ -41,7 +41,7 @@ export function createProjectTree({helperPath,helperSha256,lockPath,timeoutMs=30
   child.on('close',(status,signal)=>{ended=true;clearTimeout(timer);if(status!==0&&!failed)failed=error(codeFrom(stderr));if(pending&&!failed)failed=error('SEP_PROJECT_NATIVE_PROTOCOL');if(waiter){waiter.reject(failed??error('SEP_PROJECT_NATIVE_EOF'));waiter=undefined;}closedResolve({status,signal});});
   async function finish(){child.stdin.end();const receipt=await Promise.race([closed,new Promise(resolve=>{const t=setTimeout(()=>resolve(undefined),2000);t.unref();})]);if(!receipt){reject(error('SEP_PROJECT_CLEANUP_UNCONFIRMED'));throw failed;}if(failed)throw failed;}
   return {
-   next(){if(failed)return Promise.reject(failed);if(rows.length)return Promise.resolve(rows.shift());if(ended)return Promise.reject(error('SEP_PROJECT_NATIVE_EOF'));return new Promise((resolve,reject)=>{waiter={resolve,reject};});},
+   next(){if(failed)return Promise.reject(failed);if(waiter)return Promise.reject(error('SEP_PROJECT_BUSY'));if(rows.length)return Promise.resolve(rows.shift());if(ended)return Promise.reject(error('SEP_PROJECT_NATIVE_EOF'));return new Promise((resolve,reject)=>{waiter={resolve,reject};});},
    send(text,end=false){if(failed)throw failed;arm();if(end)child.stdin.end(text);else child.stdin.write(text);},
    idle(){clearTimeout(timer);seen=0;},finish,
    async abort(){reject(error('SEP_PROJECT_ABORTED'));await Promise.race([closed,new Promise(resolve=>{const t=setTimeout(resolve,2000);t.unref();})]);if(!ended)throw error('SEP_PROJECT_CLEANUP_UNCONFIRMED');},
@@ -66,12 +66,20 @@ export function createProjectTree({helperPath,helperSha256,lockPath,timeoutMs=30
   }catch(e){await child.abort();throw e;}
  }
  async function directory(path,privateRoot=false){
-  if(!validPath(path))fail('SEP_PROJECT_PATH');const child=await session(['hold',path,...privateRoot?['private']:[]],65536);let active=false,closed=false;
+  if(!validPath(path))fail('SEP_PROJECT_PATH');const child=await session(['hold',path,...privateRoot?['private']:[]],65536);let active=false,closed=false,activeFlow,closing,finished=false;
   const decode=row=>{if(row.kind!=='directory'||!['dev','ino','mode','uid'].every(k=>typeof row[k]==='string'&&/^\d+$/u.test(row[k])))fail('SEP_PROJECT_NATIVE_PROTOCOL');return Object.fromEntries(['dev','ino','mode','uid'].map(k=>[k,BigInt(row[k])]));};
   try{decode(await child.next());child.idle();}catch(e){await child.abort();throw e;}
-  async function command(text){if(closed)fail('SEP_PROJECT_CLOSED');if(active)fail('SEP_PROJECT_BUSY');active=true;try{child.send(text+'\n');const value=decode(await child.next());child.idle();return value;}catch(e){await child.abort();throw e;}finally{active=false;}}
+  async function command(text){if(closed)fail('SEP_PROJECT_CLOSED');if(active)fail('SEP_PROJECT_BUSY');active=true;activeFlow=(async()=>{try{child.send(text+'\n');const value=decode(await child.next());child.idle();return value;}catch(e){await child.abort();throw e;}finally{active=false;}})();return activeFlow;}
   return {async stat(options){const value=await command('stat');return options?.bigint?value:Object.fromEntries(Object.entries(value).map(([k,v])=>[k,Number(v)]));},async sync(){await command('sync');},
-   async close(){if(closed)return;closed=true;if(child.failed||child.ended){await child.abort();return;}try{child.send('close\n');const row=await child.next();if(row.phase!=='closed')fail('SEP_PROJECT_NATIVE_PROTOCOL');await child.finish();}catch(e){await child.abort();throw e;}}
+   close(){
+    if(finished)return Promise.resolve();if(closing)return closing;closed=true;
+    // Do not let close replace an accepted stat/sync response waiter. The
+    // existing command deadline and abort cleanup remain in force while draining.
+    closing=(async()=>{if(activeFlow)await activeFlow.catch(()=>{});
+     if(child.failed||child.ended){await child.abort();finished=true;return;}
+     try{child.send('close\n');const row=await child.next();if(row.phase!=='closed')fail('SEP_PROJECT_NATIVE_PROTOCOL');await child.finish();finished=true;}catch(e){await child.abort();throw e;}
+    })().finally(()=>{closing=undefined;});return closing;
+   }
   };
  }
  async function syncDirectory(path){if(!validPath(path))fail('SEP_PROJECT_PATH');const child=await session(['sync',path],4096);try{const row=await child.next();if(row.phase!=='committed')fail('SEP_PROJECT_NATIVE_PROTOCOL');await child.finish();}catch(e){await child.abort();throw e;}}

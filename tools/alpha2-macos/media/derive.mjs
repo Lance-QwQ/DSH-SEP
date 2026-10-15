@@ -33,7 +33,7 @@ const definitions=[
   ['static void put_row(Snapshot *snapshot',preflight+'static void put_row(Snapshot *snapshot'],
   ['size_t index=0;walk(source,dest,"",0,&source_snapshot,0,&index,source_device);','size_t measured_entries=0;uint64_t measured_bytes=0;preflight(source,0,source_device,&measured_entries,&measured_bytes);root_still_bound(source,argv[2]);\n size_t index=0;walk(source,dest,"",0,&source_snapshot,0,&index,source_device);'],
  ]},
- {source:'project-tree.mjs',target:'attachment-tree.mjs',sha256:'d7283d476851aa199b4cdbdc7b44015ffa96205918d9ef925cddd968c6aecca3',changes:[
+ {source:'project-tree.mjs',target:'attachment-tree.mjs',sha256:'bc56d55d93cd9bcb67beb544153a49f012aa453ba4fc35d2e9caa1fed5f0d6cd',changes:[
   ['entries:1024,bytes:33554432,file:4194304,depth:16','entries:2000,bytes:268435456,file:20971520,depth:16'],
   ['export function createProjectTree(','export function createAttachmentTree('],
   ['let bytes=0,prepared=false;','let bytes=0,prepared=false,rootIdentity;'],

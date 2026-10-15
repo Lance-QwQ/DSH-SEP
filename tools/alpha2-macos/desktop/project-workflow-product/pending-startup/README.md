@@ -1,5 +1,7 @@
 # Pending-plan startup candidate
 
+Current local low-review revision: `package-inputs.json` binds the eight current source files. Its previous exact bytes are retained in `package-inputs-r73.json`; these are historical native inputs. The r61 assembly, CI records and native runner are still frozen to their own earlier generation and cannot certify the current modified source. New native execution and rebuilt installer validation are `not_run`. See [current review](../../../MACOS-LOW-REVIEW-RESPONSE.md). The implementation and test status below describes the earlier pending-plan stage.
+
 This independent runtime candidate is implemented. The signed r61 app, original 76 runtime files, old operators and r70 results remain unchanged. Eight new runtime files derive the existing profile/runtime and select a new standalone entry. POSIX official Loader and real native-CAS tests passed 8/8; the candidate's Mac run, new signed application and two-round UI validation are not_run.
 
 The actual r70 first round passed. Its second round completed same-P2 synthetic staging and released those fixture owners, then failed before Desktop creation. `SEP_MAC_RUNTIME_MISSING` means a missing Cordis service after `runProfile`; it does not mean an on-disk runtime file disappeared. The current host output sink did not preserve the Loader's original error. Later application cleanup remains unconfirmed.

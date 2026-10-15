@@ -3,7 +3,7 @@
 import {readFile} from 'node:fs/promises';
 import {hash} from '../business/bounded-read.mjs';
 const file=new URL('../business/runtime.mjs',import.meta.url);let source=await readFile(file,'utf8');
-export const origin=Object.freeze({source:'../business/runtime.mjs',sha256:'0c413885016af096c35b5ab6b4f81856562a8127df0173d9d48429f50ece0a1e',transformations:[
+export const origin=Object.freeze({source:'../business/runtime.mjs',sha256:'8148341384289ea23050112e70355dd26a52741c45ce7b715d3699ccbbf09409',transformations:[
  ['config.business.context||config.business.vision||config.business.click','config.business.context||config.business.click'],
  ["const carrier=ctx.sepMacProfile,local=", "const attachmentSelection=config.business.vision?ctx.get('sepMacAttachmentBinding'):undefined;\n if(config.business.vision&&(!attachmentSelection||attachmentSelection.source!==config.source||attachmentSelection.storageRoot!==config.memory))fail('SEP_MAC_ATTACHMENT_BINDING');\n const carrier=ctx.sepMacProfile,local="],
  ["vision:'disabled'","vision:config.business.vision?'explicit-upload; native-attachment-domain':'disabled'"],

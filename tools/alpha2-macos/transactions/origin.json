@@ -8,7 +8,7 @@
       "sourceCommit": "930d081b1f7deb647948915432074f532eca2b62",
       "sourceSha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
       "resultPath": "transaction-store.mjs",
-      "resultSha256": "f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba",
+      "resultSha256": "a98d2ecbc7148815959d97a4b4c20085dbc3a46bb377f9ed830cec0faae90ea8",
       "changes": [
         {
           "before": "// Experimental Linux controller; imported source is never overwritten. All\n// untrusted commands must go through this controller's namespace carrier.",
@@ -117,6 +117,10 @@
         {
           "before": "   async reviewCleanup(){\n    await guard();const m=meta(),items=[];\n    for(const row of db.prepare('SELECT value FROM transactions').all()){\n     const t=parse(row.value);if(t.state!=='cleanup_blocked')continue;\n     const observed=await inspectSandbox(t.sandbox);items.push({id:t.id,recordSha256:hash(row.value),owner:t.sandbox,observed});\n    }\n    if(!items.length||items.some(x=>x.observed.state!=='gone'))return {status:'blocked',reasons:items.map(x=>({id:x.id,...x.observed}))};\n    const plan={schema:1,rootIdentity,generation:m.generation,sequence:m.sequence,pending:m.pending,items};return {status:'pass',planHash:hash(JSON.stringify(plan)),transactions:items.map(x=>x.id)};\n   },\n   resolveCleanup({planHash}={}){return exclusive(async()=>{\n    await guard();const m=meta(),items=[];\n    for(const row of db.prepare('SELECT value FROM transactions').all()){\n     const t=parse(row.value);if(t.state!=='cleanup_blocked')continue;\n     const observed=await inspectSandbox(t.sandbox);items.push({id:t.id,recordSha256:hash(row.value),owner:t.sandbox,observed});\n    }\n    const plan={schema:1,rootIdentity,generation:m.generation,sequence:m.sequence,pending:m.pending,items};\n    if(!items.length||items.some(x=>x.observed.state!=='gone')||hash(JSON.stringify(plan))!==planHash)fail('SEP_PROJECT_CLEANUP_PLAN_INVALID');\n    for(const item of items){const t=transaction(item.id);await removeCopies(t);t.state='aborted';save(t);event('cleanup-confirmed-durable',t);}\n    return recoverInternal();\n   });},\n",
           "after": "   async reviewCleanup(){await guard();return {status:'blocked',reason:'unknown-execution-requires-separate-owner-proof'};},\n   async resolveCleanup(){fail('SEP_PROJECT_CLEANUP_BLOCKED');},\n"
+        },
+        {
+          "before": "  startupInterrupted=false;m=meta();await snapshot(m.generation);return {status:'pass',action:m.pending?'blocked':'reconciled',generation:m.generation,sequence:m.sequence};",
+          "after": "  m=meta();if(m.pending)fail('SEP_PROJECT_RECOVERY_BLOCKED');\n  await snapshot(m.generation);startupInterrupted=false;return {status:'pass',action:'reconciled',generation:m.generation,sequence:m.sequence};"
         }
       ]
     },
@@ -125,7 +129,7 @@
       "sourceCommit": "930d081b1f7deb647948915432074f532eca2b62",
       "sourceSha256": "cd5eaeb97e790c266ae0cb66da8d1759b9f9eeb0af46fffa876815edfee3a3cf",
       "resultPath": "document-copies.mjs",
-      "resultSha256": "54bd2a133a6fdf713773e8dd890f247375b6a689b79b995f5e7251a3fcfdc7c5",
+      "resultSha256": "f7e720012437f105131b16936bb2b169a1a82f9c462b3abec512693b4c2a2337",
       "changes": [
         {
           "before": "import {lstat,readdir,unlink,rm} from 'node:fs/promises';",
@@ -146,6 +150,10 @@
         {
           "before": "const target=join(item.folder,selected.documentPath),s=await lstat(target,{bigint:true});if(!s.isFile()||s.isSymbolicLink()||s.nlink!==1n)fail('SEP_PROJECT_DOCUMENT_RECOVERY_INVALID');\n    const parent=await directory(dirname(target),true);try{await unlink('/proc/self/fd/'+parent.fd+'/'+selected.documentPath.split('/').at(-1));await parent.sync();}finally{await parent.close();}event('document-copy-unlinked');",
           "after": "await applyFile(item.folder,{path:selected.documentPath,expectedSha256:original.sha256,delete:true});event('document-copy-unlinked');"
+        },
+        {
+          "before": "   const reviewed=await inventory(selected.documentPath);if(expectedPlanHash!==undefined&&reviewed.planHash!==expectedPlanHash)fail('SEP_PROJECT_DOCUMENT_PLAN_CHANGED');",
+          "after": "   // A new deletion intent must bind the inventory that was actually reviewed.\n   // Only an existing durable intent may resume without fresh confirmation.\n   if(typeof expectedPlanHash!=='string'||!/^[a-f0-9]{64}$/.test(expectedPlanHash))fail('SEP_PROJECT_DOCUMENT_PLAN_REQUIRED');\n   const reviewed=await inventory(selected.documentPath);if(reviewed.planHash!==expectedPlanHash)fail('SEP_PROJECT_DOCUMENT_PLAN_CHANGED');"
         }
       ]
     }

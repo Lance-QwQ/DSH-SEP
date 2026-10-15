@@ -1,5 +1,17 @@
 # Isolated native reproduction
 
+Current-source note (2026-10-15): the commands below reproduce the historical
+frozen native workflow stage. SOURCE_INPUTS.json and FREEZE.json remain its
+immutable evidence, not a manifest of the current repaired tree. Use the
+original matching frozen commit or checkpoint to replay these commands;
+verify-inputs.mjs is expected to reject later changed source bytes. Do not
+refresh historical hashes merely to make that preflight pass.
+
+The current low-review repairs have WSL/Linux POSIX evidence only. Native
+macOS/APFS replay of these repairs and a newly built/installed Mac package
+remain not_run. See [current repair scope and evidence](../MACOS-LOW-REVIEW-RESPONSE.md).
+The historical native results must not be counted as runs of the repaired tree.
+
 Requirements: macOS 15 arm64, Node 24.21.0, Xcode command-line tools. No npm
 dependency, desktop carrier, private Profile, credentials or model service is
 needed. Install the fixed subset at `tools/alpha2-macos`; use a fresh real
@@ -42,7 +54,7 @@ cleanup cannot retroactively turn blocked workflow close into pass.
 ## Source and transfer binding
 
 `FREEZE.json` lists the exact new directory files; `SOURCE_INPUTS.json` fixes
-seven unchanged baseline files. `verify-inputs.mjs` checks both lists, the original
+seven baseline files unchanged at that historical stage. `verify-inputs.mjs` checks both lists, the original
 17-test SHA and replayed read-only derivation before native execution. The baseline:
 
 * `apfs-tree/native-tree.c`, `apfs-tree/project-tree.mjs`
@@ -53,7 +65,7 @@ seven unchanged baseline files. `verify-inputs.mjs` checks both lists, the origi
 
 Only that source subset and the new directory are needed. Do not transfer an
 entire local project, daily installation, data, credentials or environment dump.
-The baseline files are not edited. Generated `derived-transaction-store.mjs` and
+At that frozen revision, the baseline files were not edited. Generated `derived-transaction-store.mjs` and
 `derived-lifecycle.mjs` are verified by exact replay against `READONLY-ORIGIN.json`.
 `build-derived.mjs` is an operator regeneration command, not a runtime mutation.
 

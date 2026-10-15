@@ -73,3 +73,26 @@ SHA-256 is `2f7a315ec016d90deeae5fe9729c4f2e31b777befdba721838de4525683fa0d1`.
 These are isolated parser checks; business/context/document routes still need
 their own integration evidence. See `ASSEMBLY.md` for the production boundary.
 `diagnose-native.mjs` is a synthetic CI diagnostic, excluded from the product.
+
+## Low-priority review: lifecycle status semantics
+
+The worker's `state` is a lifecycle state, not a parser success verdict. A
+confirmed child exit with invalid input or a timeout may therefore be `closed`
+while the returned receipt has `status: fail`. A caller-side cleanup deadline
+first returns a `blocked` receipt; later native acknowledgement and a durable
+completion record may close the worker. The original receipt is not rewritten
+and the request is not retried. `status().result` describes the latest receipt;
+it is not an instruction to publish a late task result.
+
+`preparing` includes native inventory and authority-record IO. A preflight
+exception leaves admission closed and state `blocked`; the exception is the
+failure diagnostic and `status().result` may still be absent. `whenClosed()` is
+a cleanup-evidence signal, not a general completion promise: it intentionally
+remains pending when native cleanup or its durable record is unconfirmed.
+Callers must use the bounded owner `close()` receipt when waiting to shut down.
+
+The review did not specify a concrete incorrect transition and source tracing
+found no new success or resource-release claim that contradicts these rules.
+The current revision therefore preserves this conservative state machine.
+Portable input and origin-replay checks do not certify these native lifecycle
+sequences; newly rerunning those sequences on the supported Mac is `not_run`.

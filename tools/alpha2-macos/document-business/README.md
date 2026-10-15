@@ -1,6 +1,6 @@
 # Combined document, image and settings candidate
 
-`standalone.mjs` is the single package entry. It precisely derives the frozen media standalone, preserves cold native attachments, the native image/P1 route, settings adapter verification and authenticated settings HTTP checks, then substitutes the combined profile and runtime. Frozen `business`, `media-business` and captured 375-file source are not edited.
+`standalone.mjs` is the single package entry. It precisely derives the frozen media standalone, preserves cold native attachments, the native image/P1 route, settings adapter verification and authenticated settings HTTP checks, then substitutes the combined profile and runtime. The original native evidence used unchanged `business`, `media-business` and captured sources. The subsequent low-priority review changes the dedicated runtime admission/shutdown and document-review binding; current media/document runtime pins follow those reviewed bytes. Captured source and historical installer/evidence bytes remain unchanged.
 
 The new production allowlist contains exactly nine files:
 
@@ -16,7 +16,7 @@ document-business/standalone.mjs
 document-business/startup-cleanup.mjs
 ```
 
-These files additionally depend on the already included frozen business/media/settings modules and the independently verified `parser-integration` and `parser` runtime modules. No test module belongs in the application payload.
+These files additionally depend on the already included hash-bound business/media/settings modules and the independently verified `parser-integration` and `parser` runtime modules. No test module belongs in the application payload.
 
 ## Trusted assembly input
 
@@ -61,3 +61,18 @@ SEP_PARSER_ASSEMBLY_FIXTURE
 Use the same actual Apple-silicon macOS runtime and prepared official host/settings adapter as the passed native media job. Set `SEP_MAC_PROGRAM_ROOT` if the source root differs from the packaged program root. The runner writes only inside its explicitly supplied output root, with separate stdout/stderr logs. It runs 22 composition contracts, 7 preserved combined image/Agent/Loader cases using the real installed parser service, 3 native document/P2/explicit-context cases, and 1 two-round real standalone HTTP/settings/restart case: 33 definitions, expected zero skips. Standalone initialization must use a host where `prepareSettingsUi` has already completed.
 
 At source preparation time the combined native run is **not_run**. Portable evidence and failed fixture attempts are kept separately under the D: artifact root. Only the root coordinator uploads and runs CI, assembles the full package, and updates native status after collecting actual results.
+
+## Current review versus historical native preparation
+
+The reviewed runtime is a new source candidate. Its active source pins and the
+`inspect-origins.test.mjs` output binding are updated together. The portable
+import check requires the exact official Alpha.2 dependencies and the full
+verified business capture; it does not certify native Mac startup or shutdown.
+
+`project-workflow/SOURCE_INPUTS.json`, its `FREEZE.json`, and older recorded
+assembly/CI inputs still describe their historical byte-exact native baseline.
+The old `verify-inputs.mjs`, `prepare-posix-replay.mjs` and native fixture must
+reject changed baseline bytes. They are not current-candidate pass evidence;
+replaying them requires that historical checkout, or a separately reviewed new
+native input manifest and new native evidence. Do not remove those checks or
+refresh historical evidence merely to turn preparation green.
