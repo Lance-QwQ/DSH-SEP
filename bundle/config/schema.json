@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DSH SEP bundle configuration intent",
+  "type": "object",
+  "additionalProperties": false,
+  "default": {},
+  "properties": {
+    "schema": {
+      "type": "integer",
+      "const": 1,
+      "default": 1
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "modules": {
+      "type": "object",
+      "additionalProperties": false,
+      "default": {},
+      "properties": {
+        "rag": {
+          "type": "boolean",
+          "default": true
+        },
+        "memory": {
+          "type": "boolean",
+          "default": true
+        },
+        "media": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "default": {},
+      "properties": {
+        "recall": {
+          "type": "boolean",
+          "default": true
+        },
+        "capture": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "default": {},
+      "properties": {
+        "sharedLimitCny": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100,
+          "multipleOf": 0.01,
+          "default": 100
+        },
+        "roundLimitCny": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100,
+          "multipleOf": 0.01,
+          "default": 5
+        },
+        "sessionDefaultLimitCny": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 1000000,
+          "multipleOf": 0.01,
+          "default": 100
+        }
+      }
+    },
+    "compaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "default": {},
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "inherit-native"
+          ],
+          "default": "inherit-native"
+        }
+      }
+    }
+  }
+}

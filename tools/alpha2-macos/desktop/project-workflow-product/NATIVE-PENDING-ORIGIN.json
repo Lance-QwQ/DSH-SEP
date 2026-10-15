@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "scope": "Test carrier only: same two actual DOM rounds, same P2 authority and assertions. Synthetic former overlay now means r61 project layout. It does not authorize a production migration or change the installed application.",
+  "files": [
+    {
+      "base": "native-data-r2.mjs",
+      "sourceSha256": "ca9a0d4c2eb7c6723be5bd261c8d5be37cd3cc8a98f09f92eb8b6bd558505733",
+      "result": "native-data-r4.mjs",
+      "resultSha256": "1a02e6e19c5ee0aaa900a96ceb8d178a2513c57883bdf5d832e79667c6c76109",
+      "transformations": [
+        {
+          "before": "const previous=(await c.module('document-business/profile-layout.mjs')).businessLayout(layoutInput),next=(await c.module('desktop/project-workflow-product/profile-layout.mjs')).businessLayout(layoutInput)",
+          "after": "const previous=(await c.module('desktop/project-workflow-product/profile-layout.mjs')).businessLayout(layoutInput),next=(await c.module('desktop/project-workflow-product/pending-startup/profile-layout.mjs')).businessLayout(layoutInput)",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "base": "native-worker-r3.mjs",
+      "sourceSha256": "4b76efbaa89f17db7908a04a0c628ca19585432bb9862e7168d3e35688a54603",
+      "result": "native-worker-r4.mjs",
+      "resultSha256": "826353ddb3b2992a038326447b159ac06a11b1a43be68a4cd19a3c2738e14a96",
+      "transformations": [
+        {
+          "before": "from './native-data-r2.mjs'",
+          "after": "from './native-data-r4.mjs'",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "base": "native-operator-r3.mjs",
+      "sourceSha256": "7dfd70efc983200ebd25acbe8f2a0e057a7ce79ac73ef85a79dd56f06149f318",
+      "result": "native-operator-r4.mjs",
+      "resultSha256": "8458521a08bc8fdb4130340e67f0c55c056a69af2789a54c8f299c3e0cd37c18",
+      "transformations": [
+        {
+          "before": "['native-operator-r3.mjs','native-worker-r3.mjs','native-readiness.mjs'",
+          "after": "['native-operator-r4.mjs','native-worker-r4.mjs','NATIVE-PENDING-ORIGIN.json','derive-pending-native.mjs','native-readiness.mjs'",
+          "occurrences": 1
+        },
+        {
+          "before": "'native-dom-r3.mjs','native-data-r2.mjs'",
+          "after": "'native-dom-r3.mjs','native-data-r4.mjs'",
+          "occurrences": 1
+        },
+        {
+          "before": "new URL('./native-worker-r3.mjs',import.meta.url)",
+          "after": "new URL('./native-worker-r4.mjs',import.meta.url)",
+          "occurrences": 1
+        }
+      ]
+    }
+  ]
+}

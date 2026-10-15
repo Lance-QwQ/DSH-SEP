@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "scope": "unchanged test dependencies only; actual product pinned separately",
+  "inputs": [
+    {
+      "path": "desktop/managed-broker/program-manifest.mjs",
+      "bytes": 4920,
+      "sha256": "43abb6048918236c13b8a95cb7e46764be3ffc2d9eb46e49089bf78916a04071"
+    },
+    {
+      "path": "desktop/product-control/native-launch-runner.mjs",
+      "bytes": 7621,
+      "sha256": "447885ada24b09729a3e3f3c02c418e0a5c132eefb58017cd2d9a7411e65eb00"
+    },
+    {
+      "path": "desktop/run-command.mjs",
+      "bytes": 1826,
+      "sha256": "5d4c1708280ca79e1b874782dc4ec567570ac3af6c7def4d44f43841fa565691"
+    },
+    {
+      "path": "desktop/smoke-inspector.mjs",
+      "bytes": 1685,
+      "sha256": "d6919ce43a828ed5bbb7ed912d496ce1b218ecd96f87028b195e5947e12a19c1"
+    },
+    {
+      "path": "desktop/workspace-diagnostic-worker.mjs",
+      "bytes": 13539,
+      "sha256": "4f8620bc08a7cba335de715b7616504085c43d28553b58f67b17cf4e781418a7"
+    },
+    {
+      "path": "desktop/workspace-diagnostic.mjs",
+      "bytes": 6296,
+      "sha256": "223edd0596d86cda5dd22d6522badc89bd3428474c294ef7accbcae8ce194f5e"
+    },
+    {
+      "path": "package/package-inventory.mjs",
+      "bytes": 4020,
+      "sha256": "b72983c13528b2cf8f85d53c06c5440ca6bac583a593bafeaf12ef95c60c901a"
+    },
+    {
+      "path": "package/restore-fixed-application-r44.mjs",
+      "bytes": 6467,
+      "sha256": "b8eeaed8ca9843c77e94c0f12eff273c517a8a3429b3ae827e129b736c314645"
+    },
+    {
+      "path": "settings-ui/EVIDENCE-R33.md",
+      "bytes": 2620,
+      "sha256": "f7013c8cf97285e07fc017b148d7de4c52f1765533bc59dfb3d7b87ed3c7f154"
+    },
+    {
+      "path": "settings-ui/desktop-diagnostic.mjs",
+      "bytes": 1698,
+      "sha256": "534934ebd2bef4805373611ebb95fe87e5ccc6de608ff967702cee791b7c7b4e"
+    },
+    {
+      "path": "settings-ui/desktop-onboarding.mjs",
+      "bytes": 1397,
+      "sha256": "41ff0d9f92b3d844464ecb32e9896439cda0910c3c19cf3a70ff1080d96fdea1"
+    },
+    {
+      "path": "settings-ui/desktop-probe.mjs",
+      "bytes": 9930,
+      "sha256": "d55c0c5fa47651ede888bc66c171576474ce02decd42f2582ae9b55447afd203"
+    },
+    {
+      "path": "settings-ui/desktop-screenshot.mjs",
+      "bytes": 2089,
+      "sha256": "80977da53794f39d7d3e288920835cdde925883210f2b096932aba38c6897db6"
+    },
+    {
+      "path": "settings-ui/desktop-trace.mjs",
+      "bytes": 2685,
+      "sha256": "922bc071477d6e0eefc64f4c820abc77d9510ca788ea7e721eb3c8a2701f53cd"
+    }
+  ]
+}

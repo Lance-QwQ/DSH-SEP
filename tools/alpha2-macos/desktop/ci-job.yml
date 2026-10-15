@@ -1,0 +1,38 @@
+# Merge this job into the already-authorized macOS test workflow; not a Release.
+desktop-carrier:
+  runs-on: macos-15
+  timeout-minutes: 90
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.19.0
+    - name: Prepare fixed official source in ephemeral storage
+      shell: bash
+      run: |
+        set -euo pipefail
+        test "$(uname -s)" = Darwin
+        test "$(uname -m)" = arm64
+        SRC="$RUNNER_TEMP/sep-alpha2-official-source"
+        git init "$SRC"
+        git -C "$SRC" remote add origin https://github.com/deepseek-ai/deepseek-harness.git
+        git -C "$SRC" fetch --depth 1 origin d743267388641bc76f17c45ce8b4c231aed1d32c
+        git -C "$SRC" checkout --detach FETCH_HEAD
+        echo "SEP_MAC_OFFICIAL_SOURCE=$SRC" >> "$GITHUB_ENV"
+    - name: Native Alpha.2 carrier build
+      run: node tools/alpha2-macos/desktop/build-carrier.mjs "$SEP_MAC_OFFICIAL_SOURCE" "$RUNNER_TEMP/sep-alpha2-desktop-build"
+    - name: Three actual native carrier rounds
+      run: node tools/alpha2-macos/desktop/smoke-carrier.mjs "$SEP_MAC_OFFICIAL_SOURCE/apps/desktop/.desktop-build/targets/mac-arm64/unsigned-artifacts/mac-arm64/DSH SEP.app" "$RUNNER_TEMP/sep-alpha2-desktop-smoke"
+    - name: Preserve actual carrier and receipts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sep-alpha2-macos-desktop-carrier
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/sep-alpha2-desktop-build/*.json
+          ${{ runner.temp }}/sep-alpha2-desktop-build/*.log
+          ${{ runner.temp }}/sep-alpha2-desktop-build/desktop-carrier.zip
+          ${{ runner.temp }}/sep-alpha2-desktop-smoke/

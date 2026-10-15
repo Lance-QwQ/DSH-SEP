@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "stage": 2,
+  "status": "pass",
+  "candidate": {
+    "name": "dsh-sep-bundle",
+    "version": "0.2.1-beta.3-bundle.2",
+    "published": false,
+    "dailyDeployed": false,
+    "businessEnabled": false
+  },
+  "scope": "Prebuilt runtime dependencies, standalone cold-cache tarball installation, synthetic component execution, independent packed-artifact audit, and official admission regression. Full SEP host activation is not certified.",
+  "verification": {
+    "builderCases": 8,
+    "prebuiltContentsCases": 5,
+    "runtimeComponentCases": 8,
+    "stageCaseDefinitions": 21,
+    "officialAdmissionRegressionCases": 3,
+    "independentAuditChecks": 8,
+    "repeatInterpretation": "The 21 definitions include the existing business-admission guard as a regression. The 5 content cases repeat in source and installed tarball runs; repeats are not extra distinct scenarios. The 3 official cases repeat stage-one admission behavior.",
+    "coldInstallPackages": 15,
+    "coldCacheInitiallyEmpty": true,
+    "hostCopiesInstalled": 0,
+    "paidModelCalls": 0,
+    "finalRecheck": {
+      "runtimeAndContents": {
+        "passed": 13,
+        "cases": 13
+      },
+      "officialAdmission": {
+        "passed": 3,
+        "cases": 3
+      },
+      "builder": {
+        "passed": 8,
+        "cases": 8
+      },
+      "dependencyStore": "offline reuse of the explicitly recorded cold-install store, not a second cold install",
+      "executableBytesEqualToColdTestArtifact": true
+    }
+  },
+  "sourceGraphSha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "prebuiltComponents": 10,
+  "sealedGraphFiles": 381,
+  "twoModifiedExecutableFiles": [
+    "bundle/modules/recovery/src/suite-plugin.mjs",
+    "bundle/modules/session-migration/src/extensions.mjs"
+  ],
+  "archive": {
+    "name": "dsh-sep-bundle-0.2.1-beta.3-bundle.2.tgz",
+    "sha256": "ef2f95f23d138c5f2c4624ec56ecd091c9b2009ad6d7c66537e3ff0fbffe5db9",
+    "size": 1006456,
+    "files": 393
+  },
+  "coldInstallArchive": {
+    "sha256": "d806e233938929b927f95952b1da11acedec1273549bedfdb2aef5fa9fce3248",
+    "name": "dsh-sep-bundle-0.2.1-beta.3-bundle.2.tgz",
+    "scope": "first cold-cache test; executable bytes equal final candidate, documentation/inventory metadata subsequently reviewed"
+  },
+  "sourceSha256": {
+    "package.json": "0b6b2be3f537f4f01830a46239166c36d98b72dceb04592e512de023941bb71a",
+    "bundle/lib/index.js": "105a6ce3857f037ba937f0e38f53776523190eb6ec5e5f43f1152a4c36af5f00",
+    "bundle/cordis.patch.yml": "69c831096bb1b86a55b7729ad31e10f043b0c6d4f13390df1ced513b2a91d594",
+    "bundle/contracts/admission.json": "f6586a71b7201ed7f815ecc60fd815dfc41fda6de244613bd0f7189d24a3c203",
+    "bundle/contracts/modules.json": "9810c2d51ec48342f02bab585ac6303d8b7ee732f6ba2cbefcb7ba98e229e271",
+    "bundle/README.md": "2fd4ad86c3d889e1f4861012d824517c5e6db96a1de585a6cc6c787521812ea8",
+    "bundle/THIRD-PARTY-NOTICES.md": "02de27d5b1f5f0ccece647f6931997f197d33f2e226e45bfb7feea7450c8c883",
+    "bundle/licenses/DSH-MIT.txt": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "tools/bundle-install/build-modules.mjs": "9f56f13851c73ed2deeb820d9efaf422bf328d4bc1782e8253231a25766743df",
+    "tools/bundle-install/review-imports.mjs": "00e5d3d0c56e3199adb36331badcf19726286c6b7f36b4e31a7f868220cf66d4",
+    "tools/bundle-install/package.json": "9f9a8f048f9302f01da13781ceb8a0f55cc52ddac76a8f06670f2bec2d524fe6",
+    "tools/bundle-install/pnpm-lock.yaml": "984a4a351d67d565cd8c1b5cb3d45207dd6141d294fbf399f15a92a940f86c1f",
+    "tools/bundle-install/README.md": "fabb07535aa7d6171addb96198acda499c9f8ed574cd7b7f63fbae79b017e084",
+    "tools/bundle-install/tests/builder.test.mjs": "5720d1dc0e7add56cca466268e8712d960d52a45e4f19365bc0daf1619dbc6cc",
+    "tools/bundle-install/tests/modules.test.mjs": "fe6d8a6fe88c39381480617191b3c000ee9dd1393f7b1ee4eb4cde4dd55499d6",
+    "tools/bundle-install/tests/runtime.test.mjs": "ab558b82fab7bea8376b149855e903fd5780c0e8a5bccd6a299aa6a9d6838972",
+    "tools/bundle-install/tests/entry.test.mjs": "dc2fd885557ecfa201cd6909ed828c20568ac27246d7dfae1188c3caa2d71d53",
+    "docs/BUNDLE-INSTALL-PROGRESS.md": "e4531a6713f96b728a1d4129e132e04393087239d9c38ab3e02be40d0baaadd7",
+    ".gitignore": "60535ba11649817ca65f1a7283b8193da61654e1b952cfc81abc0300b46b4b3a"
+  },
+  "logs": {
+    "reviewed-runtime.log": "ebe83acb564751c1ecd79b22b5feabb4bfe73dd46711b297a17574cd8c984361",
+    "reviewed-entry.log": "b5bd2eec3ef30a89c0b42a1033a0dd4a8c92663943bcff3f118bba74aa2796d9",
+    "reviewed-builder.log": "4d918a9dd14756a9249ac0c551869701fc53800f6df69cd7b8f101bba25b34c9",
+    "red.log": "1b7a278612d9d9513d216dd3ef7c4c5d60c4fe5247758d5b4acf0f922b790a09",
+    "green-build.log": "cc31164e297fcca561e9e7368633367670c7b4d9a964e242c324ebc7a8812b0b",
+    "green-build-final.log": "dfb62775399c5c5c33ee1afea298ba54312087f7c70a965c49d7c3fc6b65259c",
+    "clean-runtime.log": "5b8557f19bafb0d67b8db2899804d1293e1f61ab51dffe6fb6f0edf025af8173",
+    "clean-runtime-final.log": "e0bf273e5970e4b244fb3f861974d37608a5b1be4a8865beca53fea51df96849",
+    "official-entry-regression.log": "2bee5fab80cbb03a5b8bab1230575debadc2c030af0dd9220bb46d9ed6000670",
+    "clean-install.log": "0e7432b833d08573af22d8bae72fb06652f8a23f849a70ab4eae7bb98e0979c3",
+    "reviewed-install.log": "ee68269ab9b4d193fac34758d24ba1f6aeca3f01b4e1304b55bd879ad4ca0e6c",
+    "tool-install.log": "23744a11e3ec1725dfea3e30c5bfd7d008a0c2177a263bf3c55b3c0691dbfcd3",
+    "pack-reviewed.log": "c1ee8f5aa7f84b7b6c38ce0f116bbdfe1cfd94b66954936e27be0c15934798ca",
+    "independent-import-review.log": "b38c8f8bb0aa7cb10d41d75e4bb045c095430d107072785feec570a4cbb9c93b"
+  },
+  "dependencyLocks": {
+    "coldInstall": "b09d5d6bc5823f4551dfd2697fb42cfe6f81080aa826f16849b6689a4765460b",
+    "reviewedInstall": "25267ecc06f587d5ae6e013fcb735302cbaca0a2f1798345ff89cf4062f25fa4",
+    "tooling": "984a4a351d67d565cd8c1b5cb3d45207dd6141d294fbf399f15a92a940f86c1f"
+  },
+  "fixtureCorrections": [
+    "Evaluation integrity manifest is a flat filename-to-hash object, not a files wrapper; assertion corrected before successful checks.",
+    "Tampered-source fixture initially copied package node_modules links and failed EPERM; corrected to graph-listed regular files without changing the rejection assertion.",
+    "createRequire over a pnpm logical package link does not canonicalize that virtual filename; runtime fixture now resolves realpath first, matching normal loaded modules. No production module change was made for these fixture failures."
+  ],
+  "buildAdjustments": [
+    "Program graph is 9,124,214 bytes; builder uses a 16 MiB graph bound while retaining the 8 MiB individual file limit.",
+    "Reference-only OpenClaw CLI/engine/plugin metadata gaps are explicitly classified and kept outside active static import closure.",
+    "Two missing component license texts added; original code kept."
+  ],
+  "deferred": {
+    "threeBuildPathComments": [
+      {
+        "file": "bundle/modules/ui-settings-memory/lib/client.js",
+        "kind": "CSS-region build-path comment",
+        "nextStage": 3
+      },
+      {
+        "file": "bundle/modules/ui-settings-memory/lib/client.js",
+        "kind": "CSS-region build-path comment",
+        "nextStage": 3
+      },
+      {
+        "file": "bundle/modules/ui-settings-memory/lib/client.js",
+        "kind": "CSS-region build-path comment",
+        "nextStage": 3
+      }
+    ],
+    "hostCompatibilityStatus": "not_run",
+    "hostPeerVersionExpectations": "Recorded existing rc.2 expectations do not certify latest-host compatibility. Optional peers prevent automatic host installation; they do not make missing services acceptable."
+  },
+  "notVerified": [
+    "complete host service compatibility",
+    "actual frontend registration and UI interaction",
+    "trusted backend/container lifecycle in this new bundle",
+    "Windows MCP clicks",
+    "paid model conversation",
+    "remote Git clone and GUI installation",
+    "daily deployment and public release"
+  ],
+  "historicalStageOne": "BUNDLE-ENTRY-VERIFICATION.json",
+  "priorCheckpoint": "ebf119f4088e6359a1d9e009db884e4b09bc0f91",
+  "nextStages": [
+    {
+      "stage": 3,
+      "status": "not_run"
+    },
+    {
+      "stage": 4,
+      "status": "not_run"
+    },
+    {
+      "stage": 5,
+      "status": "not_run"
+    },
+    {
+      "stage": 6,
+      "status": "not_run"
+    }
+  ]
+}

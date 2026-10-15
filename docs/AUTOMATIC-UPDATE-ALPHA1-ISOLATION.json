@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Windows x64 / DSH 0.2.1-alpha.1 / same-host, same-topology SEP schema-3 delta in isolated synthetic storage",
+  "sourceBaseCommit": "d1ba74457218b3c64f8080804abf6b5771457483",
+  "sourceInputsSha256": "54effa43e9f064730620e8002ec5878bf17c979102b5f080d75077656cc52fd6",
+  "tests": {
+    "added": {
+      "tests": 21,
+      "pass": 21,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "sha256": "91b1f7870bc170921fb134eb25de6162470451ffd5f837e6abc295eb66772b4b",
+      "path": "sealed-new-regression.log"
+    },
+    "existing": {
+      "tests": 116,
+      "pass": 105,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 11,
+      "todo": 0,
+      "sha256": "d07bba90af2eb7b7d94920c420094569ec9d3a80542eb3029e2353f62d309b3d",
+      "path": "sealed-legacy-regression.log"
+    }
+  },
+  "automaticChecks": 11,
+  "archiveSha256": "058ea8ae816129a3ee9c39a4202df44676a0d8d898e3c82da550ff9d64296299",
+  "baseGraphHash": "e500ff38492a08eaa647874ef97258380ee0155f7932dd1ab8743b6e88bc51e1",
+  "targetGraphHash": "2d7f6313cfbcf591f4d65796c7ebfc429c88e2fb08077d1575b0283d55a74fab",
+  "desktop": {
+    "status": "pass",
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "hostExit": {
+      "generation": 2,
+      "code": 0,
+      "signal": null,
+      "forced": false,
+      "ready": true,
+      "errorCode": null,
+      "at": "2026-10-11T15:15:49.593Z"
+    },
+    "programBytesUnchanged": true,
+    "forcedCleanup": false,
+    "notVerified": [
+      "actual tray click",
+      "first-close native prompt",
+      "manual drag",
+      "paid model",
+      "private continuation"
+    ]
+  },
+  "notVerified": [
+    "public HTTPS archive delivery",
+    "native review-dialog interaction",
+    "default detached Electron launch inside the automatic worker (managed-host seam and post-publication actual Electron tested separately)",
+    "arbitrary DSH upgrade or dependency-topology migration",
+    "private plugin functional certification",
+    "Linux/macOS"
+  ],
+  "publication": {
+    "github": false,
+    "dailyChanged": false
+  },
+  "review": [
+    "Exact same-host/schema-3/dependency-topology boundary; nested third-party ownership remains independent.",
+    "External Profile and budget references retained; unsupported Profile formats refuse preparation.",
+    "P2 decision and deletion authority retained; post-confirmation changes permanently invalidate plans.",
+    "Current discovery/filter/preference implementation preserved with captured source hashes; old-template API regression corrected.",
+    "Origin transformations replayed byte for byte; actual installed package tests and immutable graph audits passed.",
+    "A concurrent test legitimately triggered APP_RUNNING; original-plan recovery completed. Final publication and desktop tests were serialized."
+  ],
+  "localEvidenceRoot": "D:\\AIData\\ProjectWork\\DSH\\automatic-update-alpha1-20261011"
+}

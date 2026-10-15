@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "asset": "THIRD-PARTY-SOURCES.zip",
+  "bytes": 251343178,
+  "sha256": "237d0644ab6280a6771dc79addd579a95050cb74321c7e5021829069c5cc896b",
+  "files": 1136,
+  "sourceArchives": 32,
+  "rustCrates": 357,
+  "licenseFiles": 724,
+  "manifestSha256": "c6cf0371a1554382f844006084f481c5f27055668cdbfdba2969c32ad5249a0f",
+  "allArchivedBytesRechecked": true,
+  "applicationArchivesModified": false
+}

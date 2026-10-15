@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": "package/exercise-installed-startup.mjs",
+  "sourceSha256": "3c76a7e17ad8f095cc8d40ea51e2831d42ba4ccb3c2ccec623cdf7517e461275",
+  "result": "installer-ui/integration/installed-startup.mjs",
+  "resultSha256": "e1b4a288612d43b2b93f0ba6e27eeaa0c2f851f13016dfc33ca0f36d08eaa01b",
+  "scope": "Only relocate three test helper imports and replace the old r44 archive identity with independently verified r61. Behavior and failure cleanup remain original.",
+  "transforms": [
+    {
+      "from": "from'./package-inventory.mjs'",
+      "to": "from'../../package/package-inventory.mjs'"
+    },
+    {
+      "from": "from'./installed-profile-binding.mjs'",
+      "to": "from'../../package/installed-profile-binding.mjs'"
+    },
+    {
+      "from": "new URL('./application-observer.m',import.meta.url)",
+      "to": "new URL('../../package/application-observer.m',import.meta.url)"
+    },
+    {
+      "from": "6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67",
+      "to": "742c503ba230ee9dd92f54b8c4646af3385dd1d6259fdfdcbc2212f2ff020d13"
+    }
+  ]
+}

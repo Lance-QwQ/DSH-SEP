@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "scope": "exact r44 application; independent derived candidate only",
+  "programSha256": "fbe989745254464885c390b7d6e55fd3883674faa26b705ea74833240c07d713",
+  "asarSha256": "390ae3c2776ef237f1b409bba5a2b6426c04eadbc1eec446cc84d5aa18b4010e",
+  "inventorySha256": "5c6b9b4baba36de89cebb9e15ff7e2d7ffce7c46f385ecfa15d4ce231f4de5fb",
+  "desktopReceiptSha256": "c1e0e25a0c621ce5f69bd366c9fbc8cb9f879d37490d990589b63e74f7664f69",
+  "entries": {
+    "main": {"domain":"asar","path":"lib/main.js","sha256":"fc5e9b2d01cae3cf27509dfd319b8485d7b155d93cc8742ebffe40306504d831"},
+    "preload": {"domain":"asar","path":"lib/preload-app.cjs","sha256":"75df8659fb7ca42162b2d0ef7b1272a79416c72e67fd2adcd2d0c6a03c448991"},
+    "ui-renderer": {"domain":"host","path":"node_modules/@deepseek-ai/dsh-client-ui-renderer/lib/client.js","sha256":"561864aa9f6f1e05e15991786724a41d0bc5badfaef4be6f7c2430ed903fe231"}
+  },
+  "hostOwnerSha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f",
+  "desktopRpcSha256": "f715cd525a386bf5bb64baa8f282a1cf0fc6f77b82f424358ae3d1d8c28033dc"
+}

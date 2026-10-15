@@ -1,0 +1,205 @@
+/**
+ * Canonical message identity/signature builders used for dedup, replay detection, and assembly protection.
+ *
+ * Extracted from engine.ts (Phase 1 of the engine decomposition).
+ */
+import { buildMessageParts, stripModelIdentityFromMetadataJson, toStoredMessage, } from "./message-content.js";
+import { canonicalizeOpenClawInboundMetadataIdentityContent } from "./openclaw-inbound-metadata.js";
+import { extractToolResultIdForPairing } from "./tool-pairing.js";
+import { createHash } from "node:crypto";
+export function createBootstrapEntryHash(message) {
+    if (!message) {
+        return null;
+    }
+    const content = canonicalizeOpenClawInboundMetadataIdentityContent(message.role, message.content);
+    return createHash("sha256")
+        .update(JSON.stringify({ role: message.role, content }))
+        .digest("hex");
+}
+export function messageIdentity(role, content) {
+    return `${role}\u0000${content}`;
+}
+export function isBootstrapReplayCandidateMessage(message) {
+    const role = toStoredMessage(message).role;
+    return role === "assistant" || role === "tool";
+}
+export function createLosslessMessageSignature(message) {
+    const stored = toStoredMessage(message);
+    const parts = buildMessageParts({
+        sessionId: "lossless-message-signature",
+        message,
+        fallbackContent: stored.content,
+    });
+    // Strip model-identity metadata from the serialized payload: identity is
+    // replay affinity, not message identity. Rows persisted before identity
+    // stamping and live/assembled representations produced after the upgrade
+    // must keep comparing equal for replay-prefix detection across the
+    // pre/post-upgrade boundary.
+    return JSON.stringify({
+        role: stored.role,
+        content: stored.content,
+        parts: parts.map((part) => ({
+            partType: part.partType,
+            ordinal: part.ordinal,
+            textContent: part.textContent ?? null,
+            toolCallId: part.toolCallId ?? null,
+            toolName: part.toolName ?? null,
+            toolInput: part.toolInput ?? null,
+            toolOutput: part.toolOutput ?? null,
+            metadata: canonicalizePartMetadataForMessageSignature(part.metadata ?? null),
+        })),
+    });
+}
+/** Keep OpenAI encrypted-reasoning payloads as message identity. */
+function isOpenAiReasoningSignature(signature) {
+    if (!signature.startsWith("{")) {
+        return false;
+    }
+    try {
+        const parsed = JSON.parse(signature);
+        return parsed.type === "reasoning" && typeof parsed.id === "string";
+    }
+    catch {
+        return false;
+    }
+}
+/** Remove replay affinity while retaining content-bearing metadata. */
+function canonicalizePartMetadataForMessageSignature(metadata) {
+    const identityStripped = stripModelIdentityFromMetadataJson(metadata);
+    if (!identityStripped) {
+        return identityStripped;
+    }
+    try {
+        const parsed = JSON.parse(identityStripped);
+        if (!parsed.raw || typeof parsed.raw !== "object" || Array.isArray(parsed.raw)) {
+            return identityStripped;
+        }
+        const raw = parsed.raw;
+        const signature = raw.thinkingSignature;
+        // Empty opaque signatures can carry the only replayable payload. Keep
+        // those exact; non-empty thinking text supplies the comparison identity.
+        if (raw.type !== "thinking" ||
+            typeof signature !== "string" ||
+            isOpenAiReasoningSignature(signature) ||
+            (signature !== "reasoning_content" &&
+                (typeof raw.thinking !== "string" || raw.thinking.length === 0))) {
+            return identityStripped;
+        }
+        const { thinkingSignature: _thinkingSignature, ...canonicalRaw } = raw;
+        return JSON.stringify({ ...parsed, raw: canonicalRaw });
+    }
+    catch {
+        return identityStripped;
+    }
+}
+export function hashAgentMessageForAssemblyProtection(message) {
+    return createHash("sha256").update(JSON.stringify([message])).digest("hex").slice(0, 16);
+}
+export function messagesHaveSameLosslessSignature(left, right) {
+    return createLosslessMessageSignature(left) === createLosslessMessageSignature(right);
+}
+export function createLiveCoverageSignature(message) {
+    const stored = toStoredMessage(message);
+    if ((stored.role === "user" || stored.role === "system" || stored.role === "assistant") &&
+        stored.content.length > 0 &&
+        (isCanonicalTextOnlyMessage(message, stored.content) ||
+            (stored.role === "assistant" &&
+                isCanonicalTextWithReasoningContent(message, stored.content)))) {
+        return JSON.stringify({
+            kind: "canonical-text",
+            role: stored.role,
+            content: stored.content,
+        });
+    }
+    const canonicalToolTextSignature = createCanonicalToolTextCoverageSignature(message, stored.content);
+    if (canonicalToolTextSignature) {
+        return canonicalToolTextSignature;
+    }
+    return createLosslessMessageSignature(message);
+}
+/** Match post-upgrade sentinel replay to legacy assembly, which drops that block. */
+function isCanonicalTextWithReasoningContent(message, fallbackContent) {
+    const parts = buildMessageParts({
+        sessionId: "live-coverage-signature",
+        message,
+        fallbackContent,
+    });
+    let removedSentinel = false;
+    const visibleParts = parts.filter((part) => {
+        if (part.partType !== "reasoning") {
+            return true;
+        }
+        if (!part.metadata) {
+            return true;
+        }
+        try {
+            const parsed = JSON.parse(part.metadata);
+            const raw = parsed.raw;
+            const isSentinel = raw?.type === "thinking" && raw.thinkingSignature === "reasoning_content";
+            removedSentinel ||= isSentinel;
+            return !isSentinel;
+        }
+        catch {
+            return true;
+        }
+    });
+    return removedSentinel && hasCanonicalTextPart(visibleParts, fallbackContent);
+}
+/** True when the parts contain exactly one plain text representation. */
+function hasCanonicalTextPart(parts, fallbackContent) {
+    const part = parts[0];
+    return parts.length === 1 && part !== undefined && (part.partType === "text" &&
+        (part.textContent ?? "") === fallbackContent &&
+        part.toolCallId == null &&
+        part.toolName == null &&
+        part.toolInput == null &&
+        part.toolOutput == null);
+}
+export function normalizeToolNameForCoverage(toolName) {
+    // The assembler fills missing tool names with "unknown" on rehydration.
+    // Treat null/undefined/""/"unknown" as equivalent for coverage matching
+    // so live and assembled tool-result signatures still match.
+    if (!toolName || toolName === "unknown") {
+        return null;
+    }
+    return toolName;
+}
+export function createCanonicalToolTextCoverageSignature(message, fallbackContent) {
+    const stored = toStoredMessage(message);
+    if (stored.role !== "tool" || fallbackContent.length === 0) {
+        return undefined;
+    }
+    const parts = buildMessageParts({
+        sessionId: "live-tool-coverage-signature",
+        message,
+        fallbackContent,
+    });
+    if (parts.length !== 1) {
+        return undefined;
+    }
+    const part = parts[0];
+    if (part.partType !== "text" ||
+        (part.textContent ?? "") !== fallbackContent ||
+        part.toolInput != null ||
+        part.toolOutput != null) {
+        return undefined;
+    }
+    return JSON.stringify({
+        kind: "canonical-tool-text",
+        role: stored.role,
+        content: fallbackContent,
+        toolCallId: part.toolCallId ?? extractToolResultIdForPairing(message) ?? null,
+        toolName: normalizeToolNameForCoverage(part.toolName),
+    });
+}
+export function isCanonicalTextOnlyMessage(message, fallbackContent) {
+    const parts = buildMessageParts({
+        sessionId: "live-coverage-signature",
+        message,
+        fallbackContent,
+    });
+    return hasCanonicalTextPart(parts, fallbackContent);
+}
+export function messagesHaveSameLiveCoverageSignature(left, right) {
+    return createLiveCoverageSignature(left) === createLiveCoverageSignature(right);
+}

@@ -1,0 +1,75 @@
+{
+  "nativePackageAssembly": "pass",
+  "schema": 1,
+  "producerOnlyArchive": {
+    "sha256": "9d3ee2a441de0dd4892f5f31a898dc9a9bae0e17700d086f094385a9c9e15793",
+    "bytes": 509764143,
+    "accepted": false,
+    "downloaded": false
+  },
+  "commit": "75cd1e650d021015a7d871c44caaf7597e995fb2",
+  "programSha256": "49a3aaa7a1beb74ae64bc687a04566008a641ea02013f1d36e7945d5b8d448e8",
+  "fullMacCertification": "blocked",
+  "pendingProbe": {
+    "nativeStatus": "not_run",
+    "sha256": "449c0fa85db1f0a4bfdb14820dcfa722e4b6156fcc9acc7009296241ef8ef5a9"
+  },
+  "artifacts": [
+    {
+      "sha": "db719bdeb23d8386210124c74aa6be12ab83dbf1f93a8a45d9f706d824a6dea4",
+      "name": "r22-negative-diagnostic.zip",
+      "artifact": 11876691626
+    },
+    {
+      "sha": "0f18c1b00f55c11afb1ba2a4f406e5f9874ba6716ec2f08859cde08b2ad1d084",
+      "name": "r22-full-diagnostic.zip",
+      "artifact": 11876651898
+    }
+  ],
+  "brokerHelperTests": {
+    "pass": 27,
+    "fail": 0,
+    "skipped": 0
+  },
+  "runtime": [
+    {
+      "sha256": "37e6a332e251ffec6818108e5d37e4faacdbd8d77b491de12561601c9a3962c3",
+      "path": "desktop/managed-broker/launch-full.mjs",
+      "matchesR22": true
+    },
+    {
+      "sha256": "b3a063a699bb26efc4c873e1313c2a2f0b66ffe29d21f8e0cd449e3601b96445",
+      "path": "desktop/managed-broker/program-manifest.mjs",
+      "matchesR22": true
+    },
+    {
+      "sha256": "ef85d71769efba6618bb9dab670a369ed329732adf09f9aec25d7dd7c7b0ec07",
+      "path": "desktop/managed-broker/launch-state.mjs",
+      "matchesR22": true
+    },
+    {
+      "sha256": "f715cd525a386bf5bb64baa8f282a1cf0fc6f77b82f424358ae3d1d8c28033dc",
+      "path": "desktop/managed-broker/desktop-rpc.mjs",
+      "matchesR22": true
+    },
+    {
+      "sha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f",
+      "path": "desktop/managed-broker/host-owner.mjs",
+      "matchesR22": true
+    },
+    {
+      "sha256": "b0016da79d72268d6b325ed93c59a09227ebbda30badc9bf2a05fec3afd792e8",
+      "path": "desktop/managed-broker/business-host.mjs",
+      "matchesR22": true
+    }
+  ],
+  "runId": 38527092957,
+  "nativeMissingConnection": "pass",
+  "nativeInstalledDesktop": {
+    "round1": "FULL_WORKSPACE_NOT_READY",
+    "cleanup": "test-owned process group SIGKILL; not product shutdown proof",
+    "round2": "not_run",
+    "status": "fail",
+    "round3": "not_run"
+  }
+}

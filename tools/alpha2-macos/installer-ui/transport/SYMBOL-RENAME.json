@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "inputSha256": "779c8484aa7fba00dc2de0e1d9f81067f227a96e638a70ecc7a1caa8e7656ad3",
+  "resultSha256": "06c65200f60ce49e8592ca22f12b3697c0789140efe8c625643eff06676a3c5b",
+  "transforms": [
+    {
+      "from": "Pattern(",
+      "to": "SEPTransportPattern(",
+      "matches": 5
+    },
+    {
+      "from": "Boolean(",
+      "to": "SEPTransportBoolean(",
+      "matches": 5
+    }
+  ],
+  "reason": "r62 actual Mac SDK typedef collisions; no behavior or test change"
+}

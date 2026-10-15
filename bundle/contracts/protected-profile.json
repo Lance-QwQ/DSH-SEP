@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "name": "explicit-cold-start-protected-profile",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic scope",
+  "status": "pass",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "entry": "dsh-sep-bundle/protected-profile",
+  "provides": [
+    "sepProtectedProfile",
+    "sepGovernedStorage"
+  ],
+  "requires": [
+    "native tools/systemPrompt/sessions/storageDomain",
+    "native sandboxPolicy",
+    "registered recoveryHost project",
+    "existing known governed P2 storage",
+    "existing valid V3 budget ledger",
+    "explicit independent storage and recovery roots"
+  ],
+  "composition": [
+    "owned P2 coordinator lease",
+    "SEP SessionPersistence",
+    "protected text file tools and observation policy",
+    "project/Session binding review",
+    "governed three-domain storage wrapper"
+  ],
+  "replacement": {
+    "kind": "cold-start composition only",
+    "existingLiveProviderBehavior": "refuse without disposing existing providers",
+    "coldProfileInput": "operator-reviewed host rows explicitly disable native fs/SessionPersistence before loading this one entry",
+    "automaticPatchEdit": false,
+    "hotReplacementVerified": false
+  },
+  "configuration": {
+    "required": [
+      "selection",
+      "recovery"
+    ],
+    "optional": [
+      "session",
+      "tools"
+    ],
+    "selection": "bundle/contracts/project-binding.json input",
+    "session": {
+      "compression": [
+        "none",
+        "zstd"
+      ],
+      "defaultCompression": "none"
+    },
+    "recovery": "explicit maxFileBytes/maxTotalBytes/maxEntries/retentionMs; selected backups root",
+    "resetOrInitializeOption": false
+  },
+  "bindingConfirmation": "ephemeral read-only Session handoff confirmation only; not permission for all business, all writes or deployment",
+  "writeProtection": "native text tools/observations/Sandbox, owned persistent file recovery, SEP Session event validation and P2 business sequencing retain their own executor guards",
+  "cleanup": {
+    "closesNewGovernedStorageAdmissions": true,
+    "waitsAcceptedAccessWork": true,
+    "closesOwnedDomainsAndChildren": true,
+    "releasesP2OwnershipAfterDrain": true,
+    "retainedTableReferencesRefuse": true,
+    "failureReported": "SEP_PROFILE_CLEANUP_FAILED",
+    "wholeApplicationDeadlineVerified": false,
+    "repeatedDomainCloseCoalesces": true,
+    "callerStartedDomainCloseTracked": true
+  },
+  "failureRollback": "only owned children/domains/lease; native prerequisites and user contributions retained; no automatic reactivation of deliberately disabled native rows",
+  "fixedTestDefinitions": 17,
+  "notVerified": [
+    "live private Profile hot replacement",
+    "whole SEP business activation/P1 complete Profile interception",
+    "native compaction swap",
+    "full application/child deadline",
+    "configuration GUI and credentials availability",
+    "real GUI Git URL lifecycle",
+    "private old-library adoption",
+    "Linux/macOS runtime"
+  ]
+}

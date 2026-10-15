@@ -1,0 +1,36 @@
+import {createRequire} from 'node:module';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+import {join,dirname,resolve} from 'node:path';
+import {mkdir,readFile,writeFile,cp,symlink} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const adapterSource=resolve(process.env.SEP_DAILY_ADAPTER_SOURCE??'daily-adaptation-src');
+const {adaptDailyPresets}=await import(pathToFileURL(join(adapterSource,'lib/daily-presets.mjs')));
+const base='D:/AIData/ProjectWork/DSH/alpha2-desktop-continuation-20261012',runtime=join(base,'alpha2-runtime-r3');
+await cp(join(base,'alpha2-runtime-r2'),runtime,{recursive:true,errorOnExist:true,force:false});
+await cp(join(base,'daily-host-adapter-r3/index.js'),join(runtime,'node_modules/@deepseek-ai/dsh-desktop-host/lib/index.js'));
+const {writeDesktopRuntime,verifyDesktopRuntime}=await import(pathToFileURL(join(runtime,'build-runtime-helper.mjs')));
+const previous=JSON.parse(await readFile(join(runtime,'desktop-runtime.json')));writeDesktopRuntime(runtime,previous.release,previous.sharedPackages.map(row=>row.name));await verifyDesktopRuntime(runtime,'0.2.1-alpha.2');
+process.env.SEP_OFFICIAL_HARNESS=runtime;process.env.SEP_BUNDLE_TEST_ROOT=base;
+const repo='D:/AIData/ProjectWork/DSH/github-beta-publication-20261001/repository';
+const {setup,close,root,load}=await import(pathToFileURL(join(repo,'tools/bundle-install/tests/native-settings-fixture.mjs')));
+const f=await setup({mountRoot:false});
+try{
+ const bundleRoot=join(f.base,'materialized-bundle');await cp(root,bundleRoot,{recursive:true,filter:file=>!file.includes('node_modules',root.length)});await symlink(join(runtime,'node_modules'),join(bundleRoot,'node_modules'),'junction');
+ const configuration=structuredClone(f.input);delete configuration.runtime.compaction.nativeEntryId;
+ const sha=bytes=>createHash('sha256').update(bytes).digest('hex'),manifestFile=join(bundleRoot,'package.json');
+ const selected={schema:1,dsh:'0.2.1-alpha.2',sep:'0.2.1-beta.3-alpha2-adapter.1',bundleRoot,nativeCompactionEntryKey:'native',configuration,bindings:[{path:manifestFile,sha256:sha(await readFile(manifestFile))}]};
+ const selectionFile=join(f.base,'desktop-selection.json'),selectionBytes=JSON.stringify(selected)+'\n';await writeFile(selectionFile,selectionBytes);
+ const home=join(f.base,'desktop-home'),profile=join(home,'profiles/desktop');await mkdir(profile,{recursive:true});
+ const {PROFILE_TEMPLATES,loadOverlayPatches}=await load('@deepseek-ai/dsh-app-boot');
+ await writeFile(join(profile,'package.json'),JSON.stringify({name:'sep-synthetic-daily-profile',private:true,type:'module',dsh:{profile:{bundles:PROFILE_TEMPLATES.web.bundles}}})+'\n');
+ const rows=['standard','cordis','minimal','ptc'].map(name=>loadOverlayPatches('dsh',join(runtime,'node_modules/@deepseek-ai/dsh-web-app/presets',name+'.patch.yml'))[0].insert[0]);
+ const patch=[...adaptDailyPresets(rows),...['fs-sandbox','session-persistence-jsonl','desktop-product-telemetry','product-analytics','session-telemetry-otel','otel'].map(id=>({id,disabled:true})),{id:'storage-json',config:{root:f.dirs.memory}},{id:'sandbox-policy',config:{mode:'workspace-write',workspaceRoot:f.dirs.project}},{insert:[{id:'native',name:'@deepseek-ai/dsh-compaction-basic',config:{auto:true,thresholdRatio:.63,retainRatio:.21,maxTokens:64,compactionRetries:0,maxOverflowRetries:2}},{id:'sep-recovery',name:pathToFileURL(join(bundleRoot,'bundle/lib/recovery-authority.js')).href,config:{controlRoot:join(f.base,'authority')}}]}];
+ await writeFile(join(profile,'cordis.patch.yml'),JSON.stringify(patch)+'\n');
+ const app=join(f.base,'desktop-app');await cp(join(base,'native-desktop-r2/app'),app,{recursive:true,filter:path=>!path.includes('node_modules',join(base,'native-desktop-r2/app').length)});await symlink(join(runtime,'node_modules'),join(app,'node_modules'),'junction');
+ const manifest=JSON.parse(await readFile(join(app,'package.json')));manifest.main='lib/probe-bootstrap.mjs';await writeFile(join(app,'package.json'),JSON.stringify(manifest)+'\n');
+ const userData=join(f.base,'electron-user-data');await mkdir(userData);await writeFile(join(userData,'background-close-confirmed'),'synthetic preconfirmed notice\n');
+ const receipt=join(f.base,'DESKTOP-LIFECYCLE.json');
+ await cp(join(adapterSource,'tests/desktop-probe-bootstrap.mjs'),join(app,'lib/probe-bootstrap.mjs'));
+ await writeFile(join(base,'DESKTOP-PROBE-INPUT-r1.json'),JSON.stringify({schema:1,fixture:f.base,app,home,profile,project:f.dirs.project,userData,receipt,runtime,selectionFile,selectionSha256:sha(selectionBytes),notVerified:['manual drag','first-close native dialog','complete production launcher','private live continuation','remaining SEP integrations']},null,2)+'\n');
+ console.log(JSON.stringify({fixture:f.base,scope:'synthetic desktop lifecycle input; not deployed'}));
+}finally{await close(f);}

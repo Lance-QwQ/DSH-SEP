@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "product": "dsh-sep",
+  "distributionVersion": "0.2.1-beta.3",
+  "releaseLevel": "beta",
+  "hostVersion": "0.2.1-alpha.2",
+  "archivesUnmodified": true,
+  "unifiedInternalPackageVersions": false,
+  "freshInstallOnly": true,
+  "automaticUpdateEligible": false,
+  "dailyDeploymentPerformed": false,
+  "sourceSnapshotInputCommit": "ac69bda3ca63a3bed44780b7804cf090156514de",
+  "assets": [
+    {
+      "name": "DSH-SEP-Full-0.2.1-beta.3-Windows-x64.zip",
+      "size": 510886228,
+      "sha256": "bdc09894307cbd53c8f120c454e3a80d5ee687341ff8de15d9079a15fbc64b04"
+    },
+    {
+      "name": "DSH-SEP-Only-0.2.1-beta.3-Windows-x64.zip",
+      "size": 420827999,
+      "sha256": "a1db5cb400a04d8b76536604de63cb018d14272b6d39e858da9d61755556ff79"
+    },
+    {
+      "name": "DSH-SEP-0.2.1-beta.3-Linux-x64.tar.gz",
+      "size": 516301267,
+      "sha256": "1708b8050c35471c930c6fc61d48289296609b64c7d2a431013eb299b7482f00"
+    },
+    {
+      "name": "DSH-SEP-0.2.1-beta.3-macOS-arm64.zip",
+      "size": 692802401,
+      "sha256": "021f240986db15064182e6f3f0e002753b435093a4eb1876a4ea4fb018243db7"
+    }
+  ],
+  "platforms": {
+    "win32-x64": {
+      "build": "windows-package.2",
+      "sepVersion": "0.2.1-beta.3-alpha2-adapter.1",
+      "sourceCheckpoint": "f0a5f393648b1526f05abe78cfe02349bfbb3631",
+      "packageBuildBaseline": "fab50b9280a2f083ad478050d325a671918084ca",
+      "verificationScope": "fresh independent Full and Only installations; bounded core desktop/service checks",
+      "directPowerShellReopen": "blocked"
+    },
+    "linux-x64": {
+      "build": "alpha2-linux-closeout.12",
+      "sepBaseVersion": "0.2.1-beta.3-alpha2-adapter.1",
+      "sourceCheckpoint": "84d3e447a4713a234005685358456cc22c641289",
+      "waylandEvidenceCommit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+      "verificationScope": "WSL2 Ubuntu 24.04 x64 ext4 isolated preview; private Sway/pixman interactions",
+      "fullPublicCertification": "blocked",
+      "waylandGtkAtSpiQuit": "fail"
+    },
+    "darwin-arm64": {
+      "build": "r83 native revalidation installer",
+      "sourceCheckpoint": "ac69bda3ca63a3bed44780b7804cf090156514de",
+      "applicationBuildCommit": "f108e0374dce4a2d5db44a46e37cb6491447a1bd",
+      "installerBuildCommit": "b455d4249d0961a260566c92c9afea6184bf4e13",
+      "nativeValidationCommit": "9aa58945698b9325ba4cbda583f9de5e616e327e",
+      "verificationScope": "macOS 15.7.9 ARM64 APFS GitHub hosted isolated preview",
+      "fullPublicCertification": "blocked",
+      "signature": "ad-hoc",
+      "developerIdAndNotarization": "not_run"
+    }
+  },
+  "privacy": "Bounded rule-based checks; no universal absence-of-secrets claim; no private Git history exported."
+}

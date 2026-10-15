@@ -1,0 +1,60 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFile,writeFile,mkdir,mkdtemp,access} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {setup,close,load,require} from './full-browser-fixture.mjs';
+import {browser,button} from './full-browser-driver.mjs';
+const P=resolve(process.env.SEP_PHASE_ROOT),UI='@deepseek-ai/dsh-client-ui-settings-memory';
+async function carrier(business={}){
+ const f=await setup({mountRoot:false,business});try{
+  const profile=join(f.base,'native-profile');await mkdir(profile);await writeFile(join(profile,'package.json'),JSON.stringify({name:'sep-full-native-test-profile',version:'1.0.0',dsh:{profile:{bundles:[]}}}));await writeFile(join(profile,'cordis.patch.yml'),'[]\n');
+  f.ctx.provide('profileContext',{name:'sep-full-native-test',dir:profile,patchPath:join(profile,'cordis.patch.yml'),installAnchor:resolve(process.env.SEP_OFFICIAL_HARNESS),cwd:f.dirs.project,home:f.base,startedBundles:[],overlays:[]});
+  for(const name of ['config-editor','settings','commands'])await f.ctx.plugin((await load('@deepseek-ai/dsh-'+name)).default);
+  await f.mount();
+  const roster=['agent-default-model','client-file-upload','workspace','session-title','session-query-sqlite','typert-registry','api-gateway','api-remotes','api-settings-controller','api-workspace-controller','api-session-controller','client-ui-renderer','client-ui-settings','client-locale','client-shortcuts','client-ui-settings-general','client-ui-theme','client-ui-layout','client-ui-session','client-ui-workspace','client-ui-sidebar','client-ui-conversation','client-resources','client-ui-sidebar-right','client-ui-chat','client-ui-brand-official','client-ui-input-trigger','client-hmr'];
+  for(const name of roster){const config=name==='agent-default-model'?{provider:'deepseek-official',model:'deepseek-v4-flash'}:name==='session-title'?{fallbackMaxWords:5,fallbackMaxBytes:40,maxTitleBytes:80}:name==='session-query-sqlite'?{path:':memory:',openAt:'never'}:name==='api-session-controller'?{nativeOpen:false}:name==='api-workspace-controller'?{documentsDirectory:f.dirs.project}:undefined;await f.ctx.loader.create({id:'full-'+name,name:pathToFileURL(require.resolve('@deepseek-ai/dsh-'+name)).href,...config?{config}:{}});}
+  await f.ctx.loader.await();
+  const states=[...f.ctx.loader.entries()].filter(e=>e.options.id?.startsWith('full-')).map(e=>({id:e.options.id,state:e.fiber?.state}));assert(states.every(e=>e.state===2),JSON.stringify(states));
+  for(const name of ['kernel.js','kernel.css']){const body=await readFile(join(P,'assets',name));f.ctx.effect(()=>f.ctx.webServer.register({kind:'exact',path:'/'+name,handler(req,res){if(!f.connection.authorizeIndex(req,res))return;res.setHeader('Content-Type',name.endsWith('.css')?'text/css':'text/javascript');res.end(body);}}));}
+  f.indexHtml=()=>f.ctx.webServer.renderIndex('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="/kernel.css"><title>SEP full native UI validation</title></head><body><div id="root"></div><script type="module" src="/kernel.js"></script></body></html>');
+  return f;
+ }catch(error){await close(f);throw error;}
+}
+test('actual native layout, workspace, session and sidebar compose with SEP settings and receive HMR withdrawal without manual graph sync',{timeout:100000},async()=>{
+ const directory=await mkdtemp(join(resolve(process.env.SEP_BUNDLE_TEST_ROOT),'full-ui-'));let f,b;const checks=[];
+ try{
+  f=await carrier();b=await browser(directory);await b.cdp('Emulation.setDeviceMetricsOverride',{width:1400,height:1000,deviceScaleFactor:1,mobile:false});await b.cdp('Page.navigate',{url:f.connection.authenticatedUrl(f.origin+'/')});await b.wait('window.bootSettled');assert.equal(await b.evaluate('window.bootFailure??null'),null);
+  const roster=await b.evaluate(`([...entry.ctx.loader.entries()].map(e=>({name:e.options.name,state:e.fiber?.state})))`);assert(roster.every(e=>e.state===2),JSON.stringify(roster));
+  for(const name of ['layout','workspace','session','sidebar','conversation','chat'])assert(roster.some(e=>e.name==='@deepseek-ai/dsh-client-ui-'+name));
+  assert.equal(await b.evaluate('document.querySelector("[data-test-carrier]")===null'),true);checks.push('official AppFrame/workspace/session/sidebar/conversation/chat mounted; no synthetic outer root or session snapshot');
+  await b.wait(`document.querySelector('button[aria-label="设置"]')`);await b.click(`document.querySelector('button[aria-label="设置"]')`);await b.wait(`document.querySelector('[role="dialog"]')`);
+  const tabs=await b.evaluate(`[...document.querySelectorAll('nav button')].map(b=>b.textContent.trim())`),memory=tabs.find(t=>t.includes('记忆'));assert(memory);assert(tabs.includes('会话预算'));
+  await b.click(button(memory));const recall=`document.querySelector('input[aria-label="自动引用已有记忆"]')`;await b.wait(`${recall} && !${recall}.disabled`);await b.click(recall);await b.wait(`${recall} && !${recall}.checked && !${recall}.disabled`);checks.push('actual settings click saves recall through authenticated governed route');
+  await b.click(button('会话预算'));const amount=`document.querySelector('[name="defaultLimit"]')`;await b.wait(`${amount}?.value==='100' && !${amount}.disabled`);await b.evaluate(`${amount}.focus();${amount}.select()`);await b.cdp('Input.insertText',{text:'25'});await b.wait(`!(${button('保存默认上限')}).disabled`);await b.click(button('保存默认上限'));await b.wait(`${amount}?.value==='25' && !${amount}.disabled && !document.body.innerText.includes('正在读取')`);await b.screenshot('full-native-budget');
+  await b.cdp('Page.reload');await b.wait('window.bootSettled && !window.bootFailure');await b.click(`document.querySelector('button[aria-label="设置"]')`);await b.click(button('会话预算'));await b.wait(`${amount}?.value==='25'`);checks.push('native full browser reload preserves settings and ledger');
+  assert.equal((await f.api.close()).status,'pass');await b.wait(`![...document.querySelectorAll('nav button')].some(b=>b.textContent.includes('记忆'))`);assert(!f.ctx.clientModules.graph().entries.some(row=>row.id===UI));assert(await b.evaluate(`${button('通用设置')}!==undefined`));checks.push('real host HMR SSE removes SEP navigation without manually syncing module graph; native General survives');
+  const ledger=JSON.parse(await readFile(f.budgetPath));assert.equal(ledger.initialSpent,1);assert.deepEqual(ledger.entries,[]);assert.equal(f.requests.length,0);assert.deepEqual(await b.evaluate('frontendErrors'),[]);
+  await b.evaluate('entry.dispose()');await b.wait(`document.getElementById('root').children.length===0`);await b.finish();await close(f);await assert.rejects(access(join(f.dirs.memory,'.suite-memory/p2/owner.lock')),{code:'ENOENT'});f=undefined;
+  await writeFile(join(directory,'RESULT.json'),JSON.stringify({status:'pass',checks,modelRequests:0,scope:'native root/workspace/session/sidebar/conversation/chat assembly and HMR settings withdrawal; no claim of all optional DSH UI domains or remote model quality',cleanupPath:'AppWebEntry.dispose -> Browser.close -> controlled close -> host fiber dispose',forcedProcessStop:false},null,2)+'\n');
+ }catch(error){if(b)await writeFile(join(directory,'FAILURE.json'),JSON.stringify(await b.evaluate(`({text:document.body.innerText,errors:window.frontendErrors,bootFailure:window.bootFailure,roster:[...entry.ctx.loader.entries()].map(e=>({name:e.options.name,state:e.fiber?.state}))})`).catch(()=>({browserUnavailable:true})),null,2)+'\n');throw error;}
+ finally{await b?.cleanup();if(f)await close(f);}
+});
+
+test('native workspace and durable session reach the real chat renderer and an actual Agent turn without paid service',{timeout:100000},async()=>{
+ const directory=await mkdtemp(join(resolve(process.env.SEP_BUNDLE_TEST_ROOT),'live-ui-'));let f,b;const checks=[];
+ try{
+  f=await carrier({pluginGroup:true});const workspace=await f.ctx.workspaceRegistry.create(f.dirs.project,'SEP 合成工作区');
+  const created=await f.ctx.sessionController.create({workspaceId:workspace.id,sessionId:'sep-full-ui-live'});assert.equal(created.sessionId,'sep-full-ui-live');await f.ctx.sessionController.rename({sessionId:created.sessionId,title:'SEP 合成会话'});
+  const agent=f.ctx.agents.get(created.sessionId);assert(agent);const reset=await f.ctx.commands.execute(agent,'/sep-prework-reset',[],new AbortController().signal);assert.equal(reset.result.kind,'success');assert.equal(f.requests.length,0);checks.push('real native command registry runs project reset without model use');
+  b=await browser(directory);await b.cdp('Emulation.setDeviceMetricsOverride',{width:1400,height:1000,deviceScaleFactor:1,mobile:false});await b.cdp('Page.navigate',{url:f.connection.authenticatedUrl(f.origin+'/')});await b.wait('window.bootSettled');assert.equal(await b.evaluate('window.bootFailure??null'),null);
+  await b.wait(`document.body.innerText.includes('SEP 合成工作区')`);await writeFile(join(directory,'SESSION-ARRIVAL.json'),JSON.stringify({browser:await b.evaluate(`entry.ctx.sessions.list.getSnapshot()`),host:await f.ctx.sessionController.list({})},null,2)+'\n');await b.wait(`entry.ctx.sessions.list.getSnapshot().phase==='ready' && entry.ctx.sessions.list.getSnapshot().byId[${JSON.stringify(created.sessionId)}]!==undefined`);await b.evaluate(`entry.ctx.uiWorkspace.openSession(${JSON.stringify(created.sessionId)})`);
+  const editor=`document.querySelector('[contenteditable="true"]')`;await b.wait(`${editor} && ${editor}.getAttribute('aria-disabled')!=='true'`);await b.click(editor);await b.cdp('Input.insertText',{text:'SEP synthetic UI request'});const send=`document.querySelector('button[aria-label="发送消息"]')`;await b.wait(`${send} && !${send}.disabled`);await b.click(send);
+  await b.wait(`document.body.innerText.includes('checkpoint') && document.body.innerText.includes('SEP 合成会话')`);await agent.whenIdle();assert.equal(f.requests.length,1);assert(agent.session.snapshotEvents().some(e=>e.type==='user/message'&&e.data.content.some(p=>p.type==='text'&&p.text==='SEP synthetic UI request')));checks.push('actual composer input/click -> authenticated Session API -> actual Agent loop -> synthetic LLM -> native Chat renderer');
+  await b.screenshot('full-native-live-session');await b.cdp('Page.reload');await b.wait('window.bootSettled && !window.bootFailure');await b.wait(`entry.ctx.sessions.list.getSnapshot().phase==='ready' && entry.ctx.sessions.list.getSnapshot().byId[${JSON.stringify(created.sessionId)}]!==undefined`);await b.evaluate(`entry.ctx.uiWorkspace.openSession(${JSON.stringify(created.sessionId)})`);await b.wait(`document.body.innerText.includes('checkpoint')`);assert.equal(f.requests.length,1);checks.push('browser reload follows durable session history without replaying the model request');
+  const ledger=JSON.parse(await readFile(f.budgetPath));assert.equal(ledger.initialSpent,1);assert.equal(ledger.entries.length,1);assert.equal(ledger.entries[0].status,'settled');assert.deepEqual(await b.evaluate('frontendErrors'),[]);
+  await b.evaluate('entry.dispose()');await b.wait(`document.getElementById('root').children.length===0`);await b.finish();await close(f);await assert.rejects(access(join(f.dirs.memory,'.suite-memory/p2/owner.lock')),{code:'ENOENT'});f=undefined;
+  await writeFile(join(directory,'RESULT.json'),JSON.stringify({status:'pass',checks,modelRequests:1,paidModelRequests:0,scope:'selected synthetic Windows workspace/session and native browser interaction; actual native controller/Agent/Session persistence, model adapter synthetic',cleanupPath:'browser AppWebEntry dispose, normal Browser.close, controlled root/host close',forcedProcessStop:false},null,2)+'\n');
+ }catch(error){if(b)await writeFile(join(directory,'FAILURE.json'),JSON.stringify(await b.evaluate(`({text:document.body.innerText,errors:window.frontendErrors,bootFailure:window.bootFailure,sessions:entry.ctx.sessions.list.getSnapshot()})`).catch(()=>({browserUnavailable:true})),null,2)+'\n');throw error;}
+ finally{await b?.cleanup();if(f)await close(f);}
+});

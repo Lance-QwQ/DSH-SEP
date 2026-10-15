@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "scope": "Trusted parser-only stdin/output limits, single-process policy and literal ancestor metadata for Node resolution; general task sources unchanged.",
+  "derivations": [
+    {
+      "source": "task-contract.mjs",
+      "target": "parser-contract.mjs",
+      "sha256": "2c9f2d201fb2695da26593e36fb2ab21019ea03f846bea3b6b3d0a371819c191",
+      "changes": [
+        [
+          "timeoutMs=30000,graceMs=200,maxOutputBytes=131072",
+          "timeoutMs=15000,graceMs=200,maxOutputBytes=12582912"
+        ],
+        [
+          "Buffer.byteLength(stdin)>65536",
+          "Buffer.byteLength(stdin)>12582912"
+        ],
+        [
+          "timeoutMs>300000",
+          "timeoutMs>15000"
+        ],
+        [
+          "maxOutputBytes>1048576",
+          "maxOutputBytes>12582912"
+        ],
+        [
+          "const quoted=p=>'\"'+p+'\"';",
+          "const quoted=p=>'\"'+p+'\"';\n const ancestors=new Set();for(const root of [runtimeRoot,workRoot]){let parent=posix.dirname(root);while(parent!=='/'){ancestors.add(parent);parent=posix.dirname(parent);}}\n // Node realpath resolves every ancestor; metadata does not grant directory listing or content.\n const metadata='(allow file-read-metadata '+[...ancestors].sort().map(p=>'(literal '+quoted(p)+')').join(' ')+')';"
+        ],
+        [
+          "(deny default)\\n${mode",
+          "(deny default)\\n${metadata}\\n${mode"
+        ]
+      ],
+      "replaceAll": [
+        {
+          "before": "SEP_MAC_TASK_",
+          "after": "SEP_MAC_PARSER_",
+          "count": 14
+        },
+        {
+          "before": "!['single','family'].includes(mode)",
+          "after": "mode!=='single'",
+          "count": 2
+        }
+      ],
+      "resultSha256": "f6e7c91ba71d2035991f3fb2a3475abcfb46c249c142097dd00eca797090ffd3"
+    },
+    {
+      "source": "task-worker.mjs",
+      "target": "parser-worker.mjs",
+      "sha256": "229fc6e191b487faebc989d7b809d2f39e5c12ffaf70c70a04542859df3263a6",
+      "changes": [
+        [
+          "from './task-contract.mjs'",
+          "from './parser-contract.mjs'"
+        ],
+        [
+          "export async function createTaskWorker(",
+          "export async function createParserWorker("
+        ]
+      ],
+      "replaceAll": [
+        {
+          "before": "SEP_MAC_TASK_",
+          "after": "SEP_MAC_PARSER_",
+          "count": 18
+        }
+      ],
+      "resultSha256": "bfb5cdaffcf38d165baf8335f249da3beb597c15da87062a5ac5859af89c98ea"
+    }
+  ]
+}

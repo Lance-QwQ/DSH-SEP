@@ -1,0 +1,420 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "independent review repair and fixed Windows x64 synthetic actual-package regression, not release certification",
+  "createdAtUtc": "2026-10-10T07:21:29.765971+00:00",
+  "baselineCommit": "9db625afc1653e758d23e050b020e84cd3fa5291",
+  "sourceBinding": "baseline plus changedInputSha256; final commit recorded in local CHECKPOINT.json after commit",
+  "candidate": {
+    "artifact": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\artifacts\\final-r1\\dsh-sep-bundle-0.2.1-beta.3-bundle.24.tgz",
+    "sha256": "f1305cecdd1cf8080514909b2c6a357d1a03514ad4f969d26d7dd000d4399e8d",
+    "version": "0.2.1-beta.3-bundle.24",
+    "host": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\host"
+  },
+  "hostVersion": "0.2.1-alpha.1",
+  "defaultBundleAdmission": "pending",
+  "completeProfileStatus": "blocked",
+  "findings": [
+    {
+      "id": "K1",
+      "status": "pass",
+      "disposition": "partially_corrected",
+      "result": "Legacy business-runtime still imports governed-consumers with capture literal false: retain those restrictions and add explicit entry scope. Update settings-installation for optional capture, history, vision and current verification limits."
+    },
+    {
+      "id": "K2",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Replay both fixture origins and five runtime origins; predecessor hashes bind original records at 9db625af. Captured original modules untouched."
+    },
+    {
+      "id": "K3",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Independent cleanup continues after evaluation blocked; completed disposers remembered, failed operations retried. Fix entry.stop, plugin stop, layered-memory and Profile-domain rejected-promise caches."
+    },
+    {
+      "id": "K4",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Trusted control retains primary code/errorType and distinct nested causeCode separately from cleanup status; arbitrary messages/stacks/paths/bodies omitted."
+    },
+    {
+      "id": "K5",
+      "status": "pass",
+      "disposition": "local_workflow_fix",
+      "result": "RUNNER_TEMP across platforms, forward slashes in GITHUB_ENV, if-no-files-found:error, install.log captured; remote workflow remains not_run."
+    },
+    {
+      "id": "K6",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Document shutdown test environment and fixed official controller hash; test verifies checked-in hash and resourcesConfirmedReleased semantics."
+    },
+    {
+      "id": "G1",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Strict model-facing writeText requires explicit createIfAbsent or replaceIfVersion with nonempty string version; malformed receipts cannot overwrite existing protected files."
+    },
+    {
+      "id": "G2",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Canonical lexical POSIX containment in both schema and Entry before spawn; deny traversal, empty/dot segments, backslashes and control bytes. Trusted WSL provisioning and symlink/integrity controls remain separate."
+    },
+    {
+      "id": "G3",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Remove personal D: CI output path. Windows hosted runners may have D:; the confirmed defect is using a personal machine path, not universal absence of that drive."
+    },
+    {
+      "id": "G4",
+      "status": "pass",
+      "disposition": "fixed",
+      "result": "Compatibility tests read actual candidate manifest; deliberate installed-manifest mismatch fails with source unchanged, separately recorded as an expected negative."
+    }
+  ],
+  "testGroups": [
+    {
+      "group": "final-runtime-r1",
+      "status": "pass",
+      "counts": {
+        "tests": 309,
+        "pass": 309,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "files": [
+        "tools/bundle-install/tests/modules.test.mjs",
+        "tools/bundle-install/tests/runtime.test.mjs",
+        "tools/bundle-install/tests/configuration.test.mjs",
+        "tools/bundle-install/tests/host-contract.test.mjs",
+        "tools/bundle-install/tests/session-v4.test.mjs",
+        "tools/bundle-install/tests/session-live.test.mjs",
+        "tools/bundle-install/tests/import-closure.test.mjs",
+        "tools/bundle-install/tests/file-protection.test.mjs",
+        "tools/bundle-install/tests/content-observation.test.mjs",
+        "tools/bundle-install/tests/file-consumers.test.mjs",
+        "tools/bundle-install/tests/project-binding.test.mjs",
+        "tools/bundle-install/tests/protected-profile.test.mjs",
+        "tools/bundle-install/tests/compaction-group.test.mjs",
+        "tools/bundle-install/tests/native-compaction.test.mjs",
+        "tools/bundle-install/tests/p1-runtime.test.mjs",
+        "tools/bundle-install/tests/business-runtime.test.mjs",
+        "tools/bundle-install/tests/business-closure.test.mjs",
+        "tools/bundle-install/tests/controlled-installation.test.mjs",
+        "tools/bundle-install/tests/settings-browser.test.mjs",
+        "tools/bundle-install/tests/mount-failure.test.mjs",
+        "tools/bundle-install/tests/runtime-initialization.test.mjs",
+        "tools/bundle-install/tests/loader-lifecycle.test.mjs",
+        "tools/bundle-install/tests/native-settings.test.mjs"
+      ],
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-runtime-r1.log",
+      "logSha256": "2a0ec22b8e756a6bbba0db9493a01606027987d352d1b5a4052383dad84b0440",
+      "inputs": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-runtime-r1-INPUTS.json",
+      "inputsSha256": "4dfc85f26ed974a38e3e8fd529d0916e367abfe6c93630ad930e4371289f269f",
+      "installedBundle": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\host\\node_modules\\.pnpm\\dsh-sep-bundle@file+..+arti_3dfebe7ed79081c8554ee495ccdf19f2\\node_modules\\dsh-sep-bundle",
+      "officialControllerSha256": "30743d5ac88154b25fd2d14ac22f7ff1b8d94e915547383de1ca7e49d1bbfc66"
+    },
+    {
+      "group": "final-consumers-r1",
+      "status": "pass",
+      "counts": {
+        "tests": 57,
+        "pass": 57,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "files": [
+        "tools/bundle-install/tests/review-regressions.test.mjs",
+        "tools/bundle-install/tests/evaluation-stop-review.test.mjs",
+        "tools/bundle-install/tests/application-shutdown.test.mjs",
+        "tools/bundle-install/tests/shared-consumers.test.mjs",
+        "tools/bundle-install/tests/click-consumer.test.mjs",
+        "tools/bundle-install/tests/context-root.test.mjs",
+        "tools/bundle-install/tests/vision-consumer.test.mjs",
+        "tools/bundle-install/tests/native-compatibility.test.mjs",
+        "tools/bundle-install/tests/platform-admission.test.mjs",
+        "tools/bundle-install/tests/host-dependencies.test.mjs",
+        "tools/bundle-install/tests/native-loader-peer.test.mjs"
+      ],
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-consumers-r1.log",
+      "logSha256": "c94cf8aa71791174bbfd7deeecdcbd20aa88c94abe5758f3a244d49861b75081",
+      "inputs": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-consumers-r1-INPUTS.json",
+      "inputsSha256": "4dfc85f26ed974a38e3e8fd529d0916e367abfe6c93630ad930e4371289f269f",
+      "installedBundle": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\host\\node_modules\\.pnpm\\dsh-sep-bundle@file+..+arti_3dfebe7ed79081c8554ee495ccdf19f2\\node_modules\\dsh-sep-bundle",
+      "officialControllerSha256": "30743d5ac88154b25fd2d14ac22f7ff1b8d94e915547383de1ca7e49d1bbfc66"
+    },
+    {
+      "group": "final-builder-r1",
+      "status": "pass",
+      "counts": {
+        "tests": 13,
+        "pass": 13,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "files": [
+        "tools/bundle-install/tests/builder.test.mjs",
+        "tools/bundle-install/tests/entry.test.mjs"
+      ],
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-builder-r1.log",
+      "logSha256": "145b83901a359c0f353045c28a73ad17e8865095afd1f5af80e6a93fd6a1ec48",
+      "inputs": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-builder-r1-INPUTS.json",
+      "inputsSha256": "556e294d1c60a35eace026e138c5a2b973f1070b581548a248df3307d3025794",
+      "installedBundle": "D:\\AIData\\ProjectWork\\DSH\\github-beta-publication-20261001\\repository",
+      "officialControllerSha256": "30743d5ac88154b25fd2d14ac22f7ff1b8d94e915547383de1ca7e49d1bbfc66"
+    },
+    {
+      "group": "deep-context-r1",
+      "status": "pass",
+      "counts": {
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "files": [
+        "tools/bundle-install/tests/context-consumer.test.mjs"
+      ],
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\deep-context-r1.log",
+      "logSha256": "688e6f99ecaac574ebf66b320e24104812259d22c0bd146c0cc61951e3380e14",
+      "inputs": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\deep-context-r1-INPUTS.json",
+      "inputsSha256": "414fd9ca9a52bb4883c4b4d42a58f77d05f5a59ec977530bb1ee6f909d1d6e98",
+      "installedBundle": "\\\\?\\D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\long-path-installation-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\host\\node_modules\\.pnpm\\dsh-sep-bundle@file+..+..+a_a79e499902ce00fbdda2e6b4ca7283a5\\node_modules\\dsh-sep-bundle",
+      "officialControllerSha256": "30743d5ac88154b25fd2d14ac22f7ff1b8d94e915547383de1ca7e49d1bbfc66"
+    }
+  ],
+  "totals": {
+    "tests": 382,
+    "pass": 382,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "rule": "four disjoint definition sets; repeats and expected-negative executions not added"
+  },
+  "expectedNegative": {
+    "status": "pass",
+    "scope": "intentional malformed installed-manifest is rejected while source manifest is unchanged",
+    "childExitCode": 1,
+    "logSha256": "d7f1939ea867a9a9043f60c28053478d3b6149b20ec29d017a0194b7f5565a2c"
+  },
+  "packageAudit": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\PACKAGE-REVIEW.json",
+    "sha256": "2bae36e0d58808d33c11a95891ddb539ec18fef32162d0bb91b74cd3f3d6094d",
+    "packedFiles": 472,
+    "capturedOriginalModuleFilesUnchanged": 383,
+    "replayedOrigins": [
+      {
+        "path": "tools/bundle-install/tests/native-settings-fixture.origin.json",
+        "sha256": "aacff862b004bedb1dca824534014f8e0a0901751b85133f023178a5dac39c88",
+        "changes": 4
+      },
+      {
+        "path": "tools/bundle-install/tests/native-browser-fixture.origin.json",
+        "sha256": "56e8e530b25091317637d22c8e46005adf465044bd40527e8996dae33a797f1c",
+        "changes": 2
+      },
+      {
+        "path": "bundle/lib/settings-runtime.origin.json",
+        "sha256": "1b1eccfab9759d91c1a9f3091f0fdc3aa150e30487837f7e2f10287ac5297911",
+        "changes": 7
+      },
+      {
+        "path": "bundle/lib/settings-consumers.origin.json",
+        "sha256": "f774636c8ae734d0f783f94ae42e702dec108d480fe13fa5c44433b89c052bcb",
+        "changes": 3
+      },
+      {
+        "path": "bundle/lib/native-settings-installation.origin.json",
+        "sha256": "343d9a5f4d85c240246df72520641d0f15c2d32deace0df7d64a0ca852497130",
+        "changes": 4
+      },
+      {
+        "path": "bundle/host/evaluation-entry/entry.origin.json",
+        "sha256": "8ee500460c2666e0208347d3a940c441206523d23b66b400963527ae857bb83a",
+        "changes": 4
+      },
+      {
+        "path": "bundle/host/layered-memory/origin.json",
+        "sha256": "1399fbc1f11931b41bae5e4f43ad238178c12252e126bc92b7e34e955a8e3864",
+        "changes": 3
+      }
+    ]
+  },
+  "deepInstall": {
+    "status": "pass",
+    "host": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\long-path-installation-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\host",
+    "actualBundle": "\\\\?\\D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\long-path-installation-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\host\\node_modules\\.pnpm\\dsh-sep-bundle@file+..+..+a_a79e499902ce00fbdda2e6b4ca7283a5\\node_modules\\dsh-sep-bundle",
+    "pythonCompanionPath": "\\\\?\\D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\long-path-installation-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\host\\node_modules\\.pnpm\\dsh-sep-bundle@file+..+..+a_a79e499902ce00fbdda2e6b4ca7283a5\\node_modules\\dsh-sep-bundle\\bundle\\modules\\context-preparation\\context_resolver.py",
+    "pythonCompanionCharacters": 381,
+    "lockSha256": "9bbf1a260b1f9c1c48507f6e01704e6b4d54fdaeb9b0ace47c57b589c24a4712"
+  },
+  "resourceAudit": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\RESOURCES.json",
+    "sha256": "17673ec31e5d157f5f6d4c4f6b8726093342d4ab9cbadab52f77fd5b5f351321"
+  },
+  "preservedAttempts": [
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\red-r1.log",
+      "sha256": "e73d61dedc1fb1e8b7465c2d419ef928bc78df07f999b9d4ba32b165f6e68187",
+      "interpretation": "Sealed bundle23: 36 definitions, 29 pass/7 fail; watchdog ends hung isolated test worker. Expected reproduction, not a new green total."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\red-cleanup-r1.log",
+      "sha256": "c7d62d9d7122f3f642c318d3561522e9153b09666fc045933573386ee2d6d12a",
+      "interpretation": "Old candidate lacks the new cleanup orchestrator; retained failing evidence."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\red-evaluation-stop-r1.log",
+      "sha256": "20ee12715f4402e5a33e78741ba52204db80435b75758abbe04367f38cd7740e",
+      "interpretation": "Actual test backend exited but old cached blocked receipt persisted."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\diagnostic-red-r1.log",
+      "sha256": "6a3ac978549e9403192dd2dfe243c59f04cacfa15980d2dc1ad4ba796b83c5e9",
+      "interpretation": "Nested classified causeCode absent on old adapter."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\green-r1-install.log",
+      "sha256": "43c3ad9f8ac30f32a2fa4cea8a4b131ab1f63c816188312eae911b8baf0f1ddc",
+      "interpretation": "Unfrozen graph selected unavailable optional dependency in offline store; restore fixed historical graph rather than weaken policy."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\green-r1.log",
+      "sha256": "581b5266dffaf37d15ba8d5ee27f03bfd6414ca80c647aba1f13f345a310adf3",
+      "interpretation": "Tests continued after install failed; module-not-found infrastructure failures, excluded from final passing total."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\green-r2-install.log",
+      "sha256": "4f71b7ccb14d05e3757b99245fb9dab4918ef966c939a18fb1b402cafb07ae3f",
+      "interpretation": "Own lock editing expression crossed lines; resolution-shape error. Generator corrected to exact integrity character class."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\green-r3.log",
+      "sha256": "7355198c9b81b5a6a152c5649bbb51ffd02cfd6fe33bfe8764cfe9b07500f343",
+      "interpretation": "Overly broad CI-path test assertion corrected to actual RUNNER_TEMP scope; actual remaining cleanup cache failure separately diagnosed."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\cleanup-diagnostic-r1.log",
+      "sha256": "f3f1fc63ad5b862c33d7cf62ba6cdb5af1fdc267e63f0d82edfd3000efccb91f",
+      "interpretation": "Temporary integration instrumentation exposed underlying Profile-domain rejected cache; evidence retained."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\cleanup-diagnostic-r2.log",
+      "sha256": "78473e4705171d15d7636801c4ae04652b804b634eccb2f2d34e3ea5bbaf394e",
+      "interpretation": "Same diagnostic trail; final test removes direct inner cleanup bypass and only retries root control."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\green-r4.log",
+      "sha256": "6d8753b4969d0a8199e649ff6d65845bdbf9909e2a7c1274c12359906ff4c0c0",
+      "interpretation": "38 pass with temporary diagnostic probe; not used as final proof. Final root-only test rerun passes."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\sealed-targeted-r1.log",
+      "sha256": "c2ba8b8f0ba4a4273915d5789e67dd044bb0c819392b24841355af833c676349",
+      "interpretation": "75 pass/1 fail: short test host failed the precondition that real Python companion path exceed 300 characters. Assertion retained; final 381-character actual install passes separately."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\final-r1-install.log",
+      "sha256": "f5c7d23fc7e745956e6c8829e6c533aca87e80622e1f0e79d29c4f83ff5ea366",
+      "interpretation": "Frozen package contents installed from store. pnpm age metadata checks retried ECONNRESET; not a completely offline proof."
+    },
+    {
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\review-repair-bundle24-r1\\deep-install-r1.log",
+      "sha256": "532798f8a9019b5797f002df7f026b7c189f511b47aa24ce412e9adc300dab7f",
+      "interpretation": "Same fixed candidate installed under real deep path, not a junction, Python companion 381 characters."
+    }
+  ],
+  "changedInputSha256": {
+    ".github/workflows/sep-bundle-portable.yml": "a01405e0756264989e8b47d1c81dd5316ce1104d3e45dc2cf23b7ad2e2b04e1f",
+    "README.md": "1568caf2acb1d913a45f417900e354bee52dba35bf1c453f1deaadcf783a2f14",
+    "bundle/README.md": "eb5c1c42a676ca0cde06b5f90e1d7b4bac05a4f331ef7a154fdaa2918225c2a4",
+    "bundle/contracts/business-runtime.json": "2903170a2ebd07ff95069349e48c916d74975432f698f3e8bb56e09da2f2fe09",
+    "bundle/contracts/settings-installation.json": "b786e0369211dfb4ac6e8fcbe9230a628d3a5dfd164d45258ccdbab3de34a238",
+    "bundle/host/evaluation-entry/backend-paths.mjs": "80aa07f8c83ba63bb25d6d2bdabeac0b8a17530a0d85aa75e5a5dd105848d29e",
+    "bundle/host/evaluation-entry/entry.mjs": "2fed151e7d5a85af798b35c6fdfcd13b01333c2661764520577da86513c1f86a",
+    "bundle/host/evaluation-entry/entry.origin.json": "8ee500460c2666e0208347d3a940c441206523d23b66b400963527ae857bb83a",
+    "bundle/host/evaluation-entry/index.js": "fa91d880b3d14e45aae22aa585f088475663ad8aa950ecbae8ec74e4b04f9168",
+    "bundle/host/layered-memory/index.js": "5061e63f10bb0aa2aeb76956eeab870cd910132b79d0695a1299c4e440c128bf",
+    "bundle/host/layered-memory/origin.json": "1399fbc1f11931b41bae5e4f43ad238178c12252e126bc92b7e34e955a8e3864",
+    "bundle/lib/consumer-cleanup.js": "712b0cb69b09549653fcfe2bfc4e2565611f56c7e80b2007750214329b05d157",
+    "bundle/lib/controlled-installation.js": "1f83c4725a5d7f32dfcfff51af348bd9231abc966df0eed97ad5759df9456293",
+    "bundle/lib/failure-diagnostic.js": "932341b11ab9a2b92072736f10d5813d9f0cd38f9120a5689ad664d2832d5454",
+    "bundle/lib/native-settings-installation.js": "b4421e7d8a097a9ee6bf62e751bb661f1531763fd5881e7d2f0cbb776a14ee39",
+    "bundle/lib/native-settings-installation.origin.json": "343d9a5f4d85c240246df72520641d0f15c2d32deace0df7d64a0ca852497130",
+    "bundle/lib/protected-file-tools.js": "b7a1fdf9de2b17ec6447a71de3fd55c176f5394a74b4c7b1ac91be1bcc8f4ebc",
+    "bundle/lib/protected-profile.js": "712983fbf4d8fbd844850e311e63f3e44b6a8f4af7d8b14875ed68d1a8ae34c8",
+    "bundle/lib/settings-consumers.js": "cf964919de8d7dde9703e34f5634ff1e9c95b47c44b025e0849b7b52298c970f",
+    "bundle/lib/settings-consumers.origin.json": "f774636c8ae734d0f783f94ae42e702dec108d480fe13fa5c44433b89c052bcb",
+    "bundle/lib/settings-runtime.js": "d3b5e436f87325fc01934a0733b22bea48f14be7503deb7b9793f845927f4b05",
+    "bundle/lib/settings-runtime.origin.json": "1b1eccfab9759d91c1a9f3091f0fdc3aa150e30487837f7e2f10287ac5297911",
+    "docs/BUNDLE-CURRENT-INDEX.md": "8068276259c98392375054a99d1ec6fe4a1ed66a045e0354db560601ef05c063",
+    "package.json": "c3c1532fac53c66e2e1621c3c9976f7dd1f9b35234f01e453c70956547893c42",
+    "tools/bundle-install/platform-ci.mjs": "3783ee41f170f37d44d27b858395034dc2a54bde3c003087bcca7a75b50e8063",
+    "tools/bundle-install/platform-ci/pnpm-lock.yaml": "98ff86100407581f2b6117b982403556f29902f25cd84139cfe2d020f3642a00",
+    "tools/bundle-install/tests/APPLICATION-SHUTDOWN-REPRODUCTION.md": "51299f5ec62925fc9567a21d161d32547ded91dd58b04b69263ca819ac495f07",
+    "tools/bundle-install/tests/application-shutdown.test.mjs": "946081358f1a9a2939adb93622f54a45f9803d5aebc1b3377653e5b89442a360",
+    "tools/bundle-install/tests/application-worker.mjs": "5c667d6f7c542898eda7cd8022c47ca0404b35e1aa94ce2ff21aed47b327689f",
+    "tools/bundle-install/tests/evaluation-stop-review.test.mjs": "eb86d63bcd8a31d64f1105fdfe3ba53b6e524805a753be6037f52f90ec4f8f73",
+    "tools/bundle-install/tests/file-consumers.test.mjs": "7f8456f2a462e41ec93ea2b5e937c00592e2aa02cf12a93e246c2085b7bf1538",
+    "tools/bundle-install/tests/native-browser-fixture.origin.json": "56e8e530b25091317637d22c8e46005adf465044bd40527e8996dae33a797f1c",
+    "tools/bundle-install/tests/native-compatibility.test.mjs": "72a3ec02f95361db29457266cdd4598fb14bdd1872e1609a5fff0abcec52e292",
+    "tools/bundle-install/tests/native-settings-fixture.origin.json": "aacff862b004bedb1dca824534014f8e0a0901751b85133f023178a5dac39c88",
+    "tools/bundle-install/tests/review-regressions.test.mjs": "f6bdcbdeee66de728bbe703d731bcd39fec67b0b969905d047801b2b1ccaaddc",
+    "tools/bundle-install/tests/runtime-initialization.test.mjs": "f5fe79ddb97a35d25efac0ac616837234a78fef7c719b351db4416a6bd26faf5"
+  },
+  "notVerified": [
+    {
+      "item": "complete Windows desktop menus/IPC/application exit wiring and every native descendant",
+      "status": "not_run"
+    },
+    {
+      "item": "complete Linux/macOS protected Profile and desktop qualification",
+      "status": "blocked"
+    },
+    {
+      "item": "remote three-platform CI dispatch and artifact upload",
+      "status": "not_run"
+    },
+    {
+      "item": "public HTTPS Git/auth/proxy distribution and complete private plugins",
+      "status": "not_run"
+    },
+    {
+      "item": "paid model answer quality, real Windows MCP and remote grader cancellation/no orphan guarantee",
+      "status": "not_run"
+    },
+    {
+      "item": "automatic hard kill of uncooperative evaluation backend",
+      "status": "not_run",
+      "interpretation": "not implemented; blocked retains ownership until explicit repair/confirmed exit"
+    },
+    {
+      "item": "all review low-priority follow-ups",
+      "status": "not_run",
+      "interpretation": "listed individually in response document; not treated as fixed merely by passing regression"
+    },
+    {
+      "item": "fully offline install without metadata checks",
+      "status": "not_run",
+      "interpretation": "frozen offline package-content install still performed pnpm minimumReleaseAge metadata checks with network retry; policy not disabled"
+    }
+  ],
+  "dailyProgramChanged": false,
+  "githubPushed": false,
+  "releasePublished": false,
+  "step9Executed": false,
+  "preexistingUnstagedEditExcluded": "docs/BUNDLE15-REVIEW-RESPONSE.md; unrelated punctuation edit retained without staging"
+}

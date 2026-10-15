@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "explicit cold shared-consumers fragment only",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "fixedTestDefinitions": 24,
+  "owners": "One existing P2 coordinator, governed storage, legacy store and P1 budget; never duplicated",
+  "capture": false,
+  "automaticRecall": true,
+  "legacyAdoption": false,
+  "historyExpansion": false,
+  "paidMedia": false,
+  "frontendActivation": false,
+  "close": "Abort and drain all accepted work, restore native compaction, dispose memory hooks and close layered domains before store/Profile. A deadline yields blocked with resources retained until actual settlement.",
+  "deletion": "Independent P2 authority; confirmed source exclusion survives rollback-able domains and controlled restart. Missing authority or pending deletion refuses startup; interrupted deletion recovery is not newly certified.",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic cold-start scope",
+  "entry": "dsh-sep-bundle/business-runtime",
+  "provides": [
+    "sepBusinessRuntime"
+  ],
+  "methods": [
+    "review",
+    "activate",
+    "status",
+    "stream",
+    "close"
+  ],
+  "configuration": {
+    "required": [
+      "profile",
+      "p1",
+      "compaction",
+      "business"
+    ],
+    "business": {
+      "sources": "1–16 trusted relative paths under selected registered project",
+      "userProfile": "optional explicit binding; no automatic cross-project admission",
+      "capture": "must be false",
+      "recall": "boolean, defaults true"
+    },
+    "shutdownMs": "100–60000, default 5000"
+  },
+  "longPathAdaptation": "Fixed packaged PowerShell script through EncodedCommand; structured request stays on stdin. Original module preserved; adapter transformations recorded.",
+  "delegationLimitsApplyOnlyTo": "tasks created through suite_delegate",
+  "profileModelBudgetGuards": "separate, inherited from preserved P1 policy",
+  "notVerified": [
+    "complete root activation and frontend settings",
+    "paid automatic extraction/media",
+    "plugin-group prework/history expansion",
+    "legacy/private adoption and hot replacement",
+    "interrupted document-deletion resume through this fragment",
+    "persistent YAML, whole-root shutdown/crash recovery",
+    "Linux/macOS runtime",
+    "real model/provider/backend/MCP",
+    "remote Git URL GUI install lifecycle"
+  ],
+  "companionReferences": [
+    {
+      "file": "bundle/host/document-source/index.js",
+      "relative": "../../modules/system-enhancement-package/src/document-source-win32.ps1"
+    }
+  ],
+  "entryScope": "Legacy business-runtime uses governed-consumers, whose capture is literal false. These restrictions do not describe settings-runtime/settings-consumers or native-settings-installation.",
+  "verificationScope": "Original 24 definitions for this legacy fragment; later settings consumer evidence is separately indexed.",
+  "currentSettingsContract": "bundle/contracts/settings-installation.json"
+}

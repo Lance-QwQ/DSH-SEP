@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "scope": "Pure review of explicitly supplied unseeded V4 SEP task and recovery extension events; not live JSONL binding or migration.",
+  "businessActivationAllowed": false,
+  "verifiedBusinessHosts": [],
+  "targetHost": "0.2.1-alpha.1",
+  "limits": {
+    "maxUtf8Bytes": 16777216,
+    "maxRows": 100000
+  },
+  "legacyVersions": "refused-without-migration",
+  "inheritedExtensions": "Any inherited prefix combined with SEP extensions is refused, even if the extensions appear only in the local suffix; ownership rebinding is unverified.",
+  "externalEffects": "none"
+}

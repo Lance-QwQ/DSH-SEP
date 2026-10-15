@@ -1,0 +1,12 @@
+import {spawn,execFile} from 'node:child_process';
+import {createWriteStream} from 'node:fs';
+import {mkdir} from 'node:fs/promises';
+import {pipeline} from 'node:stream/promises';
+import {promisify} from 'node:util';
+const output=process.argv[2];if(output!=='D:\\AIData\\ProjectWork\\DSH\\alpha2-portable-profile-20261012-r1')throw Error('OUTPUT_SCOPE');
+const archive=output+'\\linux-evidence-reviewed.tar';
+const child=spawn('wsl.exe',['--distribution','DSH-SEP-Linux-RC','--cd','/','--exec','/usr/bin/tar','-cf','-','-C','/opt/dsh-sep-cross-platform/alpha2-portable-profile-audit-r18','evidence'],{windowsHide:true,stdio:['ignore','pipe','inherit']});
+const exited=new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',code=>code===0?resolve():reject(Error('EXPORT:'+code)));});
+await Promise.all([pipeline(child.stdout,createWriteStream(archive,{flags:'wx'})),exited]);
+const destination=output+'\\linux-evidence-reviewed';await mkdir(destination);
+await promisify(execFile)('C:/Windows/System32/tar.exe',['-xf',archive,'--strip-components=1','-C',destination],{windowsHide:true,timeout:30000});console.log(JSON.stringify({destination}));

@@ -1,0 +1,1218 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "sourceBase": "9dffba45e2be13d303e8c0cbc322e3b2ae7eb2b7",
+  "scope": "Ubuntu24.04 x64 / WSL2 / ext4 synthetic local package validation; private Xorg and WSLg native Wayland startup/close only",
+  "buildId": "alpha2-linux-closeout.5",
+  "counts": {
+    "previous": 200,
+    "added": 4,
+    "total": 204,
+    "realRunsNotAddedToDefinitions": true
+  },
+  "final": {
+    "tests": 204,
+    "pass": 204,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "runtime": [
+    {
+      "name": "project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148"
+    },
+    {
+      "name": "linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db"
+    },
+    {
+      "name": "linux-launch.mjs",
+      "sha256": "241f12410fec5b56de8fe12bc9b3a15386a6d68f37f156576a94409106535769"
+    },
+    {
+      "name": "linux-launch-lifecycle.mjs",
+      "sha256": "39fd7a615a6861b29b3d11c51c6916c55d1a26ca1dc4c6ce62ec9d32ec903115"
+    },
+    {
+      "name": "linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de"
+    },
+    {
+      "name": "linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1"
+    },
+    {
+      "name": "linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42"
+    },
+    {
+      "name": "linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6"
+    },
+    {
+      "name": "host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174"
+    },
+    {
+      "name": "bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17"
+    },
+    {
+      "name": "linux-profile-plugin.mjs",
+      "sha256": "7e2f5ad98f6e08619b96cbad5cd6174aae55cf04b6e643030d6783597967ac85"
+    },
+    {
+      "name": "managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4"
+    },
+    {
+      "name": "linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3"
+    },
+    {
+      "name": "linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039"
+    },
+    {
+      "name": "linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977"
+    },
+    {
+      "name": "mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c"
+    },
+    {
+      "name": "linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079"
+    },
+    {
+      "name": "linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f"
+    },
+    {
+      "name": "linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828"
+    },
+    {
+      "name": "linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06"
+    },
+    {
+      "name": "document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389"
+    },
+    {
+      "name": "linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a"
+    },
+    {
+      "name": "linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad"
+    },
+    {
+      "name": "context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f"
+    },
+    {
+      "name": "linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246"
+    },
+    {
+      "name": "linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284"
+    },
+    {
+      "name": "linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428"
+    },
+    {
+      "name": "linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23"
+    },
+    {
+      "name": "linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693"
+    },
+    {
+      "name": "linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d"
+    },
+    {
+      "name": "linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8"
+    },
+    {
+      "name": "linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511"
+    },
+    {
+      "name": "linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1"
+    },
+    {
+      "name": "linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7"
+    },
+    {
+      "name": "linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9"
+    }
+  ],
+  "package": {
+    "manifestSha256": "592f54bf131218984329ab06d98dba5908c67435244c45572af15c4f0b3d7ba3",
+    "entries": 52182,
+    "runtimeFiles": 35
+  },
+  "installation": {
+    "status": "pass",
+    "scope": "actual .5 archive, shipped first-install code, new independent program/data",
+    "result": {
+      "status": "pass",
+      "program": "/opt/dsh-sep-cross-platform/alpha2-portable-validation-installed-r12/program",
+      "dataRoot": "/opt/dsh-sep-cross-platform/alpha2-portable-validation-installed-r12/data",
+      "planHash": "9565386ce7aa1d031f493c8f00b581dd2b003259110c5f824c78fb809ac6b0a9"
+    },
+    "manifestSha256": "592f54bf131218984329ab06d98dba5908c67435244c45572af15c4f0b3d7ba3"
+  },
+  "results": {
+    "wayland": {
+      "status": "pass",
+      "mode": "wayland",
+      "rounds": [
+        {
+          "round": 1,
+          "electron": {
+            "pid": 45,
+            "birth": "3685"
+          },
+          "wayland": {
+            "displayUnset": true,
+            "session": "wayland",
+            "protocolSurface": true,
+            "bufferAttached": true
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "electronAfter": {
+            "state": "absent"
+          },
+          "status": "pass",
+          "testCleanup": []
+        },
+        {
+          "round": 2,
+          "electron": {
+            "pid": 212,
+            "birth": "6106"
+          },
+          "wayland": {
+            "displayUnset": true,
+            "session": "wayland",
+            "protocolSurface": true,
+            "bufferAttached": true
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "electronAfter": {
+            "state": "absent"
+          },
+          "status": "pass",
+          "testCleanup": []
+        }
+      ]
+    },
+    "hostCrash": {
+      "status": "pass",
+      "mode": "host-crash",
+      "rounds": [
+        {
+          "round": 1,
+          "electron": {
+            "pid": 49,
+            "birth": "14525"
+          },
+          "hostFault": {
+            "pid": 37,
+            "birth": "14361",
+            "signal": "SIGKILL"
+          },
+          "settleAfterFaultMs": 2097.184092000003,
+          "classified": true,
+          "exit": {
+            "code": 1,
+            "signal": null
+          },
+          "electronAfter": {
+            "state": "absent"
+          },
+          "status": "pass",
+          "testCleanup": []
+        },
+        {
+          "round": 2,
+          "electron": {
+            "pid": 190,
+            "birth": "17369"
+          },
+          "hostFault": {
+            "pid": 178,
+            "birth": "17207",
+            "signal": "SIGKILL"
+          },
+          "settleAfterFaultMs": 2114.5256609999924,
+          "classified": true,
+          "exit": {
+            "code": 1,
+            "signal": null
+          },
+          "electronAfter": {
+            "state": "absent"
+          },
+          "status": "pass",
+          "testCleanup": []
+        }
+      ]
+    },
+    "normalDesktop": {
+      "status": "pass",
+      "scope": "installed default Electron main, private authenticated Xorg, native window close, two cold boots; physical desktop/tray not certified",
+      "rounds": [
+        {
+          "round": 1,
+          "status": "pass",
+          "window": {
+            "status": "pass",
+            "action": "capture",
+            "windows": [
+              {
+                "id": 2097157,
+                "title": "DeepSeek Harness",
+                "pid": 49,
+                "width": 600,
+                "height": 727,
+                "distinctColors": 1599
+              }
+            ]
+          },
+          "hostPid": 37,
+          "electronPid": 49,
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "closed": {
+            "status": "pass",
+            "phase": "closed",
+            "hostExit": {
+              "code": 0,
+              "signal": null
+            },
+            "electronExit": {
+              "code": 0,
+              "signal": null
+            },
+            "receipt": {
+              "phase": "closed",
+              "status": "pass",
+              "pending": 0,
+              "consumers": {
+                "closed": true,
+                "capture": false
+              },
+              "p1": {
+                "state": "ready",
+                "budgetProblem": null,
+                "maxConcurrent": 2,
+                "maxDepth": 1,
+                "maxReworks": 2,
+                "readOnlyChildren": true,
+                "preworkRequired": false,
+                "active": 0,
+                "taskLimitCny": 5,
+                "cumulativeLimitCny": 100,
+                "budgetBasis": "local-usage-upper-bound-not-provider-invoice"
+              },
+              "compaction": {
+                "phase": "restored",
+                "closed": true,
+                "busy": false,
+                "businessEnabled": false,
+                "completeProfileStatus": "blocked",
+                "wholeApplicationDeadlineVerified": false
+              },
+              "documents": "governed-managed-copies; imported-source-retained",
+              "context": "disabled",
+              "vision": "explicit-upload; native-attachment-domain",
+              "evaluation": "disabled",
+              "computerClick": "disabled",
+              "fullLinuxCertification": "blocked",
+              "unavailable": [
+                "original-source-deletion",
+                "automatic-installation"
+              ]
+            }
+          },
+          "ledgerPreserved": true
+        },
+        {
+          "round": 2,
+          "status": "pass",
+          "window": {
+            "status": "pass",
+            "action": "capture",
+            "windows": [
+              {
+                "id": 2097157,
+                "title": "DeepSeek Harness",
+                "pid": 221,
+                "width": 600,
+                "height": 727,
+                "distinctColors": 1599
+              }
+            ]
+          },
+          "hostPid": 209,
+          "electronPid": 221,
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "closed": {
+            "status": "pass",
+            "phase": "closed",
+            "hostExit": {
+              "code": 0,
+              "signal": null
+            },
+            "electronExit": {
+              "code": 0,
+              "signal": null
+            },
+            "receipt": {
+              "phase": "closed",
+              "status": "pass",
+              "pending": 0,
+              "consumers": {
+                "closed": true,
+                "capture": false
+              },
+              "p1": {
+                "state": "ready",
+                "budgetProblem": null,
+                "maxConcurrent": 2,
+                "maxDepth": 1,
+                "maxReworks": 2,
+                "readOnlyChildren": true,
+                "preworkRequired": false,
+                "active": 0,
+                "taskLimitCny": 5,
+                "cumulativeLimitCny": 100,
+                "budgetBasis": "local-usage-upper-bound-not-provider-invoice"
+              },
+              "compaction": {
+                "phase": "restored",
+                "closed": true,
+                "busy": false,
+                "businessEnabled": false,
+                "completeProfileStatus": "blocked",
+                "wholeApplicationDeadlineVerified": false
+              },
+              "documents": "governed-managed-copies; imported-source-retained",
+              "context": "disabled",
+              "vision": "explicit-upload; native-attachment-domain",
+              "evaluation": "disabled",
+              "computerClick": "disabled",
+              "fullLinuxCertification": "blocked",
+              "unavailable": [
+                "original-source-deletion",
+                "automatic-installation"
+              ]
+            }
+          },
+          "ledgerPreserved": true
+        }
+      ]
+    },
+    "activeInspection": {
+      "status": "pass",
+      "scope": "installed production Host/RPC and real Agent; test-only synthetic LLM waterfall and profile plugin, no paid network calls; scheduled task positive and renderer quit dialog not covered",
+      "rows": [
+        {
+          "round": 1,
+          "before": {
+            "activeTasks": false,
+            "scheduledTasks": false
+          },
+          "running": {
+            "activeTasks": true,
+            "scheduledTasks": false
+          },
+          "after": {
+            "activeTasks": false,
+            "scheduledTasks": false
+          },
+          "status": "pass",
+          "exit": {
+            "code": 0,
+            "signal": null
+          }
+        },
+        {
+          "round": 2,
+          "before": {
+            "activeTasks": false,
+            "scheduledTasks": false
+          },
+          "running": {
+            "activeTasks": true,
+            "scheduledTasks": false
+          },
+          "after": {
+            "activeTasks": false,
+            "scheduledTasks": false
+          },
+          "status": "pass",
+          "exit": {
+            "code": 0,
+            "signal": null
+          }
+        }
+      ]
+    }
+  },
+  "saved": [
+    {
+      "path": "final.tap",
+      "sha256": "6a37c6e8646d26b72616740c070053d25e5ab97ed9e0c26bb37b35a29366d695",
+      "bytes": 50184
+    },
+    {
+      "path": "runtime-source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "runtime-source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "runtime-source/linux-launch.mjs",
+      "sha256": "241f12410fec5b56de8fe12bc9b3a15386a6d68f37f156576a94409106535769",
+      "bytes": 6980
+    },
+    {
+      "path": "runtime-source/linux-launch-lifecycle.mjs",
+      "sha256": "39fd7a615a6861b29b3d11c51c6916c55d1a26ca1dc4c6ce62ec9d32ec903115",
+      "bytes": 2191
+    },
+    {
+      "path": "runtime-source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "runtime-source/linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1",
+      "bytes": 1419
+    },
+    {
+      "path": "runtime-source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "runtime-source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "runtime-source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "runtime-source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "runtime-source/linux-profile-plugin.mjs",
+      "sha256": "7e2f5ad98f6e08619b96cbad5cd6174aae55cf04b6e643030d6783597967ac85",
+      "bytes": 10164
+    },
+    {
+      "path": "runtime-source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "runtime-source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "runtime-source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "runtime-source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "runtime-source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "runtime-source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "runtime-source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "runtime-source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "runtime-source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "runtime-source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "runtime-source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "runtime-source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "runtime-source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "runtime-source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "runtime-source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "runtime-source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "runtime-source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "runtime-source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "runtime-source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "runtime-source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "runtime-source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "runtime-source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "runtime-source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "runtime-source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "test-source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "test-source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "test-source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "test-source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "test-source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "test-source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "test-source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "test-source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "test-source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "test-source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "test-source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "test-source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "test-source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "test-source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "test-source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "test-source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "test-source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "test-source/linux-host-failure.test.mjs",
+      "sha256": "207ef882a067405a58d3a4092c545079998f163277eed614a68d2313d4c46dba",
+      "bytes": 2684
+    },
+    {
+      "path": "test-source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "test-source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "test-source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "test-source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "test-source/linux-profile.test.mjs",
+      "sha256": "daae3db708900d0ff75d6641a8afcae1a61fd180aa1ed41682822bb49a7efac8",
+      "bytes": 13794
+    },
+    {
+      "path": "test-source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "test-source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "test-source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "test-source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "installation/RESULT.json",
+      "sha256": "78f1f38a6ae5f2d6b69ba4f96f6c1e1a7fa3ebedc7a4dcf678a71791783457e7",
+      "bytes": 513
+    },
+    {
+      "path": "installation/PLAN.json",
+      "sha256": "968c0632fe9a5cac1e2ea6562a9337c50302e952052102d9502ac2728d326369",
+      "bytes": 928
+    },
+    {
+      "path": "PACKAGE.json",
+      "sha256": "07ec8ec930dcc67ae09414c4a29cf71ec9a7c469c0050327dac4a5711e2e960d",
+      "bytes": 1289
+    },
+    {
+      "path": "package/BUILD.json",
+      "sha256": "1f1e0242c24fb74979a39ca1afc2facf1a89289aaf081425f183bd46a319cfdf",
+      "bytes": 316
+    },
+    {
+      "path": "package/PAYLOAD-MANIFEST.json",
+      "sha256": "592f54bf131218984329ab06d98dba5908c67435244c45572af15c4f0b3d7ba3",
+      "bytes": 12230383
+    },
+    {
+      "path": "package/README.md",
+      "sha256": "42ab5a81560edc67e5910b864cd8c6af6ef10783eda2b8eab4d7cab1784d9336",
+      "bytes": 5668
+    },
+    {
+      "path": "wayland/RESULT.json",
+      "sha256": "0d179dc2da21565b9b735b8382d3b697e78d754948acf4ae6503805316bf00ca",
+      "bytes": 923
+    },
+    {
+      "path": "wayland/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "wayland/round-1.stdout.log",
+      "sha256": "8adf4ca70dcf95711e9651b63ed6ad2a2bdd66ee75cc8d3eae1177d4ce9b9142",
+      "bytes": 1287
+    },
+    {
+      "path": "wayland/round-1.wayland.log",
+      "sha256": "cba4df16d8d40d565bfd7cd795238ff20f0fa190d9507b88a869b44bb0bb445f",
+      "bytes": 15457
+    },
+    {
+      "path": "wayland/round-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "wayland/round-2.stdout.log",
+      "sha256": "3911e46b0b7a363db317f42b39858baeaded0efe1b7683af0a053a4bf3897952",
+      "bytes": 1288
+    },
+    {
+      "path": "wayland/round-2.wayland.log",
+      "sha256": "489a6635de335867593ddae60e15933774225ece1776d9c5ef1e1dc3b28fec5f",
+      "bytes": 15423
+    },
+    {
+      "path": "hostCrash/RESULT.json",
+      "sha256": "de0244d8881e65939748264b94d8555dc5fd583392836550843af2df0551dd60",
+      "bytes": 978
+    },
+    {
+      "path": "hostCrash/XSERVER-RESULT.json",
+      "sha256": "1252d54f46e4a9cb08f51b520b77dc4f9f6f45cd6f9652bc8abd61d0a83cc917",
+      "bytes": 127
+    },
+    {
+      "path": "hostCrash/round-1.stderr.log",
+      "sha256": "679f8c48872a3d270ecccbe29c3ccc2a50288e9f5d8aeaf3c77185d4c6f587cb",
+      "bytes": 112
+    },
+    {
+      "path": "hostCrash/round-1.stdout.log",
+      "sha256": "85ed4e8fe6c08b902076758ce8c3fc498bab525d82f07a0c10ff53a7c4fe9863",
+      "bytes": 284
+    },
+    {
+      "path": "hostCrash/round-2.stderr.log",
+      "sha256": "679f8c48872a3d270ecccbe29c3ccc2a50288e9f5d8aeaf3c77185d4c6f587cb",
+      "bytes": 112
+    },
+    {
+      "path": "hostCrash/round-2.stdout.log",
+      "sha256": "34f3aacad28f6c4cfbf3a8ad729a2778a1b54fbd45f57cbe5ecb37f12934edba",
+      "bytes": 285
+    },
+    {
+      "path": "hostCrash/xserver.stderr.log",
+      "sha256": "a8f823b84718135079eaa988413c5e9ae413297a55a197f8c366e34aa0880270",
+      "bytes": 3603
+    },
+    {
+      "path": "normalDesktop/RESULT.json",
+      "sha256": "270dffc410e8c92207ec1623398cf78485c85cb2230a04f639cf20c3bd78f83a",
+      "bytes": 4334
+    },
+    {
+      "path": "normalDesktop/XSERVER-RESULT.json",
+      "sha256": "1252d54f46e4a9cb08f51b520b77dc4f9f6f45cd6f9652bc8abd61d0a83cc917",
+      "bytes": 127
+    },
+    {
+      "path": "normalDesktop/round-1.electron.stderr.log",
+      "sha256": "adc8fde2da7d08cdb7a2fdfa6329b13a986d2dadaf2168ae0da9762d4febb1f1",
+      "bytes": 3286
+    },
+    {
+      "path": "normalDesktop/round-1.observer.json",
+      "sha256": "693c1a9242ee5ba6242ebe12197b55f110c9451ebfe36a45c1068b31ef2c9459",
+      "bytes": 456
+    },
+    {
+      "path": "normalDesktop/round-1.png",
+      "sha256": "30c57e20caf43c3a4b78568c46175aa6043a28d8967ecdadad96145b159c61c6",
+      "bytes": 18662
+    },
+    {
+      "path": "normalDesktop/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "normalDesktop/round-1.stdout.log",
+      "sha256": "677b1b645c8d50e21d968128fbfb97d41f228593c7cbbacf3fa09af67dcb5984",
+      "bytes": 1200
+    },
+    {
+      "path": "normalDesktop/round-2.electron.stderr.log",
+      "sha256": "9f245ab289eb0a1c704dfa73c03ab665067035dc69a67301bb898947c27e2bc8",
+      "bytes": 3305
+    },
+    {
+      "path": "normalDesktop/round-2.observer.json",
+      "sha256": "22f2915f3217be6d8e2c7c0a833a95e0e62e573b9ab0a8da0069032c2cd0a98f",
+      "bytes": 459
+    },
+    {
+      "path": "normalDesktop/round-2.png",
+      "sha256": "30c57e20caf43c3a4b78568c46175aa6043a28d8967ecdadad96145b159c61c6",
+      "bytes": 18662
+    },
+    {
+      "path": "normalDesktop/round-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "normalDesktop/round-2.stdout.log",
+      "sha256": "5e13055e2384e13deac50d20985cc9e2b4b085f408b2c9daa3a6eab20df5f76c",
+      "bytes": 1201
+    },
+    {
+      "path": "normalDesktop/xserver.stderr.log",
+      "sha256": "a8f823b84718135079eaa988413c5e9ae413297a55a197f8c366e34aa0880270",
+      "bytes": 3603
+    },
+    {
+      "path": "activeInspection/RESULT.json",
+      "sha256": "a42bc2568c9e6f1d59baffdcc8c24e7a22918822d2c1d4e25e02c77bde62c219",
+      "bytes": 1011
+    },
+    {
+      "path": "activeInspection/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "activeInspection/round-1/idle.json",
+      "sha256": "6f301c353b33dc6085abfca8e5f8c778c5b2de33f137c64dbe026aa0ae960391",
+      "bytes": 47
+    },
+    {
+      "path": "activeInspection/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "activeInspection/round-1/stdout.log",
+      "sha256": "e0134e08f4237c52dedd427a5ca439042e3de67dec7a402cd51044b1787b0450",
+      "bytes": 1160
+    },
+    {
+      "path": "activeInspection/round-2/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "activeInspection/round-2/idle.json",
+      "sha256": "3deed3a85e561671b4f17d9db9fd53ef95e127fc0ce5b12270253465e55fa435",
+      "bytes": 47
+    },
+    {
+      "path": "activeInspection/round-2/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "activeInspection/round-2/stdout.log",
+      "sha256": "d7c64bd28d296639e8e72fb678f5ddac7b98ca72fa226ca67fc1870ff7bc4455",
+      "bytes": 1160
+    },
+    {
+      "path": "baseline/installation.json",
+      "sha256": "49281efcd0aabf0bccec4d3fefb923d7adefb0c726723dbf9233ae6d36e21601",
+      "bytes": 511
+    },
+    {
+      "path": "baseline/host-crash/RESULT.json",
+      "sha256": "af8b1acfd1ecb78c30816d33b5d50de200b1ea52e34d3f1d3f5c1056cb1807d6",
+      "bytes": 563
+    },
+    {
+      "path": "baseline/host-crash/round-1.stdout.log",
+      "sha256": "2cfa35c079ac57eebd6891fc0420593a588226a9bb84623d745072bb220d95e4",
+      "bytes": 282
+    },
+    {
+      "path": "baseline/host-crash/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "baseline/host-crash/XSERVER-RESULT.json",
+      "sha256": "1252d54f46e4a9cb08f51b520b77dc4f9f6f45cd6f9652bc8abd61d0a83cc917",
+      "bytes": 127
+    },
+    {
+      "path": "baseline/wayland.json",
+      "sha256": "2e95ea94e0f576bac1471f1aa7726f401585e47a3b493cc7081bf77f77ba5b41",
+      "bytes": 925
+    },
+    {
+      "path": "baseline/activeInspection.json",
+      "sha256": "a42bc2568c9e6f1d59baffdcc8c24e7a22918822d2c1d4e25e02c77bde62c219",
+      "bytes": 1011
+    },
+    {
+      "path": "history/host-unit-red-r7.tap",
+      "sha256": "d3aab7ea5e8618551bd3c5e21e588e30a1c7497675f5d83e2ec5c70faf28db39",
+      "bytes": 4515
+    },
+    {
+      "path": "history/host-unit-red-r7/linux-host-failure.test.mjs",
+      "sha256": "207ef882a067405a58d3a4092c545079998f163277eed614a68d2313d4c46dba",
+      "bytes": 2684
+    },
+    {
+      "path": "history/host-unit-red-r7/linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811",
+      "bytes": 1629
+    },
+    {
+      "path": "history/host-unit-red-r7/linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138",
+      "bytes": 6935
+    },
+    {
+      "path": "history/host-unit-green-r9.tap",
+      "sha256": "cc661fc8f741a5c53431ea6cb1142ff67d81d04bc204fe2cf2955cf85b5cb260",
+      "bytes": 2349
+    },
+    {
+      "path": "history/host-unit-green-r9/linux-host-failure.test.mjs",
+      "sha256": "207ef882a067405a58d3a4092c545079998f163277eed614a68d2313d4c46dba",
+      "bytes": 2684
+    },
+    {
+      "path": "history/host-unit-green-r9/linux-launch-lifecycle.mjs",
+      "sha256": "39fd7a615a6861b29b3d11c51c6916c55d1a26ca1dc4c6ce62ec9d32ec903115",
+      "bytes": 2191
+    },
+    {
+      "path": "history/host-unit-green-r9/linux-launch.mjs",
+      "sha256": "241f12410fec5b56de8fe12bc9b3a15386a6d68f37f156576a94409106535769",
+      "bytes": 6980
+    },
+    {
+      "path": "harness-source/exercise-validation-boundary.mjs",
+      "sha256": "036f78ce0503e2e0548bd2486e90e47d7a3acebc81282465d805cdcdc922d65e",
+      "bytes": 4626
+    },
+    {
+      "path": "harness-source/exercise-active-inspection.mjs",
+      "sha256": "e4a384312221c78d73ea55c555700c351b0028e792c0a4b84d70940dc70e41db",
+      "bytes": 3566
+    },
+    {
+      "path": "harness-source/active-inspection-fixture.mjs",
+      "sha256": "063c96fbc8fc8599c8987a61bfe4b87ceb7dd75f55dee5e581cb4623739b6abc",
+      "bytes": 2254
+    },
+    {
+      "path": "harness-source/exercise-installed-desktop.mjs",
+      "sha256": "acd67b872791e6ab4c655ae401f32bdde69744f7728cf4fc9652770590597d57",
+      "bytes": 4922
+    },
+    {
+      "path": "harness-source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "harness-source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "harness-source/install-validation-input.mjs",
+      "sha256": "49a5267635ba489bbd80199c087b56ad904d67091fba32c1dbcd8d54b2b71c2f",
+      "bytes": 1309
+    },
+    {
+      "path": "harness-source/install-validation-candidate.mjs",
+      "sha256": "6bdb7751cb716a7441661605481dfa52daa25e5635aebf402a4cc0069def620f",
+      "bytes": 1321
+    },
+    {
+      "path": "history/gui-observer-r16/source.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/gui-observer-r16/failure.log",
+      "sha256": "4010856b1e06ff37cd0e9fca66da00f243b5ca0b319181e90bfd70a945076aa2",
+      "bytes": 23451
+    },
+    {
+      "path": "history/gui-observer-r16/round-1.observer.json",
+      "sha256": "3ddb0888c2a0f0be7a7fd923ee6f684b14fe17d72b3cbb8e957781cf94a280e1",
+      "bytes": 456
+    },
+    {
+      "path": "history/gui-observer-r16/round-1.stdout.log",
+      "sha256": "6c5fbf20963ff33bdec056c46a5bd02ec688c75f1f2a05d821f6dc64a0c38c49",
+      "bytes": 1287
+    },
+    {
+      "path": "history/gui-observer-r16/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "history/gui-observer-r16/XSERVER-RESULT.json",
+      "sha256": "1252d54f46e4a9cb08f51b520b77dc4f9f6f45cd6f9652bc8abd61d0a83cc917",
+      "bytes": 127
+    },
+    {
+      "path": "history/premature-audit-r22.log",
+      "sha256": "fca30241d8d21c0b30121d17d7e06ed772443a96aeed15376b3c79096ff57568",
+      "bytes": 582
+    }
+  ],
+  "resourceAudit": {
+    "status": "pass",
+    "remaining": [],
+    "unknown": [],
+    "scope": "recognized owned processes in dedicated RC distro/current UID",
+    "attribution": "The old .4 Host crash exceeded 12s and needed exact PID/birth SIGKILL of Electron and launcher. The .5 fault cases returned blocked/nonzero by design, with no harness process kill; observed owned Electron/launcher exit is separate from missing Host quiescence receipt. Outer test owner explicitly stopped private Xorg. Final zero recognized residuals does not make historical failure pass or prove all OS resources released."
+  },
+  "notVerified": {
+    "completePublicLinuxCertification": "blocked",
+    "physicalDesktop": "not_run",
+    "waylandDragNativeChooserClick": "not_run",
+    "activeTaskRendererQuitDialog": "not_run",
+    "scheduledTaskPositive": "not_run",
+    "publicAutomaticUpdate": "not_run",
+    "paidModel": "not_run",
+    "privateAdoption": "not_run",
+    "fullApplicationForcedFailureDeadline": "not_run",
+    "launcherSigkillRecovery": "not_run",
+    "nativeEvaluationPositive": "not_run",
+    "sameHostFullEvaluation": "not_run",
+    "allPlugins": "not_run",
+    "macOS": "not_run"
+  },
+  "dailyChanged": false,
+  "published": false,
+  "artifact": {
+    "status": "pass",
+    "name": "DSH-SEP-Linux-x64-Alpha2-closeout.5.tar.gz",
+    "sha256": "f36353364a8759e60d671272db601c348a93dd0b1f12e6502ca0dd81cbc226b2",
+    "sourceRoot": "/opt/dsh-sep-cross-platform/alpha2-portable-closeout-package-validation-r10-build"
+  },
+  "input": {
+    "status": "pass",
+    "archive": "D:/AIData/ProjectWork/DSH/alpha2-linux-validation-20261013-r1/DSH-SEP-Linux-x64-Alpha2-closeout.5.tar.gz",
+    "sha256": "f36353364a8759e60d671272db601c348a93dd0b1f12e6502ca0dd81cbc226b2",
+    "destination": "/opt/dsh-sep-cross-platform/alpha2-portable-validation-candidate-inputs-r11"
+  },
+  "dailyActual": {
+    "launch.mjs": "da140dbad22fa4f6557d98f73e192e1135b29431dba08c0f9b13e4dd3977bf9f",
+    "deployment-rc2.json": "29e3d72617ecb35f97849eccca94d03395408be6dfa4ebef2dc350846f0f0175"
+  },
+  "baselineArchive": {
+    "status": "pass",
+    "archive": "D:/AIData/ProjectWork/DSH/alpha2-linux-review-repair-20261013-r1/DSH-SEP-Linux-x64-Alpha2-closeout.4.tar.gz",
+    "sha256": "3adcf96fd09aa217ab3b425551de985c04a006ede6ddab7434048594588a0c07",
+    "destination": "/opt/dsh-sep-cross-platform/alpha2-portable-validation-inputs-r2"
+  },
+  "visualInspection": {
+    "status": "pass",
+    "image": "normalDesktop/round-1.png",
+    "sha256": "30c57e20caf43c3a4b78568c46175aa6043a28d8967ecdadad96145b159c61c6",
+    "observed": "Official first-login/Add API Key window on a blank installation. Normal-close evidence concerns this page, not all authenticated main-window interactions."
+  }
+}

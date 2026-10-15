@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "scope": "test-only bounded observable readiness; original final assertions and single actions retained",
+  "origin": {
+    "worker": {
+      "sourceSha256": "70969e9da84f5cc3ba674de698124b649adf103d6a5361f4c7a16e6b765c39c8",
+      "resultSha256": "4b76efbaa89f17db7908a04a0c628ca19585432bb9862e7168d3e35688a54603",
+      "changes": [
+        {
+          "before": "from './native-dom.mjs'",
+          "after": "from './native-dom-r3.mjs'"
+        },
+        {
+          "before": "import {fixtureResourcesUnknown} from './native-contract.mjs';",
+          "after": "import {fixtureResourcesUnknown} from './native-contract.mjs';\nimport {observeReady} from './native-readiness.mjs';"
+        },
+        {
+          "before": "result.badge=await renderer(workspace.id,'('+measureBrand.toString()+')()');",
+          "after": "const brandSamples=[];try{result.badge=await observeReady({read:async()=>{if(control.status().blocked)throw error('SEP_WORKSPACE_CONTROL_BLOCKED');return renderer(workspace.id,'('+measureBrand.toString()+')()');},pendingCode:'SEP_WORKSPACE_BRAND_UNAVAILABLE',deadlineCode:'SEP_WORKSPACE_BRAND_DEADLINE',timeoutMs:20000,signal:abort.signal,onSample:r=>{brandSamples.push(r);if(brandSamples.length>128)brandSamples.splice(1,1);}});}finally{await save('BRAND-READINESS.json',{schema:1,windowId:workspace.id,attempts:brandSamples.at(-1)?.attempt??0,first:brandSamples[0],last:brandSamples.at(-1),samples:brandSamples});}"
+        },
+        {
+          "before": "probeCurrentProject({client,windowId:workspace.id,input,preparation:result.preparation})",
+          "after": "probeCurrentProject({client,windowId:workspace.id,input,preparation:result.preparation,signal:abort.signal})"
+        },
+        {
+          "before": "}catch(e){preparationUnknown=fixtureResourcesUnknown(e);",
+          "after": "}catch(e){result.failureStage=result.stage;preparationUnknown=fixtureResourcesUnknown(e);"
+        }
+      ]
+    },
+    "operator": {
+      "sourceSha256": "a3c6a90e7869125c36d3db1518b292911bcff5aa2eda320c820ec9191800e8bf",
+      "resultSha256": "7dfd70efc983200ebd25acbe8f2a0e057a7ce79ac73ef85a79dd56f06149f318",
+      "changes": [
+        {
+          "before": "['native-operator-r2.mjs','native-worker-r2.mjs'",
+          "after": "['native-operator-r3.mjs','native-worker-r3.mjs','native-readiness.mjs','derive-native-readiness.mjs','NATIVE-READINESS-ORIGIN.json'"
+        },
+        {
+          "before": "'native-dom.mjs'",
+          "after": "'native-dom-r3.mjs'"
+        },
+        {
+          "before": "new URL('./native-worker-r2.mjs',import.meta.url)",
+          "after": "new URL('./native-worker-r3.mjs',import.meta.url)"
+        }
+      ]
+    },
+    "dom": {
+      "sourceSha256": "e20c8daf52ce79db06c4071f06caaf68af99ebb08cf738cf7e10604645734c72",
+      "resultSha256": "32798f21b8f2610389700a1108536981635e6f142a8993e5fc9cb6562acf1f38",
+      "changes": [
+        {
+          "before": "import {observeOnboarding} from '../../settings-ui/desktop-onboarding.mjs';",
+          "after": "import {observeOnboarding} from '../../settings-ui/desktop-onboarding.mjs';\nimport {observeReady} from './native-readiness.mjs';"
+        },
+        {
+          "before": "probeCurrentProject({client,windowId,input,preparation})",
+          "after": "probeCurrentProject({client,windowId,input,preparation,signal})"
+        },
+        {
+          "before": " async function wait(expression,code){const deadline=Date.now()+20000;while(Date.now()<deadline){const v=await page(expression);if(v)return v;await pause(100);}fail(code);}",
+          "after": " let observationSequence=0;\n async function wait(expression,code){const samples=[];try{return await observeReady({read:()=>page(expression),deadlineCode:code,timeoutMs:20000,intervalMs:100,signal,onSample:r=>{samples.push(r);if(samples.length>128)samples.splice(1,1);}});}finally{await writeFile(join(input.outputRoot,'DOM-READINESS-'+(++observationSequence)+'.json'),JSON.stringify({schema:1,condition:code,windowId,attempts:samples.at(-1)?.attempt??0,first:samples[0],last:samples.at(-1),samples},null,2)+'\\n',{flag:'wx',mode:0o600});}}"
+        },
+        {
+          "before": " const api=await page(",
+          "after": " await wait(`(()=>{const a=window.sepCurrentProject;return !!a&&Object.keys(a).sort().join(',')==='begin,call,commit,presented'&&Object.values(a).every(v=>typeof v==='function');})()`,'SEP_PROJECT_NATIVE_PRELOAD');\n const api=await page("
+        },
+        {
+          "before": " assert.equal(await page(`(()=>{const d=${modal},b=d&&[...d.querySelectorAll('button')].find(e=>E(e)&&['Close','关闭'].includes(e.textContent.trim()));if(!b)return false;b.click();return true;})()`),true);",
+          "after": " await wait(`(()=>{const d=${modal};return !!d&&[...d.querySelectorAll('button')].some(e=>E(e)&&['Close','关闭'].includes(e.textContent.trim()));})()`,'SEP_PROJECT_NATIVE_CLOSE_READY');\n assert.equal(await page(`(()=>{const d=${modal},b=d&&[...d.querySelectorAll('button')].find(e=>E(e)&&['Close','关闭'].includes(e.textContent.trim()));if(!b)return false;b.click();return true;})()`),true);"
+        }
+      ]
+    }
+  }
+}

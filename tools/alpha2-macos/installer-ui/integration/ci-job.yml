@@ -1,0 +1,47 @@
+# Fixed r71 signed archive and restore pins. This job verifies integration;
+# build success alone does not claim installation or user-interface success.
+  native-installer-integration:
+    runs-on: macos-15
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Record actual native environment
+        run: |
+          set -euo pipefail
+          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installer-integration-system.txt"
+      - name: Restore one fixed signed installer archive
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/package/restore-installer-application.mjs "$RUNNER_TEMP/fixed-installer"
+      - name: Original lifecycle then real-button installation then installed first boot
+        run: |
+          set -euo pipefail
+          result="$RUNNER_TEMP/fixed-installer/RESULT.json"
+          digest="$(shasum -a 256 "$result" | awk '{print $1}')"
+          node tools/alpha2-macos/installer-ui/integration/run-full.mjs "$result" "$digest" "$RUNNER_TEMP/installer-integration"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: installer-integration-native
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/installer-integration-system.txt
+            ${{ runner.temp }}/fixed-installer/RESULT.json
+            ${{ runner.temp }}/fixed-installer/SOURCE-ASSEMBLY.json
+            ${{ runner.temp }}/fixed-installer/PACKAGE-INVENTORY.json
+            ${{ runner.temp }}/fixed-installer/*.log
+            ${{ runner.temp }}/installer-integration/*.json
+            ${{ runner.temp }}/installer-integration/*.jsonl
+            ${{ runner.temp }}/installer-integration/*.log
+            ${{ runner.temp }}/installer-integration/installed-receipt/*.json
+            ${{ runner.temp }}/installer-integration/installed-startup/*.json
+            ${{ runner.temp }}/installer-integration/installed-startup/*.jsonl
+            ${{ runner.temp }}/installer-integration/installed-startup/*.log

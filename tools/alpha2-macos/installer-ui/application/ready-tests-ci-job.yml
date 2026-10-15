@@ -1,0 +1,41 @@
+native-installer-application-ready-fixture:
+  runs-on: macos-15
+  timeout-minutes: 10
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.21.0
+    - name: Derive event-bound fixture and compile unchanged implementation
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-application-ready"
+        node tools/alpha2-macos/installer-ui/application/derive-ready-tests.mjs "$RUNNER_TEMP/installer-application-ready/application" > "$RUNNER_TEMP/installer-application-ready/DERIVATION.json"
+        shasum -a 256 tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.m tools/alpha2-macos/installer-ui/application/InstallerApplication.h > "$RUNNER_TEMP/installer-application-ready/INPUTS.sha256"
+        clang -fobjc-arc -fblocks -Wall -Wextra -DSEP_INSTALLER_APPLICATION_TESTING=1 -framework Cocoa tools/alpha2-macos/installer-ui/native/InstallerUI.m tools/alpha2-macos/installer-ui/application/InstallerApplication.m "$RUNNER_TEMP/installer-application-ready/application/InstallerApplicationTests.m" -o "$RUNNER_TEMP/installer-application-ready/tests" > "$RUNNER_TEMP/installer-application-ready/compile.log" 2>&1
+    - name: Execute original eight behaviors after actual fixture readiness
+      shell: bash
+      run: |
+        set +e
+        "$RUNNER_TEMP/installer-application-ready/tests" > "$RUNNER_TEMP/installer-application-ready/RESULT.json" 2> "$RUNNER_TEMP/installer-application-ready/TRACE.jsonl"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-application-ready/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-application-ready-fixture
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/installer-application-ready/*.json
+          ${{ runner.temp }}/installer-application-ready/*.jsonl
+          ${{ runner.temp }}/installer-application-ready/*.log
+          ${{ runner.temp }}/installer-application-ready/*.sha256
+          ${{ runner.temp }}/installer-application-ready/*.txt
+          ${{ runner.temp }}/installer-application-ready/application/*.m
+          ${{ runner.temp }}/installer-application-ready/application/ORIGIN.json

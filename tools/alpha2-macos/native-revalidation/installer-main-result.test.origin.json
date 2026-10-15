@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "source": "installer-ui/integration-r79/main-result.test.mjs",
+  "sourceSha256": "990a90e4edea5c6671193c227979b6c49457fc52f3ed2148ec43d7d19525a595",
+  "result": "native-revalidation/installer-main-result.test.mjs",
+  "resultSha256": "fd3b4f0acdaf0056482833fd9e5bd207317485fea7c64d8667d78683bb0bf338",
+  "transforms": [
+    {
+      "before": "import {readFile} from 'node:fs/promises';",
+      "after": "import {readFile} from 'node:fs/promises';\nimport {payloadPins} from './installer-binding.mjs';const fixedPayload=await payloadPins();",
+      "count": 1,
+      "inputSha256": "990a90e4edea5c6671193c227979b6c49457fc52f3ed2148ec43d7d19525a595",
+      "resultSha256": "7ef03c9024d44d6b4ed82184c25e58c5fdeec3311720133daa4ef02c439bb5b0"
+    },
+    {
+      "before": "report.installed.entries,29374",
+      "after": "report.installed.entries,fixedPayload.entries",
+      "count": 1,
+      "inputSha256": "7ef03c9024d44d6b4ed82184c25e58c5fdeec3311720133daa4ef02c439bb5b0",
+      "resultSha256": "f079f7423c38709cbfeb589fde76b5de80fa76afa37ed82df7b741b9cde604d4"
+    },
+    {
+      "before": "report.installed.totalBytes,1794083023",
+      "after": "report.installed.totalBytes,fixedPayload.totalBytes",
+      "count": 1,
+      "inputSha256": "f079f7423c38709cbfeb589fde76b5de80fa76afa37ed82df7b741b9cde604d4",
+      "resultSha256": "fd3b4f0acdaf0056482833fd9e5bd207317485fea7c64d8667d78683bb0bf338"
+    }
+  ],
+  "scope": "New fixed-pinned successor operator only; original files remain unchanged; native verification not_run"
+}

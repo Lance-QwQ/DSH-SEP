@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "sourceGraphSha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "package": "@deepseek-ai/dsh-fs-local",
+  "version": "0.2.0-rc.2",
+  "source": "SEP Beta.2 protected derivative, not official alpha.1 default provider",
+  "path": "store/p0137/lib/index.js",
+  "sha256": "615246c45a5fca72420f9c3052bf7c3bebd19b7578200f2695dcf86a164e7511",
+  "size": 91185,
+  "licenseSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+  "transformations": [
+    {
+      "from": "export { LocalFileSystem, LocalFileSystem as default, withProtectedDirectory };",
+      "to": "/** Internal bounded read for a target whose native file and ancestors are held.\n * The caller owns handles; this helper deliberately does not reacquire them. */\nasync function readHeldContent(target, maxBytes, signal, internals) {\n throwIfAborted(signal, \"read\");\n const before = await probe(target.targetKey);\n const bytes = await readWholeBytes(target, signal, maxBytes, internals);\n const after = await probe(target.targetKey);\n throwIfAborted(signal, \"read\");\n if (!before || !after || before.version !== after.version) throw new FsError(\"FS_STALE_CONTENT\", \"FS_STALE_CONTENT\");\n return { bytes, version: after.version };\n}\n/** Own ordinary local NTFS file and ancestor handles for one bounded snapshot.\n * No file is created, no recovery record is written, and no handle escapes. */\nasync function readProtectedObservation(target, maxBytes, signal, internals) {\n throwIfAborted(signal, \"read\");\n const release = await lockDirectories([target.displayPath], false);\n let held;\n try {\n  held = await ProtectedFileHandle.open(target.targetKey);\n  if (!held) throw new FsError(\"FS_NOT_FOUND\", \"FS_NOT_FOUND\");\n  return await readHeldContent(target, maxBytes, signal, internals);\n } finally { try { held?.close(); } finally { release(); } }\n}\nexport { LocalFileSystem, LocalFileSystem as default, withProtectedDirectory, readHeldContent, readProtectedObservation };",
+      "count": 1
+    },
+    {
+      "from": "\t\t\t\tconst bytes = Buffer.byteLength(content, \"utf8\");",
+      "to": "\t\t\t\tawait this.assertObservedContent?.(target, expected, signal);\n\t\t\t\tconst bytes = Buffer.byteLength(content, \"utf8\");",
+      "count": 1
+    },
+    {
+      "from": "\t\t\t\tconst original = await readForEdit(target.targetKey, target.displayPath, signal);",
+      "to": "\t\t\t\tawait this.assertObservedContent?.(target, expected, signal);\n\t\t\t\tconst original = await readForEdit(target.targetKey, target.displayPath, signal);",
+      "count": 1
+    },
+    {
+      "from": "if (expected !== void 0 && before.version !== expected.version) throw new FsError(\"managed move source changed\", \"FS_STALE_VERSION\");",
+      "to": "if (expected !== void 0 && before.version !== expected.version) throw new FsError(\"managed move source changed\", \"FS_STALE_VERSION\");\n\t\t\t\tawait this.assertObservedContent?.(source, expected, signal);",
+      "count": 1
+    },
+    {
+      "from": "if (expected !== void 0 && before.version !== expected.version) throw new FsError(\"managed delete source changed\", \"FS_STALE_VERSION\");",
+      "to": "if (expected !== void 0 && before.version !== expected.version) throw new FsError(\"managed delete source changed\", \"FS_STALE_VERSION\");\n\t\t\t\tawait this.assertObservedContent?.(target, expected, signal);",
+      "count": 1
+    },
+    {
+      "from": "\t\t\t\t\ttransaction.record.afterVersion = after?.version;\n\t\t\t\t\tawait transaction.save();",
+      "to": "\t\t\t\t\ttransaction.record.afterVersion = after?.version;\n\t\t\t\t\tawait transaction.save();\n\t\t\t\t\tthis.observeCommittedContent?.(target, after?.version, content);",
+      "count": 1
+    },
+    {
+      "from": "\t\t\t\t\ttransaction.record.afterVersion = info?.version;\n\t\t\t\t\tawait transaction.save();",
+      "to": "\t\t\t\t\ttransaction.record.afterVersion = info?.version;\n\t\t\t\t\tawait transaction.save();\n\t\t\t\t\tthis.observeCommittedContent?.(target, info?.version, content);",
+      "count": 1
+    }
+  ],
+  "scope": "Private engine reuse with seven exact source-bound transformations: bounded snapshot helpers, four held-handle preflight callbacks, and two post-durable-commit observation callbacks. Native default provider untouched.",
+  "sourceSha256": "8c6942cad0c2e2c7a402ea36b60f6e1734fa72e54b4f3865c0a9b910918a2012",
+  "sourceSize": 89496
+}

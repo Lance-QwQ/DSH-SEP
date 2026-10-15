@@ -1,0 +1,335 @@
+{
+  "schema": 1,
+  "sourceCommit": "ac69bda3ca63a3bed44780b7804cf090156514de",
+  "files": [
+    {
+      "path": "tools/alpha2-adaptation/verify-candidate.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "57be1d095914acec12aca67747140adfa79807438ed609e7f0a4a3e94c07fd17",
+      "exportSha256": "0438490b43c24d030c25127874d1fa9e12ff008324134ea480e51171f4edbc0d",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-macos/bootstrap.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "9b31e3c997f8c29aa4e67765adb70f66912961ace84481a22006a1dfec24a0f5",
+      "exportSha256": "c12bfcd0e4f1ab1cbf5c41cb13523a2e1c8737a7dcadd8cf61347c173ad0ee7e",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [
+        "tools/alpha2-macos/VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-macos/seal-native.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "33b49495737bf1576a21b6e71f1e451a10d50569d4abc319d1053417876a2847",
+      "exportSha256": "915f69427bb0e3964b405044082b65bd905a7f0ac2fe0506dc726bd206625216",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [
+        "tools/alpha2-macos/VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/finish-vision-sync.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "exportSha256": "4dd0f3304d6e57ea369c0a394fe6ad8ec00280f781aa0ac624b2a78b1b1b91ad",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-attachment-ui.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "exportSha256": "5390d1b60f3c81386e689809daf1b94e5fa52c54fbc2652c30b9b4a9bfffcd83",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-certification.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "c64fae2aadabf2ef2e010f643ef6792f58371424d286a97c4cd9639d14eafd1e",
+      "exportSha256": "3b59de8682b73f928b6a291f573ea30768199c67a17c604e16ef2c0af173ebb9",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-closeout.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "exportSha256": "9930cd89af4ac7837f0038b2450f9c4f7776bfc0d96c5dd2aa3515295fd66e9d",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-context.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "exportSha256": "c9554e62284576ce21534881e2f9b84936e974c9356f7b365271dfea771c0c31",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-desktop-continuation.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "exportSha256": "0dfda61f63a0df7cca33f36a941ed90d4804ac1e30bf8d3942af2e2749bc6862",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-documents.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "exportSha256": "d76dc1c6141e926e889174a51042d30935421f850e20275798d4db001dc79a8f",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-file-attachments.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "exportSha256": "b98fac617f34055e0d7dcdf5a81a08fbf257f7367331c50411f97f6588694168",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-finalization.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "979be6de22ac586ebfefb60dfc717c768164e28817e4b297bf8488960c0871bc",
+      "exportSha256": "c492a1bc8c4afe3bccf60fe1e7b05e783624ebaa81681e0d7ee2c127e58e4b87",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-profile.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "exportSha256": "b5a3af245cb3b3ef42f5ca28c142d0bf8eb6bd9cc8de47bd829f8b29a32c185d",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-review.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "3924f349436b5808914cc9cf1ee2429c4f4ce17f80cbcda39aedc2a9b4052c41",
+      "exportSha256": "a0a540d99e5610871bc3d2d874c454fdbc1802e71398e61b20e83bfcb5895ba3",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-sep.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "exportSha256": "53577b4818c1ba03e21d5e327bd00960db50af566163a88bb76f4750918a14ea",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-transactions.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "exportSha256": "f8206bef61bd5c28ed3524db5053735100853fdb51facde9558fba3cb5158b4d",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-validation.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "0e40bc55ce0baba46a771f58a998204c772c45b767e191b5bbaf694565a66825",
+      "exportSha256": "a6e8f1e8f603c6f6b11e0109378484203bc949809294441d1ba1b6947b9197e8",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/seal-vision.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "exportSha256": "c518b3c7400d0c3ab96fb04f6670a3cb08547ef96a5be460f7699f5200ab0230",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [
+        "docs/ALPHA2-LINUX-ATTACHMENT-UI-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CLOSEOUT-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-CONTEXT-MEDIA-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-DESKTOP-CONTINUATION-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-FILE-ATTACHMENTS-VERIFICATION.json",
+        "docs/ALPHA2-LINUX-REVIEW-REPAIR-VERIFICATION.json"
+      ],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-portable/wayland-certification/seal-local.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "22d7b4418f10b87d4416df2d250c9c7e61518a9d6b3debbe2baa3111c208145a",
+      "exportSha256": "26c7db902c5436a92832c1e4ac8cc828a8bc36e558b5f7abb46f9c10fb549794",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-windows/build/checkpoint-source.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "4de9d05d5a312ba137df37bc08226a71bd1b43d2f99ad2414a04ab17e58da352",
+      "exportSha256": "41154e6f20fde5ed4e480d140404f086ce745e4a4df99119a0e755334d9135e8",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/alpha2-windows/build/resume-checkpoint.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "bc8fc8bb2af202d84ed73d48947d19e1acefad8d3d90138cf33c97997afb8f9e",
+      "exportSha256": "120e67afecc06bff1de2f9cf67e3572de20335479f3a8b9860181328cea8af17",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/daily-adaptation/README.md",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "c0dca91f66c42dd510488a82818bd60b4c59b6d55f0a45ced44f3559cbc1d9e9",
+      "exportSha256": "4a6536b958559ba2d151f392f794f42e27fa86fdd3edb7ec9e7ce7dce11fd2be",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/daily-adaptation/build/materialize-integrated-runtime.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "b368e44ce0e86756e796848af08dff501111693b5723a8f62671bd9a1cb5fc00",
+      "exportSha256": "a0f071266238175b9b027c7865cb0474cbd4f2bc2609c8398db92be975a723c0",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/daily-adaptation/build/prepare-daily-candidate.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "25ceee65812190592cde55cfcc44ce6ad5d0492cd46b1f03b47efa622c862727",
+      "exportSha256": "9617919b797ff1861456737b502787fbd55438d222addb5f520ef0d41c6f135a",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/daily-adaptation/tests/prepare-managed-desktop.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "f5eb6e98fe8c8f190cab8114a144fb664924854202321aa4f67d248b59e4414f",
+      "exportSha256": "f5b75306296f79e9241bc3166e9152a56f3bac66e082c7572e04ea501ff385c6",
+      "replacements": 2,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    },
+    {
+      "path": "tools/daily-adaptation/tests/private-session-readonly.mjs",
+      "kind": "account-path-redaction-in-local-maintenance-operator-or-document",
+      "rule": "Replace only numeric account segment of Windows home path with PUBLIC_USER; preserve all other bytes and separators.",
+      "sourceSha256": "23bf9ccbb1ce6eea2d3924b2bf34de0e81429f6158fe0e3d237b83a4616beea0",
+      "exportSha256": "f493780e7a5f404968bf4b13c0e34f696281a7e3af4574ecc2863e7c817c1aa6",
+      "replacements": 1,
+      "historicalHashReferencesRetained": [],
+      "verificationMeaning": "Historical checksums identify original local inputs, not this declared public maintenance template. Configure paths and revalidate before execution."
+    }
+  ],
+  "runtimeAndCaptureTransformed": false,
+  "originalEvidenceHashesRewritten": false
+}

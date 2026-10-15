@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "baseExportManifestSha256": "675661b277f633cb1db554022bb505d9406f68810bcec770025a0bad4817a3c0",
+  "distributionVersion": "0.2.1-beta.3",
+  "changes": [
+    {
+      "path": "docs/PRE-BETA3-README.md",
+      "beforeSha256": null,
+      "sha256": "4282e51b54dd3c55bd4bdbfd846eb2a87c7fdf91f538f40dfc96b9af5d46d1f5",
+      "bytes": 10875,
+      "reason": "Preserve historical README bytes under an explicitly historical entry."
+    },
+    {
+      "path": "README.md",
+      "beforeSha256": "4282e51b54dd3c55bd4bdbfd846eb2a87c7fdf91f538f40dfc96b9af5d46d1f5",
+      "sha256": "946666c2607d9dc98b89e7f308b4ccbef1f29dbcf8d018d9f5f9d9aa0ca014ef",
+      "bytes": 4585,
+      "reason": "Make current three-platform Beta download and scope visible first."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/Windows.md",
+      "beforeSha256": null,
+      "sha256": "136a6ca6ec361b264dd5da751c737a808d9db33a34c81e96c42079a50382ed34",
+      "bytes": 4876,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/Linux.md",
+      "beforeSha256": null,
+      "sha256": "ad86ca6bb31051600f83388580d005df46147811a652f4b217f4e42200fa9252",
+      "bytes": 5979,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/macOS.md",
+      "beforeSha256": null,
+      "sha256": "23794328d7f233d55f9453eb4b0001d7cf9d01cd6d7691fbee6f3899539bb837",
+      "bytes": 4627,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/RELEASE-NOTES.md",
+      "beforeSha256": null,
+      "sha256": "dc31bbc8f351704d0ec07f9a2af39dc7b7fd7adf8a4bbfcc8d50c634a9d4e158",
+      "bytes": 4492,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/UPGRADING.md",
+      "beforeSha256": null,
+      "sha256": "132779ad968df54ed157f98c2280a67ada6adf6042b4b6c0901b06cf7c3cf797",
+      "bytes": 1241,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/TECHNICAL-NOTES.md",
+      "beforeSha256": null,
+      "sha256": "7758128646e8580828bb923e3eb5d4224758d8af052b8626e40d70100a17dae7",
+      "bytes": 2487,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/ASSET-BINDINGS.json",
+      "beforeSha256": null,
+      "sha256": "1da5ae214ed85825de7eef179b392c6384fed00d70f39e15cc546cad36ea68e8",
+      "bytes": 2711,
+      "reason": "Public current-release documentation or sealed installer binding."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/THIRD-PARTY.md",
+      "beforeSha256": null,
+      "sha256": "5fb51fff98b0935d1652c3229e86ce7977c46efef460fe40c9b1f8b24fbb2c34",
+      "bytes": 4602,
+      "reason": "Preserve third-party licensing scope and provide matching source attachment."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/THIRD-PARTY-SOURCE-MANIFEST.json",
+      "beforeSha256": null,
+      "sha256": "c6cf0371a1554382f844006084f481c5f27055668cdbfdba2969c32ad5249a0f",
+      "bytes": 406629,
+      "reason": "Exact upstream source and license inventory; no local credentials."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/THIRD-PARTY-SOURCES-VERIFIED.json",
+      "beforeSha256": null,
+      "sha256": "fd9c200b340673bf50d122b3cb94bde5d16692f84a48d7c2695c2e6d0132d273",
+      "bytes": 428,
+      "reason": "Bind verified companion ZIP bytes."
+    },
+    {
+      "path": "RELEASE-STATUS.json",
+      "beforeSha256": "87342a9f95e87a436f6fd024f88d2efd15d3da04bb2eb41f736ae99ea4a690db",
+      "sha256": "6403dedf54cb62afb50e31e566f4dd1045187ca4dfeae783d6c337d80a600295",
+      "bytes": 777,
+      "reason": "Replace historical Beta.2 latest status with explicit Beta.3 preparation, no publication claim yet."
+    },
+    {
+      "path": "SOURCE-PROVENANCE.json",
+      "beforeSha256": "c96599ac0fee6177a9599318d214a36fc2395164a2a01af165f8f6c3b018c924",
+      "sha256": "902604bae2fe93ea572b85e95d9627263df14d2f8c55fcbf6cdf1d6a71111e8f",
+      "bytes": 610,
+      "reason": "Expose current source provenance instead of old Beta.2 status."
+    },
+    {
+      "path": "docs/DOCS_INDEX.md",
+      "beforeSha256": "1d47b72ff422e18a4ec2a7946416564206f05466f8d289b16ead8e2e6e0047c1",
+      "sha256": "bc3b937e59398f42e85abbbc5bfe9c8bae6c398f53ac7693a2ebfd9686a7bd3a",
+      "bytes": 958,
+      "reason": "Put current platform docs before historical documents."
+    }
+  ],
+  "runtimeCodeModified": false,
+  "archivesModified": false
+}

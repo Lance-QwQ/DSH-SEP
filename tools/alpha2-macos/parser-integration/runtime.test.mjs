@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdir,mkdtemp,writeFile,readFile,chmod,symlink,link,readdir,lstat} from 'node:fs/promises';
+import {join} from 'node:path';
+import {createHash} from 'node:crypto';
+import {inspectInputTree,assembleParserRuntime,verifyParserRuntime} from './runtime.mjs';
+import {openParserServices} from './services.mjs';
+const hash=x=>createHash('sha256').update(x).digest('hex'),root=process.env.SEP_PARSER_INTEGRATION_TEST_ROOT,capture=process.env.SEP_MAC_BUNDLE_ROOT;
+assert(root&&capture);await mkdir(root,{mode:0o700});
+async function fixture(){const base=await mkdtemp(join(root,'case-'));for(const d of ['python','python/bin','deps'])await mkdir(join(base,d),{mode:0o700});
+ await writeFile(join(base,'python/bin/python3.12'),'synthetic-python',{mode:0o755});await writeFile(join(base,'deps/module.js'),'export {};');
+ for(const n of ['node','owner','helper'])await writeFile(join(base,n),'synthetic-'+n,{mode:0o755});
+ const file=async n=>({path:join(base,n),sha256:hash(await readFile(join(base,n)))});
+ return {base,destination:join(base,'installed'),inputs:{node:await file('node'),owner:await file('owner'),helper:await file('helper'),python:{root:join(base,'python'),sha256:(await inspectInputTree(join(base,'python'))).sha256},dependencies:{root:join(base,'deps'),sha256:(await inspectInputTree(join(base,'deps'))).sha256},capturedRoot:join(capture,'modules/system-enhancement-package/src')}};
+}
+test('fresh assembly verifies and manifest contains relative paths and no source locations',async()=>{const f=await fixture(),r=await assembleParserRuntime(f),v=await verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:r.manifestSha256});assert.equal(v.schema,1);assert(!JSON.stringify(v).includes(f.base));assert(v.entries.some(x=>x.path==='tool-runtime/python/bin/python3.12'));assert(v.entries.every(x=>!x.path.startsWith('/')&&!x.path.includes('..')));});
+
+test('assembly under umask 077 publishes both generated files with exact immutable modes',async()=>{
+ const previous=process.umask(0o077);
+ try{const f=await fixture(),r=await assembleParserRuntime(f),v=await verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:r.manifestSha256});
+  for(const file of ['manifest.json','tool-runtime/package.json'])assert.equal((await lstat(join(f.destination,file))).mode&0o777,0o444);
+  assert.equal(v.entries.find(x=>x.path==='tool-runtime/package.json').mode,0o444);
+ }finally{process.umask(previous);}
+ assert.equal(process.umask(),previous);
+});
+test('source hash mismatch rejects before publishing destination',async()=>{const f=await fixture();f.inputs.node.sha256='0'.repeat(64);await assert.rejects(assembleParserRuntime(f),{code:'SEP_PARSER_INPUT_CHANGED'});await assert.rejects(readFile(join(f.destination,'manifest.json')),{code:'ENOENT'});});
+test('an existing destination is never overwritten',async()=>{const f=await fixture();await mkdir(f.destination);await writeFile(join(f.destination,'keep'),'keep');await assert.rejects(assembleParserRuntime(f),{code:'SEP_PARSER_DESTINATION_EXISTS'});assert.equal(await readFile(join(f.destination,'keep'),'utf8'),'keep');});
+test('in-prefix symlink is materialized but an escaping symlink is refused',async()=>{const f=await fixture();await symlink('python3.12',join(f.base,'python/bin/python3'));f.inputs.python.sha256=(await inspectInputTree(f.inputs.python.root)).sha256;const r=await assembleParserRuntime(f);await verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:r.manifestSha256});await symlink('../node',join(f.base,'python/outside'));await assert.rejects(inspectInputTree(f.inputs.python.root),{code:'SEP_PARSER_INPUT_ALIAS'});});
+test('installed body mutation is detected even when its size is unchanged',async()=>{const f=await fixture(),r=await assembleParserRuntime(f);const p=join(f.destination,'tool-runtime/node');await chmod(p,0o755);await writeFile(p,'synthetic-NODE');await chmod(p,0o555);await assert.rejects(verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:r.manifestSha256}),{code:'SEP_PARSER_RUNTIME_CHANGED'});});
+test('installed unlisted file and hard-link identity are rejected',async()=>{const f=await fixture(),r=await assembleParserRuntime(f);await chmod(f.destination,0o755);await writeFile(join(f.destination,'extra'),'extra');await assert.rejects(verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:r.manifestSha256}),{code:'SEP_PARSER_RUNTIME_CHANGED'});const g=await fixture(),s=await assembleParserRuntime(g);await link(join(g.destination,'tool-runtime/node'),join(g.base,'hard-link'));await assert.rejects(verifyParserRuntime({runtimeRoot:g.destination,manifestSha256:s.manifestSha256}),{code:'SEP_PARSER_RUNTIME_CHANGED'});});
+test('manifest hash and parent aliases fail before accepting installed program',async()=>{const f=await fixture(),r=await assembleParserRuntime(f);await assert.rejects(verifyParserRuntime({runtimeRoot:f.destination,manifestSha256:'0'.repeat(64)}),{code:'SEP_PARSER_MANIFEST_CHANGED'});await symlink(f.destination,join(f.base,'alias'));await assert.rejects(verifyParserRuntime({runtimeRoot:join(f.base,'alias'),manifestSha256:r.manifestSha256}),{code:'SEP_PARSER_RUNTIME_CHANGED'});});
+test('bridge refuses unverified platform or manifest before private state creation',async()=>{const f=await fixture(),r=await assembleParserRuntime(f),stateRoot=join(f.base,'state');await assert.rejects(openParserServices({runtimeRoot:f.destination,manifestSha256:process.platform==='darwin'?'0'.repeat(64):r.manifestSha256,stateRoot}),{code:process.platform==='darwin'?'SEP_PARSER_MANIFEST_CHANGED':'SEP_MAC_PARSER_PLATFORM_UNVERIFIED'});assert(!((await readdir(f.base)).includes('state')));});

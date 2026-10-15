@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/trusted-evaluation-entry/evaluation/index.mjs",
+  "sourceSha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+  "changes": [
+    {
+      "old": "apply(ctx,config={}){",
+      "new": "apply(ctx,config={},ownership){"
+    },
+    {
+      "old": "async execute(args,exec){",
+      "new": "async execute(args,exec){\n    const release=ownership.enter('callback');try{"
+    },
+    {
+      "old": "[lifetime.signal,...exec.signal?[exec.signal]:[]]",
+      "new": "[lifetime.signal,ownership.signal,...exec.signal?[exec.signal]:[]]"
+    },
+    {
+      "old": "finally{active.delete(work);}\n   }",
+      "new": "finally{active.delete(work);}\n    }finally{release();}\n   }"
+    }
+  ],
+  "resultSha256": "a7ca9d0a341cd7e6bce8e449f775c46e49956e5240bdebc5bd795ba42d5ba3e1"
+}

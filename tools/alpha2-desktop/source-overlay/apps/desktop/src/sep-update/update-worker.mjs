@@ -1,0 +1,66 @@
+import {readFile,open} from 'node:fs/promises';
+import {join,dirname,resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {spawn} from 'node:child_process';
+import {setTimeout as delay} from 'node:timers/promises';
+import {loadAdmission,durableJson,verify,sign} from './update-admission.mjs';
+import {jsonFile} from './update-inventory.mjs';
+import {reviewCandidate,validateQueuedReview} from './update-review.mjs';
+export {validateQueuedReview} from './update-review.mjs';
+import {hash} from './update-core.mjs';
+import {reconcileUpdate} from './update-transaction.mjs';
+import {readP2Decision} from './update-p2.mjs';
+import {isProcessAlive,processIdentity,acquireWorkerLease,runPublisher,cleanEnv} from './update-process.mjs';
+const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&(process.platform==='win32'?resolve(a).toLowerCase()===resolve(b).toLowerCase():resolve(a)===resolve(b));
+export async function runtimeAdapter({directory,id,key,admission,request}){
+ const operator=await jsonFile(admission.operatorPath),plan=await jsonFile(admission.planPath);
+ const deployment=operator.publicFiles?.find(f=>f.path.endsWith('deployment-rc2.json'));if(!deployment)throw Error('UPDATE_RESTART_ENTRY_MISSING');
+ const dailyRoot=dirname(deployment.path),target={root:admission.targetRoot,version:admission.targetVersion,graphHash:admission.targetGraphHash};
+ const readState=async()=>{try{return verify(await jsonFile(join(directory,'state-'+id+'.json')),key);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
+ const readDecision=()=>readP2Decision(operator.storageRoot,plan);
+ const client=async()=>{const active=await jsonFile(deployment.path);if(!same(active.releaseRoot,target.root)||active.graphHash!==target.graphHash||!same(active.storageRoot,operator.storageRoot))throw Error('UPDATE_SELECTOR_NOT_COMMITTED');
+  const connection=await jsonFile(join(dirname(active.controlRoot),'recovery-connection.json'));
+  const {recoveryClient}=await import(pathToFileURL(join(target.root,'node_modules/@deepseek-ai/dsh-recovery/src/client.mjs')).href);return {active,client:recoveryClient({...connection,timeoutMs:3000})};};
+ return {target,io:{readState,readDecision,isProcessAlive,
+  async writeState(state){await durableJson(directory,'state-'+id+'.json',sign(state,key));await durableJson(directory,'last-update-result.json',{...state,target:target.version,decision:request.decision});},
+  async execute(mode,onStarted){
+   const a=await loadAdmission(directory,request.release,request.currentBinding,{allowPublished:mode==='recover'});if(hash(a)!==request.admissionHash)throw Error('UPDATE_ADMISSION_CHANGED');
+   if(mode==='apply')validateQueuedReview(await reviewCandidate({directory,projectDir:request.projectDir,release:request.release,currentVersion:request.currentVersion,profileContext:request.profileContext}),request);
+   // Full same-host graph verification repeatedly hashes all installed files.
+   // A deadline remains an unknown outcome; the child is never killed/retried here.
+   await runPublisher({file:process.execPath,args:[a.publisherPath,mode,a.operatorPath],onStarted,timeoutMs:operator.kind==='automatic-sep-only-plan'?600000:120000,record:record=>durableJson(directory,`publisher-${id}-${mode}-${Date.now()}.json`,record)});
+  },
+  async launch(){const {releaseRoot,graphHash}=await jsonFile(deployment.path);if(!same(releaseRoot,target.root)||graphHash!==target.graphHash)throw Error('UPDATE_SELECTOR_NOT_COMMITTED');
+   const child=spawn(process.execPath,[join(dailyRoot,'launch.mjs')],{cwd:dailyRoot,windowsHide:true,detached:true,stdio:'ignore',env:cleanEnv()});await new Promise((res,rej)=>{child.once('spawn',res);child.once('error',rej);});child.unref();return await processIdentity(child.pid);},
+  async probe({wait}){const deadline=Date.now()+(wait?30000:0);do{try{
+    const {client:c}=await client(),[status,desktop,p2]=await Promise.all([c.call('status'),c.call('desktopStatus'),readDecision()]);
+    const host=desktop.guardian??status.guardian;
+    if(!same(desktop.projectDir,target.root)||desktop.dshVersion!==target.version||desktop.protocolVersion!==4||host?.phase!=='running'||!await processIdentity(host.pid)||status.writerState!=='open'||status.recoveryState?.state!=='ready'||p2.decision!=='committed'||p2.closed||p2.pending)throw Error('UPDATE_RUNTIME_NOT_READY');
+    return {...target,checkedAt:Date.now(),services:{'desktop-host':true,'recovery-control':true,'governed-storage':true},p2Head:p2.head,hostPid:host.pid};
+   }catch{}if(Date.now()>=deadline)return null;await delay(500);}while(true);},
+  async hold(){
+   const gate={schema:1,planHash:plan.hash,planPath:plan.planPath,nativeState:{schemaVersion:1,operationId:plan.id,profile:'web',phase:'installing'}};
+   for(const path of [plan.transactionPath,plan.markerPath]){let handle;try{handle=await open(path,'wx',0o600);await handle.writeFile(JSON.stringify(gate));await handle.sync();}catch(e){if(e.code!=='EEXIST')throw e;const prior=await jsonFile(path);if(prior.planHash!==plan.hash)throw Error('UPDATE_FOREIGN_MAINTENANCE');}finally{await handle?.close();}}
+   try{const {client:c}=await client();await c.call('stopHost');}catch{}
+   const {openControl}=await import(pathToFileURL(join(target.root,'node_modules/dsh-system-enhancement-package/src/p2/control.js')).href);
+   const control=await openControl({storageRoot:operator.storageRoot,mode:'maintenance'});try{await control.setBarrier({closed:true,transactionId:plan.id,planHash:plan.hash});return (await control.checkpoint()).barrier.closed===true;}finally{await control.close();}
+  }
+ }};
+}
+export async function executeQueued(directory,id,{adapter=runtimeAdapter}={}){
+ if(!/^[a-f0-9-]{36}$/.test(id))throw Error('UPDATE_REQUEST_ID');
+ const key=await readFile(join(directory,'control-key'));if(key.length!==32)throw Error('UPDATE_ADMISSION_KEY');
+ const request=verify(await jsonFile(join(directory,'queued-request.json')),key);if(request.schema!==3||request.id!==id||!request.parentIdentity)throw Error('UPDATE_REQUEST_CHANGED');
+ const release=await acquireWorkerLease(directory,key);
+ try{
+  let prior;try{prior=verify(await jsonFile(join(directory,'state-'+id+'.json')),key);}catch(e){if(e.code!=='ENOENT')throw e;}
+  if(['verified','rolled_back','runtime_failed'].includes(prior?.phase))return prior;
+  const expires=Date.parse(request.queuedAt)+10800000;if(!Number.isFinite(expires))throw Error('UPDATE_REQUEST_INVALID');
+  async function stillQueued(){const next=verify(await jsonFile(join(directory,'queued-request.json')),key);if(hash(next)!==hash(request))throw Error('UPDATE_SUPERSEDED');
+   if(prior?.attempted)return;try{const cancel=await jsonFile(join(directory,'cancel-request.json'));if(Date.parse(cancel.cancelledAt)>=Date.parse(request.queuedAt))throw Error('UPDATE_CANCELLED');}catch(e){if(e.code!=='ENOENT')throw e;}if(Date.now()>=expires)throw Error('UPDATE_WAIT_EXPIRED');}
+  while(await isProcessAlive(request.parentIdentity)){await stillQueued();await delay(1000);}await stillQueued();
+  const admission=await loadAdmission(directory,request.release,request.currentBinding,{allowPublished:prior?.attempted===true});if(!admission||hash(admission)!==request.admissionHash)throw Error('UPDATE_ADMISSION_CHANGED');
+  const {target,io}=await adapter({directory,id,key,admission,request});return await reconcileUpdate({id,target,io});
+ }finally{await release();}
+}
+if(process.argv[1]&&resolve(process.argv[1])===resolve(import.meta.filename)){const [directory,id]=process.argv.slice(2);executeQueued(directory,id).catch(async e=>{if(e.message!=='UPDATE_WORKER_BUSY')await durableJson(directory,'last-update-result.json',{status:'blocked',id,message:String(e.message).slice(0,160),instruction:'保留事务记录和停写状态。未提交事务按原计划恢复；提交后再次停写须先制作并确认新的维护接续计划。禁止清账或删除维护标记。'}).catch(()=>{});process.exitCode=1;});}

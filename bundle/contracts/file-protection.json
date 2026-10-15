@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "scope": "Explicit owned Windows filesystem and durable local authority core only. Root remains entry-only.",
+  "targetHost": "0.2.1-alpha.1",
+  "businessActivationAllowed": false,
+  "coreStatus": "pass",
+  "completeFilesystemAdaptationStatus": "blocked",
+  "runtimeFiles": [
+    "bundle/lib/file-protection.js",
+    "bundle/lib/recovery-authority.js",
+    "bundle/host/protected-files/index.js"
+  ],
+  "platform": "Windows x64 local NTFS only; no unsupported platform fallback",
+  "authority": "Explicit registration only; durable identity/generation/memory key. Same admission queue for managed mutations, maintenance and rebind.",
+  "mutators": [
+    "writeText",
+    "editText",
+    "moveFile",
+    "removeFile",
+    "restoreMutation"
+  ],
+  "recoveryPolicy": "Bounded same-volume preimages, retained unresolved state, current-data/hash/version conflict refusal, native handle ownership.",
+  "shutdown": "Close new mutation admission and await accepted local operations. Full application timeout and controller recovery management are not certified here.",
+  "freshness": "Native five-field FsVersion unchanged. Successful complete bounded reads retain private raw SHA-256 receipts; guarded mutations verify them under native file/ancestor ownership before recovery records. Stat/partial/failed/early-stopped reads do not grant observations. Equal-version conflicting full reads remain ambiguous until provider disposal. Explicit native text-tool and single-entry Profile fragment tested; complete consumer/Profile integration is pending.",
+  "notVerified": [
+    "private workspace onboarding",
+    "full consumer/sandbox and Profile composition",
+    "full Agent/application shutdown deadline",
+    "permission matrix across other Windows users",
+    "disk disconnect/full and actual power-loss interruption",
+    "complete frontend/native GUI installation",
+    "Linux/macOS protection"
+  ],
+  "strictContentObservationCoreStatus": "pass",
+  "observationPolicy": {
+    "maxEntriesDefault": 1024,
+    "fullReadMaxBytes": "recovery.maxFileBytes",
+    "byteReadMaxBytes": "min(requested maxBytes,recovery.maxFileBytes)",
+    "retainsBody": false,
+    "automaticEviction": false,
+    "onCapacity": "FS_OBSERVATION_LIMIT; earlier receipts retained",
+    "onMissing": "FS_NOT_OBSERVED",
+    "onContentChange": "FS_STALE_CONTENT",
+    "onConflictingSameVersionReads": "FS_OBSERVATION_AMBIGUOUS",
+    "onReload": "Fresh successful observation required",
+    "unguardedCalls": "Native explicit unguarded operations retain recoverability but do not gain observed-content freshness guarantees.",
+    "committedWrites": "Write/edit mint a digest receipt under held native handles after the durable recovery journal save. If a new receipt exceeds capacity, preserve successful commit and skip receipt; later guarded reuse fails closed."
+  },
+  "explicitTextConsumerStatus": "pass"
+}

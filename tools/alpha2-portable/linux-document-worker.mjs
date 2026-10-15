@@ -1,0 +1,10 @@
+import {setup,ok} from './sep-fixture.mjs';
+import {writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+const c=JSON.parse(process.argv[2]);
+const f=await setup({base:c.base,onEvent:event=>{if(event===c.phase)process.kill(process.pid,'SIGKILL');}});
+ok(await f.call('suite_index'));
+const plan=ok(await f.call('suite_document_delete',{action:'preview',path:'data.txt'}));
+await writeFile(join(f.base,'document-test-plan.json'),JSON.stringify({planId:plan.planId,planHash:plan.planHash}),{mode:0o600});
+f.say(plan.confirmation);ok(await f.call('suite_document_delete',{action:'confirm',planId:plan.planId,planHash:plan.planHash}));
+await f.close();throw Error('EXPECTED_CRASH_NOT_REACHED');

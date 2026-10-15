@@ -1,0 +1,257 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "stage": 3,
+  "stageScope": "remaining optional consumer wiring and independent attachment governance on controlled Windows synthetic host; no complete Profile certification",
+  "candidate": "0.2.1-beta.3-bundle.22",
+  "targetHost": "0.2.1-alpha.1",
+  "baseCommit": "53ca6170cf5b88ead0e1f0a784b88eff51b3273e",
+  "artifact": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\artifacts\\consumer-sealed-r1\\dsh-sep-bundle-0.2.1-beta.3-bundle.22.tgz",
+    "sha256": "fd266840007d04b5b56f0e6ac4f4ce3d96e8c80cecd278fd4be4e8368ada85ed",
+    "filesCompared": 467,
+    "manifestException": "pnpm CRLF to LF and terminal LF removal only"
+  },
+  "originalModules": {
+    "modules": 10,
+    "filesVerified": 383
+  },
+  "origins": {
+    "status": "pass",
+    "scope": "nine adapted source origin replays; original bytes and exact transform counts",
+    "rows": [
+      {
+        "origin": "bundle\\lib\\settings-consumers.origin.json",
+        "sourceSha256": "7627137297e25907705ceb1de52155b007dc846fe61d75920c158c9e3d922eb5",
+        "resultSha256": "f390f7d7bce8ee373969977dd3cbdc14234f8c3210007bb29bc94d8cb5d8cc6a",
+        "transforms": 39,
+        "sourceCRLF": 0,
+        "sourceLF": 47,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\lib\\settings-runtime.origin.json",
+        "sourceSha256": "8131ea71ba52e693f5a7962973507eabc4d79e466960b35ff9366c24b1be50e6",
+        "resultSha256": "0f4ad87b22fa6cf34df4887717238664d6d1b5058d567a197441d9e969115001",
+        "transforms": 39,
+        "sourceCRLF": 0,
+        "sourceLF": 129,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\host\\p1-policy\\origin.json",
+        "sourceSha256": "3e4e8d836137186a77213f0ebc7ea8700cfaa1d360e3f6d745fdd1f1cb00184a",
+        "resultSha256": "318f9c6469353809e7ae073777646b487e961a7d4fa2e2f5ffbe0bd052e78bf2",
+        "transforms": 22,
+        "sourceCRLF": 0,
+        "sourceLF": 299,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\host\\automatic-memory\\origin.json",
+        "sourceSha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+        "resultSha256": "37ff35b7a311528bf5f19f676afee6514a413ee3bf1e64a58a8c543d957483fd",
+        "transforms": 11,
+        "sourceCRLF": 148,
+        "sourceLF": 1,
+        "resultCRLF": 148
+      },
+      {
+        "origin": "bundle\\host\\context-preparation\\origin.json",
+        "sourceSha256": "5e6f09f6f7f57221348993e569b2ba5bc22fa2b53c7f429afbc91b34fa9f8861",
+        "resultSha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+        "transforms": 6,
+        "sourceCRLF": 0,
+        "sourceLF": 85,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\host\\plugin-group\\origin.json",
+        "sourceSha256": "8913db9cc929b3352bb25c08fb370990ab350747636baf990d403c3633e65f66",
+        "resultSha256": "670c827722e6fba45abfd778b637e32cbf67e1d226d19b8c366f2411242399df",
+        "transforms": 8,
+        "sourceCRLF": 57,
+        "sourceLF": 0,
+        "resultCRLF": 57
+      },
+      {
+        "origin": "bundle\\host\\computer-click\\origin.json",
+        "sourceSha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+        "resultSha256": "ac2a6a95741d5e99594dd01aa04be29c2218115c58deff1c6b7d23b0b260431c",
+        "transforms": 7,
+        "sourceCRLF": 0,
+        "sourceLF": 145,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\host\\evaluation-entry\\entry.origin.json",
+        "sourceSha256": "c6ed6f797bac4efe3e1f4838910c849b487ea856d8dc066aba8c9ffeb899cfc9",
+        "resultSha256": "124fe8485617855f044678d108e6878b2fc1af8627bd891506391fa1bdfe4307",
+        "transforms": 3,
+        "sourceCRLF": 0,
+        "sourceLF": 54,
+        "resultCRLF": 0
+      },
+      {
+        "origin": "bundle\\host\\evaluation-entry\\evaluation.origin.json",
+        "sourceSha256": "3a990c3fb1bc78e0b3db5627373a4bc174e779c11795e2600cce94ce03f6abf6",
+        "resultSha256": "a7ca9d0a341cd7e6bce8e449f775c46e49956e5240bdebc5bd795ba42d5ba3e1",
+        "transforms": 4,
+        "sourceCRLF": 0,
+        "sourceLF": 118,
+        "resultCRLF": 0
+      }
+    ]
+  },
+  "tests": [
+    {
+      "label": "sealed-runtime-r2",
+      "status": "pass",
+      "definitions": 283,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-runtime-r2.log",
+      "sha256": "dbb553995dbb974ededeb7f822cf5a1f12431fcd1e0c53c6acf8ee3773525690",
+      "binding": "pre-execution frozen manifest"
+    },
+    {
+      "label": "sealed-builder-r1",
+      "status": "pass",
+      "definitions": 13,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-builder-r1.log",
+      "sha256": "2e37ad8fe018d7266462217055bfb5e31a2178588bccfc2e52266e87c9fee3b8",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "final-deps-r1",
+      "status": "pass",
+      "definitions": 11,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\final-deps-r1.log",
+      "sha256": "37164554039680d92b179ace3b22768bee81c7c654b1cd38c103c91b06add203",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "final-lifecycle-r1",
+      "status": "pass",
+      "definitions": 23,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\final-lifecycle-r1.log",
+      "sha256": "e48a8e94fbce91b143ab743ba8701fadffa610a1e02aaad6029470cc258ab153",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-shared-r1",
+      "status": "pass",
+      "definitions": 11,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-shared-r1.log",
+      "sha256": "8322d32ccff5019e63ec3f7456dabb813d3ed350061b02b34b769da15a09363e",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-click-r1",
+      "status": "pass",
+      "definitions": 4,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-click-r1.log",
+      "sha256": "e188aace43f1c048631f72a200ef2f1ce64f35a8792f461ec1237eb14ec5790b",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-context-root-r1",
+      "status": "pass",
+      "definitions": 2,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-context-root-r1.log",
+      "sha256": "ddd8974ada480cb9f048aa060a048f8c729ed9dc65c71fd7d06222ee5e5c27b9",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-deep-context-r1",
+      "status": "pass",
+      "definitions": 3,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-deep-context-r1.log",
+      "sha256": "9fd1afa4ea3a1656205dc97e9434e566dc95a556b180656f53fa2718297b627d",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-evaluation-r1",
+      "status": "pass",
+      "definitions": 1,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-evaluation-r1.log",
+      "sha256": "4dec3c87069adcd677bd0df7886cfb9c911f8c7b1d843e41becab423c08264b7",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "sealed-application-r1",
+      "status": "pass",
+      "definitions": 8,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\sealed-application-r1.log",
+      "sha256": "39e1831acbbdc3f95c6c52d82220163f3ba54669e8757b147a3dde9f17e46711",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    },
+    {
+      "label": "attachment-cli-green-r1",
+      "status": "pass",
+      "definitions": 8,
+      "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\attachment-cli-green-r1.log",
+      "sha256": "13e15a94c7bdd7c108af0b481a025b580ee397ccf9d8d4b789eb0cec6b09608e",
+      "binding": "post-run exact source audit; consumer log provenance described separately"
+    }
+  ],
+  "earlierArtifactEquivalence": {
+    "artifact": "attachment-cli-r1",
+    "changedFiles": [
+      "bundle/contracts/context-preparation.json",
+      "bundle/README.md",
+      "README.md"
+    ],
+    "executableCodeAndRootManifestIdentical": true
+  },
+  "nativeClick": {
+    "status": "pass",
+    "evidence": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\tests\\native-click-r2\\result.json",
+    "scope": "owned synthetic Electron window; actual Windows MCP; native alpha.1 tool factory and controlled root",
+    "binding": "click-r2 earlier executable draft; not final whole-graph recertification",
+    "cleanup": {
+      "controlClosed": true,
+      "appExited": true,
+      "mcpExited": true,
+      "appCleanup": "normal-close",
+      "mcpCleanup": "already-exited"
+    }
+  },
+  "userDecisions": {
+    "attachmentDomain": "native independent cache, retention until explicit purge",
+    "testContractCorrections": "authorized and executed; production timing unchanged",
+    "originalFailureLogsRetained": true
+  },
+  "historicalAnomalies": [
+    {
+      "label": "review-runtime-r2",
+      "status": "fail",
+      "cause": "not established; mount cold-start observation timing"
+    },
+    {
+      "label": "review-lifecycle-r1",
+      "status": "fail",
+      "cause": "not established; second 100ms close receipt"
+    },
+    {
+      "label": "authorized-runtime-r1",
+      "status": "fail",
+      "cause": "not established; foreign native row repaired but 100ms close still blocked"
+    },
+    {
+      "label": "final-runtime-serial-r1",
+      "status": "fail",
+      "cause": "owned Edge exit exceeded 5s; test then forced cleanup; draft harness was repointed during this unsealed run, so not evidence of a single final graph"
+    }
+  ],
+  "latestFixedRuntimeResult": "283/283 on frozen artifact; not proof historical timing anomalies fixed",
+  "notVerified": [
+    "full native UI/workspace/session/sidebar and HMR notification withdrawal",
+    "GUI repository-install lifecycle",
+    "new root in-flight remote grading cancellation",
+    "complete native MCP installation/provisioner and arbitrary Windows applications",
+    "plugin-group reset command on full commands service",
+    "Linux/macOS runtime and CI",
+    "full Profile/default activation",
+    "step-8 final package/docs/checkpoint"
+  ],
+  "stopBoundary": "continue steps 4 through 8, then stop; no daily deployment or GitHub push"
+}

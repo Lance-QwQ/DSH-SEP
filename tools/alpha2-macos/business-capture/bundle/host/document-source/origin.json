@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/system-enhancement-package/src/document-source.js",
+  "sha256": "da0af1088f4e9b3e0e311c631a63ca06d4257cb14a2862c9ed09c2cc743f5b9c",
+  "changes": [
+    {
+      "before": "import { fileURLToPath } from 'node:url';",
+      "after": "import {readFileSync} from 'node:fs';"
+    },
+    {
+      "before": "from './errors.js'",
+      "after": "from '../../modules/system-enhancement-package/src/errors.js'"
+    },
+    {
+      "before": "const script = fileURLToPath(new URL('./document-source-win32.ps1', import.meta.url));",
+      "after": "// Windows PowerShell -File rejects pnpm's canonical paths beyond MAX_PATH.\n// Encode only this fixed packaged script, never a user path or request.\nconst script = readFileSync(new URL('../../modules/system-enhancement-package/src/document-source-win32.ps1', import.meta.url),'utf8');\nconst encodedScript=Buffer.from(script,'utf16le').toString('base64');\nif(encodedScript.length>24000)fail('DOCUMENT_SOURCE_UNSUPPORTED');"
+    },
+    {
+      "before": "'-File', script",
+      "after": "'-EncodedCommand', encodedScript"
+    }
+  ]
+}

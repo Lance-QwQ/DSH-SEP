@@ -1,0 +1,10 @@
+import './prepare-linux-file-ui-desktop.mjs';
+import {readFile,writeFile,copyFile} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {prepareDesktopFonts} from './linux-desktop-fonts.mjs';
+const root=resolve(process.env.SEP_BUNDLE_TEST_ROOT),path=join(root,'DESKTOP-FIXTURE.json'),f=JSON.parse(await readFile(path));
+const font=await prepareDesktopFonts({root:join(root,'fontconfig'),font:'/opt/dsh-sep-cross-platform/alpha2-desktop-assets-20261013-r1/fonts/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',sha256:'b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a'});
+await copyFile('/opt/dsh-sep-cross-platform/alpha2-desktop-assets-20261013-r1/fonts/usr/share/doc/fonts-noto-cjk/copyright',join(root,'FONT-LICENSE.txt'));
+await writeFile(join(f.uploads,'中文说明.txt'),'synthetic path reference only',{mode:0o600});
+await copyFile(join(f.uploads,'视觉.png'),join(f.uploads,'picker-image.png'));
+await writeFile(path,JSON.stringify({...f,font},null,2)+'\n');

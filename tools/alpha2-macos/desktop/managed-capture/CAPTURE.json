@@ -1,0 +1,873 @@
+{
+  "schema": 1,
+  "scope": "Alpha.2 R6 desktop JavaScript/assets plus explicit Mac gates; no Host runtime, data or credentials",
+  "upstreamVersion": "0.2.1-alpha.2",
+  "fullSepCertification": "not_run",
+  "rows": [
+    {
+      "path": "lib/command-manager-entry.js",
+      "sourceSha256": "826f6f3f0354fd273d748357955959e396a4ed04ea3d3f475f814c6d7efc58cd",
+      "resultSha256": "f320f4d8dd1bc28ed32a33f4567ef9b361f627f8b68d65aab17392fb59123e9b",
+      "size": 13626,
+      "resultSize": 13440
+    },
+    {
+      "path": "lib/main.js",
+      "sourceSha256": "7b73e57d9f520b76a9dc149bbb08d7e7f3dbaaeb9f961809d3217f546efec357",
+      "resultSha256": "ae32d9e028479fdc0268463292ce0cde01dfe887c96fa67fcb46ade7a0e3ef6c",
+      "size": 274341,
+      "resultSize": 270454
+    },
+    {
+      "path": "lib/preload-app.cjs",
+      "sourceSha256": "9af7d803c25bd54501b868026586a979478bf5702ca419f9b85523e411904fac",
+      "resultSha256": "8d5a4517dd628d072653e33e93413bec34a1a3648a15bf262cf9d0c339ae05ba",
+      "size": 49057,
+      "resultSize": 48065
+    },
+    {
+      "path": "lib/preload-mandatory.cjs",
+      "sourceSha256": "a49131ed0d1ece7d5f4963443d2c80e78eb1873d624424fadd74c337c0f60ec3",
+      "resultSha256": "8cb6bbd8fae90ad010be9f132b033cea217b7bd2570ba5a9d109283f86ef8955",
+      "size": 1218,
+      "resultSize": 1032
+    },
+    {
+      "path": "lib/preload-platform-account.cjs",
+      "sourceSha256": "34784b038e601d883a7601dacf85e8f512a5dbd3d1aee17b3229bd834d8057e4",
+      "resultSha256": "07f0d706ef9a17dc7abd8dab35139e9056c9c68716a67693696b96d4561a9c44",
+      "size": 2284,
+      "resultSize": 2098
+    },
+    {
+      "path": "lib/preload-update-dialog.cjs",
+      "sourceSha256": "9bc9aa3500ddfc0bacbba41f8869913c61ba08129017d2ebcf29444efda213e6",
+      "resultSha256": "5270cc9eff4fd7b75bfee6f8683674917e0255603afddc25f0130e5ed50bae73",
+      "size": 1249,
+      "resultSize": 1063
+    },
+    {
+      "path": "lib/preload-welcome.cjs",
+      "sourceSha256": "3e62cac3f69d06a7e74dac648278db74af69806932ff92ae89f377ebec95c926",
+      "resultSha256": "af3e3ca766d1b0e5453b4aaa647dd5100a446e63fbbd68952224b0507cd93e46",
+      "size": 27722,
+      "resultSize": 27474
+    },
+    {
+      "path": "lib/sep-mac-entry.mjs",
+      "sourceKind": "new Mac adapter",
+      "sourceSha256": "d4e721f233e8d38172e1ba252ddbb13a71dd19f7483ee6e6cf73944cc8355a1a",
+      "resultSha256": "d4e721f233e8d38172e1ba252ddbb13a71dd19f7483ee6e6cf73944cc8355a1a",
+      "size": 1443,
+      "resultSize": 1443
+    },
+    {
+      "path": "lib/sep-mac-update-admission.mjs",
+      "sourceKind": "new Mac adapter",
+      "sourceSha256": "36d452853e1d42c7f4999c17262d0f9d663cea82c693c52ff2b19f1879953a58",
+      "resultSha256": "36d452853e1d42c7f4999c17262d0f9d663cea82c693c52ff2b19f1879953a58",
+      "size": 226,
+      "resultSize": 226
+    },
+    {
+      "path": "lib/sep-update/assessment-input.mjs",
+      "sourceSha256": "f72b2f4af55a1865a425384af0c31df5bbcf2b9885e5e0ae0c3472c5b73c6b95",
+      "resultSha256": "f72b2f4af55a1865a425384af0c31df5bbcf2b9885e5e0ae0c3472c5b73c6b95",
+      "size": 1282,
+      "resultSize": 1282
+    },
+    {
+      "path": "lib/sep-update/desktop-composition.mjs",
+      "sourceSha256": "d4456a070a0e88e289d1ceb0908bdead73c0c83fb892882a948a7768f32119a5",
+      "resultSha256": "d4456a070a0e88e289d1ceb0908bdead73c0c83fb892882a948a7768f32119a5",
+      "size": 799,
+      "resultSize": 799
+    },
+    {
+      "path": "lib/sep-update/download-package.mjs",
+      "sourceSha256": "6bd3fa338fd629a71422de4bb894285f94db281d362a71e4cb3c8c5dec386d05",
+      "resultSha256": "6bd3fa338fd629a71422de4bb894285f94db281d362a71e4cb3c8c5dec386d05",
+      "size": 3241,
+      "resultSize": 3241
+    },
+    {
+      "path": "lib/sep-update/extract-sep.mjs",
+      "sourceSha256": "83f6b14dffa492cb977f5df453d853699e95bad58b06dce7848ce7c9dbce9dfa",
+      "resultSha256": "83f6b14dffa492cb977f5df453d853699e95bad58b06dce7848ce7c9dbce9dfa",
+      "size": 4646,
+      "resultSize": 4646
+    },
+    {
+      "path": "lib/sep-update/graph-layout.mjs",
+      "sourceSha256": "cc63bf363eae90fc68c4f9215afef0559f33b9e9237f0418911b3b6aa7c07b5f",
+      "resultSha256": "cc63bf363eae90fc68c4f9215afef0559f33b9e9237f0418911b3b6aa7c07b5f",
+      "size": 1962,
+      "resultSize": 1962
+    },
+    {
+      "path": "lib/sep-update/installed-sep-version.mjs",
+      "sourceSha256": "dd51ec2cf3a8bf714726842915ed3490262a6548b86ab64db03eb3763b188dcc",
+      "resultSha256": "dd51ec2cf3a8bf714726842915ed3490262a6548b86ab64db03eb3763b188dcc",
+      "size": 911,
+      "resultSize": 911
+    },
+    {
+      "path": "lib/sep-update/maintenance-repair.mjs",
+      "sourceSha256": "5843f630e3602a703949f7fac4724f2dc5ff18b8ea0ffa8de9cfe63d98d93e18",
+      "resultSha256": "5843f630e3602a703949f7fac4724f2dc5ff18b8ea0ffa8de9cfe63d98d93e18",
+      "size": 4699,
+      "resultSize": 4699
+    },
+    {
+      "path": "lib/sep-update/prepare-health.mjs",
+      "sourceSha256": "2fb8d2c1d3e3e9acbf761334413d803e06920743ca04f71bee26936c59955784",
+      "resultSha256": "2fb8d2c1d3e3e9acbf761334413d803e06920743ca04f71bee26936c59955784",
+      "size": 7053,
+      "resultSize": 7053
+    },
+    {
+      "path": "lib/sep-update/prepare-idle.mjs",
+      "sourceSha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6",
+      "resultSha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6",
+      "size": 2856,
+      "resultSize": 2856
+    },
+    {
+      "path": "lib/sep-update/prepare-offline.mjs",
+      "sourceSha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8",
+      "resultSha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8",
+      "size": 13434,
+      "resultSize": 13434
+    },
+    {
+      "path": "lib/sep-update/prepare-package.mjs",
+      "sourceSha256": "0f1d8fe5a84fe6a89400e0e8d3c7d4eb9365336f14c972f7bfd9a67fc451bd1e",
+      "resultSha256": "0f1d8fe5a84fe6a89400e0e8d3c7d4eb9365336f14c972f7bfd9a67fc451bd1e",
+      "size": 7450,
+      "resultSize": 7450
+    },
+    {
+      "path": "lib/sep-update/prepare-preservation.mjs",
+      "sourceSha256": "e9bbce79c7714147ae0d491576596b6f1ca607e9a8e6e6d59c9af6a14a55d861",
+      "resultSha256": "e9bbce79c7714147ae0d491576596b6f1ca607e9a8e6e6d59c9af6a14a55d861",
+      "size": 4069,
+      "resultSize": 4069
+    },
+    {
+      "path": "lib/sep-update/prepare-profile.mjs",
+      "sourceSha256": "6b2ece0a870db4a1e8cb5d6cbc89ede409dafbf31b4bcddbea6a723948a83077",
+      "resultSha256": "6b2ece0a870db4a1e8cb5d6cbc89ede409dafbf31b4bcddbea6a723948a83077",
+      "size": 3671,
+      "resultSize": 3671
+    },
+    {
+      "path": "lib/sep-update/prepare-publish.mjs",
+      "sourceSha256": "49bce869624297110f61588a11e3da399868466b2b56f76b4c0ae5eb85d5ccf2",
+      "resultSha256": "49bce869624297110f61588a11e3da399868466b2b56f76b4c0ae5eb85d5ccf2",
+      "size": 322,
+      "resultSize": 322
+    },
+    {
+      "path": "lib/sep-update/prepare-queue.mjs",
+      "sourceSha256": "0a75ad2aa00525c69112448d5acc5a0ad4d9d0e5ed08442a1fed149d8ab373c5",
+      "resultSha256": "0a75ad2aa00525c69112448d5acc5a0ad4d9d0e5ed08442a1fed149d8ab373c5",
+      "size": 5069,
+      "resultSize": 5069
+    },
+    {
+      "path": "lib/sep-update/prepare-review-host.mjs",
+      "sourceSha256": "e09cb4035a1222dca8eccb927411e4c15fe1554bc36eca25f4df463637a30175",
+      "resultSha256": "e09cb4035a1222dca8eccb927411e4c15fe1554bc36eca25f4df463637a30175",
+      "size": 3763,
+      "resultSize": 3763
+    },
+    {
+      "path": "lib/sep-update/prepare-review-ui.mjs",
+      "sourceSha256": "4088b466254ac1f2de0095aa18be698aedb249eaa8dae32b7fad9f612657f630",
+      "resultSha256": "4088b466254ac1f2de0095aa18be698aedb249eaa8dae32b7fad9f612657f630",
+      "size": 1583,
+      "resultSize": 1583
+    },
+    {
+      "path": "lib/sep-update/prepare-worker.mjs",
+      "sourceSha256": "a43ab00e931d15faf05459c53973c2e43b1a18435fad8afe9e6b06d200317276",
+      "resultSha256": "a43ab00e931d15faf05459c53973c2e43b1a18435fad8afe9e6b06d200317276",
+      "size": 9589,
+      "resultSize": 9589
+    },
+    {
+      "path": "lib/sep-update/runtime/audit-graph.mjs",
+      "sourceSha256": "30e44a11074cbda9ad21eaafe2d32599771ca2e763bf0d49d759a5fe18fee1ed",
+      "resultSha256": "30e44a11074cbda9ad21eaafe2d32599771ca2e763bf0d49d759a5fe18fee1ed",
+      "size": 2009,
+      "resultSize": 2009
+    },
+    {
+      "path": "lib/sep-update/runtime/health-template.json",
+      "sourceSha256": "e85d43871cdb9ceb073b0e92a9d53bc239af02e56cfd2f05aece33dc32ea78d0",
+      "resultSha256": "e85d43871cdb9ceb073b0e92a9d53bc239af02e56cfd2f05aece33dc32ea78d0",
+      "size": 4101,
+      "resultSize": 4101
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/checkpoint-inspection.mjs",
+      "sourceSha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec",
+      "resultSha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec",
+      "size": 6867,
+      "resultSize": 6867
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/credential-reader.mjs",
+      "sourceSha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39",
+      "resultSha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39",
+      "size": 2978,
+      "resultSize": 2978
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/desktop-payload.mjs",
+      "sourceSha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e",
+      "resultSha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e",
+      "size": 3783,
+      "resultSize": 3783
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/desktop-temp.mjs",
+      "sourceSha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2",
+      "resultSha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2",
+      "size": 1185,
+      "resultSize": 1185
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/launcher.mjs",
+      "sourceSha256": "80f4d15470160592423a4936e695bfbff7a985fa09e4e6bffa45bb535755c920",
+      "resultSha256": "80f4d15470160592423a4936e695bfbff7a985fa09e4e6bffa45bb535755c920",
+      "size": 9157,
+      "resultSize": 9157
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/startup-coordinator.mjs",
+      "sourceSha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8",
+      "resultSha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8",
+      "size": 1311,
+      "resultSize": 1311
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/startup-diagnostic.mjs",
+      "sourceSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "resultSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "size": 1172,
+      "resultSize": 1172
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/startup-lease.mjs",
+      "sourceSha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47",
+      "resultSha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47",
+      "size": 1869,
+      "resultSize": 1869
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/startup-report.mjs",
+      "sourceSha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea",
+      "resultSha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea",
+      "size": 3865,
+      "resultSize": 3865
+    },
+    {
+      "path": "lib/sep-update/runtime/launcher/validate-bootstrap.mjs",
+      "sourceSha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662",
+      "resultSha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662",
+      "size": 2339,
+      "resultSize": 2339
+    },
+    {
+      "path": "lib/sep-update/runtime/native-program.mjs",
+      "sourceSha256": "a456daf15103d7be6839221a780b830f549b1a3e0d9a596d3d2526c8506cb0cc",
+      "resultSha256": "a456daf15103d7be6839221a780b830f549b1a3e0d9a596d3d2526c8506cb0cc",
+      "size": 12758,
+      "resultSize": 12758
+    },
+    {
+      "path": "lib/sep-update/runtime/offline-publisher.mjs",
+      "sourceSha256": "8376183de7a748bc4f5dff3c7098deae8e6a6432bc1caaa9a14c3072d38f1083",
+      "resultSha256": "8376183de7a748bc4f5dff3c7098deae8e6a6432bc1caaa9a14c3072d38f1083",
+      "size": 4554,
+      "resultSize": 4554
+    },
+    {
+      "path": "lib/sep-update/runtime/profile-transaction.mjs",
+      "sourceSha256": "ee4eb3e9fb6a214468930e39c679fdf8f1b8afeb8efde02fa616a6d16702ad48",
+      "resultSha256": "ee4eb3e9fb6a214468930e39c679fdf8f1b8afeb8efde02fa616a6d16702ad48",
+      "size": 26426,
+      "resultSize": 26426
+    },
+    {
+      "path": "lib/sep-update/update-admission.mjs",
+      "sourceSha256": "a7d0c02f765e9340089cebb9f4e6450b05cbaa41fc265323205224a595c2c7de",
+      "resultSha256": "a7d0c02f765e9340089cebb9f4e6450b05cbaa41fc265323205224a595c2c7de",
+      "size": 5900,
+      "resultSize": 5900
+    },
+    {
+      "path": "lib/sep-update/update-core.mjs",
+      "sourceSha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+      "resultSha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+      "size": 7477,
+      "resultSize": 7477
+    },
+    {
+      "path": "lib/sep-update/update-desktop.mjs",
+      "sourceSha256": "8476632f8533b443fadc675b8d8a57b68878f20c5db254e4561da15b22e41047",
+      "resultSha256": "c43cd45d4c3d8b5b6df2adbb68334d64f56096721f2ed94f8fb01b9589f1fd92",
+      "size": 18785,
+      "resultSize": 18881
+    },
+    {
+      "path": "lib/sep-update/update-evidence.mjs",
+      "sourceSha256": "0ca2406176376e3635ad189cde1c9920d76e1e759acb00d5c38ce3f61c6c08df",
+      "resultSha256": "0ca2406176376e3635ad189cde1c9920d76e1e759acb00d5c38ce3f61c6c08df",
+      "size": 5125,
+      "resultSize": 5125
+    },
+    {
+      "path": "lib/sep-update/update-filter.mjs",
+      "sourceSha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+      "resultSha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+      "size": 1219,
+      "resultSize": 1219
+    },
+    {
+      "path": "lib/sep-update/update-inventory.mjs",
+      "sourceSha256": "e391d97f1154dc9359360c3d146da83345cc9991901527f955f937ea2927aaa8",
+      "resultSha256": "e391d97f1154dc9359360c3d146da83345cc9991901527f955f937ea2927aaa8",
+      "size": 21354,
+      "resultSize": 21354
+    },
+    {
+      "path": "lib/sep-update/update-migration-loader.mjs",
+      "sourceSha256": "d38630e628b7820fcde7849bb71523e39d6f42abfc357924e35de5513493f70f",
+      "resultSha256": "d38630e628b7820fcde7849bb71523e39d6f42abfc357924e35de5513493f70f",
+      "size": 2376,
+      "resultSize": 2376
+    },
+    {
+      "path": "lib/sep-update/update-migration-policy.mjs",
+      "sourceSha256": "295d7d172d7e1965652194b9acf1b5c522fa1631f9f9d76345197f3b2fab5386",
+      "resultSha256": "295d7d172d7e1965652194b9acf1b5c522fa1631f9f9d76345197f3b2fab5386",
+      "size": 9317,
+      "resultSize": 9317
+    },
+    {
+      "path": "lib/sep-update/update-migration-v2.mjs",
+      "sourceSha256": "a572473e1249f48fb173af0b5a2a0666cfa80b6184b8316dffdab26b66f069c8",
+      "resultSha256": "a572473e1249f48fb173af0b5a2a0666cfa80b6184b8316dffdab26b66f069c8",
+      "size": 11866,
+      "resultSize": 11866
+    },
+    {
+      "path": "lib/sep-update/update-p2.mjs",
+      "sourceSha256": "40394723e12881cf383d048975dd3cc0fcfbc86f6f0430376bdd625095623adc",
+      "resultSha256": "40394723e12881cf383d048975dd3cc0fcfbc86f6f0430376bdd625095623adc",
+      "size": 5077,
+      "resultSize": 5077
+    },
+    {
+      "path": "lib/sep-update/update-process-identity.mjs",
+      "sourceSha256": "b698f5caebb1d99b9662b0570ade7e6930d134368a58d6089ae4a175affcec18",
+      "resultSha256": "b698f5caebb1d99b9662b0570ade7e6930d134368a58d6089ae4a175affcec18",
+      "size": 5592,
+      "resultSize": 5592
+    },
+    {
+      "path": "lib/sep-update/update-process.mjs",
+      "sourceSha256": "a9793051b3343fb11d1d413c71beda85d9760e2f75e59306a15891acc6e185aa",
+      "resultSha256": "a9793051b3343fb11d1d413c71beda85d9760e2f75e59306a15891acc6e185aa",
+      "size": 3041,
+      "resultSize": 3041
+    },
+    {
+      "path": "lib/sep-update/update-profile.mjs",
+      "sourceSha256": "7b3195cdefa72d31f4615069cbef2bfabaf33bc85441cefe9387b27bf5612ce4",
+      "resultSha256": "7b3195cdefa72d31f4615069cbef2bfabaf33bc85441cefe9387b27bf5612ce4",
+      "size": 8207,
+      "resultSize": 8207
+    },
+    {
+      "path": "lib/sep-update/update-review.mjs",
+      "sourceSha256": "5e86052b7d370e8b0a647d86ff6c80d9f1d986bb3ea954575dd82804556043ea",
+      "resultSha256": "5e86052b7d370e8b0a647d86ff6c80d9f1d986bb3ea954575dd82804556043ea",
+      "size": 3358,
+      "resultSize": 3358
+    },
+    {
+      "path": "lib/sep-update/update-sep.mjs",
+      "sourceSha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+      "resultSha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+      "size": 8605,
+      "resultSize": 8605
+    },
+    {
+      "path": "lib/sep-update/update-transaction.mjs",
+      "sourceSha256": "80baf38df16967b6c67ef43aea61a17858c94ee2b55a9190fd2b2b269396504d",
+      "resultSha256": "80baf38df16967b6c67ef43aea61a17858c94ee2b55a9190fd2b2b269396504d",
+      "size": 3521,
+      "resultSize": 3521
+    },
+    {
+      "path": "lib/sep-update/update-worker.mjs",
+      "sourceSha256": "7767279c54f43482638cbc90a8dd6fb264fd30f52d0ecaa19b536d59c2fa5904",
+      "resultSha256": "7767279c54f43482638cbc90a8dd6fb264fd30f52d0ecaa19b536d59c2fa5904",
+      "size": 7932,
+      "resultSize": 7932
+    },
+    {
+      "path": "lib/welcome/welcome.css",
+      "sourceSha256": "1d4332d8698714bc94d6ab99710e190bcb45ca549ce0f134cbef0e2afacaafc8",
+      "resultSha256": "71c26858d44843c0f1b116667dd2e0f7fbd8f051f2a696a7158fdfab17ed86c3",
+      "size": 40562,
+      "resultSize": 40314
+    },
+    {
+      "path": "lib/welcome/welcome.js",
+      "sourceSha256": "ab3aff8c1f5acb3c87969bf02a598a381af7973bb2900f648318496228d7f630",
+      "resultSha256": "a1658ac72781717c21925c82c7d34955080fd2015f86b900a979b3117fef6ba9",
+      "size": 285248,
+      "resultSize": 283459
+    },
+    {
+      "path": "node_modules/pend/index.js",
+      "sourceSha256": "4b991290680d9027dd786493c6e816900355956d88afb6ae4d97b5ac5a3ee0f5",
+      "resultSha256": "4b991290680d9027dd786493c6e816900355956d88afb6ae4d97b5ac5a3ee0f5",
+      "size": 1101,
+      "resultSize": 1101
+    },
+    {
+      "path": "node_modules/pend/LICENSE",
+      "sourceSha256": "7e64acffcb0d20d33f5a86949ffd4a99ae045b10c7332a9c3a58635876c16880",
+      "resultSha256": "7e64acffcb0d20d33f5a86949ffd4a99ae045b10c7332a9c3a58635876c16880",
+      "size": 1082,
+      "resultSize": 1082
+    },
+    {
+      "path": "node_modules/pend/package.json",
+      "sourceSha256": "1e4f01d39cc13c261f7ab81d0509d36bd98d8eceaf9ed75f2ab274286f3c3920",
+      "resultSha256": "1e4f01d39cc13c261f7ab81d0509d36bd98d8eceaf9ed75f2ab274286f3c3920",
+      "size": 410,
+      "resultSize": 410
+    },
+    {
+      "path": "node_modules/pend/test.js",
+      "sourceSha256": "606527c6816c6adea3a586813203e9ee1980ce286ff8a485ad781fcc90912aad",
+      "resultSha256": "606527c6816c6adea3a586813203e9ee1980ce286ff8a485ad781fcc90912aad",
+      "size": 2449,
+      "resultSize": 2449
+    },
+    {
+      "path": "node_modules/yauzl/crc32.js",
+      "sourceSha256": "7bf6476c8e4984418943aa4eb6743c859d723d5e9a7278d61d34457d2554cec4",
+      "resultSha256": "7bf6476c8e4984418943aa4eb6743c859d723d5e9a7278d61d34457d2554cec4",
+      "size": 3434,
+      "resultSize": 3434
+    },
+    {
+      "path": "node_modules/yauzl/fd-slicer.js",
+      "sourceSha256": "fa8868a9879ce50db8cbec36d487424af112bd5b0c433831968441ec50d7616a",
+      "resultSha256": "fa8868a9879ce50db8cbec36d487424af112bd5b0c433831968441ec50d7616a",
+      "size": 5159,
+      "resultSize": 5159
+    },
+    {
+      "path": "node_modules/yauzl/index.js",
+      "sourceSha256": "8cccdd25e8bb5516572c09072324876860c8de5898c0b8b7070f0e660b35a0ec",
+      "resultSha256": "8cccdd25e8bb5516572c09072324876860c8de5898c0b8b7070f0e660b35a0ec",
+      "size": 43463,
+      "resultSize": 43463
+    },
+    {
+      "path": "node_modules/yauzl/LICENSE",
+      "sourceSha256": "b303783d5eb7ca50b853ffa5f145e4e7998fab339831d848f507ca6cd970577a",
+      "resultSha256": "b303783d5eb7ca50b853ffa5f145e4e7998fab339831d848f507ca6cd970577a",
+      "size": 1077,
+      "resultSize": 1077
+    },
+    {
+      "path": "node_modules/yauzl/package.json",
+      "sourceSha256": "d7d5418b74b185df4ad276b73cf1e36040dd417d22520354e609e2748a29fcbd",
+      "resultSha256": "d7d5418b74b185df4ad276b73cf1e36040dd417d22520354e609e2748a29fcbd",
+      "size": 762,
+      "resultSize": 762
+    },
+    {
+      "path": "package.json",
+      "sourceSha256": "fa0e1e0e1ce261f6be644efe200bb1d083b115162262bf0e27ed3eeb881a9203",
+      "resultSha256": "fa0e1e0e1ce261f6be644efe200bb1d083b115162262bf0e27ed3eeb881a9203",
+      "size": 4022,
+      "resultSize": 4022
+    },
+    {
+      "path": "renderer/assets/welcome-brand.svg",
+      "sourceSha256": "182f040f9d3eccf25b20f5bbfc9d50a21296a88978b91b4dec7e64cbd16b4039",
+      "resultSha256": "182f040f9d3eccf25b20f5bbfc9d50a21296a88978b91b4dec7e64cbd16b4039",
+      "size": 15929,
+      "resultSize": 15929
+    },
+    {
+      "path": "renderer/assets/window-material.css",
+      "sourceSha256": "f1709d565f57db4cf0207b7e4e348f72380665124b7bd711cab92581808855e2",
+      "resultSha256": "f1709d565f57db4cf0207b7e4e348f72380665124b7bd711cab92581808855e2",
+      "size": 529,
+      "resultSize": 529
+    },
+    {
+      "path": "renderer/mandatory-update-frame.js",
+      "sourceSha256": "ea6ba51f277ce9ae18f972c76d6a23025bd1da62c1758526ec4f87be9eee06fb",
+      "resultSha256": "ea6ba51f277ce9ae18f972c76d6a23025bd1da62c1758526ec4f87be9eee06fb",
+      "size": 1683,
+      "resultSize": 1683
+    },
+    {
+      "path": "renderer/mandatory-update.css",
+      "sourceSha256": "a1c1340b3c6050d1fe4253ff8d49a7d9709fe18cbcb7d0e4cfd785d611cdfdad",
+      "resultSha256": "a1c1340b3c6050d1fe4253ff8d49a7d9709fe18cbcb7d0e4cfd785d611cdfdad",
+      "size": 1237,
+      "resultSize": 1237
+    },
+    {
+      "path": "renderer/mandatory-update.html",
+      "sourceSha256": "17039f20594cadcfe09bf4500e45e1ab4fc57b205525a7f43e199ea4d12d4bc4",
+      "resultSha256": "17039f20594cadcfe09bf4500e45e1ab4fc57b205525a7f43e199ea4d12d4bc4",
+      "size": 1759,
+      "resultSize": 1759
+    },
+    {
+      "path": "renderer/mandatory-update.js",
+      "sourceSha256": "982d1ded29841061422174355ca41eaf33f475e5377bcd045f3f7955385ad156",
+      "resultSha256": "982d1ded29841061422174355ca41eaf33f475e5377bcd045f3f7955385ad156",
+      "size": 7160,
+      "resultSize": 7160
+    },
+    {
+      "path": "renderer/policy-login-loading.html",
+      "sourceSha256": "5129e856f96a21a29adfa96f393c98087c120cdd6f65ca0adaf7b17ae5b381f6",
+      "resultSha256": "5129e856f96a21a29adfa96f393c98087c120cdd6f65ca0adaf7b17ae5b381f6",
+      "size": 1734,
+      "resultSize": 1734
+    },
+    {
+      "path": "renderer/update-close.svg",
+      "sourceSha256": "1a1931528c542a460d1db6fde84d82d1a03a06155485265d43634031273b20d5",
+      "resultSha256": "1a1931528c542a460d1db6fde84d82d1a03a06155485265d43634031273b20d5",
+      "size": 449,
+      "resultSize": 449
+    },
+    {
+      "path": "renderer/update-dialog.css",
+      "sourceSha256": "a3828fc86b274a6ee31711ecaf721fcf929e389c421d3c3a291f197512d84e91",
+      "resultSha256": "a3828fc86b274a6ee31711ecaf721fcf929e389c421d3c3a291f197512d84e91",
+      "size": 2414,
+      "resultSize": 2414
+    },
+    {
+      "path": "renderer/update-dialog.html",
+      "sourceSha256": "8e9fd9e60cc8be41f59d930dbec59ec0f77e7b9bb720fbaa530df27f53b08cd7",
+      "resultSha256": "8e9fd9e60cc8be41f59d930dbec59ec0f77e7b9bb720fbaa530df27f53b08cd7",
+      "size": 985,
+      "resultSize": 985
+    },
+    {
+      "path": "renderer/update-dialog.js",
+      "sourceSha256": "669588e0f094c6616001d2bda37caee2f96680de8326647b854326ee2e20b7fd",
+      "resultSha256": "669588e0f094c6616001d2bda37caee2f96680de8326647b854326ee2e20b7fd",
+      "size": 2728,
+      "resultSize": 2728
+    },
+    {
+      "path": "renderer/welcome.css",
+      "sourceSha256": "d625b4775d44f218105bebcadeeeee2d8f806eecbe6f2f4bbc6cfdd472cbf91c",
+      "resultSha256": "d625b4775d44f218105bebcadeeeee2d8f806eecbe6f2f4bbc6cfdd472cbf91c",
+      "size": 7425,
+      "resultSize": 7425
+    },
+    {
+      "path": "renderer/welcome.html",
+      "sourceSha256": "02a6b02c152e6bd93d079597151ddc1d45b6ee349cbe83690af779467fdc9813",
+      "resultSha256": "02a6b02c152e6bd93d079597151ddc1d45b6ee349cbe83690af779467fdc9813",
+      "size": 645,
+      "resultSize": 645
+    },
+    {
+      "path": "resources/icon-macos.png",
+      "sourceSha256": "28a14336e024c1bb4e94d6e74fd23810dac2b737dfd1b8da6b24482e0191abec",
+      "resultSha256": "28a14336e024c1bb4e94d6e74fd23810dac2b737dfd1b8da6b24482e0191abec",
+      "size": 279163,
+      "resultSize": 279163
+    },
+    {
+      "path": "resources/icon-macos.svg",
+      "sourceSha256": "6ea87fbbb2daeb6aba30ed07ed1e9059e0c2a39a3778d98a475b0ab05034f091",
+      "resultSha256": "6ea87fbbb2daeb6aba30ed07ed1e9059e0c2a39a3778d98a475b0ab05034f091",
+      "size": 7354,
+      "resultSize": 7354
+    },
+    {
+      "path": "resources/icon-windows.png",
+      "sourceSha256": "d054052563a8600105ed72cac7ec1c3ee863dd193bf9c032b84fc612a69ed87a",
+      "resultSha256": "d054052563a8600105ed72cac7ec1c3ee863dd193bf9c032b84fc612a69ed87a",
+      "size": 332525,
+      "resultSize": 332525
+    },
+    {
+      "path": "resources/icon-windows.svg",
+      "sourceSha256": "2d6685a28bbb9041d5ddce91ddb74c57efcb2d01384c8f28d5db2bf6fb117b4b",
+      "resultSha256": "2d6685a28bbb9041d5ddce91ddb74c57efcb2d01384c8f28d5db2bf6fb117b4b",
+      "size": 7346,
+      "resultSize": 7346
+    },
+    {
+      "path": "resources/icon.png",
+      "sourceSha256": "982c2859568d83d2576110a527c545f04641f4008bdb2cfeb6758f333c0fb07a",
+      "resultSha256": "982c2859568d83d2576110a527c545f04641f4008bdb2cfeb6758f333c0fb07a",
+      "size": 369009,
+      "resultSize": 369009
+    },
+    {
+      "path": "resources/icon.svg",
+      "sourceSha256": "0458ed5e4825846a6560e90d3e4de767cd75842f7eb53539dc87a5db380d9146",
+      "resultSha256": "0458ed5e4825846a6560e90d3e4de767cd75842f7eb53539dc87a5db380d9146",
+      "size": 7281,
+      "resultSize": 7281
+    },
+    {
+      "path": "resources/tray-windows.ico",
+      "sourceSha256": "ec9354edad3eb348144569250a18843ab8d61ebcca32bebcaa3f10d1f5707a86",
+      "resultSha256": "ec9354edad3eb348144569250a18843ab8d61ebcca32bebcaa3f10d1f5707a86",
+      "size": 15698,
+      "resultSize": 15698
+    }
+  ],
+  "transforms": [
+    {
+      "schema": 1,
+      "path": "lib/main.js",
+      "sourceSha256": "7b73e57d9f520b76a9dc149bbb08d7e7f3dbaaeb9f961809d3217f546efec357",
+      "resultSha256": "f1319fd0a3a2be3cb319294c59e24174b15e139fa779e0b3aa8b1904f7821ccb",
+      "sourceKind": "captured Alpha.2 R6 JavaScript, no GTK transformation",
+      "changes": [
+        {
+          "label": "require controlled invocation before desktop initialization",
+          "from": "import { createManagedUpdater } from \"./sep-update/update-desktop.mjs\";",
+          "to": "import { createManagedUpdater } from \"./sep-update/update-desktop.mjs\";\nimport {requireManagedInvocation,configureManagedIdentity} from \"./sep-mac-entry.mjs\";\nconst sepManagedInvocation=requireManagedInvocation(process.argv,process.env);",
+          "count": 1
+        },
+        {
+          "label": "independent data home and Electron identity",
+          "from": "app6.setAppLogsPath();",
+          "to": "configureManagedIdentity(app6,sepManagedInvocation);",
+          "count": 1
+        },
+        {
+          "label": "never fall back to an unmanaged Host",
+          "from": "const managed = connectionFile === void 0 ? void 0 : await readManagedDesktopConnection(connectionFile);",
+          "to": "const managed = await readManagedDesktopConnection(sepManagedInvocation.connectionFile);",
+          "count": 1
+        },
+        {
+          "label": "native updater always disabled",
+          "from": "managed === void 0 ? void 0 : () => false,",
+          "to": "() => false,",
+          "count": 1
+        },
+        {
+          "label": "official mandatory update authority disabled",
+          "from": "const policyConfig = managed === void 0 ? resolveDesktopPolicyConfig(policyInput, !app6.isPackaged) : void 0;",
+          "to": "const policyConfig = void 0;",
+          "count": 1
+        },
+        {
+          "label": "separate external deep-link registration",
+          "from": "app6.setAsDefaultProtocolClient(\"dsh\")",
+          "to": "app6.setAsDefaultProtocolClient(\"dsh-sep\")",
+          "count": 1
+        },
+        {
+          "label": "separate external deep-link activation",
+          "from": "url === \"dsh://open\" || url === \"dsh://open/\"",
+          "to": "url === \"dsh-sep://open\" || url === \"dsh-sep://open/\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "schema": 1,
+      "path": "lib/sep-update/update-desktop.mjs",
+      "sourceSha256": "8476632f8533b443fadc675b8d8a57b68878f20c5db254e4561da15b22e41047",
+      "resultSha256": "c43cd45d4c3d8b5b6df2adbb68334d64f56096721f2ed94f8fb01b9589f1fd92",
+      "sourceKind": "captured Alpha.2 R6 JavaScript, no GTK transformation",
+      "changes": [
+        {
+          "label": "explicit Mac installation capability gate",
+          "from": "import {readInstalledSepVersion} from './installed-sep-version.mjs';",
+          "to": "import {readInstalledSepVersion} from './installed-sep-version.mjs';\nimport {macInstallUnavailable} from '../sep-mac-update-admission.mjs';",
+          "count": 1
+        },
+        {
+          "label": "block preparation default",
+          "from": "prepareSep=queuePreparation",
+          "to": "prepareSep=macInstallUnavailable",
+          "count": 1
+        },
+        {
+          "label": "caller cannot override unavailable platform preparation",
+          "from": " const directory=join(app.getPath('userData'),'sep-updates');",
+          "to": " prepareSep=macInstallUnavailable;\n const directory=join(app.getPath('userData'),'sep-updates');",
+          "count": 1
+        },
+        {
+          "label": "block DSH and SEP publication before mutation",
+          "from": "async function reviewAndQueue(release,signal){if(!active(signal))return;",
+          "to": "async function reviewAndQueue(release,signal){if(!active(signal))return;macInstallUnavailable();",
+          "count": 1
+        },
+        {
+          "label": "block worker spawn including old queued requests",
+          "from": "async function startWorker(id){",
+          "to": "async function startWorker(id){macInstallUnavailable();",
+          "count": 1
+        },
+        {
+          "label": "never resume incompatible publication state",
+          "from": "async open(){await recoverQueued();await resumePreparation(directory).catch(async e=>{await save('preparation-resume-result.json',{status:'blocked',code:String(e.code??e.message).slice(0,160)});});await clock.open();return sepClock.open();}",
+          "to": "async open(){await save('mac-update-scope.json',{status:'blocked',code:'SEP_MAC_UPDATE_INSTALL_NOT_INTEGRATED',checksAvailable:true});await clock.open();return sepClock.open();}",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "observations": [],
+  "parentCaptureSha256": "1a2f346febb029fda4b779d837d9532844a78806ebaa9d1c30b06affaf936e3b",
+  "normalization": [
+    {
+      "path": "lib/command-manager-entry.js",
+      "sourceSha256": "826f6f3f0354fd273d748357955959e396a4ed04ea3d3f475f814c6d7efc58cd",
+      "resultSha256": "f320f4d8dd1bc28ed32a33f4567ef9b361f627f8b68d65aab17392fb59123e9b",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 3,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/main.js",
+      "sourceSha256": "f1319fd0a3a2be3cb319294c59e24174b15e139fa779e0b3aa8b1904f7821ccb",
+      "resultSha256": "ae32d9e028479fdc0268463292ce0cde01dfe887c96fa67fcb46ade7a0e3ef6c",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 64,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/preload-app.cjs",
+      "sourceSha256": "9af7d803c25bd54501b868026586a979478bf5702ca419f9b85523e411904fac",
+      "resultSha256": "8d5a4517dd628d072653e33e93413bec34a1a3648a15bf262cf9d0c339ae05ba",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 16,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/preload-mandatory.cjs",
+      "sourceSha256": "a49131ed0d1ece7d5f4963443d2c80e78eb1873d624424fadd74c337c0f60ec3",
+      "resultSha256": "8cb6bbd8fae90ad010be9f132b033cea217b7bd2570ba5a9d109283f86ef8955",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 3,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/preload-platform-account.cjs",
+      "sourceSha256": "34784b038e601d883a7601dacf85e8f512a5dbd3d1aee17b3229bd834d8057e4",
+      "resultSha256": "07f0d706ef9a17dc7abd8dab35139e9056c9c68716a67693696b96d4561a9c44",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 3,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/preload-update-dialog.cjs",
+      "sourceSha256": "9bc9aa3500ddfc0bacbba41f8869913c61ba08129017d2ebcf29444efda213e6",
+      "resultSha256": "5270cc9eff4fd7b75bfee6f8683674917e0255603afddc25f0130e5ed50bae73",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 3,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/preload-welcome.cjs",
+      "sourceSha256": "3e62cac3f69d06a7e74dac648278db74af69806932ff92ae89f377ebec95c926",
+      "resultSha256": "af3e3ca766d1b0e5453b4aaa647dd5100a446e63fbbd68952224b0507cd93e46",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 4,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/welcome/welcome.css",
+      "sourceSha256": "1d4332d8698714bc94d6ab99710e190bcb45ca549ce0f134cbef0e2afacaafc8",
+      "resultSha256": "71c26858d44843c0f1b116667dd2e0f7fbd8f051f2a696a7158fdfab17ed86c3",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 4,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    },
+    {
+      "path": "lib/welcome/welcome.js",
+      "sourceSha256": "ab3aff8c1f5acb3c87969bf02a598a381af7973bb2900f648318496228d7f630",
+      "resultSha256": "a1658ac72781717c21925c82c7d34955080fd2015f86b900a979b3117fef6ba9",
+      "changes": [
+        {
+          "sourcePrefixSha256": "172508aa01ccf6f894a62c0ed1cd5ed7d6a005f03e0c0d72d3f72fb053975dbb",
+          "replacementPrefix": "sep-origin/alpha2-desktop/",
+          "count": 12,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        },
+        {
+          "sourcePrefixSha256": "a032f91daf80389ff46c1885a466da9b7e8542bd4079b04130fb305d7652dfe6",
+          "replacementPrefix": "sep-origin/alpha2-runtime/",
+          "count": 19,
+          "scope": "compiler source comment or __commonJS factory display-name"
+        }
+      ]
+    }
+  ],
+  "rawSourceAvailability": "Raw source bytes and exact local-prefix normalization receipt retained locally; public CI receives derived bytes only"
+}

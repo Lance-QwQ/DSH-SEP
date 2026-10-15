@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "files": [
+    "settings-ui/adapter.mjs",
+    "settings-ui/required.mjs",
+    "settings-ui/transport.mjs",
+    "media/attachment-tree.mjs",
+    "media/attachment-io.mjs",
+    "media-business/after-attachments-llm.mjs",
+    "media-business/attachment-maintenance.mjs",
+    "media-business/cold-attachments.mjs",
+    "media-business/profile-layout.mjs",
+    "media-business/runtime.mjs",
+    "media-business/standalone.mjs"
+  ]
+}

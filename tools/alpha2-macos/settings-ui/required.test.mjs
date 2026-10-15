@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {inspectSettingsMount} from './required.mjs';
+const id='@deepseek-ai/dsh-client-ui-settings-memory',clientPath='/controlled/settings/lib/client.js',entryUrl='file:///controlled/settings/lib/index.js';
+function fixture(){const row={options:{id:'mac-sep-settings',name:entryUrl},disabled:false,fiber:{state:2}},graph={entries:[{id,url:'plugins/settings.js',rev:'fixed'}]},ctx={loader:{entries:()=>[row]},clientModules:{graph:()=>graph,clientPath:()=>clientPath},webServer:{collectIndexInjections:()=>[{kind:'global',name:'__DSH_BOOT__',value:graph}]}};return{ctx,row,graph};}
+test('required settings gate checks actual active row, matching adapter entry and advertised client module',()=>{const {ctx}=fixture();assert.equal(inspectSettingsMount(ctx,{entryId:'mac-sep-settings',entryUrl,clientPath}).clientUrl,'plugins/settings.js');});
+test('disabled or missing settings row cannot pass because the host is running',()=>{const f=fixture();f.row.disabled=true;assert.throws(()=>inspectSettingsMount(f.ctx,{entryId:'mac-sep-settings',entryUrl,clientPath}),{code:'SEP_MAC_SETTINGS_NOT_MOUNTED'});f.row.disabled=false;f.row.fiber.state=3;assert.throws(()=>inspectSettingsMount(f.ctx,{entryId:'mac-sep-settings',entryUrl,clientPath}),{code:'SEP_MAC_SETTINGS_NOT_MOUNTED'});});
+test('an advertised but stale client or foreign host entry cannot pass',()=>{const f=fixture();assert.throws(()=>inspectSettingsMount(f.ctx,{entryId:'mac-sep-settings',entryUrl:entryUrl+'old',clientPath}),{code:'SEP_MAC_SETTINGS_NOT_MOUNTED'});f.graph.entries=[];assert.throws(()=>inspectSettingsMount(f.ctx,{entryId:'mac-sep-settings',entryUrl,clientPath}),{code:'SEP_MAC_SETTINGS_CLIENT_MISSING'});});

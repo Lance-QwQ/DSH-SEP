@@ -1,0 +1,55 @@
+name: SEP macOS fixed installer actual install and two application cycles
+on:
+  push:
+    branches: [codex/sep-alpha2-macos-20261014]
+permissions:
+  contents: read
+jobs:
+  native-current-installed-lifecycle:
+    runs-on: macos-15
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Record actual native environment
+        run: |
+          set -euo pipefail
+          { sw_vers; uname -a; node --version; } > "$RUNNER_TEMP/installed-lifecycle-system.txt"
+      - name: Fetch independently pinned current installer
+        env:
+          SEP_ARTIFACT_TOKEN: ${{ github.token }}
+        run: node tools/alpha2-macos/native-revalidation/installer-download.mjs installer "$RUNNER_TEMP/current-installer-input"
+      - name: Restore exact installer and verify signature and inventory
+        run: node tools/alpha2-macos/native-revalidation/installer-restore-local.mjs installer "$RUNNER_TEMP/current-installer-input" "$RUNNER_TEMP/current-installer-restored"
+      - name: Actual installer lifecycle controls then installed application two cycles
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/current-installer-restored/RESULT.json"
+          digest="$(shasum -a 256 "$receipt" | awk '{print $1}')"
+          node tools/alpha2-macos/native-revalidation/installer-run-full.mjs "$receipt" "$digest" "$RUNNER_TEMP/current-installed-lifecycle"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: native-current-installed-lifecycle-evidence
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            ${{ runner.temp }}/installed-lifecycle-system.txt
+            ${{ runner.temp }}/current-installer-input/*.json
+            ${{ runner.temp }}/current-installer-input/*.log
+            ${{ runner.temp }}/current-installer-restored/*.json
+            ${{ runner.temp }}/current-installer-restored/*.log
+            ${{ runner.temp }}/current-installed-lifecycle/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/*.jsonl
+            ${{ runner.temp }}/current-installed-lifecycle/*.log
+            ${{ runner.temp }}/current-installed-lifecycle/installed-receipt/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.json
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.jsonl
+            ${{ runner.temp }}/current-installed-lifecycle/installed-startup/*.log

@@ -1,0 +1,3 @@
+import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {writeFile,realpath} from 'node:fs/promises';import {win32} from 'node:path';import {validateExportPaths} from './continuation-export-paths.mjs';
+const [source,destination]=process.argv.slice(2);validateExportPaths(source,destination);if(process.platform!=='win32')throw Error('EXPORT_PLATFORM');const parent=win32.dirname(destination);if((await realpath(parent)).toLowerCase()!==parent.toLowerCase())throw Error('EXPORT_SCOPE');
+const {stdout}=await promisify(execFile)('wsl.exe',['-d','DSH-SEP-Linux-RC','-u','sep-rc','--','cat',source],{encoding:'buffer',maxBuffer:16*1024*1024,windowsHide:true});await writeFile(destination,stdout,{flag:'wx'});

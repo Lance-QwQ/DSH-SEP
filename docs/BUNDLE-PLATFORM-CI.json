@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "stage": 6,
+  "status": "blocked",
+  "reviewStatus": "pass",
+  "candidate": "0.2.1-beta.3-bundle.23",
+  "host": "0.2.1-alpha.1",
+  "scope": "platform/CI preparation and evidence inventory completed; full three-platform certification remains blocked",
+  "windows": {
+    "status": "pass",
+    "scope": "fresh frozen-lock install and 19 portable/native-provider checks; controlled runtime and GUI separate stage5 evidence",
+    "result": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase6-platform-ci-r1\\windows-r1\\RESULT.json"
+  },
+  "linux": {
+    "status": "blocked",
+    "scope": "10 read-only config/budget/default-intent tests pass with exact offline Zod4.4.3; full host install failed; no Loader or native fs activation certification",
+    "node": "24.19.0",
+    "storage": "existing D:-backed WSL VHD, new /home/sep-rc/sep-bundle-ci-20261010-r1 only",
+    "installFailure": "npm metadata fetch failed during minimumReleaseAge verification; policy unchanged; no claim of product incompatibility from network failure",
+    "logs": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase6-platform-ci-r1\\linux-results-r1",
+    "artifactFilesCompared": 467,
+    "archiveBytes": "platform pack differs; every regular file byte equals Windows candidate"
+  },
+  "macos": {
+    "status": "not_run",
+    "reason": "current branch must not be pushed; no current macOS runner execution; historical evidence not substituted"
+  },
+  "ci": {
+    "status": "not_run",
+    "localWorkflowStaticReview": "pass",
+    "localWindowsWorkflowEquivalent": "pass",
+    "file": ".github\\workflows\\sep-bundle-portable.yml",
+    "scope": "manual dispatch only; fixed Node24.21/pnpm11.7, frozen 139 direct dependency graph, limited portable tests, read-only repository permissions, no Release",
+    "workflowSha256": "08f9930dbc2ea84d86e8ae5851e0e06318dc48dfcc7a62518ddcdc6b9322f69f"
+  },
+  "completeProtectedProfile": {
+    "win32-x64": "limited controlled synthetic pass",
+    "linux": "blocked: Windows-only protection provider",
+    "darwin": "blocked: Windows-only protection provider"
+  },
+  "historicalEvidence": "cross-platform-20260929 belongs to older graph; not current certification",
+  "boundary": "no daily or GitHub changes, no platform guard relaxation"
+}

@@ -1,0 +1,12 @@
+import './prepare-linux-vision-desktop.mjs';
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {linuxImagePresetPatch} from './linux-image-preset.mjs';
+const root=resolve(process.env.SEP_BUNDLE_TEST_ROOT),path=join(root,'DESKTOP-FIXTURE.json'),f=JSON.parse(await readFile(path));
+const uploads=join(root,'synthetic-uploads');await mkdir(uploads,{mode:0o700});
+const patchFile=join(f.profile,'cordis.patch.yml'),patch=JSON.parse(await readFile(patchFile));patch.push(...linuxImagePresetPatch(),{id:'agent-default-model',config:{provider:'deepseek-official',model:'deepseek-v4-flash'}});await writeFile(patchFile,JSON.stringify(patch,null,2)+'\n');
+await copyFile(join(f.source,'视觉.png'),join(uploads,'视觉.png'));
+await writeFile(join(uploads,'unsupported.txt'),'synthetic unsupported file');
+await writeFile(join(uploads,'oversized.png'),Buffer.alloc(4*1024*1024+1));
+await writeFile(join(uploads,'malformed.png'),'synthetic malformed image');
+await writeFile(path,JSON.stringify({...f,uploads,linuxAttachmentUi:true},null,2)+'\n');

@@ -1,0 +1,44 @@
+native-desktop-control-channel:
+  runs-on: macos-15
+  timeout-minutes: 15
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Pure transport contracts
+      run: node --test --test-reporter=tap tools/alpha2-macos/desktop/control-channel/channel.test.mjs > "$RUNNER_TEMP/control-channel.tap"
+    - name: Fixed hash-bound native carrier
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: |
+        node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/control-carrier-download"
+        mkdir "$RUNNER_TEMP/control-carrier"
+        ditto -x -k "$RUNNER_TEMP/control-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/control-carrier"
+        node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/control-asar-tools"
+    - name: Independently signed synthetic Electron fixture
+      run: node tools/alpha2-macos/desktop/control-channel/prepare-native.mjs "$RUNNER_TEMP/control-carrier/DSH SEP.app" "$RUNNER_TEMP/control-carrier-download" "$RUNNER_TEMP/control-prepared" "$RUNNER_TEMP/control-asar-tools/node_modules/@electron/asar/lib/asar.js"
+    - name: Actual Electron fd3 duplex and three refusing cases
+      run: |
+        node="$RUNNER_TEMP/control-carrier/DSH SEP.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node"
+        "$node" tools/alpha2-macos/desktop/control-channel/probe-native.mjs "$RUNNER_TEMP/control-prepared" "$RUNNER_TEMP/control-native"
+    - name: Preserve transport-only evidence
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-control-channel
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/control-channel.tap
+          ${{ runner.temp }}/control-carrier-download/DOWNLOAD-RECEIPT.json
+          ${{ runner.temp }}/control-asar-tools/RESULT.json
+          ${{ runner.temp }}/control-prepared/*.json
+          ${{ runner.temp }}/control-prepared/*.log
+          ${{ runner.temp }}/control-native/RESULT.json
+          ${{ runner.temp }}/control-native/*/*.json
+          ${{ runner.temp }}/control-native/*/*.log

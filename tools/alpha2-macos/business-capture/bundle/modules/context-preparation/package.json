@@ -1,0 +1,21 @@
+{
+  "name": "dsh-sep-context-preparation",
+  "version": "0.1.7-rc.1-sep.local.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "context_resolver.py",
+    "README.md",
+    "LICENSE",
+    "LICENSE-SCOPE.json",
+    "LICENSE-SCOPE.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.4",
+    "@deepseek-ai/dsh-tools": "0.2.0-rc.2"
+  },
+  "license": "MIT",
+  "dshSepLicenseScope": "LICENSE-SCOPE.json"
+}

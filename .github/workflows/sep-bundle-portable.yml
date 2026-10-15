@@ -1,0 +1,45 @@
+name: SEP fixed bundle portable admission (not desktop certification)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable-admission:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Install fixed test package manager
+        shell: pwsh
+        run: npm install --global pnpm@11.7.0 --ignore-scripts
+      - name: Prepare, install frozen dependency graph, and verify limited scope
+        shell: pwsh
+        run: |
+          $out = (Join-Path $env:RUNNER_TEMP "sep-bundle-ci-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT").Replace('\', '/')
+          "SEP_CI_OUTPUT=$out" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $pm = Join-Path (npm root -g) 'pnpm/bin/pnpm.cjs'
+          node tools/bundle-install/platform-ci.mjs $out $pm prepare
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Push-Location (Join-Path $out 'host')
+          try { node $pm install --frozen-lockfile --ignore-scripts --store-dir (Join-Path $out 'store') --cache-dir (Join-Path $out 'cache') *>&1 | Tee-Object -FilePath (Join-Path $out 'install.log') } finally { Pop-Location }
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tools/bundle-install/platform-ci.mjs $out $pm verify
+      - name: Preserve scoped test receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sep-portable-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            ${{ env.SEP_CI_OUTPUT }}/PREPARED.json
+            ${{ env.SEP_CI_OUTPUT }}/RESULT.json
+            ${{ env.SEP_CI_OUTPUT }}/tests.log
+            ${{ env.SEP_CI_OUTPUT }}/install.log
+            ${{ env.SEP_CI_OUTPUT }}/pack.log

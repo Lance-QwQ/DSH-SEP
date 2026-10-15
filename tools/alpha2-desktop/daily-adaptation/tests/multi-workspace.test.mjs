@@ -1,0 +1,82 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {mkdir,readFile,writeFile,symlink} from 'node:fs/promises';
+import {join,dirname} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createHash,randomUUID} from 'node:crypto';
+const repo=process.env.SEP_SOURCE_REPO;
+const {setup,close,save,call,load,root,agent}=await import(pathToFileURL(join(repo,'tools/bundle-install/tests/native-settings-fixture.mjs')));
+const {buildDailyComposition}=await import('../build/daily-composition.mjs');
+const {SessionId}=await load('@deepseek-ai/dsh-session');
+const otherId='00000000-0000-4000-8000-000000000099';
+let seq=0;
+test('daily composition admits two registered roots, isolates memory, protects both, and refuses unknown/paused roots',async()=>{
+ const f=await setup({mountRoot:false});
+ try{
+  const second=join(f.base,'second');await mkdir(second);
+  await f.ctx.recoveryHost.registerProject({id:otherId,root:second});
+  const out=join(f.base,'daily-composition');await buildDailyComposition({coreRoot:root,out});
+  await symlink(dirname(root),join(out,'node_modules'),'junction');
+  await import(pathToFileURL(join(out,'native-settings-installation.js')));
+  await f.ctx.loader.create({id:'daily-test',name:pathToFileURL(join(out,'native-settings-installation.js')).href,config:f.input});
+  await f.ctx.loader.await();f.api=f.ctx.sepControlledInstallation;f.fiber=f.ctx.loader.resolve('daily-test').fiber;
+  assert.ok(f.api,JSON.stringify([...f.ctx.loader.entries()].map(e=>({id:e.options.id,state:e.fiber?.state,error:String(e.fiber?._error??'')}))));
+  assert.equal(f.api.status().phase,'ready',JSON.stringify(f.api.status()));
+  const plan=await f.api.review();await f.api.activate({planHash:plan.planHash});
+  assert.ok(f.ctx.tools.get('suite_change'),'daily safe-change tool is retained');
+  assert.ok(f.ctx.tools.get('task_checkpoint'),'daily checkpoint tool is retained');
+  assert.equal(f.ctx.suiteEnhancements.p2Retention.status().running,true,'daily copies and metadata TTL worker is retained');
+  const assessment=f.ctx.suiteEnhancements.updateAssessment;
+  assert.ok(assessment,'daily update assessment settings are retained');
+  assert.equal((await assessment.get()).enabled,false);
+  assert.equal((await assessment.update({enabled:true})).enabled,true);
+  assert.equal((await assessment.update({enabled:false})).enabled,false);
+  const a=await agent(f);
+  const runTool=(name,args)=>f.ctx.agents.withInitiator(a,()=>f.ctx.tools.get(name,a).execute(args,{agent:a,signal:new AbortController().signal,callId:'daily-probe-'+(++seq)}));
+  await writeFile(join(f.dirs.project,'candidate.txt'),'before');
+  const candidate=await runTool('suite_change',{action:'prepare',path:'candidate.txt',format:'text',checks:[{kind:'equals',value:'after'}]});
+  await runTool('suite_change',{action:'stage',id:candidate.id,content:'after'});
+  const verified=await runTool('suite_change',{action:'verify',id:candidate.id});assert.ok(verified.planHash);
+  assert.equal(await readFile(join(f.dirs.project,'candidate.txt'),'utf8'),'before');
+  assert.equal((await runTool('suite_change',{action:'cancel',id:candidate.id})).status,'cancelled');
+  const taskId=randomUUID();
+  const task=JSON.parse(await runTool('task_checkpoint',{action:'create',task_id:taskId,objective:'Daily synthetic checkpoint',plan_json:JSON.stringify([{id:'one',description:'Check candidate',acceptance:'Original retained',artifacts:[{path:'candidate.txt',sha256:createHash('sha256').update('before').digest('hex')}]}])}));
+  assert.ok(task);await runTool('task_checkpoint',{action:'read',task_id:taskId});
+  const b=(await f.ctx.agents.create({sessionId:SessionId('daily-other-'+(++seq)),meta:{cwd:second},agentOptions:{provider:'deepseek-official',model:'deepseek-v4-flash'}})).agent;
+  assert.equal((await f.ctx.sepProtectedProfile.reviewSession(b.session)).project.id,otherId);
+  await save(f,a,'First project remembers mercury alpha','project');
+  await save(f,b,'Second project remembers venus beta','project');
+  const bResult=JSON.stringify(await call(f,b,'memory_recall',{query:'mercury alpha venus beta'}));
+  assert.match(bResult,/venus beta/);assert.doesNotMatch(bResult,/mercury alpha/);
+  // Alpha.2 changes effective cwd without rewriting immutable session.header.cwd.
+  await f.ctx.workingDirectory.set(a,second);
+  assert.equal(a.session.header.cwd,f.dirs.project);
+  assert.equal((await f.ctx.sepProtectedProfile.reviewSession(a.session)).project.id,otherId);
+  const switched=JSON.stringify(await call(f,a,'memory_recall',{query:'mercury alpha venus beta'}));
+  assert.match(switched,/venus beta/);assert.doesNotMatch(switched,/mercury alpha/);
+  await writeFile(join(second,'switched-candidate.txt'),'second-before');
+  const switchedPlan=await runTool('suite_change',{action:'prepare',path:'switched-candidate.txt',format:'text',checks:[{kind:'equals',value:'second-after'}]});
+  await runTool('suite_change',{action:'stage',id:switchedPlan.id,content:'second-after'});
+  assert.ok((await runTool('suite_change',{action:'verify',id:switchedPlan.id})).planHash);
+  assert.equal(await readFile(join(second,'switched-candidate.txt'),'utf8'),'second-before');
+  assert.equal((await runTool('suite_change',{action:'cancel',id:switchedPlan.id})).status,'cancelled');
+  await f.ctx.workingDirectory.set(a,f.dirs.project);
+  const returned=JSON.stringify(await call(f,a,'memory_recall',{query:'mercury alpha venus beta'}));
+  assert.match(returned,/mercury alpha/);assert.doesNotMatch(returned,/venus beta/);
+
+  const fs=f.ctx.fs;
+  for(const cwd of [f.dirs.project,second]){
+   const path=join(cwd,'protected.txt');await writeFile(path,'original');
+   const target=await fs.resolve(path),info=await fs.stat(target);await fs.readText(target);
+   await fs.writeText(target,'updated',{kind:'replaceIfVersion',version:info.version},undefined,{mode:'workspace-write',workspaceRoot:cwd});
+   assert.equal(await readFile(path,'utf8'),'updated');
+  }
+  const alien=join(f.base,'unregistered');await mkdir(alien);const outside=await fs.resolve(join(alien,'denied.txt'));
+  await assert.rejects(fs.writeText(outside,'denied',{kind:'createIfAbsent'},undefined,{mode:'workspace-write',workspaceRoot:alien}),{code:'RECOVERY_PROJECT_UNKNOWN'});
+  const {rename}=await import('node:fs/promises');await rename(second,second+'-moved');
+  await assert.rejects(call(f,b,'memory_recall',{query:'venus'}));
+  await assert.rejects(f.ctx.sepProtectedProfile.reviewSession(b.session));
+  const stopped=await f.api.close();assert.equal(stopped.status,'pass');assert.equal(stopped.resourcesRetained,false);
+  await assert.rejects(assessment.get(),{code:'SEP_P1_CLOSED'});
+ }finally{await close(f);}
+});

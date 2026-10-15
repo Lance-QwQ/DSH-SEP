@@ -1,0 +1,335 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Test-only r5 Inspector sequencing; portable Windows Node 24.21.0 contracts and exact source derivation; native UI not_run",
+  "priorFrozenInputsUnchanged": true,
+  "prior": [
+    {
+      "path": "NATIVE-FREEZE.json",
+      "bytes": 3859,
+      "sha256": "cc996f79319b2b844234a67e918805b2f0ebd011a17a9cf94b1d35cc0846d30a"
+    },
+    {
+      "path": "NATIVE-AUTHORITY-FREEZE.json",
+      "bytes": 5980,
+      "sha256": "348be6155a24fb3080e544706e0f07f54703a667f0e0a8f13f1a2b9b196173b8"
+    },
+    {
+      "path": "NATIVE-READINESS-FREEZE.json",
+      "bytes": 6605,
+      "sha256": "b3dc6c7d6b9f22d9c316ab2277097639f839a2dc446d041a3b5a7a76d93bb155"
+    }
+  ],
+  "files": [
+    {
+      "path": "derive-inspector-identity.mjs",
+      "bytes": 3023,
+      "sha256": "c988d79f5c4b1139615420541ee8a6af3adf1662b61f2f407436c2898d645965"
+    },
+    {
+      "path": "native-worker-r5.mjs",
+      "bytes": 15788,
+      "sha256": "3a36edcf03bd036c09fe8564224d85ce594bb7b2b71a228ab55db5b8080fab54"
+    },
+    {
+      "path": "native-operator-r5.mjs",
+      "bytes": 6629,
+      "sha256": "69d2fb326f9bec0663f5b25f13b53fa4c365433edda2c7c91ca15a8d31262f53"
+    },
+    {
+      "path": "NATIVE-IDENTITY-ORIGIN.json",
+      "bytes": 2227,
+      "sha256": "62ce6d6983d700ecd46c61f1c851924ccb1f8fe79298860d395dd40cc7013dae"
+    },
+    {
+      "path": "native-inspector-identity.test.mjs",
+      "bytes": 3966,
+      "sha256": "55096c077a5501d983cb906043fabb08f956497562d675d46e5756828bb605bf"
+    },
+    {
+      "path": "native-inspector-identity-README.md",
+      "bytes": 3067,
+      "sha256": "08cf9a72534621d115fc89e1d08115cbf9ee03bd53e27d25ec77ed96ed54bd70"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "NATIVE-FREEZE.json",
+      "bytes": 3859,
+      "sha256": "cc996f79319b2b844234a67e918805b2f0ebd011a17a9cf94b1d35cc0846d30a"
+    },
+    {
+      "path": "NATIVE-ORIGIN.json",
+      "bytes": 5555,
+      "sha256": "eddfe9ff6d1a25176483641cfdb4759971587e6a16c163f7040e24d83d27b2ec"
+    },
+    {
+      "path": "ax-capability.m",
+      "bytes": 440,
+      "sha256": "2c77c3a12e7ed60c9748132ecdc7de9328f28bb6cb2a34fe9a6213888d2a9335"
+    },
+    {
+      "path": "derive-native.mjs",
+      "bytes": 5160,
+      "sha256": "e8a2b8818d550641d749b06790bf0fd9e91c0945f18c9bf53f9c139ae7c69c11"
+    },
+    {
+      "path": "native-README.md",
+      "bytes": 3751,
+      "sha256": "060651af0ae071b327f4c35561e96263ceae7dd13ff5816671ec611f138b5179"
+    },
+    {
+      "path": "native-ci-step.yml",
+      "bytes": 1704,
+      "sha256": "edc9e1f83ca3fe73a2e19d4bc5241b6528076be739a6e15bba25c6ab516fc42a"
+    },
+    {
+      "path": "native-contract.mjs",
+      "bytes": 1186,
+      "sha256": "959315ad251c986f59aa86af67a10fa913adfa88a852fa5733dde6d7350da2d1"
+    },
+    {
+      "path": "native-contract.test.mjs",
+      "bytes": 3629,
+      "sha256": "9ae09478a6ea466b396509b6e79bc980a6041cedb448dd22ac4ee3ba74cb56b5"
+    },
+    {
+      "path": "native-data.mjs",
+      "bytes": 7759,
+      "sha256": "29fd8c149d259d1fdd3a2b10a4bb5291b5d7cbd98a08cbb607069de5a716d2de"
+    },
+    {
+      "path": "native-dom.mjs",
+      "bytes": 8579,
+      "sha256": "e20c8daf52ce79db06c4071f06caaf68af99ebb08cf738cf7e10604645734c72"
+    },
+    {
+      "path": "native-operator.mjs",
+      "bytes": 6324,
+      "sha256": "90c25e2b8d50d2d8c9bdc53fac72cf79686be5a38989907e53880e8096e01524"
+    },
+    {
+      "path": "native-worker.mjs",
+      "bytes": 14763,
+      "sha256": "3bbbaf4adf5100d6d60c2a0437907e7f6f704c9d87e3b23b4d890159d62a611c"
+    },
+    {
+      "path": "../../settings-product/worker.mjs",
+      "bytes": 14199,
+      "sha256": "a45d1b20e17d5a5af219f3e0337a8d1512c11b8014da9a0c632f384e71c89e55"
+    },
+    {
+      "path": "../../settings-product/operator.mjs",
+      "bytes": 6325,
+      "sha256": "c8f803f69fb359386b9fc85a60896894f819295eab4f07c984e6a7a9d60a6665"
+    },
+    {
+      "path": "../../settings-ui/desktop-onboarding.mjs",
+      "bytes": 1397,
+      "sha256": "41ff0d9f92b3d844464ecb32e9896439cda0910c3c19cf3a70ff1080d96fdea1"
+    },
+    {
+      "path": "../workspace-diagnostic.mjs",
+      "bytes": 6296,
+      "sha256": "223edd0596d86cda5dd22d6522badc89bd3428474c294ef7accbcae8ce194f5e"
+    },
+    {
+      "path": "../smoke-inspector.mjs",
+      "bytes": 1685,
+      "sha256": "d6919ce43a828ed5bbb7ed912d496ce1b218ecd96f87028b195e5947e12a19c1"
+    },
+    {
+      "path": "../product-control/native-launch-runner.mjs",
+      "bytes": 7621,
+      "sha256": "447885ada24b09729a3e3f3c02c418e0a5c132eefb58017cd2d9a7411e65eb00"
+    },
+    {
+      "path": "../managed-broker/program-manifest.mjs",
+      "bytes": 4920,
+      "sha256": "43abb6048918236c13b8a95cb7e46764be3ffc2d9eb46e49089bf78916a04071"
+    },
+    {
+      "path": "NATIVE-AUTHORITY-FREEZE.json",
+      "bytes": 5980,
+      "sha256": "348be6155a24fb3080e544706e0f07f54703a667f0e0a8f13f1a2b9b196173b8"
+    },
+    {
+      "path": "native-fixture-authority.test.mjs",
+      "bytes": 5137,
+      "sha256": "8993eaa9d829cf39405f0655b162b05755a6a5596cf238044a79520582f1e8eb"
+    },
+    {
+      "path": "native-p2-authority.mjs",
+      "bytes": 1149,
+      "sha256": "902c5427c0dea51f9e6942bc708cc4040ae2b625327eb1ea45681008ad0437d4"
+    },
+    {
+      "path": "derive-native-authority.mjs",
+      "bytes": 3834,
+      "sha256": "6f33348a1f2ca8de7535f08a570c9bae5a8f2ea7da873222c697c113258ed034"
+    },
+    {
+      "path": "native-data-r2.mjs",
+      "bytes": 8563,
+      "sha256": "ca9a0d4c2eb7c6723be5bd261c8d5be37cd3cc8a98f09f92eb8b6bd558505733"
+    },
+    {
+      "path": "native-worker-r2.mjs",
+      "bytes": 14833,
+      "sha256": "70969e9da84f5cc3ba674de698124b649adf103d6a5361f4c7a16e6b765c39c8"
+    },
+    {
+      "path": "native-operator-r2.mjs",
+      "bytes": 6423,
+      "sha256": "a3c6a90e7869125c36d3db1518b292911bcff5aa2eda320c820ec9191800e8bf"
+    },
+    {
+      "path": "NATIVE-AUTHORITY-ORIGIN.json",
+      "bytes": 4017,
+      "sha256": "daa6853ebc65cfa511998cad2f266b2de028687bf6c63f572e8bd11506c3943e"
+    },
+    {
+      "path": "native-authority-derive.test.mjs",
+      "bytes": 916,
+      "sha256": "077b3eb6ab0389c47500314d92aac1f18db151c8fe20f02fa27c0bd954270cce"
+    },
+    {
+      "path": "native-authority-ci-step.yml",
+      "bytes": 1656,
+      "sha256": "82cd418bb2ba5d92128ebdef131f6cd11dd292d18176ad113fe5acdbe5885642"
+    },
+    {
+      "path": "native-authority-README.md",
+      "bytes": 2187,
+      "sha256": "94ceb83d8bd079a01f72784dd6c3b0535f84b588505e3a1ef3668d58b15868ff"
+    },
+    {
+      "path": "NATIVE-READINESS-FREEZE.json",
+      "bytes": 6605,
+      "sha256": "b3dc6c7d6b9f22d9c316ab2277097639f839a2dc446d041a3b5a7a76d93bb155"
+    },
+    {
+      "path": "native-readiness.mjs",
+      "bytes": 1828,
+      "sha256": "993fd49726d34efc080f6c70e8c98e30b9f506a422c555eec2d0157fdb79ee96"
+    },
+    {
+      "path": "native-readiness.test.mjs",
+      "bytes": 3495,
+      "sha256": "58837d54ed4c89474933ac9d12d0879423aab580852c0bd1792d476ea03a2394"
+    },
+    {
+      "path": "derive-native-readiness.mjs",
+      "bytes": 4888,
+      "sha256": "8e449f8ea4210270e9159baf20d8a1c4290bdb66258b82bb8adb1b4647b46861"
+    },
+    {
+      "path": "native-worker-r3.mjs",
+      "bytes": 15482,
+      "sha256": "4b76efbaa89f17db7908a04a0c628ca19585432bb9862e7168d3e35688a54603"
+    },
+    {
+      "path": "native-operator-r3.mjs",
+      "bytes": 6510,
+      "sha256": "7dfd70efc983200ebd25acbe8f2a0e057a7ce79ac73ef85a79dd56f06149f318"
+    },
+    {
+      "path": "native-dom-r3.mjs",
+      "bytes": 9408,
+      "sha256": "32798f21b8f2610389700a1108536981635e6f142a8993e5fc9cb6562acf1f38"
+    },
+    {
+      "path": "NATIVE-READINESS-ORIGIN.json",
+      "bytes": 5172,
+      "sha256": "ecbb6f22c07b6206ef13541c2d5aceb23cece1dd6da3c540d51df69026519786"
+    },
+    {
+      "path": "native-readiness-derive.test.mjs",
+      "bytes": 2873,
+      "sha256": "183845a48fcd29377b2dd93a99d3b6b2be3fe0a98c663872b6b5638c777a24d3"
+    },
+    {
+      "path": "native-readiness-README.md",
+      "bytes": 2800,
+      "sha256": "6fcad358805b699fb532088cab4d54f2b14b8d6f1919dfa1f5fa3e035f249da6"
+    },
+    {
+      "path": "native-readiness-ci-step.yml",
+      "bytes": 1815,
+      "sha256": "22a00e239b328bd8a0e8a0356d9b5049b88a22d05cc265ec2f9abc5b5495b63e"
+    },
+    {
+      "path": "native-worker-r4.mjs",
+      "bytes": 15482,
+      "sha256": "826353ddb3b2992a038326447b159ac06a11b1a43be68a4cd19a3c2738e14a96"
+    },
+    {
+      "path": "native-operator-r4.mjs",
+      "bytes": 6567,
+      "sha256": "8458521a08bc8fdb4130340e67f0c55c056a69af2789a54c8f299c3e0cd37c18"
+    },
+    {
+      "path": "native-data-r4.mjs",
+      "bytes": 8594,
+      "sha256": "1a02e6e19c5ee0aaa900a96ceb8d178a2513c57883bdf5d832e79667c6c76109"
+    },
+    {
+      "path": "derive-pending-native.mjs",
+      "bytes": 2759,
+      "sha256": "d229d5fc92baddac0e07bc70d0992777bd6f62160c3bc08de44d732d742010fd"
+    },
+    {
+      "path": "NATIVE-PENDING-ORIGIN.json",
+      "bytes": 2527,
+      "sha256": "72c2000cfa5b7745bbfeb6681ca4ea003f002b80d3a3eb0dc3bbb0b2cb23ff64"
+    }
+  ],
+  "tests": {
+    "oldR4": {
+      "definitions": 6,
+      "pass": 2,
+      "fail": 4,
+      "scope": "actual frozen reader seam with Electron unavailable before trusted readiness"
+    },
+    "green": {
+      "definitions": 21,
+      "pass": 21,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "originalContracts": 15,
+      "identityContracts": 6
+    }
+  },
+  "derivation": {
+    "workerTransforms": 2,
+    "operatorTransforms": 2,
+    "exactReplay": "pass",
+    "oldLateReaderUnchanged": true
+  },
+  "nativeUi": "not_run",
+  "productModified": false,
+  "evidence": [
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-inspector-identity-r5\\RED-final-r4.tap",
+      "bytes": 5362,
+      "sha256": "cb917c1dc02e257631a05c548a82498b4d41678b6905e38878f80c8a40039187"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-inspector-identity-r5\\GREEN-all21.tap",
+      "bytes": 4962,
+      "sha256": "bce767820924dbfe2da157bae3bb159092dffe57e593caf18c95a9047fbbaaf1"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-inspector-identity-r5\\ORIGIN-VERIFY.json",
+      "bytes": 262,
+      "sha256": "b0c7a15b312d8c1a227e165e0dd6977925be52464b952b967a42446cd44ae407"
+    }
+  ],
+  "originalR74Audit": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\application-r74-evidence\\AUDIT.json",
+    "sha256": "64440f0a015e1a3d2e466f4f2abab551711b716eb930e65802e17ff76e85385d"
+  },
+  "command": "node native-operator-r5.mjs verifiedRestoreRESULT RESULT_SHA freshRoundOutput sameSyntheticDataRoot 1|2",
+  "ci": "Restore exact r74 without modification; --verify derivation; run old four test files plus identity file =21; round2 only after round1 pass. Save all evidence including early/surface-ready identity. Default identity test selects r5; RED selects r4 via SEP_IDENTITY_TEST_WORKER."
+}

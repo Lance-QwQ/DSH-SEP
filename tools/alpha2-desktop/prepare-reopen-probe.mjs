@@ -1,0 +1,14 @@
+import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';
+const phase=process.argv[2],fixture=JSON.parse(await readFile(join(phase,'MANAGED-DESKTOP-FIXTURE-r5.json')));
+const path=join(fixture.externalDesktopEntry,'sep-test-bootstrap.mjs');let source=await readFile(path,'utf8');
+const replace=(from,to)=>{if(source.split(from).length!==2)throw Error('REOPEN_PROBE_ANCHOR');source=source.replace(from,to);};
+replace("import {writeFile} from 'node:fs/promises';","import {writeFile} from 'node:fs/promises';\nimport {spawn} from 'node:child_process';");
+replace("  app.emit('second-instance',{},[],input.project,{});await until(()=>window.isVisible());",`  const second=spawn(process.execPath,[input.externalEntry,'--user-data-dir='+input.userData],{cwd:input.project,env:process.env,stdio:'ignore',windowsHide:true});
+  const secondExit=await new Promise((resolve,reject)=>{second.once('error',reject);second.once('exit',(code,signal)=>resolve({code,signal}));});
+  if(secondExit.code!==0)throw Error('SECOND_EXECUTABLE_FAILED');await until(()=>window.isVisible());`);
+replace("step:'official-second-instance-handler-reopened'","step:'actual-second-executable-reopened'");
+replace('real official reopen handler','actual second executable reopen');
+await writeFile(path,source);
+const inputPath=join(fixture.externalDesktopEntry,'sep-test-input.json'),input=JSON.parse(await readFile(inputPath));input.externalEntry=fixture.externalDesktopEntry;
+input.notVerified=['actual tray click','first-close prompt (separate r4 human evidence)','manual drag (separate r4 human evidence)','paid model','private Profile admission'];
+await writeFile(inputPath,JSON.stringify(input)+'\n');

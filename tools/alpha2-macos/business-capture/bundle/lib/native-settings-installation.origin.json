@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "source": "bundle/lib/controlled-installation.js",
+  "sourceSha256": "1f83c4725a5d7f32dfcfff51af348bd9231abc966df0eed97ad5759df9456293",
+  "changes": [
+    {
+      "old": "    if(phase!=='ready'||transition)fail('SEP_INSTALLATION_STATE');\n    const inner=await runtime.review();if(phase!=='ready')fail('SEP_INSTALLATION_STATE');\n    plan={runtimeHash:inner.planHash,planHash:hash({runtimeHash:inner.planHash,ui:config.ui,scope:'controlled-cold-settings-v1'})};\n    return {...plan,scope:'explicit cold settings root; default admission and complete SEP remain blocked'};\n   },\n",
+      "new": "    if(phase!=='ready'||transition)fail('SEP_INSTALLATION_STATE');\n    const inner=await runtime.review();if(phase!=='ready')fail('SEP_INSTALLATION_STATE');\n    plan={runtimeHash:inner.planHash,planHash:hash({runtimeHash:inner.planHash,ui:config.ui,scope:'controlled-cold-native-settings-v1'})};\n    return {...plan,scope:'explicit cold settings root; default admission and complete SEP remain blocked'};\n   },\n"
+    },
+    {
+      "old": "   await startup.promise;\n   await runtime?.whenClosed();\n   try{await uiFiber?.dispose();await runtimeFiber?.dispose();phase='closed';problem=undefined;closed.resolve();}\n   catch{phase='cleanup-blocked';problem='SEP_INSTALLATION_CLEANUP_BLOCKED';}\n   return receipt();\n",
+      "new": "   await startup.promise;\n   await runtime?.whenClosed();\n   try{await ctx.get('sepNativeSettingsUi')?.close();await uiFiber?.dispose();await runtimeFiber?.dispose();phase='closed';problem=undefined;closed.resolve();}\n   catch{phase='cleanup-blocked';problem='SEP_INSTALLATION_CLEANUP_BLOCKED';}\n   return receipt();\n"
+    },
+    {
+      "old": " if(retiredRoots.has(ctx.fiber))fail('SEP_INSTALLATION_STATE');\n let config;try{config=schema.parse(input);}catch{fail('SEP_INSTALLATION_INPUT_INVALID');}\n if(ctx.get('sepControlledInstallation',false)||ctx.get('suiteEnhancements',false))fail('SEP_INSTALLATION_PROVIDER_CONFLICT');\n let phase='preparing',runtimeFiber,uiFiber,runtime,plan,transition,finishing,problem,mountFailure,mountCause;\n",
+      "new": " if(retiredRoots.has(ctx.fiber))fail('SEP_INSTALLATION_STATE');\n let config;try{config=schema.parse(input);}catch{fail('SEP_INSTALLATION_INPUT_INVALID');}\n SettingsUi.assertOwner(ctx);\n if(ctx.get('sepControlledInstallation',false)||ctx.get('suiteEnhancements',false))fail('SEP_INSTALLATION_PROVIDER_CONFLICT');\n let phase='preparing',runtimeFiber,uiFiber,runtime,plan,transition,finishing,problem,mountFailure,mountCause;\n"
+    },
+    {
+      "old": "import {createHash} from 'node:crypto';\nimport * as Runtime from './settings-runtime.js';\nimport * as SettingsUi from '../modules/ui-settings-memory/lib/index.js';\n\nexport const name='dsh-sep-controlled-installation';\nexport const inject=[...Runtime.inject,'connection'];\nexport const provide=['sepControlledInstallation'];\nconst schema=z.object({runtime:z.record(z.string(),z.unknown()),ui:z.object({enabled:z.literal(true).default(true),requestTimeoutMs:z.number().int().min(1000).max(300000).default(120000)}).strict().default({enabled:true,requestTimeoutMs:120000})}).strict();\n",
+      "new": "import {createHash} from 'node:crypto';\nimport * as Runtime from './settings-runtime.js';\nimport * as SettingsUi from './native-settings-ui.js';\n\nexport const name='dsh-sep-native-settings-installation';\nexport const inject=[...Runtime.inject,'connection','clientModules'];\nexport const provide=['sepControlledInstallation'];\nconst schema=z.object({runtime:z.record(z.string(),z.unknown()),ui:z.object({enabled:z.literal(true).default(true),requestTimeoutMs:z.number().int().min(1000).max(300000).default(120000)}).strict().default({enabled:true,requestTimeoutMs:120000})}).strict();\n"
+    }
+  ],
+  "resultSha256": "b4421e7d8a097a9ee6bf62e751bb661f1531763fd5881e7d2f0cbb776a14ee39",
+  "textNormalization": "Replay converts CRLF to LF; SHA-256 always binds original raw bytes.",
+  "supersedesOriginSha256": "93576bcfedde71cac4584914cffefd8bd677f9d718d6b420afc0e8ca4f49ee18",
+  "predecessorCommit": "9db625afc1653e758d23e050b020e84cd3fa5291",
+  "scope": "Current bundle24 exact replay; recorded predecessor remains in Git and sealed bundle23."
+}

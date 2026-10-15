@@ -1,0 +1,144 @@
+desktop-managed-overlay:
+  runs-on: macos-15
+  timeout-minutes: 40
+  permissions:
+    contents: read
+    actions: read
+  env:
+    SEP_MAC_OVERLAY_CAPTURE_SHA256: c7a1d78b577648ceaa6e94006e8d910cfaff579c1a23bdec240921c2d4f2c597
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.19.0
+    - name: Verify public derived capture and admission rules
+      shell: bash
+      run: |
+        set -euo pipefail
+        test "$(uname -s)" = Darwin
+        test "$(uname -m)" = arm64
+        export SEP_MAC_MANAGED_CAPTURE="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture"
+        mkdir "$RUNNER_TEMP/overlay-receipts"
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/inspector-entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/entry.test.mjs tools/alpha2-macos/desktop/managed-overlay/paths.test.mjs tools/alpha2-macos/desktop/managed-overlay/captured.test.mjs tools/alpha2-macos/desktop/managed-overlay/asar-plist.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-dependencies.test.mjs tools/alpha2-macos/desktop/managed-overlay/desktop-imports.test.mjs > "$RUNNER_TEMP/overlay-receipts/tests.tap"
+        cp -R "$SEP_MAC_MANAGED_CAPTURE" "$RUNNER_TEMP/managed-capture"
+    - name: Fetch fixed successful carrier artifact and derive inner digest
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/desktop/managed-overlay/download-carrier.mjs "$RUNNER_TEMP/managed-carrier-download"
+    - name: Extract bound carrier and install integrity-pinned ASAR tool
+      run: |
+        mkdir "$RUNNER_TEMP/managed-carrier"
+        ditto -x -k "$RUNNER_TEMP/managed-carrier-download/input/desktop-carrier.zip" "$RUNNER_TEMP/managed-carrier"
+        node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/asar-tools"
+    - name: Assemble isolated managed overlay and verify native signature
+      id: managed_overlay_build
+      run: node tools/alpha2-macos/desktop/managed-overlay/apply-to-carrier.mjs "$RUNNER_TEMP/managed-carrier/DSH SEP.app" "$RUNNER_TEMP/managed-capture" "$RUNNER_TEMP/managed-overlay-result" "$RUNNER_TEMP/asar-tools/node_modules/@electron/asar/lib/asar.js"
+    - name: Actual missing-connection refusal without ordinary Host startup
+      run: node tools/alpha2-macos/desktop/managed-overlay/probe-missing-connection.mjs "$RUNNER_TEMP/managed-overlay-result/DSH SEP.app" "$RUNNER_TEMP/managed-negative"
+    - name: Verify current broker and real Inspector helpers
+      id: full_broker
+      if: always() && steps.managed_overlay_build.outcome == 'success'
+      run: |
+        export SEP_TEST_ROOT="$RUNNER_TEMP"
+        export SEP_STARTUP_HOST_TEST_ROOT="$RUNNER_TEMP/startup-host-tests"
+        export SEP_STARTUP_HOST_ENTRY="$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-broker/business-host.mjs"
+        export SEP_STARTUP_HOST_EXPECTED_SHA="a1712ce685020656e3994a4af9ea4e2f59eb0d7546032a9b58643e8d482345e5"
+        export SEP_DESKTOP_TEST_ROOT="$RUNNER_TEMP/broker-integration-tests"
+        mkdir "$SEP_DESKTOP_TEST_ROOT"
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/managed-broker/*.test.mjs tools/alpha2-macos/desktop/managed-overlay/refusal-observer.test.mjs tools/alpha2-macos/desktop/smoke-helpers.test.mjs tools/alpha2-macos/desktop/inspector-live.test.mjs tools/alpha2-macos/startup-host-recovery/recovery.test.mjs > "$RUNNER_TEMP/overlay-receipts/broker-integration.tap"
+    - name: Assemble actual Mac document/image/settings package from verified program inputs
+      id: full_build
+      if: always() && steps.full_broker.outcome == 'success'
+      env:
+        SEP_MAC_BUSINESS_CAPTURE_SHA256: 3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3
+      run: |
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$RUNNER_TEMP/full-project-tree"
+        export SEP_MAC_IMAGE_PACKAGE=1
+        export SEP_MAC_ATTACHMENT_HELPER="$RUNNER_TEMP/full-attachment-tree"
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/media/native-attachments.c -o "$SEP_MAC_ATTACHMENT_HELPER"
+        export SEP_MAC_DOCUMENT_PACKAGE=1
+        export SEP_MAC_PARSER_OWNER="$RUNNER_TEMP/full-parser-owner"
+        export SEP_MAC_PARSER_DEPENDENCIES="$RUNNER_TEMP/full-parser-dependencies/node_modules"
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/task-sandbox/task-owner.c -o "$SEP_MAC_PARSER_OWNER"
+        node tools/alpha2-macos/package/install-parser-dependencies.mjs "$RUNNER_TEMP/full-parser-dependencies"
+        node tools/alpha2-macos/package/assemble-full.mjs "$RUNNER_TEMP/managed-overlay-result" "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE/tools/alpha2-macos" "$RUNNER_TEMP/full-project-tree" "$RUNNER_TEMP/asar-tools/node_modules/@electron/asar/lib/asar.js" "$RUNNER_TEMP/final-package"
+    - name: Restore the actual distribution archive into a fresh directory
+      id: full_restore
+      if: always() && steps.full_build.outcome == 'success'
+      run: |
+        mkdir "$RUNNER_TEMP/restored-package"
+        ditto -x -k "$RUNNER_TEMP/final-package/DSH-SEP-macOS-Alpha2-preview.zip" "$RUNNER_TEMP/restored-package"
+        node --input-type=module <<'JS'
+        import {readFile,writeFile} from 'node:fs/promises';
+        import {join} from 'node:path';
+        import {verifyPackage} from './tools/alpha2-macos/package/package-inventory.mjs';
+        const out=join(process.env.RUNNER_TEMP,'final-package'),receipt=JSON.parse(await readFile(join(out,'PACKAGE-INVENTORY.json'),'utf8'));
+        const result=await verifyPackage(join(process.env.RUNNER_TEMP,'restored-package/DSH-SEP-macOS-Alpha2-preview'),receipt);
+        await writeFile(join(out,'ARCHIVE-RESTORE.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+        JS
+    - name: Three real installed Profile and desktop cycles
+      id: full_smoke
+      if: always() && steps.full_restore.outcome == 'success'
+      run: |
+        programSha=$(node -e 'process.stdout.write(JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")).programSha256)' "$RUNNER_TEMP/final-package/RESULT.json")
+        node tools/alpha2-macos/desktop/smoke-full.mjs "$RUNNER_TEMP/restored-package/DSH-SEP-macOS-Alpha2-preview/PROGRAM.json" "$programSha" "$RUNNER_TEMP/full-native-smoke"
+    - name: Confirm installed program unchanged after real use
+      id: full_inventory
+      if: always() && steps.full_smoke.outcome == 'success'
+      run: |
+        node --input-type=module <<'JS'
+        import {readFile,writeFile} from 'node:fs/promises';
+        import {join} from 'node:path';
+        import {verifyPackage} from './tools/alpha2-macos/package/package-inventory.mjs';
+        const root=join(process.env.RUNNER_TEMP,'final-package');
+        const receipt=JSON.parse(await readFile(join(root,'PACKAGE-INVENTORY.json'),'utf8'));
+        const result=await verifyPackage(join(process.env.RUNNER_TEMP,'restored-package/DSH-SEP-macOS-Alpha2-preview'),receipt);
+        await writeFile(join(root,'POST-SMOKE.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+        JS
+    - name: Preserve complete candidate only after installed smoke succeeds
+      if: always() && steps.full_inventory.outcome == 'success'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-document-preview-package
+        if-no-files-found: error
+        compression-level: 0
+        path: |
+          ${{ runner.temp }}/final-package/DSH-SEP-macOS-Alpha2-preview.zip
+          ${{ runner.temp }}/final-package/RESULT.json
+          ${{ runner.temp }}/final-package/PACKAGE-INVENTORY.json
+          ${{ runner.temp }}/final-package/POST-SMOKE.json
+          ${{ runner.temp }}/final-package/ARCHIVE-RESTORE.json
+    - name: Preserve package and installed-smoke diagnostics
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-installed-package-evidence
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/final-package/RESULT.json
+          ${{ runner.temp }}/final-package/ARCHIVE-RESTORE.json
+          ${{ runner.temp }}/final-package/*.log
+          ${{ runner.temp }}/final-package/DSH-SEP-macOS-Alpha2-preview/payload/parser-runtime/manifest.json
+          ${{ runner.temp }}/full-parser-dependencies/RESULT.json
+          ${{ runner.temp }}/full-parser-dependencies/*.log
+          ${{ runner.temp }}/full-native-smoke/RESULT.json
+          ${{ runner.temp }}/full-native-smoke/round-*/*.json
+          ${{ runner.temp }}/full-native-smoke/round-*/*.log
+          ${{ runner.temp }}/startup-host-tests/**/TRACE.json
+          ${{ runner.temp }}/startup-host-tests/**/OWNER.json
+    
+    - name: Preserve receipts and cleanup attribution
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-alpha2-macos-managed-overlay
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/overlay-receipts/
+          ${{ runner.temp }}/managed-carrier-download/DOWNLOAD-RECEIPT.json
+          ${{ runner.temp }}/asar-tools/RESULT.json
+          ${{ runner.temp }}/managed-overlay-result/RESULT.json
+          ${{ runner.temp }}/managed-overlay-result/*.log
+          ${{ runner.temp }}/managed-negative/

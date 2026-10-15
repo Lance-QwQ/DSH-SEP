@@ -1,0 +1,16 @@
+# Insert after welcome-build-candidate in the dedicated native job. Preserve
+# product-tests.tap and product-candidate alongside the welcome artifacts.
+- name: Product main origin and owned-window callback contracts
+  env:
+    SEP_PRODUCT_MAIN_INPUT: ${{ runner.temp }}/welcome-candidate/asar/lib/main.js
+    SEP_RENDERER_READINESS_INPUTS: ${{ runner.temp }}/welcome-workspace-inputs
+    SEP_WELCOME_READINESS_INPUTS: ${{ runner.temp }}/welcome-inputs
+    SEP_PRODUCT_CONTROL_INPUTS: ${{ github.workspace }}/tools/alpha2-macos/desktop/product-control
+  run: |
+    node --test --test-reporter=tap \
+      tools/alpha2-macos/desktop/renderer-readiness/product-window-actions.test.mjs \
+      tools/alpha2-macos/desktop/renderer-readiness/product-derive.test.mjs \
+      tools/alpha2-macos/desktop/renderer-readiness/product-activation-composition.test.mjs \
+      tools/alpha2-macos/desktop/renderer-readiness/application-inputs.test.mjs > "$RUNNER_TEMP/product-tests.tap"
+- name: Create independent product main adapter candidate
+  run: node tools/alpha2-macos/desktop/renderer-readiness/product-build-candidate.mjs "$RUNNER_TEMP/welcome-candidate/asar/lib/main.js" "$RUNNER_TEMP/product-candidate"

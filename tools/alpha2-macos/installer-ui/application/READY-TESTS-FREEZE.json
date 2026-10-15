@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "definitions": 8,
+  "inputs": [
+    {
+      "path": "derive-ready-tests.mjs",
+      "bytes": 3918,
+      "sha256": "fb8927e2f06aae1e0f67a04d80d88631c32d807b5a57cf2e881207ebe9b3e0c9"
+    },
+    {
+      "path": "ready-tests-ci-job.yml",
+      "bytes": 2594,
+      "sha256": "181d18b289c2ecee8bd29e2a36b6f7d1926075797d0a13b5400c7d4001a48d34"
+    },
+    {
+      "path": "InstallerApplicationTests.m",
+      "bytes": 7740,
+      "sha256": "269a7beb19608579feb34659c2d9a7fd393ccf79aa3ea741ebafc313df479af9"
+    },
+    {
+      "path": "InstallerApplication.m",
+      "bytes": 2150,
+      "sha256": "f8f0778e19d91e70f26a23492e4439c7df6138fa4428498d54a070c71befcc81"
+    },
+    {
+      "path": "InstallerApplication.h",
+      "bytes": 438,
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c"
+    },
+    {
+      "path": "../native/InstallerUI.m",
+      "bytes": 16429,
+      "sha256": "c36fdc9877c19e3ec77ca5da1b05610285d591ec5f19b32e1331bf9637fdfb80"
+    },
+    {
+      "path": "../native/InstallerUI.h",
+      "bytes": 921,
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    }
+  ],
+  "originSha256": "dc9fd798db6eccd27873250b77a041e9bca2d44baefed195918ce474c9119779",
+  "derivedTestSha256": "96a951d90f125b01f4606fcc3f6f2e7cb15e23b2116f08b3dfc88d161ca0dc58",
+  "sourceEvidence": {
+    "run": 38634271006,
+    "job": 116093303075,
+    "auditSha256": "07bb4f55de7c5bb093ff12f44594b94c7bce1ffe26bfc10f88eed013420b2c28"
+  },
+  "change": "Test setup waits for the actual preview request before replying, then preview phase; NSMenu waits for actual action delivery. Original eight behavior assertions and production delegate are unchanged.",
+  "scope": "Real native execution pending; bounded test setup/event waits are not production changes or a stronger success claim."
+}

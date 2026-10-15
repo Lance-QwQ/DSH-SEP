@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "stage": 7,
+  "status": "pass",
+  "scope": "finite investigation and honest disposition; not root-cause resolution",
+  "sampleCount": 6,
+  "samplesPerPath": 3,
+  "newExperiments": 0,
+  "input": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\tests\\finite-close-r1\\timing.json",
+  "inputSha256": "86c2c5ba2a6d3e64c57999cbee25ef2e5b8b9209e7314271d2e9318f75f4d0fc",
+  "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\finite-close-r1.log",
+  "logSha256": "4fb52209701e6b71642a206b05793563dc348651f1da5f408f627cd6735fcfa2",
+  "samples": [
+    {
+      "kind": "native-100ms",
+      "run": 1,
+      "actualClosed": true,
+      "leaseGone": true,
+      "firstStatus": "blocked",
+      "secondStatus": "pass",
+      "firstReceiptMs": 105.42,
+      "secondReceiptMs": 17.73,
+      "completionPath": "explicit model gate release -> model settles -> retry close -> physical lease close -> whenClosed"
+    },
+    {
+      "kind": "native-100ms",
+      "run": 2,
+      "actualClosed": true,
+      "leaseGone": true,
+      "firstStatus": "blocked",
+      "secondStatus": "pass",
+      "firstReceiptMs": 101.32,
+      "secondReceiptMs": 16.92,
+      "completionPath": "explicit model gate release -> model settles -> retry close -> physical lease close -> whenClosed"
+    },
+    {
+      "kind": "native-100ms",
+      "run": 3,
+      "actualClosed": true,
+      "leaseGone": true,
+      "firstStatus": "blocked",
+      "secondStatus": "pass",
+      "firstReceiptMs": 112.0,
+      "secondReceiptMs": 21.78,
+      "completionPath": "explicit model gate release -> model settles -> retry close -> physical lease close -> whenClosed"
+    },
+    {
+      "kind": "mount-700ms",
+      "run": 1,
+      "actualClosed": true,
+      "leaseGone": true,
+      "observation": "settled",
+      "closeStatus": "blocked",
+      "completionPath": "mount failure returns bounded controls with restore gate held -> explicit restore gate release -> retry close/dispose -> physical lease absent"
+    },
+    {
+      "kind": "mount-700ms",
+      "run": 2,
+      "actualClosed": true,
+      "leaseGone": true,
+      "observation": "settled",
+      "closeStatus": "blocked",
+      "completionPath": "mount failure returns bounded controls with restore gate held -> explicit restore gate release -> retry close/dispose -> physical lease absent"
+    },
+    {
+      "kind": "mount-700ms",
+      "run": 3,
+      "actualClosed": true,
+      "leaseGone": true,
+      "observation": "settled",
+      "closeStatus": "blocked",
+      "completionPath": "mount failure returns bounded controls with restore gate held -> explicit restore gate release -> retry close/dispose -> physical lease absent"
+    }
+  ],
+  "historicalRootCause": "unattributed",
+  "historicalIssueFixed": false,
+  "productionTimeoutChanged": false,
+  "testObservationCorrection": {
+    "status": "pass",
+    "scope": "test-contract correction; no production timing change, old failed logs retained; no claim of historical root-cause resolution",
+    "rows": [
+      {
+        "file": "tools\\bundle-install\\tests\\native-settings.test.mjs",
+        "beforeSha256": "9198bce202b3648de1734a0a5a9dc343744334e3540e6669a30673b0c2b092d0",
+        "afterSha256": "7955b85116613fe8cd8e481e32709480e40ab19a5f02839dd3b55df1a2d71d54",
+        "reason": "100ms bounds the close receipt; model settlement is not physical owner release; retain actual completion and a finite 3s fixture deadline"
+      },
+      {
+        "file": "tools\\bundle-install\\tests\\mount-failure.test.mjs",
+        "beforeSha256": "3985f01ce28c5a774911e7536b4acd09be01eee100553752ebf2d7dda5a8b6f4",
+        "afterSha256": "e96785c4b6ada2ea96251fab891c88a5577470432adb629792d2413ed6a31c3e",
+        "reason": "Start the existing 700ms failure-cleanup observation at the fault injection; arbitrary cold startup is separately bounded at 5s; 100ms close and 180ms retained-disposal checks unchanged"
+      }
+    ]
+  },
+  "laterEvidence": "frozen bundle22 runtime283 and stage5 bundle23 runtime283/lifecycle23 pass; independent repeated success does not explain historical timing failures",
+  "resourceAttribution": "blocked receipts retained resources then; eventual absence followed controlled gate release/retry/owner close. Browser5s historical failure used forced owned-child cleanup, distinct from later normal Browser.close samples",
+  "acceptancePolicy": "no new permanent requirement to explain every slow historical sample; preserve logs and bounded observations"
+}

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "stage": "installer-private-transport-native-red-r2",
+  "definitions": 15,
+  "implementation": "unchanged explicit non-launching RED stub",
+  "sourceInputs": [
+    {
+      "path": "InstallerPipeTransport.h",
+      "bytes": 494,
+      "sha256": "c1ece550711b546ddd5589199f3a7646b857b32f489394bc0729a91f96ea491c"
+    },
+    {
+      "path": "InstallerPipeTransport.m",
+      "bytes": 1005,
+      "sha256": "42ab73e34434836781acf189dc51151d2aa63ecf451b5353dabf4a6a7e64802c"
+    },
+    {
+      "path": "InstallerPipeTransportTests.m",
+      "bytes": 12634,
+      "sha256": "c19fb9ddfaf925beddfe38ececc1f2716f87dc3431401c0518e45397c3e961ab"
+    },
+    {
+      "path": "controller-fixture.mjs",
+      "bytes": 4234,
+      "sha256": "588492c465dedb416c041bb2163c127bc0d996753728f2813689f5f809f0135d"
+    },
+    {
+      "path": "fixture-preflight.mjs",
+      "bytes": 3064,
+      "sha256": "e960550597684ebf7706d6a5b2f8003a59e9aee8afa9d945a8159644dbdf1016"
+    },
+    {
+      "path": "ci-job.yml",
+      "bytes": 2618,
+      "sha256": "4b9113566dfda0b2d6eef5730d71f3a1b77df2fa4c133719a39af2644723a4aa"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3353,
+      "sha256": "f5e2a63fcee6c707787fa138d3c73e8b2f843145e4fbb0227b66076774aab184"
+    },
+    {
+      "path": "RED-PREFLIGHT-CORRECTION.md",
+      "bytes": 1377,
+      "sha256": "d864dee6ab6d3c998b6df9324aca5110a9a21786ea5c6dff9b4bb0d47c9f57d4"
+    }
+  ],
+  "dependency": {
+    "path": "installer-ui/native/InstallerUI.h",
+    "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+  },
+  "originalFreezeSha256": "8ce80c2bcbfe35300ab6277212b5d706f1acdb9395c2d172c0f7fe8527f21eea",
+  "preservedTestSha256": "c19fb9ddfaf925beddfe38ececc1f2716f87dc3431401c0518e45397c3e961ab",
+  "change": "only exit-eof synthetic controller parent avoids stdout.end before exiting; no product implementation or test definition changes",
+  "posixAuxiliary": {
+    "node": "v24.19.0",
+    "oldExit": 1,
+    "newExit": 0,
+    "exitToEofMs": 375,
+    "notMacEvidence": true
+  },
+  "notVerified": [
+    "actual Mac RED execution",
+    "native NSTask transport",
+    "production installation"
+  ]
+}

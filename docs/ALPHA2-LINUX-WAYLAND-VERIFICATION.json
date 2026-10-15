@@ -1,0 +1,2885 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "verificationScope": "4 successful actual closeout.12 private native Sway/pixman Wayland UI rounds; includes separate ASCII and Unicode chooser inputs; no production program change",
+  "sourceBase": "84d3e447a4713a234005685358456cc22c641289",
+  "package": {
+    "name": "DSH-SEP-Linux-x64-Alpha2-closeout.12.tar.gz",
+    "sha256": "1708b8050c35471c930c6fc61d48289296609b64c7d2a431013eb299b7482f00",
+    "manifestSha256": "1f087d0680ca3d0c1b13a38983d564b73c2a0e068b6ec1d9eb87fbc55ca5b196"
+  },
+  "counts": {
+    "fixedScenarioDefinitions": 10,
+    "originalRounds": 2,
+    "asciiSupplementRounds": 0,
+    "unicodeSupplementRounds": 2,
+    "successfulScenarioExecutions": 40,
+    "inputGuardDefinitions": 3,
+    "inputGuardPass": 3,
+    "old226DefinitionsRerun": false,
+    "historicalAttemptsNotAddedToPassCount": true
+  },
+  "environment": {
+    "os": "Ubuntu 24.04 x64 dedicated WSL2 ext4",
+    "compositor": "Sway 1.9 private headless",
+    "renderer": "pixman",
+    "xwayland": false,
+    "physicalInput": false,
+    "sessionBus": "private",
+    "model": "synthetic LLM; no paid requests"
+  },
+  "attempts": [
+    {
+      "name": "alpha2-portable-wayland-actual-r10",
+      "status": "fail",
+      "code": "WAYLAND_CONDITION_DEADLINE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r11",
+      "status": "fail",
+      "code": "WAYLAND_CONDITION_DEADLINE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r12",
+      "status": "fail",
+      "code": "WAYLAND_CONDITION_DEADLINE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r13",
+      "status": "fail",
+      "code": "Expected values to be strictly equal:\n\n1 !== 0\n",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r14",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r15",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r18",
+      "status": "not_run",
+      "code": null,
+      "completedRounds": 0,
+      "interpretation": "setup interrupted before RESULT; see history and cleanup records"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r19",
+      "status": "not_run",
+      "code": null,
+      "completedRounds": 0,
+      "interpretation": "setup interrupted before RESULT; see history and cleanup records"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r20",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r21",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r22",
+      "status": "fail",
+      "code": "The \"path\" argument must be of type string. Received undefined",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r23",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r24",
+      "status": "pass",
+      "code": null,
+      "completedRounds": 2,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r26",
+      "status": "fail",
+      "code": "NATIVE_IMAGE_PREVIEW_MISSING",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r27",
+      "status": "pass",
+      "code": null,
+      "completedRounds": 2,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r7",
+      "status": "fail",
+      "code": "OBSERVATION_ENDPOINT_SCOPE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r8",
+      "status": "fail",
+      "code": "The expression evaluated to a falsy value:\n\n  assert(Math.abs(after.rect.x-before.rect.x)>=40)\n",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-actual-r9",
+      "status": "fail",
+      "code": "WAYLAND_CONDITION_DEADLINE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-atspi-r16",
+      "status": "fail",
+      "code": "SEP_LINUX_CLICK_APPLICATION_UNAVAILABLE",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-atspi-r17",
+      "status": "fail",
+      "code": "SEP_LINUX_CLICK_DBUS_UNKNOWNMETHOD",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    },
+    {
+      "name": "alpha2-portable-wayland-atspi-r25",
+      "status": "fail",
+      "code": "ERR_ASSERTION",
+      "completedRounds": 0,
+      "interpretation": "raw attempt retained; failures not counted as passes"
+    }
+  ],
+  "notVerified": {
+    "fullLinuxPublicCertification": "blocked",
+    "nativeAtspiActualGtkDialog": "fail",
+    "physicalDesktopAndWslgOuterInput": "not_run",
+    "gnomeKdePortalBackends": "not_run",
+    "paidOnlineModels": "not_run",
+    "privateDataAdoption": "not_run",
+    "publicAutomaticInstallation": "blocked",
+    "installedStartShDuplicateActivation": "not_run",
+    "allSupervisorsKilled": "not_run",
+    "macOS": "not_run"
+  },
+  "interpretation": {
+    "nativeImages": "chooser File preview and removal only; this run does not send the image or certify a paid vision request",
+    "drag": "native Sway decoration titlebar; not frameless client-area dragging",
+    "hideReactivation": "official Electron single-instance activation; not duplicate start.sh wrapper activation",
+    "atspi": "installed provider could not complete actual native GTK dialog semantic Cancel/Quit; prior X11 fixture evidence is separate",
+    "cleanup": "successful four application rounds closed normally; compositor/input/bus are separately test-cleaned. atspi-r17 needed identity-checked test recovery. Final zero does not retroactively pass historical blocked exits.",
+    "source": "test/evidence additions only; package remains closeout.12 unchanged"
+  },
+  "saved": [
+    {
+      "path": "installed-audit.json",
+      "sha256": "b903ffab79b751034e57627aca0fb794fa30cef165646d8d8d3de4c733c07879",
+      "bytes": 1476
+    },
+    {
+      "path": "input-scope.tap",
+      "sha256": "3af4345fb9da2f2e6e1b1bc7b0caabeda3bb0bd4f8aa0a6df38fae3dff938f48",
+      "bytes": 862
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/PRIVATE-CLEANUP.json",
+      "sha256": "b1027d4e276b3971176bf05d367387fefc5c1e90092964169c0f9c3f317e8332",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/RESULT.json",
+      "sha256": "cbaea3a4a20a040bb6213c1d7a4422e7a3bab21102a09184ade40193b2ca9a39",
+      "bytes": 3577
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/dbus.stderr.log",
+      "sha256": "104c6bf99e79ce6be7632435d0479dd1f41d42f1c31661bdc7fa7e3d2b48e538",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/dbus.stdout.log",
+      "sha256": "9b46b02abdbc713ae9c28c19c95b5013489887d5171127e8e6e0d1d119268ca4",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/pointer.stdout.log",
+      "sha256": "7e995f0897c8c8b2b242b1808148fa82ae083efe0f72ba1ed85f321600ae7384",
+      "bytes": 93
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/PROGRESS.json",
+      "sha256": "8ee98403a620b197637890c5e550d09f1cbcaa7f39d6d918271f440cad752d20",
+      "bytes": 2618
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/RESULT.json",
+      "sha256": "eac206941a37304b51f7557e20ef2d0dd05c68315ca69e93c5fa4ecb53601dca",
+      "bytes": 2812
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/failure-dom.json",
+      "sha256": "2f619e7470592e4d70c749d1a680dcbaaadf6a16ac1976f706f189d3e64eaca2",
+      "bytes": 2441
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/observation.jsonl",
+      "sha256": "430b27d167d200f0b5b3ac32dc6757c4d3c1528eb2bbc2097907becad86797ac",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1/stdout.log",
+      "sha256": "93955a331e21d4307ade2e163f3211e036b2d9e0f262d44df5e118085bac16d8",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1-chooser-cancel.png",
+      "sha256": "be0532b8fc350cb8e9ef15ee3658c5802afb1619b17d18e4b9e924b865adbabc",
+      "bytes": 29345
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1-drag.png",
+      "sha256": "04e0a6131b23313a585ec1911de6cb8a594a48f904e55b77c0d4d9145941200a",
+      "bytes": 51421
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1-failure.png",
+      "sha256": "be0532b8fc350cb8e9ef15ee3658c5802afb1619b17d18e4b9e924b865adbabc",
+      "bytes": 29345
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1-main.png",
+      "sha256": "2d596261ac983f479db3a268c4bebdc5c1054868485db1213795c689535eb003",
+      "bytes": 54588
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r10/sway.stderr.log",
+      "sha256": "c4658cc6aa45c628a076a249ec4400036f43eed05df4d68a227956ed5f1b0cb4",
+      "bytes": 37351
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/PRIVATE-CLEANUP.json",
+      "sha256": "0df95c627144236bedf516ffe95be8a6aa0ee7ed963b6053b8808c4fb76217ad",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/RESULT.json",
+      "sha256": "616621cf661e316d199dcc893dac4afa4d5b8770ecee3efb5bbbede12b89d97e",
+      "bytes": 8701
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/dbus.stderr.log",
+      "sha256": "513cb678a0db447264a5b7158248fff38a1eec03e17a1fc6f53b3f90e96cc3b1",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/dbus.stdout.log",
+      "sha256": "0eb108361cb9527c7a1d022ca27d1021997d08be530f8fa03cf0efb2c754a830",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/pointer.stdout.log",
+      "sha256": "7e995f0897c8c8b2b242b1808148fa82ae083efe0f72ba1ed85f321600ae7384",
+      "bytes": 93
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/PROGRESS.json",
+      "sha256": "9b64f2b48202f3209036e9c1d55ec453e5bbe7cda7cd517d0a9d5031e4152ab6",
+      "bytes": 2617
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/RESULT.json",
+      "sha256": "c54ab0c0a6b7bd537926faab62e50cba848522bce02b0b6a271808d3f1fb793d",
+      "bytes": 7080
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/failure-dom.json",
+      "sha256": "554deab0df488f297daf8812ca586b74d8f8101de1c0390855709f14824d1c7f",
+      "bytes": 2321
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/observation.jsonl",
+      "sha256": "b935d5f002bab069c5de9e3f08fb88d0ce145491e68566c2097442eb0312ec22",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1/stdout.log",
+      "sha256": "dacaf6e7b485ecafaaf66f2927a8aebbdf45e36902b6cc35a5569ea3fc19c423",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1-chooser-cancel.png",
+      "sha256": "dbc85963fdfb8767f7dd68daaef2f3a03c2a56aa24e7d436cc755fd1e785ca21",
+      "bytes": 29126
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1-drag.png",
+      "sha256": "2f68f2c7ffcb38ac0fe2362ec8e02774bba2aaefc34a8766c1e8fc34784620fb",
+      "bytes": 54350
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1-failure.png",
+      "sha256": "dbc85963fdfb8767f7dd68daaef2f3a03c2a56aa24e7d436cc755fd1e785ca21",
+      "bytes": 29126
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1-main.png",
+      "sha256": "236e51a21edac0154539236f61b698be0069a8f18525363194d347be2e0ae810",
+      "bytes": 57507
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r11/sway.stderr.log",
+      "sha256": "abd160c28d628b593f6f208b7488b88391778e85c8b28d6dd0f48eb1fabad344",
+      "bytes": 38079
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/PRIVATE-CLEANUP.json",
+      "sha256": "0df95c627144236bedf516ffe95be8a6aa0ee7ed963b6053b8808c4fb76217ad",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/RESULT.json",
+      "sha256": "32713ea319cf7c3dd420aba364568de3e28fa4b674d303ce60d51cef4465c855",
+      "bytes": 8701
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/dbus.stderr.log",
+      "sha256": "513cb678a0db447264a5b7158248fff38a1eec03e17a1fc6f53b3f90e96cc3b1",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/dbus.stdout.log",
+      "sha256": "3dc9d5faeb1572b07d8a9507063b11f469c7ed0dbf8dec54729e8a376fec8b8c",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/pointer.stdout.log",
+      "sha256": "7e995f0897c8c8b2b242b1808148fa82ae083efe0f72ba1ed85f321600ae7384",
+      "bytes": 93
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/PROGRESS.json",
+      "sha256": "0076e647b8ce0ba6f6954fd84520e69b1b25e86aca5c25a553310234530b8834",
+      "bytes": 2617
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/RESULT.json",
+      "sha256": "843baddeebe6f54a6eac4dd3b16c79f5f83a3d38dfb7557e1da19bac3c9dd838",
+      "bytes": 7080
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/failure-dom.json",
+      "sha256": "93a0184cca6467fb8aa314659f852e5e7160bd6093c38011d9401502053ffb47",
+      "bytes": 2408
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/observation.jsonl",
+      "sha256": "3f9eb510a27e498f3b569f0c2eb93e8d2d521456c95753b8244d3499d119f363",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1/stdout.log",
+      "sha256": "dacaf6e7b485ecafaaf66f2927a8aebbdf45e36902b6cc35a5569ea3fc19c423",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1-chooser-cancel.png",
+      "sha256": "157007516d170948c75aa3dbdd650b671d2653dec3a8ef603d134625e23f1de3",
+      "bytes": 29158
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1-drag.png",
+      "sha256": "e8f7d216ce1d0c896c06d934bbbb0b12997d0c83299127e967718f607ce2ce41",
+      "bytes": 57533
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1-failure.png",
+      "sha256": "157007516d170948c75aa3dbdd650b671d2653dec3a8ef603d134625e23f1de3",
+      "bytes": 29158
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1-main.png",
+      "sha256": "256801ec879707ea7c766be01fc6c19bafa286f2621958c603b6c921a369fff9",
+      "bytes": 57505
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r12/sway.stderr.log",
+      "sha256": "048815c4efab98a9b2e2a90922969dee479cac8815952375eb5461ac52a53031",
+      "bytes": 38097
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/PRIVATE-CLEANUP.json",
+      "sha256": "f852e198e3d5eb7495cd86fcd8833f83fe06cdf1cc254486e03ce03c977cb27e",
+      "bytes": 854
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/RESULT.json",
+      "sha256": "3fab3b7f76f2008ffdc66abc38f3fc4dc07b272729658ef4dd52c11a078230ec",
+      "bytes": 7419
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/dbus.stderr.log",
+      "sha256": "9364427fbbfa3ffe656b4799c233a09dca5506d8ea4416ad54d7809324373938",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/dbus.stdout.log",
+      "sha256": "a48f634e3ca5aa8c48ecd172a305488a5fa04a2fb4fd421397e57656c971e82e",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/keyboard.stdout.log",
+      "sha256": "52c237a3a0fbec23f7a4ec29fc5eb6b8b27b7c2385e879e501dc17a54d8ccb49",
+      "bytes": 45
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/pointer.stdout.log",
+      "sha256": "7e995f0897c8c8b2b242b1808148fa82ae083efe0f72ba1ed85f321600ae7384",
+      "bytes": 93
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/PROGRESS.json",
+      "sha256": "67fae7939d5be5e98b3b5a2aa375b16056ee4c8c91f3c0298820cb2969eff647",
+      "bytes": 2617
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/RESULT.json",
+      "sha256": "ac7e041f34d3e2ec883bb6995d0d22461255b8fafce81a51d20597f468f08af4",
+      "bytes": 6010
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/failure-dom.json",
+      "sha256": "554deab0df488f297daf8812ca586b74d8f8101de1c0390855709f14824d1c7f",
+      "bytes": 2321
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/observation.jsonl",
+      "sha256": "d58a10bea3d5bc9ef7a9ad007557e0d5c8d69a1a0d6af056c874a22ce3be6e48",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1/stdout.log",
+      "sha256": "6e1af0f3d3e6ec75f91e7c524f2364321b6cb397c809b737ba8fc554507b966c",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1-chooser-cancel.png",
+      "sha256": "c087f220cc6d4f7c26943c90379024767142a6fa1678e50341296365b6b25ef2",
+      "bytes": 29361
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1-drag.png",
+      "sha256": "2f68f2c7ffcb38ac0fe2362ec8e02774bba2aaefc34a8766c1e8fc34784620fb",
+      "bytes": 54350
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1-failure.png",
+      "sha256": "4a1925e86ab070e7f25e17a52f782c3739dc70d6a8bb379b449e14b65fb77d28",
+      "bytes": 53955
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1-main.png",
+      "sha256": "0f1e9227b8a3244207a584832a927ea4732efd8c05e7a865ae75532dc19a2ff5",
+      "bytes": 57498
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r13/sway.stderr.log",
+      "sha256": "406c66ef422cf2c6ae57032b6d82a1f729b8af81c4febb8cce8330b01f8959f9",
+      "bytes": 34017
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/PRIVATE-CLEANUP.json",
+      "sha256": "5e71c7ec9f6a532fb8c44cde53f4208270f7813c6b50ec2575e419e802f485c3",
+      "bytes": 854
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/RESULT.json",
+      "sha256": "20d7197e03a0bc00d382b66925ddcc1562190fc5fe0a2a02fc84b000b9ea9949",
+      "bytes": 7550
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/dbus.stderr.log",
+      "sha256": "c0e18f6f34a8cae9516a10a5592b90caea6bb6545da12f096be3bb9ffeefa8e6",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/dbus.stdout.log",
+      "sha256": "d8f18eb1e062a916a1ca42e59c540c634ca88f472db9d8104c541a78fbdadbf3",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/keyboard.stdout.log",
+      "sha256": "04b39b2491fda5d95a74f60387886c245a17b575f269fb81095de0de4ff8d763",
+      "bytes": 72
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/pointer.stdout.log",
+      "sha256": "0defa8540c783dc9e0fb557a595b062350cb11d8f34602dbb50320ce60c78dee",
+      "bytes": 111
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/PROGRESS.json",
+      "sha256": "8f082efe579afdab81b34da248e5134ef7a6e1867a06b7626ccf44accb446f44",
+      "bytes": 4775
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/RESULT.json",
+      "sha256": "8d90f116979c8317e95ae83de33433b6a9744cc61ab7db59d27fdec31df5e69e",
+      "bytes": 6117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/failure-dom.json",
+      "sha256": "554deab0df488f297daf8812ca586b74d8f8101de1c0390855709f14824d1c7f",
+      "bytes": 2321
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/observation.jsonl",
+      "sha256": "237295d8fd9d9035a520ebbf05f858025c4518d35167b74f6bdfe22178e15039",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1/stdout.log",
+      "sha256": "49cfcd21610dd20c357a0d9b9d52d1342d28897b342abf06061d0ade0606dcca",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1-chooser-cancel.png",
+      "sha256": "fc88f99b6bb31a0e273e77cf8497e20470872a052480364053910402394b9c80",
+      "bytes": 29294
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1-drag.png",
+      "sha256": "2f68f2c7ffcb38ac0fe2362ec8e02774bba2aaefc34a8766c1e8fc34784620fb",
+      "bytes": 54350
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1-failure.png",
+      "sha256": "4a1925e86ab070e7f25e17a52f782c3739dc70d6a8bb379b449e14b65fb77d28",
+      "bytes": 53955
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1-main.png",
+      "sha256": "5f3a1e062596c751342c8316440a7a5fc7ad181ce707cb2c160b2f37c2c87b3e",
+      "bytes": 57507
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r14/sway.stderr.log",
+      "sha256": "93be602ddc28fb2d46faafa028de4200bcc7d89c6375fc49bd98725c4e8d85a5",
+      "bytes": 55034
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/PRIVATE-CLEANUP.json",
+      "sha256": "5e71c7ec9f6a532fb8c44cde53f4208270f7813c6b50ec2575e419e802f485c3",
+      "bytes": 854
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/RESULT.json",
+      "sha256": "ee2a066bed9b97928bcc0d2b7e85b8a98388dd963be95779c90373a32acf1a61",
+      "bytes": 7549
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/dbus.stderr.log",
+      "sha256": "c0e18f6f34a8cae9516a10a5592b90caea6bb6545da12f096be3bb9ffeefa8e6",
+      "bytes": 568
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/dbus.stdout.log",
+      "sha256": "613e548510a956683e102378b39e906cd1a0ea2618641423ba7ca1b9bfc9f23a",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/keyboard.stdout.log",
+      "sha256": "bee84f805e5f021ecc592f576309f19845a4f66544e002f0fd61391d2bfc3958",
+      "bytes": 1323
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/pointer.stdout.log",
+      "sha256": "0defa8540c783dc9e0fb557a595b062350cb11d8f34602dbb50320ce60c78dee",
+      "bytes": 111
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/PROGRESS.json",
+      "sha256": "6ab51bc71e5e802f0c20ebd98edb0d9630612d4681e4312aa393fdd5f0c9b6cc",
+      "bytes": 4774
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/RESULT.json",
+      "sha256": "73c90d14487caf0a5f5a91abf6dc4c9ce2e0b6e0995a2aae5caaa6a067ea7ca5",
+      "bytes": 6116
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/failure-dom.json",
+      "sha256": "554deab0df488f297daf8812ca586b74d8f8101de1c0390855709f14824d1c7f",
+      "bytes": 2321
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/observation.jsonl",
+      "sha256": "8d9066184d9da8f844f3e96f73d7326e6b3a00e2e1b85eeeef40040eca14c14b",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1/stdout.log",
+      "sha256": "49cfcd21610dd20c357a0d9b9d52d1342d28897b342abf06061d0ade0606dcca",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-chooser-cancel.png",
+      "sha256": "2269cc5442b7a214c271d95961b6e9303045c5b34a552b22ab0f03e77100a1c9",
+      "bytes": 29326
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-drag.png",
+      "sha256": "e7442173cb6251c49834a751b7eebc3c44a78132ff46118ed407a682bc7bec61",
+      "bytes": 53899
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-failure.png",
+      "sha256": "4a1925e86ab070e7f25e17a52f782c3739dc70d6a8bb379b449e14b65fb77d28",
+      "bytes": 53955
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-location-empty.png",
+      "sha256": "208c45828724ed470ca6b2c6191905d5405d6902cba9905e22bb88ada8f19b80",
+      "bytes": 30610
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-location-filled.png",
+      "sha256": "4a1925e86ab070e7f25e17a52f782c3739dc70d6a8bb379b449e14b65fb77d28",
+      "bytes": 53955
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-main.png",
+      "sha256": "892190b4134dc9b959af2d1520c03dee6a5ef061601d50bac76e819bf0f67b51",
+      "bytes": 57380
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r15/sway.stderr.log",
+      "sha256": "f62230670cb9fbc9f9e5ebc2dd9ed31c5c830bbf78c053c781c4a83335243b24",
+      "bytes": 57854
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r18/PRIVATE-CLEANUP.json",
+      "sha256": "948e49ab6e3a4cb1e6aa71c9a9c56551f2cfa26f74626da321af80fd8c381109",
+      "bytes": 444
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r18/dbus.stderr.log",
+      "sha256": "b205a5a2cbb8691258be245ebc2c06b935422f591ecb883b1ebe6cd21350d4a3",
+      "bytes": 281
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r18/dbus.stdout.log",
+      "sha256": "5a7685ed6f058d2aca02179a677c44d4c4545beaa908db03d42bf7de2ee0be7f",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r19/PRIVATE-CLEANUP.json",
+      "sha256": "948e49ab6e3a4cb1e6aa71c9a9c56551f2cfa26f74626da321af80fd8c381109",
+      "bytes": 444
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r19/dbus.stderr.log",
+      "sha256": "b205a5a2cbb8691258be245ebc2c06b935422f591ecb883b1ebe6cd21350d4a3",
+      "bytes": 281
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r19/dbus.stdout.log",
+      "sha256": "2b8076c1d1b6d88a6f7681439e4ed8a766c649b817007f31cd6f83723214262b",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/PRIVATE-CLEANUP.json",
+      "sha256": "4e6c44ba2700c2b5ec17f910861df69c97171fa3e8e40034fe486f9f6a9572ee",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/RESULT.json",
+      "sha256": "58923221f78076fec4335f4487d9681010b29ca6f72b12c561ae1c7ae9fb656b",
+      "bytes": 7550
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/accessibility.stderr.log",
+      "sha256": "6f93dacd4a8f9f5169938a42c7cef528fd02a307d01e5a831c1f52e90843aaea",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/dbus.stderr.log",
+      "sha256": "62ad2d288c99440afdaf94677dcc5c12da9975c1d7170072cb823eb131610959",
+      "bytes": 567
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/dbus.stdout.log",
+      "sha256": "5d4f934c6fef92a3b3a293c0548a6b7dc337c6d845d148b8d314f86648598062",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/keyboard.stdout.log",
+      "sha256": "e3f501cce736ca4e6a9ab9c1e96a43a68c21499aa10dd322150bc82b38715846",
+      "bytes": 1038
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/pointer.stdout.log",
+      "sha256": "0defa8540c783dc9e0fb557a595b062350cb11d8f34602dbb50320ce60c78dee",
+      "bytes": 111
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/PROGRESS.json",
+      "sha256": "d97081c9cb01c4307aab6a8bff00f23e09c9a06950b0515fb9fc95165813cae6",
+      "bytes": 4775
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/RESULT.json",
+      "sha256": "486409a5b90b5c0ad9a3851e9787f9daa85f5e441979433d62b25d1ea7fdaf74",
+      "bytes": 6117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/failure-dom.json",
+      "sha256": "84409fd2144e02976b3117ce2aba49fe9c4e7c6ea074896534f0e0946b5950b7",
+      "bytes": 2405
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/image.png",
+      "sha256": "8ab61347f4ac5394d84414bb4134b6ab32364b6074dc51cf4b91e13603273656",
+      "bytes": 74
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/observation.jsonl",
+      "sha256": "0539372dd468ea156837eabdf97a64ec85234c21b0f7f1ac831ff870a8a5c09a",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1/stdout.log",
+      "sha256": "7f42830ce042bac61856be742aae840dec1215734d53d3a301481346e7ba091f",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-drag.png",
+      "sha256": "cc6a23cec49deb3526077e27d65a430322ca7fce6ea7c8f95d69023971bc3f2f",
+      "bytes": 55495
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-failure.png",
+      "sha256": "99da0032431252fb1fb5d0348fa3abdec911454ffd3a92d1d1278944f32ad509",
+      "bytes": 55366
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-location-empty.png",
+      "sha256": "21900a5475cab5bc115d3848ba84926674544bd9f24e81e64dd9f06c4ebae3df",
+      "bytes": 27887
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-location-filled.png",
+      "sha256": "4ca179d5b8442e07116b4be26387b6c3873edb07a1806091622d8254450f88b4",
+      "bytes": 32662
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-main.png",
+      "sha256": "a660346f98bc4467590265545a323b476612f114676f3f92cd3473ccefab59f6",
+      "bytes": 58728
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r20/sway.stderr.log",
+      "sha256": "740ba55ef134e194adffecaffa7de4de9eaf487429642054f3a91d3a5955fdcb",
+      "bytes": 55504
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/PRIVATE-CLEANUP.json",
+      "sha256": "99bd7f20c8356346ce4a5e030083c919c9797fd485d4a55f372b73abc156f55e",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/RESULT.json",
+      "sha256": "d660efa4f04e09ff3afb4c7db9cc4c0e398510aa6647d437e155e6fc44985518",
+      "bytes": 7550
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/dbus.stderr.log",
+      "sha256": "463851c49823d73362339b9691bb2a802e47bb07f43bfed7b864cf5d1bc4a9b9",
+      "bytes": 801
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/dbus.stdout.log",
+      "sha256": "01181da99723b7c52cb6dca9dfe253d9b37162ce331bdd81ad551dfb7767a6ac",
+      "bytes": 146
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/keyboard.stdout.log",
+      "sha256": "9ee907f2ff46b8379f17c444fd47b4befb594151a1d970d3dd95119df5444ee6",
+      "bytes": 1056
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/pointer.stdout.log",
+      "sha256": "0defa8540c783dc9e0fb557a595b062350cb11d8f34602dbb50320ce60c78dee",
+      "bytes": 111
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/PROGRESS.json",
+      "sha256": "b2b492813b14fc6d391f96b55a99638e2bd64ba694de0b3ade9061a0cfb53dba",
+      "bytes": 4775
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/RESULT.json",
+      "sha256": "13cf5724d4df86e3cff46623a7edc85abeb3d774f8c6c8ecbc7f0d46ed3e7c39",
+      "bytes": 6117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/failure-dom.json",
+      "sha256": "8ada5d5ee163f4b29b9d9b8cf75c4367d7ab6281d5b72a31958cf3a8ee828957",
+      "bytes": 2492
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/image.png",
+      "sha256": "8ab61347f4ac5394d84414bb4134b6ab32364b6074dc51cf4b91e13603273656",
+      "bytes": 74
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/observation.jsonl",
+      "sha256": "87d5d02fc7ddb168090613adc6476cdbfa3ea12f3e9a15efc6e15181414b1a27",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1/stdout.log",
+      "sha256": "50236fbe285b4235de24e53ecc341fc483abf238823c595928be65a5af223f3c",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-drag.png",
+      "sha256": "cc6a23cec49deb3526077e27d65a430322ca7fce6ea7c8f95d69023971bc3f2f",
+      "bytes": 55495
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-failure.png",
+      "sha256": "b5cb16e51e027a21bf314b9f2fda8a50ea191b87177930df58ccf56edaceda57",
+      "bytes": 57454
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-location-empty.png",
+      "sha256": "7a6e3d09f4bb6a267ba3b7ae0f6b5737cc20f7b3119fcb5123071406be2541d7",
+      "bytes": 27885
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-location-filled.png",
+      "sha256": "e351c171bc9151aff1991afb2284081666b78ea8f723aeebcd3a755538133521",
+      "bytes": 32446
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-main.png",
+      "sha256": "95828c0f497494831029123c36e523ccab45ea729880bcfc5eb609e4d7bef5cd",
+      "bytes": 53601
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r21/sway.stderr.log",
+      "sha256": "9f5787e41c3e554b96ef5d85bcae64acd8edf90abe0490a8d1e5b39ed0a4d31a",
+      "bytes": 55266
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/PRIVATE-CLEANUP.json",
+      "sha256": "4e6c44ba2700c2b5ec17f910861df69c97171fa3e8e40034fe486f9f6a9572ee",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/RESULT.json",
+      "sha256": "623800bbe3bb28877c4583f37a8ef6a613d3099929e99808a190cfbeb2326f47",
+      "bytes": 7586
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/accessibility.stderr.log",
+      "sha256": "a951fc3deee4b4d758c96b5f3929fe2ed0e115dd5f22a7d9511eafe5420fbd3f",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/dbus.stderr.log",
+      "sha256": "c49fe9fcb0ac9df576f0eefe022ec4a0d431e7a1f236509992830b9c101ad3ae",
+      "bytes": 567
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/dbus.stdout.log",
+      "sha256": "093609fa5fccca329a2987645f4387937afb8f75a899da4c8201fb6e18a761b9",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/keyboard.stdout.log",
+      "sha256": "194ff061d7f17545e8195e89ac989be26fe31ccaaedbfa9342516575fbad703d",
+      "bytes": 54
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/pointer.stdout.log",
+      "sha256": "7e995f0897c8c8b2b242b1808148fa82ae083efe0f72ba1ed85f321600ae7384",
+      "bytes": 93
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/PROGRESS.json",
+      "sha256": "f18d01d34405bf1f2dd3416cabf734df111370809f9c3b48b173ee8ec79400fe",
+      "bytes": 4775
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/RESULT.json",
+      "sha256": "392dcefdda2c92a62b240fe46bca72f7d300e36c96cb717076b9c955548e0e1c",
+      "bytes": 6153
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/failure-dom.json",
+      "sha256": "17cd855328d28e1ad35d76a66b38c528c58b2bc8815369d35f25fff08f02fdc2",
+      "bytes": 2525
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/observation.jsonl",
+      "sha256": "fcddcc7682e6dffbcbe590bfc769e7c603954d0b7c39d73985307b7fc9a8d8ce",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1/stdout.log",
+      "sha256": "b2229c5ae40ca4d0778464285042d437bb6446ac97b65380d225698c8cebfdd0",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1-drag.png",
+      "sha256": "cc6a23cec49deb3526077e27d65a430322ca7fce6ea7c8f95d69023971bc3f2f",
+      "bytes": 55495
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1-failure.png",
+      "sha256": "7a5a102684f4bafc8530d5f223bedbaedbbd6ed488f800143125b1b799e2f015",
+      "bytes": 58505
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1-main.png",
+      "sha256": "9d4f4bdeb91a1cc0ed7af41cc52a5c5f338f0130072c6ab43a3f8b17ce25afc3",
+      "bytes": 58554
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r22/sway.stderr.log",
+      "sha256": "523f14d2bf4c7059c60b533ae9c3118caab204a026a90eddae0f02e8d6b44dea",
+      "bytes": 32609
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/PRIVATE-CLEANUP.json",
+      "sha256": "b4790320902c05ead4773f452f1dd7d1caf40317032ec9245f9d2aabf0107116",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/RESULT.json",
+      "sha256": "32bca7c0e95e1175cf0b3942f2a617a82727262ba3b5451e6aecc430203bdda2",
+      "bytes": 7550
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/dbus.stderr.log",
+      "sha256": "09504b122994cc1f43323a855fadd05b8331cb5320421ecc42c886fa4482a9bd",
+      "bytes": 801
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/dbus.stdout.log",
+      "sha256": "a4b5b018adedfb2946c671a74f853ab153977151a91090262c536b134c2752d3",
+      "bytes": 146
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/keyboard.stdout.log",
+      "sha256": "9ee907f2ff46b8379f17c444fd47b4befb594151a1d970d3dd95119df5444ee6",
+      "bytes": 1056
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/pointer.stdout.log",
+      "sha256": "0defa8540c783dc9e0fb557a595b062350cb11d8f34602dbb50320ce60c78dee",
+      "bytes": 111
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/PROGRESS.json",
+      "sha256": "4714beda8ee289a95340a547ae2cd52eaf82ec181617907019896a9735585a48",
+      "bytes": 4775
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/RESULT.json",
+      "sha256": "48a3616458656c8c1e5a63938cc81b51a72c537d1d6ab16036f69fee8765dafc",
+      "bytes": 6117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/failure-dom.json",
+      "sha256": "8ada5d5ee163f4b29b9d9b8cf75c4367d7ab6281d5b72a31958cf3a8ee828957",
+      "bytes": 2492
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/image.png",
+      "sha256": "8ab61347f4ac5394d84414bb4134b6ab32364b6074dc51cf4b91e13603273656",
+      "bytes": 74
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/location-empty-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/location-empty.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/location-filled-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/location-filled.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/observation.jsonl",
+      "sha256": "2b1dbb88c9a8e552d148ced5731b728cc532038ea4b8d20659d7a74b454356d1",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1/stdout.log",
+      "sha256": "10a92d1f39c79fa2ed1e53cc93109fdd69b4c223418f16a2718a38688ffa22dc",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-failure.png",
+      "sha256": "b5cb16e51e027a21bf314b9f2fda8a50ea191b87177930df58ccf56edaceda57",
+      "bytes": 57454
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-location-empty.png",
+      "sha256": "6f5b75900959d54397ba85ba1a17d49f8f6df9963d6fb2a1334aac65c4c95b4e",
+      "bytes": 27866
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-location-filled.png",
+      "sha256": "527b0a3a40baa323d28e6c3b1a49a4dd79b18ab5158cdb28270a4517a35e2240",
+      "bytes": 32679
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-main.png",
+      "sha256": "b17901d4e8f85a9edd6a6756159678dcb6a73fb48dccd657a4a0a4129fe77581",
+      "bytes": 57532
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r23/sway.stderr.log",
+      "sha256": "34d0743eb9b55b0cc75e5c17c5b17b0f1b3a51cb92932a1c0898f098d29c23f0",
+      "bytes": 54346
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/PRIVATE-CLEANUP.json",
+      "sha256": "4e6c44ba2700c2b5ec17f910861df69c97171fa3e8e40034fe486f9f6a9572ee",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/RESULT.json",
+      "sha256": "2dc2594b941b1e49c438b9457489d03567f1b531eb76f6743280226cdd1d0738",
+      "bytes": 15937
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/accessibility.stderr.log",
+      "sha256": "6f93dacd4a8f9f5169938a42c7cef528fd02a307d01e5a831c1f52e90843aaea",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/dbus.stderr.log",
+      "sha256": "62ad2d288c99440afdaf94677dcc5c12da9975c1d7170072cb823eb131610959",
+      "bytes": 567
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/dbus.stdout.log",
+      "sha256": "c5cadb203b88e1f5f848dfb91d2917a6e8b532c3d0872cfa6ad05d1f08fb5440",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/keyboard.stdout.log",
+      "sha256": "65e5d90778bb9fd2933eb52480beeb2589e67baebbd8dd978442e3124be50a55",
+      "bytes": 2274
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/pointer.stdout.log",
+      "sha256": "b013478bd7407dab101d092e32b90f32a79f02c2612596b1e796ac4764803059",
+      "bytes": 270
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/PROGRESS.json",
+      "sha256": "c6ea9691c0d54f8a35ab72c6838f0d5af02100329c9754af7e0f82e15fd82d88",
+      "bytes": 6552
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/RESULT.json",
+      "sha256": "19a41113f5033ccb4e2166ced081bacbfa712dbc7b8044cefc4a63abd6cc67ec",
+      "bytes": 6628
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/idle.json",
+      "sha256": "25c47a4836460f5c837e5260cef71dd026779fd3451988c124c3112fdd0bba85",
+      "bytes": 66
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/image.png",
+      "sha256": "8ab61347f4ac5394d84414bb4134b6ab32364b6074dc51cf4b91e13603273656",
+      "bytes": 74
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/location-empty-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/location-empty.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/location-filled-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/location-filled.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/observation.jsonl",
+      "sha256": "45a7ca1a356af6998cc6c7b0b45d5d6d7e635b4ac94cafe469e9091376ec1884",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1/stdout.log",
+      "sha256": "e599257fdb496a6379390bc9e6d01b10b0bac769e4d560ba23a720d4fa196d64",
+      "bytes": 1404
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-image-preview.png",
+      "sha256": "0847930dc865a3892dd065dbb11ab80f13736bbc42eea979cc50c5c38b15fcaf",
+      "bytes": 53768
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-location-empty.png",
+      "sha256": "ff03f1ab0a49e0b14e1620d26d16774b79737d924e6acdd8694156dff6bf6706",
+      "bytes": 27884
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-location-filled.png",
+      "sha256": "0e04cdf43f3476a2543d81ccd75eb5229bd52a51f270c75c7b4bc3231918c5ae",
+      "bytes": 32621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-main.png",
+      "sha256": "b17901d4e8f85a9edd6a6756159678dcb6a73fb48dccd657a4a0a4129fe77581",
+      "bytes": 57532
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-quit-accept.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-quit-cancel.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/PROGRESS.json",
+      "sha256": "b8b0d0d30433814049718eb7c7d1962eb13c485cf5f6353a1b2bcd35724732b3",
+      "bytes": 6559
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/RESULT.json",
+      "sha256": "ef47e8c3dab806fefdaeb2669702a90a708ec82e7dd5527c3a7b57b3ac8511f2",
+      "bytes": 6635
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/idle.json",
+      "sha256": "404dfbfda7bf6346b3c0fbd0d07fce8bfedce85c08118b498cad7a0a16595abf",
+      "bytes": 66
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/image.png",
+      "sha256": "8ab61347f4ac5394d84414bb4134b6ab32364b6074dc51cf4b91e13603273656",
+      "bytes": 74
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/location-empty-0.json",
+      "sha256": "de303d6c4323864568a3920ff105c32a9e401b9c7e4eb53de63fa2d3225287f2",
+      "bytes": 16088
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/location-empty.json",
+      "sha256": "d3b31af13c24e402a58d2cdd69c2c6fff595feb6c8589283f19c326366c8a11b",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/location-filled-0.json",
+      "sha256": "de303d6c4323864568a3920ff105c32a9e401b9c7e4eb53de63fa2d3225287f2",
+      "bytes": 16088
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/location-filled.json",
+      "sha256": "d3b31af13c24e402a58d2cdd69c2c6fff595feb6c8589283f19c326366c8a11b",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/observation.jsonl",
+      "sha256": "f38b0635d509e8d883b6c944263bed4089dbc37b92f388fee64d364a30b98edf",
+      "bytes": 250
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2/stdout.log",
+      "sha256": "dcf6ee7d8ceec1a48f37f6de888585c86ef7119df4fd961e284ee4495963c328",
+      "bytes": 1405
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-image-preview.png",
+      "sha256": "aef6d6ecdebc198c2e4915a7002988a58f4f4a574e8d05de74c1ca8b6e2068a5",
+      "bytes": 53633
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-location-empty.png",
+      "sha256": "21900a5475cab5bc115d3848ba84926674544bd9f24e81e64dd9f06c4ebae3df",
+      "bytes": 27887
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-location-filled.png",
+      "sha256": "9e986ec329ae6c8ec00f0156132e5bbc0627e44cd8defabbaafb43c393daa027",
+      "bytes": 32532
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-main.png",
+      "sha256": "02070fd65c94d2cc7c3069de1fbc72fd980fde3d4b4ad6a86b84d3abc63504f2",
+      "bytes": 57646
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-quit-accept.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-quit-cancel.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-welcome.png",
+      "sha256": "637ecc77f60aabb0eff81b6e4f9d39d02ae8f6aea0b5baf37d89b89e04f5786c",
+      "bytes": 33841
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r24/sway.stderr.log",
+      "sha256": "f2f99f324bfbb99a7f582670aeda4a1ab445540cc6c545e60fc551965e868990",
+      "bytes": 114686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/PRIVATE-CLEANUP.json",
+      "sha256": "b4790320902c05ead4773f452f1dd7d1caf40317032ec9245f9d2aabf0107116",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/RESULT.json",
+      "sha256": "8d57ad8802d3b13310fe1a9413003d76153a89fb1eecf649e55dad18cf41a47d",
+      "bytes": 7549
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/dbus.stderr.log",
+      "sha256": "0435073004c22e2b777953b2eb42e7d963f9b08e33d8c1519ab4faf0c4f4ac51",
+      "bytes": 801
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/dbus.stdout.log",
+      "sha256": "e5bbcb0a83a21169d4ec1d0847d1737256fa25812bf2d5d56236cef502499c8f",
+      "bytes": 146
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/keyboard.stdout.log",
+      "sha256": "9c036d641d657edcf9c8018a02d064bfd38a9ef64455b72ac5e789e28af654cd",
+      "bytes": 1488
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/pointer.stdout.log",
+      "sha256": "69239f66e2b9d4c4769d50244f31552c7434b29b6108044fc74d1be01f013eb6",
+      "bytes": 120
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/PROGRESS.json",
+      "sha256": "5c9dc738f06fd2e8ca98dfb28946e1c49d5208c5335ab3c4617d4a7329ca6076",
+      "bytes": 4774
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/RESULT.json",
+      "sha256": "6f71046d4917069ca6183caa20fb44534388c006a8ed65d7a183d69841c07448",
+      "bytes": 6116
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/failure-dom.json",
+      "sha256": "c3b63af91b5352ca0a32ffae465bd80d6c89134ebebebba60a7b395a2d815fed",
+      "bytes": 2569
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/location-empty-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/location-empty.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/location-filled-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/location-filled.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/observation.jsonl",
+      "sha256": "33b195b5b6d8bb5ae44665b7cc7efcf8c418ec4f35a0d486ce72e87352ec3b97",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1/stdout.log",
+      "sha256": "46c61db855859982383d34bf145f157b733bb99b468fe3a02b674742cce7b5cd",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-failure.png",
+      "sha256": "287d41ef17d5fbf06a52bb9fd65367f963abea7dab2f813eab5ce29dd0e190af",
+      "bytes": 56616
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-location-empty.png",
+      "sha256": "2c2a59de1dff319ad81a68c04051ebccc8ff54592da466f35e6dde4cae5d9e08",
+      "bytes": 27864
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-location-filled.png",
+      "sha256": "d3509729b714ad1d373f1c08ccc2cffb3b30d236d65aac2d9df66824b24cb9d3",
+      "bytes": 34663
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-main.png",
+      "sha256": "7fc2a943e4b51846c46115cc61e0cb72c597127900cb5cb92f395f7f6013a45d",
+      "bytes": 57656
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r26/sway.stderr.log",
+      "sha256": "f598a39fe4e67014f4e8e61bd42b650c30e55b6be5c3f3434b82147220887c1c",
+      "bytes": 60485
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/PRIVATE-CLEANUP.json",
+      "sha256": "4e6c44ba2700c2b5ec17f910861df69c97171fa3e8e40034fe486f9f6a9572ee",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/RESULT.json",
+      "sha256": "55fda9fe37d622ce42cf639f3556cdd691d713b1bee70964605de1e3976524c3",
+      "bytes": 15929
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/accessibility.stderr.log",
+      "sha256": "7f3f6b9d441cbc012264d0be5ac2de641fe8beab510fd9e25ea6cf41447d94c6",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/dbus.stderr.log",
+      "sha256": "55757dbc5fa7cc12e574839a6c1c51d6f31e6e25a866ee9e58891a26bf94aebd",
+      "bytes": 567
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/dbus.stdout.log",
+      "sha256": "f7579d4b5439a20a122d92e7f0cb217ff6d0c86a7b6a266799f97546f0f1a5f2",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/keyboard.stdout.log",
+      "sha256": "6b1e67b922f91bd745009c9ff1fb24f0bcab4c25e942127c1367108e5363392d",
+      "bytes": 354
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/pointer.stdout.log",
+      "sha256": "b013478bd7407dab101d092e32b90f32a79f02c2612596b1e796ac4764803059",
+      "bytes": 270
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/PROGRESS.json",
+      "sha256": "0070a5726f4db24364616f7fd1c2df05e819a6a39f94041e2ed6b41a7b51f05b",
+      "bytes": 6548
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/RESULT.json",
+      "sha256": "912ad8966832f22fbe852f8ede21d892e34ac5d84f9700468b155fbd9c99fffb",
+      "bytes": 6624
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/idle.json",
+      "sha256": "bbe591848bc02d77f3705a0e7350689d90fa81c5948839a2eee7c48be6aa1cea",
+      "bytes": 66
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/location-empty-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/location-empty.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/location-filled-0.json",
+      "sha256": "f06b27be3b4f813c820ada912bb92c02a9c9061e18f3d6034807897d5f0196ac",
+      "bytes": 16109
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/location-filled.json",
+      "sha256": "39b1e4344f36db067f69469ca519e136ceaea7744c9deb7312382ac72c7d88c7",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/observation.jsonl",
+      "sha256": "b8d8dcc67992b7a4d7265e8046e13a9e8abfeba4fecbf767f6c1cdc40b74bf1e",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1/stdout.log",
+      "sha256": "2bed34a8cba1e5b8d5b836e87a2a232d21db9f07c9d0c7d6d23adf17b3c16368",
+      "bytes": 1404
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-image-preview.png",
+      "sha256": "0847930dc865a3892dd065dbb11ab80f13736bbc42eea979cc50c5c38b15fcaf",
+      "bytes": 53768
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-location-empty.png",
+      "sha256": "7dd0ce5e685eb8410820bf7001d5b7203c19b1c4078467a78815b283934eb6fe",
+      "bytes": 27864
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-location-filled.png",
+      "sha256": "56a22748f08f1407fd9e9da2be737a83d6afc4ff82887bec453d33afe665b1a4",
+      "bytes": 33511
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-main.png",
+      "sha256": "15a3a85eca798ade933e109fd4240829ea0aa1f7d415e2ad28c16b7c00232a87",
+      "bytes": 54928
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-quit-accept.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-quit-cancel.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/PROGRESS.json",
+      "sha256": "54f37544d2dcc98cf16325a183f1ecd05e4b4ba22d998c059d4adcfa53e0570e",
+      "bytes": 6555
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/RESULT.json",
+      "sha256": "a27586525fcb24510fe6bfb1680ca95c3f7e4ba31e7c6f0ca3d603d7ccca4b5e",
+      "bytes": 6631
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/idle.json",
+      "sha256": "d21806ae08a4a3e30120629fdad6e021679ef0e98a4592d4868a2739dd4942eb",
+      "bytes": 66
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/location-empty-0.json",
+      "sha256": "de303d6c4323864568a3920ff105c32a9e401b9c7e4eb53de63fa2d3225287f2",
+      "bytes": 16088
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/location-empty.json",
+      "sha256": "d3b31af13c24e402a58d2cdd69c2c6fff595feb6c8589283f19c326366c8a11b",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/location-filled-0.json",
+      "sha256": "de303d6c4323864568a3920ff105c32a9e401b9c7e4eb53de63fa2d3225287f2",
+      "bytes": 16088
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/location-filled.json",
+      "sha256": "d3b31af13c24e402a58d2cdd69c2c6fff595feb6c8589283f19c326366c8a11b",
+      "bytes": 201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/observation.jsonl",
+      "sha256": "a8d3b1ba116c66c48aaaefcf14d655cb52cbd9cedd70f5b5ad909a22915aa235",
+      "bytes": 250
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2/stdout.log",
+      "sha256": "73aadc74276caf591b8c9b7cdd392fb91cb178b1dccef1891775b5503821c78e",
+      "bytes": 1405
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-chooser-cancel.png",
+      "sha256": "5e0aa8ce9569a2a8d3622a1bb535934cc978dba91946a3736a34d95590fe332d",
+      "bytes": 26621
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-drag.png",
+      "sha256": "fc84b7ccd96b1fcdfcdd58949e896abab8e443406d1e85b908905f1c49ebde74",
+      "bytes": 57562
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-image-preview.png",
+      "sha256": "0847930dc865a3892dd065dbb11ab80f13736bbc42eea979cc50c5c38b15fcaf",
+      "bytes": 53768
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-location-empty.png",
+      "sha256": "21900a5475cab5bc115d3848ba84926674544bd9f24e81e64dd9f06c4ebae3df",
+      "bytes": 27887
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-location-filled.png",
+      "sha256": "56a22748f08f1407fd9e9da2be737a83d6afc4ff82887bec453d33afe665b1a4",
+      "bytes": 33511
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-main.png",
+      "sha256": "b17901d4e8f85a9edd6a6756159678dcb6a73fb48dccd657a4a0a4129fe77581",
+      "bytes": 57532
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-quit-accept.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-quit-cancel.png",
+      "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+      "bytes": 56877
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-welcome.png",
+      "sha256": "637ecc77f60aabb0eff81b6e4f9d39d02ae8f6aea0b5baf37d89b89e04f5786c",
+      "bytes": 33841
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r27/sway.stderr.log",
+      "sha256": "664e6888097f3e5650077d3c4a1b72018d2707a4855e0419cdf096a77fd5ba90",
+      "bytes": 116956
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/PRIVATE-CLEANUP.json",
+      "sha256": "886591fd38927487353ff5240da9d072b0f14c1c48d92dec0f32135e75383090",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/RESULT.json",
+      "sha256": "0e2d6437f366ed8b4a7ee8658d4a93c8448532eaf6c8200f4be83cb798cab7f8",
+      "bytes": 602
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/dbus.stderr.log",
+      "sha256": "f31b34bf79481477b1681c36712feea0ad923f6154f4b06b88d2670ec3ccd212",
+      "bytes": 282
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/dbus.stdout.log",
+      "sha256": "ecdbf8f70d3c96f86e72e40722433f262b69ee6160ff43139e9a20e7e4ba187a",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/pointer.stdout.log",
+      "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b",
+      "bytes": 6
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1/RESULT.json",
+      "sha256": "0f42aa8d3fbd847287ae28a7dce688eef023bf4c6b266e0864fa3253d2e20af7",
+      "bytes": 305
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1/observation.jsonl",
+      "sha256": "3c34db3b184d4d695c54009d4cf8b75d3c39b9ad17a4d7c724f0c101ca5cf745",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1/stdout.log",
+      "sha256": "49cfcd21610dd20c357a0d9b9d52d1342d28897b342abf06061d0ade0606dcca",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/round-1-failure.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r7/sway.stderr.log",
+      "sha256": "87f8412955467cce31d1fc004bde966a26112c1aa427cc40c74b818fa56e9bde",
+      "bytes": 12939
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/PRIVATE-CLEANUP.json",
+      "sha256": "0df95c627144236bedf516ffe95be8a6aa0ee7ed963b6053b8808c4fb76217ad",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/RESULT.json",
+      "sha256": "5e90994b4c0694dc8fc88707b50f790bd61eb0b8677c8c0b548ad2aef2818db5",
+      "bytes": 2377
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/dbus.stderr.log",
+      "sha256": "bf26620ce637158255c40fda7cf9471788104c470aad38f2def5000fba93a8f5",
+      "bytes": 282
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/dbus.stdout.log",
+      "sha256": "7904283d3e0314da0acadf32927fdd8fea0a6a70b4e923f720119ffa41085646",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/pointer.stdout.log",
+      "sha256": "2635b44a6fe1785ceb752dcbaa43dc60e481e30b568997d4808978ce7389b10a",
+      "bytes": 57
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/PROGRESS.json",
+      "sha256": "452cdc7b8cd95eba547863490e461c9a9c2c3acacaf20ab885382c7272350a77",
+      "bytes": 1558
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/RESULT.json",
+      "sha256": "1e431ab09707a82007d9c55e41cf4ec3ab0d5e93e53fdaf2138f0623124a1a43",
+      "bytes": 1824
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/failure-dom.json",
+      "sha256": "aec85d161206330647bec77e2777db8e3853b2cc52e4b0de6640a4a32472ce92",
+      "bytes": 1795
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/observation.jsonl",
+      "sha256": "868fbc3797012f4dc6aec5c2bae77b07ff96947c97cd4449e26ce1589367ea05",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1/stdout.log",
+      "sha256": "dacaf6e7b485ecafaaf66f2927a8aebbdf45e36902b6cc35a5569ea3fc19c423",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1-failure.png",
+      "sha256": "aab2f8ebdb182a583b7e200bd1294c0d5780d2aa66505587399a7fc528b88dad",
+      "bytes": 54105
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1-main.png",
+      "sha256": "ee54303448c953ad89751ef88dc8d68e0e7118055694d1564d3882fb85dc51c6",
+      "bytes": 57504
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r8/sway.stderr.log",
+      "sha256": "15a613f1e8176a2fd1be1f9d8c1c841112f4d8e476f2a269f6881466dd5a9cb8",
+      "bytes": 18201
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/PRIVATE-CLEANUP.json",
+      "sha256": "0df95c627144236bedf516ffe95be8a6aa0ee7ed963b6053b8808c4fb76217ad",
+      "bytes": 644
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/RESULT.json",
+      "sha256": "4c26be15142b4685dc9ef7773db3a769396679896a743051d8fd39198e16d395",
+      "bytes": 3045
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/dbus.stderr.log",
+      "sha256": "bf26620ce637158255c40fda7cf9471788104c470aad38f2def5000fba93a8f5",
+      "bytes": 282
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/dbus.stdout.log",
+      "sha256": "de25d82edbf320da449da03a6d3b27294b6aa2e43c0e7aaea67c5368cc394295",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/pointer.stdout.log",
+      "sha256": "5c0d5f42c70dae0ccda44459f7c613e53c3ae5320db62e3b6f379109a92ee28c",
+      "bytes": 66
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/PROGRESS.json",
+      "sha256": "3bee677d6854e9751caa2fe1220f2b06d54cf32dfd511d57d4dee7ff0db9c5e6",
+      "bytes": 2154
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/RESULT.json",
+      "sha256": "dddc5ed6dfc9429df3390f7d93bc22ff9d7c0ea41e49e37da9f4cfe9cd8a610e",
+      "bytes": 2348
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/error.json",
+      "sha256": "90dc47fb25e199ae366eba4735b0735202666adff2d11da1c90efc1797115241",
+      "bytes": 11
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/failure-dom.json",
+      "sha256": "7091fcbe94881cbfe928a4937545512df76856d086bf554171b3d5aad6c25247",
+      "bytes": 1876
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/observation.jsonl",
+      "sha256": "1827bc1f445c0233c9114fe3f857639503209f8f83923e3f637148c8ddb6fba6",
+      "bytes": 244
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1/stdout.log",
+      "sha256": "dacaf6e7b485ecafaaf66f2927a8aebbdf45e36902b6cc35a5569ea3fc19c423",
+      "bytes": 1491
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1-drag.png",
+      "sha256": "b71f5ae085f07f3f104fc28d365f2652c51b400478c3e42035beccb487673b63",
+      "bytes": 57453
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1-failure.png",
+      "sha256": "5150978fd3cc467b7fc07c5e46cfede76bbe2e91f3265e966ee33aceb13281a5",
+      "bytes": 54654
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1-main.png",
+      "sha256": "b8324a0c63b97972416297c4726dfab24cccf5fb8c975c89a68f2f3403ae9b49",
+      "bytes": 57514
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/round-1-welcome.png",
+      "sha256": "1aac06e88b8526e653e50a13f91f6d145275cb17948f08ceed9f0f0b9c9e0023",
+      "bytes": 33686
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-actual-r9/sway.stderr.log",
+      "sha256": "93d2bcd6143e7b8943fb5b8c19fcedf4ef7f7d28cd774b3fba4ffd0ac94a4764",
+      "bytes": 21217
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/PRIVATE-CLEANUP.json",
+      "sha256": "ef24cce0a3bfbbeb7150a3547b826021fb6f87c4e97511aa9d18296760bb2f9f",
+      "bytes": 854
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/RESULT.json",
+      "sha256": "c51a3afe0ef2be9fc9a650a8f43c3f406f33326eb69231203bf820aa5e0d242a",
+      "bytes": 539
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/dbus.stderr.log",
+      "sha256": "58b76c022b44845eb65703cc196da6c3733a7f155c78d831560a19d46be2e051",
+      "bytes": 537
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/dbus.stdout.log",
+      "sha256": "17867524f0782f3a7552c00661ff3f6ba31804f95d66c147b1cfcd7f8da6dab4",
+      "bytes": 146
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/keyboard.stdout.log",
+      "sha256": "6e2c9cb1e0eb4c099434059d5994d46c5c99257312053ce2ac395a7ec874330a",
+      "bytes": 27
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/pointer.stdout.log",
+      "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b",
+      "bytes": 6
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1/idle.json",
+      "sha256": "98599c9cf49e55974d6fc0b2532472cc7570a416e79deaeacccd3b1deaa1dc58",
+      "bytes": 64
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1/stderr.log",
+      "sha256": "515c5340f21048e08b40243d174ad5fb9131bc2c7dbf64f520a91694de39af31",
+      "bytes": 117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1/stdout.log",
+      "sha256": "611e2ebfcfea9f67992fe680b6a1b0ea28d8941578bb06a43525995326455a27",
+      "bytes": 490
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/round-1-cancel.png",
+      "sha256": "57a55f22203d8b8056fcaf526ddd97619e053918f48e1f3a66ce2835815a09f8",
+      "bytes": 33557
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r16/sway.stderr.log",
+      "sha256": "b6eb724ced977f17824b4aa4be951646d6153ed048d06dbe378a60c5cbebacdc",
+      "bytes": 18884
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/PRIVATE-CLEANUP.json",
+      "sha256": "5d04f4418697fec55245a60ff8e2965a927b4dc00894d0ccc0ca2aada5b4ff7b",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/RESULT.json",
+      "sha256": "13716c2e0cf83f9d1884fbb52eb22f659bb86fa8298bf22e0f523d48c0087f99",
+      "bytes": 534
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/TEST-RECOVERY.json",
+      "sha256": "0df830ff93a075643ef13d22f225208e4078da96b59bb63233cc8d2d4bb5043e",
+      "bytes": 421
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/accessibility.stderr.log",
+      "sha256": "cfcea4bc5e271c5e7b12550b097ec53dcc31c9246439bf30e9f31104ff5c0f47",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/dbus.stderr.log",
+      "sha256": "b205a5a2cbb8691258be245ebc2c06b935422f591ecb883b1ebe6cd21350d4a3",
+      "bytes": 281
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/dbus.stdout.log",
+      "sha256": "8bebd1ba2848a0463ca82c9d1cc44c0e36884bf0b60084a13cb752bc36035e3c",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/keyboard.stdout.log",
+      "sha256": "6e2c9cb1e0eb4c099434059d5994d46c5c99257312053ce2ac395a7ec874330a",
+      "bytes": 27
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/pointer.stdout.log",
+      "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b",
+      "bytes": 6
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1/idle.json",
+      "sha256": "f208d909eb2bde9ba266837cadd7b976d53aede8afa392fe5bec241ca1717c2b",
+      "bytes": 64
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1/stderr.log",
+      "sha256": "515c5340f21048e08b40243d174ad5fb9131bc2c7dbf64f520a91694de39af31",
+      "bytes": 117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1/stdout.log",
+      "sha256": "a50f9bb24a60515df0480b5fb781e13fb67a7c7b13a40a3679fff3b23fdfea8b",
+      "bytes": 490
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/round-1-cancel.png",
+      "sha256": "57a55f22203d8b8056fcaf526ddd97619e053918f48e1f3a66ce2835815a09f8",
+      "bytes": 33557
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r17/sway.stderr.log",
+      "sha256": "edc40b92c4b1ec935de0439b487281a048b41ac780901d293b289cfa2ef2bf6f",
+      "bytes": 18750
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/PRIVATE-CLEANUP.json",
+      "sha256": "4e6c44ba2700c2b5ec17f910861df69c97171fa3e8e40034fe486f9f6a9572ee",
+      "bytes": 1061
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/RESULT.json",
+      "sha256": "df0454edd5ec8def28af39a74d642db147c7957e33fd2cad496f0c999999ca33",
+      "bytes": 513
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/accessibility.stderr.log",
+      "sha256": "6f93dacd4a8f9f5169938a42c7cef528fd02a307d01e5a831c1f52e90843aaea",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/accessibility.stdout.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+      "bytes": 77
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/dbus.stderr.log",
+      "sha256": "b205a5a2cbb8691258be245ebc2c06b935422f591ecb883b1ebe6cd21350d4a3",
+      "bytes": 281
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/dbus.stdout.log",
+      "sha256": "4fb0971935d90edc663a6a37a6f33d92448ad0f945c87c2caf4e829297c787f1",
+      "bytes": 69
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/keyboard.stdout.log",
+      "sha256": "f0cc0b4dc48b2276827d6461d163db4137ed14af8c9ec8ff76656e2eedb051ac",
+      "bytes": 30
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/pointer.stdout.log",
+      "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b",
+      "bytes": 6
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/begin",
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "bytes": 1
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/entered.json",
+      "sha256": "f0282a2dddd713aae415f6daf98450887e0016d94f037d36120e0e56277aefaa",
+      "bytes": 32
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/idle.json",
+      "sha256": "f75d9e8502e0ebfd390bf8a52cb1d210d80df7a35e17bd01df461536f90a9863",
+      "bytes": 64
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/native-observation.json",
+      "sha256": "e46899d2178b0c0ad2fc5f43b07631ebb6b6c0684860a7a99ad470996a8b18d9",
+      "bytes": 278
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/observation.jsonl",
+      "sha256": "77e03d2f733e14e22f1d3061a184b3926e7db3ce49bb589f06795445ee73247f",
+      "bytes": 252
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/stderr.log",
+      "sha256": "515c5340f21048e08b40243d174ad5fb9131bc2c7dbf64f520a91694de39af31",
+      "bytes": 117
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1/stdout.log",
+      "sha256": "70c14173a9c421205906490d250f4889ab7207b8d774fa664773c0d3cb715b1f",
+      "bytes": 490
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/round-1-cancel.png",
+      "sha256": "57a55f22203d8b8056fcaf526ddd97619e053918f48e1f3a66ce2835815a09f8",
+      "bytes": 33557
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/sway.conf",
+      "sha256": "2799389f0dcf6e0e35d393505920270819ff2ef3191599341dc50225fb675c29",
+      "bytes": 191
+    },
+    {
+      "path": "attempts/alpha2-portable-wayland-atspi-r25/sway.stderr.log",
+      "sha256": "68279913b9503f5ee16563847c1b282b6bc49ba050641b146996eb3b742e1b96",
+      "bytes": 18668
+    },
+    {
+      "path": "executed-inputs/r24/PLAN.md",
+      "sha256": "3684622ad690a6683b3c9e9f19b65a23a908776097b1cfd824db3b39e74d24a5",
+      "bytes": 2049
+    },
+    {
+      "path": "executed-inputs/r24/active-inspection-fixture.mjs",
+      "sha256": "9a822d7602298e246d806cf9609e8be6d54a0adda29a522c11d754265d54fae0",
+      "bytes": 2362
+    },
+    {
+      "path": "executed-inputs/r24/build-keyboard.py",
+      "sha256": "c8e57123eef086efb3b8a6b828f0291b8d9f70169b8ecbc0ebded18eb7fb1f8f",
+      "bytes": 1264
+    },
+    {
+      "path": "executed-inputs/r24/build-pointer.py",
+      "sha256": "e7ede5fb312560e595dd2df421d6070767a57482818b4f4cec9eca63792f196f",
+      "bytes": 1328
+    },
+    {
+      "path": "executed-inputs/r24/cdp-observation.mjs",
+      "sha256": "580a34b89cfcbc905c9292c8438f2550417f0abf70235b99f3f56276f3a75394",
+      "bytes": 1892
+    },
+    {
+      "path": "executed-inputs/r24/complete-assets.py",
+      "sha256": "ddcd8ea053e62bae40d77e1ec2505e3b7b241c5f59a2de89fe293cbe8d47cb4b",
+      "bytes": 2152
+    },
+    {
+      "path": "executed-inputs/r24/debug-observer.mjs",
+      "sha256": "2f6976d0179a5d6daf5f3af366283223235b619a67a31d86c7b8d1ca246cb0f7",
+      "bytes": 1200
+    },
+    {
+      "path": "executed-inputs/r24/exercise-atspi.mjs",
+      "sha256": "6f49280cd035a97a1053775c57dc23bcd99071d500cd6bad048a19fae1e7d9fc",
+      "bytes": 5245
+    },
+    {
+      "path": "executed-inputs/r24/exercise-wayland.mjs",
+      "sha256": "58ba86337102549a91430537acb2c34b22e0e222af1efa2f816c698822b25b52",
+      "bytes": 14234
+    },
+    {
+      "path": "executed-inputs/r24/export-evidence.mjs",
+      "sha256": "024e167db353090e73ca6bd0c602273cc6cc2383c351a6daa07218d991014259",
+      "bytes": 1177
+    },
+    {
+      "path": "executed-inputs/r24/gtk-observation.py",
+      "sha256": "424b70220351df64b35a9c2af6e41a5f4e3ec3e3edce8e5c68ad66dbfaeca7e5",
+      "bytes": 7531
+    },
+    {
+      "path": "executed-inputs/r24/gtk-query.mjs",
+      "sha256": "ec4e9849a7b97909fd444347ba9b970c95dae49ff700547b7247c565d9b2c894",
+      "bytes": 837
+    },
+    {
+      "path": "executed-inputs/r24/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "executed-inputs/r24/input-scope.test.mjs",
+      "sha256": "9c8f69a8da0384d326fe51b90690c53f8c841bf07a6c6a18ebb524a09690aa8f",
+      "bytes": 1173
+    },
+    {
+      "path": "executed-inputs/r24/install-fixture.mjs",
+      "sha256": "b8954822c74a6d4dd6c806febbba5d3cab2ca0a5f6840c5ecef37176c2f92887",
+      "bytes": 1351
+    },
+    {
+      "path": "executed-inputs/r24/prepare-assets.py",
+      "sha256": "7d976ed2aa6df66ab30253b957e5cd441b72cbebe183dbb4a9e93b71c4a3c22a",
+      "bytes": 2840
+    },
+    {
+      "path": "executed-inputs/r24/private-wayland.mjs",
+      "sha256": "9640a7a877feab17fb8642c5fb8e839c281b43a7b856346dac0b88f6a793f0d4",
+      "bytes": 7700
+    },
+    {
+      "path": "executed-inputs/r24/smoke-compositor.mjs",
+      "sha256": "223d3378a88a74d4c090a3fde11336ccb4996e4dd78ece68fa38ed9b3424a5e3",
+      "bytes": 649
+    },
+    {
+      "path": "executed-inputs/r24/virtual-keyboard-unstable-v1.xml",
+      "sha256": "7ad7870003ecd592cae47dc19d277a609b7f18fd7b7be012623cf3225a7294f5",
+      "bytes": 4886
+    },
+    {
+      "path": "executed-inputs/r24/virtual-keyboard.c",
+      "sha256": "b9a3b5bac2d9f70f43220304d3b1cbd44b4d3abf122ed3960164add722e79d7e",
+      "bytes": 3479
+    },
+    {
+      "path": "executed-inputs/r24/virtual-pointer.c",
+      "sha256": "dc41e22f16252418c7456acd8579ec3d15384e83d603d067c04d32d1627d3368",
+      "bytes": 2534
+    },
+    {
+      "path": "executed-inputs/r24/wlr-virtual-pointer-unstable-v1.xml",
+      "sha256": "3ff6d540be0bc5228195bf072bde42117ea17945a5c2061add5d3cf97d6bb524",
+      "bytes": 6895
+    },
+    {
+      "path": "executed-inputs/r27/PLAN.md",
+      "sha256": "3684622ad690a6683b3c9e9f19b65a23a908776097b1cfd824db3b39e74d24a5",
+      "bytes": 2049
+    },
+    {
+      "path": "executed-inputs/r27/active-inspection-fixture.mjs",
+      "sha256": "9a822d7602298e246d806cf9609e8be6d54a0adda29a522c11d754265d54fae0",
+      "bytes": 2362
+    },
+    {
+      "path": "executed-inputs/r27/audit-installed.py",
+      "sha256": "525a8ba08134445d59ee41098cf1098f921973fb3b6506362b2506db875e2028",
+      "bytes": 2463
+    },
+    {
+      "path": "executed-inputs/r27/build-keyboard.py",
+      "sha256": "c8e57123eef086efb3b8a6b828f0291b8d9f70169b8ecbc0ebded18eb7fb1f8f",
+      "bytes": 1264
+    },
+    {
+      "path": "executed-inputs/r27/build-pointer.py",
+      "sha256": "e7ede5fb312560e595dd2df421d6070767a57482818b4f4cec9eca63792f196f",
+      "bytes": 1328
+    },
+    {
+      "path": "executed-inputs/r27/cdp-observation.mjs",
+      "sha256": "580a34b89cfcbc905c9292c8438f2550417f0abf70235b99f3f56276f3a75394",
+      "bytes": 1892
+    },
+    {
+      "path": "executed-inputs/r27/complete-assets.py",
+      "sha256": "ddcd8ea053e62bae40d77e1ec2505e3b7b241c5f59a2de89fe293cbe8d47cb4b",
+      "bytes": 2152
+    },
+    {
+      "path": "executed-inputs/r27/debug-observer.mjs",
+      "sha256": "2f6976d0179a5d6daf5f3af366283223235b619a67a31d86c7b8d1ca246cb0f7",
+      "bytes": 1200
+    },
+    {
+      "path": "executed-inputs/r27/exercise-atspi.mjs",
+      "sha256": "93878379d7e1b500716dd69df1cc6abc8e790107e68f178963fdc2c90eb116e5",
+      "bytes": 5537
+    },
+    {
+      "path": "executed-inputs/r27/exercise-wayland.mjs",
+      "sha256": "750128c3bbeaf8252e2cc117c4bacf20ffc2bbeb4a76e54e829a46d0c7d2aec9",
+      "bytes": 14457
+    },
+    {
+      "path": "executed-inputs/r27/export-evidence.mjs",
+      "sha256": "024e167db353090e73ca6bd0c602273cc6cc2383c351a6daa07218d991014259",
+      "bytes": 1177
+    },
+    {
+      "path": "executed-inputs/r27/gtk-observation.py",
+      "sha256": "424b70220351df64b35a9c2af6e41a5f4e3ec3e3edce8e5c68ad66dbfaeca7e5",
+      "bytes": 7531
+    },
+    {
+      "path": "executed-inputs/r27/gtk-query.mjs",
+      "sha256": "ec4e9849a7b97909fd444347ba9b970c95dae49ff700547b7247c565d9b2c894",
+      "bytes": 837
+    },
+    {
+      "path": "executed-inputs/r27/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "executed-inputs/r27/input-scope.test.mjs",
+      "sha256": "9c8f69a8da0384d326fe51b90690c53f8c841bf07a6c6a18ebb524a09690aa8f",
+      "bytes": 1173
+    },
+    {
+      "path": "executed-inputs/r27/install-fixture.mjs",
+      "sha256": "b8954822c74a6d4dd6c806febbba5d3cab2ca0a5f6840c5ecef37176c2f92887",
+      "bytes": 1351
+    },
+    {
+      "path": "executed-inputs/r27/prepare-assets.py",
+      "sha256": "7d976ed2aa6df66ab30253b957e5cd441b72cbebe183dbb4a9e93b71c4a3c22a",
+      "bytes": 2840
+    },
+    {
+      "path": "executed-inputs/r27/private-wayland.mjs",
+      "sha256": "6e6ceec396623330adf4aed39647c9d2898ea258036574dc5029100f8a5627ad",
+      "bytes": 7710
+    },
+    {
+      "path": "executed-inputs/r27/smoke-compositor.mjs",
+      "sha256": "223d3378a88a74d4c090a3fde11336ccb4996e4dd78ece68fa38ed9b3424a5e3",
+      "bytes": 649
+    },
+    {
+      "path": "executed-inputs/r27/virtual-keyboard-unstable-v1.xml",
+      "sha256": "7ad7870003ecd592cae47dc19d277a609b7f18fd7b7be012623cf3225a7294f5",
+      "bytes": 4886
+    },
+    {
+      "path": "executed-inputs/r27/virtual-keyboard.c",
+      "sha256": "b9a3b5bac2d9f70f43220304d3b1cbd44b4d3abf122ed3960164add722e79d7e",
+      "bytes": 3479
+    },
+    {
+      "path": "executed-inputs/r27/virtual-pointer.c",
+      "sha256": "dc41e22f16252418c7456acd8579ec3d15384e83d603d067c04d32d1627d3368",
+      "bytes": 2534
+    },
+    {
+      "path": "executed-inputs/r27/wlr-virtual-pointer-unstable-v1.xml",
+      "sha256": "3ff6d540be0bc5228195bf072bde42117ea17945a5c2061add5d3cf97d6bb524",
+      "bytes": 6895
+    },
+    {
+      "path": "final-test-source/PLAN.md",
+      "sha256": "3684622ad690a6683b3c9e9f19b65a23a908776097b1cfd824db3b39e74d24a5",
+      "bytes": 2049
+    },
+    {
+      "path": "final-test-source/active-inspection-fixture.mjs",
+      "sha256": "9a822d7602298e246d806cf9609e8be6d54a0adda29a522c11d754265d54fae0",
+      "bytes": 2362
+    },
+    {
+      "path": "final-test-source/audit-installed.py",
+      "sha256": "a96907ff82345e128e909ff54470ca537fe82ffb8b14e067c2c1717d460882d7",
+      "bytes": 3034
+    },
+    {
+      "path": "final-test-source/build-keyboard.py",
+      "sha256": "c8e57123eef086efb3b8a6b828f0291b8d9f70169b8ecbc0ebded18eb7fb1f8f",
+      "bytes": 1264
+    },
+    {
+      "path": "final-test-source/build-pointer.py",
+      "sha256": "e7ede5fb312560e595dd2df421d6070767a57482818b4f4cec9eca63792f196f",
+      "bytes": 1328
+    },
+    {
+      "path": "final-test-source/cdp-observation.mjs",
+      "sha256": "580a34b89cfcbc905c9292c8438f2550417f0abf70235b99f3f56276f3a75394",
+      "bytes": 1892
+    },
+    {
+      "path": "final-test-source/collect-final.mjs",
+      "sha256": "0b096552848620ff8cf026d29a3ad01831b9e02002d1810338e2a847e49ce641",
+      "bytes": 5762
+    },
+    {
+      "path": "final-test-source/complete-assets.py",
+      "sha256": "ddcd8ea053e62bae40d77e1ec2505e3b7b241c5f59a2de89fe293cbe8d47cb4b",
+      "bytes": 2152
+    },
+    {
+      "path": "final-test-source/debug-observer.mjs",
+      "sha256": "2f6976d0179a5d6daf5f3af366283223235b619a67a31d86c7b8d1ca246cb0f7",
+      "bytes": 1200
+    },
+    {
+      "path": "final-test-source/exercise-atspi.mjs",
+      "sha256": "93878379d7e1b500716dd69df1cc6abc8e790107e68f178963fdc2c90eb116e5",
+      "bytes": 5537
+    },
+    {
+      "path": "final-test-source/exercise-wayland.mjs",
+      "sha256": "750128c3bbeaf8252e2cc117c4bacf20ffc2bbeb4a76e54e829a46d0c7d2aec9",
+      "bytes": 14457
+    },
+    {
+      "path": "final-test-source/export-evidence.mjs",
+      "sha256": "024e167db353090e73ca6bd0c602273cc6cc2383c351a6daa07218d991014259",
+      "bytes": 1177
+    },
+    {
+      "path": "final-test-source/gtk-observation.py",
+      "sha256": "424b70220351df64b35a9c2af6e41a5f4e3ec3e3edce8e5c68ad66dbfaeca7e5",
+      "bytes": 7531
+    },
+    {
+      "path": "final-test-source/gtk-query.mjs",
+      "sha256": "ec4e9849a7b97909fd444347ba9b970c95dae49ff700547b7247c565d9b2c894",
+      "bytes": 837
+    },
+    {
+      "path": "final-test-source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "final-test-source/input-scope.test.mjs",
+      "sha256": "9c8f69a8da0384d326fe51b90690c53f8c841bf07a6c6a18ebb524a09690aa8f",
+      "bytes": 1173
+    },
+    {
+      "path": "final-test-source/install-fixture.mjs",
+      "sha256": "b8954822c74a6d4dd6c806febbba5d3cab2ca0a5f6840c5ecef37176c2f92887",
+      "bytes": 1351
+    },
+    {
+      "path": "final-test-source/prepare-assets.py",
+      "sha256": "7d976ed2aa6df66ab30253b957e5cd441b72cbebe183dbb4a9e93b71c4a3c22a",
+      "bytes": 2840
+    },
+    {
+      "path": "final-test-source/private-wayland.mjs",
+      "sha256": "6e6ceec396623330adf4aed39647c9d2898ea258036574dc5029100f8a5627ad",
+      "bytes": 7710
+    },
+    {
+      "path": "final-test-source/smoke-compositor.mjs",
+      "sha256": "223d3378a88a74d4c090a3fde11336ccb4996e4dd78ece68fa38ed9b3424a5e3",
+      "bytes": 649
+    },
+    {
+      "path": "final-test-source/virtual-keyboard-unstable-v1.xml",
+      "sha256": "7ad7870003ecd592cae47dc19d277a609b7f18fd7b7be012623cf3225a7294f5",
+      "bytes": 4886
+    },
+    {
+      "path": "final-test-source/virtual-keyboard.c",
+      "sha256": "b9a3b5bac2d9f70f43220304d3b1cbd44b4d3abf122ed3960164add722e79d7e",
+      "bytes": 3479
+    },
+    {
+      "path": "final-test-source/virtual-pointer.c",
+      "sha256": "dc41e22f16252418c7456acd8579ec3d15384e83d603d067c04d32d1627d3368",
+      "bytes": 2534
+    },
+    {
+      "path": "final-test-source/wlr-virtual-pointer-unstable-v1.xml",
+      "sha256": "3ff6d540be0bc5228195bf072bde42117ea17945a5c2061add5d3cf97d6bb524",
+      "bytes": 6895
+    },
+    {
+      "path": "assets/RESULT.json",
+      "sha256": "be80b30556beacb542c9a4959ab34010c68b024c4943c87e7f7564b03d64da20",
+      "bytes": 7404
+    },
+    {
+      "path": "assets/pointer-build/RESULT.json",
+      "sha256": "ef289cbd56e9a7badefd901979622e999f292b6b023f2f7224b663c2e440040b",
+      "bytes": 464
+    },
+    {
+      "path": "assets/keyboard-build/RESULT.json",
+      "sha256": "9d783267a36b3a153417b59349df04d3090534a3573e064b964512c68f4f0cc9",
+      "bytes": 389
+    },
+    {
+      "path": "assets/keyboard-build-r21/RESULT.json",
+      "sha256": "4abd077bd2ba4193331e783514640e511cd0bac019343d8ca5d70f98993aa6d7",
+      "bytes": 389
+    },
+    {
+      "path": "synthetic-application-logs/electron.stderr.log",
+      "sha256": "7546018990bb2d3aa59de9d67e75dd64fdf2f828609969fd3048999d809affab",
+      "bytes": 6399694
+    },
+    {
+      "path": "synthetic-application-logs/host.stdout.log",
+      "sha256": "ddb0e828ac29d3ce273b4271bb196bd162d32105cbf307c1d91c79556bea44a8",
+      "bytes": 1743
+    }
+  ],
+  "dailyChanged": false,
+  "published": false,
+  "programRebuilt": false,
+  "evidenceArchive": {
+    "path": "evidence-r2.tar",
+    "sha256": "e7f9a523a852a6adf077769a8728b36f3c7ce25e4b1fa5b25732daf899a27f17"
+  },
+  "resultSha256": "ed99ccb68731a0900a95045eeaebf9fc4f9ae385efb9afa965afb899b8ef29f3",
+  "installedAuditSha256": "b903ffab79b751034e57627aca0fb794fa30cef165646d8d8d3de4c733c07879",
+  "dailyActual": {
+    "launch.mjs": "da140dbad22fa4f6557d98f73e192e1135b29431dba08c0f9b13e4dd3977bf9f",
+    "deployment-rc2.json": "29e3d72617ecb35f97849eccca94d03395408be6dfa4ebef2dc350846f0f0175"
+  },
+  "userEditSha256": "a7ea53338c300162a175e9fa69c491779eb63f04335b4b20b01dabeff3c8a6c1",
+  "visualInspection": {
+    "status": "pass",
+    "images": [
+      {
+        "path": "attempts/alpha2-portable-wayland-actual-r24/round-1-image-preview.png",
+        "sha256": "0847930dc865a3892dd065dbb11ab80f13736bbc42eea979cc50c5c38b15fcaf",
+        "observed": "Actual GTK choice produced the green synthetic image preview",
+        "method": "model visually inspected tool-returned actual grim screenshot; separate from program assertions"
+      },
+      {
+        "path": "attempts/alpha2-portable-wayland-actual-r24/round-2-quit-accept.png",
+        "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+        "observed": "Actual native Quit/Cancel warning visible",
+        "method": "model visually inspected tool-returned actual grim screenshot; separate from program assertions"
+      },
+      {
+        "path": "attempts/alpha2-portable-wayland-actual-r27/round-1-image-preview.png",
+        "sha256": "0847930dc865a3892dd065dbb11ab80f13736bbc42eea979cc50c5c38b15fcaf",
+        "observed": "Unicode synthetic choice produced image preview",
+        "method": "model visually inspected tool-returned actual grim screenshot; separate from program assertions"
+      },
+      {
+        "path": "attempts/alpha2-portable-wayland-actual-r27/round-2-quit-cancel.png",
+        "sha256": "8ed279a6e1b83a039ebf432fac02c40e268c7cba3a5c67019455ea9d42d2f166",
+        "observed": "Unicode supplement native active-task Quit/Cancel warning visible",
+        "method": "model visually inspected tool-returned actual grim screenshot; separate from program assertions"
+      }
+    ]
+  }
+}

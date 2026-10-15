@@ -1,0 +1,745 @@
+{
+  "schema": 1,
+  "commit": "116d36363a8f3d97991b244e0a250715dda7c633",
+  "runId": 38586423216,
+  "jobId": 115929521543,
+  "artifactSha256": "066514dc2d8069e1281b08dfc72c7a02d8494eafc4ae27e6aa823aade6a0e645",
+  "rows": [
+    {
+      "case": {
+        "variant": "cli",
+        "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+        "hideCalls": 1,
+        "cleanup": {
+          "exitCode": 0,
+          "signal": null,
+          "forced": false,
+          "terminated": true
+        },
+        "ready": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": true,
+          "event": "ready",
+          "bundleIdentifier": "ai.dshsep.test.hide.cli",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": false,
+          "birthSeconds": 1791990430,
+          "visible": true,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+          "birthMicroseconds": 746639,
+          "finishedLaunching": true,
+          "pid": 1585,
+          "runningActivationPolicy": 0,
+          "hidden": false,
+          "windowCanHide": true
+        },
+        "pid": 1585,
+        "birthSeconds": 1791990430,
+        "birthMicroseconds": 746639,
+        "before": {
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.cli",
+          "launchTime": 1791990430.746639,
+          "action": "snapshot",
+          "birthSeconds": 1791990430,
+          "terminated": false,
+          "birthMicroseconds": 746639,
+          "hidden": false,
+          "requestSent": true,
+          "pid": 1585,
+          "status": "pass"
+        },
+        "action": {
+          "exitCode": 1,
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.cli",
+          "launchTime": 1791990430.746639,
+          "action": "hide",
+          "birthSeconds": 1791990430,
+          "terminated": false,
+          "birthMicroseconds": 746639,
+          "hidden": false,
+          "requestSent": false,
+          "pid": 1585,
+          "status": "pass"
+        },
+        "after": {
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.cli",
+          "launchTime": 1791990430.746639,
+          "action": "snapshot",
+          "birthSeconds": 1791990430,
+          "terminated": false,
+          "birthMicroseconds": 746639,
+          "hidden": true,
+          "requestSent": true,
+          "pid": 1585,
+          "status": "pass",
+          "sameIdentity": true
+        },
+        "fixture": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": false,
+          "event": "snapshot",
+          "bundleIdentifier": "ai.dshsep.test.hide.cli",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": true,
+          "birthSeconds": 1791990430,
+          "visible": false,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+          "birthMicroseconds": 746639,
+          "finishedLaunching": true,
+          "pid": 1585,
+          "runningActivationPolicy": 0,
+          "hidden": true,
+          "windowCanHide": true
+        },
+        "initialization": [
+          {
+            "activationPolicy": 0,
+            "event": "policyInitial",
+            "pid": 1585,
+            "runningActivationPolicy": 0
+          },
+          {
+            "activationPolicy": 0,
+            "event": "policyAfter",
+            "pid": 1585,
+            "runningActivationPolicy": 0
+          },
+          {
+            "initial": 0,
+            "regular": true,
+            "event": "policyDecision",
+            "setterAccepted": null,
+            "after": 0,
+            "setterAttempted": false,
+            "pid": 1585
+          }
+        ]
+      },
+      "records": {
+        "snapshot": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1585",
+              "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+              "ai.dshsep.test.hide.cli"
+            ],
+            "pid": 1591,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.cli\",\"launchTime\":1791990430.746639,\"action\":\"snapshot\",\"birthSeconds\":1791990430,\"terminated\":false,\"birthMicroseconds\":746639,\"hidden\":false,\"requestSent\":true,\"pid\":1585,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "after": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1585",
+              "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+              "ai.dshsep.test.hide.cli"
+            ],
+            "pid": 1596,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.cli\",\"launchTime\":1791990430.746639,\"action\":\"snapshot\",\"birthSeconds\":1791990430,\"terminated\":false,\"birthMicroseconds\":746639,\"hidden\":true,\"requestSent\":true,\"pid\":1585,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "hide": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "hide",
+              "1585",
+              "/Users/runner/work/_temp/hide-observer-probe/cli.app",
+              "ai.dshsep.test.hide.cli",
+              "1791990430.746639"
+            ],
+            "pid": 1592,
+            "code": 1,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.cli\",\"launchTime\":1791990430.746639,\"action\":\"hide\",\"birthSeconds\":1791990430,\"terminated\":false,\"birthMicroseconds\":746639,\"hidden\":false,\"requestSent\":false,\"pid\":1585,\"status\":\"pass\"}\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "case": {
+        "variant": "runloop",
+        "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+        "hideCalls": 1,
+        "cleanup": {
+          "exitCode": 0,
+          "signal": null,
+          "forced": false,
+          "terminated": true
+        },
+        "ready": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": true,
+          "event": "ready",
+          "bundleIdentifier": "ai.dshsep.test.hide.runloop",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": false,
+          "birthSeconds": 1791990433,
+          "visible": true,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+          "birthMicroseconds": 161523,
+          "finishedLaunching": true,
+          "pid": 1599,
+          "runningActivationPolicy": 0,
+          "hidden": false,
+          "windowCanHide": true
+        },
+        "pid": 1599,
+        "birthSeconds": 1791990433,
+        "birthMicroseconds": 161523,
+        "before": {
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.runloop",
+          "launchTime": 1791990433.161523,
+          "action": "snapshot",
+          "birthSeconds": 1791990433,
+          "terminated": false,
+          "birthMicroseconds": 161523,
+          "hidden": false,
+          "requestSent": true,
+          "pid": 1599,
+          "status": "pass"
+        },
+        "action": {
+          "exitCode": 1,
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.runloop",
+          "launchTime": 1791990433.161523,
+          "action": "hide",
+          "birthSeconds": 1791990433,
+          "terminated": false,
+          "birthMicroseconds": 161523,
+          "hidden": true,
+          "requestSent": false,
+          "pid": 1599,
+          "status": "pass"
+        },
+        "after": {
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.runloop",
+          "launchTime": 1791990433.161523,
+          "action": "snapshot",
+          "birthSeconds": 1791990433,
+          "terminated": false,
+          "birthMicroseconds": 161523,
+          "hidden": true,
+          "requestSent": true,
+          "pid": 1599,
+          "status": "pass",
+          "sameIdentity": true
+        },
+        "fixture": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": false,
+          "event": "snapshot",
+          "bundleIdentifier": "ai.dshsep.test.hide.runloop",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": true,
+          "birthSeconds": 1791990433,
+          "visible": false,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+          "birthMicroseconds": 161523,
+          "finishedLaunching": true,
+          "pid": 1599,
+          "runningActivationPolicy": 0,
+          "hidden": true,
+          "windowCanHide": true
+        },
+        "initialization": [
+          {
+            "activationPolicy": 0,
+            "event": "policyInitial",
+            "pid": 1599,
+            "runningActivationPolicy": 0
+          },
+          {
+            "activationPolicy": 0,
+            "event": "policyAfter",
+            "pid": 1599,
+            "runningActivationPolicy": 0
+          },
+          {
+            "initial": 0,
+            "regular": true,
+            "event": "policyDecision",
+            "setterAccepted": null,
+            "after": 0,
+            "setterAttempted": false,
+            "pid": 1599
+          }
+        ]
+      },
+      "records": {
+        "snapshot": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1599",
+              "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+              "ai.dshsep.test.hide.runloop"
+            ],
+            "pid": 1601,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.runloop\",\"launchTime\":1791990433.1615231,\"action\":\"snapshot\",\"birthSeconds\":1791990433,\"terminated\":false,\"birthMicroseconds\":161523,\"hidden\":false,\"requestSent\":true,\"pid\":1599,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "after": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1599",
+              "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+              "ai.dshsep.test.hide.runloop"
+            ],
+            "pid": 1612,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.runloop\",\"launchTime\":1791990433.1615231,\"action\":\"snapshot\",\"birthSeconds\":1791990433,\"terminated\":false,\"birthMicroseconds\":161523,\"hidden\":true,\"requestSent\":true,\"pid\":1599,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "hide": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-runloop",
+            "args": [
+              "hide",
+              "1599",
+              "/Users/runner/work/_temp/hide-observer-probe/runloop.app",
+              "ai.dshsep.test.hide.runloop",
+              "1791990433.161523"
+            ],
+            "pid": 1603,
+            "code": 1,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.runloop\",\"launchTime\":1791990433.1615231,\"action\":\"hide\",\"birthSeconds\":1791990433,\"terminated\":false,\"birthMicroseconds\":161523,\"hidden\":true,\"requestSent\":false,\"pid\":1599,\"status\":\"pass\"}\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "case": {
+        "variant": "shared",
+        "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+        "hideCalls": 1,
+        "cleanup": {
+          "exitCode": 0,
+          "signal": null,
+          "forced": false,
+          "terminated": true
+        },
+        "ready": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": true,
+          "event": "ready",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": false,
+          "birthSeconds": 1791990435,
+          "visible": true,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+          "birthMicroseconds": 447085,
+          "finishedLaunching": true,
+          "pid": 1615,
+          "runningActivationPolicy": 0,
+          "hidden": false,
+          "windowCanHide": true
+        },
+        "pid": 1615,
+        "birthSeconds": 1791990435,
+        "birthMicroseconds": 447085,
+        "before": {
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared",
+          "launchTime": 1791990435.447085,
+          "action": "snapshot",
+          "birthSeconds": 1791990435,
+          "terminated": false,
+          "birthMicroseconds": 447085,
+          "hidden": false,
+          "requestSent": true,
+          "pid": 1615,
+          "status": "pass"
+        },
+        "action": {
+          "exitCode": 1,
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared",
+          "launchTime": 1791990435.447085,
+          "action": "hide",
+          "birthSeconds": 1791990435,
+          "terminated": false,
+          "birthMicroseconds": 447085,
+          "hidden": false,
+          "requestSent": false,
+          "pid": 1615,
+          "status": "pass"
+        },
+        "after": {
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared",
+          "launchTime": 1791990435.447085,
+          "action": "snapshot",
+          "birthSeconds": 1791990435,
+          "terminated": false,
+          "birthMicroseconds": 447085,
+          "hidden": true,
+          "requestSent": true,
+          "pid": 1615,
+          "status": "pass",
+          "sameIdentity": true
+        },
+        "fixture": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": false,
+          "event": "snapshot",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": true,
+          "birthSeconds": 1791990435,
+          "visible": false,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+          "birthMicroseconds": 447085,
+          "finishedLaunching": true,
+          "pid": 1615,
+          "runningActivationPolicy": 0,
+          "hidden": true,
+          "windowCanHide": true
+        },
+        "initialization": [
+          {
+            "activationPolicy": 0,
+            "event": "policyInitial",
+            "pid": 1615,
+            "runningActivationPolicy": 0
+          },
+          {
+            "activationPolicy": 0,
+            "event": "policyAfter",
+            "pid": 1615,
+            "runningActivationPolicy": 0
+          },
+          {
+            "initial": 0,
+            "regular": true,
+            "event": "policyDecision",
+            "setterAccepted": null,
+            "after": 0,
+            "setterAttempted": false,
+            "pid": 1615
+          }
+        ]
+      },
+      "records": {
+        "snapshot": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1615",
+              "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+              "ai.dshsep.test.hide.shared"
+            ],
+            "pid": 1617,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared\",\"launchTime\":1791990435.4470849,\"action\":\"snapshot\",\"birthSeconds\":1791990435,\"terminated\":false,\"birthMicroseconds\":447085,\"hidden\":false,\"requestSent\":true,\"pid\":1615,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "after": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1615",
+              "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+              "ai.dshsep.test.hide.shared"
+            ],
+            "pid": 1624,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared\",\"launchTime\":1791990435.4470849,\"action\":\"snapshot\",\"birthSeconds\":1791990435,\"terminated\":false,\"birthMicroseconds\":447085,\"hidden\":true,\"requestSent\":true,\"pid\":1615,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "hide": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-shared",
+            "args": [
+              "hide",
+              "1615",
+              "/Users/runner/work/_temp/hide-observer-probe/shared.app",
+              "ai.dshsep.test.hide.shared",
+              "1791990435.447085"
+            ],
+            "pid": 1619,
+            "code": 1,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared\",\"launchTime\":1791990435.4470849,\"action\":\"hide\",\"birthSeconds\":1791990435,\"terminated\":false,\"birthMicroseconds\":447085,\"hidden\":false,\"requestSent\":false,\"pid\":1615,\"status\":\"pass\"}\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "case": {
+        "variant": "shared-runloop",
+        "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+        "hideCalls": 1,
+        "cleanup": {
+          "exitCode": 0,
+          "signal": null,
+          "forced": false,
+          "terminated": true
+        },
+        "ready": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": true,
+          "event": "ready",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared.runloop",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": false,
+          "birthSeconds": 1791990437,
+          "visible": true,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+          "birthMicroseconds": 274204,
+          "finishedLaunching": true,
+          "pid": 1629,
+          "runningActivationPolicy": 0,
+          "hidden": false,
+          "windowCanHide": true
+        },
+        "pid": 1629,
+        "birthSeconds": 1791990437,
+        "birthMicroseconds": 274204,
+        "before": {
+          "active": true,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared.runloop",
+          "launchTime": 1791990437.274204,
+          "action": "snapshot",
+          "birthSeconds": 1791990437,
+          "terminated": false,
+          "birthMicroseconds": 274204,
+          "hidden": false,
+          "requestSent": true,
+          "pid": 1629,
+          "status": "pass"
+        },
+        "action": {
+          "exitCode": 1,
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared.runloop",
+          "launchTime": 1791990437.274204,
+          "action": "hide",
+          "birthSeconds": 1791990437,
+          "terminated": false,
+          "birthMicroseconds": 274204,
+          "hidden": true,
+          "requestSent": false,
+          "pid": 1629,
+          "status": "pass"
+        },
+        "after": {
+          "active": false,
+          "applicationLaunchDate": null,
+          "birthSource": "proc_bsdinfo",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared.runloop",
+          "launchTime": 1791990437.274204,
+          "action": "snapshot",
+          "birthSeconds": 1791990437,
+          "terminated": false,
+          "birthMicroseconds": 274204,
+          "hidden": true,
+          "requestSent": true,
+          "pid": 1629,
+          "status": "pass",
+          "sameIdentity": true
+        },
+        "fixture": {
+          "presentationOptions": 0,
+          "systemPresentationOptions": 0,
+          "active": false,
+          "event": "snapshot",
+          "bundleIdentifier": "ai.dshsep.test.hide.shared.runloop",
+          "activationPolicy": 0,
+          "birthValid": true,
+          "didHide": true,
+          "birthSeconds": 1791990437,
+          "visible": false,
+          "bundlePath": "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+          "birthMicroseconds": 274204,
+          "finishedLaunching": true,
+          "pid": 1629,
+          "runningActivationPolicy": 0,
+          "hidden": true,
+          "windowCanHide": true
+        },
+        "initialization": [
+          {
+            "activationPolicy": 0,
+            "event": "policyInitial",
+            "pid": 1629,
+            "runningActivationPolicy": 0
+          },
+          {
+            "activationPolicy": 0,
+            "event": "policyAfter",
+            "pid": 1629,
+            "runningActivationPolicy": 0
+          },
+          {
+            "initial": 0,
+            "regular": true,
+            "event": "policyDecision",
+            "setterAccepted": null,
+            "after": 0,
+            "setterAttempted": false,
+            "pid": 1629
+          }
+        ]
+      },
+      "records": {
+        "snapshot": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1629",
+              "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+              "ai.dshsep.test.hide.shared.runloop"
+            ],
+            "pid": 1635,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":true,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared.runloop\",\"launchTime\":1791990437.274204,\"action\":\"snapshot\",\"birthSeconds\":1791990437,\"terminated\":false,\"birthMicroseconds\":274204,\"hidden\":false,\"requestSent\":true,\"pid\":1629,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "after": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-cli",
+            "args": [
+              "snapshot",
+              "1629",
+              "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+              "ai.dshsep.test.hide.shared.runloop"
+            ],
+            "pid": 1653,
+            "code": 0,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared.runloop\",\"launchTime\":1791990437.274204,\"action\":\"snapshot\",\"birthSeconds\":1791990437,\"terminated\":false,\"birthMicroseconds\":274204,\"hidden\":true,\"requestSent\":true,\"pid\":1629,\"status\":\"pass\"}\n",
+          "stderr": ""
+        },
+        "hide": {
+          "command": {
+            "executable": "/Users/runner/work/_temp/hide-observer-probe/observer-shared-runloop",
+            "args": [
+              "hide",
+              "1629",
+              "/Users/runner/work/_temp/hide-observer-probe/shared-runloop.app",
+              "ai.dshsep.test.hide.shared.runloop",
+              "1791990437.274204"
+            ],
+            "pid": 1637,
+            "code": 1,
+            "signal": null,
+            "deadline": false,
+            "overflow": false,
+            "forced": false
+          },
+          "stdout": "{\"active\":false,\"applicationLaunchDate\":null,\"birthSource\":\"proc_bsdinfo\",\"bundleIdentifier\":\"ai.dshsep.test.hide.shared.runloop\",\"launchTime\":1791990437.274204,\"action\":\"hide\",\"birthSeconds\":1791990437,\"terminated\":false,\"birthMicroseconds\":274204,\"hidden\":true,\"requestSent\":false,\"pid\":1629,\"status\":\"pass\"}\n",
+          "stderr": ""
+        }
+      }
+    }
+  ]
+}

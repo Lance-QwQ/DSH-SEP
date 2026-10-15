@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "scope": "Explicit owned current Session persistence provider; root bundle remains entry-only.",
+  "targetHost": "0.2.1-alpha.1",
+  "businessActivationAllowed": false,
+  "currentProviderStatus": "pass",
+  "runtimeFiles": [
+    "bundle/lib/session-persistence.js",
+    "bundle/lib/session-parent-proof.js",
+    "bundle/lib/session-catalog.js",
+    "bundle/lib/session-storage-validation.js",
+    "bundle/lib/session-vocabulary.js",
+    "bundle/host/session-jsonl/index.js",
+    "bundle/host/session-jsonl/worker.cjs"
+  ],
+  "companionReferences": [
+    {
+      "file": "bundle/host/session-jsonl/index.js",
+      "relative": "./worker.cjs",
+      "kind": "built-verifier"
+    },
+    {
+      "file": "bundle/host/session-jsonl/index.js",
+      "relative": "./worker.ts",
+      "kind": "source-only-unreachable-in-js"
+    }
+  ],
+  "sourceOnlyCompanions": [
+    {
+      "file": "bundle/host/session-jsonl/index.js",
+      "relative": "./worker.ts",
+      "guard": "import.meta.url.endsWith(\".ts\") is false for packaged index.js; pinned upstream bytes preserve this branch."
+    }
+  ],
+  "requiredEvents": [
+    "task/checkpoint-change"
+  ],
+  "ignorableEvents": [
+    "recovery/continuation"
+  ],
+  "historicalSepExtensions": "refused without successor publication; adjacent SEP migration remains unverified",
+  "nativeHistoricalEvidence": "one empty V3 fixed fixture with real verifier and V4 successor; no broad migration certification",
+  "parentProof": {
+    "source": "same-provider durable parent generations",
+    "maxAncestors": 64,
+    "requiresSameCwd": true,
+    "missingOrChanged": "refuse without fabricating parent or mutating source",
+    "taskIdentities": "retained; local task changes must belong to child"
+  },
+  "notVerified": [
+    "full Agent task execution/resume",
+    "controlled profile provider replacement",
+    "existing private root adoption",
+    "non-empty V0-V3 migration corpus",
+    "historical SEP migration",
+    "cross-project SEP fork",
+    "long-session throughput",
+    "frontend/GUI lifecycle",
+    "complete bundle business"
+  ]
+}

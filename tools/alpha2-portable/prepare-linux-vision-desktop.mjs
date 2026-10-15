@@ -1,0 +1,10 @@
+import './prepare-linux-sep-desktop.mjs';
+import {readFile,writeFile} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {createRequire} from 'node:module';
+import {bundleRoot} from './bundle-modules.mjs';
+const root=resolve(process.env.SEP_BUNDLE_TEST_ROOT),f=JSON.parse(await readFile(join(root,'DESKTOP-FIXTURE.json'))),file=join(f.profile,'cordis.patch.yml'),patch=JSON.parse(await readFile(file));
+patch.push({id:'attachment-local',disabled:true},{id:'llm',disabled:true},{id:'llm-deepseek',disabled:true},{id:'llm-deepseek-account',disabled:true},{insert:[{id:'linux-cold-attachments',name:new URL('./linux-attachments.mjs',import.meta.url).href,config:{source:f.source,storageRoot:f.memory,initialize:true}},{id:'linux-owned-llm',name:new URL('./linux-vision-llm.mjs',import.meta.url).href}]});
+const runtime=patch.flatMap(x=>x.insert??[]).find(x=>x.id==='linux-sep-business');if(!runtime)throw Error('MISSING_DESKTOP_RUNTIME');runtime.config.business.vision={enabled:true,allowUpload:true};
+const {createCanvas}=createRequire(join(bundleRoot,'package.json'))('@napi-rs/canvas'),canvas=createCanvas(8,8);canvas.getContext('2d').fillRect(0,0,8,8);await writeFile(join(f.source,'视觉.png'),canvas.toBuffer('image/png'));
+await writeFile(file,JSON.stringify(patch,null,2)+'\n');await writeFile(join(root,'DESKTOP-FIXTURE.json'),JSON.stringify({...f,linuxVision:true},null,2)+'\n');

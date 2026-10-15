@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "stage": 3,
+  "status": "pass",
+  "scope": "Portable strict configuration intent, pure existing-budget review, build-comment privacy cleanup and pending official admission; no business activation certification.",
+  "checks": [
+    "packed allowlist and every byte equal source, except pnpm omits one terminal LF from root package.json; manifest semantics equal, no links/cache/data",
+    "381 graph-bound originals preserved except two import substitutions and exactly three comment lines; license additions separately bound",
+    "offline consumer has the six pinned direct dependencies and public configuration exports, with no extra DSH host or install scripts",
+    "trusted evaluation and migration integrity manifests continue to match actual packaged files",
+    "independent packed root/module import and companion review; remaining dynamic host semantics explicitly not certified",
+    "admission patch and business gate preserved; native settings and host data bindings remain next-stage requirements",
+    "all package contents exclude private project identifiers, local user/build paths, credential-shaped values and user databases",
+    "prior verification files, official source/public README and daily Beta.2 graph/selection remain intact",
+    "23 packed configuration/component checks, 9 builder checks and 4 real official admission checks passed with original failed evidence retained"
+  ],
+  "archive": {
+    "name": "dsh-sep-bundle-0.2.1-beta.3-bundle.3.tgz",
+    "sha256": "96d01c3bcd059f8266a067df4b0da343cfc9415aa7330ddac4fed631854662bc",
+    "size": 1009378,
+    "files": 398
+  },
+  "modules": 10,
+  "graphBoundFiles": 381,
+  "importRewrites": [
+    "bundle/modules/recovery/src/suite-plugin.mjs",
+    "bundle/modules/session-migration/src/extensions.mjs"
+  ],
+  "sanitizedCommentFile": "bundle/modules/ui-settings-memory/lib/client.js",
+  "sanitizedComments": 3,
+  "staticReview": {
+    "status": "pass",
+    "esmImports": 962,
+    "companionReferences": 11,
+    "dynamicImports": 10,
+    "frontendFactories": 2,
+    "scope": "Static packed closure and declared host/external dependencies; nonliteral imports and actual host semantics remain uncertified."
+  },
+  "runtimeCases": 23,
+  "builderCases": 9,
+  "officialAdmissionCases": 4,
+  "packagingNormalization": "pnpm omits one final LF in root package.json; semantic equality independently checked",
+  "businessEnabled": false,
+  "dailyChanged": false,
+  "published": false,
+  "notVerified": [
+    "host project/storage/ledger/credential bindings",
+    "native configuration settings controls",
+    "complete business activation",
+    "actual frontend registration",
+    "trusted backend/container lifecycle",
+    "Windows MCP clicks",
+    "paid model loop",
+    "remote Git clone and GUI lifecycle",
+    "daily deployment/public release"
+  ],
+  "candidate": {
+    "name": "dsh-sep-bundle",
+    "version": "0.2.1-beta.3-bundle.3",
+    "published": false,
+    "dailyDeployed": false,
+    "businessEnabled": false
+  },
+  "priorCheckpoint": "a9618aec6778a047a492cc15424ec5c87cd5a541",
+  "freshPriorAuthentication": {
+    "status": "pass",
+    "runtime": 13,
+    "builder": 8,
+    "officialAdmission": 3,
+    "committedFiles": 403,
+    "recordSha256": "ab137a8458a06536e378a53fe074efb159abbc517ae5912ada5bd6c9204fa7fa"
+  },
+  "verification": {
+    "finalTestDefinitions": 36,
+    "newStageThreeDefinitions": 12,
+    "priorBehaviorDefinitions": 24,
+    "independentAuditChecks": 9,
+    "paidModelCalls": 0,
+    "cacheMode": "offline reuse of stage-two cold-install store; local tarball newly consumed",
+    "interpretation": "Repeated runs of these definitions are not additional scenarios. No complete Agent, GUI, model or backend certification."
+  },
+  "fixtureCorrections": [
+    "Configured Loader test used a raw Windows ESM specifier; ERR_UNSUPPORTED_ESM_URL_SCHEME was reproduced, then only the test was changed to file URL. Original failure log retained.",
+    "Independent reviewer originally required the final package.json LF and assumed unindented CSS comments. Byte inspection identified pnpm terminal-LF omission and two-tab indentation; reviewer corrected without changing the tarball.",
+    "Root-export import review and consumer test resolution strengthened before final checks."
+  ],
+  "logs": {
+    "red.log": "90f80d02610240bab4bfafd3addc14582f945f1a3a88e1fb9485566c8ba090bc",
+    "builder-green.log": "49716134a6968a79d594ab266d900f02d36453446ebf02f318eccd3751bac05f",
+    "runtime-green.log": "76522e674ebeb8f7b00fc2d8376cbac37e34921e1ca547d3b587f04fcf4f5679",
+    "entry-green.log": "c768b5a628f20a9d55575dd5d921d61e795400bab59db65dbf392321a1647b7e",
+    "entry-green-final.log": "c0f626a6b5c8a7595f163b9872915ac894a0eae36d7036742012f83d9b5459cd",
+    "runtime-final.log": "c7c1a37886c8feea0b3aadf659454209254b8c9380966579c31002bf2fe37a3e",
+    "builder-entry-final.log": "059f079e1b2091da8d8b0c0a5bd7e81a6ca1cea70d602af84c1d0c9b60d66ab0",
+    "pack.log": "088cc0646b5d01be3c51b90a207dc6e0ee8c7ee3b72be06198e718129c9a4d4b",
+    "install.log": "50dc8af2356b97f16ce57d8818aa2ae6b7539a68134330c1e09b469e0856073d",
+    "imports.log": "56d153ea220b08ac8b18378dd743a0f0b2af0b1f358775b10eb3014ddccf5be4",
+    "builder-entry-checkpoint.log": "df2b5df691c7c0dbd131c39809cd03ffaa7b0aaf852026b701aca290323be9ad"
+  },
+  "consumerLockSha256": "b6759dd924e59243d8b65def2b8db41f3dad6d32d08ca9a1695a7bce575463ef",
+  "evidenceDirectory": "bundle-install-20261008/phase3",
+  "historicalEvidence": [
+    "BUNDLE-ENTRY-VERIFICATION.json",
+    "BUNDLE-MODULES-VERIFICATION.json"
+  ],
+  "sourceGraphSha256": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
+  "sourceSha256": {
+    "package.json": "9b66997cab06d582efa937f28d71277d3d111254a3c58eb73990324f3504d07c",
+    "bundle/lib/index.js": "f26d811085d6238ecadc1c69dbb744e4c26f76393c203508bf43a14367f7bd6d",
+    "bundle/lib/configuration.js": "56c6a6d9c8fb50ad978b760e341fb0e288751f1a319e59413402dbfe0b0d8931",
+    "bundle/lib/configuration-budget.js": "0c16d88601bcc667dad659c70f44c78356877fe646cb2520e48b22fd13dc1a27",
+    "bundle/config/schema.json": "77895c6d91f61c34911347c3c55a8ff75b93f1c46f8445e479bc17d3d4dfa010",
+    "bundle/config/default.json": "e7f93b4b221d9e3deab7453be2fa57a1620ee061b99855c40fc786837d5f0799",
+    "bundle/cordis.patch.yml": "69c831096bb1b86a55b7729ad31e10f043b0c6d4f13390df1ced513b2a91d594",
+    "bundle/contracts/admission.json": "f6586a71b7201ed7f815ecc60fd815dfc41fda6de244613bd0f7189d24a3c203",
+    "bundle/contracts/modules.json": "64ce92eedf4deae711b166a4fb6bac4b157e58c7c2ba5e948b522ed3fc49aaf5",
+    "bundle/contracts/configuration.json": "12c9a72199da2d8660edd0a8825d568c5a4e16774b14536d6e0a84c56b65fe4d",
+    "bundle/README.md": "dec75ec87c7e977a216228002809bd98753fdffb92f2ad38e94567272752635d",
+    "bundle/THIRD-PARTY-NOTICES.md": "02de27d5b1f5f0ccece647f6931997f197d33f2e226e45bfb7feea7450c8c883",
+    "bundle/licenses/DSH-MIT.txt": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "tools/bundle-install/build-modules.mjs": "8be42d07502b941cbc0790b2deeb8e5e5f9ee6aa17daa215d830c6ac5869adc2",
+    "tools/bundle-install/review-imports.mjs": "deaad0ede0884232cda6311b211ca3beb8cf6709c9175bb465c5e33df9ec2119",
+    "tools/bundle-install/package.json": "9f9a8f048f9302f01da13781ceb8a0f55cc52ddac76a8f06670f2bec2d524fe6",
+    "tools/bundle-install/pnpm-lock.yaml": "984a4a351d67d565cd8c1b5cb3d45207dd6141d294fbf399f15a92a940f86c1f",
+    "tools/bundle-install/README.md": "84a796cc7130ca4c6a0fd77e475819084d7429c6c1550ba129687d29c29dc4e2",
+    "tools/bundle-install/tests/builder.test.mjs": "f1b506320c52c8b07164d252d34603333ca065d4f096d7f845dfff96bce284fe",
+    "tools/bundle-install/tests/modules.test.mjs": "fe6d8a6fe88c39381480617191b3c000ee9dd1393f7b1ee4eb4cde4dd55499d6",
+    "tools/bundle-install/tests/runtime.test.mjs": "ab558b82fab7bea8376b149855e903fd5780c0e8a5bccd6a299aa6a9d6838972",
+    "tools/bundle-install/tests/configuration.test.mjs": "2e3a5386387c9e3ed008552830ded1b9dcb101d7887fdccb01aa030684aeaa5f",
+    "tools/bundle-install/tests/entry.test.mjs": "cb71f48147cea5a18cf6c46f9e72a6b7b269a1bdc16d5101232b0851731bed48",
+    "docs/BUNDLE-INSTALL-PROGRESS.md": "59b1c805a6a180673cb0f88c3efc5d8b124585d597e8281fce8597b4d3bb8dd2",
+    ".gitignore": "60535ba11649817ca65f1a7283b8193da61654e1b952cfc81abc0300b46b4b3a"
+  }
+}

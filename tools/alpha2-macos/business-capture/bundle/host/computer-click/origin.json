@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/system-enhancement-package/src/computer-click.js",
+  "sourceSha256": "478591306da106d49b8bda615e24e393fd06da90082dd4f39c4ee14aa9fd1fed",
+  "changes": [
+    {
+      "old": "from './errors.js'",
+      "new": "from '../../modules/system-enhancement-package/src/errors.js'"
+    },
+    {
+      "old": "const configSchema=z.object(",
+      "new": "export const configSchema=z.object("
+    },
+    {
+      "old": "apply(ctx,raw={}){",
+      "new": "apply(ctx,raw={},ownership){"
+    },
+    {
+      "old": "async execute(rawArgs,exec){",
+      "new": "async execute(rawArgs,exec){\n  const release=ownership.enter('callback');try{await ownership.authorize(exec);ownership.signal.throwIfAborted();"
+    },
+    {
+      "old": "[exec.signal,lifetime.signal]",
+      "new": "[exec.signal,lifetime.signal,ownership.signal]"
+    },
+    {
+      "old": "  operation.work=work;",
+      "new": "  ownership.track(work).catch(()=>{});\n  operation.work=work;"
+    },
+    {
+      "old": "upstream.removeEventListener('abort',onAbort);}\n }});",
+      "new": "upstream.removeEventListener('abort',onAbort);}\n  }finally{release();}\n }});"
+    }
+  ],
+  "resultSha256": "ac2a6a95741d5e99594dd01aa04be29c2218115c58deff1c6b7d23b0b260431c"
+}

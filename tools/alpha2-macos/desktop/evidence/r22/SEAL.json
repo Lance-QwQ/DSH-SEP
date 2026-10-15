@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "sha256": "51f1a3d7e10fce5280ee7bafd4b9c976ce7420931c8aa2b0523b8079571d1f13",
+      "bytes": 6084,
+      "path": "EVIDENCE-R22.md"
+    },
+    {
+      "sha256": "449c0fa85db1f0a4bfdb14820dcfa722e4b6156fcc9acc7009296241ef8ef5a9",
+      "bytes": 8642,
+      "path": "PENDING-NOT-NATIVE-RUN-smoke-full.mjs"
+    },
+    {
+      "sha256": "0f18c1b00f55c11afb1ba2a4f406e5f9874ba6716ec2f08859cde08b2ad1d084",
+      "bytes": 4556,
+      "path": "r22-full-diagnostic.zip"
+    },
+    {
+      "sha256": "db719bdeb23d8386210124c74aa6be12ab83dbf1f93a8a45d9f706d824a6dea4",
+      "bytes": 15132,
+      "path": "r22-negative-diagnostic.zip"
+    },
+    {
+      "sha256": "87a6d3acd1b5ef5dba5b2961b2da4bb29d36a5d039e22b8cdbd41404044c2002",
+      "bytes": 2445,
+      "path": "RESULT.json"
+    }
+  ]
+}

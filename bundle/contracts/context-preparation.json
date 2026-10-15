@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "entry": "dsh-sep-bundle/context-preparation",
+  "scope": "Windows tool and optional controlled-root immutable snapshot scope; not full Profile certification",
+  "targetHost": "0.2.1-alpha.1",
+  "python": "trusted absolute existing runtime path supplied by host; not bundled here",
+  "legacyModuleUnchanged": true,
+  "limits": {
+    "inputBytes": 10485760,
+    "outputBytes": 12582912,
+    "parserDeadlineMs": 10000
+  },
+  "modelRequests": 0,
+  "guarantees": [
+    "real long-path Python companion invocation",
+    "registered direct agent and canonical project path required",
+    "subagent scope denied",
+    "cancelled result never published as successful context",
+    "Python AST analysis only; task source never executed"
+  ],
+  "notVerified": [
+    "macOS/Linux execution of this new adapter"
+  ],
+  "companionReferences": [
+    {
+      "file": "bundle/host/context-preparation/index.mjs",
+      "relative": "../../modules/context-preparation/context_resolver.py"
+    }
+  ]
+}

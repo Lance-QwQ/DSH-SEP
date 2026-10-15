@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "stage": 5,
+  "status": "pass",
+  "candidate": "0.2.1-beta.3-bundle.23",
+  "host": "0.2.1-alpha.1",
+  "artifact": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase5-gui-install-r1\\artifacts\\peers-r2\\dsh-sep-bundle-0.2.1-beta.3-bundle.23.tgz",
+  "sha256": "53a622369e5e98aa0f36a9563cac73d4bb1166a0fd7cd0c52447d3aa987cdcf7",
+  "files": 467,
+  "archiveChangesFromBundle22": [
+    "bundle/contracts/host-dependencies.json",
+    "package.json"
+  ],
+  "scope": "official native plugin GUI, fixed local Git transport, default pending entry; restart required after upgrade; not public HTTPS or paid business activation",
+  "logs": [
+    {
+      "file": "gui-lifecycle-r14.log",
+      "definitions": 2,
+      "sha256": "6bf1aa647797eb838c4664e352a41e1b6f7c9fb8ee39804ac84a929135d599f9"
+    },
+    {
+      "file": "native-compatibility-green-r1.log",
+      "definitions": 3,
+      "sha256": "b411f4bc0d20a20de7982f10e5ac2fa568a330d66310b1218448a8b31a2b4326"
+    },
+    {
+      "file": "metadata-deps-r1.log",
+      "definitions": 11,
+      "sha256": "1888293f749807036788e77a0c903838d33029cbecf27b0185e57f730752e896"
+    },
+    {
+      "file": "sealed-runtime-r1.log",
+      "definitions": 283,
+      "sha256": "eafb0759d22f56a26591ac54fe0a63b8aadcdd9a48ef0458d2e97fd3955f96e7"
+    },
+    {
+      "file": "sealed-builder-r1.log",
+      "definitions": 13,
+      "sha256": "0f921d8c54c165c240eaa527fd31453ce1d1f838d4dd4875b2485335f92ed971"
+    },
+    {
+      "file": "sealed-lifecycle-r1.log",
+      "definitions": 23,
+      "sha256": "6c8616c68cef0208e7a55a23d3c335bf60802c61d525a00ce1409cf7d5bf8f89"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "tools/bundle-install/tests/gui-install-fixture.mjs",
+      "sha256": "a7f5db90b59294781103dd4ccbb53c6c1f0c6e04c6f9b3b6d78aa86a2c676617"
+    },
+    {
+      "path": "tools/bundle-install/tests/gui-install.test.mjs",
+      "sha256": "3e437276f1c4db388bcc697aa95496197c27f748f9355a5758b87faf5ba9217a"
+    },
+    {
+      "path": "tools/bundle-install/tests/gui-restart-probe.mjs",
+      "sha256": "bfe1a1c22e5c898fd76fa087a49e30a7ab7c37951604909397bceba33e267029"
+    },
+    {
+      "path": "tools/bundle-install/tests/native-compatibility.test.mjs",
+      "sha256": "08c7ac396d1929b08f381c45e27f1e92bb8474109274bc729e170effbd2e576f"
+    }
+  ],
+  "results": [
+    {
+      "status": "pass",
+      "checks": [
+        "real pnpm reached owned held tarball endpoint",
+        "actual GUI cancellation waited for manager restoration",
+        "profile manifest bytes unchanged; no bundle activated"
+      ],
+      "cleanupPath": "normal browser/root/host close; fixture destroys own stalled HTTP sockets and closes server",
+      "forcedProcessStop": false
+    },
+    {
+      "status": "pass",
+      "checks": [
+        "real GUI inspection -> actual pnpm Git install -> profile declaration -> actual HMR enable; default entry remains pending",
+        "new actual boot reads saved profile bundle layer and keeps pending admission",
+        "GUI disable withdraws bundle provider and retains installed dependency",
+        "uninstall/reinstall fixed newer Git commit then fresh Node host restart verifies upgraded entry; same-process version-only reload may retain old imported manifest and is not certified as live upgrade",
+        "uninstall removes only managed bundle dependency; project file and ledger preserved"
+      ],
+      "paidModelRequests": 0,
+      "transport": "local Git file URL with exact commits; not public HTTPS/GitHub authentication",
+      "scope": "default pending bundle lifecycle; controlled synthetic runtime tested separately",
+      "cleanupPath": "normal AppWebEntry and Browser.close, controlled root and host dispose",
+      "forcedProcessStop": false
+    }
+  ],
+  "historicalFailuresRetained": true,
+  "productionFix": "invariants peer union satisfies installed rc.2 leaf and official alpha.1 runtime gate; all other pins unchanged; future hosts rejected",
+  "defaultAdmission": "pending",
+  "completeProfileStatus": "blocked",
+  "paidRequests": 0,
+  "boundary": "no daily deployment, no GitHub push; stop after step8"
+}

@@ -1,0 +1,40 @@
+native-installer-private-transport-red:
+  runs-on: macos-15
+  timeout-minutes: 12
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.21.0
+    - name: Verify synthetic controller and compile native RED contracts
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/installer-transport"
+        files=(tools/alpha2-macos/installer-ui/native/InstallerUI.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.h tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs)
+        shasum -a 256 "${files[@]}" > "$RUNNER_TEMP/installer-transport/INPUTS.sha256"
+        node tools/alpha2-macos/installer-ui/transport/fixture-preflight.mjs "$RUNNER_TEMP/installer-transport/fixture-preflight" > "$RUNNER_TEMP/installer-transport/fixture-preflight.json" 2> "$RUNNER_TEMP/installer-transport/fixture-preflight.stderr"
+        clang -fobjc-arc -fblocks -Wall -Wextra -framework Cocoa tools/alpha2-macos/installer-ui/transport/InstallerPipeTransport.m tools/alpha2-macos/installer-ui/transport/InstallerPipeTransportTests.m -o "$RUNNER_TEMP/installer-transport/tests" > "$RUNNER_TEMP/installer-transport/compile.log" 2>&1
+    - name: Run fifteen real NSTask contracts against explicit missing implementation
+      shell: bash
+      run: |
+        set +e
+        "$RUNNER_TEMP/installer-transport/tests" "$(command -v node)" "$GITHUB_WORKSPACE/tools/alpha2-macos/installer-ui/transport/controller-fixture.mjs" "$RUNNER_TEMP/installer-transport/fixtures" > "$RUNNER_TEMP/installer-transport/RESULT.json" 2> "$RUNNER_TEMP/installer-transport/stderr.log"
+        code=$?
+        printf '%s\n' "$code" > "$RUNNER_TEMP/installer-transport/exit.txt"
+        exit "$code"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: always()
+      with:
+        name: native-installer-private-transport-red
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/installer-transport/*.json
+          ${{ runner.temp }}/installer-transport/*.log
+          ${{ runner.temp }}/installer-transport/*.sha256
+          ${{ runner.temp }}/installer-transport/*.txt
+          ${{ runner.temp }}/installer-transport/*.stderr

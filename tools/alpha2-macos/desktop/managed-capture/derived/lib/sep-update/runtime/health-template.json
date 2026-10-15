@@ -1,0 +1,171 @@
+{
+  "patch": [
+    {
+      "id": "fs-sandbox",
+      "config": {
+        "cwd": "@probe@/workspace",
+        "recovery": {
+          "root": "@probe@/home/file-recovery",
+          "maxFileBytes": 67108864,
+          "maxTotalBytes": 1073741824,
+          "maxEntries": 1000,
+          "retentionMs": 2592000000
+        },
+        "requireRecovery": true
+      }
+    },
+    {
+      "id": "cordis-host-runner",
+      "config": {
+        "persistence": {
+          "root": "@probe@/home/saved-cordis-sources",
+          "projectRoot": "@probe@/workspace",
+          "maxVersionBytes": 1048576,
+          "maxTotalBytes": 16777216,
+          "maxPlugins": 32,
+          "maxVersions": 16,
+          "maxPendingFiles": 16
+        }
+      }
+    },
+    {
+      "id": "agent-default-model",
+      "config": {
+        "provider": "deepseek-official",
+        "model": "deepseek-flash"
+      }
+    },
+    {
+      "id": "llm-deepseek",
+      "config": {
+        "baseURL": "https://api.deepseek.com/anthropic",
+        "apiKeyEnv": "DEEPSEEK_API_KEY",
+        "thinking": "enabled",
+        "reasoningEffort": "off",
+        "maxTokens": 32768,
+        "streamIdleTimeoutMs": 45000,
+        "retryPolicy": {
+          "mode": "normal",
+          "maxRetries": 0
+        }
+      }
+    },
+    {
+      "id": "storage-json",
+      "config": {
+        "root": "@probe@/data/storage"
+      }
+    },
+    {
+      "id": "session-persistence-jsonl",
+      "config": {
+        "root": "@probe@/home/sessions",
+        "requireExistingRoot": true,
+        "compression": "none"
+      }
+    },
+    {
+      "insert": [
+        {
+          "id": "sep-memory-ui",
+          "name": "@deepseek-ai/dsh-client-ui-settings-memory",
+          "config": {
+            "enabled": true
+          }
+        },
+        {
+          "id": "sep-recovery-host",
+          "name": "@program-url@/node_modules/@deepseek-ai/dsh-recovery/src/host-plugin.mjs",
+          "config": {
+            "registerSelectedWorkspaces": true
+          }
+        },
+        {
+          "id": "sep-continuation",
+          "name": "@program-url@/node_modules/@deepseek-ai/dsh-recovery/src/desktop-continuation.mjs",
+          "config": {}
+        },
+        {
+          "id": "sep-suite",
+          "name": "@program-url@/node_modules/@deepseek-ai/dsh-recovery/src/suite-plugin.mjs",
+          "config": {
+            "enabled": true,
+            "configFile": "@probe@/managed/suite-config.json"
+          }
+        }
+      ]
+    },
+    {
+      "id": "session-log-deepseek",
+      "disabled": true,
+      "config": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "session-telemetry-otel",
+      "disabled": true
+    }
+  ],
+  "config": {
+    "enabled": true,
+    "lockDirectory": "@probe@/state/locks",
+    "projects": [
+      {
+        "root": "@probe@/workspace",
+        "sources": [
+          "knowledge"
+        ],
+        "allowImageUpload": true,
+        "userProfile": "instance-user",
+        "recoveryProjectId": "202bc849-b52e-4147-bda7-7753368c2d8d"
+      }
+    ],
+    "modules": {
+      "rag": true,
+      "memory": true,
+      "media": false
+    },
+    "memoryLayers": {
+      "enabled": true,
+      "migrateLegacy": false
+    },
+    "memoryAutomation": {
+      "capture": false,
+      "recall": false,
+      "model": "deepseek-flash",
+      "timeoutMs": 30000,
+      "budgetPath": "@probe@/state/budget.json",
+      "limitCny": 100,
+      "initialSpentCny": 0
+    },
+    "vision": {
+      "model": "deepseek-flash",
+      "budgetPath": "@probe@/state/budget.json",
+      "limitCny": 100,
+      "initialSpentCny": 0
+    },
+    "p1": {
+      "enabled": false,
+      "budgetPath": "@probe@/state/budget.json",
+      "limitCny": 100,
+      "initialSpentCny": 0,
+      "timeoutMs": 60000,
+      "model": "deepseek-flash",
+      "maxTokens": 2048,
+      "standards": [],
+      "prework": true,
+      "profileLimits": {
+        "maxOutputTokens": 32768,
+        "maxInputBytes": 2000000
+      }
+    },
+    "p2": {
+      "enabled": true,
+      "storageRoot": "@probe@/data/storage"
+    },
+    "recovery": {
+      "enabled": true
+    }
+  }
+}

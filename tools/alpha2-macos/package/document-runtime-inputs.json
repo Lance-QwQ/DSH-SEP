@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "files": [
+    "document-business/derive.mjs",
+    "document-business/parsed-tools.mjs",
+    "document-business/context.mjs",
+    "document-business/consumers.mjs",
+    "document-business/runtime-source.mjs",
+    "document-business/runtime.mjs",
+    "document-business/profile-layout.mjs",
+    "document-business/standalone.mjs",
+    "document-business/startup-cleanup.mjs",
+    "parser-integration/runtime.mjs",
+    "parser-integration/services.mjs",
+    "parser-integration/lifecycle.mjs",
+    "parser/trusted-parser.mjs",
+    "parser/parser-worker.mjs",
+    "parser/parser-contract.mjs"
+  ]
+}

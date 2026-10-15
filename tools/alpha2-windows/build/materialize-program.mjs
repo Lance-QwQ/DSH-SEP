@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {createHash} from 'node:crypto';
+import {copyVerifiedProgram} from './program-files.mjs';
+const root='D:/AIData/ProjectWork/DSH/alpha2-windows-packages-20261015-r1';
+const source='D:/AIData/ProjectWork/DSH/alpha2-desktop-continuation-20261012/alpha2-runtime-r6';
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const bytes=await readFile(join(source,'graph.json'));
+assert.equal(hash(bytes),'715ed1c0495d91bba2131029ec0475b2e735d1688b156ce269df149487427a2b');
+const graph=JSON.parse(bytes);assert.equal(graph.schema,3);assert.equal(graph.files.length,21819);
+const result=await copyVerifiedProgram({source,out:join(root,'program'),files:graph.files});
+const descriptor=await readFile(join(source,'desktop-runtime.json'));
+assert.equal(hash(descriptor),'9605a50a959475494655d97f3f0f34d173cd77c072c53379c3387a3f39652d40');
+await writeFile(join(root,'BASE-PROGRAM-GRAPH.json'),bytes,{flag:'wx'});
+await writeFile(join(root,'BASE-DESKTOP-RUNTIME.json'),descriptor,{flag:'wx'});
+await writeFile(join(root,'PROGRAM-COPY.json'),JSON.stringify({schema:1,status:'pass',scope:'Verified immutable program files only; not a sanitized or installable candidate yet',source,sourceGraphSha256:hash(bytes),sourceDescriptorSha256:hash(descriptor),output:join(root,'program'),...result},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({status:'pass',...result,scope:'program copy only'}));

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "kind": "native-test-entry-and-full-installer-operator",
+  "order": ["build-and-restore-original-installer", "original-installer-launchservices-start-normal-close", "separate-test-entry-real-ui-full-install", "fixed-installed-product-launchservices-lifecycle"],
+  "plannedIntegrationDefinitions": 6,
+  "nativeTestMain": "test-main.m",
+  "productionInputs": "package/installer-native-inputs.json",
+  "productionMainReplacedOnlyInSeparateTestCopy": true,
+  "productionModuleChanges": false,
+  "controllerReplyMocks": false,
+  "nativeDialogReplyInjection": false,
+  "actions": ["cancel-review-performClick", "refresh-preview-performClick", "install-performClick", "attached-sheet-Cancel-performClick", "attached-sheet-Install-performClick", "normal-close"],
+  "fixedTarget": "current-account/Applications/DSH SEP.app",
+  "fixedData": "current-account/Library/Application Support/DSH SEP/alpha2-mac-finder-preview",
+  "initialAccount": "target, data and installer governance absent; never delete or adopt an existing path",
+  "unknownCleanup": "blocked, preserve owner and evidence; no force termination; CI teardown separate",
+  "notVerified": ["Native execution has not yet run", "Original byte-identical Installer.app external mouse clicks", "Physical Finder or Dock input", "Developer ID and notarization", "Private user environments"]
+}

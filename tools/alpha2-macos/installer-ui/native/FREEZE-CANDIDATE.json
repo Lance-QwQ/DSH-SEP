@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "UI implementation candidate; native GREEN pending",
+  "expectedDefinitions": 15,
+  "red": {
+    "run": 38599226907,
+    "job": 115973818047,
+    "artifact": 11912771850,
+    "sha256": "f10e43f73a2bb6c8455fdbada45e73dba5fce46617feb47a2b32cc1ee897813c",
+    "expectedFailures": 15
+  },
+  "inputs": [
+    {
+      "path": "InstallerUI.h",
+      "bytes": 921,
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+    },
+    {
+      "path": "InstallerUI.m",
+      "bytes": 16429,
+      "sha256": "c36fdc9877c19e3ec77ca5da1b05610285d591ec5f19b32e1331bf9637fdfb80"
+    },
+    {
+      "path": "InstallerUITests.m",
+      "bytes": 13609,
+      "sha256": "2d30f53864082ca3e44396ed0ab7c7960c8b3292c1a205c87fc9f3f04fa9541c"
+    },
+    {
+      "path": "green-ci-job.yml",
+      "bytes": 1512,
+      "sha256": "df3dd8e7ee40314e3362241ae4a27fd494dd89a7073623b6fef40af6484e4021"
+    },
+    {
+      "path": "IMPLEMENTATION.md",
+      "bytes": 2284,
+      "sha256": "094e9f8e8b3e2158246919c4c68d8be9f73d083187dcbc467d4206750d6b207c"
+    }
+  ]
+}

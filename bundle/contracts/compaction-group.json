@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "name": "cold-start-compaction-and-protected-runtime",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic scope",
+  "status": "pass",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "entries": [
+    "dsh-sep-bundle/compaction-group",
+    "dsh-sep-bundle/protected-runtime"
+  ],
+  "replacement": {
+    "kind": "operator-reviewed cold-start composition only",
+    "requires": "disable native compaction row explicitly; copy its complete native configuration",
+    "liveProviderBehavior": "refuse without disposing existing providers",
+    "automaticPatchEdit": false,
+    "automaticNativeRowRestore": false,
+    "hotReplacementVerified": false
+  },
+  "nativeSemanticsRetained": [
+    "auto",
+    "pressure and retention configuration",
+    "model policies",
+    "range selection and tool pairing",
+    "shrink and selected-source stability checks",
+    "retry policy",
+    "Session durable compaction transaction",
+    "synchronous manual-maintenance reservation"
+  ],
+  "enhancement": "same-project in-memory lossless source/summary graph integrity; original summary result unchanged",
+  "persistentGraph": false,
+  "automaticExpansion": false,
+  "additionalModelRequests": 0,
+  "configuration": {
+    "standaloneRequired": [
+      "projects",
+      "native"
+    ],
+    "standaloneOptional": [
+      "maxInputBytes"
+    ],
+    "runtimeRequired": [
+      "profile",
+      "compaction.native"
+    ],
+    "runtimeOptional": [
+      "compaction.maxInputBytes"
+    ],
+    "runtimeProjectSelection": "registered project of profile.selection, not caller-supplied extra roots",
+    "resetOrInitializeOption": false
+  },
+  "cleanup": {
+    "blocksNewCompactionAdmission": true,
+    "cancelsAcceptedOperations": true,
+    "waitsActualSettlement": true,
+    "order": [
+      "compaction operations and engine",
+      "protected Profile Session/domains/lease"
+    ],
+    "wholeApplicationDeadlineVerified": false,
+    "uncooperativeAdapterBehavior": "closure waits for actual settlement; no early zero-residue claim",
+    "retainedEngineReferencesRefuse": true,
+    "orderedEffectKind": "synchronous generator retaining original thenable child disposers"
+  },
+  "fixedTestDefinitions": 20,
+  "notVerified": [
+    "private live Profile hot replacement",
+    "whole SEP business and P1/delegate Profile interception",
+    "application-wide shutdown deadline",
+    "persistent history graph and automatic expansion",
+    "credentials availability and real paid model",
+    "actual frontend/GUI Git URL lifecycle",
+    "Linux/macOS runtime"
+  ]
+}

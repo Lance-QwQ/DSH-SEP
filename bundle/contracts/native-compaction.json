@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "name": "controlled-native-compaction-binding",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic cold-start scope",
+  "status": "pass",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "entry": "dsh-sep-bundle/native-compaction",
+  "provides": [
+    "sepNativeCompaction"
+  ],
+  "methods": [
+    "review",
+    "activate",
+    "restore",
+    "status"
+  ],
+  "configuration": {
+    "required": [
+      "nativeEntryId",
+      "projects"
+    ],
+    "optional": [
+      "maxInputBytes"
+    ],
+    "nativeConfigSource": "actual current official BasicCompactionEngine resolved config; original raw row retained separately"
+  },
+  "replacement": {
+    "kind": "one-shot trusted cold-start transition; caller owns startup admission",
+    "requires": "plain official native row, no live Sessions; explicit planHash confirmation",
+    "planBinding": [
+      "actual full Loader id and row object",
+      "original raw options",
+      "current native owner uid and resolved config",
+      "canonical project path and dev/ino",
+      "selected input byte limit"
+    ],
+    "automaticNativeRowRestore": true,
+    "persistentConfigWrite": false,
+    "crashRecoveryVerified": false,
+    "privateHotReplacementVerified": false,
+    "rejectsAdvancedRows": [
+      "expressions",
+      "isolation",
+      "custom injection",
+      "groups and custom Loader options"
+    ],
+    "foreignRowChange": "block restore, preserve changed row; explicit receipt and controlled retry",
+    "restoreImportFailure": "verify actual native owner after Entry.init; keep paused fence on own unchanged row and report restore-blocked"
+  },
+  "cleanup": {
+    "blocksNewControllerAdmission": true,
+    "cancelsOwnedCompaction": true,
+    "waitsActualSettlement": true,
+    "restoresOnlyAfterOwnedEngineDisposal": true,
+    "uncooperativeAdapterBehavior": "wait for actual settlement; no application deadline guarantee",
+    "cordisDisposeCaveat": "dispose may swallow cleanup errors; inspect retained status or explicit restore; restore-blocked does not prove native restored",
+    "rootShutdownRestorationVerified": false
+  },
+  "persistentGraph": false,
+  "automaticExpansion": false,
+  "additionalModelRequests": 0,
+  "fixedTestDefinitions": 21,
+  "notVerified": [
+    "private live replacement",
+    "persistent YAML edit and crash restart",
+    "global business admission or arbitrary detached native references",
+    "application-wide bounded shutdown",
+    "complete SEP P1/delegate Profile",
+    "frontend settings and remote Git URL GUI",
+    "Linux/macOS runtime",
+    "real model and credentials"
+  ]
+}

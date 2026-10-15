@@ -1,0 +1,37 @@
+import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {randomUUID} from 'node:crypto';
+import {fileHash,jsonFile} from './update-inventory.mjs';
+import {auditMaterializedGraph} from './materialized-audit.mjs';
+import {createMaterializedLaunch} from './materialized-profile.mjs';
+const demand=(v,c)=>{if(!v)throw Error(c);},load=p=>import(pathToFileURL(p));
+/** Fixed synthetic Profile: never execute the caller's private plugin config,
+ * read its credentials, or initialize its storage. No paid model request. */
+export async function checkMaterializedHealth({programRoot,probeRoot,graphHash,installation:c,signal}){
+ demand(process.platform==='win32'&&process.arch==='x64','SEP_MATERIALIZED_PLATFORM');signal?.throwIfAborted();await auditMaterializedGraph(programRoot,graphHash);await mkdir(probeRoot);
+ const projectId=randomUUID(),workspace=join(probeRoot,'workspace'),home=join(probeRoot,'home'),storage=join(probeRoot,'memory'),locks=join(probeRoot,'locks'),profileRoot=join(probeRoot,'profile'),budgetPath=join(probeRoot,'budget/ledger.json');
+ for(const p of [workspace,join(workspace,'资料'),home,storage,locks,profileRoot,join(home,'sessions'),join(probeRoot,'budget'),join(probeRoot,'backups'),join(probeRoot,'authority'),join(probeRoot,'electron'),join(probeRoot,'user/temp'),join(probeRoot,'runtime')])await mkdir(p,{recursive:true});
+ for(const name of ['primary-runtime','office-skills'])await cp(join(c.dailyRoot,'runtime',name),join(probeRoot,'runtime',name),{recursive:true});
+ await writeFile(budgetPath,JSON.stringify({version:3,currency:'CNY',limit:100,initialSpent:0,entries:[],taskLimits:{},childBindings:{},reconciliations:[],legacyInitialSpent:false,sessionDefault:{limitCny:100,revision:1},sessionLimits:{}})+'\n');
+ const recovery=join(programRoot,'node_modules/@deepseek-ai/dsh-recovery'),core=join(programRoot,'node_modules/dsh-sep-bundle'),adapter=join(programRoot,'daily-adapter'),url=p=>pathToFileURL(p).href;
+ const {PROFILE_TEMPLATES}=await load(join(programRoot,'node_modules/@deepseek-ai/dsh-app-boot/lib/index.js'));await writeFile(join(profileRoot,'package.json'),JSON.stringify({name:'sep-synthetic-update-health',private:true,type:'module',dsh:{profile:{bundles:PROFILE_TEMPLATES.web.bundles}}}));await writeFile(join(profileRoot,'cordis.yml'),'[]\n');
+ const patch=[...['fs-sandbox','session-persistence-jsonl','desktop-product-telemetry','product-analytics','session-telemetry-otel','otel'].map(id=>({id,disabled:true})),{id:'storage-json',config:{root:storage}},{id:'sandbox-policy',config:{mode:'workspace-write',workspaceRoot:workspace}},{insert:[{id:'native',name:'@deepseek-ai/dsh-compaction-basic',config:{auto:true,thresholdRatio:.08,retainRatio:.016,maxTokens:8192,compactionRetries:0,maxOverflowRetries:2}},{id:'sep-recovery',name:url(join(recovery,'src/host-plugin.mjs')),config:{registerSelectedWorkspaces:true}},{id:'sep-continuation',name:url(join(recovery,'src/desktop-continuation.mjs')),config:{}}]}];await writeFile(join(profileRoot,'cordis.patch.yml'),JSON.stringify(patch)+'\n');
+ const bindings=[];for(const path of [join(core,'package.json'),...(await (await import('node:fs/promises')).readdir(adapter)).map(n=>join(adapter,n))])bindings.push({path,sha256:await fileHash(path)});
+ const selection={schema:2,dsh:'0.2.1-alpha.1',sep:(await jsonFile(join(core,'package.json'))).version,bundleRoot:core,dailyAdapterRoot:adapter,nativeCompactionEntryKey:'native',configuration:{runtime:{profile:{selection:{projectId,roots:{sessions:join(home,'sessions'),memory:storage,locks,backups:join(probeRoot,'backups')},budgetPath,credentialRef:'DEEPSEEK_API_KEY'},recovery:{maxFileBytes:65536,maxTotalBytes:1048576,maxEntries:64,retentionMs:86400000}},p1:{enabled:true,budgetPath},business:{sources:['资料'],capture:false},compaction:{maxInputBytes:65536},shutdownMs:5000},ui:{enabled:true,requestTimeoutMs:5000}},bindings};
+ const selectionPath=join(probeRoot,'daily-selection.json');await writeFile(selectionPath,JSON.stringify(selection)+'\n');
+ const installation={...c,dailyRoot:probeRoot,releaseRoot:programRoot,profileRoot,home,storageRoot:storage,controlRoot:join(probeRoot,'authority'),lockDirectory:locks,electronUserData:join(probeRoot,'electron'),runtimeUser:join(probeRoot,'user'),credentialsPath:join(probeRoot,'synthetic.env'),projects:[{id:projectId,root:workspace}]};await writeFile(installation.credentialsPath,'DEEPSEEK_API_KEY=synthetic-not-a-real-key\n');
+ const prepared={root:programRoot,graphHash,profileRoot,selectionPath},launcherRoot=join(probeRoot,'launcher'),{config}=await createMaterializedLaunch({installation,prepared,out:launcherRoot}),configPath=join(probeRoot,'deployment-rc2.json');await writeFile(configPath,JSON.stringify(config)+'\n');
+ const {openControl}=await load(join(core,'bundle/modules/system-enhancement-package/src/p2/control.js'));let control=await openControl({storageRoot:storage,initialize:true});await control.close();
+ const {openDaily}=await load(join(launcherRoot,'launcher.mjs'));let runtime,carrier,pid,stdout='',stderr='';
+ try{
+  runtime=await openDaily(configPath,{readCredential:false,onHostSpawn:({child})=>{child.stdout.on('data',b=>stdout=(stdout+b).slice(-32768));child.stderr.on('data',b=>stderr=(stderr+b).slice(-32768));}});const started=await runtime.start();demand(started.phase==='running','SEP_HEALTH_HOST');pid=started.pid;
+  const status=await runtime.client.call('status');pid=status.guardian?.pid;demand(status.writerState==='open'&&status.guardian?.phase==='running','SEP_HEALTH_HOST');
+  const {openHttpCarrier}=await load(join(recovery,'src/http-carrier.mjs'));carrier=await openHttpCarrier(await runtime.client.call('desktopReady'));
+  for(const method of ['sep-memory/list','sep-budget/list']){const response=await carrier.fetch(new Request('dsh-app://app/api/'+method,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type:'client-request',rpcId:method,method,payload:{}}),signal:AbortSignal.any([AbortSignal.timeout(15000),...(signal?[signal]:[])])}));const reply=await response.json();demand(response.ok&&reply.result?.ok&&reply.result.value?.available===true,'SEP_HEALTH_SETTINGS');}
+  const idle=await runtime.client.call('desktopQuitInspection');demand(idle.activeTasks===false&&idle.scheduledTasks===false,'SEP_HEALTH_NOT_IDLE');signal?.throwIfAborted();
+ }finally{carrier?.close();await runtime?.close();await writeFile(join(probeRoot,'stdout.log'),stdout);await writeFile(join(probeRoot,'stderr.log'),stderr);}
+ try{process.kill(pid,0);throw Error('SEP_HEALTH_PROCESS_REMAINS');}catch(e){if(e.code!=='ESRCH')throw e;}
+ control=await openControl({storageRoot:storage,mode:'maintenance',initialize:false});try{const cp=await control.checkpoint();demand(!cp.barrier.closed&&!cp.pending.length,'SEP_HEALTH_STORAGE');}finally{await control.close();}
+ const result={schema:1,status:'pass',targetRoot:programRoot,targetGraphHash:graphHash,targetVersion:'0.2.1-alpha.1',testedAt:new Date().toISOString(),checks:['desktop-host','recovery-control','governed-storage'].map(name=>({name,status:'pass'})),cleanup:'owned host closed and exit observed; no force cleanup',scope:'Windows x64 alpha.1 synthetic managed host and authenticated memory/budget routes; no real model, private plugin execution or Electron window'};await writeFile(join(probeRoot,'health.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});return result;
+}

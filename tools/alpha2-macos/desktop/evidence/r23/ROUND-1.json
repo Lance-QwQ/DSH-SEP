@@ -1,0 +1,17 @@
+{
+  "index": 1,
+  "status": "pass",
+  "sameDataRoot": true,
+  "nativeWelcomeSkip": "pass",
+  "desktopPid": 8933,
+  "hostPid": 8853,
+  "windowId": 1,
+  "realInspection": "pass",
+  "backgroundSameHost": "pass",
+  "reopenSameOwner": "pass",
+  "gracefulOwnedResources": "pass",
+  "exit": {
+    "code": 0,
+    "signal": null
+  }
+}

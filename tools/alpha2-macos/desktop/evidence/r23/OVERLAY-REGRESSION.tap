@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: does not run CJS instrumentation at the early Electron bootstrap pause
+ok 1 - does not run CJS instrumentation at the early Electron bootstrap pause
+  ---
+  duration_ms: 1.225041
+  type: 'test'
+  ...
+# Subtest: entry breakpoint can be the first pause
+ok 2 - entry breakpoint can be the first pause
+  ---
+  duration_ms: 0.188209
+  type: 'test'
+  ...
+# Subtest: missing entry has a bounded deadline and never instruments
+ok 3 - missing entry has a bounded deadline and never instruments
+  ---
+  duration_ms: 11.04975
+  type: 'test'
+  ...
+# Subtest: instrumentation failure removes breakpoint without resuming product code
+ok 4 - instrumentation failure removes breakpoint without resuming product code
+  ---
+  duration_ms: 0.572125
+  type: 'test'
+  ...
+# Subtest: diagnostic exception pausing is disabled before resuming real app execution
+ok 5 - diagnostic exception pausing is disabled before resuming real app execution
+  ---
+  duration_ms: 0.316792
+  type: 'test'
+  ...
+# Subtest: repack changes exactly app.asar header binding and retains independent bundle identity
+ok 6 - repack changes exactly app.asar header binding and retains independent bundle identity
+  ---
+  duration_ms: 3.00675
+  type: 'test'
+  ...
+# Subtest: unexpected bundle identity or stale original header refuses
+ok 7 - unexpected bundle identity or stale original header refuses
+  ---
+  duration_ms: 0.487959
+  type: 'test'
+  ...
+# Subtest: public capture is exact r3 and each installed byte matches manifest
+ok 8 - public capture is exact r3 and each installed byte matches manifest
+  ---
+  duration_ms: 72.035875
+  type: 'test'
+  ...
+# Subtest: normalization is limited to compiler labels, no private roots or credential literals remain
+ok 9 - normalization is limited to compiler labels, no private roots or credential literals remain
+  ---
+  duration_ms: 61.575416
+  type: 'test'
+  ...
+# Subtest: missing explicit desktop dependencies link only to bound carrier host packages
+ok 10 - missing explicit desktop dependencies link only to bound carrier host packages
+  ---
+  duration_ms: 1.9455
+  type: 'test'
+  ...
+# Subtest: existing carrier dependency is preserved rather than replaced
+ok 11 - existing carrier dependency is preserved rather than replaced
+  ---
+  duration_ms: 0.238625
+  type: 'test'
+  ...
+# Subtest: missing or version-incompatible carrier dependency rejects assembly
+ok 12 - missing or version-incompatible carrier dependency rejects assembly
+  ---
+  duration_ms: 0.729708
+  type: 'test'
+  ...
+# Subtest: command manager import is bound to the explicit carrier file, with exact source count
+ok 13 - command manager import is bound to the explicit carrier file, with exact source count
+  ---
+  duration_ms: 0.948
+  type: 'test'
+  ...
+# Subtest: audit includes ESM and literal dynamic and CJS bare imports, excluding relative and builtins
+ok 14 - audit includes ESM and literal dynamic and CJS bare imports, excluding relative and builtins
+  ---
+  duration_ms: 0.595875
+  type: 'test'
+  ...
+# Subtest: all fixed captured JS imports reconcile after exactly nine import rewrites
+ok 15 - all fixed captured JS imports reconcile after exactly nine import rewrites
+  ---
+  duration_ms: 26.908292
+  type: 'test'
+  ...
+# Subtest: Mac invocation binds explicit independent roots and controlled connection
+ok 16 - Mac invocation binds explicit independent roots and controlled connection
+  ---
+  duration_ms: 1.796333
+  type: 'test'
+  ...
+# Subtest: missing, duplicate or invalid controlled entry refuses []
+ok 17 - missing, duplicate or invalid controlled entry refuses []
+  ---
+  duration_ms: 0.3235
+  type: 'test'
+  ...
+# Subtest: missing, duplicate or invalid controlled entry refuses ["electron"]
+ok 18 - missing, duplicate or invalid controlled entry refuses ["electron"]
+  ---
+  duration_ms: 0.065334
+  type: 'test'
+  ...
+# Subtest: missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection=/tmp/sep/desktop.json","--sep-recovery-connection=/tmp/sep/desktop.json"]
+ok 19 - missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection=/tmp/sep/desktop.json","--sep-recovery-connection=/tmp/sep/desktop.json"]
+  ---
+  duration_ms: 0.056583
+  type: 'test'
+  ...
+# Subtest: missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection="]
+ok 20 - missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection="]
+  ---
+  duration_ms: 0.06
+  type: 'test'
+  ...
+# Subtest: missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection=relative.json"]
+ok 21 - missing, duplicate or invalid controlled entry refuses ["electron","--sep-recovery-connection=relative.json"]
+  ---
+  duration_ms: 0.053083
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "/"
+ok 22 - invalid data root refuses "/"
+  ---
+  duration_ms: 0.089542
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "/tmp/../sep"
+ok 23 - invalid data root refuses "/tmp/../sep"
+  ---
+  duration_ms: 0.083167
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "/tmp//sep"
+ok 24 - invalid data root refuses "/tmp//sep"
+  ---
+  duration_ms: 0.27725
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "/tmp/sep/"
+ok 25 - invalid data root refuses "/tmp/sep/"
+  ---
+  duration_ms: 0.10525
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "/tmp/sep\\u0000x"
+ok 26 - invalid data root refuses "/tmp/sep\\u0000x"
+  ---
+  duration_ms: 0.060208
+  type: 'test'
+  ...
+# Subtest: invalid data root refuses "C:\\\\sep"
+ok 27 - invalid data root refuses "C:\\\\sep"
+  ---
+  duration_ms: 0.050833
+  type: 'test'
+  ...
+# Subtest: foreign platform and missing immutable/runtime roots refuse
+ok 28 - foreign platform and missing immutable/runtime roots refuse
+  ---
+  duration_ms: 0.109625
+  type: 'test'
+  ...
+# Subtest: configuration writes only explicit independent Electron identity
+ok 29 - configuration writes only explicit independent Electron identity
+  ---
+  duration_ms: 3.069625
+  type: 'test'
+  ...
+# Subtest: unintegrated install gate rejects before calling any supplied work
+ok 30 - unintegrated install gate rejects before calling any supplied work
+  ---
+  duration_ms: 0.108292
+  type: 'test'
+  ...
+# Subtest: ASAR paths and links cannot escape extraction root
+ok 31 - ASAR paths and links cannot escape extraction root
+  ---
+  duration_ms: 5.70925
+  type: 'test'
+  ...
+# Subtest: Mac case aliases reject before copying
+ok 32 - Mac case aliases reject before copying
+  ---
+  duration_ms: 1.652208
+  type: 'test'
+  ...
+# Subtest: nested native ASAR metadata and internal framework links retained
+ok 33 - nested native ASAR metadata and internal framework links retained
+  ---
+  duration_ms: 0.757625
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 441.906708

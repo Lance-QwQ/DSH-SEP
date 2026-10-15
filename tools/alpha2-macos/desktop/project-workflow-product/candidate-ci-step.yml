@@ -1,0 +1,26 @@
+# Separate fresh macOS VM. Does not rebuild or re-sign the application.
+- name: Restore exact signed r61 candidate
+  env:
+    SEP_ARTIFACT_TOKEN: ${{ github.token }}
+  shell: bash
+  run: |
+    set -euo pipefail
+    export TMPDIR="$RUNNER_TEMP/"
+    node tools/alpha2-macos/desktop/project-workflow-product/restore-project-application-r61.mjs "$RUNNER_TEMP/project-r61"
+- name: Fixed candidate bindings and unchanged r49 hide contracts
+  shell: bash
+  run: |
+    set -euo pipefail
+    export SEP_PROJECT_R61_RECEIPT="$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json"
+    export SEP_PROJECT_CANDIDATE_TEST_ROOT="$RUNNER_TEMP/project-candidate-contracts"
+    mkdir "$SEP_PROJECT_CANDIDATE_TEST_ROOT"
+    node --test --test-reporter=tap tools/alpha2-macos/desktop/project-workflow-product/candidate.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/observation.test.mjs tools/alpha2-macos/desktop/hide-effect-probe/derive.test.mjs > "$RUNNER_TEMP/project-candidate-contracts.tap" 2> "$RUNNER_TEMP/project-candidate-contracts.stderr"
+- name: Three LaunchServices cycles with one hide and fresh observed effect each
+  shell: bash
+  run: |
+    set -euo pipefail
+    export TMPDIR="$RUNNER_TEMP/"
+    node tools/alpha2-macos/desktop/project-workflow-product/candidate-lifecycle.mjs "$RUNNER_TEMP/project-r61/evidence/project-build/RESULT.json" 6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1 "$RUNNER_TEMP/project-r61" "$RUNNER_TEMP/project-lifecycle-r61"
+# Always retain project-lifecycle-r61/**, contract logs, project-r61/RESULT.json,
+# project-r61/PACKAGE-INVENTORY.json, evidence/project-build/RESULT.json and logs.
+# Do not upload the ~647MB archive in one artifact; its existing fixed parts suffice.

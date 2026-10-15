@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/system-enhancement-package/src/automatic-layered-memory.js",
+  "sourceSha256": "f4ff39a28a616af3ddb666b24633e3ddbf91a8d831c064f510bec1aed3be4827",
+  "changes": [
+    {
+      "old": "from './provider-diagnostics.js'",
+      "new": "from '../../modules/system-enhancement-package/src/provider-diagnostics.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './automatic-memory.js'",
+      "new": "from '../../modules/system-enhancement-package/src/automatic-memory.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './vendor/bm25.js'",
+      "new": "from '../../modules/system-enhancement-package/src/vendor/bm25.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './errors.js'",
+      "new": "from '../../modules/system-enhancement-package/src/errors.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './deepseek.js'",
+      "new": "from '../../modules/system-enhancement-package/src/deepseek.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './automation-settings.js'",
+      "new": "from '../../modules/system-enhancement-package/src/automation-settings.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "from './session-events.js'",
+      "new": "from '../../modules/system-enhancement-package/src/session-events.js'",
+      "occurrences": 1
+    },
+    {
+      "old": "resolveBudgetScope=()=>undefined,config:input={}",
+      "new": "resolveBudgetScope=()=>undefined,sharedBudget,generate,config:input={}",
+      "occurrences": 1
+    },
+    {
+      "old": "let budget;const resolveKey=()=>ctx.get('credentials')?.resolve('DEEPSEEK_API_KEY');",
+      "new": "let budget=sharedBudget;const resolveKey=()=>undefined;",
+      "occurrences": 1
+    },
+    {
+      "old": "try{if(!config.budgetPath)fail('BUDGET_CONFIG');budget=new Budget(config.budgetPath,{limit:config.limitCny,initialSpent:config.initialSpentCny});await budget.init();}",
+      "new": "try{if(!(budget instanceof Budget)||typeof generate!=='function')fail('MEMORY_SHARED_MODEL_REQUIRED');}",
+      "occurrences": 1
+    },
+    {
+      "old": "await callDeepSeek(",
+      "new": "await generate(",
+      "occurrences": 2
+    }
+  ],
+  "resultSha256": "37ff35b7a311528bf5f19f676afee6514a413ee3bf1e64a58a8c543d957483fd",
+  "scope": "Shared already-open budget reference; extraction routed through native P1 model guard; original evidence/retention/settings rules preserved"
+}

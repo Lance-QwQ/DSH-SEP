@@ -1,0 +1,3 @@
+- insert:
+    - id: sep-bundle-installation
+      name: ./lib/index.js

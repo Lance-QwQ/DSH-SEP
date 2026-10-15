@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "sourceCommit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+  "scope": "unmodified owner primitives and native synthetic tests; no product release claim",
+  "files": [
+    {
+      "path": "captured/owner-posix.mjs",
+      "bytes": 6134,
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/owner-posix.mjs"
+      }
+    },
+    {
+      "path": "captured/owner-lease.mjs",
+      "bytes": 17920,
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/owner-lease.mjs"
+      }
+    },
+    {
+      "path": "captured/budget-ledger.js",
+      "bytes": 19699,
+      "sha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/budget-ledger.js"
+      }
+    },
+    {
+      "path": "captured/budget-lock.js",
+      "bytes": 5885,
+      "sha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/budget-lock.js"
+      }
+    },
+    {
+      "path": "captured/budget-continuity.js",
+      "bytes": 1626,
+      "sha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/budget-continuity.js"
+      }
+    },
+    {
+      "path": "captured/errors.js",
+      "bytes": 443,
+      "sha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3",
+      "origin": {
+        "commit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+        "path": "bundle/modules/system-enhancement-package/src/errors.js"
+      }
+    },
+    {
+      "path": "identity-contract.test.mjs",
+      "bytes": 1809,
+      "sha256": "a16926784e02af12f66fbbab62bec2021c623a9c538a4e31e23ab71d33de3d1b",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "lease-worker.mjs",
+      "bytes": 764,
+      "sha256": "a05447719ebbb7fb72e3db760eb544095da214c40efe932f2cfbc7e9907c6161",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "run-native.mjs",
+      "bytes": 7020,
+      "sha256": "bfce1b404f7de20a285751d7c40b31a512a0de7505a82ae0ddfd4d84a5e6bf3a",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "budget-worker.mjs",
+      "bytes": 790,
+      "sha256": "2047bb3cc92a2506cf1fc8667778c746f29628e76bbf41bc99409498d1771956",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "run-budget-native.mjs",
+      "bytes": 7879,
+      "sha256": "8377a2971e5189c5e60c21e1ea80e4516dc51888065dc5215e3aebe60cdb1994",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "command-log.mjs",
+      "bytes": 800,
+      "sha256": "8ba79ed6e0b91b47631a0dac7a19b9b099ac1b280f492750d5eb9b9f375172c5",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "command-log.test.mjs",
+      "bytes": 826,
+      "sha256": "58f317d4335aaa5b0b516c6c09e19dd1bb5670b1322795603d9121f0e7b70b6a",
+      "origin": {
+        "kind": "new synthetic test fixture"
+      }
+    },
+    {
+      "path": "sandbox-probe.m",
+      "bytes": 3899,
+      "sha256": "2921867da5fd14afc972ad8c0a0e1aba3f975e21186aa951b953f0a1ab3f623e",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "sandbox-entitlements.plist",
+      "bytes": 233,
+      "sha256": "baa050bc06d89900bed3bb4954acdf2f17c4f47e259b1870f889d4a301fbcaf4",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "helper-entitlements.plist",
+      "bytes": 277,
+      "sha256": "89ef4cb8622d50576a600545812c12abc3c5ef29ee7c3e7113f8e79543114d24",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "run-sandbox-prototype.mjs",
+      "bytes": 5977,
+      "sha256": "c5df6ee68d68a738f9c715cbb8fe02898603529a5a447bd367c96a69c1317974",
+      "origin": {
+        "kind": "native App Sandbox synthetic feasibility test; not production worker"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 2793,
+      "sha256": "7f7a9694af8f0584641e7a2707a8751b07c5b8d66eb721a55de3bca0f345d592",
+      "origin": {
+        "kind": "scope declaration"
+      }
+    },
+    {
+      "path": "package.json",
+      "bytes": 156,
+      "sha256": "cabe674d1c144c50378f6618e4a510527cc2f58a3c6a11f32fcfcd7e8c3358cb",
+      "origin": {
+        "kind": "test-only module boundary"
+      }
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 555,
+      "sha256": "5f4022d416cfef35bb6ac7865ab1646f3e5741fe80fcf4bd001def5f9b1f36fc",
+      "origin": {
+        "kind": "zod integrity retained from the tested Alpha.2 host pnpm lock"
+      }
+    }
+  ]
+}

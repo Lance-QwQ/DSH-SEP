@@ -1,0 +1,19 @@
+# Test-only successor; restore the exact unchanged r61 application first.
+- name: Derived project UI probe with same P2 authority during final inspection
+  shell: bash
+  run: |
+    set -euo pipefail
+    : "${SEP_PROJECT_UI_SOURCE:?absolute source root}"
+    : "${SEP_PROJECT_UI_ASSEMBLY_RESULT:?new verified restore RESULT}"
+    : "${SEP_PROJECT_UI_ASSEMBLY_SHA256:?new restore RESULT SHA}"
+    : "${SEP_PROJECT_UI_OPERATOR_NODE:?verified Node}"
+    output="$RUNNER_TEMP/project-ui-native-r2"
+    mkdir "$output"
+    /usr/bin/sw_vers > "$output/mac-version.txt"
+    /usr/bin/clang -framework ApplicationServices "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/ax-capability.m" -o "$output/ax-capability"
+    "$output/ax-capability" > "$output/AX-CAPABILITY.json"
+    "$SEP_PROJECT_UI_OPERATOR_NODE" --test --test-reporter=tap "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-contract.test.mjs" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-authority-derive.test.mjs" > "$output/contracts.tap" 2> "$output/contracts.stderr"
+    "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator-r2.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round1" "$output/data" 1
+    "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator-r2.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round2" "$output/data" 2
+# Always retain project-ui-native-r2/**. No product rebuild, native dialog shim,
+# native confirmation acceptance, physical-input claim or paid request.

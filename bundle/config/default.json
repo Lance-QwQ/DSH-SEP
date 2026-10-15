@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "enabled": false,
+  "modules": {
+    "rag": true,
+    "memory": true,
+    "media": false
+  },
+  "memory": {
+    "recall": true,
+    "capture": false
+  },
+  "budget": {
+    "sharedLimitCny": 100,
+    "roundLimitCny": 5,
+    "sessionDefaultLimitCny": 100
+  },
+  "compaction": {
+    "mode": "inherit-native"
+  }
+}

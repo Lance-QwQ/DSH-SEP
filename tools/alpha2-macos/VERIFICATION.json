@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "macOS native foundation, accounting and sandbox feasibility only",
+  "sourceCommit": "79e07bfd6993be8cfb0d354bb24019c6c4d64bcc",
+  "ciCommit": "561a41d781fcf6cc78b3864f3744df23579620b3",
+  "ciRun": 38509592523,
+  "targetDsh": "0.2.1-alpha.2",
+  "counts": {
+    "identityContracts": 9,
+    "failedCommandDiagnostic": 1,
+    "nativeScenarios": 6,
+    "nativeRounds": 3,
+    "nativeExecutions": 18,
+    "budgetScenarios": 8,
+    "budgetRounds": 3,
+    "budgetExecutions": 24,
+    "sandboxUnsignedControls": 1,
+    "sandboxSignedRounds": 3
+  },
+  "artifacts": [
+    {
+      "id": 11869227691,
+      "name": "sep-alpha2-macos-sandbox-feasibility",
+      "archiveSha256": "78b3673fb7142d4cf23fb868f2362c49dbc2b325bd97bae9ee26a96fc39e076c",
+      "result": "sep-alpha2-macos-sandbox-feasibility-r6/RESULT.json",
+      "resultSha256": "d1948fd928941bc7bde31c11edc213df686d1d72fb75a78cd594df2cb78f54cc"
+    },
+    {
+      "id": 11869077990,
+      "name": "sep-alpha2-macos-native-foundation",
+      "archiveSha256": "0cc4e272eb256e68da52e175e0d6dfdcebe0921d424cbe940495813b4141bded",
+      "result": "sep-alpha2-macos-native-foundation-r6/RESULT.json",
+      "resultSha256": "bcdcef262705d7c091b01e0478d2de42314a428cb9f68868da57cf1417f2d047"
+    },
+    {
+      "id": 11868613740,
+      "name": "sep-alpha2-macos-native-budget",
+      "archiveSha256": "d86ca9d715f4b2b2f1bccfbc77387d4c7b26149dd6fc1d95e5e86720a2cdd0bc",
+      "result": "sep-alpha2-macos-native-budget-r6/RESULT.json",
+      "resultSha256": "6bb178e571b7a1aaf6dba88672fb1788f23e0133bb0de456dd2f00e6186d84c2"
+    }
+  ],
+  "source": [
+    {
+      "path": "tools/alpha2-macos/captured/owner-posix.mjs",
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3"
+    },
+    {
+      "path": "tools/alpha2-macos/captured/owner-lease.mjs",
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a"
+    },
+    {
+      "path": "tools/alpha2-macos/captured/budget-ledger.js",
+      "sha256": "a00165ba843a02b93b2fb77da3eab5fb7caba02ff1818ed4999f2bf6c0a86475"
+    },
+    {
+      "path": "tools/alpha2-macos/captured/budget-lock.js",
+      "sha256": "7f77a0a95925927c7b5aff696f4cbe1107a5dad342beff7a76278b0e45d5e7c5"
+    },
+    {
+      "path": "tools/alpha2-macos/captured/budget-continuity.js",
+      "sha256": "777a9bc76291311bad2760f6999571efdd03b24c789127cec81c4d3fbd6569e8"
+    },
+    {
+      "path": "tools/alpha2-macos/captured/errors.js",
+      "sha256": "bbeb606e67ab37f26515e5ab5848a5120fa4cb1ba7afc12ca1f7c3e0db91bfb3"
+    },
+    {
+      "path": "tools/alpha2-macos/identity-contract.test.mjs",
+      "sha256": "a16926784e02af12f66fbbab62bec2021c623a9c538a4e31e23ab71d33de3d1b"
+    },
+    {
+      "path": "tools/alpha2-macos/lease-worker.mjs",
+      "sha256": "a05447719ebbb7fb72e3db760eb544095da214c40efe932f2cfbc7e9907c6161"
+    },
+    {
+      "path": "tools/alpha2-macos/run-native.mjs",
+      "sha256": "bfce1b404f7de20a285751d7c40b31a512a0de7505a82ae0ddfd4d84a5e6bf3a"
+    },
+    {
+      "path": "tools/alpha2-macos/budget-worker.mjs",
+      "sha256": "2047bb3cc92a2506cf1fc8667778c746f29628e76bbf41bc99409498d1771956"
+    },
+    {
+      "path": "tools/alpha2-macos/run-budget-native.mjs",
+      "sha256": "8377a2971e5189c5e60c21e1ea80e4516dc51888065dc5215e3aebe60cdb1994"
+    },
+    {
+      "path": "tools/alpha2-macos/command-log.mjs",
+      "sha256": "8ba79ed6e0b91b47631a0dac7a19b9b099ac1b280f492750d5eb9b9f375172c5"
+    },
+    {
+      "path": "tools/alpha2-macos/command-log.test.mjs",
+      "sha256": "58f317d4335aaa5b0b516c6c09e19dd1bb5670b1322795603d9121f0e7b70b6a"
+    },
+    {
+      "path": "tools/alpha2-macos/sandbox-probe.m",
+      "sha256": "2921867da5fd14afc972ad8c0a0e1aba3f975e21186aa951b953f0a1ab3f623e"
+    },
+    {
+      "path": "tools/alpha2-macos/sandbox-entitlements.plist",
+      "sha256": "baa050bc06d89900bed3bb4954acdf2f17c4f47e259b1870f889d4a301fbcaf4"
+    },
+    {
+      "path": "tools/alpha2-macos/helper-entitlements.plist",
+      "sha256": "89ef4cb8622d50576a600545812c12abc3c5ef29ee7c3e7113f8e79543114d24"
+    },
+    {
+      "path": "tools/alpha2-macos/run-sandbox-prototype.mjs",
+      "sha256": "c5df6ee68d68a738f9c715cbb8fe02898603529a5a447bd367c96a69c1317974"
+    },
+    {
+      "path": "tools/alpha2-macos/README.md",
+      "sha256": "7f7a9694af8f0584641e7a2707a8751b07c5b8d66eb721a55de3bca0f345d592"
+    },
+    {
+      "path": "tools/alpha2-macos/package.json",
+      "sha256": "cabe674d1c144c50378f6618e4a510527cc2f58a3c6a11f32fcfcd7e8c3358cb"
+    },
+    {
+      "path": "tools/alpha2-macos/package-lock.json",
+      "sha256": "5f4022d416cfef35bb6ac7865ab1646f3e5741fe80fcf4bd001def5f9b1f36fc"
+    },
+    {
+      "path": "tools/alpha2-macos/INPUTS.json",
+      "sha256": "6e3a7654762cfa93e4c83814499285f3545bc96af77d120fc72792497ca7148c"
+    },
+    {
+      "path": ".github/workflows/sep-alpha2-macos.yml",
+      "sha256": "5ea2585440cdd0927fae0c5864d0065a15d6d0aa9842f3a709a04dd51492b836"
+    },
+    {
+      "path": "tools/alpha2-macos/PROGRESS.md",
+      "sha256": "29e16400c7977810bf5ad7542eb4292b40107788d089c3b63f225fae15fc068b"
+    },
+    {
+      "path": "tools/alpha2-macos/stage-native.mjs",
+      "sha256": "bdbf59481c71afaa9363694ce9782c3e0dd4f89ce4c5cf4ade2766982399b816"
+    },
+    {
+      "path": "tools/alpha2-macos/seal-native.mjs",
+      "sha256": "33b49495737bf1576a21b6e71f1e451a10d50569d4abc319d1053417876a2847"
+    },
+    {
+      "path": "tools/alpha2-macos/bootstrap.mjs",
+      "sha256": "9b31e3c997f8c29aa4e67765adb70f66912961ace84481a22006a1dfec24a0f5"
+    },
+    {
+      "path": "tools/alpha2-macos/README-native.md",
+      "sha256": "7f7a9694af8f0584641e7a2707a8751b07c5b8d66eb721a55de3bca0f345d592"
+    },
+    {
+      "path": "tools/alpha2-macos/mac-native.yml",
+      "sha256": "5ea2585440cdd0927fae0c5864d0065a15d6d0aa9842f3a709a04dd51492b836"
+    }
+  ],
+  "historicalFailure": {
+    "run": 38506588022,
+    "status": "fail",
+    "archive": "macos-sandbox-failed-r1.zip",
+    "sha256": "eb5e9ed76f3bcb6998e44119051003828c7bd6aa33421d5c6c1e4d0300622491",
+    "diagnosis": "Objective-C encoded 0 instead of JSON false; strict assertion stopped unsigned control before sandbox rounds"
+  },
+  "protection": {
+    "dailyHashes": {
+      "launch.mjs": "da140dbad22fa4f6557d98f73e192e1135b29431dba08c0f9b13e4dd3977bf9f",
+      "deployment-rc2.json": "29e3d72617ecb35f97849eccca94d03395408be6dfa4ebef2dc350846f0f0175"
+    },
+    "userDocSha256": "a7ea53338c300162a175e9fa69c491779eb63f04335b4b20b01dabeff3c8a6c1",
+    "githubMainChanged": false,
+    "releasePublished": false,
+    "paidModelCalls": 0
+  },
+  "notVerified": [
+    "full Alpha.2 host integration",
+    "APFS secure tree walker",
+    "per-project worker isolation",
+    "transaction commit and recovery",
+    "P2/memory domains",
+    "complete desktop exit",
+    "Accessibility and TCC",
+    "Full/Only installation",
+    "signed notarized public delivery",
+    "fast PID reuse",
+    "whole process tree containment"
+  ],
+  "macPackageReady": false,
+  "precedingReceipt": {
+    "path": "RESULT.json",
+    "sha256": "a365fa41292fdb5acde0abc00c39e399c5b7fe1ebb410c0dcbd2b833f52b258f",
+    "change": "include two operator input files required to replay stage-native.mjs; no CI input changed"
+  }
+}

@@ -1,0 +1,2 @@
+// Test fixture cleanup only, never product lifecycle authority.
+export function fixtureReleased(execution,receipt){return execution.signal===null&&!execution.blocked&&receipt?.fixtureAbsentAfter===true&&receipt?.fixtureTerminated===true&&(receipt.dispatched===false&&receipt.fixturePid===0||receipt.dispatched===true&&Number.isInteger(receipt.fixturePid)&&receipt.fixturePid>0&&receipt.fixtureIdentityMatched===true);}

@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "sha256": "2460def9ff48bf0b626579782f84dae8b4cf8967c25d4f587112b4a0b18386cf",
+      "bytes": 5328,
+      "path": "ASSEMBLY.json"
+    },
+    {
+      "sha256": "3034b1d7935643b725aaa59e7ea677c8828701fa0a019653408305bdad55c3cd",
+      "bytes": 6010,
+      "path": "BROKER-REGRESSION.tap"
+    },
+    {
+      "sha256": "bb9114927e87a8a9ad527c9f3e58f78b537c2c6c26f78582fb9b71a436da5f3c",
+      "bytes": 1708,
+      "path": "DESKTOP-THREE-CYCLES.json"
+    },
+    {
+      "sha256": "884a7fb1caa92d41f64eb560ae5a2f32755211208eac74e5ac2b971b5cf4e1b9",
+      "bytes": 4427,
+      "path": "EVIDENCE-R23.md"
+    },
+    {
+      "sha256": "ac79c33da546259afd2671d86d854afef550d060e3597b4a4a5a9acf1d6f24fd",
+      "bytes": 580,
+      "path": "MISSING-CONNECTION.json"
+    },
+    {
+      "sha256": "a584dba1a4ade93b3beddd634ee25a40f34ed31edd66237d95d127d088aa11c8",
+      "bytes": 6893,
+      "path": "OVERLAY-REGRESSION.tap"
+    },
+    {
+      "sha256": "b4950ca79a5b8fa6c5c1301e5beddf90f00d7ee5c29346a42f980d32bcb99ba2",
+      "bytes": 5445,
+      "path": "r23-full-diagnostic.zip"
+    },
+    {
+      "sha256": "0c46bc9c09dba5c9a2372717d91511aeb7e6c66b24bb1a4efc14157812ab651a",
+      "bytes": 15118,
+      "path": "r23-negative-diagnostic.zip"
+    },
+    {
+      "sha256": "288d7c513f828190620107b97fb7b59bc7bd7e2c6cb894aa3098af0b0dedc379",
+      "bytes": 209,
+      "path": "REFUSAL-RECEIPT.json"
+    },
+    {
+      "sha256": "8dac6e0f2d2d604c257bfd9d1852320e90fcf0e75b356cdb37b4c2d63ecc991f",
+      "bytes": 2197,
+      "path": "RESULT.json"
+    },
+    {
+      "sha256": "751bdd9cc851f6c082a9642a1206b2e6c64d31d7af2d9dc0bc772bb43a6588eb",
+      "bytes": 326,
+      "path": "ROUND-1.json"
+    },
+    {
+      "sha256": "de49370c485603598e35ef282b5cfefb59c83641483ccca4347228e5da2e329e",
+      "bytes": 326,
+      "path": "ROUND-2.json"
+    },
+    {
+      "sha256": "986626298497c4d6e23b67eece2d6092367912720f9d673cd7d8c14dbddd3180",
+      "bytes": 326,
+      "path": "ROUND-3.json"
+    },
+    {
+      "sha256": "449c0fa85db1f0a4bfdb14820dcfa722e4b6156fcc9acc7009296241ef8ef5a9",
+      "bytes": 8642,
+      "path": "TESTED-smoke-full.mjs"
+    }
+  ]
+}

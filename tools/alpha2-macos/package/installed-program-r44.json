@@ -1,0 +1,48 @@
+{
+  "schema": 4,
+  "validationScope": "isolated-macos-preview",
+  "dshVersion": "0.2.1-alpha.2",
+  "bundleRoot": "Resources/product/payload/host/sep-capture",
+  "hostRoot": "Resources/product/payload/host",
+  "appRoot": "Helpers/DSH SEP Desktop.app",
+  "capabilities": [
+    "governed-images",
+    "trusted-parsers"
+  ],
+  "parserRoot": "Resources/product/payload/parser-runtime",
+  "entries": {
+    "node": {
+      "path": "Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "sha256": "e4b5a3af0e05c75de2eae013904145f40fe7fc2a6e6f17510128bf45cca4e79b"
+    },
+    "business": {
+      "path": "Resources/product/runtime/document-business/standalone.mjs",
+      "sha256": "68cd07112d4dfec586ced12818f358ee35feed119a3c3050193ae64b247b698a"
+    },
+    "ownerLease": {
+      "path": "Resources/product/runtime/captured/owner-lease.mjs",
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a"
+    },
+    "helper": {
+      "path": "Resources/product/payload/native/project-tree",
+      "sha256": "aef9bf0d490bdae3762db4b19682dd59d50fd6842876daf396362e482f524109"
+    },
+    "attachmentHelper": {
+      "path": "Resources/product/payload/native/attachment-tree",
+      "sha256": "a21047e71e799a89cdfd046d28814d657b71bef2e3abcc27793d597cc9843e8d"
+    },
+    "parserManifest": {
+      "path": "Resources/product/payload/parser-runtime/manifest.json",
+      "sha256": "1cbd8ec4afc1b421d4a730b54f053005f6a7827706f5ffc8e9e14dcd1041029a"
+    },
+    "electron": {
+      "path": "Helpers/DSH SEP Desktop.app/Contents/MacOS/DSH SEP",
+      "sha256": "18152296db013868506d714bd3a766429686483c53e246190ebfc508787cab5f"
+    },
+    "asar": {
+      "path": "Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "sha256": "390ae3c2776ef237f1b409bba5a2b6426c04eadbc1eec446cc84d5aa18b4010e"
+    }
+  },
+  "layout": "macos-app-v1"
+}

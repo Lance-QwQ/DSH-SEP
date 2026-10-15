@@ -1,0 +1,719 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Windows x64 isolated Alpha.2 desktop and governed PRIVATE COPY only; no daily switch or GitHub upload",
+  "officialCommit": "d743267388641bc76f17c45ce8b4c231aed1d32c",
+  "program": {
+    "sep": "0.2.1-beta.3-alpha2-adapter.1",
+    "dsh": "0.2.1-alpha.2",
+    "generation": "alpha2-runtime-r5",
+    "graphSha256": "cd92c0ecebcf94023c318d567cb9487f3b947d4803cb612bd3e3adb686a4b6ca",
+    "files": 21818
+  },
+  "artifacts": [
+    {
+      "path": "core-regression-r3.tap",
+      "status": "pass",
+      "tests": 43,
+      "sha256": "b8bdcbe6662849c24e3cb7833509acc0da58539e551a39a8ef1785251ad6e3f4",
+      "repeated": false,
+      "format": "node-spec"
+    },
+    {
+      "path": "daily-regression-r3.tap",
+      "status": "pass",
+      "tests": 8,
+      "sha256": "65fcf04563a0c63a35556441b9b9fb66538161866a3ffeb935227c83765ad7c3",
+      "repeated": false,
+      "format": "node-spec"
+    },
+    {
+      "path": "native-reload-green-r2.tap",
+      "status": "pass",
+      "tests": 24,
+      "sha256": "c729c01eddd15ac70f424da72ba56da767d37b498c52196175585921bac94563",
+      "repeated": false,
+      "format": "node-spec"
+    },
+    {
+      "path": "private-copy-r4.tap",
+      "status": "pass",
+      "tests": 6,
+      "sha256": "8c16cd3c463640b62b271860b64742ea29af99be5415e662e284d70ea02f84b9",
+      "repeated": false,
+      "format": "node-spec"
+    },
+    {
+      "path": "verification-copy-green-r2.tap",
+      "status": "pass",
+      "tests": 6,
+      "sha256": "7ec9c8ef4a90515a611f276555712941a6591ad55f990a8e1e0daf6f0ec652ab",
+      "repeated": false,
+      "format": "tap"
+    },
+    {
+      "path": "repository-source-regression-r1.tap",
+      "status": "pass",
+      "tests": 30,
+      "sha256": "078bbb05ea4284128c3e0f06dbd65163548036637c1b8950098fe333c125d4ce",
+      "repeated": true,
+      "format": "tap"
+    },
+    {
+      "path": "REPAIRED-RUNTIME-r5.json",
+      "status": "pass",
+      "sha256": "deeffafcb0bd0f6b8917e19fb081c891ec640b730c1dcf6c49afc2277fcacd60"
+    },
+    {
+      "path": "DEFAULT-ENTRY-RESULT-r10.json",
+      "status": "pass",
+      "sha256": "27bb53f9859a46d7f3511be6dbcfd526e0110c8da1af8c13361e3ae88f17acb3"
+    },
+    {
+      "path": "MANAGED-DESKTOP-RESULT-r4.json",
+      "status": "pass",
+      "sha256": "93fe1126ec98a18de1de1bce11b9bf5d820adc0d654641fc0cc4a974da3c8d77"
+    },
+    {
+      "path": "MANAGED-DESKTOP-RESULT-r5.json",
+      "status": "pass",
+      "sha256": "39bef6fb3a29f63f0023afeb9fe01c7cad6c002651e66b52a66b370b5134394b"
+    },
+    {
+      "path": "FINAL-DATA-PROGRAM-AUDIT-r3.json",
+      "status": "pass",
+      "sha256": "1d1283240deb6d2bad80682d2e67c6638f30213c842a21bc3e2ac3f4696d3b63"
+    },
+    {
+      "path": "FINAL-RESOURCES-ACL-r2.json",
+      "status": "pass",
+      "sha256": "83278e7e2c57f5993eb5f118741dbdca0995514ac37f29e8a3f696fe1f3fbbab"
+    }
+  ],
+  "privateProfile": {
+    "status": "pass",
+    "rounds": 2,
+    "privateReceiptSha256": "7652ef32fef56fda61791d6f3e5d619dcb8b136186219e03c4a4fed53ebfc633",
+    "privatePhysicalFiles": 21,
+    "privateSessions": 19,
+    "sourceOriginalFilesVerified": 752,
+    "privateDataIncluded": false,
+    "relation": "Electron tests use synthetic stores; private tests use separate full official Profile processes, not one combined private GUI end-to-end run"
+  },
+  "inputFiles": [
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/build-alpha1-desktop-isolated.mjs",
+      "sha256": "a812c44bfc815b1f1b35e6b294657f37b417847b09fc32a9e07474f072d2e5ad"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/build-alpha1-host-adapter.mjs",
+      "sha256": "619c4a4c770c518a36f1c6afce05d6917b165d1ea654e6f0c18dac7cf93cfd3c"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/build-integrated-client.mjs",
+      "sha256": "3271dcd9c70a181d80d9ff02278459395c9a1793412a4d3145bc0d3d305d52bc"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/build-integrated-desktop.mjs",
+      "sha256": "665566ad14206f27bf2e706910a61c7bbe81301fb9edd99cc3642aa52b06217b"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/daily-composition.mjs",
+      "sha256": "2cd873641afb52f20e67aa022f07055a19e90e73b2ba75453767f56e442d0e46"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/daily-launcher.mjs",
+      "sha256": "0c2dcc0a8f3d46ccd1ba527ae8b08bd7f6c0650efa57a7088b8f154c79acd913"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/daily-recovery.mjs",
+      "sha256": "930edcc10f3999e9f13c1e403b5adc7068be261fbee46fc559293302c0bf68d2"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/materialize-alpha1-runtime.mjs",
+      "sha256": "81d152544f584984c948bbb75d4b72183ef2094e41ada9b61db0175923574cb5"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/materialize-integrated-runtime.mjs",
+      "sha256": "99c8d3ff9098765f98eebfdced777b0ad56d142ee45fc8ed0821d633b1424825"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/prepare-alpha1-desktop-probe.mjs",
+      "sha256": "94cee94eb50293e54e86fefd5fb6173c51c580e9ff16203cf3f377ba1059f996"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/prepare-daily-candidate.mjs",
+      "sha256": "5b3ea9d674541dcd38247c665d009e0828a487774b141df4aa029f0887f27df6"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/prepare-integrated-runtime.mjs",
+      "sha256": "3d68959824f9cfa30c0ab1cbb204943723be05c09bffccb6212b940c746e200d"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/program-graph.mjs",
+      "sha256": "4b36e2cffdaf235c0c9b1eeec85e1aacd09505655096b9a3886276cab619d480"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/run-alpha1-desktop-probe.mjs",
+      "sha256": "823c3299f454526b88c3c6fe19b62de04e5fccac5b6958c867988b17652b4708"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/build/updater-inventory.mjs",
+      "sha256": "b2dca3f62a353c3eba5d34febbcf10eda7dad68d78464b58fbb9a5a53cb92fdb"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/daily-presets.mjs",
+      "sha256": "ffc2f1bc34846552a1ab5caac95bcd73928b9eb8ff9addf94e594993feaf2ad0"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/daily-profile.mjs",
+      "sha256": "5481738b0be6e5441107eccfcc6b9f30adf3825a2025e86c1d0f24818e33ea5a"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/daily-startup.mjs",
+      "sha256": "a24e969f7f65462de3217c4700783403736bdd8e7de755e700b9a0392fbf8e92"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/graph-layout.mjs",
+      "sha256": "cc63bf363eae90fc68c4f9215afef0559f33b9e9237f0418911b3b6aa7c07b5f"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/installed-sep-version.mjs",
+      "sha256": "dd51ec2cf3a8bf714726842915ed3490262a6548b86ab64db03eb3763b188dcc"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/legacy-attachments.mjs",
+      "sha256": "ebf8d51264d82b7bddef0725a9a074eb25afd90ae731b02b03d284a6ae7c5a94"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/lib/project-write-lease.mjs",
+      "sha256": "c7be4c5d01a94dcc783ac3a2930a1484e299d956779467a72036969f74298469"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/daily-presets.test.mjs",
+      "sha256": "64366f7833b750664e22cec5ac49937c94beed791973c7fbb948da2ab29781ce"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/daily-profile.test.mjs",
+      "sha256": "882d7ce2c3d547c52ff06cf8611379cd9871e2706b08a79e905c4838913b1817"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/daily-startup.test.mjs",
+      "sha256": "2a412cda823d4b7a2c156c7f592e00d9a2ada3b6a532d5b1f0513fb7e2f47f5f"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/desktop-probe-bootstrap.mjs",
+      "sha256": "c7ee822de54b25e4c2d9a990c4dd0f84478602fc8affa8ea764b206f90976b2e"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/full-profile.test.mjs",
+      "sha256": "824785850c4dfed57901f6b0ff833ad63d7df1762282c1e40d8f6f750aed4fb6"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/graph-layout.test.mjs",
+      "sha256": "295ce095746c101f2b00cbe4cd50011c264bbae1d8fa0d3ef9f6646664e89741"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/installed-version.test.mjs",
+      "sha256": "740b1899bc16e649f8b3698823ca94da9c4bf965637fd2ae4dc6c21280907cc9"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/legacy-attachments.test.mjs",
+      "sha256": "094a0ec3ff00f96a8f8a8646224709478ffb5a7c4cf2a18c6b821c564d94b5cf"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/managed-inventory.mjs",
+      "sha256": "a105f0b5a4ec9f34f7af2ef97c1c1b1474189f721c8821d8e7308073950cc163"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/managed-profile.test.mjs",
+      "sha256": "2de2253fedf23931497dfe03670b9ec3c47a1b575d2b3f15590f58f2ab369e28"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/multi-workspace.test.mjs",
+      "sha256": "b201d9b7e32974401c4c09f185576fa0e1f6c416dee6ed339f58d5759faf7d12"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/prepare-managed-desktop.mjs",
+      "sha256": "ba68c4f98f29b7052af0dcdca3014e5571f702d548730ea865164952a82dc6ea"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/private-session-readonly.mjs",
+      "sha256": "91ae34737480903e49a1280de168786fde8f57d11a8612bd8a8f543c0fae89d0"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/profile-worker.mjs",
+      "sha256": "c4128ced02278bcdcf65d40f7a877587622a9c51665af80b46aea5fb402d0374"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/project-write-lease.test.mjs",
+      "sha256": "1dd599086356edc4cb29a28913deaaddac972c555f2d588d481b6c4b0bdf6227"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/restart-reader.mjs",
+      "sha256": "3c460f9344a463cde03790131b99dc607c99c040fe06aaa4b0210b98a9fd29e3"
+    },
+    {
+      "path": "tools/alpha2-desktop/daily-adaptation/tests/run-managed-desktop.mjs",
+      "sha256": "abfb47ab11a50a81d15c346f4e8abffc49bbd6e8feff05a6e14d47972894fd3d"
+    },
+    {
+      "path": "tools/alpha2-desktop/default-entry.mjs",
+      "sha256": "09912940d83954934dd846a893beb28ca4035f32a2848402f14b5d3ca5c20288"
+    },
+    {
+      "path": "tools/alpha2-desktop/final-audit.mjs",
+      "sha256": "ff215af3da98214dcb420712d2919225358b4dc9b30d9866c425c974a0f16169"
+    },
+    {
+      "path": "tools/alpha2-desktop/prepare-native-reload-tests.mjs",
+      "sha256": "64726af455feec961415f9b98bb462727e5e0a55d1c08e044862850c0b8e0d76"
+    },
+    {
+      "path": "tools/alpha2-desktop/prepare-reopen-probe.mjs",
+      "sha256": "22a0b3446187e89921fe507f857c26eba3a3fd5220b77eef58a21208d39f66dc"
+    },
+    {
+      "path": "tools/alpha2-desktop/private-profile-checks.mjs",
+      "sha256": "3d77e4c0ce9cfaddab0d4dbebb922ec3250ab2154555760b70e736dc086f2fd7"
+    },
+    {
+      "path": "tools/alpha2-desktop/private-profile.mjs",
+      "sha256": "355ba4b7ca8e1ce420d27cd9ad8153a95b93688f46321815b55bbebf90b0503a"
+    },
+    {
+      "path": "tools/alpha2-desktop/README.md",
+      "sha256": "337e6e0c09312434944cb078875afe0b9b5d10d232fb4b7eb5750aa89184da24"
+    },
+    {
+      "path": "tools/alpha2-desktop/SOURCE-FINAL.json",
+      "sha256": "3a64ad9aa9408f5285ec4f8a8db9b57b78b1fb0d2741b4af826d8829dad82b4c"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/fatal-recovery.ts",
+      "sha256": "95b0c7c37c9063ce7127885eff18f70a26df252e8ea3a6b3af929cdac17e620e"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/ipc.ts",
+      "sha256": "76358ffff851abf505c0c63f7684407ae6a0beef9fc1f5e043d0a84c20113307"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/locale.ts",
+      "sha256": "6d4462db7db5ce82f51fd03e74644e2e35167fe56bf94ac47188ed2a2f6a9b37"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/main.ts",
+      "sha256": "d1fac91c8cbef8afffda574c7cba1d1de0be2a935d46c3c376e2ad6dec1fa76c"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/managed-host.ts",
+      "sha256": "2f1f6456d07112ee5c90e140eb8d780c36eec12d266440ed2277a78ff9ef2f4a"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/preload-app.ts",
+      "sha256": "5a16ae77de722b40e8fde6da6eb3a3dee54445a72164dc4d636122e706d4f9bc"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/request-lifetime.ts",
+      "sha256": "8ec88953918b297ea3266ab1cbf9737f37300a29093237908dc99e74151584dd"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-background.d.mts",
+      "sha256": "2158d7f8a075eac1a6708d19dd9104d7f6b77170548e358350f98b584e3e42c2"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-background.mjs",
+      "sha256": "6270a2637d97710a2048bcbf54c018da1650e66c1e02418497aee0df4caf108b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/assessment-input.mjs",
+      "sha256": "f72b2f4af55a1865a425384af0c31df5bbcf2b9885e5e0ae0c3472c5b73c6b95"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/desktop-composition.mjs",
+      "sha256": "d4456a070a0e88e289d1ceb0908bdead73c0c83fb892882a948a7768f32119a5"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/download-package.mjs",
+      "sha256": "6bd3fa338fd629a71422de4bb894285f94db281d362a71e4cb3c8c5dec386d05"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/extract-sep.mjs",
+      "sha256": "83f6b14dffa492cb977f5df453d853699e95bad58b06dce7848ce7c9dbce9dfa"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/extract-sep.ps1",
+      "sha256": "596348abf7c8fc437ab4709f4bef0a1e56b61ba4a02b78bc5be6922b92e37ec9"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/LIFECYCLE-PORTABILITY.md",
+      "sha256": "b76e22437d1fbff7cfa0359fc0e0cca8552621f5fa9826573c0228fc96f8b546"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/maintenance-repair.mjs",
+      "sha256": "5843f630e3602a703949f7fac4724f2dc5ff18b8ea0ffa8de9cfe63d98d93e18"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/MAINTENANCE.md",
+      "sha256": "1a551782b4273bfe38028f0227af1d0123cda41198a8546b72ed0db15146c5e2"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/PREPARATION-PORTABILITY.md",
+      "sha256": "0ae739680cf7f4c02919188573a25fb87e9578d9bd89f005687eab14237ec2ae"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-health.mjs",
+      "sha256": "2fb8d2c1d3e3e9acbf761334413d803e06920743ca04f71bee26936c59955784"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-idle.mjs",
+      "sha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-offline.mjs",
+      "sha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-package.mjs",
+      "sha256": "0f1d8fe5a84fe6a89400e0e8d3c7d4eb9365336f14c972f7bfd9a67fc451bd1e"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-preservation.mjs",
+      "sha256": "e9bbce79c7714147ae0d491576596b6f1ca607e9a8e6e6d59c9af6a14a55d861"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-profile.mjs",
+      "sha256": "6b2ece0a870db4a1e8cb5d6cbc89ede409dafbf31b4bcddbea6a723948a83077"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-publish.mjs",
+      "sha256": "49bce869624297110f61588a11e3da399868466b2b56f76b4c0ae5eb85d5ccf2"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-queue.mjs",
+      "sha256": "0a75ad2aa00525c69112448d5acc5a0ad4d9d0e5ed08442a1fed149d8ab373c5"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-review-host.mjs",
+      "sha256": "e09cb4035a1222dca8eccb927411e4c15fe1554bc36eca25f4df463637a30175"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-review-ui.mjs",
+      "sha256": "4088b466254ac1f2de0095aa18be698aedb249eaa8dae32b7fad9f612657f630"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/prepare-worker.mjs",
+      "sha256": "a43ab00e931d15faf05459c53973c2e43b1a18435fad8afe9e6b06d200317276"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/README.md",
+      "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/audit-graph.mjs",
+      "sha256": "30e44a11074cbda9ad21eaafe2d32599771ca2e763bf0d49d759a5fe18fee1ed"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/health-template.json",
+      "sha256": "e85d43871cdb9ceb073b0e92a9d53bc239af02e56cfd2f05aece33dc32ea78d0"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/checkpoint-inspection.mjs",
+      "sha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/credential-reader.mjs",
+      "sha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
+      "sha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/desktop-temp.mjs",
+      "sha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",
+      "sha256": "80f4d15470160592423a4936e695bfbff7a985fa09e4e6bffa45bb535755c920"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/startup-coordinator.mjs",
+      "sha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/startup-diagnostic.mjs",
+      "sha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/startup-lease.mjs",
+      "sha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/startup-report.mjs",
+      "sha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/launcher/validate-bootstrap.mjs",
+      "sha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/native-program.mjs",
+      "sha256": "a456daf15103d7be6839221a780b830f549b1a3e0d9a596d3d2526c8506cb0cc"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/offline-publisher.mjs",
+      "sha256": "8376183de7a748bc4f5dff3c7098deae8e6a6432bc1caaa9a14c3072d38f1083"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/runtime/profile-transaction.mjs",
+      "sha256": "ee4eb3e9fb6a214468930e39c679fdf8f1b8afeb8efde02fa616a6d16702ad48"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/assessment-discovery.test.mjs",
+      "sha256": "74cf7299612260562f9c85c102d2c12180de324f612167ba37626442e14d17d7"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/assessment-health.mjs",
+      "sha256": "ad3eb31bbbc7f07e5f92170434937c581c4126120b9660cbb6fd2cc43fd0a52d"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/assessment-input.test.mjs",
+      "sha256": "1a350058fafc81900c679550eba475bfa1da206ad17f349fd39d0b2f9e27f1fe"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/inventory-binding.test.mjs",
+      "sha256": "f2179bec633dfb389b2fe23438c4a7efebc3b98c288b6a4dd195e5f1d42298be"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/lifecycle-dependencies.mjs",
+      "sha256": "8e59219e515320c528b652e5adb73422af305a5215ad39c4965defeadc6780ec"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/lifecycle-portability.test.mjs",
+      "sha256": "c4c698b6bc0e7e8ccb961c7c33495ea3517d183e7f41d0abdc1b0391fae89300"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/lifecycle-yaml.cjs",
+      "sha256": "919a77f1ff0e5ee9dc9af35061b5836f9b2bb7da404f456dfa40826a589acf65"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/maintenance-review.test.mjs",
+      "sha256": "68c6b543105bc4833a09fd5daf048cb70ab485a4e99379e72d41c1d7324e1667"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/offline-evidence.test.mjs",
+      "sha256": "7c290b2fa5fd9448d85bcc12f3c75cbc5275a816b29ecf981db48604a88f8b42"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/owned-file-preservation.test.mjs",
+      "sha256": "58209ca065440d2062c935bcbcbb218ec4dfd5888dcf5da76b3a1ab7f7c38bda"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/preparation-dependencies.mjs",
+      "sha256": "b22e4369e108f524cadc11917aa7b4fb27e42da6bb63d5b6f8da7e27a3f45233"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/preparation-fixtures.mjs",
+      "sha256": "a24197c2bbe824e1ed19460bc27198e4edb1a18af44be9daa1dffedd469381ea"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/preparation-portability.test.mjs",
+      "sha256": "d989e9db2d09d32f510de828f3783a22abc67d7db5425039889ff706a38d1c2b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/profile-successor.test.mjs",
+      "sha256": "0f830989466326af7fd56c5c401a6d41fb8f1e5af372e58d8f960e567282d58a"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/update-filter.test.mjs",
+      "sha256": "7228375ed3b869b7df789ef52b96ae5eb3fc4f23abb130b2e65cb8ca5468391c"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/tests/update-preferences.test.mjs",
+      "sha256": "374e5027679ba94562b5f3bd7d3e7b9b44d78e316ede1076dfecac7e3edd525b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-admission.mjs",
+      "sha256": "a7d0c02f765e9340089cebb9f4e6450b05cbaa41fc265323205224a595c2c7de"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-core.mjs",
+      "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-desktop.d.mts",
+      "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-desktop.mjs",
+      "sha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-evidence.mjs",
+      "sha256": "0ca2406176376e3635ad189cde1c9920d76e1e759acb00d5c38ce3f61c6c08df"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-filter.d.mts",
+      "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-filter.mjs",
+      "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-inventory.mjs",
+      "sha256": "6b1b5765c3e98b11e0084fc80cf6a735b76b8dd7e586d22ef0d5c3db80139360"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-migration-loader.mjs",
+      "sha256": "d38630e628b7820fcde7849bb71523e39d6f42abfc357924e35de5513493f70f"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-migration-policy.mjs",
+      "sha256": "295d7d172d7e1965652194b9acf1b5c522fa1631f9f9d76345197f3b2fab5386"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-migration-v2.mjs",
+      "sha256": "a572473e1249f48fb173af0b5a2a0666cfa80b6184b8316dffdab26b66f069c8"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-p2.mjs",
+      "sha256": "40394723e12881cf383d048975dd3cc0fcfbc86f6f0430376bdd625095623adc"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-process-identity.mjs",
+      "sha256": "b698f5caebb1d99b9662b0570ade7e6930d134368a58d6089ae4a175affcec18"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-process.mjs",
+      "sha256": "a9793051b3343fb11d1d413c71beda85d9760e2f75e59306a15891acc6e185aa"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-profile.mjs",
+      "sha256": "fda5ba2f02a6dd53e1e792fb3e6dde9f9392d04d5da05cf9076d9860582abc1f"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-review.mjs",
+      "sha256": "5e86052b7d370e8b0a647d86ff6c80d9f1d986bb3ea954575dd82804556043ea"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-sep.mjs",
+      "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-transaction.mjs",
+      "sha256": "80baf38df16967b6c67ef43aea61a17858c94ee2b55a9190fd2b2b269396504d"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/sep-update/update-worker.mjs",
+      "sha256": "7767279c54f43482638cbc90a8dd6fb264fd30f52d0ecaa19b536d59c2fa5904"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop/src/web-document.ts",
+      "sha256": "cee050980703f228d959de740d708011921c06f629e8ddbd58fa90f21f758f11"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/index.ts",
+      "sha256": "f246e9e5aa273dede9afd5ea275d163c676b62daabacee49395a0a1c9bc9dd07"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/plugin-policy.ts",
+      "sha256": "46c748c28208ec09e79400eb589cda64750065f32a50c7caca259778af791d86"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/sep-host-lifecycle.d.mts",
+      "sha256": "35122afa4cf5ab92cae8accf251f2a436c77424b2b7ce502a0ed4517b3710248"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/sep-host-lifecycle.mjs",
+      "sha256": "b1eba400c5d0de716f0d93d89de8791537bf4faa663068a5b58fd609e2fafdcb"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/sep-policy.json",
+      "sha256": "05dcbee1fabf821638fbc6923dccf2f950cfbfa1c1982c2ce06098bd6aa600b7"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/startup-diagnostic.d.mts",
+      "sha256": "3a5e67885d4ee7a626ba6567747edfc2d0e845e4aeabc80e0a7d6261eb4a5d64"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/apps/desktop-host/src/startup-diagnostic.mjs",
+      "sha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/api/remotes/src/client/index.ts",
+      "sha256": "a0683098005890bba51ddb125aef781ce45474a1ed68f075d8ee6c5a424cfebb"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/desktop-update-preferences-source.ts",
+      "sha256": "eb61174af3774072d23e2263a1b4829a1db522ae5b8acef0f2c128a29ddb52d6"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/DesktopUpdateIndicator.module.css",
+      "sha256": "04a179c43df355a98e92cbcc4d2ce47b1f9794469034fd67c33aee0a8336f771"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/DesktopUpdateIndicator.tsx",
+      "sha256": "31c7de15454b4de91dc59ebeee311011f4e3d66e72e3e721a8dbacbdb34fc58b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/index.ts",
+      "sha256": "b7de35fc59481edd46e2d26ff6a801fdae399005b87bf1eda1eda61695e4e24b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/locales.ts",
+      "sha256": "0f9f0cb71340c772d0cac2eadcddc5fa81fbb000e26afffe307defe174d25d12"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/SettingsRoot.tsx",
+      "sha256": "9b294e58fe894777e71ffd5ec103cdc302e0c3da56b52aada8ad8aa675e49d0e"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/shell-contract.ts",
+      "sha256": "e9abc55e684dfe948663952d9755d807c66853c59dfc7a991d4b2fae28b12f3b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/UpdateFilterRow.module.css",
+      "sha256": "5cc937debe39f5199cc727afe0e07fb68105e97f87e9d7393a7443a8776218c6"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/client/UpdateFilterRow.tsx",
+      "sha256": "b6c8be5c8bec3525caf84174571a979151760f8e1ce6f04a55d05991e62d0f7b"
+    },
+    {
+      "path": "tools/alpha2-desktop/source-overlay/packages/client/ui-settings-general/src/types.ts",
+      "sha256": "27de9f3d30116d19c1ae4cd3f8f5afc49233b1d679f0792e6000fafb9df039ef"
+    },
+    {
+      "path": "tools/alpha2-desktop/TOOL-ORIGINS.json",
+      "sha256": "565be75c216953c2c2a673d9eb9a52da556788ee19c756956ce7f083f29b4671"
+    },
+    {
+      "path": "tools/alpha2-desktop/verification-copy.mjs",
+      "sha256": "c001f3a98d6a7eee10f3d869c0f7931063d67b4ab5d833495ff8056b8bb6e75c"
+    },
+    {
+      "path": "tools/alpha2-desktop/verification-copy.test.mjs",
+      "sha256": "253e4f302bea4004278af255cfd17842f02f37ed4645cd1f8fd7bb14cd233fde"
+    },
+    {
+      "path": "bundle/lib/native-compaction.js",
+      "sha256": "8ce9835a635eb182a18721d69265d2dba0f0341a66597e0676a664dc5de6e08d"
+    },
+    {
+      "path": "tools/bundle-install/tests/native-compaction.test.mjs",
+      "sha256": "363d3e4f609a1b2514097be928cbbd7c081b1dbadb1009316ab8880f715e2289"
+    }
+  ],
+  "notVerified": [
+    "paid model",
+    "TLS",
+    "actual tray menu click",
+    "new AgentTeam flows",
+    "private data in actual graphical Electron end-to-end run",
+    "production storage relocation/adoption/old backup restoration",
+    "Linux/macOS full desktop and protected Profile",
+    "same-run public-download + native confirmation + automatic installation"
+  ]
+}

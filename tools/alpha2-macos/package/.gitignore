@@ -1,0 +1,3 @@
+# Python test/operator bytecode is local cache, never release source.
+__pycache__/
+*.py[cod]

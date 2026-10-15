@@ -1,0 +1,812 @@
+{
+  "schema": 1,
+  "officialCommit": "d743267388641bc76f17c45ce8b4c231aed1d32c",
+  "baseOfficialCommit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "scope": "reviewable final 99-file SEP source overlay on official Alpha.2; generated/build outputs excluded",
+  "rows": [
+    {
+      "path": "apps/desktop/src/fatal-recovery.ts",
+      "baseSha256": "786f45290a621d019c21866d7083a2b9137e89beabb16f2cd56b12ce965ff8d4",
+      "upstreamSha256": "786f45290a621d019c21866d7083a2b9137e89beabb16f2cd56b12ce965ff8d4",
+      "resultSha256": "95b0c7c37c9063ce7127885eff18f70a26df252e8ea3a6b3af929cdac17e620e",
+      "mergeResultSha256": "95b0c7c37c9063ce7127885eff18f70a26df252e8ea3a6b3af929cdac17e620e",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/ipc.ts",
+      "baseSha256": "b7ee202112d7485c524741ffcfe257c5c4f6dca18281aa5ac01c4510b69c6a08",
+      "upstreamSha256": "b7ee202112d7485c524741ffcfe257c5c4f6dca18281aa5ac01c4510b69c6a08",
+      "resultSha256": "76358ffff851abf505c0c63f7684407ae6a0beef9fc1f5e043d0a84c20113307",
+      "mergeResultSha256": "76358ffff851abf505c0c63f7684407ae6a0beef9fc1f5e043d0a84c20113307",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/locale.ts",
+      "baseSha256": "8426a3943be0dfe81d0f0ecef1d9fe3cc03dc6cd79d3b8177a316f12ac09b242",
+      "upstreamSha256": "8426a3943be0dfe81d0f0ecef1d9fe3cc03dc6cd79d3b8177a316f12ac09b242",
+      "resultSha256": "6d4462db7db5ce82f51fd03e74644e2e35167fe56bf94ac47188ed2a2f6a9b37",
+      "mergeResultSha256": "6d4462db7db5ce82f51fd03e74644e2e35167fe56bf94ac47188ed2a2f6a9b37",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/main.ts",
+      "baseSha256": "1fd424f16514d82d79665e0e8a1e2448dd8636126d3a37be7fa888d883b6ea3a",
+      "upstreamSha256": "19aae691feeb41e459f2de0c1000f02d6bea02a4b9f5d3c59f3b02b7a628edac",
+      "resultSha256": "d1fac91c8cbef8afffda574c7cba1d1de0be2a935d46c3c376e2ad6dec1fa76c",
+      "mergeResultSha256": "d1fac91c8cbef8afffda574c7cba1d1de0be2a935d46c3c376e2ad6dec1fa76c",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/managed-host.ts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "2f1f6456d07112ee5c90e140eb8d780c36eec12d266440ed2277a78ff9ef2f4a",
+      "mergeResultSha256": "2f1f6456d07112ee5c90e140eb8d780c36eec12d266440ed2277a78ff9ef2f4a",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/preload-app.ts",
+      "baseSha256": "cff269a4f049d276a44974c3c40008ceb9d6a0b35105a54d6605f7dcf59a64eb",
+      "upstreamSha256": "cff269a4f049d276a44974c3c40008ceb9d6a0b35105a54d6605f7dcf59a64eb",
+      "resultSha256": "5a16ae77de722b40e8fde6da6eb3a3dee54445a72164dc4d636122e706d4f9bc",
+      "mergeResultSha256": "5a16ae77de722b40e8fde6da6eb3a3dee54445a72164dc4d636122e706d4f9bc",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/request-lifetime.ts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "8ec88953918b297ea3266ab1cbf9737f37300a29093237908dc99e74151584dd",
+      "mergeResultSha256": "8ec88953918b297ea3266ab1cbf9737f37300a29093237908dc99e74151584dd",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-background.d.mts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "2158d7f8a075eac1a6708d19dd9104d7f6b77170548e358350f98b584e3e42c2",
+      "mergeResultSha256": "2158d7f8a075eac1a6708d19dd9104d7f6b77170548e358350f98b584e3e42c2",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-background.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "6270a2637d97710a2048bcbf54c018da1650e66c1e02418497aee0df4caf108b",
+      "mergeResultSha256": "6270a2637d97710a2048bcbf54c018da1650e66c1e02418497aee0df4caf108b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/assessment-input.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "f72b2f4af55a1865a425384af0c31df5bbcf2b9885e5e0ae0c3472c5b73c6b95",
+      "mergeResultSha256": "f72b2f4af55a1865a425384af0c31df5bbcf2b9885e5e0ae0c3472c5b73c6b95",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/desktop-composition.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "d4456a070a0e88e289d1ceb0908bdead73c0c83fb892882a948a7768f32119a5",
+      "mergeResultSha256": "d4456a070a0e88e289d1ceb0908bdead73c0c83fb892882a948a7768f32119a5",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/download-package.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "6bd3fa338fd629a71422de4bb894285f94db281d362a71e4cb3c8c5dec386d05",
+      "mergeResultSha256": "6bd3fa338fd629a71422de4bb894285f94db281d362a71e4cb3c8c5dec386d05",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/extract-sep.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "83f6b14dffa492cb977f5df453d853699e95bad58b06dce7848ce7c9dbce9dfa",
+      "mergeResultSha256": "83f6b14dffa492cb977f5df453d853699e95bad58b06dce7848ce7c9dbce9dfa",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/extract-sep.ps1",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "596348abf7c8fc437ab4709f4bef0a1e56b61ba4a02b78bc5be6922b92e37ec9",
+      "mergeResultSha256": "596348abf7c8fc437ab4709f4bef0a1e56b61ba4a02b78bc5be6922b92e37ec9",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/LIFECYCLE-PORTABILITY.md",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b76e22437d1fbff7cfa0359fc0e0cca8552621f5fa9826573c0228fc96f8b546",
+      "mergeResultSha256": "b76e22437d1fbff7cfa0359fc0e0cca8552621f5fa9826573c0228fc96f8b546",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/maintenance-repair.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "5843f630e3602a703949f7fac4724f2dc5ff18b8ea0ffa8de9cfe63d98d93e18",
+      "mergeResultSha256": "5843f630e3602a703949f7fac4724f2dc5ff18b8ea0ffa8de9cfe63d98d93e18",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/MAINTENANCE.md",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "1a551782b4273bfe38028f0227af1d0123cda41198a8546b72ed0db15146c5e2",
+      "mergeResultSha256": "1a551782b4273bfe38028f0227af1d0123cda41198a8546b72ed0db15146c5e2",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/PREPARATION-PORTABILITY.md",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "0ae739680cf7f4c02919188573a25fb87e9578d9bd89f005687eab14237ec2ae",
+      "mergeResultSha256": "0ae739680cf7f4c02919188573a25fb87e9578d9bd89f005687eab14237ec2ae",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-health.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "2fb8d2c1d3e3e9acbf761334413d803e06920743ca04f71bee26936c59955784",
+      "mergeResultSha256": "2fb8d2c1d3e3e9acbf761334413d803e06920743ca04f71bee26936c59955784",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-idle.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6",
+      "mergeResultSha256": "2e17091ed028b06911a85c85bf69a241d3dbf747111eab97451a6df3046ff5d6",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-offline.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8",
+      "mergeResultSha256": "1e2f2a8f6628eed1900391c81912b84d1a09e453ad3e221de54091cba3c83ad8",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-package.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "0f1d8fe5a84fe6a89400e0e8d3c7d4eb9365336f14c972f7bfd9a67fc451bd1e",
+      "mergeResultSha256": "0f1d8fe5a84fe6a89400e0e8d3c7d4eb9365336f14c972f7bfd9a67fc451bd1e",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-preservation.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "e9bbce79c7714147ae0d491576596b6f1ca607e9a8e6e6d59c9af6a14a55d861",
+      "mergeResultSha256": "e9bbce79c7714147ae0d491576596b6f1ca607e9a8e6e6d59c9af6a14a55d861",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-profile.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "6b2ece0a870db4a1e8cb5d6cbc89ede409dafbf31b4bcddbea6a723948a83077",
+      "mergeResultSha256": "6b2ece0a870db4a1e8cb5d6cbc89ede409dafbf31b4bcddbea6a723948a83077",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-publish.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "49bce869624297110f61588a11e3da399868466b2b56f76b4c0ae5eb85d5ccf2",
+      "mergeResultSha256": "49bce869624297110f61588a11e3da399868466b2b56f76b4c0ae5eb85d5ccf2",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-queue.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "0a75ad2aa00525c69112448d5acc5a0ad4d9d0e5ed08442a1fed149d8ab373c5",
+      "mergeResultSha256": "0a75ad2aa00525c69112448d5acc5a0ad4d9d0e5ed08442a1fed149d8ab373c5",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-review-host.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "e09cb4035a1222dca8eccb927411e4c15fe1554bc36eca25f4df463637a30175",
+      "mergeResultSha256": "e09cb4035a1222dca8eccb927411e4c15fe1554bc36eca25f4df463637a30175",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-review-ui.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "4088b466254ac1f2de0095aa18be698aedb249eaa8dae32b7fad9f612657f630",
+      "mergeResultSha256": "4088b466254ac1f2de0095aa18be698aedb249eaa8dae32b7fad9f612657f630",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/prepare-worker.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a43ab00e931d15faf05459c53973c2e43b1a18435fad8afe9e6b06d200317276",
+      "mergeResultSha256": "a43ab00e931d15faf05459c53973c2e43b1a18435fad8afe9e6b06d200317276",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/README.md",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+      "mergeResultSha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/audit-graph.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "30e44a11074cbda9ad21eaafe2d32599771ca2e763bf0d49d759a5fe18fee1ed",
+      "mergeResultSha256": "30e44a11074cbda9ad21eaafe2d32599771ca2e763bf0d49d759a5fe18fee1ed",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/health-template.json",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "e85d43871cdb9ceb073b0e92a9d53bc239af02e56cfd2f05aece33dc32ea78d0",
+      "mergeResultSha256": "e85d43871cdb9ceb073b0e92a9d53bc239af02e56cfd2f05aece33dc32ea78d0",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/checkpoint-inspection.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec",
+      "mergeResultSha256": "1ec4553fcb0f828394a0bd6e4bfed78ef00bd25fa0b9a9ebcb3242dac07707ec",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/credential-reader.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39",
+      "mergeResultSha256": "09429925de8bf0b1da36b4a1230b6067cfaa7a5684b2290ab6e8d6536ffc8b39",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-payload.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e",
+      "mergeResultSha256": "b7995eac900f49c65f06b5c01cf4f15427f283e2dc70427dbdf5a5b9cb133f5e",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/desktop-temp.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2",
+      "mergeResultSha256": "b8572980708683faa62ba976217a9cf2a73801992ff2c72e056fdd190e3efaa2",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/launcher.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "80f4d15470160592423a4936e695bfbff7a985fa09e4e6bffa45bb535755c920",
+      "mergeResultSha256": "80f4d15470160592423a4936e695bfbff7a985fa09e4e6bffa45bb535755c920",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/startup-coordinator.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8",
+      "mergeResultSha256": "7fb2a0b6f147e6f7add9ac2a50b57b577211f8d7708e1d6b84a87f07f2e057b8",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/startup-diagnostic.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "mergeResultSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/startup-lease.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47",
+      "mergeResultSha256": "82cea77b876b3bfbe01c5c141adce15f7b15db67fd4896f2f1a782512e2cbb47",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/startup-report.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea",
+      "mergeResultSha256": "f0771d27fa73c1bb14b172498d7b5ae7528e383ce9ff65ff6a4752508946c3ea",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/launcher/validate-bootstrap.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662",
+      "mergeResultSha256": "92caf01b8e8d611b61bed5e83125c17a9a68b65ec6c436067c9409f2fca2b662",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/native-program.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a456daf15103d7be6839221a780b830f549b1a3e0d9a596d3d2526c8506cb0cc",
+      "mergeResultSha256": "a456daf15103d7be6839221a780b830f549b1a3e0d9a596d3d2526c8506cb0cc",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/offline-publisher.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "8376183de7a748bc4f5dff3c7098deae8e6a6432bc1caaa9a14c3072d38f1083",
+      "mergeResultSha256": "8376183de7a748bc4f5dff3c7098deae8e6a6432bc1caaa9a14c3072d38f1083",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/runtime/profile-transaction.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "ee4eb3e9fb6a214468930e39c679fdf8f1b8afeb8efde02fa616a6d16702ad48",
+      "mergeResultSha256": "ee4eb3e9fb6a214468930e39c679fdf8f1b8afeb8efde02fa616a6d16702ad48",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/assessment-discovery.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "74cf7299612260562f9c85c102d2c12180de324f612167ba37626442e14d17d7",
+      "mergeResultSha256": "74cf7299612260562f9c85c102d2c12180de324f612167ba37626442e14d17d7",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/assessment-health.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "ad3eb31bbbc7f07e5f92170434937c581c4126120b9660cbb6fd2cc43fd0a52d",
+      "mergeResultSha256": "ad3eb31bbbc7f07e5f92170434937c581c4126120b9660cbb6fd2cc43fd0a52d",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/assessment-input.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "1a350058fafc81900c679550eba475bfa1da206ad17f349fd39d0b2f9e27f1fe",
+      "mergeResultSha256": "1a350058fafc81900c679550eba475bfa1da206ad17f349fd39d0b2f9e27f1fe",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/inventory-binding.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "f2179bec633dfb389b2fe23438c4a7efebc3b98c288b6a4dd195e5f1d42298be",
+      "mergeResultSha256": "f2179bec633dfb389b2fe23438c4a7efebc3b98c288b6a4dd195e5f1d42298be",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/lifecycle-dependencies.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "8e59219e515320c528b652e5adb73422af305a5215ad39c4965defeadc6780ec",
+      "mergeResultSha256": "8e59219e515320c528b652e5adb73422af305a5215ad39c4965defeadc6780ec",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/lifecycle-portability.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "c4c698b6bc0e7e8ccb961c7c33495ea3517d183e7f41d0abdc1b0391fae89300",
+      "mergeResultSha256": "c4c698b6bc0e7e8ccb961c7c33495ea3517d183e7f41d0abdc1b0391fae89300",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/lifecycle-yaml.cjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "919a77f1ff0e5ee9dc9af35061b5836f9b2bb7da404f456dfa40826a589acf65",
+      "mergeResultSha256": "919a77f1ff0e5ee9dc9af35061b5836f9b2bb7da404f456dfa40826a589acf65",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/maintenance-review.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "68c6b543105bc4833a09fd5daf048cb70ab485a4e99379e72d41c1d7324e1667",
+      "mergeResultSha256": "68c6b543105bc4833a09fd5daf048cb70ab485a4e99379e72d41c1d7324e1667",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/offline-evidence.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "7c290b2fa5fd9448d85bcc12f3c75cbc5275a816b29ecf981db48604a88f8b42",
+      "mergeResultSha256": "7c290b2fa5fd9448d85bcc12f3c75cbc5275a816b29ecf981db48604a88f8b42",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/owned-file-preservation.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "58209ca065440d2062c935bcbcbb218ec4dfd5888dcf5da76b3a1ab7f7c38bda",
+      "mergeResultSha256": "58209ca065440d2062c935bcbcbb218ec4dfd5888dcf5da76b3a1ab7f7c38bda",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/preparation-dependencies.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b22e4369e108f524cadc11917aa7b4fb27e42da6bb63d5b6f8da7e27a3f45233",
+      "mergeResultSha256": "b22e4369e108f524cadc11917aa7b4fb27e42da6bb63d5b6f8da7e27a3f45233",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/preparation-fixtures.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a24197c2bbe824e1ed19460bc27198e4edb1a18af44be9daa1dffedd469381ea",
+      "mergeResultSha256": "a24197c2bbe824e1ed19460bc27198e4edb1a18af44be9daa1dffedd469381ea",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/preparation-portability.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "d989e9db2d09d32f510de828f3783a22abc67d7db5425039889ff706a38d1c2b",
+      "mergeResultSha256": "d989e9db2d09d32f510de828f3783a22abc67d7db5425039889ff706a38d1c2b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/profile-successor.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "0f830989466326af7fd56c5c401a6d41fb8f1e5af372e58d8f960e567282d58a",
+      "mergeResultSha256": "0f830989466326af7fd56c5c401a6d41fb8f1e5af372e58d8f960e567282d58a",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/update-filter.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "7228375ed3b869b7df789ef52b96ae5eb3fc4f23abb130b2e65cb8ca5468391c",
+      "mergeResultSha256": "7228375ed3b869b7df789ef52b96ae5eb3fc4f23abb130b2e65cb8ca5468391c",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/tests/update-preferences.test.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "374e5027679ba94562b5f3bd7d3e7b9b44d78e316ede1076dfecac7e3edd525b",
+      "mergeResultSha256": "374e5027679ba94562b5f3bd7d3e7b9b44d78e316ede1076dfecac7e3edd525b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-admission.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a7d0c02f765e9340089cebb9f4e6450b05cbaa41fc265323205224a595c2c7de",
+      "mergeResultSha256": "a7d0c02f765e9340089cebb9f4e6450b05cbaa41fc265323205224a595c2c7de",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-core.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+      "mergeResultSha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-desktop.d.mts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+      "mergeResultSha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-desktop.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+      "mergeResultSha256": "40512378d64435755becdedcc6d81e094ae543a456124370667c6134e5db1a3a",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-evidence.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "0ca2406176376e3635ad189cde1c9920d76e1e759acb00d5c38ce3f61c6c08df",
+      "mergeResultSha256": "0ca2406176376e3635ad189cde1c9920d76e1e759acb00d5c38ce3f61c6c08df",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-filter.d.mts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+      "mergeResultSha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-filter.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+      "mergeResultSha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-inventory.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "6b1b5765c3e98b11e0084fc80cf6a735b76b8dd7e586d22ef0d5c3db80139360",
+      "mergeResultSha256": "6b1b5765c3e98b11e0084fc80cf6a735b76b8dd7e586d22ef0d5c3db80139360",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-migration-loader.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "d38630e628b7820fcde7849bb71523e39d6f42abfc357924e35de5513493f70f",
+      "mergeResultSha256": "d38630e628b7820fcde7849bb71523e39d6f42abfc357924e35de5513493f70f",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-migration-policy.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "295d7d172d7e1965652194b9acf1b5c522fa1631f9f9d76345197f3b2fab5386",
+      "mergeResultSha256": "295d7d172d7e1965652194b9acf1b5c522fa1631f9f9d76345197f3b2fab5386",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-migration-v2.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a572473e1249f48fb173af0b5a2a0666cfa80b6184b8316dffdab26b66f069c8",
+      "mergeResultSha256": "a572473e1249f48fb173af0b5a2a0666cfa80b6184b8316dffdab26b66f069c8",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-p2.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "40394723e12881cf383d048975dd3cc0fcfbc86f6f0430376bdd625095623adc",
+      "mergeResultSha256": "40394723e12881cf383d048975dd3cc0fcfbc86f6f0430376bdd625095623adc",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-process-identity.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b698f5caebb1d99b9662b0570ade7e6930d134368a58d6089ae4a175affcec18",
+      "mergeResultSha256": "b698f5caebb1d99b9662b0570ade7e6930d134368a58d6089ae4a175affcec18",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-process.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "a9793051b3343fb11d1d413c71beda85d9760e2f75e59306a15891acc6e185aa",
+      "mergeResultSha256": "a9793051b3343fb11d1d413c71beda85d9760e2f75e59306a15891acc6e185aa",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-profile.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "fda5ba2f02a6dd53e1e792fb3e6dde9f9392d04d5da05cf9076d9860582abc1f",
+      "mergeResultSha256": "fda5ba2f02a6dd53e1e792fb3e6dde9f9392d04d5da05cf9076d9860582abc1f",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-review.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "5e86052b7d370e8b0a647d86ff6c80d9f1d986bb3ea954575dd82804556043ea",
+      "mergeResultSha256": "5e86052b7d370e8b0a647d86ff6c80d9f1d986bb3ea954575dd82804556043ea",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-sep.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+      "mergeResultSha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-transaction.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "80baf38df16967b6c67ef43aea61a17858c94ee2b55a9190fd2b2b269396504d",
+      "mergeResultSha256": "80baf38df16967b6c67ef43aea61a17858c94ee2b55a9190fd2b2b269396504d",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/sep-update/update-worker.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "7767279c54f43482638cbc90a8dd6fb264fd30f52d0ecaa19b536d59c2fa5904",
+      "mergeResultSha256": "7767279c54f43482638cbc90a8dd6fb264fd30f52d0ecaa19b536d59c2fa5904",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop/src/web-document.ts",
+      "baseSha256": "05ab6fd59199f1b7a7dd558e60f50e38f4df1085a70af671014c085d270e91cc",
+      "upstreamSha256": "05ab6fd59199f1b7a7dd558e60f50e38f4df1085a70af671014c085d270e91cc",
+      "resultSha256": "cee050980703f228d959de740d708011921c06f629e8ddbd58fa90f21f758f11",
+      "mergeResultSha256": "cee050980703f228d959de740d708011921c06f629e8ddbd58fa90f21f758f11",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/index.ts",
+      "baseSha256": "a16e37fa194f34f4140a1c87ca897a27a3979eef76770fef28af49b5a38715a1",
+      "upstreamSha256": "1f61890c63da8898cef678479450d7647163530c416751d161dde6b397c654d3",
+      "resultSha256": "f246e9e5aa273dede9afd5ea275d163c676b62daabacee49395a0a1c9bc9dd07",
+      "mergeResultSha256": "15272a3ae38601f2651c8b83a1ad43ffa6d7fea815d4697a8bdb4c116cc20c48",
+      "subsequentResolution": true
+    },
+    {
+      "path": "apps/desktop-host/src/plugin-policy.ts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "46c748c28208ec09e79400eb589cda64750065f32a50c7caca259778af791d86",
+      "mergeResultSha256": "46c748c28208ec09e79400eb589cda64750065f32a50c7caca259778af791d86",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/sep-host-lifecycle.d.mts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "35122afa4cf5ab92cae8accf251f2a436c77424b2b7ce502a0ed4517b3710248",
+      "mergeResultSha256": "35122afa4cf5ab92cae8accf251f2a436c77424b2b7ce502a0ed4517b3710248",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/sep-host-lifecycle.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b1eba400c5d0de716f0d93d89de8791537bf4faa663068a5b58fd609e2fafdcb",
+      "mergeResultSha256": "b1eba400c5d0de716f0d93d89de8791537bf4faa663068a5b58fd609e2fafdcb",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/sep-policy.json",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "05dcbee1fabf821638fbc6923dccf2f950cfbfa1c1982c2ce06098bd6aa600b7",
+      "mergeResultSha256": "05dcbee1fabf821638fbc6923dccf2f950cfbfa1c1982c2ce06098bd6aa600b7",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/startup-diagnostic.d.mts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "3a5e67885d4ee7a626ba6567747edfc2d0e845e4aeabc80e0a7d6261eb4a5d64",
+      "mergeResultSha256": "3a5e67885d4ee7a626ba6567747edfc2d0e845e4aeabc80e0a7d6261eb4a5d64",
+      "subsequentResolution": false
+    },
+    {
+      "path": "apps/desktop-host/src/startup-diagnostic.mjs",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "mergeResultSha256": "873a3c7a43b4b84006b2986a97bc291ae49e09350516de589c7f9f476a8dd04b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/api/remotes/src/client/index.ts",
+      "baseSha256": "de3342a4981e484c100420716159ea5586ab7b22f38ac420f1b2994d444778d6",
+      "upstreamSha256": "de3342a4981e484c100420716159ea5586ab7b22f38ac420f1b2994d444778d6",
+      "resultSha256": "a0683098005890bba51ddb125aef781ce45474a1ed68f075d8ee6c5a424cfebb",
+      "mergeResultSha256": "a0683098005890bba51ddb125aef781ce45474a1ed68f075d8ee6c5a424cfebb",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/desktop-update-preferences-source.ts",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "eb61174af3774072d23e2263a1b4829a1db522ae5b8acef0f2c128a29ddb52d6",
+      "mergeResultSha256": "eb61174af3774072d23e2263a1b4829a1db522ae5b8acef0f2c128a29ddb52d6",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/DesktopUpdateIndicator.module.css",
+      "baseSha256": "3d3afea694008e2f9587efed31c419e963297026dd53aef475641dc8d2f5fcfa",
+      "upstreamSha256": "3d3afea694008e2f9587efed31c419e963297026dd53aef475641dc8d2f5fcfa",
+      "resultSha256": "04a179c43df355a98e92cbcc4d2ce47b1f9794469034fd67c33aee0a8336f771",
+      "mergeResultSha256": "04a179c43df355a98e92cbcc4d2ce47b1f9794469034fd67c33aee0a8336f771",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/DesktopUpdateIndicator.tsx",
+      "baseSha256": "c551d302c80252bf7f9a258409427a3d3587da7dc92abb1ef75646ef2623fbe2",
+      "upstreamSha256": "c551d302c80252bf7f9a258409427a3d3587da7dc92abb1ef75646ef2623fbe2",
+      "resultSha256": "31c7de15454b4de91dc59ebeee311011f4e3d66e72e3e721a8dbacbdb34fc58b",
+      "mergeResultSha256": "31c7de15454b4de91dc59ebeee311011f4e3d66e72e3e721a8dbacbdb34fc58b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/index.ts",
+      "baseSha256": "fbbf526e1bab31b0c7afcea82f311f930a6cd64b2cab8d4ab486518eb928543a",
+      "upstreamSha256": "fbbf526e1bab31b0c7afcea82f311f930a6cd64b2cab8d4ab486518eb928543a",
+      "resultSha256": "b7de35fc59481edd46e2d26ff6a801fdae399005b87bf1eda1eda61695e4e24b",
+      "mergeResultSha256": "b7de35fc59481edd46e2d26ff6a801fdae399005b87bf1eda1eda61695e4e24b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/locales.ts",
+      "baseSha256": "95eab48b2b5bef5567e0d10d013a1465a13c38a658372d8d458971f3d7a08a35",
+      "upstreamSha256": "95eab48b2b5bef5567e0d10d013a1465a13c38a658372d8d458971f3d7a08a35",
+      "resultSha256": "0f9f0cb71340c772d0cac2eadcddc5fa81fbb000e26afffe307defe174d25d12",
+      "mergeResultSha256": "0f9f0cb71340c772d0cac2eadcddc5fa81fbb000e26afffe307defe174d25d12",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/SettingsRoot.tsx",
+      "baseSha256": "01966a7299b66d16b2f80106c72dd1f37c541bbfe2d3a0397ca9edd96c21f466",
+      "upstreamSha256": "01966a7299b66d16b2f80106c72dd1f37c541bbfe2d3a0397ca9edd96c21f466",
+      "resultSha256": "9b294e58fe894777e71ffd5ec103cdc302e0c3da56b52aada8ad8aa675e49d0e",
+      "mergeResultSha256": "9b294e58fe894777e71ffd5ec103cdc302e0c3da56b52aada8ad8aa675e49d0e",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/shell-contract.ts",
+      "baseSha256": "dc8d6f6decbbb285d30b3791d5889857062479faf2294286af909dd3662dcf25",
+      "upstreamSha256": "dc8d6f6decbbb285d30b3791d5889857062479faf2294286af909dd3662dcf25",
+      "resultSha256": "e9abc55e684dfe948663952d9755d807c66853c59dfc7a991d4b2fae28b12f3b",
+      "mergeResultSha256": "e9abc55e684dfe948663952d9755d807c66853c59dfc7a991d4b2fae28b12f3b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/UpdateFilterRow.module.css",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "5cc937debe39f5199cc727afe0e07fb68105e97f87e9d7393a7443a8776218c6",
+      "mergeResultSha256": "5cc937debe39f5199cc727afe0e07fb68105e97f87e9d7393a7443a8776218c6",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/client/UpdateFilterRow.tsx",
+      "baseSha256": null,
+      "upstreamSha256": null,
+      "resultSha256": "b6c8be5c8bec3525caf84174571a979151760f8e1ce6f04a55d05991e62d0f7b",
+      "mergeResultSha256": "b6c8be5c8bec3525caf84174571a979151760f8e1ce6f04a55d05991e62d0f7b",
+      "subsequentResolution": false
+    },
+    {
+      "path": "packages/client/ui-settings-general/src/types.ts",
+      "baseSha256": "a55f2c8088f226afeecde38e75aa348271b01cce00dc1bd7aa1afded625a745f",
+      "upstreamSha256": "a55f2c8088f226afeecde38e75aa348271b01cce00dc1bd7aa1afded625a745f",
+      "resultSha256": "27de9f3d30116d19c1ae4cd3f8f5afc49233b1d679f0792e6000fafb9df039ef",
+      "mergeResultSha256": "27de9f3d30116d19c1ae4cd3f8f5afc49233b1d679f0792e6000fafb9df039ef",
+      "subsequentResolution": false
+    }
+  ],
+  "corrections": [
+    {
+      "historical": "native-desktop-r2/BUILD-INPUTS.json officialCommit",
+      "recorded": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+      "actual": "d743267388641bc76f17c45ce8b4c231aed1d32c",
+      "reason": "old metadata literal inherited from Alpha.1 tool; source inputs are Alpha.2"
+    },
+    {
+      "historical": "source-r1/DESKTOP-SOURCE-MERGE.json",
+      "reason": "intermediate conflict-resolution hashes retained; final bytes are bound by this manifest"
+    }
+  ]
+}

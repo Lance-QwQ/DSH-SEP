@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "scope": "derived current-project UI candidate; actual application not_run",
+  "baseRuntimeCount": 58,
+  "extraRuntimeCount": 18,
+  "totalRuntimeCount": 76,
+  "runtimeReplacement": {
+    "source": "desktop/project-workflow-product/controller.mjs",
+    "target": "bootstrap/controller.mjs",
+    "sha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361",
+    "bytes": 2596
+  },
+  "runtime": [
+    {
+      "source": "desktop/project-workflow-product/business-host.mjs",
+      "target": "desktop/project-workflow-product/business-host.mjs",
+      "sha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb",
+      "bytes": 3640
+    },
+    {
+      "source": "desktop/project-workflow-product/host-owner.mjs",
+      "target": "desktop/project-workflow-product/host-owner.mjs",
+      "sha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8",
+      "bytes": 6302
+    },
+    {
+      "source": "desktop/project-workflow-product/launch-full.mjs",
+      "target": "desktop/project-workflow-product/launch-full.mjs",
+      "sha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069",
+      "bytes": 9327
+    },
+    {
+      "source": "desktop/project-workflow-product/overlay.mjs",
+      "target": "desktop/project-workflow-product/overlay.mjs",
+      "sha256": "c5451e02fdbbbc3ae288314c1f3bb1f9c0c4689ad06641f13f5f7e1f7430b594",
+      "bytes": 758
+    },
+    {
+      "source": "desktop/project-workflow-product/profile-layout.mjs",
+      "target": "desktop/project-workflow-product/profile-layout.mjs",
+      "sha256": "1de544f372f2540d6681999610678146aa6b4b16dd1a984d9f56de5a79d2d4f5",
+      "bytes": 2050
+    },
+    {
+      "source": "desktop/project-workflow-product/profile-plugin.mjs",
+      "target": "desktop/project-workflow-product/profile-plugin.mjs",
+      "sha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49",
+      "bytes": 3942
+    },
+    {
+      "source": "desktop/project-workflow-product/relay.mjs",
+      "target": "desktop/project-workflow-product/relay.mjs",
+      "sha256": "cae4901893c83a1aa03a7526d4d479bd165453790f900209a89491e716142db0",
+      "bytes": 1847
+    },
+    {
+      "source": "desktop/project-workflow-product/standalone.mjs",
+      "target": "desktop/project-workflow-product/standalone.mjs",
+      "sha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128",
+      "bytes": 4764
+    },
+    {
+      "source": "desktop/project-workflow-ui/host.mjs",
+      "target": "desktop/project-workflow-ui/host.mjs",
+      "sha256": "d8e7b907eb8ff7fb34a04edc84ea7d4f12441260ba4f5d9954212313f7639a48",
+      "bytes": 5006
+    },
+    {
+      "source": "desktop/project-workflow-ui/rules.mjs",
+      "target": "desktop/project-workflow-ui/rules.mjs",
+      "sha256": "83dc0f51585f6871259bf42cc97b24cd06d8c038c107a16d47768a621acb5b6a",
+      "bytes": 1372
+    },
+    {
+      "source": "desktop/project-workflow-ui/transport.mjs",
+      "target": "desktop/project-workflow-ui/transport.mjs",
+      "sha256": "65134282e54d2c7b70b98565a55615023740660ec9cb6b1bb5ae9658f2e7a7cb",
+      "bytes": 4353
+    },
+    {
+      "source": "project-workflow/workflow-adapter.mjs",
+      "target": "project-workflow/workflow-adapter.mjs",
+      "sha256": "4f7b610726daaad27012c56b4ab4ebe121a0f1fe145c2b847c059b4156014a75",
+      "bytes": 11023
+    },
+    {
+      "source": "project-workflow/project-factory.mjs",
+      "target": "project-workflow/project-factory.mjs",
+      "sha256": "7bf3b64b377109db6b63bc270c6c367612566310efee8259e6469389f14ac070",
+      "bytes": 1909
+    },
+    {
+      "source": "project-workflow/derive-sources.mjs",
+      "target": "project-workflow/derive-sources.mjs",
+      "sha256": "aa43c341142f99fe834c6434d2c49985b98037ec722c170533e1f90dcd44874c",
+      "bytes": 3848
+    },
+    {
+      "source": "project-workflow/derived-transaction-store.mjs",
+      "target": "project-workflow/derived-transaction-store.mjs",
+      "sha256": "80794421a6b158d4f3259408a5bdcf01e9d4cd699ab199d72b23a4e9d6e48a97",
+      "bytes": 24951
+    },
+    {
+      "source": "project-workflow/derived-lifecycle.mjs",
+      "target": "project-workflow/derived-lifecycle.mjs",
+      "sha256": "4705776b87cf49be55a8d6d77a7a2fdbc55b49c44d3e554a42627ab17628ecd3",
+      "bytes": 4291
+    },
+    {
+      "source": "project-workflow/preview.mjs",
+      "target": "project-workflow/preview.mjs",
+      "sha256": "a181771ac520dd2c75ff4210dc02015a8b25d2bb00e75c57a7182275f3a524bc",
+      "bytes": 6214
+    },
+    {
+      "source": "project-workflow/READONLY-ORIGIN.json",
+      "target": "project-workflow/READONLY-ORIGIN.json",
+      "sha256": "586536e3ae9b23113c3ce25af5b41be6508f6793ca24732d665ad15e62840e48",
+      "bytes": 3450
+    }
+  ],
+  "businessEntry": "Resources/product/runtime/desktop/project-workflow-product/standalone.mjs",
+  "apply": {
+    "module": "desktop/project-workflow-product/apply-to-application.mjs",
+    "export": "applyProjectUi",
+    "arguments": [
+      "applicationRoot",
+      "evidenceRoot",
+      "asarPath"
+    ],
+    "result": "RESULT.json in evidenceRoot; requires status pass",
+    "draftMarker": {
+      "path": "applicationRoot parent/PROJECT-DRAFT.json",
+      "exact": {
+        "schema": 1,
+        "status": "pass",
+        "application": "real absolute applicationRoot",
+        "baseProgramSha256": "fbe989745254464885c390b7d6e55fd3883674faa26b705ea74833240c07d713"
+      }
+    },
+    "asarEditCount": 8,
+    "hostEditCount": 3
+  },
+  "finalization": "Root assembler must update PROGRAM, BOOTSTRAP, outer signature and restored inventory after inner signing."
+}

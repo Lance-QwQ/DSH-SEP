@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "current": "RUNTIME-ORIGIN-r2.json",
+  "historical": [
+    "RUNTIME-ORIGIN.json"
+  ],
+  "currentSha256": "5f37e88711b487d8e54a307fa36308b77cb89bc3a687719b3acdd17a368cce11",
+  "historicalSha256": "f1bfbdfec80aff0f541dc6e18b38abe5d7c5d9477fe8eb0dc3935b6417d41b7f",
+  "currentGeneratedFiles": [
+    {
+      "path": "host-owner.mjs",
+      "sha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8"
+    },
+    {
+      "path": "business-host.mjs",
+      "sha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb"
+    },
+    {
+      "path": "launch-full.mjs",
+      "sha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069"
+    },
+    {
+      "path": "controller.mjs",
+      "sha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361"
+    },
+    {
+      "path": "profile-plugin.mjs",
+      "sha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49"
+    },
+    {
+      "path": "standalone.mjs",
+      "sha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128"
+    }
+  ],
+  "scope": "Current six generated product runtime files only; not a whole installation or native verification manifest. The older four-file record is historical and remains unchanged."
+}

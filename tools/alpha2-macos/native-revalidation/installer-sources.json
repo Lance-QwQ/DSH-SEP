@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "sourceCommit": "0e721a72784e595f0f56e08d41eb6757ccec3877",
+  "scope": "Unchanged production installer native/runtime/helper inputs and historical derivation sources; not new native acceptance",
+  "files": [
+    {
+      "path": "bootstrap/production-manifest.mjs",
+      "sha256": "0ab1aef33bcadc1b3283c0687d8451b16a707ed91e220abb4318f2605a25ad0b",
+      "bytes": 2093,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "desktop/managed-broker/program-manifest.mjs",
+      "sha256": "43abb6048918236c13b8a95cb7e46764be3ffc2d9eb46e49089bf78916a04071",
+      "bytes": 4920,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installation/first-install.mjs",
+      "sha256": "e8f068c7fcb6925073a6c59bb10ea3752b7b822a94daae4ca044680e5de2aabb",
+      "bytes": 14783,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installation/install-native.c",
+      "sha256": "c6d13e492aa348d829e64acf11e8ee50b567960d1c9cf13ab0aad33ac6c07f30",
+      "bytes": 13811,
+      "kind": "production-helper"
+    },
+    {
+      "path": "installer-entry/account-native.c",
+      "sha256": "dc43051f1fadd40738501e11a8339f2f5624fd6d5cbc75f236a36de62c45a7bf",
+      "bytes": 18101,
+      "kind": "production-helper"
+    },
+    {
+      "path": "installer-entry/boundaries.mjs",
+      "sha256": "67e9fd24e1c9174ac719fbe7033b7636c6228bb4c5d1a76b2e07e4843e7aa82e",
+      "bytes": 1178,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-entry/candidate.mjs",
+      "sha256": "49f46d26b26189769e146e6f5c5a447068fe4ea4e1267b4c6fe6bc95ab314822",
+      "bytes": 4627,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-entry/controller-core.mjs",
+      "sha256": "04268feaa3faaff0a1d25e8f87e7cbc8f997ba0cd79cb01610bf9bd98d378262",
+      "bytes": 12203,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-entry/controller.mjs",
+      "sha256": "c29ad96bb304126ae0bcf4ad914c9445c5f1610e49ac30e03cc8ee326ad3bd59",
+      "bytes": 211,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-entry/native-client.mjs",
+      "sha256": "06930edd329ac167e613af328c1e48bf2e71b43386aa5d221fae90c2c6dbafec",
+      "bytes": 5119,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/admission/installer-admission.h",
+      "sha256": "42d2ac595d84e943d7c2d62fd809b17c124a6aaa064b016063c1cdd6885e236c",
+      "bytes": 433,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/admission/installer-admission.m",
+      "sha256": "44849f556423d7e06fdfe054c2ecd40133f538aca9c39a1782a319e5657fa6c2",
+      "bytes": 13801,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/application/FixedApplicationOpener.h",
+      "sha256": "6c50cdd2b71f275b49552cc9822fa23cfeb56112e7b93f3a6f5a56530c7b40dc",
+      "bytes": 196,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/application/FixedApplicationOpener.m",
+      "sha256": "512e89b6a2dda7ebb37c5b6ea913bcb5a51be7ecc2cb9df472e723aa33e105f4",
+      "bytes": 5366,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/application/InstallerApplication.h",
+      "sha256": "50d6c3b55a66aa9a648eada45f760a0d9d921e2ba158674b4aa23e3defa7959c",
+      "bytes": 438,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/application/InstallerApplication.m",
+      "sha256": "f8f0778e19d91e70f26a23492e4439c7df6138fa4428498d54a070c71befcc81",
+      "bytes": 2150,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/application/main.m",
+      "sha256": "6c6130bb261f84aac7abc8416895fcdec99dbdc072990b859612c458b6dfa2a1",
+      "bytes": 3600,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/bundle-config.mjs",
+      "sha256": "3fb7fba58e8a8e73c9b560112c37ca6f5d5842a862ccc3bdfdd11705d42260c7",
+      "bytes": 5145,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/controller-main.mjs",
+      "sha256": "cc16e28a608f9ce3718349773741c30f86e3ab619529619eae703ab4a235cb8c",
+      "bytes": 1359,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/controller-session.mjs",
+      "sha256": "90e30e859e4e19f4bbe2aa350186110278a1ebde3ab0abf373708a3854f9d772",
+      "bytes": 8522,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/entry-options.mjs",
+      "sha256": "eb38c2ae512d2dfa42a0e6a9b7884879388ded9e7f2e6db04453efd4bfdbeb6b",
+      "bytes": 1089,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/integration-r79/installed-startup.mjs",
+      "sha256": "be5fa6fb1271f7b64686a1d5cee4c91c8e7203a8cfd40720e6112d28c445bfe1",
+      "bytes": 10554,
+      "kind": "historical-operator"
+    },
+    {
+      "path": "installer-ui/integration-r79/installer-observer.m",
+      "sha256": "6adee71f937e2e00444495f06298b88214c3ca5a51575e855c44d870ea305f36",
+      "bytes": 6523,
+      "kind": "native-test-source"
+    },
+    {
+      "path": "installer-ui/integration-r79/main-result.test.mjs",
+      "sha256": "990a90e4edea5c6671193c227979b6c49457fc52f3ed2148ec43d7d19525a595",
+      "bytes": 3404,
+      "kind": "historical-operator"
+    },
+    {
+      "path": "installer-ui/integration-r79/run-full.mjs",
+      "sha256": "251155a12d3585191266dfa92853067d5b341e84b4dd92af19da36770ff2c1a3",
+      "bytes": 21376,
+      "kind": "historical-operator"
+    },
+    {
+      "path": "installer-ui/integration-r79/test-main.m",
+      "sha256": "6c588c90e2d1828e046682f8f91deabd5068b0d511aa602f02a3066d139c494a",
+      "bytes": 11309,
+      "kind": "native-test-source"
+    },
+    {
+      "path": "installer-ui/manifest.mjs",
+      "sha256": "24a6ce86f6b1fe060e26345208d6779cb4d2261793cbf8d85af0b0d767572775",
+      "bytes": 2335,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/native/InstallerUI.h",
+      "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c",
+      "bytes": 921,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/native/InstallerUI.m",
+      "sha256": "c36fdc9877c19e3ec77ca5da1b05610285d591ec5f19b32e1331bf9637fdfb80",
+      "bytes": 16429,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/protocol.mjs",
+      "sha256": "929b1531b20529a751e6527fb93df23798fc41b95b1d0551e9b0141748e3b3a8",
+      "bytes": 4730,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "installer-ui/transport/InstallerPipeTransport.h",
+      "sha256": "c1ece550711b546ddd5589199f3a7646b857b32f489394bc0729a91f96ea491c",
+      "bytes": 494,
+      "kind": "production-native"
+    },
+    {
+      "path": "installer-ui/transport/InstallerPipeTransport.m",
+      "sha256": "d4d84f548bb6068bdd942064b9fc7036af1495a58715636e23f9702bb832ce23",
+      "bytes": 15915,
+      "kind": "production-native"
+    },
+    {
+      "path": "package/application-observer.m",
+      "sha256": "bb37b6fae94465da6646609f48d444fc16957f884dfb265c0044b7fce1d99995",
+      "bytes": 2998,
+      "kind": "native-test-source"
+    },
+    {
+      "path": "package/bootstrap-manifest-builder.mjs",
+      "sha256": "390fe5e0e8aeefd65e160f5731d372032f366f066651d5e0556e19ab343830ee",
+      "bytes": 2994,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "package/installer-native-inputs.json",
+      "sha256": "7826c3f7b90ab10f77004017c5b272019b32c5efa6eb4c55bd69b63872591fdf",
+      "bytes": 2262,
+      "kind": "native-manifest"
+    },
+    {
+      "path": "package/package-inventory.mjs",
+      "sha256": "b72983c13528b2cf8f85d53c06c5440ca6bac583a593bafeaf12ef95c60c901a",
+      "bytes": 4020,
+      "kind": "production-runtime"
+    },
+    {
+      "path": "package/successor-r74/assemble-installer-application.mjs",
+      "sha256": "a3728e50377e7cc8aa22ffa2c5ed7ea13d4d5d3c77bb5c9a521e5a09fc8951c9",
+      "bytes": 11060,
+      "kind": "historical-operator"
+    }
+  ]
+}

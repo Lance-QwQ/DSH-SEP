@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "sourceCommit": "ac69bda3ca63a3bed44780b7804cf090156514de",
+  "sourceSelection": "Only tracked blobs of this exact Git tree, retrieved through git cat-file. No Git directory/history, worktree changes, untracked files or local user state exported.",
+  "exportKind": "Public tracked-source snapshot with explicit maintenance-path derivatives.",
+  "preservedScope": [
+    "All source/ and bundle/ blob bytes are unchanged.",
+    "Production runtime/capture/origin and trusted manifests retain original bytes.",
+    "Generic D:/AIData/ProjectWork/DSH build layout is intentionally retained; it is not an account identity.",
+    "528 upstream tracked test/snapshot JSONL fixtures are retained, not private user sessions."
+  ],
+  "symlinkContract": "14 mode-120000 blobs are materialized as link-text regular files on Windows (core.symlinks=false representation). The publication Git index and source archive MUST restore mode 120000 and target semantics from SOURCE-EXPORT-MANIFEST.json. Do not follow them when copying.",
+  "limits": [
+    "This does not prove every platform binary can be reproduced from this snapshot.",
+    "Historical checksums and receipts bind original inputs, not redacted maintenance templates.",
+    "Four historical diagnostic ZIPs are omitted and identified by EXCLUSIONS.json.",
+    "Current release README/status are updated separately by publication owner.",
+    "Specific-format scans cannot guarantee absence of arbitrary encoded secrets."
+  ]
+}

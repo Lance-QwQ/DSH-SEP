@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "source": "bundle/modules/system-enhancement-package/src/layered-memory.js",
+  "sourceSha256": "2e9c22aa8b041942335842c190b96feb17c911db82acba5c9f70702913d7235d",
+  "changes": [
+    {
+      "old": "      },\n    },\n    async close(){if(closed)return;closed=true;await tail;await coldDomain.close();await domain.close();},\n  };\n  try{for(const project of scope.projects){if(legacy.read(project).memories.length&&!catalog().migrations[project.key]){if(!config.migrateLegacy)fail('MEMORY_MIGRATION_REQUIRED');await manager.migrateLegacy(project,{});}}}\n",
+      "new": "      },\n    },\n    close(){closed=true;if(closing)return closing;closing=(async()=>{await tail;const errors=[];for(const owned of [coldDomain,domain])if(!closedDomains.has(owned))try{await owned.close();closedDomains.add(owned);}catch(error){errors.push(error);}if(errors.length)throw errors[0];})().finally(()=>{closing=undefined;});return closing;},\n  };\n  try{for(const project of scope.projects){if(legacy.read(project).memories.length&&!catalog().migrations[project.key]){if(!config.migrateLegacy)fail('MEMORY_MIGRATION_REQUIRED');await manager.migrateLegacy(project,{});}}}\n"
+    },
+    {
+      "old": "  try{coldDomain=await facility.open(coldSpec);}catch(error){await domain.close();throw error;}\n  const activeTable=domain.table('active'),archiveTable=coldDomain.table('archives'),backups=coldDomain.table('backups');\n  let tail=Promise.resolve(),closed=false;\n  const stamp=()=>new Date(now()).toISOString();\n  const catalog=()=>structuredClone(activeTable.get('catalog')??{version:1,owners:{},archives:{},migrations:{},audits:[]});\n",
+      "new": "  try{coldDomain=await facility.open(coldSpec);}catch(error){await domain.close();throw error;}\n  const activeTable=domain.table('active'),archiveTable=coldDomain.table('archives'),backups=coldDomain.table('backups');\n  let tail=Promise.resolve(),closed=false,closing;const closedDomains=new Set();\n  const stamp=()=>new Date(now()).toISOString();\n  const catalog=()=>structuredClone(activeTable.get('catalog')??{version:1,owners:{},archives:{},migrations:{},audits:[]});\n"
+    },
+    {
+      "old": "import {messageProvenance,mergeProvenance,assertSourceOutside} from './source-provenance.js';\nimport {z} from 'zod';\nimport {randomUUID} from 'node:crypto';\nimport {digest,fail,checkAbort} from './errors.js';\nimport {rankBm25,selectTokenizer} from './vendor/bm25.js';\nimport {classifyMemory,archiveReason} from './layer-policy.js';\nimport {commitMemoryWrite} from './memory-commit.js';\nimport {sessionEvents} from './session-events.js';\n\nconst category=z.enum(['preference','personal','goal','task','project','temporary']);\n",
+      "new": "import {messageProvenance,mergeProvenance,assertSourceOutside} from '../../modules/system-enhancement-package/src/source-provenance.js';\nimport {z} from 'zod';\nimport {randomUUID} from 'node:crypto';\nimport {digest,fail,checkAbort} from '../../modules/system-enhancement-package/src/errors.js';\nimport {rankBm25,selectTokenizer} from '../../modules/system-enhancement-package/src/vendor/bm25.js';\nimport {classifyMemory,archiveReason} from '../../modules/system-enhancement-package/src/layer-policy.js';\nimport {commitMemoryWrite} from '../../modules/system-enhancement-package/src/memory-commit.js';\nimport {sessionEvents} from '../../modules/system-enhancement-package/src/session-events.js';\n\nconst category=z.enum(['preference','personal','goal','task','project','temporary']);\n"
+    }
+  ],
+  "resultSha256": "5061e63f10bb0aa2aeb76956eeab870cd910132b79d0695a1299c4e440c128bf",
+  "textNormalization": "Replay converts CRLF to LF; SHA-256 always binds original raw bytes.",
+  "supersedesOriginSha256": null,
+  "predecessorCommit": null,
+  "scope": "Current bundle24 exact replay; recorded predecessor remains in Git and sealed bundle23."
+}

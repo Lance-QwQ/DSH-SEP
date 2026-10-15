@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "stage": "r63-native-signed-synthetic-verified",
+  "verificationScope": "Twelve fixed native definitions: signed synthetic payloads only. Full payload probe remains not_run until its own bound evidence exists.",
+  "greenEvidence": "r63 run 38631108180 / job 116082665761: 12 pass, 0 fail/skip/cancel. Two positive fixture builds contain 43 entries / 131707 bytes; intentional invalid-C failure preserves its classified receipt.",
+  "redEvidence": "r60: 12/12 reached SEP_INSTALLER_RESOURCES_NOT_IMPLEMENTED, 0 setup errors/skips/cancellations; original inputs and logs retained outside the source tree",
+  "entry": "assembleInstallerResources({ sourceApp, receipt, sourceRoot, contents })",
+  "audience": "Trusted build-time assembler only; no user/model supplied runtime command, source path or destination selector",
+  "target": "Contents must be absent; real existing parent; no aliases; outside payload and sourceRoot; refuse overwrite",
+  "preflight": ["Verify signed payload and complete receipt", "Capture reviewed static ESM runtime closure with fixed controller root", "Capture two native C sources with identity/hash checks; no symlinks/hardlinks", "Reject invalid inputs before creating target"],
+  "assembly": ["Create only fresh Contents", "Copy complete signed payload preserving bytes, links and modes", "Copy Node from verified PROGRAM node entry", "Write exact captured runtime closure excluding tests", "Compile two helpers with fixed /usr/bin/clang and bounded controlled environment", "Write PAYLOAD and INSTALLER JSON with explicit 0444 modes", "Use buildInstallerManifest and loadInstallerConfiguration to verify assembled resources", "Recheck original source identities/hashes and candidate receipt"],
+  "nativeSources": ["installation/install-native.c", "installer-entry/account-native.c"],
+  "sourceEvidence": "Raw captured runtime and native source bytes plus input/output digests and bounded compiler logs retained in a new sibling <Installer.app>.resources-build evidence directory; never silently overwrite it",
+  "compiler": {"path": "/usr/bin/clang", "arguments": ["-std=c11", "-Wall", "-Wextra", "-Werror"], "timeoutMs": 30000, "maxBufferBytes": 1048576},
+  "success": "status pass plus contents, manifestPath, manifestSha256, payload counts, source runtime/native path+sha256 records; applicationStarted false and outerSignatureCreated false",
+  "failure": "Preserve partial Contents and bounded diagnostic RESOURCES-BUILD.json after writes begin. Never delete automatically or return a pass manifest on failed compile/verification.",
+  "testDefinitions": 12,
+  "notIncluded": ["Outer AppKit binary", "Outer application signing or notarization", "Installation into user Applications", "Application launch", "Uninstall", "Upgrade or data adoption"]
+}

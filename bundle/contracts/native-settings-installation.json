@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "targetHostVersion": "0.2.1-alpha.1",
+  "entry": "dsh-sep-bundle/native-settings-installation",
+  "scope": "explicit cold root; initialization rollback, native host discovery and authenticated HTTP/browser settings carrier",
+  "loaderPeer": "@deepseek-ai/cordis-plugin-loader@1.0.6-alpha.1",
+  "uiModule": "@deepseek-ai/dsh-client-ui-settings-memory",
+  "innerLoaderPersistence": "memory-only; no generated child YAML",
+  "outerLoaderPersistence": "trusted caller owns explicit outer entry",
+  "activation": "review root planHash then authorize exact plan; runtimeHash is insufficient",
+  "close": "bounded receipt from runtime.shutdownMs; retain native child and ownership until real settlement; retry blocked cleanup; whenClosed is actual completion",
+  "ownership": "foreign replacement tree or subgroup is preserved and blocks cleanup",
+  "dedicatedProjectHost": true,
+  "projectAgentCancelScope": "all host agents whose cwd is project root or descendant, including other compositions",
+  "authentication": "official Connection HTTP carrier owns Host/Origin and BrowserAuth before settings routes; raw shared fetch handler is not authentication",
+  "credentials": "explicit synthetic credential store and empty launch environment in tests; no paid request",
+  "defaultBundleAdmission": "pending",
+  "completeProfileStatus": "blocked",
+  "notVerified": [
+    "full native workspace/session/sidebar application and HMR notification transport",
+    "full GUI repository-link installation",
+    "whole application independent shutdown deadline",
+    "all peers runtime functionality",
+    "cross-platform certification"
+  ],
+  "companionReferences": [
+    {
+      "file": "bundle/lib/native-settings-ui.js",
+      "relative": "../modules/ui-settings-memory/lib/index.js"
+    }
+  ],
+  "fixedTestDefinitions": 27,
+  "nativeBrowserScope": "Official AppWebEntry/ModuleSystem/Loader, SettingsRoot and General/SEP pages with a test-owned outer settings seat and empty session snapshot; does not certify full application.",
+  "initializationFailure": "Same root-owned lifecycle and trusted non-strict startup lookup as settings-installation.json; old root controls stay closed across dependency refresh, explicit fresh root allowed.",
+  "checks": {
+    "nativeHostHttp": 15,
+    "loaderPeer": 2,
+    "nativeBrowser": 2,
+    "initialization": 7,
+    "loaderOwnershipCharacterization": 1
+  }
+}

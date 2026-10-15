@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "runner": {
+    "schema": 1,
+    "status": "pass",
+    "scope": "r49 supervisor adapted to explicit r61 result SHA and exact fresh restored candidate",
+    "inputSha256": "9bbd353116245fc01c9592657ce844f64a287b13f8924404b5f68e933a0e68ff",
+    "outputSha256": "2f7b2897913da354a8f006e3697e6d029ecf492b93c8f2291a22c74652f58730",
+    "transforms": [
+      {
+        "before": "// Test operator only. The original r44 app is restored and verified separately.",
+        "after": "// Test operator only. The fixed r61 candidate is restored and verified separately."
+      },
+      {
+        "before": "import {deriveExercise} from './derive.mjs';",
+        "after": "import {deriveCandidateExercise as deriveExercise} from './derive-candidate-lifecycle.mjs';\nimport {readCandidate} from './candidate-binding.mjs';"
+      },
+      {
+        "before": "assert.equal(process.argv.length,4)",
+        "after": "assert.equal(process.argv.length,6)"
+      },
+      {
+        "before": "const restored=await realpath(process.argv[2]),out=resolve(process.argv[3]),temp=await realpath(process.env.RUNNER_TEMP);",
+        "after": "const [resultPath,resultSha256,restoredArg,outArg]=process.argv.slice(2),restored=await realpath(restoredArg),out=resolve(outArg),temp=await realpath(process.env.RUNNER_TEMP);"
+      },
+      {
+        "before": "scope:'new test-only r44 three-cycle hide-effect/reopen operator; raw BOOL and observed effect remain separate'",
+        "after": "scope:'fixed r61 three-cycle LaunchServices operator; raw BOOL and observed hide effect remain separate'"
+      },
+      {
+        "before": "productSourceCommit:'569b4bdf6fd1ab2ebc7ec3aa5821b21cad3f2e4a'",
+        "after": "productSourceCommit:'157eef6bcaaee8db959f37ed267ff202b9bc206c'"
+      },
+      {
+        "before": " const receipt=await json(join(restored,'RESULT.json'));assert.equal(receipt.status,'pass');assert.equal(receipt.source.commit,result.productSourceCommit);\n for(const[k,v]of Object.entries({archiveSha256:'6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67',treeSha256:'128885968401b628b2c21974d045a70a04233bc04a0bfd3aa943eba1ce4e5ebd',programSha256:'fbe989745254464885c390b7d6e55fd3883674faa26b705ea74833240c07d713',bootstrapSha256:'ef6c6054a9affd6895639fe5c0a0fda746c0ecf8a9f33b1f6e3b48612077b009'}))assert.equal(receipt.source[k],v);\n result.restoreResultSha256=digest(await readFile(join(restored,'RESULT.json')));\n",
+        "after": " const binding=await readCandidate({resultPath,resultSha256,restoredRoot:restored,runnerTemp:temp});\n result.binding={sourceAssemblySha256:binding.sourceAssemblySha256,programSha256:binding.programSha256,bootstrapSha256:binding.bootstrapSha256,archiveSha256:binding.artifactSha256,archiveBytes:binding.artifactBytes,treeSha256:binding.treeSha256,application:binding.restoredApplication};\n"
+      },
+      {
+        "before": "for(const f of ['observation.mjs','observation.test.mjs','r48-cases.json','derive.mjs','derive.test.mjs','run-product.mjs','ci-job.yml','README.md']){\n  const bytes=await readFile(join(here,f));inputs.push({file:'desktop/hide-effect-probe/'+f,bytes:bytes.length,sha256:digest(bytes)});\n  if(f==='observation.mjs')await writeFile(join(generated,f),bytes,{flag:'wx',mode:0o600});\n }",
+        "after": "for(const path of [\"candidate-binding.mjs\",\"candidate-pins.json\",\"derive-candidate-lifecycle.mjs\",\"candidate-lifecycle.mjs\",\"candidate.test.mjs\",\"restore-project-application-r61.mjs\",\"CANDIDATE-ORIGIN.json\",\"candidate-ci-step.yml\",\"candidate-README.md\",\"../hide-effect-probe/observation.mjs\",\"../hide-effect-probe/derive.mjs\",\"../hide-effect-probe/run-product.mjs\",\"../../package/restore-fixed-application-r44.mjs\"]){\n  const bytes=await readFile(join(here,path));inputs.push({file:path,bytes:bytes.length,sha256:digest(bytes)});\n  const name=path.split('/').at(-1);if(['observation.mjs','candidate-binding.mjs','candidate-pins.json'].includes(name))await writeFile(join(generated,name),bytes,{flag:'wx',mode:0o600});\n }"
+      },
+      {
+        "before": "[script,restored,join(out,'lifecycle')]",
+        "after": "[script,resultPath,resultSha256,restored,join(out,'lifecycle')]"
+      }
+    ]
+  },
+  "restore": {
+    "schema": 1,
+    "status": "pass",
+    "scope": "exact r44 restorer adapted only to r61 artifact pins, evidence location and relative imports",
+    "inputSha256": "b8eeaed8ca9843c77e94c0f12eff273c517a8a3429b3ae827e129b736c314645",
+    "outputSha256": "d05dc152505e7117e1d1e26eb26477007f199e3eb17aa52dd1b0f9b087376cab",
+    "transforms": [
+      {
+        "before": "// Test operator only: restore exactly r44, with no rebuild, patch or re-sign.",
+        "after": "// Test operator only: restore exactly r61, with no rebuild, patch or re-sign."
+      },
+      {
+        "before": "from '../desktop/run-command.mjs'",
+        "after": "from '../run-command.mjs'"
+      },
+      {
+        "before": "from './package-inventory.mjs'",
+        "after": "from '../../package/package-inventory.mjs'"
+      },
+      {
+        "before": "assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');",
+        "after": "assert.equal(process.platform,'darwin');assert.equal(process.arch,'arm64');assert.equal(process.argv.length,3);"
+      },
+      {
+        "before": "const source={run:38576229021,commit:'569b4bdf6fd1ab2ebc7ec3aa5821b21cad3f2e4a',assemblySha256:'18137f4f284b90cf28a23b293fb8fab035a9bcbba8fde4617a12eb89db2f1f65',archiveSha256:'6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67',archiveBytes:647468896,treeSha256:'128885968401b628b2c21974d045a70a04233bc04a0bfd3aa943eba1ce4e5ebd',programSha256:'fbe989745254464885c390b7d6e55fd3883674faa26b705ea74833240c07d713',bootstrapSha256:'ef6c6054a9affd6895639fe5c0a0fda746c0ecf8a9f33b1f6e3b48612077b009',artifacts:[\n {label:'evidence',id:11900327240,bytes:1250543,sha256:'4d8a099d73d9d446d2b00ced617b48b09f28b5046fe159314c4d9a98cb2df222'},\n {label:'part-one',id:11900412268,bytes:402654429,sha256:'de11207c1024cd8ee800b0d82b306c4326cc9969c7817be77295351b673c3a99'},\n {label:'part-two',id:11900587137,bytes:244815934,sha256:'d5298c524ab05520cc1cadde6bfe87114054a605edc3de364d80939cbd031695'}]};",
+        "after": "const source={\n  \"schema\": 1,\n  \"run\": 38629693549,\n  \"commit\": \"157eef6bcaaee8db959f37ed267ff202b9bc206c\",\n  \"assemblySha256\": \"6c0b301d362ab8b576498c44852f0de35e55a0ebb8f040b3f9d429bc699dafa1\",\n  \"assemblyBytes\": 27784,\n  \"inventorySha256\": \"6a22a85ac1f40e784f5bf0118daedc255f9d61acefa88d991a4aa9c2ae560ad9\",\n  \"artifact\": \"DSH-SEP-macOS-Alpha2-project-preview.zip\",\n  \"archiveSha256\": \"742c503ba230ee9dd92f54b8c4646af3385dd1d6259fdfdcbc2212f2ff020d13\",\n  \"archiveBytes\": 647522618,\n  \"treeSha256\": \"1f984a51666bb94068141be79e5d46fcf9d79d0cb6f1ba84127f4fb99d879991\",\n  \"programSha256\": \"0e8867766b0c01307959b935ced963ae0edd0eeb576cb62eb1c1c3a84ee1a732\",\n  \"bootstrapSha256\": \"3b36e6443d277fce03502c2913cf27ff74660cdef12124a00c6a812aa2818836\",\n  \"artifacts\": [\n    {\n      \"label\": \"evidence\",\n      \"id\": 11925148439,\n      \"bytes\": 1235369,\n      \"sha256\": \"00edfa9092a45c20255a3a03765cd063f14e758aff6c980215f10b209ba65815\"\n    },\n    {\n      \"label\": \"part-one\",\n      \"id\": 11925713136,\n      \"bytes\": 402654409,\n      \"sha256\": \"1d64b891d480f738853c8f0fe8260e5341c783fafaa3bd717a7b5f9d693589b1\"\n    },\n    {\n      \"label\": \"part-two\",\n      \"id\": 11925373341,\n      \"bytes\": 244869648,\n      \"sha256\": \"61059b8272734a7d484a645937e1cf3857bd79d8c2a04c55d5ed0a7e3bf819b6\"\n    }\n  ]\n};"
+      },
+      {
+        "before": "scope:'restore exact r44 signed application bytes; no new product build'",
+        "after": "scope:'restore exact r61 signed application bytes; no new product build'"
+      },
+      {
+        "before": "evidence/application-build/RESULT.json",
+        "after": "evidence/project-build/RESULT.json"
+      },
+      {
+        "before": "assert.equal(assembly.status,'pass');assert.equal(assembly.artifactSha256",
+        "after": "assert.equal(assembly.status,'pass');assert.equal(assembly.sourceCommit,source.commit);assert.equal(assembly.programSha256,source.programSha256);assert.equal(assembly.bootstrapSha256,source.bootstrapSha256);assert.equal(assembly.treeSha256,source.treeSha256);assert.equal(assembly.artifact,source.artifact);assert.equal(assembly.artifactSha256"
+      },
+      {
+        "before": "evidence/application-build/PACKAGE-INVENTORY.json",
+        "after": "evidence/project-build/PACKAGE-INVENTORY.json"
+      },
+      {
+        "before": "assert.equal(inventory.treeSha256,source.treeSha256);",
+        "after": "assert.equal(await digest(inventoryPath),source.inventorySha256);assert.equal(inventory.treeSha256,source.treeSha256);"
+      }
+    ]
+  },
+  "exercise": {
+    "schema": 1,
+    "status": "pass",
+    "scope": "r49 actual lifecycle with fixed r61 candidate binding; no lifecycle behavior change",
+    "inputSha256": "b177f14251a538276db0e276e2f27695dec5480f34cc7ac127d7470b40401456",
+    "outputSha256": "2b7412dd96cfcfc9bb48c18134eb02c546a377022dc4eb9e2adc14d0d67c6460",
+    "transforms": [
+      {
+        "before": "import{verifyPackage}from'./package-inventory.mjs';",
+        "after": "import{verifyPackage}from'./package-inventory.mjs';\nimport{readCandidate}from'./candidate-binding.mjs';"
+      },
+      {
+        "before": "const[assembledArg,outArg]=process.argv.slice(2),assembled=await realpath(assembledArg),out=resolve(outArg),temp=await realpath(process.env.RUNNER_TEMP);",
+        "after": "assert.equal(process.argv.length,6);const[resultPath,resultSha256,assembledArg,outArg]=process.argv.slice(2),assembled=await realpath(assembledArg),out=resolve(outArg),temp=await realpath(process.env.RUNNER_TEMP);"
+      },
+      {
+        "before": "const assembly=await json(join(assembled,'RESULT.json'));assert.equal(assembly.status,'pass');app=assembly.restoredApplication;",
+        "after": "const assembly=await readCandidate({resultPath,resultSha256,restoredRoot:assembled,runnerTemp:temp});app=assembly.restoredApplication;"
+      }
+    ],
+    "r49": {
+      "schema": 1,
+      "status": "pass",
+      "scope": "test-only operator derivation; native product result separate",
+      "input": "package/exercise-application.mjs",
+      "inputSha256": "ecb9321b2c23ee9ef4e67117f31fbe6b86de9745c5f5a47994690c124e59d979",
+      "outputSha256": "b177f14251a538276db0e276e2f27695dec5480f34cc7ac127d7470b40401456",
+      "normalizesCrLf": true,
+      "plannedCycles": 3,
+      "productModified": false,
+      "observerModified": false,
+      "transforms": [
+        {
+          "before": "import{verifyPackage}from'./package-inventory.mjs';",
+          "after": "import{verifyPackage}from'./package-inventory.mjs';\nimport {admitVisibleSnapshot,observeHiddenEffect} from './observation.mjs';"
+        },
+        {
+          "before": "async function observe(action,pid,path,birth){",
+          "after": "async function observe(action,pid,path,birth,raw=false){"
+        },
+        {
+          "before": " if(failure)throw failure;\n return JSON.parse(stdout);",
+          "after": " if(raw){\n  assert(action==='hide'||action==='snapshot');\n  if(failure&&!(action==='hide'&&observation.exitCode===1&&observation.signal===null&&observation.errorCode===null&&!observation.killed&&parsed?.status==='pass'&&parsed?.action==='hide'&&parsed?.requestSent===false))throw failure;\n  return observation;\n }\n if(failure)throw failure;\n return JSON.parse(stdout);"
+        },
+        {
+          "before": "  const hidden=await observe('hide',generation.desktopPid,inner,desktop.launchTime);assert.equal(hidden.requestSent,true);await deadline(async()=>((await observe('snapshot',generation.desktopPid,inner)).hidden===true),10000);",
+          "after": "  const hideBefore=await observe('snapshot',generation.desktopPid,inner,desktop.launchTime,true);\n  const hideIdentity=admitVisibleSnapshot(hideBefore);\n  const hidden=await observe('hide',generation.desktopPid,inner,desktop.launchTime,true);\n  cycle.hide=await observeHiddenEffect({identity:hideIdentity,request:hidden,snapshot:()=>observe('snapshot',generation.desktopPid,inner,desktop.launchTime,true),timeoutMs:10000});"
+        }
+      ]
+    }
+  }
+}

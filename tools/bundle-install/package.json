@@ -1,0 +1,9 @@
+{
+  "name": "sep-bundle-build-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "es-module-lexer": "1.7.0"
+  }
+}

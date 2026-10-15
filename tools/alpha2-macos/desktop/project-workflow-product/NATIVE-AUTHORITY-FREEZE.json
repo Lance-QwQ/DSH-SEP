@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Test-only same-P2 authority correction; POSIX real-store regression and Windows contracts; actual r61 native rerun not_run",
+  "createdUtc": "2026-10-14T20:44:33.1629896Z",
+  "priorFreeze": {
+    "path": "NATIVE-FREEZE.json",
+    "sha256": "cc996f79319b2b844234a67e918805b2f0ebd011a17a9cf94b1d35cc0846d30a",
+    "verifiedFiles": 11,
+    "verifiedDependencies": 7,
+    "unchanged": true
+  },
+  "r64Audit": {
+    "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\ci-r64-results\\project-native-ui-r64\\AUDIT.json",
+    "sha256": "5601b8c9180812948cee36cca3458a1e52574e31f9c39e4856bb3b5c1ac4f00a",
+    "round1": "fail",
+    "round2": "not_run"
+  },
+  "tests": {
+    "realPosix": {
+      "red": {
+        "pass": 0,
+        "fail": 3
+      },
+      "green": {
+        "pass": 3,
+        "fail": 0,
+        "skip": 0,
+        "cancelled": 0
+      },
+      "node": "v24.19.0",
+      "nativeHelperSha256": "93b71915041f5c12645ce06ce67fecf58aba91175d6ff71224836b4c658044a6",
+      "captureManifestSha256": "3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3"
+    },
+    "windowsContracts": {
+      "pass": 6,
+      "fail": 0,
+      "skip": 0,
+      "cancelled": 0,
+      "node": "v24.21.0"
+    },
+    "coldImport": "pass",
+    "syntaxEntries": 4
+  },
+  "nativeUi": "not_run",
+  "nativeConfirmation": "not_run",
+  "physicalInput": "not_run",
+  "productModified": false,
+  "files": [
+    {
+      "path": "native-fixture-authority.test.mjs",
+      "bytes": 5137,
+      "sha256": "8993eaa9d829cf39405f0655b162b05755a6a5596cf238044a79520582f1e8eb"
+    },
+    {
+      "path": "native-p2-authority.mjs",
+      "bytes": 1149,
+      "sha256": "902c5427c0dea51f9e6942bc708cc4040ae2b625327eb1ea45681008ad0437d4"
+    },
+    {
+      "path": "derive-native-authority.mjs",
+      "bytes": 3834,
+      "sha256": "6f33348a1f2ca8de7535f08a570c9bae5a8f2ea7da873222c697c113258ed034"
+    },
+    {
+      "path": "native-data-r2.mjs",
+      "bytes": 8563,
+      "sha256": "ca9a0d4c2eb7c6723be5bd261c8d5be37cd3cc8a98f09f92eb8b6bd558505733"
+    },
+    {
+      "path": "native-worker-r2.mjs",
+      "bytes": 14833,
+      "sha256": "70969e9da84f5cc3ba674de698124b649adf103d6a5361f4c7a16e6b765c39c8"
+    },
+    {
+      "path": "native-operator-r2.mjs",
+      "bytes": 6423,
+      "sha256": "a3c6a90e7869125c36d3db1518b292911bcff5aa2eda320c820ec9191800e8bf"
+    },
+    {
+      "path": "NATIVE-AUTHORITY-ORIGIN.json",
+      "bytes": 4017,
+      "sha256": "daa6853ebc65cfa511998cad2f266b2de028687bf6c63f572e8bd11506c3943e"
+    },
+    {
+      "path": "native-authority-derive.test.mjs",
+      "bytes": 916,
+      "sha256": "077b3eb6ab0389c47500314d92aac1f18db151c8fe20f02fa27c0bd954270cce"
+    },
+    {
+      "path": "native-authority-ci-step.yml",
+      "bytes": 1656,
+      "sha256": "82cd418bb2ba5d92128ebdef131f6cd11dd292d18176ad113fe5acdbe5885642"
+    },
+    {
+      "path": "native-authority-README.md",
+      "bytes": 2187,
+      "sha256": "94ceb83d8bd079a01f72784dd6c3b0535f84b588505e3a1ef3668d58b15868ff"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\RED-SOURCE.json",
+      "bytes": 193072,
+      "sha256": "77200ac863ba0ca9bac48667ab17e1a94dbf826fe8413c2e51979854bb6ce922"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\RED.tap",
+      "bytes": 4751,
+      "sha256": "05494845078dc36623651d3d45b98e20ebd1d448de75464c05bf82600922d786"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\RED.stderr",
+      "bytes": 153,
+      "sha256": "e816706cd44ce0c6c65a7a7938be8103514f7c899694c8240d844f74319b7f98"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\GREEN-SOURCE.json",
+      "bytes": 13154,
+      "sha256": "1f4359429652e56359369b72e6e35eab846f512c996ea3bad95b4a3f90418225"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\GREEN-posix.tap",
+      "bytes": 920,
+      "sha256": "c2f1fef54bf93bd8294bf7191f9f472646b30dc1a02e5cbe1cd5a585af1a954e"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\GREEN-posix.stderr",
+      "bytes": 153,
+      "sha256": "e816706cd44ce0c6c65a7a7938be8103514f7c899694c8240d844f74319b7f98"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\GREEN-contracts6.tap",
+      "bytes": 1558,
+      "sha256": "7e5d969e3174b1c3e1cc5cb03a766eac1cf406b5705695065370082706f97625"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\GREEN-contracts6.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\COLD-IMPORT.json",
+      "bytes": 165,
+      "sha256": "e3b4ea1d3c43befeaf818bc83de24ae2cfd21c93c6bddddeb78dba9bc786eb1e"
+    },
+    {
+      "path": "D:\\AIData\\ProjectWork\\DSH\\alpha2-macos-package-20261014-r1\\desktop\\project-native-authority-r2\\COLD-IMPORT.stderr",
+      "bytes": 153,
+      "sha256": "e816706cd44ce0c6c65a7a7938be8103514f7c899694c8240d844f74319b7f98"
+    }
+  ],
+  "ci": "Stage these 10 files plus unchanged old NATIVE-FREEZE 11+7 closure; use native-authority-ci-step.yml after fixed r61 restore. The same packaged runtime closure supplies real P2/project dependencies."
+}

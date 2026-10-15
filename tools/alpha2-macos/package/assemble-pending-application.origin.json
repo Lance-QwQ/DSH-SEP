@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "source": "assemble-project-application.mjs",
+  "sourceSha256": "7c5ebf6e339615f9d65aee632d71559516132af051b61f7f39e8a83137faabde",
+  "result": "assemble-pending-application.mjs",
+  "resultSha256": "d783bfdc0cc7fdcd3485d5fce2880118a7dbad61f1d11dd0210eaf960855ba2d",
+  "transformations": [
+    {
+      "before": "../desktop/project-workflow-product/package-inputs.mjs",
+      "after": "../desktop/project-workflow-product/pending-startup/package-inputs.mjs",
+      "occurrences": 1
+    },
+    {
+      "before": "assert.equal(EXTRA_RUNTIME.length,18);",
+      "after": "assert.equal(EXTRA_RUNTIME.length,26);",
+      "occurrences": 1
+    },
+    {
+      "before": "assert.equal(new Set(rows.map(r=>r.path)).size,76);",
+      "after": "assert.equal(new Set(rows.map(r=>r.path)).size,84);",
+      "occurrences": 1
+    },
+    {
+      "before": "scope:'fresh r44 current-project application derivative; build and restore only'",
+      "after": "scope:'fresh r44 project application with pending-plan startup derivative; build and restore only'",
+      "occurrences": 1
+    },
+    {
+      "before": "info.CFBundleVersion='2';",
+      "after": "info.CFBundleVersion='3';",
+      "occurrences": 1
+    }
+  ],
+  "scope": "Build operator derivative only; preserves original r61 operator and base application. Eight additive runtime modules; no existing runtime override except the original r61 controller mapping. Native build/signature/restore and actual product execution remain separate evidence."
+}

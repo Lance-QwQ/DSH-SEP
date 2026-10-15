@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Windows synthetic dedicated controlled application with actual official process controller; native GUI quit wiring not certified",
+  "hostVersion": "0.2.1-alpha.1",
+  "hostController": "apps/cli/src/process-shutdown.ts",
+  "defaults": {
+    "processDeadlineMs": 5000,
+    "rootReceiptMs": "root configuration, distinct from process cutoff"
+  },
+  "rules": [
+    "trusted launcher only; requires explicit dedicatedHost true",
+    "withdraw root admission synchronously before host disposal",
+    "blocked close joins whenClosed, never detaches the owner as successful cleanup",
+    "only actual whole-tree disposal completes pass; host deadline or repeated interrupt reports forced/blocked",
+    "forced exit may retain dead-owner markers, dispatched reservations or pending intents; restart verifies native ownership and never resets ledger or resolves business intents automatically"
+  ],
+  "fixedCases": [
+    "idle",
+    "coalesced-idle",
+    "cooperative-model",
+    "cooperative-tool",
+    "hung-model",
+    "hung-tool",
+    "pending-intent",
+    "interrupt-model"
+  ],
+  "notVerified": [
+    "native desktop IPC/menu quit integration",
+    "full GUI startup/exit",
+    "all external native descendants"
+  ],
+  "officialControllerSha256": "30743d5ac88154b25fd2d14ac22f7ff1b8d94e915547383de1ca7e49d1bbfc66",
+  "fixedDefinitions": 8,
+  "testDeadlineMs": 700
+}

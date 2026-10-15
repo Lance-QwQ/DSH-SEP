@@ -1,0 +1,11 @@
+# Include only after a verified r44 restore and exact Node 24.21.0 setup.
+- name: Revalidate current macOS sources
+  shell: bash
+  run: |
+    set -euo pipefail
+    test -n "$SEP_OFFICIAL_HARNESS"
+    test -n "$SEP_MAC_BUNDLE_ROOT"
+    temp="$(cd "$RUNNER_TEMP" && pwd -P)"
+    node tools/alpha2-macos/native-revalidation/run-native.mjs "$temp/mac-native-low-review-r83"
+# Parent workflow must always upload this fresh directory (if-no-files-found: error),
+# and may build the successor only after RESULT.status and command exit both pass.

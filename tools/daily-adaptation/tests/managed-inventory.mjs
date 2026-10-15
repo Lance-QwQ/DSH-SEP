@@ -1,0 +1,14 @@
+import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';import {pathToFileURL} from 'node:url';
+import assert from 'node:assert/strict';
+const base=process.env.SEP_BUNDLE_TEST_ROOT,generation=process.argv[2]??'r3';
+const fixture=JSON.parse(await readFile(join(base,'MANAGED-DESKTOP-FIXTURE-'+generation+'.json'))),config=JSON.parse(await readFile(fixture.config));
+const dir=join(config.releaseRoot,'node_modules/@deepseek-ai/dsh-desktop/lib/sep-update');
+const {inventory}=await import(pathToFileURL(join(dir,'update-inventory.mjs')));
+const {profileContextIdentity}=await import(pathToFileURL(join(dir,'update-profile.mjs')));
+const context=profileContextIdentity({home:config.home,profileRoot:config.profileRoot,installAnchor:join(config.releaseRoot,'node_modules/@deepseek-ai/dsh/package.json'),overlayFiles:[join(config.releaseRoot,'node_modules/@deepseek-ai/dsh-desktop-host/lib/sep-policy.json')]});
+const result=await inventory(config.releaseRoot,{profileContext:context});
+await writeFile(join(base,'MANAGED-INVENTORY-'+generation+'.json'),JSON.stringify({scope:'synthetic official materialized alpha.1 graph, inert full profile inventory; no execution compatibility verdict',entries:result.plugins.map(p=>({name:p.name,version:p.version,instanceId:p.instanceId,source:p.source,fingerprint:p.fingerprint})),hardBlocks:result.hardBlocks,binding:result.binding,graphHash:result.graphHash,profileCoverage:result.profileCoverage},null,2)+'\n',{flag:'wx'});
+assert.equal(result.hardBlocks.length,0,JSON.stringify(result.hardBlocks));assert.equal(result.profileCoverage.complete,true);
+const local=result.plugins.filter(p=>p.source==='installed-graph-file');assert.ok(local.length>=2);
+assert.ok(result.plugins.some(p=>p.name==='dsh-sep-bundle'&&p.version==='0.2.1-beta.3-bundle.24'));
+console.log(JSON.stringify({status:'pass',entries:result.plugins.length,hardBlocks:result.hardBlocks.length,localOwnedEntries:local.length}));

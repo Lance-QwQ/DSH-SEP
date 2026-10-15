@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "kind": "current-alpha1-desktop-updater-additions",
+  "programmeGraphHash": "a12d85f5e0f7802d818fbc873c8b13b560b2fc7958a90c29e378852ad592367c",
+  "host": "0.2.1-alpha.1",
+  "sep": "0.2.1-beta.3-bundle.24",
+  "files": [
+    {
+      "name": "README.md",
+      "sha256": "4e7b91cdf0f285c1157bbee5941bf0c9037530666319240361d7953e19b7eba8"
+    },
+    {
+      "name": "update-core.mjs",
+      "sha256": "71c5017188b04ba706ce5883e2038a5479a7323c063510586022a07a77894275"
+    },
+    {
+      "name": "update-desktop.mjs",
+      "sha256": "8476632f8533b443fadc675b8d8a57b68878f20c5db254e4561da15b22e41047"
+    },
+    {
+      "name": "update-desktop.d.mts",
+      "sha256": "ca74b645326989206f28bdad675e5cd1c05bff008ad97cae9d5f157f387282f9"
+    },
+    {
+      "name": "update-sep.mjs",
+      "sha256": "2f95cfd478c5dfd13a0749d60a33e105299bb71a64129fa86878b92eb6c9b5d3"
+    },
+    {
+      "name": "update-filter.mjs",
+      "sha256": "9fe0a5a268f3ff3422dbbeb780fa0851820dcadc439e476407e368fd2f3d4d69"
+    },
+    {
+      "name": "update-filter.d.mts",
+      "sha256": "dc57606f18ec71f7fc36f12b227c9ca0a4b0b1aceab660fbe82d2fbdb4586a88"
+    },
+    {
+      "name": "tests/update-filter.test.mjs",
+      "sha256": "7228375ed3b869b7df789ef52b96ae5eb3fc4f23abb130b2e65cb8ca5468391c"
+    },
+    {
+      "name": "tests/update-preferences.test.mjs",
+      "sha256": "374e5027679ba94562b5f3bd7d3e7b9b44d78e316ede1076dfecac7e3edd525b"
+    }
+  ]
+}

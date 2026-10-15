@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "scope": "Test-only early Inspector identity sequencing. No product changes. Import-free early exact PID precedes trusted ready; late Electron/appPath/isReady, UI and cleanup remain unchanged.",
+  "files": [
+    {
+      "base": "native-worker-r4.mjs",
+      "sourceSha256": "826353ddb3b2992a038326447b159ac06a11b1a43be68a4cd19a3c2738e14a96",
+      "result": "native-worker-r5.mjs",
+      "resultSha256": "3a36edcf03bd036c09fe8564224d85ce594bb7b2b71a228ab55db5b8080fab54",
+      "transformations": [
+        {
+          "before": "observedPid:observed?.observedPid??null,appPath:",
+          "after": "observedPid:observed?.observedPid??null,execPath:observed?.execPath??null,electronVersion:observed?.electronVersion??null,processType:observed?.processType??null,appPath:",
+          "occurrences": 1
+        },
+        {
+          "before": "  result.earlyIdentity=await verifyWorkspaceInspector({phase:'early',read:readIdentity,save,expectedPid:app.desktopPid,expectedAppPath:asar});",
+          "after": "  const readEarlyIdentity=()=>client.eval('({observedPid:process.pid,execPath:process.execPath,electronVersion:process.versions.electron??null,processType:process.type??null})');\n  result.earlyIdentity=await verifyWorkspaceInspector({phase:'early',read:readEarlyIdentity,save,expectedPid:app.desktopPid,expectedAppPath:asar});",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "base": "native-operator-r4.mjs",
+      "sourceSha256": "8458521a08bc8fdb4130340e67f0c55c056a69af2789a54c8f299c3e0cd37c18",
+      "result": "native-operator-r5.mjs",
+      "resultSha256": "69d2fb326f9bec0663f5b25f13b53fa4c365433edda2c7c91ca15a8d31262f53",
+      "transformations": [
+        {
+          "before": "['native-operator-r4.mjs','native-worker-r4.mjs','NATIVE-PENDING-ORIGIN.json'",
+          "after": "['native-operator-r5.mjs','native-worker-r5.mjs','NATIVE-IDENTITY-ORIGIN.json','derive-inspector-identity.mjs','NATIVE-PENDING-ORIGIN.json'",
+          "occurrences": 1
+        },
+        {
+          "before": "new URL('./native-worker-r4.mjs',import.meta.url)",
+          "after": "new URL('./native-worker-r5.mjs',import.meta.url)",
+          "occurrences": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "implementation": "isolated-origin-pinned-control-layer-candidate-native-acceptance-pending",
+  "projectScope": "one-existing-controlled-project",
+  "publicationTarget": "managed-generation-only",
+  "originalSourceWritable": false,
+  "modelManagementAccess": false,
+  "ordinaryToolManagementAccess": false,
+  "methods": {
+    "status": {"input": {}, "body": false},
+    "plans": {"input": {}, "body": false, "maximumPlans": 256, "maximumChangesPerPlan": 256, "maximumUtf8JsonBytes": 262144, "overflow": "reject-entire-response-no-silent-truncation"},
+    "select": {"input": {"planHash": "sha256"}, "effect": "select-existing-ready-plan"},
+    "review": {"input": {"planHash": "sha256"}, "effect": "bounded-read-only-preview"},
+    "commit": {"input": {"reviewId": "opaque-id", "planHash": "sha256", "approval": "non-serializable-user-capability"}, "effect": "publish-managed-generation"},
+    "discard": {"input": {"planHash": "sha256"}, "effect": "discard-exact-known-candidate"},
+    "restore": {"input": {"generation": "positive-integer"}, "effect": "create-restore-candidate-never-auto-commit"},
+    "recover": {"input": {}, "effect": "reconcile-known-durable-transaction-no-unknown-cleanup"},
+    "generations": {"input": {"after": "nonnegative-integer", "limit": "integer-1-through-32"}, "body": false},
+    "cancel": {"input": {"reviewId": "opaque-id"}, "effect": "revoke-review-and-approval-not-discard"},
+    "close": {"input": {}, "effect": "close-admission-revoke-approvals-bounded-drain"},
+    "whenClosed": {"input": {}, "effect": "resolve-only-after-confirmed-resource-release"}
+  },
+  "caller": {
+    "transport": "trusted-local-controller-or-Electron-main-only",
+    "context": "opaque-current-window-document-capability",
+    "rendererJsonIsAuthority": false,
+    "confirmation": "explicit-user-action-after-summary-rendered-in-current-bound-window",
+    "approvalIssuer": "trusted-main-or-local-controller-private-capability",
+    "approvalBinding": ["projectId", "ownerGeneration", "windowId", "documentGeneration", "reviewId", "reviewSha256", "planHash", "baseGeneration", "baseSequence", "baseSha256", "targetSha256", "expiresAt", "omissionsAcknowledged"],
+    "approvalConsumption": "once-after-admission-and-current-review-recheck-before-commit",
+    "cancelWhileConsuming": "approval-may-already-be-consumed-but-no-commit-dispatch-after-cancel-or-close; fresh-review-and-confirmation-required",
+    "cancelAfterDispatch": "COMMIT_IN_FLIGHT-not-rollback; existing-transaction-and-close-drain-rules-apply",
+    "crossProcess": "opaque-objects-never-serialized; future-owned-IPC-must-validate-exact-window-confirmation-and-issue-capability-inside-business-host",
+    "revocation": ["cancel", "close", "navigation", "window-destruction", "owner-restart", "selection-change", "candidate-change", "baseline-change", "review-expiry"]
+  },
+  "review": {
+    "changedFileMetadataMaximum": 256,
+    "textBytesPerFileMaximum": 16384,
+    "textBytesTotalMaximum": 65536,
+    "diffLinesTotalMaximum": 400,
+    "reviewTtlMsMaximum": 300000,
+    "format": "bounded-line-hunks-with-before-and-after-sha256",
+    "omissionReasons": ["binary", "non-utf8", "file-byte-limit", "total-byte-limit", "line-limit"],
+    "omissions": "explicit-per-file-and-aggregate-no-claim-of-complete-body-review",
+    "omittedBodyApproval": "requires-explicit-omissionsAcknowledged-true-bound-to-review",
+    "metadataOverflow": "reject-no-hidden-extra-files",
+    "physicalPathsReturned": false,
+    "sameOwnerRead": "baseline-and-candidate-verified-before-and-after-read",
+    "queuedRecursion": "never-call-controller-method-from-controller-withView-callback"
+  },
+  "requiredReadOnlyExtensions": {
+    "listGenerations": "authoritative-SQLite-generation-rows-under-existing-owner-with-snapshot-verification-and-bounded-pagination",
+    "inspectPlan": "same-owner-verified-baseline-and-candidate-readback-with-fixed-budgets-and-no-caller-path",
+    "sourcePolicy": "new-origin-pinned-derived-candidate-only-existing-transactions-profile-unchanged",
+    "missingExtension": "blocked-no-fallback-SQLite-open-or-directory-enumeration"
+  },
+  "evidence": {
+    "initialNativeRed": "r48-17-feature-failures-after-real-preflight; separately-audited",
+    "nativeAcceptance": "not_run",
+    "auxiliaryPosix": "17-fixed-definitions-replayed-through-explicit-test-only-Linux-factory/preflight-derivation; not-APFS-acceptance",
+    "supplementalDefinitions": {"preview": 9, "origin": 2, "control": 5},
+    "nativeUserConfirmationUi": "not_run",
+    "syntheticAuthorityOnly": true,
+    "previousTransactionsEvidence": "separate-not-counted-as-this-feature",
+    "releaseOrDailyIntegration": "not_run"
+  }
+}

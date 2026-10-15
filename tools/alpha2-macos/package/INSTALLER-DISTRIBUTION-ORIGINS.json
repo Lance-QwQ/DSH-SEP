@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "status": "prepared",
+  "scope": "Only local transport/scan adapter byte derivation; no real downloaded-artifact result",
+  "origins": [
+    {
+      "source": "verify-application-distribution.test.py",
+      "sourceSha256": "ccee174336fb214c0b010d00f2ec2e2b41165e19af3278b1abc4039bb1d0c82f",
+      "result": "verify-installer-distribution.test.py",
+      "resultSha256": "69d90fa34a4f4f73e3a0ba4b01eafd5ac038ace4fcd9651499ed45cc6b250145",
+      "transformations": [
+        {
+          "from": "'verify-application-distribution.py'",
+          "to": "'verify-installer-distribution.py'",
+          "occurrences": 1
+        },
+        {
+          "from": "'DSH-SEP-macOS-Alpha2-project-preview.zip'",
+          "to": "'DSH-SEP-macOS-Alpha2-installer-preview.zip'",
+          "occurrences": 1
+        },
+        {
+          "from": "{'project-build/RESULT.json': assembly_bytes},\n            {'transport-manifest.json': encode(manifest), name + '.0001.part': parts[0]}",
+          "to": "{'_temp/installer-application/RESULT.json': assembly_bytes, '_temp/installer-transport/transport-manifest.json': encode(manifest)},\n            {name + '.0001.part': parts[0]}",
+          "occurrences": 1
+        },
+        {
+          "from": "'name': 'project-application-r74-' + role",
+          "to": "'name': {'evidence': 'installer-application-evidence-r78', 'part-one': 'installer-application-part1-r78', 'part-two': 'installer-application-part2-r78'}[role]",
+          "occurrences": 1
+        },
+        {
+          "from": "'artifactPrefix': 'project-application-r74'",
+          "to": "'artifactPrefix': 'installer-application'",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "verify-application-distribution.py",
+      "sourceSha256": "a8875649f3968b6959767319de5e9d05de5ebce07afde36ae37ffa7d2f94b6b0",
+      "result": "verify-installer-distribution.py",
+      "resultSha256": "65d32ffdcb444605bd55cda24bffb5152cf7d80972d6e0787a4c504b0851efb5",
+      "transformations": [
+        {
+          "from": "fixed r74 distribution directory",
+          "to": "fixed r78 installer distribution directory",
+          "occurrences": 1
+        },
+        {
+          "from": "/application-r74-distribution",
+          "to": "/installer-r78-distribution",
+          "occurrences": 1
+        },
+        {
+          "from": "and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,120}', pins['artifactPrefix'] or '')",
+          "to": "and pins['artifactPrefix'] == 'installer-application'",
+          "occurrences": 1
+        },
+        {
+          "from": "meta.get('name') == pins['artifactPrefix'] + '-' + expected_role",
+          "to": "meta.get('name') == {'evidence': 'installer-application-evidence-r78', 'part-one': 'installer-application-part1-r78', 'part-two': 'installer-application-part2-r78'}[expected_role]",
+          "occurrences": 1
+        },
+        {
+          "from": "'project-build/RESULT.json'",
+          "to": "'_temp/installer-application/RESULT.json'",
+          "occurrences": 1
+        },
+        {
+          "from": "read_entry(by_role['part-one']['zip'], 'transport-manifest.json')",
+          "to": "read_entry(by_role['evidence']['zip'], '_temp/installer-transport/transport-manifest.json')",
+          "occurrences": 1
+        },
+        {
+          "from": "and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,199}\\.zip', assembly.get('artifact') or '')",
+          "to": "and assembly.get('artifact') == 'DSH-SEP-macOS-Alpha2-installer-preview.zip'",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "scan-r74-distribution.py",
+      "sourceSha256": "bbe191e1751304d5f02a921f0b8553fe5202009e4ed66ba768decf8726d39c09",
+      "result": "scan-installer-distribution.py",
+      "resultSha256": "620380654263aec38e6bda3d3c58bf4cc98f4f1aa8a28967c4ec82368805785a",
+      "transformations": [
+        {
+          "from": "ARCHIVE = ROOT / 'application-r74-distribution/verified-package/DSH-SEP-macOS-Alpha2-project-preview.zip'",
+          "to": "ARCHIVE = ROOT / 'installer-r78-distribution/verified-package/DSH-SEP-macOS-Alpha2-installer-preview.zip'",
+          "occurrences": 1
+        },
+        {
+          "from": "OUTPUT = ROOT / 'application-r74-distribution/privacy-scan-r1'",
+          "to": "OUTPUT = ROOT / 'installer-r78-distribution/privacy-scan-r1'",
+          "occurrences": 1
+        },
+        {
+          "from": "EXPECTED = '20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107'\nEXPECTED_BYTES = 647532416",
+          "to": "RECORD = ROOT / 'installer-r78-distribution/verified-package/DOWNLOAD-VERIFIED.json'\nEXPECTED, EXPECTED_BYTES = None, None",
+          "occurrences": 1
+        },
+        {
+          "from": "def main():\n    before = identity(ARCHIVE)",
+          "to": "def main():\n    global EXPECTED, EXPECTED_BYTES\n    record_before = identity(RECORD)\n    if not 0 < record_before[2] <= 1048576:\n        raise RuntimeError('SCAN_RECORD')\n    record_bytes = RECORD.read_bytes()\n    record = json.loads(record_bytes)\n    if record.get('schema') != 1 or record.get('status') != 'pass' or record.get('archive') != str(ARCHIVE) or not re.fullmatch(r'[a-f0-9]{40}', record.get('sourceCommit', '')) or not re.fullmatch(r'[a-f0-9]{64}', record.get('sha256', '')) or type(record.get('bytes')) is not int or not 0 < record['bytes'] <= 2 * 1024**3:\n        raise RuntimeError('SCAN_RECORD')\n    EXPECTED, EXPECTED_BYTES = record['sha256'], record['bytes']\n    before = identity(ARCHIVE)",
+          "occurrences": 1
+        },
+        {
+          "from": "'This is the r74 application ZIP, not a later installer ZIP'",
+          "to": "'This inspects only the exact installer ZIP bound to the supplied verified download record; no native execution or full privacy certification'",
+          "occurrences": 1
+        },
+        {
+          "from": "    OUTPUT.mkdir(mode=0o700)",
+          "to": "    if record_before != identity(RECORD) or record_bytes != RECORD.read_bytes():\n        raise RuntimeError('SCAN_RECORD_CHANGED')\n    result['downloadRecordSha256'] = hashlib.sha256(record_bytes).hexdigest()\n    result['sourceCommit'] = record['sourceCommit']\n    OUTPUT.mkdir(mode=0o700)",
+          "occurrences": 1
+        }
+      ]
+    }
+  ]
+}

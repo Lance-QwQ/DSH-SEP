@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "scope": "isolated project-workflow candidate only; not production integrated",
+  "nativeAcceptance": "not_run",
+  "fixedNativeDefinitions": 17,
+  "supplementalDefinitions": {
+    "preview": 9,
+    "origin": 2,
+    "control": 5
+  },
+  "baselineManifestSha256": "66adc1999155ff6ac68ac2c730c0492581fcb1aaff9ea9c25d83f7616400d4e5",
+  "inputs": [
+    {
+      "path": "CONTRACT.json",
+      "bytes": 4729,
+      "sha256": "dedada2c78b4519ca1deab543e2eb9b3bffaddfc6a0aa146b7038407e6f8ed31"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5935,
+      "sha256": "36a8156abf930b50360d57e425dec4c203ae8a0b98f1b6ef6412d91db0f70d71"
+    },
+    {
+      "path": "READONLY-ORIGIN.json",
+      "bytes": 3450,
+      "sha256": "586536e3ae9b23113c3ce25af5b41be6508f6793ca24732d665ad15e62840e48"
+    },
+    {
+      "path": "REPRODUCTION.md",
+      "bytes": 4110,
+      "sha256": "ee3813cebd95244e145d8dcb019590028ba90515a6b5025bb2b1f13ac8dc6cd6"
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "bytes": 1356,
+      "sha256": "66adc1999155ff6ac68ac2c730c0492581fcb1aaff9ea9c25d83f7616400d4e5"
+    },
+    {
+      "path": "build-derived.mjs",
+      "bytes": 960,
+      "sha256": "4cff29a62246c35213ee7ec7ab37228d87c62db31b7b7beb991de8bb935609ad"
+    },
+    {
+      "path": "control-boundaries.test.mjs",
+      "bytes": 4785,
+      "sha256": "8f209aa321f5791e0ce825396bee6677e5e2281c7f1f9705a5f8fd1b1ad9b641"
+    },
+    {
+      "path": "derive-sources.mjs",
+      "bytes": 3848,
+      "sha256": "aa43c341142f99fe834c6434d2c49985b98037ec722c170533e1f90dcd44874c"
+    },
+    {
+      "path": "derive-sources.test.mjs",
+      "bytes": 1194,
+      "sha256": "f858655a6b0894d5dd68abc9d82e00cd764580933a1cc1a5edf601b606a2f019"
+    },
+    {
+      "path": "derived-lifecycle.mjs",
+      "bytes": 4291,
+      "sha256": "4705776b87cf49be55a8d6d77a7a2fdbc55b49c44d3e554a42627ab17628ecd3"
+    },
+    {
+      "path": "derived-transaction-store.mjs",
+      "bytes": 24951,
+      "sha256": "80794421a6b158d4f3259408a5bdcf01e9d4cd699ab199d72b23a4e9d6e48a97"
+    },
+    {
+      "path": "native-ci-job.yml",
+      "bytes": 2855,
+      "sha256": "d576084f62cbc9eabb8b33faf3c365bfe680a3a76ffdf9cc6a225ae885169804"
+    },
+    {
+      "path": "native-fixture.mjs",
+      "bytes": 7573,
+      "sha256": "f5fd0e96f4db525fbe41468ffe0ade676133cb53ae1c3113a4cd3eadc3eee136"
+    },
+    {
+      "path": "native-workflow.test.mjs",
+      "bytes": 11649,
+      "sha256": "a9cd12ce226cf53e3a72e94b0a6f6de1384c99b44d836f788248518a5277ec8a"
+    },
+    {
+      "path": "prepare-posix-replay.mjs",
+      "bytes": 3481,
+      "sha256": "9318ae8f5e637c0c5202279596956bd1e17a5caf5e6ab996b021927cc3ff16e6"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 6214,
+      "sha256": "a181771ac520dd2c75ff4210dc02015a8b25d2bb00e75c57a7182275f3a524bc"
+    },
+    {
+      "path": "preview.test.mjs",
+      "bytes": 5956,
+      "sha256": "86aabb3927274574659f7bb6e3415689a37e136613a9eedcdeb8ef13991ae309"
+    },
+    {
+      "path": "project-factory.mjs",
+      "bytes": 1909,
+      "sha256": "7bf3b64b377109db6b63bc270c6c367612566310efee8259e6469389f14ac070"
+    },
+    {
+      "path": "verify-inputs.mjs",
+      "bytes": 2602,
+      "sha256": "915a987ffff6f879bb7572af9c4777870942f84bb35f7ad9b43f3045d586db0a"
+    },
+    {
+      "path": "workflow-adapter.mjs",
+      "bytes": 11023,
+      "sha256": "4f7b610726daaad27012c56b4ab4ebe121a0f1fe145c2b847c059b4156014a75"
+    }
+  ]
+}

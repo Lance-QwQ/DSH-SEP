@@ -1,0 +1,304 @@
+import { estimateSerializedMessageTokens, estimateSerializedMessagesTokens } from "./estimate-tokens.js";
+import { resolveForkBoundedLiveSuffix, stripTrailingAssistantPrefill } from "./live-coverage.js";
+import { toStoredMessage } from "./message-content.js";
+import { estimateAgentMessageTokens, normalizeNonNegativeInteger, toRuntimeRoleForTokenEstimate } from "./token-accounting.js";
+import { buildToolPairIndexesByAssembledIndex, extractToolResultIdForPairing, } from "./tool-pairing.js";
+import { sanitizeToolUseResultPairing } from "./transcript-repair.js";
+/**
+ * Expand a retained suffix to a provider-valid turn without replaying the
+ * entire live transcript. Tool calls and results are one eviction unit; when
+ * the suffix begins inside such a unit, recover every matching partner and a
+ * preceding user message before repairing provider ordering.
+ */
+function buildProviderValidSuffix(params) {
+    if (params.messages.length === 0 || params.retainedStartIndex >= params.messages.length) {
+        return [];
+    }
+    const retainedIndexes = new Set();
+    const safeStartIndex = Math.max(0, params.retainedStartIndex);
+    for (let index = safeStartIndex; index < params.messages.length; index += 1) {
+        retainedIndexes.add(index);
+    }
+    const toolPairIndexes = buildToolPairIndexesByAssembledIndex(params.messages);
+    for (const index of [...retainedIndexes]) {
+        for (const relatedIndex of toolPairIndexes.get(index) ?? [index]) {
+            retainedIndexes.add(relatedIndex);
+        }
+    }
+    const hasUserMessage = [...retainedIndexes].some((index) => toRuntimeRoleForTokenEstimate(params.messages[index].role) === "user");
+    if (!hasUserMessage) {
+        const earliestRetainedIndex = Math.min(...retainedIndexes);
+        for (let index = earliestRetainedIndex - 1; index >= 0; index -= 1) {
+            if (toRuntimeRoleForTokenEstimate(params.messages[index].role) === "user") {
+                retainedIndexes.add(index);
+                break;
+            }
+        }
+    }
+    const retainedMessages = [...retainedIndexes]
+        .sort((left, right) => left - right)
+        .map((index) => {
+        const message = params.messages[index];
+        if (message.role !== "tool" && message.role !== "toolResult") {
+            return message;
+        }
+        // Pairing repair consumes the runtime toolResult role and top-level ID.
+        // Normalize a copy so the host-owned live transcript stays unchanged.
+        const toolCallId = extractToolResultIdForPairing(message);
+        return {
+            ...message,
+            role: "toolResult",
+            ...(toolCallId ? { toolCallId } : {}),
+        };
+    });
+    // Apply the caller's prefill policy before repair can synthesize results.
+    // Keep the legacy assistant-only fallback when stripping would empty it.
+    const stripped = stripTrailingAssistantPrefill(retainedMessages, params);
+    const repairMessages = stripped.length > 0 || params.preserveSubstantiveAssistantTail === true
+        ? stripped
+        : retainedMessages;
+    // Prompt-separate hosts repair the final adopted assistant turn, which may
+    // contain a pending call. Earlier calls still need local pairing repair
+    // when a subsequent assistant turn follows them.
+    const repairEndIndex = repairMessages[repairMessages.length - 1]?.role === "assistant"
+        ? repairMessages.length - 1
+        : repairMessages.length;
+    return [
+        ...sanitizeToolUseResultPairing(repairMessages.slice(0, repairEndIndex)),
+        ...repairMessages.slice(repairEndIndex),
+    ];
+}
+/**
+ * Suffix-trim live messages for prompt bounding, measured by serialized
+ * (model-boundary) token estimate.
+ *
+ * Unlike `trimBootstrapMessagesToBudget` (which selects what to *persist*
+ * during bootstrap and stays on stored-content counts), this bounds what is
+ * *sent to the model*, so it must count structured tool payloads that the
+ * stored-content estimate omits.
+ */
+export function trimMessagesToBudget(messages, tokenBudget, options = {}) {
+    const safeMaxTokens = Number.isFinite(tokenBudget) ? Math.max(0, Math.floor(tokenBudget)) : 0;
+    if (messages.length === 0) {
+        return [];
+    }
+    if (safeMaxTokens <= 0) {
+        return stripTrailingAssistantPrefill([messages[messages.length - 1]], options);
+    }
+    const kept = [];
+    let totalTokens = 0;
+    for (let index = messages.length - 1; index >= 0; index -= 1) {
+        const message = messages[index];
+        const tokenCount = estimateSerializedMessageTokens(message);
+        if (kept.length > 0 && totalTokens + tokenCount > safeMaxTokens) {
+            break;
+        }
+        kept.push(message);
+        totalTokens += tokenCount;
+    }
+    // A single oversized tail message exceeding the budget returns empty,
+    // matching the bootstrap trim contract callers already handle.
+    if (kept.length === 1 && totalTokens > safeMaxTokens) {
+        return [];
+    }
+    kept.reverse();
+    return stripTrailingAssistantPrefill(kept, options);
+}
+/**
+ * Safety ratio applied to the assembly token budget when clamping final
+ * output by serialized (model-boundary) estimate. Leaves headroom for the
+ * host's reserve tokens and renderer overhead beyond our approximation.
+ */
+export const SERIALIZED_OUTPUT_CLAMP_SAFETY_RATIO = 0.9;
+/**
+ * Final budget clamp on assembled output, measured by serialized
+ * (model-boundary) token estimate rather than stored-content counts.
+ *
+ * Assembly budgets enforced on stored token counts can diverge from the
+ * real prompt when live message objects carry structured payloads that
+ * stored content omits (e.g. transcripts imported from a previous harness).
+ * This clamp keeps the newest suffix that fits, expands retained tool calls
+ * and results to complete pairing units, and re-seats the most recent user
+ * turn if eviction removed every user message. A single atomic turn can still
+ * exceed the target; returning it intact is safer than emitting an invalid
+ * partial tool exchange.
+ */
+export function clampMessagesToSerializedBudget(params) {
+    // Trigger once the serialized estimate crosses the safety target, not only
+    // the hard budget. The host renderer adds prompt and message-boundary
+    // pressure that this plugin can only approximate, so near-budget assemblies
+    // must leave explicit headroom before OpenClaw performs its final precheck.
+    const triggerTokens = Math.max(1, Math.floor(params.tokenBudget));
+    const targetTokens = Math.max(1, Math.floor(params.tokenBudget * SERIALIZED_OUTPUT_CLAMP_SAFETY_RATIO));
+    const serializedTokensBefore = estimateSerializedMessagesTokens(params.messages);
+    if (serializedTokensBefore <= targetTokens || params.messages.length === 0) {
+        return {
+            messages: params.messages,
+            serializedTokens: serializedTokensBefore,
+            serializedTokensBefore,
+            clamped: false,
+            evictedMessages: 0,
+            overBudget: serializedTokensBefore > triggerTokens,
+        };
+    }
+    // Keep the newest suffix that fits the target (always at least one message),
+    // then recover any tool-pair partners displaced by the budget boundary.
+    const kept = [];
+    let keptTokens = 0;
+    for (let index = params.messages.length - 1; index >= 0; index -= 1) {
+        const message = params.messages[index];
+        const tokenCount = estimateSerializedMessageTokens(message);
+        if (kept.length > 0 && keptTokens + tokenCount > targetTokens) {
+            break;
+        }
+        kept.push(message);
+        keptTokens += tokenCount;
+    }
+    kept.reverse();
+    const providerValidKept = buildProviderValidSuffix({
+        messages: params.messages,
+        retainedStartIndex: params.messages.length - kept.length,
+        preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail,
+    });
+    keptTokens = estimateSerializedMessagesTokens(providerValidKept);
+    // Historically an assistant-only suffix was retained when stripping would
+    // empty the result. Prompt-separate hosts must still return an empty array
+    // for blank or reasoning-only tails: restoring those tails would reintroduce
+    // invalid assistant prefill content after the preservation policy rejected it.
+    const stripped = stripTrailingAssistantPrefill(providerValidKept, {
+        preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail,
+    });
+    const finalMessages = stripped.length > 0 || params.preserveSubstantiveAssistantTail === true
+        ? stripped
+        : providerValidKept;
+    const serializedTokens = finalMessages.length === providerValidKept.length
+        ? keptTokens
+        : estimateSerializedMessagesTokens(finalMessages);
+    return {
+        messages: finalMessages,
+        serializedTokens,
+        serializedTokensBefore,
+        clamped: true,
+        evictedMessages: Math.max(0, params.messages.length - finalMessages.length),
+        overBudget: serializedTokens > targetTokens,
+    };
+}
+export function isProtectedLeadingLiveContextMessage(message) {
+    const role = typeof message.role === "string" ? message.role.toLowerCase() : "";
+    return role === "system" || role === "developer";
+}
+export function buildDegradedLiveAssembleResult(params) {
+    const prefillOptions = {
+        preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail,
+    };
+    const withoutAssistantPrefill = stripTrailingAssistantPrefill(params.liveMessages, prefillOptions);
+    const protectedPrefix = [];
+    while (protectedPrefix.length < withoutAssistantPrefill.length &&
+        isProtectedLeadingLiveContextMessage(withoutAssistantPrefill[protectedPrefix.length])) {
+        protectedPrefix.push(withoutAssistantPrefill[protectedPrefix.length]);
+    }
+    const liveTail = withoutAssistantPrefill.slice(protectedPrefix.length);
+    const remainingBudget = Math.max(0, Math.floor(params.tokenBudget) - estimateAgentMessageTokens(protectedPrefix));
+    let liveTailMessages = trimMessagesToBudget(liveTail, remainingBudget, prefillOptions);
+    if (liveTailMessages.length === 0 && liveTail.length > 0) {
+        liveTailMessages = [liveTail[liveTail.length - 1]];
+    }
+    liveTailMessages = buildProviderValidSuffix({
+        messages: liveTail,
+        retainedStartIndex: liveTail.length - liveTailMessages.length,
+        preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail,
+    });
+    const messages = [...protectedPrefix, ...liveTailMessages];
+    return {
+        messages,
+        estimatedTokens: estimateAgentMessageTokens(messages),
+        promptAuthority: "preassembly_may_overflow",
+        contextProjection: params.contextProjection,
+    };
+}
+/**
+ * Resolve deferred compaction pressure from the canonical stored projection.
+ *
+ * Debt-time current and projected counts remain diagnostic because compaction
+ * can make them stale. Only the current `context_items` total decides whether
+ * another assemble-time drain could reduce the model context.
+ */
+export function resolveDeferredAssemblyPressure(params) {
+    const recordedProjectedTokens = normalizeNonNegativeInteger(params.maintenance?.projectedTokenCount);
+    return {
+        storedContextTokens: params.storedContextTokens,
+        projectedTokenCount: recordedProjectedTokens ?? null,
+        pressureTokenCount: params.storedContextTokens,
+    };
+}
+export function buildForkBoundedLiveFallback(params) {
+    const suffix = resolveForkBoundedLiveSuffix({
+        assembledMessages: [],
+        liveMessages: params.liveMessages,
+        forkSourceMessageCount: params.forkSourceMessageCount,
+    });
+    const candidateMessages = suffix.length > 0 ? suffix : params.liveMessages;
+    const boundedMessages = trimMessagesToBudget(candidateMessages, Math.min(params.tokenBudget, params.bootstrapMaxTokens), { preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail });
+    return {
+        messages: boundedMessages,
+        estimatedTokens: estimateAgentMessageTokens(boundedMessages),
+    };
+}
+/** Return the log level for fork-bounded live suffix append pressure. */
+export function forkBoundedLiveSuffixAppendLogLevel(append) {
+    return append.overBudget || append.evictedMessages > 0 ? "warn" : "debug";
+}
+export function appendForkBoundedLiveSuffixWithinBudget(params) {
+    const suffix = stripTrailingAssistantPrefill(resolveForkBoundedLiveSuffix({
+        assembledMessages: params.assembledMessages,
+        liveMessages: params.liveMessages,
+        forkSourceMessageCount: params.forkSourceMessageCount,
+    }), { preserveSubstantiveAssistantTail: params.preserveSubstantiveAssistantTail });
+    if (suffix.length === 0) {
+        return {
+            messages: params.assembledMessages,
+            estimatedTokens: params.assembledEstimatedTokens,
+            appendedMessages: 0,
+            appendedTokens: 0,
+            evictedMessages: 0,
+            evictedTokens: 0,
+            overBudget: params.assembledEstimatedTokens > params.tokenBudget,
+            protectedIndexes: new Set(),
+        };
+    }
+    let retained = params.assembledMessages.slice();
+    let retainedSuffix = suffix.slice();
+    let evictedMessages = 0;
+    let evictedTokens = 0;
+    let output = [...retained, ...retainedSuffix];
+    let estimatedTokens = estimateAgentMessageTokens(output);
+    while (retained.length > 0 && estimatedTokens > params.tokenBudget) {
+        const removed = retained.shift();
+        evictedMessages += 1;
+        evictedTokens += toStoredMessage(removed).tokenCount;
+        output = [...retained, ...retainedSuffix];
+        estimatedTokens = estimateAgentMessageTokens(output);
+    }
+    while (retainedSuffix.length > 0 && estimatedTokens > params.tokenBudget) {
+        const removed = retainedSuffix.shift();
+        evictedMessages += 1;
+        evictedTokens += toStoredMessage(removed).tokenCount;
+        output = [...retained, ...retainedSuffix];
+        estimatedTokens = estimateAgentMessageTokens(output);
+    }
+    const protectedIndexes = new Set();
+    const suffixStartIndex = output.length - retainedSuffix.length;
+    for (let index = suffixStartIndex; index < output.length; index += 1) {
+        protectedIndexes.add(index);
+    }
+    return {
+        messages: output,
+        estimatedTokens,
+        appendedMessages: retainedSuffix.length,
+        appendedTokens: estimateAgentMessageTokens(retainedSuffix),
+        evictedMessages,
+        evictedTokens,
+        overBudget: estimatedTokens > params.tokenBudget,
+        protectedIndexes,
+    };
+}

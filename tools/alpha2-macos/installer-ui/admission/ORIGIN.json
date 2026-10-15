@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "kind": "manually-adapted-native-source",
+  "status": "not_run",
+  "source": "../../bootstrap/production-config.inc.m",
+  "sourceSha256": "b6500204cc88821be5668efa55da305ef4cfa398d6719b47ef65a60c56420990",
+  "manifestSource": "../manifest.mjs",
+  "manifestSourceSha256": "24a6ce86f6b1fe060e26345208d6779cb4d2261793cbf8d85af0b0d767572775",
+  "scope": "Native held-fd read/hash/location and runtime inventory primitives adapted from the pinned original; this is a descriptive origin record, not an exact replacement script",
+  "functionMapping": {"pExact": "exact", "pHash": "hexHash", "sepBootstrapRelativePath": "relativePath", "pRuntimePath": "runtimePath", "pSafe": "safe", "pSame": "same", "pLocation": "location", "pOpen": "openRelative", "pRead": "readBound", "pInventory": "inventory", "pVerifyBundle": "verifyBundle"},
+  "changes": ["Installer manifest exact schema and fixed roles", "Installer executable NSBundle identity", "Receipt and payload manifest hashes; full payload inventory remains in trusted Node", "Test-only fixed read-boundary rendezvous excluded from production", "O_NONBLOCK at open avoids blocking on a swapped FIFO before type rejection", "Bounded native reads and descriptor cleanup without spawning", "Immutable success configuration uses role records with absolute path and expected sha256"],
+  "redEvidence": {"run": 38600667418, "job": 115978782285, "definitions": 29, "failed": 29, "skipped": 0, "cancelled": 0, "auditSha256": "8212d7990efb3b1fba9a4a7dde69556ba2aa0c95249b2bb95e894743d88573f7"}
+}

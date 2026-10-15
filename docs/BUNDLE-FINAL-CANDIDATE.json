@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "stage": 8,
+  "status": "pass",
+  "scope": "candidate packaging, docs/evidence review and recovery checkpoint only; adaptation/release remains blocked",
+  "candidate": "0.2.1-beta.3-bundle.23",
+  "host": "0.2.1-alpha.1",
+  "artifact": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase8-final-checkpoint-r1\\windows-final-r1\\dsh-sep-bundle-0.2.1-beta.3-bundle.23.tgz",
+  "artifactSha256": "9b3fddc6101110bf87d072b301b8a4f19b16e34ae03050a2f4c85e50bf64b2a8",
+  "archiveFiles": 467,
+  "sourceAndInstalledBytesMatch": true,
+  "changedFromStage5": [
+    "README.md"
+  ],
+  "unchangedFromStage5": 466,
+  "codeEquivalentEvidence": "stage5 runtime283/lifecycle23/builder13/deps11/runtimeGate3/GUI2 retained with their exact original artifacts; final archive not mislabelled as those reruns",
+  "finalInstallationSmoke": {
+    "status": "pass",
+    "definitions": 19,
+    "resultSha256": "2c2f7c425e4fbbdfd4d96b12c8a3806595e6ceb8f2de5b88ef5be78ecbf2ac7a",
+    "logSha256": "ecb2239a07b01bbea42762de99b21420cbda4df522108c6c17498b3c624f9961",
+    "installLogSha256": "d304d4bf74be49113c01ae8e9e4afae9e9d8b27fe16d974155af6fc6c9e7eb17"
+  },
+  "installationNetwork": "cached packages and frozen lock; pnpm attempted supply-chain metadata fetches with ECONNRESET retries then passed; not an entirely offline proof",
+  "defaultAdmission": "pending",
+  "completeProfileStatus": "blocked",
+  "platformCertification": "blocked",
+  "remoteCI": "not_run",
+  "stageEvidence": [
+    {
+      "stage": 1,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-runtime-initialization-r1\\RESULT.json",
+      "sha256": "b9420dba6faedfe1613f0d1d4e695a311536e1433bfd7f50685d25ef24882dbd"
+    },
+    {
+      "stage": 2,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-application-shutdown-r1\\RESULT.json",
+      "sha256": "5dbaaf198cdbd34e3f4df00c7c5274da2958f595670327ba977f6edfe9b8bb89"
+    },
+    {
+      "stage": 3,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\RESULT-r2.json",
+      "sha256": "e246b6583f124e15017e5f8c8e126436a7fc5f250516023190c6ee4866c4197a"
+    },
+    {
+      "stage": 4,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-full-native-ui-r1\\RESULT.json",
+      "sha256": "464a2b1883d0bcc0ab734051e2f54dc7d134ce869c17d2cb513e165a95860353"
+    },
+    {
+      "stage": 5,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase5-gui-install-r1\\RESULT.json",
+      "sha256": "0d0e712e6e066ca93d53f6f2f5f43184834dec385094df8d81caf524c98aeb48"
+    },
+    {
+      "stage": 6,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase6-platform-ci-r1\\RESULT.json",
+      "sha256": "3374bda0206d76eea7b57b9f6133fe1d02b942c0a39336447f548d80a9c747b1"
+    },
+    {
+      "stage": 7,
+      "file": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase7-close-disposition-r1\\RESULT.json",
+      "sha256": "c72dcbb20c26af9909f00d19a6380ef3ac5b9fbd1a74588e89fae8c6044510f8"
+    }
+  ],
+  "resourceAudit": {
+    "cleanupAttribution": "success fixtures normal disposal; historical failures may use controlled gate release or forced own-browser cleanup separately documented",
+    "forcedStopPerformedByThisAudit": false,
+    "ownedProcessMatches": [],
+    "scope": "selected successful stage5 and final stage8 fixture P2 markers; named test-process command lines only, not all system handles",
+    "schema": 1,
+    "p2OwnerMarkers": []
+  },
+  "resourceAuditSha256": "d931599dd3d599513c426d281c34a9b928e303aed5d530b1b58b150d568e2ea5",
+  "privacy": "package path inventory excludes .env/.git/session artifacts/database files; no user runtime files included; not a general secret scanner certification",
+  "paidRequests": 0,
+  "dailyDeployment": false,
+  "githubPush": false,
+  "release": false,
+  "stopAfterStep8": true,
+  "checkpointContract": "standalone root-commit snapshot with exact source tree; original shallow repository and failed historical bundle preserved; success requires fresh clone and blob verification",
+  "restorePrerequisites": {
+    "core.autocrlf": false,
+    "core.longpaths": true,
+    "reason": "source local autocrlf=false; global defaults must not rewrite restored blobs"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "scope": "Byte-preserving inclusion of existing historical evidence; no new native execution",
+  "reviewedCommit": "fab50b9280a2f083ad478050d325a671918084ca",
+  "repairBaseCommit": "f0a5f393648b1526f05abe78cfe02349bfbb3631",
+  "members": [
+    {
+      "path": "desktop/evidence/r22/EVIDENCE-R22.md",
+      "source": "desktop/r22-sealed/EVIDENCE-R22.md",
+      "bytes": 6084,
+      "sha256": "51f1a3d7e10fce5280ee7bafd4b9c976ce7420931c8aa2b0523b8079571d1f13"
+    },
+    {
+      "path": "desktop/evidence/r22/PENDING-NOT-NATIVE-RUN-smoke-full.mjs",
+      "source": "desktop/r22-sealed/PENDING-NOT-NATIVE-RUN-smoke-full.mjs",
+      "bytes": 8642,
+      "sha256": "449c0fa85db1f0a4bfdb14820dcfa722e4b6156fcc9acc7009296241ef8ef5a9"
+    },
+    {
+      "path": "desktop/evidence/r22/r22-full-diagnostic.zip",
+      "source": "desktop/r22-sealed/r22-full-diagnostic.zip",
+      "bytes": 4556,
+      "sha256": "0f18c1b00f55c11afb1ba2a4f406e5f9874ba6716ec2f08859cde08b2ad1d084"
+    },
+    {
+      "path": "desktop/evidence/r22/r22-negative-diagnostic.zip",
+      "source": "desktop/r22-sealed/r22-negative-diagnostic.zip",
+      "bytes": 15132,
+      "sha256": "db719bdeb23d8386210124c74aa6be12ab83dbf1f93a8a45d9f706d824a6dea4"
+    },
+    {
+      "path": "desktop/evidence/r22/RESULT.json",
+      "source": "desktop/r22-sealed/RESULT.json",
+      "bytes": 2445,
+      "sha256": "87a6d3acd1b5ef5dba5b2961b2da4bb29d36a5d039e22b8cdbd41404044c2002"
+    },
+    {
+      "path": "desktop/evidence/r22/SEAL.json",
+      "source": "desktop/r22-sealed/SEAL.json",
+      "bytes": 854,
+      "sha256": "242f74640bc31f6271af7ed63e417737dda2aff304765cfa1b8dbb016a2d2f59"
+    },
+    {
+      "path": "desktop/evidence/r23/ASSEMBLY.json",
+      "source": "desktop/r23-sealed/ASSEMBLY.json",
+      "bytes": 5328,
+      "sha256": "2460def9ff48bf0b626579782f84dae8b4cf8967c25d4f587112b4a0b18386cf"
+    },
+    {
+      "path": "desktop/evidence/r23/BROKER-REGRESSION.tap",
+      "source": "desktop/r23-sealed/BROKER-REGRESSION.tap",
+      "bytes": 6010,
+      "sha256": "3034b1d7935643b725aaa59e7ea677c8828701fa0a019653408305bdad55c3cd"
+    },
+    {
+      "path": "desktop/evidence/r23/DESKTOP-THREE-CYCLES.json",
+      "source": "desktop/r23-sealed/DESKTOP-THREE-CYCLES.json",
+      "bytes": 1708,
+      "sha256": "bb9114927e87a8a9ad527c9f3e58f78b537c2c6c26f78582fb9b71a436da5f3c"
+    },
+    {
+      "path": "desktop/evidence/r23/EVIDENCE-R23.md",
+      "source": "desktop/r23-sealed/EVIDENCE-R23.md",
+      "bytes": 4427,
+      "sha256": "884a7fb1caa92d41f64eb560ae5a2f32755211208eac74e5ac2b971b5cf4e1b9"
+    },
+    {
+      "path": "desktop/evidence/r23/MISSING-CONNECTION.json",
+      "source": "desktop/r23-sealed/MISSING-CONNECTION.json",
+      "bytes": 580,
+      "sha256": "ac79c33da546259afd2671d86d854afef550d060e3597b4a4a5a9acf1d6f24fd"
+    },
+    {
+      "path": "desktop/evidence/r23/OVERLAY-REGRESSION.tap",
+      "source": "desktop/r23-sealed/OVERLAY-REGRESSION.tap",
+      "bytes": 6893,
+      "sha256": "a584dba1a4ade93b3beddd634ee25a40f34ed31edd66237d95d127d088aa11c8"
+    },
+    {
+      "path": "desktop/evidence/r23/r23-full-diagnostic.zip",
+      "source": "desktop/r23-sealed/r23-full-diagnostic.zip",
+      "bytes": 5445,
+      "sha256": "b4950ca79a5b8fa6c5c1301e5beddf90f00d7ee5c29346a42f980d32bcb99ba2"
+    },
+    {
+      "path": "desktop/evidence/r23/r23-negative-diagnostic.zip",
+      "source": "desktop/r23-sealed/r23-negative-diagnostic.zip",
+      "bytes": 15118,
+      "sha256": "0c46bc9c09dba5c9a2372717d91511aeb7e6c66b24bb1a4efc14157812ab651a"
+    },
+    {
+      "path": "desktop/evidence/r23/REFUSAL-RECEIPT.json",
+      "source": "desktop/r23-sealed/REFUSAL-RECEIPT.json",
+      "bytes": 209,
+      "sha256": "288d7c513f828190620107b97fb7b59bc7bd7e2c6cb894aa3098af0b0dedc379"
+    },
+    {
+      "path": "desktop/evidence/r23/RESULT.json",
+      "source": "desktop/r23-sealed/RESULT.json",
+      "bytes": 2197,
+      "sha256": "8dac6e0f2d2d604c257bfd9d1852320e90fcf0e75b356cdb37b4c2d63ecc991f"
+    },
+    {
+      "path": "desktop/evidence/r23/ROUND-1.json",
+      "source": "desktop/r23-sealed/ROUND-1.json",
+      "bytes": 326,
+      "sha256": "751bdd9cc851f6c082a9642a1206b2e6c64d31d7af2d9dc0bc772bb43a6588eb"
+    },
+    {
+      "path": "desktop/evidence/r23/ROUND-2.json",
+      "source": "desktop/r23-sealed/ROUND-2.json",
+      "bytes": 326,
+      "sha256": "de49370c485603598e35ef282b5cfefb59c83641483ccca4347228e5da2e329e"
+    },
+    {
+      "path": "desktop/evidence/r23/ROUND-3.json",
+      "source": "desktop/r23-sealed/ROUND-3.json",
+      "bytes": 326,
+      "sha256": "986626298497c4d6e23b67eece2d6092367912720f9d673cd7d8c14dbddd3180"
+    },
+    {
+      "path": "desktop/evidence/r23/SEAL.json",
+      "source": "desktop/r23-sealed/SEAL.json",
+      "bytes": 2253,
+      "sha256": "8c78a25dc464d06a5256fe74447f575827e01b4ee59a8b446026f0bae1c57755"
+    },
+    {
+      "path": "desktop/evidence/r23/TESTED-smoke-full.mjs",
+      "source": "desktop/r23-sealed/TESTED-smoke-full.mjs",
+      "bytes": 8642,
+      "sha256": "449c0fa85db1f0a4bfdb14820dcfa722e4b6156fcc9acc7009296241ef8ef5a9"
+    },
+    {
+      "path": "desktop/evidence/r23-post-smoke/ADDENDUM.json",
+      "source": "desktop/r23-post-smoke-addendum/ADDENDUM.json",
+      "bytes": 608,
+      "sha256": "e538ec096fb4d84045d48294ee44926a0af9916cfb7d94ef5f06443d04e5832b"
+    },
+    {
+      "path": "desktop/evidence/r23-post-smoke/POST-SMOKE.json",
+      "source": "desktop/r23-post-smoke-addendum/POST-SMOKE.json",
+      "bytes": 155,
+      "sha256": "2b39f13366ec05c4e9816539c100ddcf3a2fea2610ee852816fd8ad700560d2c"
+    }
+  ],
+  "deliveryUnchanged": {
+    "DSH-SEP-macOS-Alpha2-installer-preview.zip": "6043ddd8305009e9013de46f85f7660cdc775d4320987553808eb9f8ec01db4f",
+    "MANIFEST.json": "48d4a25760bb6fff09fb08ecc0cfbafaf3109b31b5ed7e259d87b959d413c975",
+    "README.md": "bd56840d1e1b5b3cc76ee00974f9722f5f6d8d0578a7bb4b41fc21c54ed8226d",
+    "SHA256SUMS": "1a6539aae3070f0c805eb2b3056576790a7dce8b1721cd965648e7e0ee6e8799"
+  },
+  "fullMacCertification": "blocked"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "sourceCommit": "ac69bda3ca63a3bed44780b7804cf090156514de",
+  "bodyReadForExcludedDuringExport": false,
+  "files": [
+    {
+      "path": "tools/alpha2-macos/desktop/evidence/r22/r22-full-diagnostic.zip",
+      "originalSha256": "0f18c1b00f55c11afb1ba2a4f406e5f9874ba6716ec2f08859cde08b2ad1d084",
+      "bytes": 4556,
+      "reason": "Historical raw r22/r23 diagnostic ZIP omitted from executable-source snapshot. Historical checksums and reports do not claim these omitted files are present in this export."
+    },
+    {
+      "path": "tools/alpha2-macos/desktop/evidence/r22/r22-negative-diagnostic.zip",
+      "originalSha256": "db719bdeb23d8386210124c74aa6be12ab83dbf1f93a8a45d9f706d824a6dea4",
+      "bytes": 15132,
+      "reason": "Historical raw r22/r23 diagnostic ZIP omitted from executable-source snapshot. Historical checksums and reports do not claim these omitted files are present in this export."
+    },
+    {
+      "path": "tools/alpha2-macos/desktop/evidence/r23/r23-full-diagnostic.zip",
+      "originalSha256": "b4950ca79a5b8fa6c5c1301e5beddf90f00d7ee5c29346a42f980d32bcb99ba2",
+      "bytes": 5445,
+      "reason": "Historical raw r22/r23 diagnostic ZIP omitted from executable-source snapshot. Historical checksums and reports do not claim these omitted files are present in this export."
+    },
+    {
+      "path": "tools/alpha2-macos/desktop/evidence/r23/r23-negative-diagnostic.zip",
+      "originalSha256": "0c46bc9c09dba5c9a2372717d91511aeb7e6c66b24bb1a4efc14157812ab651a",
+      "bytes": 15118,
+      "reason": "Historical raw r22/r23 diagnostic ZIP omitted from executable-source snapshot. Historical checksums and reports do not claim these omitted files are present in this export."
+    }
+  ],
+  "untrackedReadOrExported": false,
+  "gitHistoryExported": false
+}

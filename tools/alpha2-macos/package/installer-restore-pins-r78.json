@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "ready",
+  "scope": "Fixed r78 signed installer archive restore; new r79 install/startup outcomes remain not_run",
+  "commit": "e2cdf833051e9ff0b451d0885549f38690220acd",
+  "runId": 38648087267,
+  "artifact": "DSH-SEP-macOS-Alpha2-installer-preview.zip",
+  "assemblyPath": "_temp/installer-application/RESULT.json",
+  "inventoryPath": "_temp/installer-application/PACKAGE-INVENTORY.json",
+  "transportPath": "_temp/installer-transport/transport-manifest.json",
+  "assemblySha256": "778975555791cc4d6b70ba3f698cab1d7ef038ddb9288d08e29c33f9a9de1043",
+  "archiveSha256": "6043ddd8305009e9013de46f85f7660cdc775d4320987553808eb9f8ec01db4f",
+  "archiveBytes": 692801617,
+  "inventorySha256": "df8bd9acc904cd733afcb724c219344347707f68c60658941075f7a33298f7aa",
+  "treeSha256": "70a477c032ac1f9bb215883f3e958924b7d8e1785b3b2ba9b5b6b2d05f3424c7",
+  "manifestSha256": "93f6ca255692457a084ae91588f8d72b9cebacb232f327139a2d787acb481dd4",
+  "artifacts": [
+    {
+      "label": "evidence",
+      "id": 11933362884,
+      "bytes": 1243882,
+      "sha256": "2c0ab99f6b756976848004546d8bdaf0466d4663ee819282e9c543f24566285d"
+    },
+    {
+      "label": "part-one",
+      "id": 11933432746,
+      "bytes": 402653402,
+      "sha256": "3ac809d4786c0a1df438a2e99e32a3a3fd1ab2a07c286c8e62f7f37f925ba0e0"
+    },
+    {
+      "label": "part-two",
+      "id": 11933651586,
+      "bytes": 290148651,
+      "sha256": "df6bc9fe36abe39d1bf4c21dda6a1236129149c201f2d0c4ce386540a7987b35"
+    }
+  ]
+}

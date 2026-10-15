@@ -1,0 +1,902 @@
+{
+  "schema": 1,
+  "repository": "Lance-QwQ/DSH-SEP",
+  "payload": {
+    "status": "ready",
+    "sourceCommit": "f108e0374dce4a2d5db44a46e37cb6491447a1bd",
+    "runId": 38710389496,
+    "artifacts": [
+      {
+        "id": 11961086539,
+        "name": "native-current-application-evidence",
+        "bytes": 2644906,
+        "sha256": "8eb8c81f4d219f0ee4dd1690cb0fa520846b50ee1b47f0c27fbf55259abf82f1",
+        "members": [
+          {
+            "path": "asar-tool/RESULT.json",
+            "bytes": 3103,
+            "sha256": "88b72a25982c50ed8885487776f84b9a6a2b794c608a3eaf50bfa65f0671fe19"
+          },
+          {
+            "path": "native-system.txt",
+            "bytes": 277,
+            "sha256": "78c1f9c75c1ef2b60cac1d2663d671983e57c296170c52fca3a9efff743ab6f3"
+          },
+          {
+            "path": "asar-tool/asar-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/asar-list.log",
+            "bytes": 690,
+            "sha256": "b0917b5862b1d5637d7209d5b80e16a375a600f7dc8e5ac439186b0b38f8fd4e"
+          },
+          {
+            "path": "asar-tool/balanced-match-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/balanced-match-list.log",
+            "bytes": 103,
+            "sha256": "292b283903aad51d397478cf50267fb9de3e575e0d19b778b962334faec7ce41"
+          },
+          {
+            "path": "asar-tool/brace-expansion-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/brace-expansion-list.log",
+            "bytes": 72,
+            "sha256": "7aaae0ae1568e374a2d3b6ac8d358da50df72d73e85c1a124b3f650b57b327d1"
+          },
+          {
+            "path": "asar-tool/commander-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/commander-list.log",
+            "bytes": 120,
+            "sha256": "c06fa98b91fa4cbf13c6bbc013f2f574236f9b3b5e9839db537bdaedececa563"
+          },
+          {
+            "path": "asar-tool/concat-map-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/concat-map-list.log",
+            "bytes": 141,
+            "sha256": "80e0d17ef3ca3f4812f2d5246325cdcd424026d8e585ae3e40e5419ae81994b4"
+          },
+          {
+            "path": "asar-tool/fs.realpath-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/fs.realpath-list.log",
+            "bytes": 87,
+            "sha256": "b1bd490b7a1f77c2a04e0481819ebd701630d798cd353d7638030387bccb218d"
+          },
+          {
+            "path": "asar-tool/glob-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/glob-list.log",
+            "bytes": 105,
+            "sha256": "ef53e8e41039c7d542e08034b2f62a05982f419ba2d101e3fce2a4c0842886d2"
+          },
+          {
+            "path": "asar-tool/inflight-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/inflight-list.log",
+            "bytes": 75,
+            "sha256": "e1a3946d94a23d518d23af86ac619ff33ab9e0ceb387f424ab2b5ff002095f90"
+          },
+          {
+            "path": "asar-tool/inherits-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/inherits-list.log",
+            "bytes": 103,
+            "sha256": "da861327e252834055f278a4aea88da26619fcdf3cebe01899f9e810a968171e"
+          },
+          {
+            "path": "asar-tool/minimatch-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/minimatch-list.log",
+            "bytes": 76,
+            "sha256": "8382b75f72fdc607c544081f3a753373f6d48a103afb73ad9e4055f4a0efbcfd"
+          },
+          {
+            "path": "asar-tool/once-list.log",
+            "bytes": 71,
+            "sha256": "1d4c140f1483dfb861487c87211de32dc447191ddf756a398cac95281b9616da"
+          },
+          {
+            "path": "asar-tool/once-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/path-is-absolute-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/path-is-absolute-list.log",
+            "bytes": 72,
+            "sha256": "64a18ae964f5c2df125b349a1e62832110ab2c2db0c7dd973c5ac2202c623caf"
+          },
+          {
+            "path": "asar-tool/wrappy-extract.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "asar-tool/wrappy-list.log",
+            "bytes": 73,
+            "sha256": "15a80472e3dcb46bd1659a79cf3fe93fd8f6c15002806d43db39b2096a2bc3cb"
+          },
+          {
+            "path": "fixed-r44/PACKAGE-INVENTORY.json",
+            "bytes": 8851296,
+            "sha256": "5c6b9b4baba36de89cebb9e15ff7e2d7ffce7c46f385ecfa15d4ce231f4de5fb"
+          },
+          {
+            "path": "fixed-r44/RESULT.json",
+            "bytes": 2962,
+            "sha256": "024395f52a4501d59344af40275672798c7499bf7011e204110d3e97d74f9b2e"
+          },
+          {
+            "path": "fixed-r44/extract-evidence.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "fixed-r44/restore-fixed-application.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "fixed-r44/extract-part-one.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "fixed-r44/extract-part-two.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "fixed-r44/verify-fixed-signature.log",
+            "bytes": 3303,
+            "sha256": "046718435969a400ac3a203acedd84bdb72decaa3ce0b5b86d99126f2f9cb2ff"
+          },
+          {
+            "path": "native-environment/ENV.json",
+            "bytes": 651,
+            "sha256": "f8e876144e926cb20d5da936da639242e4f17385d497820b4a44a082feaecf15"
+          },
+          {
+            "path": "native-environment/RESULT.json",
+            "bytes": 264,
+            "sha256": "aca7208b3c651759dc08047c2c25326ab5d7c5d07fdb09d8df523690502e80f5"
+          },
+          {
+            "path": "native-environment/parser-fixture.json",
+            "bytes": 217,
+            "sha256": "025b624f2af22e2bd7c10db49cdc990db937e1a945a220730ec3f17896dd0aca"
+          },
+          {
+            "path": "native-regression/INPUTS-AFTER.json",
+            "bytes": 23174,
+            "sha256": "ff25f513d9306d3bf77f066c1798e9c0d86dc740f4ea518342f98a728ea2ffc8"
+          },
+          {
+            "path": "native-regression/RESULT.json",
+            "bytes": 37356,
+            "sha256": "d3c6ec912e6f63af1148c5cb8567670b411139d2abf8617bbaddb5203bae89e2"
+          },
+          {
+            "path": "native-regression/INPUTS-VERIFIED.json",
+            "bytes": 23174,
+            "sha256": "ff25f513d9306d3bf77f066c1798e9c0d86dc740f4ea518342f98a728ea2ffc8"
+          },
+          {
+            "path": "native-regression/attachment-io.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/business-derived-import.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/attachment-io.stdout.log",
+            "bytes": 2887,
+            "sha256": "f95d4e2fb62537c7d80939109c6632269ad9707c63cef6bc00f5f23575ce9e5f"
+          },
+          {
+            "path": "native-regression/business-derived-import.stdout.log",
+            "bytes": 324,
+            "sha256": "04c12e187ef9dc5828cfbea3a640d35e7aa5dc6c1a6a21f0dbd4fc4671d37a34"
+          },
+          {
+            "path": "native-regression/business-portable.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/compile-attachments.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/business-portable.stdout.log",
+            "bytes": 5574,
+            "sha256": "58c7985c5c2b54f8c32c71ec37c4e97fda65ba66dc250b1455528457529d8ff1"
+          },
+          {
+            "path": "native-regression/compile-attachments.stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/compile-tree.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/compile-tree.stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/disk-info-json.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/disk-info-json.stdout.log",
+            "bytes": 1786,
+            "sha256": "0f966fd51c2e41f13d4dda635d8f4c95aabfabd4b19643a94d77863427dfc8d3"
+          },
+          {
+            "path": "native-regression/disk-info.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/disk-info.stdout.log",
+            "bytes": 3318,
+            "sha256": "811830fc864c402d9e18bf9d7ecdf56c2ad9549f4eb88e155f6a64e76d3d2a91"
+          },
+          {
+            "path": "native-regression/files-lifecycle.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/files-lifecycle.stdout.log",
+            "bytes": 7163,
+            "sha256": "c93d309772e4e401644995d9c82874e88d0bf014d8be1093e82d832105d9dcb1"
+          },
+          {
+            "path": "native-regression/origin-control.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/origin-control.stdout.log",
+            "bytes": 4250,
+            "sha256": "96460651f805e26b2738de596fd96578d6c45a42c2e8b6dbe611293c4ea32832"
+          },
+          {
+            "path": "native-regression/pending-manifest.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/pending-manifest.stdout.log",
+            "bytes": 383,
+            "sha256": "3a3342c83bf9921ee0494625872c7d2028c57f7db228c3224231cf73e628afeb"
+          },
+          {
+            "path": "native-regression/system-version.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/system-version.stdout.log",
+            "bytes": 7,
+            "sha256": "3e7f3aac6ec05838460f29272ec4647dbdf438a5b83be784975079531ab79eb1"
+          },
+          {
+            "path": "native-regression/transactions.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/transactions.stdout.log",
+            "bytes": 6532,
+            "sha256": "1e96e1714f7169e2cd30fb48b1155fb8bb2c952803ccc960ae114fab5beee320"
+          },
+          {
+            "path": "native-regression/volume-df.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-regression/volume-df.stdout.log",
+            "bytes": 140,
+            "sha256": "cd64a021c6b7d3de1603b40a37187b6cfe5218903270c9f3691fed4510862c74"
+          },
+          {
+            "path": "native-regression/workflow/CLEANUP.jsonl",
+            "bytes": 1976,
+            "sha256": "0583285b050ea644389e0b4974a434a08a52032b4b5721d0888867a0e22b891f"
+          },
+          {
+            "path": "native-regression/workflow-native.stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "native-business/ENV.json",
+            "bytes": 648,
+            "sha256": "58dff5a2d8615703db041f2dcc81194061e975f5d40b60cb7737ff64da38e078"
+          },
+          {
+            "path": "native-regression/workflow-native.stdout.log",
+            "bytes": 3997,
+            "sha256": "5188761f61191cb33987142ab01dfdcdb031eff425ddaaf0cb200022ad3a2ae7"
+          },
+          {
+            "path": "native-business/RESULT.json",
+            "bytes": 3923,
+            "sha256": "da5dac014b669050d66e9fb1f538a0e9ae9ab940bcd129217d678bdf2dcb828f"
+          },
+          {
+            "path": "native-business/RUNTIME-INPUTS.json",
+            "bytes": 16562,
+            "sha256": "65e96472a8035f988ef043091693424a73ad754af254c1b57802efedc7c557d4"
+          },
+          {
+            "path": "native-business/SOURCE-INVENTORY.json",
+            "bytes": 326865,
+            "sha256": "0abc5b55bc7b10a664cf2b62b0e0da77a4aff17668c1349e637c2df01b99add7"
+          },
+          {
+            "path": "native-business/document-contracts/native.tap",
+            "bytes": 4995,
+            "sha256": "6e8a0c577eae2f770190d0d0b7495168215f9d33fb1182d2c993a9d912b43d48"
+          },
+          {
+            "path": "native-business/document-native-context/native.tap",
+            "bytes": 939,
+            "sha256": "44efee1b7e10247530fb1f7627e09c7547e2d3244bba03659d7134f59219ed07"
+          },
+          {
+            "path": "native-business/document-standalone/native.tap",
+            "bytes": 434,
+            "sha256": "a5bd389d7ea42caf2355e2813233c136e50eccfb0ca7223578a5d0c638eae7da"
+          },
+          {
+            "path": "native-business/document-vision-loader/native.tap",
+            "bytes": 1879,
+            "sha256": "47742702e34749c416678dec132d9ecd5a96b8f8986b2d9127c36cd25f884a97"
+          },
+          {
+            "path": "native-business/parser-fixture.json",
+            "bytes": 217,
+            "sha256": "025b624f2af22e2bd7c10db49cdc990db937e1a945a220730ec3f17896dd0aca"
+          },
+          {
+            "path": "native-business/pending-loader-restart/native.tap",
+            "bytes": 2198,
+            "sha256": "d8955cba7abbd8833923c4a1a9feaa9adacebee20b7d2681a9328170fd608c96"
+          },
+          {
+            "path": "native-business/pending-loader-restart/receipts/FINGERPRINT.json",
+            "bytes": 203,
+            "sha256": "3b7d5330a4e9004809c73734c91323ab1d2623600eb55da25162677a9435fe8c"
+          },
+          {
+            "path": "native-business/pending-loader-restart/receipts/LOADER-REPRO.json",
+            "bytes": 4400,
+            "sha256": "259c93e919db9b8247b43d229e06db69d51f34b2d4e92706b5e71ad454b9a69b"
+          },
+          {
+            "path": "native-built/ENV.json",
+            "bytes": 653,
+            "sha256": "fff7d3bf2bd6c8b4fa9a2939a4734213366cac5a414fe9f5f1a87a38340cb19e"
+          },
+          {
+            "path": "native-built/RESULT.json",
+            "bytes": 3923,
+            "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+          },
+          {
+            "path": "native-built/RUNTIME-INPUTS.json",
+            "bytes": 16562,
+            "sha256": "65e96472a8035f988ef043091693424a73ad754af254c1b57802efedc7c557d4"
+          },
+          {
+            "path": "native-built/SOURCE-INVENTORY.json",
+            "bytes": 326865,
+            "sha256": "0abc5b55bc7b10a664cf2b62b0e0da77a4aff17668c1349e637c2df01b99add7"
+          },
+          {
+            "path": "native-built/document-contracts/native.tap",
+            "bytes": 5009,
+            "sha256": "3fa4ad0f800b1994debaf9031313d3ef4d63b83a954cfddc4b65c8b6293d2915"
+          },
+          {
+            "path": "native-built/document-native-context/native.tap",
+            "bytes": 936,
+            "sha256": "e12fdd107699284927ac872b2e44427b12f1dbcbb226fbe5a3afd35c1efd43e3"
+          },
+          {
+            "path": "native-built/document-standalone/native.tap",
+            "bytes": 434,
+            "sha256": "5a33047f71b94f217371bdf052b19bb356e080081873c7f60a3e7ebac327a0f3"
+          },
+          {
+            "path": "native-built/document-vision-loader/native.tap",
+            "bytes": 1880,
+            "sha256": "076e65af6fcfc622ea5193fa18b17410b1c4df55c7fc8b9de228ea95bb03814a"
+          },
+          {
+            "path": "native-built/parser-fixture.json",
+            "bytes": 219,
+            "sha256": "cdf651ad62c589470cb91392c1be955d1ab16e1b79c22fe1fd8ac991aeb25ff6"
+          },
+          {
+            "path": "native-built/pending-loader-restart/native.tap",
+            "bytes": 2206,
+            "sha256": "3ca5fdf6eded3f6549bebda47a9c04737f832fd79c396cef4f16768de468ebcd"
+          },
+          {
+            "path": "native-built/pending-loader-restart/receipts/FINGERPRINT.json",
+            "bytes": 203,
+            "sha256": "3b7d5330a4e9004809c73734c91323ab1d2623600eb55da25162677a9435fe8c"
+          },
+          {
+            "path": "native-built/pending-loader-restart/receipts/LOADER-REPRO.json",
+            "bytes": 4400,
+            "sha256": "6a861d660ff73411ca346e8aede23b48af920559c02325915c97caa68e846fcd"
+          },
+          {
+            "path": "current-app-REVALIDATION.json",
+            "bytes": 1442,
+            "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+          },
+          {
+            "path": "current-app-build.log",
+            "bytes": 72,
+            "sha256": "0b1badbe6ca2098f4b1addeb5d74b8f1b8579fd2c3293e3c564107a9f9fec10d"
+          },
+          {
+            "path": "current-app/PACKAGE-INVENTORY.json",
+            "bytes": 8860625,
+            "sha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3"
+          },
+          {
+            "path": "current-app/RESULT.json",
+            "bytes": 29896,
+            "sha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05"
+          },
+          {
+            "path": "current-app/archive.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/compile-outer.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/copy-fixed-application.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/desktop/RESULT.json",
+            "bytes": 8871,
+            "sha256": "533ebcb4d087288aa91d61e8f7e571108ccecf888d00116a2994166898dd11f8"
+          },
+          {
+            "path": "current-app/desktop/derived-info.json",
+            "bytes": 2285,
+            "sha256": "90fac2ae62278889d6febf68dfb25a71fd3f750c75062e7b24b4fa5ffcdbf353"
+          },
+          {
+            "path": "current-app/desktop/original-info.json",
+            "bytes": 2287,
+            "sha256": "4b27828a7fa991a81369a97f5f4cfeaaf39cc9cd5c63abcf4f26fb3ba64c1fd8"
+          },
+          {
+            "path": "current-app/desktop/read-info.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/desktop/sign-inner.log",
+            "bytes": 122,
+            "sha256": "ebca0e108ace4f40d378322c171a3b40c5df57e24e3bc769c34f72790991cc61"
+          },
+          {
+            "path": "current-app/desktop/verify-derived-inner.log",
+            "bytes": 3148,
+            "sha256": "3fa7a789d503939f68dfe297b5d37502a3b006cd8f18425cbd52efc7175418ca"
+          },
+          {
+            "path": "current-app/desktop/verify-original-inner.log",
+            "bytes": 3148,
+            "sha256": "4c9367267a6bc2b42439951563e6d9dafe1c7a7ae87955c430b25b2abeb63086"
+          },
+          {
+            "path": "current-app/desktop/write-info.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/new-info.json",
+            "bytes": 391,
+            "sha256": "c75009b61f051380368d61535f89205d07898104d038031f21658439fb995751"
+          },
+          {
+            "path": "current-app/old-info.json",
+            "bytes": 345,
+            "sha256": "e142d7315203a52372e2c1feb18c2226294b5d82c1ea3de20015e8be1b9dcab8"
+          },
+          {
+            "path": "current-app/read-outer-info.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/restore.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "current-app/sign-outer.log",
+            "bytes": 85,
+            "sha256": "cad230d0d04450751fc44e541cd249edfd486323682fe61154ea905002062cd6"
+          },
+          {
+            "path": "current-app/verify-outer.log",
+            "bytes": 3281,
+            "sha256": "1b0fe5e4b42eed12af7563b8c8422396d646d574fe8da3ef7656d88db2406dad"
+          },
+          {
+            "path": "current-app/verify-restored.log",
+            "bytes": 3347,
+            "sha256": "6a546c99cb4f3017093913e1b032e0cbaa453bccd3d7b9b6a9d39928962a9175"
+          },
+          {
+            "path": "current-app/write-outer-info.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      {
+        "id": 11961605433,
+        "name": "native-current-application-part-one",
+        "bytes": 402654409,
+        "sha256": "e23489f6f7a9f8b23cedc606aedeb276c95680c1230e1e00fa529fa3e0899d6a",
+        "members": [
+          {
+            "path": "DSH-SEP-macOS-Alpha2-project-preview.zip.0001.part",
+            "bytes": 402653184,
+            "sha256": "34b11d79cfc51aba94b3531db4c3236fc8c4f24bf3022cb9e98d80e599110a24"
+          },
+          {
+            "path": "transport-manifest.json",
+            "bytes": 873,
+            "sha256": "d26cce830e6f0dc280cd0b564d3a5d6f6f71937330cacac7eaaab2d164834c99"
+          }
+        ]
+      },
+      {
+        "id": 11961555636,
+        "name": "native-current-application-part-two",
+        "bytes": 244881247,
+        "sha256": "dedfbff21c4c8ae28837fca03fcf3405fbadc7e9806e682c2ee4a24e2215d22b",
+        "members": [
+          {
+            "path": "DSH-SEP-macOS-Alpha2-project-preview.zip.0002.part",
+            "bytes": 244880022,
+            "sha256": "17070cf50ca21390e514900137913e6091564d62fcd569cb368a2edda7ee7b7f"
+          },
+          {
+            "path": "transport-manifest.json",
+            "bytes": 873,
+            "sha256": "d26cce830e6f0dc280cd0b564d3a5d6f6f71937330cacac7eaaab2d164834c99"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "RESULT.json",
+        "artifactId": 11961086539,
+        "member": "current-app/RESULT.json"
+      },
+      {
+        "name": "PACKAGE-INVENTORY.json",
+        "artifactId": 11961086539,
+        "member": "current-app/PACKAGE-INVENTORY.json"
+      },
+      {
+        "name": "APP-BUILD-REVALIDATION.json",
+        "artifactId": 11961086539,
+        "member": "current-app-REVALIDATION.json"
+      },
+      {
+        "name": "APP-POST-VERIFICATION.json",
+        "artifactId": 11961086539,
+        "member": "native-built/RESULT.json"
+      }
+    ],
+    "parts": [
+      {
+        "index": 1,
+        "artifactId": 11961605433,
+        "member": "DSH-SEP-macOS-Alpha2-project-preview.zip.0001.part",
+        "bytes": 402653184,
+        "sha256": "34b11d79cfc51aba94b3531db4c3236fc8c4f24bf3022cb9e98d80e599110a24"
+      },
+      {
+        "index": 2,
+        "artifactId": 11961555636,
+        "member": "DSH-SEP-macOS-Alpha2-project-preview.zip.0002.part",
+        "bytes": 244880022,
+        "sha256": "17070cf50ca21390e514900137913e6091564d62fcd569cb368a2edda7ee7b7f"
+      }
+    ]
+  },
+  "installer": {
+    "status": "ready",
+    "sourceCommit": "b455d4249d0961a260566c92c9afea6184bf4e13",
+    "runId": 38713934011,
+    "artifacts": [
+      {
+        "id": 11962497869,
+        "name": "native-current-installer-evidence",
+        "bytes": 3677545,
+        "sha256": "326257b747317f751267090a96812ff7ebbb6c827e12f2ee24b2f64b7bf91227",
+        "members": [
+          {
+            "path": "installer-system.txt",
+            "bytes": 276,
+            "sha256": "490c5fc2b3ed238e2c1fa2deffd3274aa7559ee475a20d75e082eaf587e6056d"
+          },
+          {
+            "path": "current-payload-input/APP-BUILD-REVALIDATION.json",
+            "bytes": 1442,
+            "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+          },
+          {
+            "path": "current-payload-input/DOWNLOAD-RESULT.json",
+            "bytes": 1019,
+            "sha256": "f9561a0eaff032b5aa6c7f8da2dc2ad22ad732bb6005ede3d7682dd5a5602a24"
+          },
+          {
+            "path": "current-payload-input/APP-POST-VERIFICATION.json",
+            "bytes": 3923,
+            "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+          },
+          {
+            "path": "current-payload-input/DOWNLOAD-VERIFIED.json",
+            "bytes": 471,
+            "sha256": "97db74b17c8190da64eb42d6c4c150604ef047c62c0ceb23b0ce96c74b8c7cb7"
+          },
+          {
+            "path": "current-payload-input/RESULT.json",
+            "bytes": 29896,
+            "sha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05"
+          },
+          {
+            "path": "current-payload-input/PACKAGE-INVENTORY.json",
+            "bytes": 8860625,
+            "sha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3"
+          },
+          {
+            "path": "current-payload-input/download-verifier.log",
+            "bytes": 32,
+            "sha256": "75c6565f02caab77f79fecd1d802749fa2c20268ddc78e6593149ee084ad6cb2"
+          },
+          {
+            "path": "current-payload-restored/APP-BUILD-REVALIDATION.json",
+            "bytes": 1442,
+            "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+          },
+          {
+            "path": "current-payload-restored/APP-POST-VERIFICATION.json",
+            "bytes": 3923,
+            "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+          },
+          {
+            "path": "current-payload-restored/PACKAGE-INVENTORY.json",
+            "bytes": 8860625,
+            "sha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3"
+          },
+          {
+            "path": "current-payload-restored/RESULT.json",
+            "bytes": 20580,
+            "sha256": "99256f90f1c326cb57be2fc0d8ec89885ba7c0297fd97c5359ab827fd0323db8"
+          },
+          {
+            "path": "current-payload-restored/SOURCE-ASSEMBLY.json",
+            "bytes": 29896,
+            "sha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05"
+          },
+          {
+            "path": "current-payload-restored/extract.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-payload-restored/signature.log",
+            "bytes": 3634,
+            "sha256": "dde5a52ee03a4798023d593b4c6f4f71a2c7f4168c067b65045b80c7e4d4e873"
+          },
+          {
+            "path": "current-installer/PACKAGE-INVENTORY.json",
+            "bytes": 10013962,
+            "sha256": "505463e90235c51f5838af57f4346dffeee3d38c763154f18d700fcbc2ece0ad"
+          },
+          {
+            "path": "current-installer/RESOURCES-BUILD.json",
+            "bytes": 4025,
+            "sha256": "0aba4206aa6ad29d228d7333dc60c655e4535edc795ff695573659d93337c161"
+          },
+          {
+            "path": "current-installer/RESOURCES.json",
+            "bytes": 4025,
+            "sha256": "0aba4206aa6ad29d228d7333dc60c655e4535edc795ff695573659d93337c161"
+          },
+          {
+            "path": "current-installer/RESULT.json",
+            "bytes": 26126,
+            "sha256": "fa3a1ddfc9dd4bdc06d6085c92685e447efd301f80cf35c818712dcf2b221572"
+          },
+          {
+            "path": "current-installer/archive.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/compile-installer.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/coreHelper-build.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/entryHelper-build.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/info.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/installer-info.json",
+            "bytes": 373,
+            "sha256": "6808efaa22f482f21ea5b453cbaf20cd753ac97bc6952887a1258ed578a56428"
+          },
+          {
+            "path": "current-installer/restore.log",
+            "bytes": 1,
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+          },
+          {
+            "path": "current-installer/sign-outer.log",
+            "bytes": 96,
+            "sha256": "752b7778b590b11b4a3f25a41bc9796a2743069b3511aa8f2d8bdb4bdb1ea5bb"
+          },
+          {
+            "path": "current-installer/verify-outer.log",
+            "bytes": 184,
+            "sha256": "d01797f75bc443dfd28c983095c45e64f49ca353b5511d0a5f01b7175fd0e5be"
+          },
+          {
+            "path": "current-installer/verify-restored.log",
+            "bytes": 202,
+            "sha256": "8fde14619f81d767bc3f191f09d5c7147fbd6387c63fa920ce8e891323b5d7d8"
+          }
+        ]
+      },
+      {
+        "id": 11962737416,
+        "name": "native-current-installer-part-one",
+        "bytes": 402654419,
+        "sha256": "4abde269b9cba210b8fece9a34e24f008327d89ea93c773abd6ac51d6c1c9429",
+        "members": [
+          {
+            "path": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0001.part",
+            "bytes": 402653184,
+            "sha256": "c7702a14d82b493ef1019026202828af7c490199cfc1036b68a5f04b7f807ff8"
+          },
+          {
+            "path": "transport-manifest.json",
+            "bytes": 879,
+            "sha256": "771d1626abe0d283e4bebb5c32ae2604b19d1e8069b6845abc6f4e33cb71827a"
+          }
+        ]
+      },
+      {
+        "id": 11963056804,
+        "name": "native-current-installer-part-two",
+        "bytes": 290150452,
+        "sha256": "6523ded74c6c0483666a14f9503968999e6da43a81cac42e041e92a68d947882",
+        "members": [
+          {
+            "path": "transport-manifest.json",
+            "bytes": 879,
+            "sha256": "771d1626abe0d283e4bebb5c32ae2604b19d1e8069b6845abc6f4e33cb71827a"
+          },
+          {
+            "path": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0002.part",
+            "bytes": 290149217,
+            "sha256": "53e1f1fc12b8ec97cbc9cb5c91cbb2d358b2738d546e585a98d3427aceac892a"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "RESULT.json",
+        "artifactId": 11962497869,
+        "member": "current-installer/RESULT.json"
+      },
+      {
+        "name": "PACKAGE-INVENTORY.json",
+        "artifactId": 11962497869,
+        "member": "current-installer/PACKAGE-INVENTORY.json"
+      }
+    ],
+    "parts": [
+      {
+        "index": 1,
+        "artifactId": 11962737416,
+        "member": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0001.part",
+        "bytes": 402653184,
+        "sha256": "c7702a14d82b493ef1019026202828af7c490199cfc1036b68a5f04b7f807ff8"
+      },
+      {
+        "index": 2,
+        "artifactId": 11963056804,
+        "member": "DSH-SEP-macOS-Alpha2-installer-preview.zip.0002.part",
+        "bytes": 290149217,
+        "sha256": "53e1f1fc12b8ec97cbc9cb5c91cbb2d358b2738d546e585a98d3427aceac892a"
+      }
+    ]
+  }
+}

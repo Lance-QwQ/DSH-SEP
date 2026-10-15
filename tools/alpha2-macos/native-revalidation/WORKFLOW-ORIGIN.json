@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "scope": "New native validation generation; original fixture/test kept byte-identical. Only module locations and current input manifest differ; no platform override or native implementation substitution.",
+  "definitions": [
+    {
+      "source": "project-workflow/native-fixture.mjs",
+      "target": "workflow-fixture.mjs",
+      "changes": [
+        [
+          "from './project-factory.mjs'",
+          "from '../project-workflow/project-factory.mjs'"
+        ],
+        [
+          "from './derived-lifecycle.mjs'",
+          "from '../project-workflow/derived-lifecycle.mjs'"
+        ],
+        [
+          "from './workflow-adapter.mjs'",
+          "from '../project-workflow/workflow-adapter.mjs'"
+        ],
+        [
+          "new URL('./SOURCE_INPUTS.json', import.meta.url)",
+          "new URL('./INPUTS.json', import.meta.url)",
+          2
+        ]
+      ],
+      "sourceSha256": "f5fd0e96f4db525fbe41468ffe0ade676133cb53ae1c3113a4cd3eadc3eee136",
+      "resultSha256": "1574201011681815589628211c7a1f219dfcf38293d20e8ea02afe7ee39625f4"
+    },
+    {
+      "source": "project-workflow/native-workflow.test.mjs",
+      "target": "workflow.test.mjs",
+      "changes": [
+        [
+          "from './native-fixture.mjs'",
+          "from './workflow-fixture.mjs'"
+        ]
+      ],
+      "sourceSha256": "a9cd12ce226cf53e3a72e94b0a6f6de1384c99b44d836f788248518a5277ec8a",
+      "resultSha256": "99f4908e10ffe9393b23ae2effc1fc7cb06e3e3359afda23b8e31376d29bd608"
+    }
+  ]
+}

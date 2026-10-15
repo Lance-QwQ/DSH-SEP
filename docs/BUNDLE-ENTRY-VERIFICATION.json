@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "candidate": {
+    "name": "dsh-sep-bundle",
+    "version": "0.2.1-beta.3-bundle.1",
+    "published": false,
+    "businessEnabled": false
+  },
+  "stage": 1,
+  "status": "pass",
+  "scope": "Official 0.2.1-alpha.1 PluginManager local-path inspection, patch composition, Loader admission/disposal, and independent packed-entry verification. This is not complete SEP installation or runtime certification.",
+  "verification": {
+    "regressionCases": 3,
+    "regressionPassed": 3,
+    "packedRecheckCases": 3,
+    "packedRecheckPassed": 3,
+    "interpretation": "The packed run repeats the same three behaviors; these are not six distinct scenarios.",
+    "independentAuditChecks": 7,
+    "redCase": "Official manager refused the unmodified root with not-a-package because package.json was absent.",
+    "fixtureCorrection": "First green run used Entry.dispose(), which does not exist. Corrected to the documented Fiber.dispose(); first failure log retained. No production change was needed for that failure."
+  },
+  "officialInputs": [
+    {
+      "name": "@deepseek-ai/dsh-plugin-manager",
+      "version": "0.2.1-alpha.1",
+      "manifestSha256": "652bad775cae99900a2711b25c11baa1a5c8b569ca0d37ca9e83745e7b6c87e0"
+    },
+    {
+      "name": "@deepseek-ai/dsh-app-boot",
+      "version": "0.2.1-alpha.1",
+      "manifestSha256": "a0016099050531d85a235368462d810cecd11c21cb9dc9e23e010b216eb2c54f"
+    }
+  ],
+  "officialDependencyLockSha256": "2ba349f47c40b7a2808d44d37a906d4daeda6081e5382f321707b1069c16fe3f",
+  "sourceSha256": {
+    "package.json": "9f10719b0b71de2e09de62518707f736020282fca1859a458f08ec635ccef4c3",
+    "bundle/cordis.patch.yml": "69c831096bb1b86a55b7729ad31e10f043b0c6d4f13390df1ced513b2a91d594",
+    "bundle/lib/index.js": "105a6ce3857f037ba937f0e38f53776523190eb6ec5e5f43f1152a4c36af5f00",
+    "bundle/contracts/admission.json": "f6586a71b7201ed7f815ecc60fd815dfc41fda6de244613bd0f7189d24a3c203",
+    "bundle/README.md": "e151687f622e88abdead5a3c4adb5045225908eb787d8bbae67f26b875de5d8a",
+    "docs/BUNDLE-INSTALL-PROGRESS.md": "0d5d89e9440ea8e2979f5be8eb16ef7ff1d8a56aa54ae0816665fe772ee7672e",
+    "tools/bundle-install/tests/entry.test.mjs": "dc2fd885557ecfa201cd6909ed828c20568ac27246d7dfae1188c3caa2d71d53"
+  },
+  "archive": {
+    "name": "dsh-sep-bundle-0.2.1-beta.3-bundle.1.tgz",
+    "sha256": "c806cd52b8be6a732a0ce0001c2fe27a01d30ac3d3e16b51ef7afc12fa2b4cf7",
+    "size": 5376
+  },
+  "logs": {
+    "official-install.log": "43f4247136cf13fde4a168342659f4205a29e672503ba7c2a9be173fdbd9eb2b",
+    "red.log": "bdeb30a3e91f5e325436360b74d66a0638152958a548a168ad80f4571c7fcf2e",
+    "green-fixture-error.log": "ab0f3061e7a525dcfbc352e53bccd9cce08686199a76b2682b52faecae6d5c4f",
+    "green.log": "88ff72c68415597152f809373d4282e0515dd8c8e5870d1fd53ae0d3c386625a",
+    "pack.log": "2ee0c397fc6154f216d5a14ecc109c1ef2956368057b4af03d836468a05f0446",
+    "review-packed.log": "5fb9445c9d7cf0d570d11594d263b22de56dc63df0c95e200484603ca896e3b6"
+  },
+  "nextStages": [
+    {
+      "stage": 2,
+      "status": "not_run"
+    },
+    {
+      "stage": 3,
+      "status": "not_run"
+    },
+    {
+      "stage": 4,
+      "status": "not_run"
+    },
+    {
+      "stage": 5,
+      "status": "not_run"
+    },
+    {
+      "stage": 6,
+      "status": "not_run"
+    }
+  ],
+  "notVerified": [
+    "GitHub remote clone installation",
+    "official GUI installation",
+    "full SEP dependencies and activation",
+    "daily deployment",
+    "public distribution"
+  ]
+}

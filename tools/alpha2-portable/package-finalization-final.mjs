@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {spawn,execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {createReadStream,createWriteStream} from 'node:fs';
+import {writeFile} from 'node:fs/promises';
+import {pipeline} from 'node:stream/promises';
+import {createHash} from 'node:crypto';
+const out='D:/AIData/ProjectWork/DSH/alpha2-linux-finalization-20261013-r1',build='/opt/dsh-sep-cross-platform/alpha2-portable-closeout-package-finalization-r22-build',input='/opt/dsh-sep-cross-platform/alpha2-portable-finalization-archive-r24',installation='/opt/dsh-sep-cross-platform/alpha2-portable-finalization-installed-r25',driver='/opt/dsh-sep-cross-platform/alpha2-portable-finalization-driver-r23',name='DSH-SEP-Linux-x64-Alpha2-closeout.9.tar.gz';
+const wait=c=>new Promise((r,j)=>{c.once('error',j);c.once('close',n=>n===0?r():j(Error('PACKAGE_COMMAND_'+n)));});
+const meta=JSON.parse((await promisify(execFile)('wsl.exe',['-d','DSH-SEP-Linux-RC','-u','sep-rc','--exec','cat',build+'/PACKAGE.json'])).stdout);assert.equal(meta.status,'pass');assert.match(meta.manifestSha256,/^[a-f0-9]{64}$/);
+const c=spawn('wsl.exe',['-d','DSH-SEP-Linux-RC','-u','sep-rc','--exec','tar','-czf','-','-C',build,'payload','PACKAGE.json'],{windowsHide:true,stdio:['ignore','pipe','inherit']});await Promise.all([pipeline(c.stdout,createWriteStream(out+'/'+name,{flags:'wx'})),wait(c)]);
+const h=createHash('sha256');for await(const b of createReadStream(out+'/'+name))h.update(b);const sha256=h.digest('hex');
+const record={status:'pass',name,sha256,manifestSha256:meta.manifestSha256,build,input,installation};await writeFile(out+'/candidate-final-export.json',JSON.stringify(record,null,2)+'\n',{flag:'wx'});await writeFile(out+'/'+name+'.sha256',sha256+'  '+name+'\n',{flag:'wx'});
+const r=spawn('wsl.exe',['-d','DSH-SEP-Linux-RC','-u','sep-rc','--exec','/bin/sh','-c','umask 077; mkdir "$1" && exec tar -xzpf - -C "$1"','unpack',input],{windowsHide:true,stdio:['pipe','inherit','inherit']});await Promise.all([pipeline(createReadStream(out+'/'+name),r.stdin),wait(r)]);
+await wait(spawn('wsl.exe',['-d','DSH-SEP-Linux-RC','-u','sep-rc','--cd',driver,'--exec','/opt/dsh-sep-cross-platform/runtime/bin/node','install-finalization-final.mjs',input,installation,meta.manifestSha256],{windowsHide:true,stdio:'inherit'}));console.log(JSON.stringify(record));

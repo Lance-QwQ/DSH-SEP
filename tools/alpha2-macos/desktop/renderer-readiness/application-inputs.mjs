@@ -1,0 +1,13 @@
+import {readFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import {composeDesktopReadiness} from './welcome-compose.mjs';import {deriveProductMain} from './product-derive.mjs';import {deriveProductWelcomeGate} from './product-gate-derive.mjs';import {rewriteDesktopImports} from '../managed-overlay/desktop-imports.mjs';
+const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+export const CONTROL_INPUTS=Object.freeze({'electron.cjs':'0704150b3188173e302692bc23048afa640a25decf44d1158143ed458e41a043','transport.cjs':'61413a5b2893b6f305fb570accbe2fbd384b6b657d4aca3c7e18cf37fc7eb436','fixed-program.cjs':'03b08f9700f6d352270fc067af59b812ca1dcc16b9d2144c98559fad5f7e8c07'});
+export async function prepareApplicationEdits({inputs,controls}){
+ if(!controls||Object.keys(controls).sort().join('|')!==Object.keys(CONTROL_INPUTS).sort().join('|'))throw Error('SEP_APPLICATION_CONTROL_INPUT');for(const[name,hash]of Object.entries(CONTROL_INPUTS))if(!Buffer.isBuffer(controls[name])||sha(controls[name])!==hash)throw Error('SEP_APPLICATION_CONTROL_INPUT');
+ const combined=await composeDesktopReadiness(inputs),edits=combined.outputs.map(row=>({...row,beforeSha256:row.origins.length?sha(inputs[row.key]):null})),main=edits.find(row=>row.key==='main'),product=deriveProductMain(main.bytes),rewritten=rewriteDesktopImports(main.path,product.bytes.toString());main.beforeSha256=sha(rewriteDesktopImports(main.path,inputs.main.toString()).text);main.bytes=Buffer.from(rewritten.text);main.sha256=sha(main.bytes);main.origins=[...main.origins,product.origin,{schema:1,kind:'bare-import-rewrite',sourceSha256:product.origin.resultSha256,resultSha256:main.sha256,transforms:rewritten.transforms}];
+ const welcome=edits.find(row=>row.key==='welcome-helper'),productGate=deriveProductWelcomeGate(welcome.bytes);welcome.bytes=productGate.bytes;welcome.sha256=sha(productGate.bytes);welcome.origins=[productGate.origin];
+ const helper=await readFile(new URL('./product-window-actions.mjs',import.meta.url));edits.push({key:'product-window-actions',domain:'asar',path:'lib/sep-product-window-actions.mjs',beforeSha256:null,bytes:helper,sha256:sha(helper),origins:[]});
+ for(const[name,bytes]of Object.entries(controls))edits.push({key:'product-control/'+name,domain:'asar',path:'lib/sep-product-control/'+name,beforeSha256:null,bytes,sha256:sha(bytes),origins:[]});
+ for(const row of edits)row.changed=row.beforeSha256!==row.sha256;
+ return{schema:1,scope:'exact fixed r33 application edits; not runtime validation',edits};
+}
+export function verifyTargetHashes(edits,actual){for(const row of edits)if(!actual.has(row.domain+'/'+row.path)||actual.get(row.domain+'/'+row.path)!==row.beforeSha256)throw Error('SEP_APPLICATION_TARGET_CHANGED');return true;}

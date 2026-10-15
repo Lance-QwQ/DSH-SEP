@@ -1,0 +1,101 @@
+native-product-control-contracts:
+  runs-on: macos-15
+  timeout-minutes: 15
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Fixed inputs and isolated native contract directories
+      id: inputs
+      shell: bash
+      run: |
+        test "$(uname -s)" = Darwin
+        test "$(uname -m)" = arm64
+        root="$(cd "$RUNNER_TEMP" && pwd -P)/product-control-contracts"
+        mkdir -m 700 "$root"
+        mkdir -m 700 "$root/tmp" "$root/product-tests" "$root/broker-tests"
+        echo "SEP_PRODUCT_CI_OUTPUT=$root" >> "$GITHUB_ENV"
+        echo "SEP_PRODUCT_TEST_ROOT=$root/product-tests" >> "$GITHUB_ENV"
+        echo "SEP_DESKTOP_TEST_ROOT=$root/broker-tests" >> "$GITHUB_ENV"
+        echo "SEP_PRODUCT_OWNER_MODULE=$GITHUB_WORKSPACE/tools/alpha2-macos/captured/owner-lease.mjs" >> "$GITHUB_ENV"
+        echo "TMPDIR=$root/tmp" >> "$GITHUB_ENV"
+        echo "TMP=$root/tmp" >> "$GITHUB_ENV"
+        echo "TEMP=$root/tmp" >> "$GITHUB_ENV"
+        sw_vers > "$root/system.txt"
+        uname -a >> "$root/system.txt"
+        SEP_PRODUCT_CI_OUTPUT="$root" node --input-type=module <<'NODE'
+        import fs from 'node:fs';import path from 'node:path';import{createHash}from'node:crypto';import{execFileSync}from'node:child_process';
+        const out=process.env.SEP_PRODUCT_CI_OUTPUT,base=path.join(process.env.GITHUB_WORKSPACE,'tools/alpha2-macos'),hash=b=>createHash('sha256').update(b).digest('hex');
+        const files=['bootstrap/controller.mjs','captured/owner-lease.mjs','captured/owner-posix.mjs'];
+        for(const dir of ['desktop/product-control','desktop/managed-broker'])for(const name of fs.readdirSync(path.join(base,dir)).sort())if(fs.statSync(path.join(base,dir,name)).isFile())files.push(dir+'/'+name);
+        const inputs=files.sort().map(name=>{const bytes=fs.readFileSync(path.join(base,name));return{path:name,bytes:bytes.length,sha256:hash(bytes)};});
+        const expected={'captured/owner-lease.mjs':'33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a','captured/owner-posix.mjs':'bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3'};
+        for(const[name,sha]of Object.entries(expected))if(inputs.find(x=>x.path===name)?.sha256!==sha)throw Error('SEP_PRODUCT_CAPTURE_CHANGED');
+        const platform={platform:process.platform,arch:process.arch,node:process.version,nodeSha256:hash(fs.readFileSync(process.execPath)),macOSVersion:execFileSync('/usr/bin/sw_vers',['-productVersion'],{encoding:'utf8'}).trim(),macOSBuild:execFileSync('/usr/bin/sw_vers',['-buildVersion'],{encoding:'utf8'}).trim()};
+        if(platform.platform!=='darwin'||platform.arch!=='arm64')throw Error('SEP_PRODUCT_NATIVE_PLATFORM');
+        const receipt={schema:1,scope:'product control contracts only',commit:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,job:process.env.GITHUB_JOB,platform,inputs,inputsSha256:hash(JSON.stringify(inputs))};
+        fs.writeFileSync(path.join(out,'INPUTS.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
+        NODE
+    - name: Forty product control definitions
+      id: product
+      shell: bash
+      run: |
+        set +e
+        node --test --test-reporter=tap \
+          tools/alpha2-macos/desktop/product-control/controller-bridge.test.mjs \
+          tools/alpha2-macos/desktop/product-control/controller-composition.test.mjs \
+          tools/alpha2-macos/desktop/product-control/controller-outcome.test.mjs \
+          tools/alpha2-macos/desktop/product-control/controller-paths.test.mjs \
+          tools/alpha2-macos/desktop/product-control/electron.test.mjs \
+          tools/alpha2-macos/desktop/product-control/fixed-program.test.mjs \
+          tools/alpha2-macos/desktop/product-control/launch-control.test.mjs \
+          tools/alpha2-macos/desktop/product-control/owned-observer.test.mjs \
+          tools/alpha2-macos/desktop/product-control/transport.test.mjs \
+          > "$SEP_PRODUCT_CI_OUTPUT/product.tap" 2> "$SEP_PRODUCT_CI_OUTPUT/product.stderr.log"
+        result=$?
+        printf '%s\n' "$result" > "$SEP_PRODUCT_CI_OUTPUT/product.exit"
+        exit "$result"
+    - name: Thirty existing broker definitions
+      id: broker
+      if: always() && steps.inputs.outcome == 'success'
+      shell: bash
+      run: |
+        set +e
+        node --test --test-reporter=tap \
+          tools/alpha2-macos/desktop/managed-broker/app-program.test.mjs \
+          tools/alpha2-macos/desktop/managed-broker/desktop-rpc.test.mjs \
+          tools/alpha2-macos/desktop/managed-broker/host-owner.test.mjs \
+          tools/alpha2-macos/desktop/managed-broker/launch-state.test.mjs \
+          tools/alpha2-macos/desktop/managed-broker/program-manifest.test.mjs \
+          > "$SEP_PRODUCT_CI_OUTPUT/broker.tap" 2> "$SEP_PRODUCT_CI_OUTPUT/broker.stderr.log"
+        result=$?
+        printf '%s\n' "$result" > "$SEP_PRODUCT_CI_OUTPUT/broker.exit"
+        exit "$result"
+    - name: Assert complete counts and record exact scope
+      if: always() && steps.inputs.outcome == 'success'
+      shell: bash
+      run: |
+        node --input-type=module <<'NODE'
+        import fs from'node:fs';import path from'node:path';import{createHash}from'node:crypto';
+        const out=process.env.SEP_PRODUCT_CI_OUTPUT,hash=b=>createHash('sha256').update(b).digest('hex'),inputBytes=fs.readFileSync(path.join(out,'INPUTS.json')),input=JSON.parse(inputBytes);
+        function result(name,expected){const file=path.join(out,name+'.tap');if(!fs.existsSync(file))return{status:'not_run',expected};const bytes=fs.readFileSync(file),text=bytes.toString(),counts=Object.fromEntries(['tests','pass','fail','cancelled','skipped','todo'].map(k=>[k,Number(text.match(new RegExp('^# '+k+' (\\d+)$','m'))?.[1]??-1)])),exitPath=path.join(out,name+'.exit'),exit=fs.existsSync(exitPath)?Number(fs.readFileSync(exitPath,'utf8').trim()):null;return{status:exit===0&&counts.tests===expected&&counts.pass===expected&&['fail','cancelled','skipped','todo'].every(k=>counts[k]===0)?'pass':'fail',expected,exit,counts,tapSha256:hash(bytes),stderrSha256:hash(fs.readFileSync(path.join(out,name+'.stderr.log')))};}
+        const groups={product:result('product',40),broker:result('broker',30)},receipt={schema:1,status:Object.values(groups).every(x=>x.status==='pass')?'pass':'fail',scope:'native macOS contracts with independent Node fixture children; not assembled Electron/AppKit/Finder validation',commit:input.commit,runId:input.runId,job:input.job,platform:input.platform,inputsReceiptSha256:hash(inputBytes),inputsSha256:input.inputsSha256,expectedDefinitions:70,groups,nativeProduct:{status:'not_run',directLaunchDefinitions:2,electronProduct:'not_run',appkitProduct:'not_run',finder:'not_run'}};
+        fs.writeFileSync(path.join(out,'RESULT.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({status:receipt.status,expectedDefinitions:70,product:groups.product.counts,broker:groups.broker.counts}));if(receipt.status!=='pass')process.exitCode=1;
+        NODE
+    - name: Preserve contract inputs and result evidence
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-product-control-contracts
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/product-control-contracts/*.json
+          ${{ runner.temp }}/product-control-contracts/*.tap
+          ${{ runner.temp }}/product-control-contracts/*.stderr.log
+          ${{ runner.temp }}/product-control-contracts/*.exit
+          ${{ runner.temp }}/product-control-contracts/system.txt

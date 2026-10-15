@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "scope": "Fixed installed Alpha.2 official frontend BootScreen, renderer handoff/slots/errors, layout main/sidebar slots, and sidebar new-session button labels. Read-only verification source binding, not a product modification.",
+  "files": [
+    {"path":"node_modules/@deepseek-ai/dsh-web-frontend/dist/assets/index-Dp57FHwW.js","bytes":635065,"sha256":"0dc92c889d3f182d494f4917191555d634a756ae0f3be569aaa397a025e51d6a"},
+    {"path":"node_modules/@deepseek-ai/dsh-client-ui-renderer/lib/client.js","bytes":77433,"sha256":"e40ba7ee84a5d93f5f0894bab866a76bc0879ee6631d5d8c17269696754e3c4b"},
+    {"path":"node_modules/@deepseek-ai/dsh-client-ui-layout/lib/client.js","bytes":32825,"sha256":"686fb83c91c8ff8d03c365bb666ef34dacc3dd110eb768deacbc7998b885c8c1"},
+    {"path":"node_modules/@deepseek-ai/dsh-client-ui-sidebar/lib/client.js","bytes":31998,"sha256":"08c750fb59ea242a2f20b79d0d55f6f9fd432dda5f508de98ccf706ce4ca33a2"}
+  ]
+}

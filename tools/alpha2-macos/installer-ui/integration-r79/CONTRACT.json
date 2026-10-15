@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "kind": "native-test-entry-and-full-installer-operator",
+  "order": [
+    "build-and-restore-original-installer",
+    "original-installer-launchservices-start-normal-close",
+    "separate-test-entry-real-ui-full-install",
+    "fixed-installed-product-launchservices-lifecycle"
+  ],
+  "plannedIntegrationDefinitions": 6,
+  "nativeTestMain": "test-main.m",
+  "productionInputs": "package/installer-native-inputs.json",
+  "productionMainReplacedOnlyInSeparateTestCopy": true,
+  "productionModuleChanges": false,
+  "controllerReplyMocks": false,
+  "nativeDialogReplyInjection": false,
+  "actions": [
+    "cancel-review-performClick",
+    "refresh-preview-performClick",
+    "install-performClick",
+    "attached-sheet-Cancel-performClick",
+    "attached-sheet-Install-performClick",
+    "normal-close"
+  ],
+  "fixedTarget": "current-account/Applications/DSH SEP.app",
+  "fixedData": "current-account/Library/Application Support/DSH SEP/alpha2-mac-finder-preview",
+  "initialAccount": "target, data and installer governance absent; never delete or adopt an existing path",
+  "unknownCleanup": "blocked, preserve owner and evidence; no force termination; CI teardown separate",
+  "notVerified": [
+    "Native execution has not yet run",
+    "Original byte-identical Installer.app external mouse clicks",
+    "Physical Finder or Dock input",
+    "Developer ID and notarization",
+    "Private user environments"
+  ],
+  "installerBuild": {
+    "commit": "e2cdf833051e9ff0b451d0885549f38690220acd",
+    "archiveSha256": "6043ddd8305009e9013de46f85f7660cdc775d4320987553808eb9f8ec01db4f",
+    "manifestSha256": "93f6ca255692457a084ae91588f8d72b9cebacb232f327139a2d787acb481dd4",
+    "inventorySha256": "df8bd9acc904cd733afcb724c219344347707f68c60658941075f7a33298f7aa"
+  },
+  "payloadBuild": {
+    "commit": "155f324013fada4caf3ecd15a9631678d4d5c4a7",
+    "sourceAssemblySha256": "5aa8ddfc6b72141f494eb50e07cdced61e1fc89080368b9edf922389641f2704",
+    "programSha256": "e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834",
+    "bootstrapSha256": "ff97b34568f4cdf3d380191256b5523f1f27049b7e0c3a9afba16060da9fbc2b",
+    "archiveSha256": "20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107",
+    "treeSha256": "eadad5720380302d460bea68f77d9cdfdf5dc4f7b7f77dd9cf0d10df3f7713a1",
+    "entries": 29374,
+    "totalBytes": 1794083023
+  },
+  "testCommit": "not_run"
+}

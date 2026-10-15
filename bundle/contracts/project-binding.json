@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "name": "explicit-project-session-binding",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic scope",
+  "status": "pass",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "entry": "dsh-sep-bundle/project-binding",
+  "service": "sepProjectBinding",
+  "methods": [
+    "review",
+    "confirm",
+    "reviewSession"
+  ],
+  "caller": "trusted same-process composition only; no model tool or RPC",
+  "requires": [
+    "registered recoveryHost project identity and generation",
+    "live owned SepSessionPersistence and SepProtectedFileSystem",
+    "native JSON backends for all three SEP storage domains at one explicit root",
+    "owned writer-mode P2 coordinator with known coverage and open barrier",
+    "existing valid version-3 budget ledger",
+    "explicit separate local sessions/memory/locks/backups/budget roots outside registered projects",
+    "DEEPSEEK_API_KEY reference only"
+  ],
+  "confirmation": {
+    "kind": "ephemeral per-plugin process state",
+    "binding": [
+      "project identity/generation",
+      "root directory local identities",
+      "provider instances",
+      "budget canonical path and reviewed bytes",
+      "P2 head",
+      "normalized configuration intent",
+      "credential reference"
+    ],
+    "persistentCommit": false,
+    "rechecksBeforeConfirm": true,
+    "changeInvalidatesPlan": true,
+    "unloadClearsConfirmation": true
+  },
+  "sessionHandoff": {
+    "nativeSessionRequired": true,
+    "cwdMatch": "exact registered project root",
+    "freshReadOnlySnapshot": true,
+    "unchangedRootBudgetUpdates": "current ledger and persisted policy remain authoritative; no new financial authorization or ledger continuity claim",
+    "guardsRetained": [
+      "Budget",
+      "P2",
+      "protected file tools",
+      "Session persistence"
+    ]
+  },
+  "never": [
+    "resolve credentials",
+    "initialize missing ledger or storage",
+    "migrate legacy ledger",
+    "change existing limits",
+    "clear spent/reserved/unknown/reconciliation entries",
+    "refresh memory timestamps",
+    "replace live providers",
+    "activate business",
+    "approve deployment"
+  ],
+  "failureSemantics": {
+    "missingLedger": "SEP_BINDING_LEDGER_REQUIRED",
+    "legacyLedger": "SEP_BINDING_LEDGER_MIGRATION_REQUIRED",
+    "changedPreparedPlan": "SEP_BINDING_PLAN_CHANGED",
+    "changedConfirmedContext": "SEP_BINDING_CONTEXT_CHANGED",
+    "maintenanceReview": "existing P2_RECOVERY_REQUIRED may propagate before binding-level governance classification"
+  },
+  "fixedTestDefinitions": 21,
+  "notVerified": [
+    "full controlled Profile provider replacement",
+    "private existing storage adoption",
+    "durable binding publication",
+    "GUI configuration wizard",
+    "credential availability/value/permissions",
+    "whole SEP activation or deployment",
+    "non-Windows runtime"
+  ]
+}

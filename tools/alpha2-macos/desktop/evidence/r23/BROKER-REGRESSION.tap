@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: real Node Inspector reaches the entry and permits synchronous paused instrumentation
+ok 1 - real Node Inspector reaches the entry and permits synchronous paused instrumentation
+  ---
+  duration_ms: 120.381375
+  type: 'test'
+  ...
+# Subtest: protocol 4 preserves real owner identity and actual task inspection
+ok 2 - protocol 4 preserves real owner identity and actual task inspection
+  ---
+  duration_ms: 43.872375
+  type: 'test'
+  ...
+# Subtest: auth, origin, Host, route, method and envelope reject before owner mutations
+ok 3 - auth, origin, Host, route, method and envelope reject before owner mutations
+  ---
+  duration_ms: 28.253375
+  type: 'test'
+  ...
+# Subtest: request body is bounded and cannot bypass mutation admission
+ok 4 - request body is bounded and cannot bypass mutation admission
+  ---
+  duration_ms: 2.210916
+  type: 'test'
+  ...
+# Subtest: owner failure text is classified without leaking it
+ok 5 - owner failure text is classified without leaking it
+  ---
+  duration_ms: 4.401583
+  type: 'test'
+  ...
+# Subtest: blocked HTTP drain can be retried, late success is retained, new calls rejected
+ok 6 - blocked HTTP drain can be retried, late success is retained, new calls rejected
+  ---
+  duration_ms: 20.906625
+  type: 'test'
+  ...
+# Subtest: invalid ready or inspection result is never replaced with optimistic defaults
+ok 7 - invalid ready or inspection result is never replaced with optimistic defaults
+  ---
+  duration_ms: 3.850167
+  type: 'test'
+  ...
+# Subtest: real independent child ready, correlated inspection, same owner and acknowledged stop
+ok 8 - real independent child ready, correlated inspection, same owner and acknowledged stop
+  ---
+  duration_ms: 49.8925
+  type: 'test'
+  ...
+# Subtest: blocked business close retains child and retry performs a new close attempt
+ok 9 - blocked business close retains child and retry performs a new close attempt
+  ---
+  duration_ms: 52.174
+  type: 'test'
+  ...
+# Subtest: wrong business module hash refuses before a child is spawned
+ok 10 - wrong business module hash refuses before a child is spawned
+  ---
+  duration_ms: 2.282709
+  type: 'test'
+  ...
+# Subtest: stop accepted during source validation prevents late child creation
+ok 11 - stop accepted during source validation prevents late child creation
+  ---
+  duration_ms: 4.718
+  type: 'test'
+  ...
+# Subtest: real child exit preceding delayed stop receipt converges to confirmed stopped
+ok 12 - real child exit preceding delayed stop receipt converges to confirmed stopped
+  ---
+  duration_ms: 151.445666
+  type: 'test'
+  ...
+# Subtest: classified startup cause survives child transport while unknown text does not
+ok 13 - classified startup cause survives child transport while unknown text does not
+  ---
+  duration_ms: 99.308542
+  type: 'test'
+  ...
+# Subtest: only absent or confirmed closed prior generations permit another launch
+ok 14 - only absent or confirmed closed prior generations permit another launch
+  ---
+  duration_ms: 0.845375
+  type: 'test'
+  ...
+# Subtest: exit zero alone and business blocked cannot become clean shutdown
+ok 15 - exit zero alone and business blocked cannot become clean shutdown
+  ---
+  duration_ms: 0.118583
+  type: 'test'
+  ...
+# Subtest: confirmed closed failed first boot may initialize an actually empty business domain
+ok 16 - confirmed closed failed first boot may initialize an actually empty business domain
+  ---
+  duration_ms: 0.114
+  type: 'test'
+  ...
+# Subtest: existing business authority is continued rather than reinitialized
+ok 17 - existing business authority is continued rather than reinitialized
+  ---
+  duration_ms: 0.069917
+  type: 'test'
+  ...
+# Subtest: unknown nonempty data and unowned first-use data are never adopted automatically
+ok 18 - unknown nonempty data and unowned first-use data are never adopted automatically
+  ---
+  duration_ms: 0.13
+  type: 'test'
+  ...
+# Subtest: relocatable program describes exactly the controlled executable roles
+ok 19 - relocatable program describes exactly the controlled executable roles
+  ---
+  duration_ms: 0.829042
+  type: 'test'
+  ...
+# Subtest: absolute, dot, empty, separator and control path segments refuse
+ok 20 - absolute, dot, empty, separator and control path segments refuse
+  ---
+  duration_ms: 0.93475
+  type: 'test'
+  ...
+# Subtest: unknown role, incompatible version and incomplete hash refuse
+ok 21 - unknown role, incompatible version and incomplete hash refuse
+  ---
+  duration_ms: 0.332625
+  type: 'test'
+  ...
+# Subtest: real program files bind to manifest and reject later byte changes
+ok 22 - real program files bind to manifest and reject later byte changes
+  ---
+  duration_ms: 29.686333
+  type: 'test'
+  ...
+# Subtest: passive monitor records actual gate failure without swallowing its uncaught exit
+ok 23 - passive monitor records actual gate failure without swallowing its uncaught exit
+  ---
+  duration_ms: 59.978542
+  type: 'test'
+  ...
+# Subtest: spawn dispatched before refusal is recorded and cannot satisfy zero-host proof
+ok 24 - spawn dispatched before refusal is recorded and cannot satisfy zero-host proof
+  ---
+  duration_ms: 96.008167
+  type: 'test'
+  ...
+# Subtest: Electron explicit uncaughtException emission is observed without changing its one-listener contract
+ok 25 - Electron explicit uncaughtException emission is observed without changing its one-listener contract
+  ---
+  duration_ms: 54.923958
+  type: 'test'
+  ...
+# Subtest: sync smoke evaluator reads real Inspector values without awaiting unresolved promises
+ok 26 - sync smoke evaluator reads real Inspector values without awaiting unresolved promises
+  ---
+  duration_ms: 88.3335
+  type: 'test'
+  ...
+# Subtest: smoke HOME and TMPDIR exist before the child and restart preserves their data
+ok 27 - smoke HOME and TMPDIR exist before the child and restart preserves their data
+  ---
+  duration_ms: 6.453625
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 789.238417

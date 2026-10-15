@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "source": "tools/daily-adaptation/lib/daily-profile.mjs",
+  "file": "daily-profile.mjs",
+  "sourceSha256": "5481738b0be6e5441107eccfcc6b9f30adf3825a2025e86c1d0f24818e33ea5a",
+  "resultSha256": "5481738b0be6e5441107eccfcc6b9f30adf3825a2025e86c1d0f24818e33ea5a",
+  "bytes": 4147,
+  "transformations": []
+}

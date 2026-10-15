@@ -1,0 +1,20 @@
+# TEST/OPERATOR ONLY. Caller supplies exact restored new-package RESULT path/SHA.
+# This step never changes installed bytes or uses fixed Finder/private data.
+- name: Derived current-project application UI and same-Profile migration
+  shell: bash
+  run: |
+    set -euo pipefail
+    : "${SEP_PROJECT_UI_SOURCE:?absolute tools/alpha2-macos source root required}"
+    : "${SEP_PROJECT_UI_ASSEMBLY_RESULT:?exact new assembly RESULT required}"
+    : "${SEP_PROJECT_UI_ASSEMBLY_SHA256:?assembly RESULT SHA required}"
+    : "${SEP_PROJECT_UI_OPERATOR_NODE:?verified operator Node required}"
+    output="$RUNNER_TEMP/project-ui-native"
+    mkdir "$output"
+    /usr/bin/sw_vers > "$output/mac-version.txt"
+    /usr/bin/clang -framework ApplicationServices "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/ax-capability.m" -o "$output/ax-capability"
+    "$output/ax-capability" > "$output/AX-CAPABILITY.json"
+    "$SEP_PROJECT_UI_OPERATOR_NODE" --test --test-reporter=tap "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-contract.test.mjs" > "$output/contracts.tap" 2> "$output/contracts.stderr"
+    "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round1" "$output/data" 1
+    "$SEP_PROJECT_UI_OPERATOR_NODE" "$SEP_PROJECT_UI_SOURCE/desktop/project-workflow-product/native-operator.mjs" "$SEP_PROJECT_UI_ASSEMBLY_RESULT" "$SEP_PROJECT_UI_ASSEMBLY_SHA256" "$output/round2" "$output/data" 2
+# Archive $RUNNER_TEMP/project-ui-native/** on success and failure. Source fixture
+# and diff are public synthetic strings only. AX false does not become UI pass.

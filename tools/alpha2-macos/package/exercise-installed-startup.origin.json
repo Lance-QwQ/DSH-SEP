@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "status": "derived-not-run",
+  "source": "exercise-application.mjs",
+  "sourceSha256": "ecb9321b2c23ee9ef4e67117f31fbe6b86de9745c5f5a47994690c124e59d979",
+  "result": "exercise-installed-startup.mjs",
+  "resultSha256": "3c76a7e17ad8f095cc8d40ea51e2831d42ba4ccb3c2ccec623cdf7517e461275",
+  "scope": "Narrower installed first-boot and restart test with final-path PROFILE binding; does not replace original three hide/reopen cycles",
+  "transforms": [
+    {
+      "before": "// Tests the installed bytes via LaunchServices. No inspector, fake ready frame,",
+      "after": "// Separate two-cycle installed first-boot/restart test; hide/reopen is NOT covered.\n// Tests the installed bytes via LaunchServices. No inspector, fake ready frame,"
+    },
+    {
+      "before": "import{verifyPackage}from'./package-inventory.mjs';",
+      "after": "import{verifyPackage}from'./package-inventory.mjs';\nimport{verifyInstalledProfileBinding}from'./installed-profile-binding.mjs';"
+    },
+    {
+      "before": "scope:'actual restored app through LaunchServices, trusted committed UI readiness and normal lifecycle; empty account flow expects welcome',plannedCycles:3",
+      "after": "scope:'installed first boot and same-account restart through LaunchServices, readiness and normal quit only; hide/reopen not tested',plannedCycles:2"
+    },
+    {
+      "before": "app=assembly.restoredApplication;assert.equal(app,join(assembled,'restored/DSH SEP.app'));",
+      "after": "assert.equal(assembly.phase,'committed');assert.equal(assembly.applicationStarted,false);assert.equal(assembly.source.archiveSha256,'6d0705c190bc56b3028cfa26a287ca04eba9ab39822e2edae1177a1033ccbf67');app=assembly.restoredApplication;assert.equal(app,join(userInfo().homedir,'Applications/DSH SEP.app'));"
+    },
+    {
+      "before": "for(let index=0;index<3;index++)",
+      "after": "for(let index=0;index<2;index++)"
+    },
+    {
+      "before": "const sessions=new Set(),generations=new Set();",
+      "after": "const sessions=new Set(),generations=new Set();let firstProfileSha=null;"
+    },
+    {
+      "before": "  const hidden=await observe('hide',generation.desktopPid,inner,desktop.launchTime);assert.equal(hidden.requestSent,true);await deadline(async()=>((await observe('snapshot',generation.desktopPid,inner)).hidden===true),10000);\n  await exec('/usr/bin/open',[app],{env,timeout:10000});\n  const activated=await deadline(async()=>(await frames(stdout)).find(r=>r.event==='activated'&&r.sessionId===ready.sessionId&&r.generation===ready.generation&&r.sequence>initialActivation.sequence),15000);\n  await deadline(async()=>{const r=await observe('snapshot',generation.desktopPid,inner);assert.equal(r.launchTime,desktop.launchTime);return r.hidden===false&&r.active===true;},10000);const same=await json(generationPath);assert.equal(same.generation,ready.generation);assert.equal(same.desktopPid,generation.desktopPid);cycle.reopen={sameGeneration:true,actualActivatedAck:activated.sequence,desktopUnhidden:true};\n",
+      "after": "  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};\n  // Deliberately no hide or reopen request: those original failed samples remain separate.\n"
+    },
+    {
+      "before": "  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};",
+      "after": "  const profileBytes=await readFile(join(dataRoot,'business/PROFILE.json')),profile=JSON.parse(profileBytes),profileSha=digest(profileBytes);verifyInstalledProfileBinding(profile,{programBytes:await readFile(join(app,'Contents/Resources/PROGRAM.json')),programSha256:assembly.programSha256,app,dataRoot});if(firstProfileSha===null)firstProfileSha=profileSha;else assert.equal(profileSha,firstProfileSha);cycle.profile={sha256:profileSha,installedPathBound:true,sameAcrossRestart:index>0};\n  cycle.initialActivation={acknowledged:true,sequence:initialActivation.sequence};"
+    },
+    {
+      "before": "result.notVerified=['physical Finder or Dock mouse input'",
+      "after": "result.notVerified=['hide/reopen certification','physical Finder or Dock mouse input'"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+# Bilingual-pair consistency record for safe-change-workflow.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/sep/system-enhancement-package/docs/safe-change-workflow.md
+/safe-change-workflow-local-candidate:
+  en: 7e8134a0b35270d5
+  zh: bfa0b3e08f483cb6
+/safe-change-workflow-local-candidate/summary:
+  en: a987bedbc206c9d7
+  zh: d6950d737d3e6ea5
+/safe-change-workflow-local-candidate/table-of-contents:
+  en: 2f7c73697890afd2
+  zh: 1bb6ab4d929a4be3
+/safe-change-workflow-local-candidate/authorization-scope:
+  en: 210c4db4fac2d376
+  zh: 33a63e47ee7cc435
+/safe-change-workflow-local-candidate/review-and-confirmation:
+  en: 34d250ad72b0f663
+  zh: d8ae1b3301a452da
+/safe-change-workflow-local-candidate/validation-coverage:
+  en: 091031c0f6a3f43a
+  zh: 52e168ddd681df2c
+/safe-change-workflow-local-candidate/closeout-and-lifecycle:
+  en: be7386fb70c04fa9
+  zh: 03b467479abf8247
+/safe-change-workflow-local-candidate/platform-coverage:
+  en: baeb79fb63eed2ab
+  zh: fa345007af2cbbfa
+/safe-change-workflow-local-candidate/developer-reference:
+  en: c2fddc6ab95e6b9d
+  zh: 2145c00130a34fb9
+/safe-change-workflow-local-candidate/dev-note:
+  en: fcaa68389e6f01cb
+  zh: d413e48371ca8c1b

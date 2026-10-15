@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "private Node pipe session with synthetic controller; no native install/UI acceptance",
+  "inputs": [
+    {
+      "path": "protocol.mjs",
+      "bytes": 4730,
+      "sha256": "929b1531b20529a751e6527fb93df23798fc41b95b1d0551e9b0141748e3b3a8"
+    },
+    {
+      "path": "protocol.test.mjs",
+      "bytes": 6232,
+      "sha256": "c4bf59b503d138b491b766ce7cb06fb1bb82732f8a4e7bc63aba0fd28db07140"
+    },
+    {
+      "path": "controller-session.mjs",
+      "bytes": 8522,
+      "sha256": "90e30e859e4e19f4bbe2aa350186110278a1ebde3ab0abf373708a3854f9d772"
+    },
+    {
+      "path": "controller-session.test.mjs",
+      "bytes": 8174,
+      "sha256": "379d091d3fb45f653c5dc4426bb7062e998025c3e78c094ae707b9ae876fa33a"
+    },
+    {
+      "path": "controller-session-fixture.mjs",
+      "bytes": 3072,
+      "sha256": "8ddf0e04fe8aa01a491c27e6df40274d421d013ab1e6534d2c3a020934c679b3"
+    },
+    {
+      "path": "SESSION.md",
+      "bytes": 3410,
+      "sha256": "e1ff2063e56729df9929f663ff0c619f516967b6c4d809418ee3a250bd231a6c"
+    }
+  ],
+  "tests": {
+    "existingProtocol": 17,
+    "newSession": 11
+  },
+  "notRun": [
+    "real macOS private-pipe execution",
+    "native AppKit confirmation",
+    "fixed NSBundle production admission",
+    "real controller integration"
+  ]
+}

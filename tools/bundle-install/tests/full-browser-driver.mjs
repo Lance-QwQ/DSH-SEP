@@ -1,0 +1,19 @@
+import assert from 'node:assert/strict';import {spawn} from 'node:child_process';import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';const sleep=ms=>new Promise(r=>setTimeout(r,ms));const bounded=(p,ms=7000)=>{let timer;return Promise.race([p,new Promise((_,j)=>{timer=setTimeout(()=>j(Error('owned fixture deadline')),ms);})]).finally(()=>clearTimeout(timer));};
+async function browser(directory){
+ const profile=join(directory,'edge-profile'),child=spawn(process.env.SEP_TEST_EDGE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',['--headless=new','--disable-gpu','--no-first-run','--disable-background-networking','--disable-component-update','--disable-extensions','--lang=zh-CN','--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],{stdio:['ignore','ignore','pipe'],windowsHide:true});
+ let stderr='';child.stderr.on('data',b=>{stderr=(stderr+b).slice(-4000)});const exited=new Promise(r=>child.once('exit',(code,signal)=>r({code,signal})));let ws,normal=false;
+ const cleanup=async()=>{try{if(!normal){child.kill();await bounded(exited);await writeFile(join(directory,'CLEANUP-EXCEPTION.json'),JSON.stringify({forcedProcessStop:true,stderr})+'\n');}}finally{ws?.close()}};
+ try{
+  let port;for(let n=0;n<100;n++){try{port=Number((await readFile(join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0]);if(port)break}catch{}await sleep(100)}assert(port,'owned browser did not start');
+  const targets=await(await fetch('http://127.0.0.1:'+port+'/json/list')).json();ws=new WebSocket(targets.find(t=>t.type==='page').webSocketDebuggerUrl);await bounded(new Promise((r,j)=>{ws.addEventListener('open',r,{once:true});ws.addEventListener('error',j,{once:true})}));
+  let seq=0;const pending=new Map();ws.addEventListener('message',e=>{const m=JSON.parse(e.data),p=pending.get(m.id);if(!p)return;pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(m.error.message)):p.resolve(m.result)});ws.addEventListener('close',()=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('owned browser closed'))}pending.clear()});
+  const cdp=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq,timer=setTimeout(()=>{pending.delete(id);reject(Error('CDP deadline '+method))},10000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}))});
+  const evaluate=async expression=>{const x=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(x.exceptionDetails)throw Error(x.exceptionDetails.exception?.description??x.exceptionDetails.text);return x.result.value};
+  const wait=async expression=>{for(let n=0;n<200;n++){if(await evaluate(`Boolean(${expression})`))return;await sleep(50)}await writeFile(join(directory,'UI-FAILURE.json'),JSON.stringify(await evaluate(`({text:document.body.innerText,errors:window.frontendErrors,bootFailure:window.bootFailure})`),null,2));throw Error('UI deadline: '+expression)};
+  const click=async expression=>{const p=await evaluate(`(()=>{const e=${expression};if(!e||e.disabled)throw Error('UI control unavailable');e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`);await cdp('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,...p});await cdp('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,...p})};
+  const screenshot=async name=>writeFile(join(directory,name+'.png'),Buffer.from((await cdp('Page.captureScreenshot',{captureBeyondViewport:true})).data,'base64'));
+  return {child,cdp,evaluate,wait,click,screenshot,cleanup,async finish(){await cdp('Browser.close').catch(e=>{if(e.message!=='owned browser closed')throw e});await bounded(exited);normal=true;ws.close()}};
+ }catch(e){await cleanup();throw e}
+}
+const button=text=>`[...document.querySelectorAll('button')].find(b=>b.textContent.trim()===${JSON.stringify(text)})`;
+export {browser,button};

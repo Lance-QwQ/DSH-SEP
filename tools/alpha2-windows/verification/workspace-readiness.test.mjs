@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {isWorkspaceReady} from './workspace-readiness.mjs';
+const ready=()=>({schema:1,readyState:'complete',textLength:180,bootCount:0,spinnerCount:0,rootCount:1,sidebarCount:1,mainCount:1,slotErrorCount:0,factoryErrorCount:0,visibleNewSessionButtons:1,sep:'function',host:'function'});
+test('actual 24-character HARNESS loading screen with both preloads is not a workspace',()=>{const text='HARNESS\nLoading plugins…';assert.equal(text.length,24);assert.equal(isWorkspaceReady({...ready(),textLength:text.length,bootCount:1,spinnerCount:1,rootCount:0,sidebarCount:0,mainCount:0,visibleNewSessionButtons:0}),false);});
+test('boot handoff or spinner remaining rejects even with rendered slots',()=>{for(const field of ['bootCount','spinnerCount'])assert.equal(isWorkspaceReady({...ready(),[field]:1}),false);});
+test('missing or duplicate root/sidebar/main slots are not a workspace',()=>{for(const field of ['rootCount','sidebarCount','mainCount'])for(const n of [0,2])assert.equal(isWorkspaceReady({...ready(),[field]:n}),false);});
+test('renderer slot/factory error surfaces reject',()=>{for(const field of ['slotErrorCount','factoryErrorCount'])assert.equal(isWorkspaceReady({...ready(),[field]:1}),false);});
+test('missing visible enabled actual new-session control rejects',()=>{assert.equal(isWorkspaceReady({...ready(),visibleNewSessionButtons:0}),false);});
+test('incomplete document or missing real preload rejects',()=>{assert.equal(isWorkspaceReady({...ready(),readyState:'interactive'}),false);for(const field of ['sep','host'])assert.equal(isWorkspaceReady({...ready(),[field]:'undefined'}),false);});
+test('completed renderer and visible actual control pass without a root rectangle or text threshold',()=>{assert.equal(isWorkspaceReady({...ready(),textLength:0}),true);});
+test('malformed or missing snapshots fail closed',()=>{for(const item of [null,undefined,{}, {...ready(),schema:2},{...ready(),visibleNewSessionButtons:'1'}])assert.equal(isWorkspaceReady(item),false);});

@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Windows x64 controlled private COPY + true desktop; daily candidate prepared only; no GitHub upload",
+  "programs": {
+    "privateDesktop": {
+      "generation": "r5",
+      "graphSha256": "cd92c0ecebcf94023c318d567cb9487f3b947d4803cb612bd3e3adb686a4b6ca",
+      "rounds": 2,
+      "productionMain": "lib/main.js"
+    },
+    "dailyCandidate": {
+      "generation": "r6",
+      "graphSha256": "715ed1c0495d91bba2131029ec0475b2e735d1688b156ce269df149487427a2b",
+      "notSelected": true,
+      "inventoryEntries": 910,
+      "hardBlocks": 0
+    }
+  },
+  "inputs": [
+    {
+      "path": "tools/alpha2-private-desktop/README.md",
+      "sha256": "ab31d3e1b20d98040c12a74ba5d7e45302dd6b37eb86ca041166494022d7ae6c"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/audit-resources.ps1",
+      "sha256": "2243c16e2b283d320c01acb9415ce8cd09c964f3815d6e364fe42e403c770253"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/close-electron-cache-acl.ps1",
+      "sha256": "e66a62d75dde9ed4212b5e691784fa12aa11d4587a44bb3434db6b34ad9ea253"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/current-profile.mjs",
+      "sha256": "d8717aba0c1b84aa53a0aa65206424cb4ff6c6099096c4c211da59b65fc1efd6"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/current-profile.test.mjs",
+      "sha256": "89743e8cae646b89c21393ba4581ac2d4e31119509ec3c96093492ead58e4323"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/finalize-plan.mjs",
+      "sha256": "19dcc597e58b89c77d8b254778991032f4a2d9b11282d1a3f2aa52c3a51bdfe8"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/identity.test.mjs",
+      "sha256": "5f1aca802d855d7a90f6c46b4b8b18165e331e63a465b98f5c376643802cd1d4"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/prepare-candidate.mjs",
+      "sha256": "62a8c40adbfc6c074cf6ef159be2c512268d765812f1fa8b9c74f6c939894b4c"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/prepare-current-candidate.mjs",
+      "sha256": "a4d06e20b21e8daa9a218e0dbab480a0aaa5521ea8899cb84bbca6e0623718b2"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/prepare-desktop.mjs",
+      "sha256": "301dd30f4a0093fa0fd188b3b497b1fe10e30dfb6e55a7cf934c1618daedb3ae"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/prepare-private.mjs",
+      "sha256": "34f1ef21fd4a29ae915bbccb9bb08a47a1564f489966e7a320f5dd97d97e385b"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/repair-fixture.mjs",
+      "sha256": "0081bc13c99e8c2c6685f93a5daf416532a8d8af324b6ff8ab7f34649dd79bc3"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/repair-probe.mjs",
+      "sha256": "d580cb206b3989cb5ecc81dec3a10b1da55482248ede09a5d7e93f39ffa644ea"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/run-desktop.mjs",
+      "sha256": "c3482fc734359ef048ca36eb7b4d77e849f78805b06ad1a446eb2dbfcf572996"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/verification-copy.mjs",
+      "sha256": "3f76c8752dd76cec4ee1860d8b465eabd56fc1ff145783adabeac878d275f51a"
+    },
+    {
+      "path": "tools/alpha2-private-desktop/verification-copy.test.mjs",
+      "sha256": "253e4f302bea4004278af255cfd17842f02f37ed4645cd1f8fd7bb14cd233fde"
+    },
+    {
+      "sha256": "d71017af47f293ede8bd74e86ee3e0e4df7413c759dd2d2bffbc4320956ff47b",
+      "path": "tools/alpha2-private-desktop/control-bindings.mjs"
+    },
+    {
+      "sha256": "e6a209d1a6d9e517d8d63c13f3d423de699522853cf779cade2ebddd97800ec0",
+      "path": "tools/alpha2-private-desktop/control-bindings.test.mjs"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "desktop-identity-red.tap",
+      "sha256": "3573d58665dfb5d5ff70569e331f52971181bbad18db7ed761282fe355def622"
+    },
+    {
+      "path": "desktop-identity-green.tap",
+      "sha256": "f774444f3ea22aaab98921e7318a0ea5f84858d8d29dba720040f267cf50c5c5"
+    },
+    {
+      "path": "current-profile-red.tap",
+      "sha256": "1fa805398a9b4f7faddd2dbb6773b24cae03e6cbc08f5ade6a19d5db5445e9d1"
+    },
+    {
+      "path": "current-profile-green.tap",
+      "sha256": "a43f908dbb1ed63c950633ed00ffc5ef74cfd57db847478a97cffb0c9d36eea4"
+    },
+    {
+      "path": "candidate-r6-regression.tap",
+      "sha256": "453cd56adc764d1102378e399f3ac10df90e5ba37e48c90589548d9e6e09703f"
+    },
+    {
+      "path": "candidate-r6-retest.tap",
+      "sha256": "e8f3255809fb007650351391511ca8aeb7b214426807c74f1404b85fce6c80ec"
+    },
+    {
+      "path": "FINAL-DATA-PROGRAM-AUDIT-r4.json",
+      "sha256": "1d1283240deb6d2bad80682d2e67c6638f30213c842a21bc3e2ac3f4696d3b63"
+    },
+    {
+      "path": "FINAL-RESOURCES-ACL-r3.json",
+      "sha256": "fa51a1e997fd32275813e1921a03f9bf8d490e21f3571551d6cb4978b6270bb4"
+    },
+    {
+      "path": "private-copy/PRIVATE-DESKTOP-RESULT-r1.json",
+      "sha256": "2030d0191bec07a4e28fb1b0ba0120e439424656f951b44d409b81b19e714bb5",
+      "privateLocalOnly": true
+    },
+    {
+      "path": "private-copy/PRIVATE-DESKTOP-RESULT-r2.json",
+      "sha256": "a7b4feb9190dc47f21e493028922eb856d78118513318ba57f5e78ee50a36021",
+      "privateLocalOnly": true
+    },
+    {
+      "path": "private-copy/PRIVATE-DESKTOP-RESULT-r3.json",
+      "sha256": "5fad42e58bddc30f81f1f406f365c3724f797ccfad16cc25deacb50e0d69c859",
+      "privateLocalOnly": true
+    },
+    {
+      "path": "private-copy/ELECTRON-CACHE-ACL-CLOSEOUT.json",
+      "sha256": "6d7c43ef0b3fbff44bb00ea409c45490b101b0e4c07b4b4738c914083821a6e2",
+      "privateLocalOnly": true
+    },
+    {
+      "path": "source-final-regression.tap",
+      "sha256": "85ced9b2df73f53b9a322d6453fe9613236e5cb480ef16e4357de477860c1afb",
+      "repeated": true,
+      "tests": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    {
+      "sha256": "0bba01d1bb9d7f978175a28ac47f7cdaf579df74f0d95ad9c64fd3950cf06395",
+      "path": "control-binding-red.tap"
+    },
+    {
+      "sha256": "2f94112c1558330553c48acbcc5d07e600a34b7e6d2e41e5cf0412105e076dbe",
+      "path": "control-binding-green.tap"
+    }
+  ],
+  "testAccounting": {
+    "identity": {
+      "definitions": 8,
+      "pass": 8
+    },
+    "currentProfile": {
+      "definitions": 2,
+      "pass": 2
+    },
+    "candidate": {
+      "definitions": 51,
+      "firstRun": {
+        "pass": 49,
+        "fail": 2
+      },
+      "correctedEnvironmentRerun": {
+        "pass": 2,
+        "fail": 0
+      }
+    },
+    "skip": 0,
+    "controlPreparation": {
+      "definitions": 4,
+      "fail": 0,
+      "pass": 4
+    }
+  },
+  "artifactPathResolution": {
+    "regular": "Relative to the local phase directory alpha2-desktop-continuation-20261012",
+    "private-copy": "Local-only alias for working in PRIVATE-DESKTOP-FIXTURE-r1.json; replace this prefix before verification. Private directory paths and bodies are not published."
+  }
+}

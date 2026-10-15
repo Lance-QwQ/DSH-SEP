@@ -1,0 +1,38 @@
+export declare const zh: {
+    readonly title: "会话预算";
+    readonly refresh: "刷新";
+    readonly description: "为每个会话窗口设置累计金额安全护栏。默认 100 元，可调整默认值，或为指定会话单独设置。主任务和归属于它的子代理共同计入该会话。";
+    readonly notInvoice: "这是 SEP 的本地估算与预留额度，不是 DeepSeek 账户余额，也不是提供方账单。";
+    readonly defaultLimit: "默认单会话上限（元）";
+    readonly defaultHelp: "修改默认值会影响尚未单独设置上限的会话。已产生的消费和预留不会清零。";
+    readonly range: "可设置 0.01 至 1,000,000 元，最多两位小数。";
+    readonly saveDefault: "保存默认上限";
+    readonly session: "会话窗口";
+    readonly noSessions: "尚无可管理的根会话。";
+    readonly sessionLimit: "此会话累计上限（元）";
+    readonly saveSession: "保存此会话上限";
+    readonly usesDefault: "此会话当前使用默认上限。";
+    readonly override: "此会话已使用独立上限，不随默认值变化。";
+    readonly accounted: "累计计入金额";
+    readonly settled: "已结算估算";
+    readonly reserved: "未结预留";
+    readonly remaining: "剩余可用额度";
+    readonly unattributed: "仅计入共享总账的旧／未归属金额";
+    readonly sharedGuard: "共享总预算上限";
+    readonly taskGuard: "单轮任务上限";
+    readonly independent: "三项护栏独立生效。即使将会话上限设为 200 元，请求仍可能被共享总预算剩余额度或单轮上限拦截。设置低于已计入金额后，后续新请求会受限；已发出的请求仍需结算。";
+    readonly retained: "保存只调整护栏。历史消费、子代理归属和未结预留均保留。";
+    readonly unknown: "结果未知的请求仍占用预留；无法归属旧消费只计入共享总账，不猜测分配给某个会话。";
+    readonly confirmed: "上次读取时间";
+    readonly loading: "正在读取已保存的设置…";
+    readonly unavailable: "预算设置暂不可用。";
+    readonly ledgerMissing: "预算账本缺失，已阻止新的模型请求。请恢复并核验原账本，不能清零重建。刷新不会自动重建账本。";
+    readonly ledgerChanged: "预算账本在操作期间发生变化，已拒绝本次写入。请核验原账本并刷新；不会自动重复保存或清零消费。";
+    readonly readError: "读取失败，旧值已隐藏。请刷新后再修改。";
+    readonly unconfirmed: "保存结果未确认，已尝试重新读取。不会自动重复提交；请核对已保存值。";
+    readonly conflict: "设置已被其他操作修改，已重新读取。请核对后再保存。";
+    readonly saved: "设置已保存，正在核对最新值。";
+};
+export type BudgetLocaleKey = keyof typeof zh;
+export declare const en: Record<BudgetLocaleKey, string>;
+//# sourceMappingURL=budget-locales.d.ts.map

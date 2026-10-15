@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "name": "guarded-p1-cold-runtime",
+  "targetHost": "0.2.1-alpha.1",
+  "platform": "Windows x64 local NTFS synthetic cold-start scope",
+  "status": "pass",
+  "completeProfileStatus": "blocked",
+  "businessActivationAllowed": false,
+  "entry": "dsh-sep-bundle/p1-runtime",
+  "provides": [
+    "sepP1Runtime"
+  ],
+  "methods": [
+    "review",
+    "activate",
+    "close",
+    "status",
+    "stream"
+  ],
+  "configuration": {
+    "required": [
+      "profile",
+      "p1",
+      "compaction"
+    ],
+    "optional": [
+      "shutdownMs"
+    ],
+    "shutdownMsDefault": 5000,
+    "shutdownMsRange": [
+      100,
+      60000
+    ],
+    "p1EnabledRequired": true,
+    "initialSpentCnyMustBeZero": true,
+    "budgetPathMustMatchProfile": true
+  },
+  "budget": {
+    "startup": "Existing validated V3 ledger only; read-only initialization; missing/legacy/malformed ledgers rejected",
+    "preserves": [
+      "initialSpent",
+      "entries",
+      "unknown reservations",
+      "childBindings",
+      "sessionDefault",
+      "sessionLimits",
+      "taskLimits",
+      "reconciliations"
+    ],
+    "profileWide": [
+      "provider/model allowlist",
+      "input UTF-8 byte limit",
+      "output token limit",
+      "shared accounting including native compaction/title/retry"
+    ],
+    "sharedCapDefaultCny": 100,
+    "taskCapDefaultCny": 5,
+    "sessionCapDefaultCny": 100,
+    "unknown": "status reserved with phase unknown; not a free retry",
+    "scopeAttribution": "capture original immutable native turn signal; durable child binding from actual registry and initiator"
+  },
+  "delegation": {
+    "limitsApplyOnlyTo": "tasks created through suite_delegate",
+    "maxConcurrent": 2,
+    "maxDepth": 1,
+    "readOnly": true,
+    "timeoutMsDefault": 30000,
+    "disposalAndFinalReceiptTracked": true,
+    "trustedIndependentChildKeepsNativePermissions": true,
+    "nativeDelegationToolsInSelectedProject": "redirected to suite_delegate by separate Profile policy",
+    "prework": "optional existing plugin-group prerequisite; not connected/certified by this fragment"
+  },
+  "delivery": {
+    "frozenStandards": true,
+    "maxReworks": 2,
+    "independentChecks": true
+  },
+  "replacement": {
+    "oneShotColdStartup": true,
+    "requires": "review hash, exact Profile binding, valid existing governance, actual plain native compaction row, no live Sessions",
+    "persistentConfigWrite": false,
+    "privateHotReplacementVerified": false
+  },
+  "cleanup": {
+    "explicitCloseDeadlineReceipt": true,
+    "blocksNewOwnedAdmission": true,
+    "acceptedModelsTrackedUntilAccountingFinally": true,
+    "ordinaryToolsTrackedFromNativePreExecuteToFinalResult": true,
+    "managedTaskFinalPersistTracked": true,
+    "cancelsSelectedRegisteredAgents": true,
+    "awaitsNativeAgentWhenIdle": true,
+    "streamMethodCombinesLifetimeBeforeNativeDispatch": true,
+    "immutableNativeRequestsNotMutated": true,
+    "unattributedNativeCallsWithoutCancelHandle": "wait actual settlement; deadline blocked; no invented cancellation guarantee",
+    "nativeRestoration": "cancel/drain owned compaction, restore original options, keep Profile if restore blocked",
+    "deadline": "return blocked/draining and retain protected resources; background drain may later finish",
+    "cleanupFailure": "blocked; never infer zero from Cordis disposal alone; check retained P2 owner marker",
+    "fiberDisposal": "joins actual drain and may exceed explicit close deadline; not whole-application deadline guarantee",
+    "wholeApplicationDeadlineVerified": false
+  },
+  "fixedTestDefinitions": 20,
+  "notVerified": [
+    "complete SEP RAG/layered memory/media/settings composition",
+    "full application startup admission and root shutdown orchestration",
+    "private live provider replacement and migration",
+    "persistent YAML/crash recovery",
+    "frontend and remote Git URL GUI lifecycle",
+    "real model/credentials and paid provider transport",
+    "Linux/macOS runtime",
+    "external backend/MCP"
+  ]
+}

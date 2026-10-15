@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "stage": "entry-only",
+  "businessActivationAllowed": false,
+  "verifiedBusinessHosts": [],
+  "plannedHostChecks": [
+    "0.2.0-rc.2",
+    "0.2.1-alpha.1"
+  ],
+  "scope": "Bundle recognition and Loader admission only. No full SEP runtime compatibility is claimed."
+}

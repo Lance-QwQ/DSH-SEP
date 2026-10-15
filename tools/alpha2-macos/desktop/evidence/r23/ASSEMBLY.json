@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "isolated macOS ARM64 integrated preview",
+  "fullMacCertification": "blocked",
+  "dshVersion": "0.2.1-alpha.2",
+  "commands": [
+    {
+      "label": "copy-app",
+      "status": "pass",
+      "exitCode": 0,
+      "signal": null,
+      "timedOut": false,
+      "cleanupConfirmed": true,
+      "logFinished": true
+    },
+    {
+      "label": "verify-node",
+      "status": "pass",
+      "exitCode": 0,
+      "signal": null,
+      "timedOut": false,
+      "cleanupConfirmed": true,
+      "logFinished": true
+    },
+    {
+      "label": "archive",
+      "status": "pass",
+      "exitCode": 0,
+      "signal": null,
+      "timedOut": false,
+      "cleanupConfirmed": true,
+      "logFinished": true
+    }
+  ],
+  "captureSha256": "3c6eaccc6337907e0ece2715d6b61213ef8d382dc98f2fa703b4c42af07613b3",
+  "packageRoot": "/Users/runner/work/_temp/final-package/DSH-SEP-macOS-Alpha2-preview",
+  "programSha256": "49a3aaa7a1beb74ae64bc687a04566008a641ea02013f1d36e7945d5b8d448e8",
+  "inputs": [
+    {
+      "path": "apfs-tree/project-tree.mjs",
+      "sha256": "d7283d476851aa199b4cdbdc7b44015ffa96205918d9ef925cddd968c6aecca3"
+    },
+    {
+      "path": "transactions/mac-managed-project.mjs",
+      "sha256": "9b4134b17587dc8623b9e6bc315f0882226e4f1a2334cad8972ab21810f8666b"
+    },
+    {
+      "path": "transactions/transaction-store.mjs",
+      "sha256": "f18fe590e924d38c39bc150480de8d910286614ecd0f51cd5943960648f253ba"
+    },
+    {
+      "path": "transactions/document-copies.mjs",
+      "sha256": "54bd2a133a6fdf713773e8dd890f247375b6a689b79b995f5e7251a3fcfdc7c5"
+    },
+    {
+      "path": "lifecycle/managed-project-lifecycle.mjs",
+      "sha256": "480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844"
+    },
+    {
+      "path": "profile/controlled-files.mjs",
+      "sha256": "400a6c84f94dc87efc40406dced9d38e71b22e3c4a285327d9e71f54c435a9ca"
+    },
+    {
+      "path": "captured/owner-lease.mjs",
+      "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a"
+    },
+    {
+      "path": "captured/owner-posix.mjs",
+      "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3"
+    },
+    {
+      "path": "business/standalone.mjs",
+      "sha256": "e4ad150db13d7cf173826923f2d047c61c8762ff959b403eeee73fe01e7911c6"
+    },
+    {
+      "path": "business/profile-layout.mjs",
+      "sha256": "5513a06989b5dfcc4b4429b796be65efe1cab8fa78dab68bc7c9759194690576"
+    },
+    {
+      "path": "business/runtime.mjs",
+      "sha256": "0c413885016af096c35b5ab6b4f81856562a8127df0173d9d48429f50ece0a1e"
+    },
+    {
+      "path": "business/profile-plugin.mjs",
+      "sha256": "ca30b19aae277b4c6df650723002bc27558d78c266526a1c8445073c045937fc"
+    },
+    {
+      "path": "business/readonly-files.mjs",
+      "sha256": "43ec22c1e9c1304075b942a87bfd14a0ca02f189590ad2b3ed98f1223152cc19"
+    },
+    {
+      "path": "business/host-modules.mjs",
+      "sha256": "a982f1b06f61070cbd54e3ba708540b2fb640f9089697bd7981fde446c4a79c7"
+    },
+    {
+      "path": "business/bundle-modules.mjs",
+      "sha256": "056bd1bc221521451960e91444dcebd6dc7aab3a19d9cc4fbab5f66273f087a7"
+    },
+    {
+      "path": "business/bounded-read.mjs",
+      "sha256": "9d471a3c66256e5b4ea18495942fdee1e162590fce22e22a4eb8bcef7bd9191e"
+    },
+    {
+      "path": "business/capture-runtime.mjs",
+      "sha256": "46853fae12052e68d419f5f1f40208c9ed4707699f34b07f5cd6a09c3944d411"
+    },
+    {
+      "path": "business/consumers.mjs",
+      "sha256": "f45f3f7185fea0cef77de34730e2a4ac5e0b72073002f3731a09c7fa87de57db"
+    },
+    {
+      "path": "business/documents.mjs",
+      "sha256": "964a605dd058afea49ab9466a6e66d731f8c2613dc01c341be496617eea021ba"
+    },
+    {
+      "path": "business/snapshot-scope.mjs",
+      "sha256": "075df32ed73c9f0a8ca050e11e009464b1114b9e7b7be1088c29cad93635866f"
+    },
+    {
+      "path": "desktop/managed-broker/launch-full.mjs",
+      "sha256": "37e6a332e251ffec6818108e5d37e4faacdbd8d77b491de12561601c9a3962c3"
+    },
+    {
+      "path": "desktop/managed-broker/program-manifest.mjs",
+      "sha256": "b3a063a699bb26efc4c873e1313c2a2f0b66ffe29d21f8e0cd449e3601b96445"
+    },
+    {
+      "path": "desktop/managed-broker/launch-state.mjs",
+      "sha256": "ef85d71769efba6618bb9dab670a369ed329732adf09f9aec25d7dd7c7b0ec07"
+    },
+    {
+      "path": "desktop/managed-broker/desktop-rpc.mjs",
+      "sha256": "f715cd525a386bf5bb64baa8f282a1cf0fc6f77b82f424358ae3d1d8c28033dc"
+    },
+    {
+      "path": "desktop/managed-broker/host-owner.mjs",
+      "sha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f"
+    },
+    {
+      "path": "desktop/managed-broker/business-host.mjs",
+      "sha256": "b0016da79d72268d6b325ed93c59a09227ebbda30badc9bf2a05fec3afd792e8"
+    }
+  ],
+  "treeSha256": "c260dee9312b31e7986d099341cace49012e68ae90773036444c4ba9c9c00db8",
+  "artifact": "DSH-SEP-macOS-Alpha2-preview.zip",
+  "artifactSha256": "2bcf3328ba64208c3153dcaa03706b860ea85af9aba7d535b0b11405df9c3e16",
+  "artifactBytes": 509764143,
+  "notVerified": [
+    "integrated native desktop startup until separate smoke passes",
+    "Developer ID/notarization",
+    "physical desktop and TCC interaction",
+    "paid provider calls",
+    "arbitrary process-family cleanup",
+    "Finder app bootstrap",
+    "production automatic updates"
+  ]
+}

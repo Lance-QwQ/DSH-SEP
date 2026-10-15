@@ -1,0 +1,334 @@
+[
+  {
+    "name": "host-owner.mjs",
+    "bytes": 6302,
+    "origin": {
+      "source": "../managed-broker/host-owner.mjs",
+      "inputSha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f",
+      "resultSha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8",
+      "transforms": [
+        {
+          "before": "import {fork} from 'node:child_process';",
+          "after": "import {fork,ChildProcess} from 'node:child_process';import {checkBinding} from '../project-workflow-ui/rules.mjs';import {openProjectRelay} from './relay.mjs';",
+          "count": 1,
+          "inputSha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f",
+          "resultSha256": "c79bc5e01f2c3c084961e00ac2a9a25d4122b0fc9924e2844f754b963116a075"
+        },
+        {
+          "before": "input,env={},startDeadlineMs=40000",
+          "after": "input,projectBinding,env={},startDeadlineMs=40000",
+          "count": 1,
+          "inputSha256": "c79bc5e01f2c3c084961e00ac2a9a25d4122b0fc9924e2844f754b963116a075",
+          "resultSha256": "14498a7748e61a756fb370ec95971bf91f7529e0c48c1bd1c375f75e68aa01a0"
+        },
+        {
+          "before": " const serialized=JSON.stringify(input);",
+          "after": " const binding=checkBinding(projectBinding);let relay;\n const serialized=JSON.stringify(input);",
+          "count": 1,
+          "inputSha256": "14498a7748e61a756fb370ec95971bf91f7529e0c48c1bd1c375f75e68aa01a0",
+          "resultSha256": "15e9b8002f8d5ec1f270d8f0c23239405e18c393985c408de48f1f36309fdc65"
+        },
+        {
+          "before": "stdio:['ignore','pipe','pipe','ipc']",
+          "after": "stdio:['ignore','pipe','pipe','ipc',process.platform==='win32'?'overlapped':'pipe']",
+          "count": 1,
+          "inputSha256": "15e9b8002f8d5ec1f270d8f0c23239405e18c393985c408de48f1f36309fdc65",
+          "resultSha256": "9c3d616ba0c3b0be0b8f81d8206fc7b3dd29ca037d42f44cb650a3079545cdb1"
+        },
+        {
+          "before": "input:JSON.parse(serialized)}",
+          "after": "input:JSON.parse(serialized),projectBinding:binding}",
+          "count": 1,
+          "inputSha256": "9c3d616ba0c3b0be0b8f81d8206fc7b3dd29ca037d42f44cb650a3079545cdb1",
+          "resultSha256": "d4999bac23c32925d7e173ca23f1628893687a62067965a713d87436f8f27325"
+        },
+        {
+          "before": "closeReceipt=response.receipt;await bound(exited",
+          "after": "closeReceipt=response.receipt;child.stdio[4].end();await bound(exited",
+          "count": 1,
+          "inputSha256": "d4999bac23c32925d7e173ca23f1628893687a62067965a713d87436f8f27325",
+          "resultSha256": "d33c4d7ee41ea929294922492f6f6da26481233fcd2e9c9b219b15e697f31810"
+        },
+        {
+          "before": " return Object.freeze({status,start,ready:",
+          "after": " function attachProjectDesktop(desktop){if(phase!=='running'||relay||!(desktop instanceof ChildProcess)||!Number.isSafeInteger(desktop.pid)||desktop.pid<1||desktop.exitCode!==null||desktop.signalCode!==null||!desktop.stdio[4])throw failure('SEP_PROJECT_UI_OWNER');relay=openProjectRelay({hostPort:child.stdio[4],desktopPort:desktop.stdio[4],binding});return relay;}\n return Object.freeze({status,start,attachProjectDesktop,ready:",
+          "count": 1,
+          "inputSha256": "d33c4d7ee41ea929294922492f6f6da26481233fcd2e9c9b219b15e697f31810",
+          "resultSha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8"
+        }
+      ]
+    }
+  },
+  {
+    "name": "business-host.mjs",
+    "bytes": 3640,
+    "origin": {
+      "source": "../managed-broker/business-host.mjs",
+      "inputSha256": "a1712ce685020656e3994a4af9ea4e2f59eb0d7546032a9b58643e8d482345e5",
+      "resultSha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb",
+      "transforms": [
+        {
+          "before": "import {readFile,lstat,realpath}",
+          "after": "import {Socket} from 'node:net';import {checkBinding} from '../project-workflow-ui/rules.mjs';\nimport {readFile,lstat,realpath}",
+          "count": 1,
+          "inputSha256": "a1712ce685020656e3994a4af9ea4e2f59eb0d7546032a9b58643e8d482345e5",
+          "resultSha256": "9d8cce3af360aaa473f6bbfbde5109524155aa8bc01fae24e656c6f13dabb243"
+        },
+        {
+          "before": "let initialized=false,opening",
+          "after": "let projectPort;\nlet initialized=false,opening",
+          "count": 1,
+          "inputSha256": "9d8cce3af360aaa473f6bbfbde5109524155aa8bc01fae24e656c6f13dabb243",
+          "resultSha256": "205bf3b73f4907c2eccee245e5e3b663662a7fea776292cb00ad0c87ae93403b"
+        },
+        {
+          "before": "clearInterval(keepAlive);if(process.connected)process.disconnect();}return receipt;",
+          "after": "projectPort?.end();clearInterval(keepAlive);if(process.connected)process.disconnect();}return receipt;",
+          "count": 1,
+          "inputSha256": "205bf3b73f4907c2eccee245e5e3b663662a7fea776292cb00ad0c87ae93403b",
+          "resultSha256": "d284c953ae97e3158f30038380eb839a41036f4a76f5a74e8750c20a9ecd2ed4"
+        },
+        {
+          "before": "try{return await openMacBusiness(input);}",
+          "after": "try{const binding=checkBinding(message.projectBinding);projectPort=new Socket({fd:4,readable:true,writable:true});projectPort.on('error',()=>{});return await openMacBusiness(input,{currentProject:{binding,port:projectPort}});}",
+          "count": 1,
+          "inputSha256": "d284c953ae97e3158f30038380eb839a41036f4a76f5a74e8750c20a9ecd2ed4",
+          "resultSha256": "f729e5b00b04090cba88e90b165b1c2f0c8c29588daa53ebd94ced7989015012"
+        },
+        {
+          "before": "if(!runtime&&!cleanupOwner){clearInterval(keepAlive);",
+          "after": "if(!runtime&&!cleanupOwner){projectPort?.end();clearInterval(keepAlive);",
+          "count": 1,
+          "inputSha256": "f729e5b00b04090cba88e90b165b1c2f0c8c29588daa53ebd94ced7989015012",
+          "resultSha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb"
+        }
+      ]
+    }
+  },
+  {
+    "name": "launch-full.mjs",
+    "bytes": 9327,
+    "origin": {
+      "source": "../managed-broker/launch-full.mjs",
+      "inputSha256": "13f021e4b19282028df9ff56475e69ce995f82c677964effc3d66f9fea8e6a7c",
+      "resultSha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069",
+      "transforms": [
+        {
+          "before": "from './program-manifest.mjs'",
+          "after": "from '../managed-broker/program-manifest.mjs'",
+          "count": 1,
+          "inputSha256": "13f021e4b19282028df9ff56475e69ce995f82c677964effc3d66f9fea8e6a7c",
+          "resultSha256": "c757b23512520287f5b7652f5ea0ac8973e916a28cc96a25bd3d4bebd1f387b1"
+        },
+        {
+          "before": "from './desktop-rpc.mjs'",
+          "after": "from '../managed-broker/desktop-rpc.mjs'",
+          "count": 1,
+          "inputSha256": "c757b23512520287f5b7652f5ea0ac8973e916a28cc96a25bd3d4bebd1f387b1",
+          "resultSha256": "35d89dfa82ed15a3ed218bc4be3a52c302b8534c05d08d4fa237af0a3bda5d9d"
+        },
+        {
+          "before": "from './launch-state.mjs'",
+          "after": "from '../managed-broker/launch-state.mjs'",
+          "count": 1,
+          "inputSha256": "35d89dfa82ed15a3ed218bc4be3a52c302b8534c05d08d4fa237af0a3bda5d9d",
+          "resultSha256": "d9cf1bba531d81ec239b8589c02f04257be3a530f1fa15b013db141d067a1e71"
+        },
+        {
+          "before": "if(control!==undefined)(await import('../product-control/launch-control.mjs')).assertLaunchControl(control);",
+          "after": "if(control===undefined)fail('SEP_PROJECT_UI_CONTROL_REQUIRED');(await import('../product-control/launch-control.mjs')).assertLaunchControl(control);",
+          "count": 1,
+          "inputSha256": "d9cf1bba531d81ec239b8589c02f04257be3a530f1fa15b013db141d067a1e71",
+          "resultSha256": "85367532f3ba00bb1510df30afae3263a2db1f4984bd4313b121297134ad8a6a"
+        },
+        {
+          "before": "owner=createHostOwner({nodeExecutable:",
+          "after": "const projectBinding={nonce:randomBytes(32).toString('hex'),programSha256,ownerGeneration:generation};\n  owner=createHostOwner({projectBinding,nodeExecutable:",
+          "count": 1,
+          "inputSha256": "85367532f3ba00bb1510df30afae3263a2db1f4984bd4313b121297134ad8a6a",
+          "resultSha256": "776b12bf3487e1a47eb6a0fdd27cb33865f7c8bbea2d595f6bc0a4546e7f7a98"
+        },
+        {
+          "before": "stdio:control?['ignore','pipe','pipe','pipe']:['ignore','pipe','pipe']",
+          "after": "stdio:['ignore','pipe','pipe','pipe','pipe']",
+          "count": 1,
+          "inputSha256": "776b12bf3487e1a47eb6a0fdd27cb33865f7c8bbea2d595f6bc0a4546e7f7a98",
+          "resultSha256": "33c8d6f667d3226a7d3e0a8c6ecb276b386d9097cd4a98e3d1e2add0d392d2ea"
+        },
+        {
+          "before": "  if(control)control.attach(desktop);",
+          "after": "  if(control)control.attach(desktop);\n  owner.attachProjectDesktop(desktop);",
+          "count": 1,
+          "inputSha256": "33c8d6f667d3226a7d3e0a8c6ecb276b386d9097cd4a98e3d1e2add0d392d2ea",
+          "resultSha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069"
+        }
+      ]
+    }
+  },
+  {
+    "name": "controller.mjs",
+    "bytes": 2596,
+    "origin": {
+      "source": "../../bootstrap/controller.mjs",
+      "inputSha256": "8147922ffe5a15b229ba1a052e452f378c82e886c41c7e68e4c849be48d36efd",
+      "resultSha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361",
+      "transforms": [
+        {
+          "before": "../desktop/managed-broker/launch-full.mjs",
+          "after": "../desktop/project-workflow-product/launch-full.mjs",
+          "count": 1,
+          "inputSha256": "8147922ffe5a15b229ba1a052e452f378c82e886c41c7e68e4c849be48d36efd",
+          "resultSha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361"
+        }
+      ]
+    }
+  },
+  {
+    "name": "profile-plugin.mjs",
+    "bytes": 3942,
+    "origin": {
+      "source": "../../business/profile-plugin.mjs",
+      "inputSha256": "ca30b19aae277b4c6df650723002bc27558d78c266526a1c8445073c045937fc",
+      "resultSha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49",
+      "transforms": [
+        {
+          "before": "from '../profile/controlled-files.mjs'",
+          "after": "from '../../profile/controlled-files.mjs'",
+          "count": 1,
+          "inputSha256": "ca30b19aae277b4c6df650723002bc27558d78c266526a1c8445073c045937fc",
+          "resultSha256": "7bcd55f7c672fda8d6fa5a86f0ea67154778b63740a5cabe5713b91b95cc3a6e"
+        },
+        {
+          "before": "import {openGovernedMacManagedProject} from '../lifecycle/managed-project-lifecycle.mjs';",
+          "after": "import {openWorkflowProject} from '../../project-workflow/project-factory.mjs';import {wrapManagedProject} from '../../project-workflow/derived-lifecycle.mjs';import {openHostBridge} from '../project-workflow-ui/host.mjs';",
+          "count": 1,
+          "inputSha256": "7bcd55f7c672fda8d6fa5a86f0ea67154778b63740a5cabe5713b91b95cc3a6e",
+          "resultSha256": "b5ea2a1330ab92a1f504d5f1158f28131337f492e4079157d18fec47b16d5126"
+        },
+        {
+          "before": "from './host-modules.mjs'",
+          "after": "from '../../business/host-modules.mjs'",
+          "count": 1,
+          "inputSha256": "b5ea2a1330ab92a1f504d5f1158f28131337f492e4079157d18fec47b16d5126",
+          "resultSha256": "cff21056d92a672050b13a03e0dbbe7c4c83b73be17c67392e1cc0e9250cbc6e"
+        },
+        {
+          "before": "from './readonly-files.mjs'",
+          "after": "from '../../business/readonly-files.mjs'",
+          "count": 1,
+          "inputSha256": "cff21056d92a672050b13a03e0dbbe7c4c83b73be17c67392e1cc0e9250cbc6e",
+          "resultSha256": "5202586b85243b359968837e3c58fdc53d1f3843a8cbb86db01836dbf48e3221"
+        },
+        {
+          "before": "const project=await openProject(config);let profile;",
+          "after": "const project=await openProject(config);let profile,uiBridge;",
+          "count": 1,
+          "inputSha256": "5202586b85243b359968837e3c58fdc53d1f3843a8cbb86db01836dbf48e3221",
+          "resultSha256": "7e8d59db7d28e0c5a3ead2fed1b9eb0b14a74a3f443f3a1a4b5b782d65f1e35c"
+        },
+        {
+          "before": "service=Object.freeze({...controller,withView:",
+          "after": "service=Object.freeze({...controller,async openCurrentProject(binding){if(uiBridge||!controller.status().admissionOpen)fail('SEP_PROJECT_UI_OWNER');uiBridge=await openHostBridge({binding,source:config.source,controller,project});return uiBridge;},close(){uiBridge?.closeAdmission();return uiBridge?uiBridge.close():controller.close();},withView:",
+          "count": 1,
+          "inputSha256": "7e8d59db7d28e0c5a3ead2fed1b9eb0b14a74a3f443f3a1a4b5b782d65f1e35c",
+          "resultSha256": "5d0c7ba92ba67c4b7f17700d9ced0cd41eee3d217380147225456e815685787a"
+        },
+        {
+          "before": "ctx.effect(()=>()=>controller.close())",
+          "after": "ctx.effect(()=>()=>service.close())",
+          "count": 1,
+          "inputSha256": "5d0c7ba92ba67c4b7f17700d9ced0cd41eee3d217380147225456e815685787a",
+          "resultSha256": "7191005e61c4ae68faccaea4442b62006a58a5be95d9f4c22f378fd08c174cc7"
+        },
+        {
+          "before": "const plugin=createProfilePlugin(input=>openGovernedMacManagedProject(input));",
+          "after": "const plugin=createProfilePlugin(async input=>wrapManagedProject(await openWorkflowProject(input)));",
+          "count": 1,
+          "inputSha256": "7191005e61c4ae68faccaea4442b62006a58a5be95d9f4c22f378fd08c174cc7",
+          "resultSha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49"
+        }
+      ]
+    }
+  },
+  {
+    "name": "standalone.mjs",
+    "bytes": 4764,
+    "origin": {
+      "source": "../../business/standalone.mjs",
+      "inputSha256": "e4ad150db13d7cf173826923f2d047c61c8762ff959b403eeee73fe01e7911c6",
+      "resultSha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128",
+      "transforms": [
+        {
+          "before": "const record=await initializeBusinessProfile(input),",
+          "after": "await verifySettingsUi({hostRoot:input.hostRoot});\n const record=await initializeBusinessProfile(input),",
+          "count": 1,
+          "inputSha256": "e4ad150db13d7cf173826923f2d047c61c8762ff959b403eeee73fe01e7911c6",
+          "resultSha256": "0fc249f87a02616b59eb5eed4881e149f8dc980f8bdeb1894c47529b22c6fa46"
+        },
+        {
+          "before": "await ctx.workspaceRegistry.create(record.source,'DSH SEP macOS');",
+          "after": "await ctx.workspaceRegistry.create(record.source,'DSH SEP macOS');\n  const settings=await assertSettingsMounted(ctx,{entryId:'mac-sep-settings',hostRoot:input.hostRoot});",
+          "count": 1,
+          "inputSha256": "0fc249f87a02616b59eb5eed4881e149f8dc980f8bdeb1894c47529b22c6fa46",
+          "resultSha256": "daa4c8ceb3fd694cf7d2163d9a3061ff101396d9b999d0c08d3c21e360149ca0"
+        },
+        {
+          "before": "ready:{url:",
+          "after": "ready:{settings,url:",
+          "count": 1,
+          "inputSha256": "daa4c8ceb3fd694cf7d2163d9a3061ff101396d9b999d0c08d3c21e360149ca0",
+          "resultSha256": "dc49025210618cfd8696680fc1409bafaf9b1d510d39c34999abd8bca52fda20"
+        },
+        {
+          "before": "}catch(error){if(running){await running.ctx.get('sepMacRuntime')?.close();await running.ctx.get('sepMacProfile')?.close();await running.shutdown.shutdown(1);}throw error;}",
+          "after": "}catch(error){await cleanupFailedStartup(running,error);}",
+          "count": 1,
+          "inputSha256": "dc49025210618cfd8696680fc1409bafaf9b1d510d39c34999abd8bca52fda20",
+          "resultSha256": "3d1a877634a645273e0259183ed1dd91044635d7df510481df93813e675c35c6"
+        },
+        {
+          "before": "import {realpath,lstat,readFile}",
+          "after": "import {checkBinding} from '../project-workflow-ui/rules.mjs';import {serveHost} from '../project-workflow-ui/transport.mjs';import {cleanupFailedStartup} from '../../document-business/startup-cleanup.mjs';import {verifySettingsUi} from '../../settings-ui/adapter.mjs';import {assertSettingsMounted} from '../../settings-ui/required.mjs';\nimport {realpath,lstat,readFile}",
+          "count": 1,
+          "inputSha256": "3d1a877634a645273e0259183ed1dd91044635d7df510481df93813e675c35c6",
+          "resultSha256": "88442ee5eb7829dcd96053d22904e7d0f212f2be34e0c0033857c8ce32dba286"
+        },
+        {
+          "before": "import('./host-modules.mjs')",
+          "after": "import('../../business/host-modules.mjs')",
+          "count": 1,
+          "inputSha256": "88442ee5eb7829dcd96053d22904e7d0f212f2be34e0c0033857c8ce32dba286",
+          "resultSha256": "9bbb2545a0f9eeeb6da4d4460f49cc4db1d9fd9a1b2a8c43912b0415400a37e0"
+        },
+        {
+          "before": "export async function openMacBusiness(input){",
+          "after": "export async function openMacBusiness(input,{currentProject}={}){\n if(!currentProject||typeof currentProject.port?.write!=='function'||typeof currentProject.port?.on!=='function')fail('SEP_PROJECT_UI_OWNER');checkBinding(currentProject.binding);",
+          "count": 1,
+          "inputSha256": "9bbb2545a0f9eeeb6da4d4460f49cc4db1d9fd9a1b2a8c43912b0415400a37e0",
+          "resultSha256": "d169ada539e3a5db0f30df218fe9f52174a7d424cb274d35f74adfa976cde3a7"
+        },
+        {
+          "before": "const settings=await assertSettingsMounted(ctx,{entryId:'mac-sep-settings',hostRoot:input.hostRoot});",
+          "after": "const settings=await assertSettingsMounted(ctx,{entryId:'mac-sep-settings',hostRoot:input.hostRoot});\n  const projectBridge=await profile.openCurrentProject(currentProject.binding),projectServer=serveHost(currentProject.port,projectBridge,currentProject.binding);",
+          "count": 1,
+          "inputSha256": "d169ada539e3a5db0f30df218fe9f52174a7d424cb274d35f74adfa976cde3a7",
+          "resultSha256": "da57b908a898d8c7750e705ec8b3db2e1be8ffc36b4d892dce3c85b1fff638d0"
+        },
+        {
+          "before": "activeTasks:api.status().pending>0",
+          "after": "activeTasks:projectBridge.inspectQuit().activeTasks||projectServer.status().pending>0||api.status().pending>0",
+          "count": 1,
+          "inputSha256": "da57b908a898d8c7750e705ec8b3db2e1be8ffc36b4d892dce3c85b1fff638d0",
+          "resultSha256": "61689c9f77d2a54cdd506028c2d5297189375d2c54bfdd1635db783365301f1d"
+        },
+        {
+          "before": "const close=()=>{if(terminal)",
+          "after": "const close=()=>{projectServer.closeAdmission();if(terminal)",
+          "count": 1,
+          "inputSha256": "61689c9f77d2a54cdd506028c2d5297189375d2c54bfdd1635db783365301f1d",
+          "resultSha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {setTimeout as delay} from 'node:timers/promises';
+import {withPrivateDisplay} from './private-xorg.mjs';
+import {captureClickOwner} from './linux-click.mjs';
+import {setup,ok} from './sep-fixture.mjs';
+const root=process.env.SEP_BUNDLE_TEST_ROOT;process.umask(0o077);
+if(process.env.SEP_PRIVATE_DBUS_READY!=='1'){
+ await mkdir(root,{mode:0o700});const runtime=join(root,'runtime-dir');await mkdir(runtime,{mode:0o700});const session=spawn('/usr/bin/dbus-run-session',['--',process.execPath,fileURLToPath(import.meta.url)],{env:{...process.env,XDG_RUNTIME_DIR:runtime,SEP_PRIVATE_DBUS_READY:'1'},stdio:'inherit'});const code=await new Promise((r,j)=>{session.once('error',j);session.once('close',r);});process.exit(code??1);
+}
+await withPrivateDisplay(root,async()=>{
+ const bus=spawn('/usr/libexec/at-spi-bus-launcher',['--launch-immediately','--a11y=1'],{detached:true,env:process.env,stdio:['ignore','pipe','pipe']});const busLogs=[];bus.stdout.on('data',b=>busLogs.push(b));bus.stderr.on('data',b=>busLogs.push(b));const busOwner=await captureClickOwner(bus.pid);await delay(500);
+ const child=spawn('/opt/dsh-sep-cross-platform/desktop-r7/payload/electron/electron',['--no-sandbox',fileURLToPath(new URL('./native-click-fixture.cjs',import.meta.url))],{env:{...process.env,NO_AT_BRIDGE:'0',GTK_MODULES:'gail:atk-bridge'},stdio:['ignore','pipe','pipe','ipc']});const logs=[];child.stderr.on('data',b=>logs.push(b));child.stdout.on('data',()=>{});let exited;const ended=new Promise(r=>child.once('close',(code,signal)=>{exited={code,signal};r(exited);}));
+ const messages=[],wait=async type=>{const until=Date.now()+10000;while(Date.now()<until){const i=messages.findIndex(m=>m.type===type);if(i>=0)return messages.splice(i,1)[0];if(exited)throw Error('CLICK_FIXTURE_EXITED');await delay(20);}throw Error('CLICK_FIXTURE_MESSAGE_DEADLINE_'+type);};child.on('message',m=>messages.push(m));let f;const checks=[];
+ try{
+  await wait('ready');await delay(500);const proof=await captureClickOwner(child.pid);f=await setup({business:{click:{enabled:true,serverName:'sep_linux',operationTimeoutMs:10000}},runtimeOptions:{clickRuntime:proof}});
+  assert.equal(f.api.status().computerClick,'atspi-owned-application-only');assert.equal(f.ctx.tools.get('mcp__sep_linux__ui_click'),undefined);
+  let observed,lastObservation;for(let i=0;i<20;i++){const r=await f.call('suite_computer_observe',{});lastObservation=r;if(!r.isError&&r.value.windows?.length){observed=r.value;break;}await delay(100);}assert(observed,'native accessibility window missing: '+JSON.stringify(lastObservation));
+  const windowHandle=observed.windows.find(w=>w.name==='SEP Linux native click validation')?.windowHandle;assert(windowHandle);const tree=ok(await f.call('suite_computer_observe',{windowHandle})).tree,button=tree.find(t=>t.name==='确认合成动作');assert(button);checks.push({name:'actual-native-accessibility-observation',status:'pass'});
+  for(const [requestId,target]of [['disabled',{name:'禁用动作'}],['ambiguous',{name:'重复动作'}]]){const r=await f.call('suite_computer_click',{requestId,windowHandle,target});assert.equal(r.isError,true);assert.match(r.error.message,/SEP_CLICK_PREFLIGHT_FAILED/);checks.push({name:requestId+'-refused',status:'pass'});}
+  const stale=tree.find(t=>t.name==='旧目标');child.send({type:'change'});await wait('changed');const refused=await f.call('suite_computer_click',{requestId:'stale',windowHandle,target:{elementId:stale.id}});assert.equal(refused.isError,true);assert.match(refused.error.message,/SEP_CLICK_PREFLIGHT_FAILED/);checks.push({name:'stale-id-refused',status:'pass'});
+  const args={requestId:'native-single',windowHandle,target:{name:'确认合成动作'},expected:{mode:'appear',name:'点击完成1'}},attempt=await f.call('suite_computer_click',args);assert.equal(attempt.isError,false,JSON.stringify({error:attempt.error,diagnostics:f.ctx.get('sepLinuxClickDiagnostics')?.status()}));const clicked=attempt.value;assert.equal(clicked.outcome,'expected_condition_observed');assert(!JSON.stringify(clicked).includes('确认合成动作'));assert.deepEqual(ok(await f.call('suite_computer_click',args)),clicked);child.send({type:'inspect'});assert.equal((await wait('inspected')).count,1);checks.push({name:'native-action-and-replay-single-dispatch',status:'pass'});
+  const foreign=(await f.ctx.agents.create({sessionId:'foreign-click',meta:{cwd:f.base},agentOptions:{}})).agent;assert.equal((await f.call('suite_computer_observe',{},foreign)).isError,true);checks.push({name:'foreign-session-refused',status:'pass'});
+  const unsupported=await f.call('suite_computer_click',{...args,requestId:'unsupported-double',doubleClick:true});assert.equal(unsupported.isError,true);assert.match(unsupported.error.message,/SEP_CLICK_DISPATCH_UNCERTAIN/);const quarantined=await f.call('suite_computer_click',{...args,requestId:'after-uncertain'});assert.equal(quarantined.isError,true);assert.match(quarantined.error.message,/SEP_CLICK_PROVIDER_QUARANTINED/);child.send({type:'inspect'});assert.equal((await wait('inspected')).count,1);checks.push({name:'unsupported-action-quarantines-without-retry',status:'pass'});
+  const closed=await f.api.close();assert.equal(closed.status,'pass');assert.equal((await f.call('suite_computer_click',args)).isError,true);checks.push({name:'closed-owner-refused',status:'pass'});
+  child.send({type:'stop'});assert.deepEqual(await Promise.race([ended,delay(5000).then(()=>{throw Error('CLICK_FIXTURE_EXIT_DEADLINE');})]),{code:0,signal:null});checks.push({name:'normal-exit',status:'pass'});
+  await writeFile(join(root,'NATIVE-CLICK-RESULT.json'),JSON.stringify({status:'pass',scope:'actual AT-SPI DoAction in private Xorg synthetic Electron; no coordinates or real user desktop',checks,exit:exited},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({status:'pass',checks:checks.length}));
+ }finally{await f?.close();if(!exited){child.kill('SIGTERM');await Promise.race([ended,delay(2000)]);if(!exited){child.kill('SIGKILL');await ended;}}await writeFile(join(root,'native-click.stderr.log'),Buffer.concat(logs),{flag:'wx'});try{assert.deepEqual(await captureClickOwner(bus.pid),busOwner);process.kill(-bus.pid,'SIGTERM');}catch(e){if(e.code!=='SEP_LINUX_CLICK_OWNER_CHANGED'&&e.code!=='ESRCH')throw e;}await writeFile(join(root,'native-click-bus.log'),Buffer.concat(busLogs),{flag:'wx'});}
+});

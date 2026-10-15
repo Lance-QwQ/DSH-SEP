@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "runId": "38547010709",
+  "artifactId": "11884503938",
+  "outerSha256": "db3ecea27d84129301b2e931ed6d7f0f28dd28276c3c08109efbd0ad3a6fd613",
+  "postSmokeSha256": "2b39f13366ec05c4e9816539c100ddcf3a2fea2610ee852816fd8ad700560d2c",
+  "treeSha256": "c260dee9312b31e7986d099341cace49012e68ae90773036444c4ba9c9c00db8",
+  "entries": 24203,
+  "totalBytes": 1396667805,
+  "scope": "Independent read of native post-smoke inventory receipt; immutable prior 14-file r23 seal unchanged; settings UI was not asserted by core smoke",
+  "noInnerArchiveExtraction": true
+}

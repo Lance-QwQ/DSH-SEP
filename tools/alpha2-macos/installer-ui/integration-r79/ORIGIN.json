@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "preparation": "derived",
+  "scope": "Mechanical test-operator successor; r72 behavior and limits retained. Actual r79 results cannot be inherited.",
+  "auditSha256": "d83d1d267531ae62ebe3c82c3609d65089a7435d8567019eda7b4ef4494ab6da",
+  "bindings": {
+    "installerBuildCommit": "e2cdf833051e9ff0b451d0885549f38690220acd",
+    "installerArchiveSha256": "6043ddd8305009e9013de46f85f7660cdc775d4320987553808eb9f8ec01db4f",
+    "payloadBuildCommit": "155f324013fada4caf3ecd15a9631678d4d5c4a7",
+    "payloadAssemblySha256": "5aa8ddfc6b72141f494eb50e07cdced61e1fc89080368b9edf922389641f2704"
+  },
+  "contractSource": {
+    "path": "installer-ui/integration/CONTRACT.json",
+    "sha256": "94036620fb9648d39cd24264bd410c5c4df267e2eddda3f48edca826eaa42565"
+  },
+  "origins": [
+    {
+      "source": "package/restore-installer-application.mjs",
+      "sourceSha256": "51f95045ccf121430acc622ea802fad1ae2cee165bfca9272e5dfedc81865617",
+      "result": "package/restore-installer-application-r78.mjs",
+      "resultSha256": "1d44169c9a8ee8c42fda6ea16fcea2095f2763e1461440dac8e20544d098508c",
+      "transforms": [
+        {
+          "from": "./installer-restore-pins.json",
+          "to": "./installer-restore-pins-r78.json",
+          "occurrences": 1
+        },
+        {
+          "from": "1b5bcfa5c8a88fda7ad5727ee104eef8f8f0ad04",
+          "to": "e2cdf833051e9ff0b451d0885549f38690220acd",
+          "occurrences": 1
+        },
+        {
+          "from": "0e8867766b0c01307959b935ced963ae0edd0eeb576cb62eb1c1c3a84ee1a732",
+          "to": "e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834",
+          "occurrences": 1
+        },
+        {
+          "from": "3b36e6443d277fce03502c2913cf27ff74660cdef12124a00c6a812aa2818836",
+          "to": "ff97b34568f4cdf3d380191256b5523f1f27049b7e0c3a9afba16060da9fbc2b",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "installer-ui/integration/run-full.mjs",
+      "sourceSha256": "5acd9167b81d61e168ff1ee8b3bc117f37851c3e0b5ce90ca68e31f832aaf1ee",
+      "result": "installer-ui/integration-r79/run-full.mjs",
+      "resultSha256": "251155a12d3585191266dfa92853067d5b341e84b4dd92af19da36770ff2c1a3",
+      "transforms": [
+        {
+          "from": "0e8867766b0c01307959b935ced963ae0edd0eeb576cb62eb1c1c3a84ee1a732",
+          "to": "e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834",
+          "occurrences": 1
+        },
+        {
+          "from": "3b36e6443d277fce03502c2913cf27ff74660cdef12124a00c6a812aa2818836",
+          "to": "ff97b34568f4cdf3d380191256b5523f1f27049b7e0c3a9afba16060da9fbc2b",
+          "occurrences": 1
+        },
+        {
+          "from": "1f984a51666bb94068141be79e5d46fcf9d79d0cb6f1ba84127f4fb99d879991",
+          "to": "eadad5720380302d460bea68f77d9cdfdf5dc4f7b7f77dd9cf0d10df3f7713a1",
+          "occurrences": 1
+        },
+        {
+          "from": "742c503ba230ee9dd92f54b8c4646af3385dd1d6259fdfdcbc2212f2ff020d13",
+          "to": "20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107",
+          "occurrences": 1
+        },
+        {
+          "from": "1b5bcfa5c8a88fda7ad5727ee104eef8f8f0ad04",
+          "to": "e2cdf833051e9ff0b451d0885549f38690220acd",
+          "occurrences": 1
+        },
+        {
+          "from": "fixed r61 installed first boot/restart",
+          "to": "fixed r74 installed first boot/restart",
+          "occurrences": 1
+        },
+        {
+          "from": "installed-r61-product-first-boot-and-restart",
+          "to": "installed-r74-product-first-boot-and-restart",
+          "occurrences": 1
+        },
+        {
+          "from": "config.receipt.inventory.entries.length,29365",
+          "to": "config.receipt.inventory.entries.length,29374",
+          "occurrences": 1
+        },
+        {
+          "from": "config.receipt.inventory.totalBytes,1794064040",
+          "to": "config.receipt.inventory.totalBytes,1794083023",
+          "occurrences": 1
+        },
+        {
+          "from": "path:'installer-ui/integration/'+path",
+          "to": "path:'installer-ui/integration-r79/'+path",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "installer-ui/integration/main-result.test.mjs",
+      "sourceSha256": "5fd379be6ce0d22fefe21f9925d6f68824bb1dfc04b0dffdbe6e33213b82bccd",
+      "result": "installer-ui/integration-r79/main-result.test.mjs",
+      "resultSha256": "990a90e4edea5c6671193c227979b6c49457fc52f3ed2148ec43d7d19525a595",
+      "transforms": [
+        {
+          "from": "report.installed.entries,29365",
+          "to": "report.installed.entries,29374",
+          "occurrences": 1
+        },
+        {
+          "from": "report.installed.totalBytes,1794064040",
+          "to": "report.installed.totalBytes,1794083023",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "installer-ui/integration/installed-startup.mjs",
+      "sourceSha256": "e1b4a288612d43b2b93f0ba6e27eeaa0c2f851f13016dfc33ca0f36d08eaa01b",
+      "result": "installer-ui/integration-r79/installed-startup.mjs",
+      "resultSha256": "be5fa6fb1271f7b64686a1d5cee4c91c8e7203a8cfd40720e6112d28c445bfe1",
+      "transforms": [
+        {
+          "from": "742c503ba230ee9dd92f54b8c4646af3385dd1d6259fdfdcbc2212f2ff020d13",
+          "to": "20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "source": "installer-ui/integration/test-main.m",
+      "sourceSha256": "6c588c90e2d1828e046682f8f91deabd5068b0d511aa602f02a3066d139c494a",
+      "result": "installer-ui/integration-r79/test-main.m",
+      "resultSha256": "6c588c90e2d1828e046682f8f91deabd5068b0d511aa602f02a3066d139c494a",
+      "transforms": []
+    },
+    {
+      "source": "installer-ui/integration/installer-observer.m",
+      "sourceSha256": "6adee71f937e2e00444495f06298b88214c3ca5a51575e855c44d870ea305f36",
+      "result": "installer-ui/integration-r79/installer-observer.m",
+      "resultSha256": "6adee71f937e2e00444495f06298b88214c3ca5a51575e855c44d870ea305f36",
+      "transforms": []
+    },
+    {
+      "source": "installer-ui/integration/ci-job.yml",
+      "sourceSha256": "a2fe9a824c32ec254ffb1c0a25bccde9d5dd4cac9d22d70f91608b934fbf8b44",
+      "result": "installer-ui/integration-r79/ci-job.yml",
+      "resultSha256": "caf273f8ed73432c705543b4716c8ae5bd0d8d9e158c2433277faa4f9906be10",
+      "transforms": [
+        {
+          "from": "# Fixed r71 signed archive and restore pins.",
+          "to": "# Fixed r78 signed archive and restore pins.",
+          "occurrences": 1
+        },
+        {
+          "from": "native-installer-integration:",
+          "to": "native-installer-integration-r79:",
+          "occurrences": 1
+        },
+        {
+          "from": "name: installer-integration-native",
+          "to": "name: installer-integration-native-r79",
+          "occurrences": 1
+        },
+        {
+          "from": "package/restore-installer-application.mjs",
+          "to": "package/restore-installer-application-r78.mjs",
+          "occurrences": 1
+        },
+        {
+          "from": "installer-ui/integration/run-full.mjs",
+          "to": "installer-ui/integration-r79/run-full.mjs",
+          "occurrences": 1
+        },
+        {
+          "from": "fixed-installer",
+          "to": "fixed-installer-r79",
+          "occurrences": 6
+        },
+        {
+          "from": "/installer-integration",
+          "to": "/installer-integration-r79",
+          "occurrences": 10
+        }
+      ]
+    }
+  ]
+}

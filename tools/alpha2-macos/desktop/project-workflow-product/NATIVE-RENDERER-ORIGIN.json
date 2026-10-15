@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "scope": "Test-only emitted preview JavaScript grammar correction. Same fixed r74 product and assertions. Select click remains single; native confirmation, ownership cleanup and finally logic are unchanged.",
+  "files": [
+    {
+      "base": "native-dom-r3.mjs",
+      "sourceSha256": "32798f21b8f2610389700a1108536981635e6f142a8993e5fc9cb6562acf1f38",
+      "result": "native-dom-r4.mjs",
+      "resultSha256": "25974978b76a3c93e5102c74bba3772dc3530cd42b4b32fbe79c21c5fbb851eb",
+      "transformations": [
+        {
+          "before": ".map(e=>e.textContent).join('\\n')",
+          "after": ".map(e=>e.textContent).join('\\\\n')",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "base": "native-worker-r5.mjs",
+      "sourceSha256": "3a36edcf03bd036c09fe8564224d85ce594bb7b2b71a228ab55db5b8080fab54",
+      "result": "native-worker-r6.mjs",
+      "resultSha256": "babb39208bbeedd26e37e5fe5a469336948878014a3995350aaf759d63867d67",
+      "transformations": [
+        {
+          "before": "from './native-dom-r3.mjs'",
+          "after": "from './native-dom-r4.mjs'",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "base": "native-operator-r5.mjs",
+      "sourceSha256": "69d2fb326f9bec0663f5b25f13b53fa4c365433edda2c7c91ca15a8d31262f53",
+      "result": "native-operator-r6.mjs",
+      "resultSha256": "908f619d5fea5cb6c3877400966b1262c170296aa19145c9fb57daaf9029a518",
+      "transformations": [
+        {
+          "before": "['native-operator-r5.mjs','native-worker-r5.mjs','NATIVE-IDENTITY-ORIGIN.json'",
+          "after": "['native-operator-r6.mjs','native-worker-r6.mjs','NATIVE-RENDERER-ORIGIN.json','derive-renderer-grammar.mjs','NATIVE-IDENTITY-ORIGIN.json'",
+          "occurrences": 1
+        },
+        {
+          "before": "'native-dom-r3.mjs','native-data-r4.mjs'",
+          "after": "'native-dom-r4.mjs','native-data-r4.mjs'",
+          "occurrences": 1
+        },
+        {
+          "before": "new URL('./native-worker-r5.mjs',import.meta.url)",
+          "after": "new URL('./native-worker-r6.mjs',import.meta.url)",
+          "occurrences": 1
+        }
+      ]
+    }
+  ]
+}

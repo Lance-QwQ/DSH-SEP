@@ -1,0 +1,23 @@
+import {mkdir,cp,symlink,readdir,readFile,writeFile} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+const root=resolve(process.env.SEP_BUNDLE_TEST_ROOT),frozen=join(process.env.SEP_PORTABLE_ROOT,'host'),input=process.env.SEP_DESKTOP_INPUTS??'/opt/dsh-sep-cross-platform/alpha2-portable-desktop-inputs-r2';
+const runtime=join(root,'runtime'),app=join(root,'app'),home=join(root,'home'),profile=join(home,'profiles/desktop'),source=join(root,'synthetic-source'),managed=join(root,'managed');
+for(const p of [runtime,app,profile,source,managed])await mkdir(p,{recursive:true,mode:0o700});
+await mkdir(join(runtime,'node_modules/@deepseek-ai'),{recursive:true});
+for(const name of await readdir(join(frozen,'node_modules'))){if(name==='@deepseek-ai')continue;await symlink(join(frozen,'node_modules',name),join(runtime,'node_modules',name));}
+for(const name of await readdir(join(frozen,'node_modules/@deepseek-ai')))await symlink(join(frozen,'node_modules/@deepseek-ai',name),join(runtime,'node_modules/@deepseek-ai',name));
+for(const name of await readdir(join(input,'dependencies')))await cp(join(input,'dependencies',name),join(runtime,'node_modules',name),{recursive:true,errorOnExist:true});
+await cp(join(input,'dsh-desktop'),app,{recursive:true});await symlink(join(runtime,'node_modules'),join(app,'node_modules'));
+await cp(join(input,'dsh-desktop-host'),join(runtime,'node_modules/@deepseek-ai/dsh-desktop-host'),{recursive:true});
+await writeFile(join(runtime,'package.json'),await readFile(join(frozen,'package.json')));
+await writeFile(join(source,'data.txt'),'synthetic desktop project');
+await writeFile(join(profile,'package.json'),JSON.stringify({private:true,type:'module',dsh:{profile:{bundles:['@deepseek-ai/dsh-base','@deepseek-ai/dsh-web-app']}}})+'\n');
+await writeFile(join(profile,'.env'),'DEEPSEEK_API_KEY=synthetic-not-a-real-key\n');
+const isolation={bwrap:join(process.env.SEP_PORTABLE_ROOT,'sandbox-runtime/usr/bin/bwrap'),binarySha256:process.env.SEP_BWRAP_SHA256};
+const disabled=['jobs','subprocess','fs-sandbox','tool-bash','tool-jobs','tool-fs','tool-fs-search','mcp-resources','plugin-manager','hmr'];
+await writeFile(join(profile,'cordis.patch.yml'),JSON.stringify([...disabled.map(id=>({id,disabled:true})),{insert:[{id:'linux-controlled',name:new URL('./linux-profile-plugin.mjs',import.meta.url).href,config:{root:managed,source,isolation,servers:{}}}]}],null,2)+'\n');
+const origin=await readFile(join(app,'lib/main.js'));await writeFile(join(app,'lib/main.js'),"import "+JSON.stringify(new URL('./desktop-probe.cjs',import.meta.url).href)+";\n"+origin);
+await writeFile(join(root,'DESKTOP-FIXTURE.json'),JSON.stringify({runtime,app,home,profile,source,managed,entryOriginalSha256:createHash('sha256').update(origin).digest('hex'),instrumentation:'one test observer import before otherwise unchanged official Alpha.2 main',electron:'/opt/dsh-sep-cross-platform/desktop-r7/payload/electron/electron'},null,2)+'\n');
+console.log(JSON.stringify({root,app}));

@@ -1,0 +1,40 @@
+archive-fixed-r33:
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.19.0'
+    - name: Download, verify and split fixed original bytes
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/package/archive-r33.mjs "$RUNNER_TEMP/r33-archive"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-r33-archive-manifest
+        if-no-files-found: error
+        path: ${{ runner.temp }}/r33-archive/PARTS.json
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-r33-archive-part-1
+        compression-level: 0
+        if-no-files-found: error
+        path: ${{ runner.temp }}/r33-archive/part-1/*
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-r33-archive-part-2
+        compression-level: 0
+        if-no-files-found: error
+        path: ${{ runner.temp }}/r33-archive/part-2/*
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-r33-archive-part-3
+        compression-level: 0
+        if-no-files-found: error
+        path: ${{ runner.temp }}/r33-archive/part-3/*

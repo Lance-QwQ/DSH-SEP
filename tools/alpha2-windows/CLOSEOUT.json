@@ -1,0 +1,320 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "Fixed Windows x64 Full/Only archive construction, bounded privacy inspection, fresh installation and isolated service/core-desktop plus VBS smoke verification. Direct start.ps1 policy blocks are recorded separately and excluded from pass. Not a new public release or universal plugin certification.",
+  "hostVersion": "0.2.1-alpha.2",
+  "sepVersion": "0.2.1-beta.3-alpha2-adapter.1",
+  "revision": "windows-package.2",
+  "archives": [
+    {
+      "kind": "full",
+      "size": 510886228,
+      "sha256": "bdc09894307cbd53c8f120c454e3a80d5ee687341ff8de15d9079a15fbc64b04",
+      "members": 29565,
+      "file": "DSH-SEP-Full-Windows-x64-Alpha2-windows-package.2.zip"
+    },
+    {
+      "kind": "sep",
+      "size": 420827999,
+      "sha256": "a1db5cb400a04d8b76536604de63cb018d14272b6d39e858da9d61755556ff79",
+      "members": 25326,
+      "file": "DSH-SEP-Only-Windows-x64-Alpha2-windows-package.2.zip"
+    }
+  ],
+  "acceptance": {
+    "freshInstallations": 2,
+    "installedRuntimeSmoke": 2,
+    "headlessChecks": 16,
+    "headlessHostLifetimes": 4,
+    "desktopColdRounds": 4,
+    "actualNodeSecondaryLaunches": 4,
+    "actualPs1Reopens": 0,
+    "blockedPs1Reopens": 2,
+    "actualVbsReopens": 2,
+    "desktopGuardianExits": 4,
+    "modelCalls": 0,
+    "shortRootPowerShellExtraction": "pass; current Windows PowerShell version only, see bound separate report",
+    "privacy": {
+      "status": "pass",
+      "scope": "Selected byte patterns, bounded JSON/JSONC and inline-source-map decoding, ZIP/packed ASAR/gzip/TAR inspection; no program execution or user-state body reads",
+      "unresolvedFindings": 0,
+      "coverageGapsInSelectedDecoders": 0,
+      "fullPrivacyAudit": "not_run"
+    },
+    "dailyPublicEntryGuardsUnchanged": true,
+    "resourceAudit": "All four tracked Host lifetimes ended through actual runtime.close; guardian exit0/forcedfalse, exact tracked PID absence and P2 lock absence verified. No forced cleanup.",
+    "guiResourceAudit": "Normal Electron app.quit, then each tracked launcher/Electron/Host PID and P2 owner lock absence; independent journal-chain audit binds each Host/generation to ready and exit 0, signal null, forced false. No forced test cleanup on accepted core runs. Asynchronous VBS descendants were not independently tracked."
+  },
+  "retainedFailures": [
+    "First deep-path ZIP extraction failed before installation. Windows extended-path I/O was added to the independent extractor; original output retained.",
+    "Extractor follow-up: 31 definitions, 30 pass, 1 blocked because the unchanged junction fixture command was rejected by Windows (WinError 225). Historical 30/30 evidence is not substituted for that blocked current test.",
+    "The windows-package.1 fresh-install Host exited 1 before readiness. The original and separate diagnostic runs are retained; later exact PID/P2 lock absence does not turn that startup into pass. Revision 2 moves only the fresh ledger into its own state/budget directory, with real binding regressions and new ZIP/install/service/desktop evidence.",
+    "The first revision-2 service probe started both Hosts but incorrectly compared the memory service project key with a configuration UUID. That run remains fail and its normal cleanup is separately attributed. A corrected probe binds the actual recovery authority, and the later service run uses its own receipt.",
+    "A subsequent probe incorrectly treated stored project controls as the configured/effective capture switch. Its failed run and normal cleanup are retained. The final probe checks stored, configured and effective memory controls separately against the fixed service contract; no product change was made for these probe corrections.",
+    "The next probe incorrectly expected the old memory UI package name; this combination mounts that UI using its exact installed file URL. The failed run and normal cleanup are retained. Final composition verification binds the installed module identity and explicit enabled/disabled state of this fresh Profile.",
+    "The first Full desktop probe failed at direct start.ps1 because of the current PowerShell execution policy. Its failure cleanup kept the inspector connected until after its deadline and reported blocked. That original fail/blocked receipt is retained; a later independently bound journal confirms only the original Host exited normally. The probe was corrected to disconnect before waiting; new core/VBS results do not reclassify the original receipt or the policy block.",
+    "GUI r2 lifecycle and wrapper facts remain retained, but its workspace readiness predicate also accepted the official Loading plugins boot screen (textLength 24). The final independent review rejected that readiness proof. GUI r3 must instead bind the disappearance of the boot screen and actual workspace controls; r2 is not counted toward the final workspace-ready acceptance.",
+    "Earlier source-proof, bootstrap, redaction and test-fixture failures are retained in the stage directory; only final successful reports support the relevant claims."
+  ],
+  "limitations": [
+    "Fixed Windows x64 Alpha.2 combination only; Only needs the exact authenticated npm component subset and supported expanded layout.",
+    "Default desktop uses the existing --inspect-desktop observation option. Real secondary launches use no observation flag; physical pointer/tray/first-close-notice and a first launch without observation were not certified here.",
+    "No paid model, external Computer use/MCP/WSL/Docker feature certification, or exhaustive plugin-function certification in this packaging run.",
+    "Bounded pattern/container scans and provenance review do not prove absence of arbitrary encoded private content; fullPrivacyAudit remains not_run.",
+    "Short-root Expand-Archive was tested only on the current recorded Windows PowerShell version. Explorer and arbitrary extraction tools/versions are not certified. Use a short extraction root as described in EXTRACTION.md.",
+    "The unchanged production VBS uses child-process -ExecutionPolicy Bypass. No persistent execution policy was changed; its asynchronous descendants were not independently tracked.",
+    "Direct start.ps1 was attempted under the current PowerShell policy and may be blocked; each blocked attempt remains blocked with window reopen not_run. Node/VBS success does not prove the PS1 policy issue resolved.",
+    "No public HTTPS full-install loop, GitHub upload, daily switch or private-data migration."
+  ],
+  "githubUploaded": false,
+  "dailySwitched": false,
+  "privateDataImported": false,
+  "evidence": [
+    {
+      "path": "repaired-r2/ARCHIVES.json",
+      "size": 771,
+      "sha256": "eccbdb3e705978a85adb444c30b763b4e1b751ed3dbaee53090cf8fccd5641b4",
+      "status": "pass"
+    },
+    {
+      "path": "fresh-install-verification-r3/RESULT.json",
+      "size": 22274,
+      "sha256": "0fa11bca3c69b87c4e8cfc88581b90ba048e997257497fd09d68fb0a5e1b46e1",
+      "status": "pass"
+    },
+    {
+      "path": "headless-install-verification-r5/RESULT.json",
+      "size": 16007,
+      "sha256": "9b073ae5d8c522fcebf3524227637303159660205e2a13ad8360fa4160e9d5b0",
+      "status": "pass"
+    },
+    {
+      "path": "default-desktop-full-r3/RESULT.json",
+      "size": 7828,
+      "sha256": "757c42c2d1a1ebacfc0471eb9ab42423a5bbdb8b9a920e33597d72ccfa957994",
+      "status": "blocked"
+    },
+    {
+      "path": "default-desktop-sep-r3/RESULT.json",
+      "size": 7831,
+      "sha256": "2e3d10f1215ef0a0b1e952548202e55bd6dbd315bcec43ab899a54304e057e4b",
+      "status": "blocked"
+    },
+    {
+      "path": "DESKTOP-GUARDIAN-AUDIT-r3.json",
+      "size": 7628,
+      "sha256": "6757b7c106e8b28f8da3246b2a144095024220ef94b32bc906fff86b05bdea1a",
+      "status": "pass"
+    },
+    {
+      "path": "repaired-r2/privacy/FINAL-FULL-SCAN.json",
+      "size": 7342008,
+      "sha256": "6afd3235f75869bb108b2bdc374a379f192887aedf180edaf507b73ec2ff744a",
+      "status": "pass"
+    },
+    {
+      "path": "repaired-r2/privacy/FINAL-SEP-SCAN.json",
+      "size": 6210720,
+      "sha256": "3f6928c50271808b0b16b083e16799a6c21a391c0344429e2468321b4dda0fe8",
+      "status": "pass"
+    },
+    {
+      "path": "repaired-r2/FINAL-PACKAGE-REVIEW.json",
+      "size": 16060,
+      "sha256": "e8a17704e0898752457727d16d60ce46fbbeffe81ca57867ce9c4a2295a7c999",
+      "status": "pass"
+    },
+    {
+      "path": "repaired-r2/privacy/AUDIT.json",
+      "size": 8130,
+      "sha256": "5fcc87827c6757ec9deb7b3f2bbebb301b2b50bdb98e22063ee71a309d86e387",
+      "status": "pass"
+    },
+    {
+      "path": "FINAL-ACCEPTANCE-REVIEW.json",
+      "size": 19801,
+      "sha256": "9d40bd1c299690cb8858bc638b7ad24ac582d877c574dc1489b2214fb65e4efa",
+      "status": "pass"
+    },
+    {
+      "path": "repaired-r2/POWERSHELL-EXTRACTION.json",
+      "size": 7286,
+      "sha256": "90086bc0642ef60b50c7550ee897a848ccfa4b7858017f6f6520095f76c5a132",
+      "status": "pass"
+    },
+    {
+      "path": "verification-longpath-green/AUDIT.json",
+      "size": 2957,
+      "sha256": "0a72808cb80c46086b99652e4fb4792708b2a65907c1fadf958d2d1a134813b7",
+      "status": "pass"
+    },
+    {
+      "path": "fresh-install-verification-r1/RESULT.json",
+      "size": 1425,
+      "sha256": "268e6b67cf8deed74dd575b86b71a6d6eb92683e9c23919a313ae762f7aa4805",
+      "status": "fail"
+    },
+    {
+      "path": "headless-install-verification-r1/RESULT.json",
+      "size": 860,
+      "sha256": "819f258c391a1c992f4c78e150a5a27571c8d752da7988a032fac0f0f8999bbc",
+      "status": "fail"
+    },
+    {
+      "path": "headless-install-verification-r2/RESULT.json",
+      "size": 2812,
+      "sha256": "5791ae61af31b8741f3c803fa96d0e382ad4f8b801338a22b559cbc5efe33bab",
+      "status": "fail"
+    },
+    {
+      "path": "headless-install-verification-r3/RESULT.json",
+      "size": 2695,
+      "sha256": "f5c517d4ced007422ba7969b7724d41b0c64f64e3b15b97bd3e3e022b43972f9",
+      "status": "fail"
+    },
+    {
+      "path": "headless-install-verification-r4/RESULT.json",
+      "size": 3486,
+      "sha256": "ae80d4d8d56c7ad03ac6f3c693833dab2e38ef9b4ac855ffe538144353065f66",
+      "status": "fail"
+    },
+    {
+      "path": "headless-start-diagnostic-r1/RESULT.json",
+      "size": 2358,
+      "sha256": "9a32adb6c96a92ffe6b8ac3eb628b698df4b278ab07eeb7a6c7e611f82ad8119",
+      "status": "fail"
+    },
+    {
+      "path": "headless-start-diagnostic-r1/AUDIT.json",
+      "size": 2021,
+      "sha256": "9457d68e77ab22e100d2525410fd1068267b312891845b774639d24c6bc62d90",
+      "status": "pass"
+    },
+    {
+      "path": "default-desktop-full-r1/RESULT.json",
+      "size": 1759,
+      "sha256": "2666acba0d4b64277c08b3c2385d2feb7f80d7fff7d5166c9b362a3d10ccdae0",
+      "status": "fail"
+    },
+    {
+      "path": "desktop-guardian-r1/AUDIT.json",
+      "size": 3457,
+      "sha256": "6dd8fc2af69147201d90209c5356eb68d06c6bfa40f92bd4a688eb60e636b0bb",
+      "status": "pass"
+    },
+    {
+      "path": "default-desktop-full-r2/RESULT.json",
+      "size": 4929,
+      "sha256": "485ead1d45979be32bd832004ffed43f62590a10f13812822ce6261211984793",
+      "status": "blocked"
+    },
+    {
+      "path": "default-desktop-sep-r2/RESULT.json",
+      "size": 4927,
+      "sha256": "d6392fdd4847c5cfaa224f2b1650bb8c54595d08c5ce6cf110370e842809409d",
+      "status": "blocked"
+    },
+    {
+      "path": "DESKTOP-GUARDIAN-AUDIT.json",
+      "size": 6554,
+      "sha256": "ea1d7aa768030c7c25e6aa0bf883a6230b9c8ff183bdbef439ed73abaa21d704",
+      "status": "pass"
+    },
+    {
+      "path": "inventory-diagnostic-r1/RESULT.json",
+      "size": 46611,
+      "sha256": "1c948f0b08d28afa605228ac007f23b940db9b280143a82fa0af9b9ac19dbc75",
+      "status": "pass"
+    },
+    {
+      "path": "PROGRAM-SEALED.json",
+      "size": 447,
+      "sha256": "587ece29b9f5be1b4a3bda17293fcd648fe5c1b0f359b5d2966cca3f2d053e85",
+      "status": "pass"
+    },
+    {
+      "path": "PACKAGE-DOCS-REVIEW.json",
+      "size": 1968,
+      "sha256": "8a6754be4f8d88ca7d77712229eb929f9e89ce84e4f8ffc8671d355e8fdfd14a",
+      "status": "pass"
+    },
+    {
+      "path": "SUPPORT-PYC-OMISSION.json",
+      "size": 271269,
+      "sha256": "7e00c48d386a1720b689d93f320d2f4855ebe36c4ab3bacd7385b0979f285d0a",
+      "status": "pass"
+    },
+    {
+      "path": "SUPPORT-PYTHON-IMPORT.json",
+      "size": 317,
+      "sha256": "35008cb642c9ca917e5cd669d65f187c62b0fc3b23d30733989c567569f89d40",
+      "status": "pass"
+    },
+    {
+      "path": "ONLY-REQUIRED.json",
+      "size": 2425181,
+      "sha256": "9327b440e0484d5493b80707531cd61105368e0d970a1f41766c1aa237868412",
+      "status": "pass"
+    },
+    {
+      "path": "official-source-audit-r3/RESULT.json",
+      "size": 1078966,
+      "sha256": "16972821bc6aa79b39a1a74a729de42ae104335c1971333a49211472c3d341fe",
+      "status": "mismatch"
+    },
+    {
+      "path": "installer-freeze-r2/FREEZE.json",
+      "size": 2612,
+      "sha256": "a35ad2d066dc4ad0fcd6ca66afba408d37f06a8103056754ed954bc969d588da",
+      "status": "pass"
+    },
+    {
+      "path": "verification-freeze-r6/FREEZE.json",
+      "size": 3002,
+      "sha256": "76841d9fb7a2bfbdbd16800c4c02d0ff827091e88c52822db8f695431cba926c",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r7/FREEZE.json",
+      "size": 3295,
+      "sha256": "7e96f7522556dc17ea7c1a08133907fadab32c03b3c8a7709e6aab836150248b",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r8/FREEZE.json",
+      "size": 4129,
+      "sha256": "9e6931546d0311b6da5382cc0b13ffac25ad26ae7124c41fb758a435cdf2cbd2",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r9/FREEZE.json",
+      "size": 4433,
+      "sha256": "da139a4f1a723c92e6869d16a174fabb36b6484fd08f8f3596f4b2d8cd5ab37e",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r10/FREEZE.json",
+      "size": 4613,
+      "sha256": "de2d9c3a0de98e9a980e0c2152f24c08f246a26de555a0a0ebb71b19cfbfbfad",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r10-r2/FREEZE.json",
+      "size": 4603,
+      "sha256": "904407dba70546ee6e766a0793bbbcee761b8be5386fb24f9b77891e1138ec1b",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-freeze-r11/FREEZE.json",
+      "size": 6430,
+      "sha256": "e895acc5b8213c4c5d685259ee047f0165afac5951c3444e9474c89e4f8d4868",
+      "status": "not_run"
+    },
+    {
+      "path": "verification-documentation-r1/FREEZE.json",
+      "size": 1515,
+      "sha256": "80ae2efc307b307bc121a0df6c5d5814c2ea24f91273ec3743c37cfe470f8eee",
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "treeSha256": "c260dee9312b31e7986d099341cace49012e68ae90773036444c4ba9c9c00db8",
+  "runtime": [
+    {
+      "sha256": "37e6a332e251ffec6818108e5d37e4faacdbd8d77b491de12561601c9a3962c3",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/launch-full.mjs"
+    },
+    {
+      "sha256": "b3a063a699bb26efc4c873e1313c2a2f0b66ffe29d21f8e0cd449e3601b96445",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/program-manifest.mjs"
+    },
+    {
+      "sha256": "ef85d71769efba6618bb9dab670a369ed329732adf09f9aec25d7dd7c7b0ec07",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/launch-state.mjs"
+    },
+    {
+      "sha256": "f715cd525a386bf5bb64baa8f282a1cf0fc6f77b82f424358ae3d1d8c28033dc",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/desktop-rpc.mjs"
+    },
+    {
+      "sha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/host-owner.mjs"
+    },
+    {
+      "sha256": "b0016da79d72268d6b325ed93c59a09227ebbda30badc9bf2a05fec3afd792e8",
+      "matchesFrozenR23": true,
+      "path": "desktop/managed-broker/business-host.mjs"
+    }
+  ],
+  "positiveCleanupCount": 0,
+  "postSmoke": {
+    "receiptInLargeArtifact": 11884503938,
+    "ciStep": "pass",
+    "localReceiptRead": false
+  },
+  "schema": 1,
+  "runId": 38547010709,
+  "negativeCleanup": "test-owned SIGKILL; not graceful product proof",
+  "rounds": 3,
+  "status": "pass",
+  "fullMacCertification": "blocked",
+  "commit": "9d754da37ca399594dc9e19027ff8ff3547095d5",
+  "scope": "three actual installed core Mac desktop cycles; not full public certification",
+  "artifacts": [
+    {
+      "sha": "0c46bc9c09dba5c9a2372717d91511aeb7e6c66b24bb1a4efc14157812ab651a",
+      "name": "r23-negative-diagnostic.zip",
+      "artifact": 11884867829
+    },
+    {
+      "sha": "b4950ca79a5b8fa6c5c1301e5beddf90f00d7ee5c29346a42f980d32bcb99ba2",
+      "name": "r23-full-diagnostic.zip",
+      "artifact": 11884434212
+    }
+  ],
+  "programSha256": "49a3aaa7a1beb74ae64bc687a04566008a641ea02013f1d36e7945d5b8d448e8"
+}

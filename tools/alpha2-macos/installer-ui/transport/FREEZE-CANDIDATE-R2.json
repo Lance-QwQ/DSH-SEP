@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "status": "not_run",
+  "scope": "compile-name correction only; native15 GREEN and supplemental6 RED still pending",
+  "inputs": [
+    {
+      "path": "InstallerPipeTransport.h",
+      "bytes": 494,
+      "sha256": "c1ece550711b546ddd5589199f3a7646b857b32f489394bc0729a91f96ea491c"
+    },
+    {
+      "path": "InstallerPipeTransport.m",
+      "bytes": 14128,
+      "sha256": "06c65200f60ce49e8592ca22f12b3697c0789140efe8c625643eff06676a3c5b"
+    },
+    {
+      "path": "InstallerPipeTransportTests.m",
+      "bytes": 12634,
+      "sha256": "c19fb9ddfaf925beddfe38ececc1f2716f87dc3431401c0518e45397c3e961ab"
+    },
+    {
+      "path": "controller-fixture.mjs",
+      "bytes": 4234,
+      "sha256": "588492c465dedb416c041bb2163c127bc0d996753728f2813689f5f809f0135d"
+    },
+    {
+      "path": "fixture-preflight.mjs",
+      "bytes": 3064,
+      "sha256": "e960550597684ebf7706d6a5b2f8003a59e9aee8afa9d945a8159644dbdf1016"
+    },
+    {
+      "path": "green-ci-job.yml",
+      "bytes": 2619,
+      "sha256": "204f33ec1646fe45060da5b47c9b2072da66fbc75c2d97c81bcdb79c224d0e25"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3565,
+      "sha256": "f04e2572f0c3acc86301b3c13782fb9d7edce976e50203d9a5e4c5e754dfebf7"
+    },
+    {
+      "path": "IMPLEMENTATION.md",
+      "bytes": 2458,
+      "sha256": "5db0ec700869184eb01afd36988c5c5dab6189f6561dbd8036c18b0349776f9d"
+    },
+    {
+      "path": "InstallerRoleTests.m",
+      "bytes": 4315,
+      "sha256": "e595b66a82b07d18135871c98b4db7490deac4ac41a6fc22ad01add466186ce4"
+    },
+    {
+      "path": "role-regressions.mjs",
+      "bytes": 2382,
+      "sha256": "2eabe68413c90c8e7ce721538792fe08026703c98835a0d88bb756b31623ef4c"
+    },
+    {
+      "path": "role-red-ci-job.yml",
+      "bytes": 2374,
+      "sha256": "8c122ca5dc9bcabcf574f282209613f8fd5d6ba5bd1510fbbb935c4577c5b99d"
+    },
+    {
+      "path": "SYMBOL-RENAME.json",
+      "bytes": 480,
+      "sha256": "454360303c6c0b64b5d21c42ed3394fc1dd9c3387f403ccbd93a912353f1be28"
+    }
+  ],
+  "originalDefinitions": 15,
+  "supplementalDefinitions": 6,
+  "origin": {
+    "schema": 1,
+    "inputSha256": "779c8484aa7fba00dc2de0e1d9f81067f227a96e638a70ecc7a1caa8e7656ad3",
+    "resultSha256": "06c65200f60ce49e8592ca22f12b3697c0789140efe8c625643eff06676a3c5b",
+    "transforms": [
+      {
+        "from": "Pattern(",
+        "to": "SEPTransportPattern(",
+        "matches": 5
+      },
+      {
+        "from": "Boolean(",
+        "to": "SEPTransportBoolean(",
+        "matches": 5
+      }
+    ],
+    "reason": "r62 actual Mac SDK typedef collisions; no behavior or test change"
+  },
+  "previousAttempt": {
+    "stage": "r62",
+    "outcome": "compile failed before either test set; ten diagnostics from two SDK typedef collisions",
+    "executedDefinitions": 0
+  },
+  "dependency": {
+    "path": "installer-ui/native/InstallerUI.h",
+    "sha256": "aa9b9a48d413a01b426576d05fa00d9245bbddb18c80d316b998e3d09a6fc76c"
+  }
+}

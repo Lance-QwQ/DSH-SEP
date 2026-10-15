@@ -1,0 +1,17 @@
+import {spawn} from 'node:child_process';
+import {createWriteStream} from 'node:fs';
+import {mkdir} from 'node:fs/promises';
+import {pipeline} from 'node:stream/promises';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {join} from 'node:path';
+const output=process.argv[2];if(!/^D:\\AIData\\ProjectWork\\DSH\\alpha2-portable-[a-z0-9-]+$/.test(output))throw Error('OUTPUT_SCOPE');
+const suffix=process.argv[3]??'';if(suffix&&!/^-r[1-9][0-9]*$/.test(suffix))throw Error('EVIDENCE_GENERATION');
+const names=['PREPARED.json','RESULT.json','install-r1.log','core-r1.tap','probes-r1.tap','combined-r2.tap','combined-r3.tap','isolation-red-r1.tap','isolation-green-r1.tap','isolation-hardlink-red.tap','isolation-green-r2.tap','isolation-green-r3.tap','isolation-green-r4.tap','host/package.json','host/pnpm-lock.yaml','host/pnpm-workspace.yaml','sandbox-downloads/metadata.txt','sandbox-downloads/download.log','tests/entry.test.mjs','tests/configuration.test.mjs','tests/platform-admission.test.mjs','tests/native-compaction.test.mjs'];
+const archive=join(output,'linux-evidence'+suffix+'.tar');
+const child=spawn('wsl.exe',['--distribution','DSH-SEP-Linux-RC','--cd','/','--exec','/usr/bin/tar','-cf','-','-C','/opt/dsh-sep-cross-platform/alpha2-portable-20261012-r1',...names],{windowsHide:true,stdio:['ignore','pipe','inherit']});
+const exited=new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',code=>code===0?resolve():reject(Error('EXPORT:'+code)));});
+await Promise.all([pipeline(child.stdout,createWriteStream(archive,{flags:'wx'})),exited]);
+const evidence=join(output,'linux-evidence'+suffix);await mkdir(evidence);
+await promisify(execFile)('C:/Windows/System32/tar.exe',['-xf',archive,'-C',evidence],{windowsHide:true,timeout:30000});
+console.log(JSON.stringify({evidence}));

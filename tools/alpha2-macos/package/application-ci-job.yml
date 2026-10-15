@@ -1,0 +1,125 @@
+native-integrated-application:
+  runs-on: macos-15
+  timeout-minutes: 45
+  permissions:
+    contents: read
+    actions: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Restore and verify fixed r33 product input
+      env:
+        SEP_ARTIFACT_TOKEN: ${{ github.token }}
+      run: node tools/alpha2-macos/package/restore-app-base.mjs "$RUNNER_TEMP/application-base"
+    - name: Install the integrity-pinned pure JS ASAR tool
+      run: node tools/alpha2-macos/desktop/managed-overlay/install-asar-tool.mjs "$RUNNER_TEMP/application-asar-tool"
+    - name: Verify six branding contracts against the restored native source
+      run: |
+        node --input-type=module <<'NODE'
+        import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
+        const base=process.env.RUNNER_TEMP+'/application-base',receipt=JSON.parse(fs.readFileSync(base+'/RESULT.json','utf8'));
+        assert.equal(receipt.status,'pass');assert.equal(receipt.packageRoot,base+'/restored/DSH-SEP-macOS-Alpha2-preview');
+        const source=path.join(receipt.packageRoot,'payload/host/node_modules/@deepseek-ai/dsh-client-ui-brand-official'),target=process.env.RUNNER_TEMP+'/application-brand-inputs';fs.mkdirSync(target,{mode:0o700});
+        fs.copyFileSync(source+'/lib/client.js',target+'/client.js',fs.constants.COPYFILE_EXCL);fs.copyFileSync(source+'/package.json',target+'/package.json',fs.constants.COPYFILE_EXCL);
+        NODE
+        SEP_MAC_BRAND_INPUTS="$RUNNER_TEMP/application-brand-inputs" node --test --test-reporter=tap tools/alpha2-macos/desktop/brand-identity/derive.test.mjs > "$RUNNER_TEMP/application-brand-tests.tap"
+        node --input-type=module <<'NODE'
+        import fs from 'node:fs';import assert from 'node:assert/strict';
+        const text=fs.readFileSync(process.env.RUNNER_TEMP+'/application-brand-tests.tap','utf8');
+        for(const [key,n] of Object.entries({tests:6,pass:6,fail:0,cancelled:0,skipped:0}))assert.match(text,new RegExp('^# '+key+' '+n+'$','m'));
+        NODE
+    - name: Derive and sign fresh fixed-layout app, then verify its archive restore
+      id: assembly
+      run: |
+        node tools/alpha2-macos/package/assemble-application.mjs \
+          "$RUNNER_TEMP/application-base" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos" \
+          "$GITHUB_WORKSPACE/tools/alpha2-macos/desktop/managed-capture" \
+          "$RUNNER_TEMP/application-asar-tool/node_modules/@electron/asar/lib/asar.js" \
+          "$RUNNER_TEMP/application-build"
+    - name: Two direct launch definitions against the assembled and restored application
+      run: |
+        receipt="$RUNNER_TEMP/application-build/RESULT.json"
+        expected_sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f 1)
+        node tools/alpha2-macos/desktop/product-control/native-launch-runner.mjs \
+          "$receipt" "$expected_sha" "$RUNNER_TEMP/application-native-preflight"
+    - name: Actual LaunchServices lifecycle without Inspector or model requests
+      run: node tools/alpha2-macos/package/exercise-application.mjs "$RUNNER_TEMP/application-build" "$RUNNER_TEMP/application-lifecycle"
+    - name: One separate diagnostic workspace transition and actual badge measurement
+      run: |
+        node --test --test-reporter=tap tools/alpha2-macos/desktop/workspace-diagnostic.test.mjs > "$RUNNER_TEMP/application-workspace-contracts.tap"
+        receipt="$RUNNER_TEMP/application-build/RESULT.json"
+        expected_sha=$(shasum -a 256 "$receipt" | cut -d ' ' -f 1)
+        node tools/alpha2-macos/desktop/workspace-diagnostic.mjs \
+          "$receipt" "$expected_sha" "$RUNNER_TEMP/application-workspace-diagnostic"
+    - name: Preserve exact outcomes and evidence, even when integration fails
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-evidence
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/application-base/RESULT.json
+          ${{ runner.temp }}/application-base/*.log
+          ${{ runner.temp }}/application-asar-tool/RESULT.json
+          ${{ runner.temp }}/application-brand-tests.tap
+          ${{ runner.temp }}/application-build/RESULT.json
+          ${{ runner.temp }}/application-build/PACKAGE-INVENTORY.json
+          ${{ runner.temp }}/application-build/BRAND-ORIGIN.json
+          ${{ runner.temp }}/application-build/*.log
+          ${{ runner.temp }}/application-build/draft/APP-DRAFT.json
+          ${{ runner.temp }}/application-build/draft/*.log
+          ${{ runner.temp }}/application-build/desktop/RESULT.json
+          ${{ runner.temp }}/application-build/desktop/*.log
+          ${{ runner.temp }}/application-build/draft/DSH SEP.app/Contents/Resources/PROGRAM.json
+          ${{ runner.temp }}/application-build/draft/DSH SEP.app/Contents/Resources/BOOTSTRAP.json
+          ${{ runner.temp }}/application-lifecycle/RESULT.json
+          ${{ runner.temp }}/application-lifecycle/*.log
+          ${{ runner.temp }}/application-native-preflight/RESULT.json
+          ${{ runner.temp }}/application-native-preflight/INPUTS.json
+          ${{ runner.temp }}/application-native-preflight/WORKER-RESULT.json
+          ${{ runner.temp }}/application-native-preflight/CASE-*.json
+          ${{ runner.temp }}/application-native-preflight/*.log
+          ${{ runner.temp }}/application-workspace-contracts.tap
+          ${{ runner.temp }}/application-workspace-diagnostic/*.json
+          ${{ runner.temp }}/application-workspace-diagnostic/*.log
+    - name: Split the unchanged candidate for bounded artifact transport
+      id: transport
+      if: always() && steps.assembly.outcome == 'success'
+      run: |
+        node tools/alpha2-macos/package/split-application-artifact.mjs "$RUNNER_TEMP/application-build" "$RUNNER_TEMP/application-transport"
+        node --input-type=module <<'NODE'
+        import fs from 'node:fs';
+        const value=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/application-transport/transport-manifest.json','utf8'));
+        if(value.status!=='pass'||value.parts.length<1||value.parts.length>2)throw Error('SEP_APPLICATION_TRANSPORT_SIZE');
+        fs.appendFileSync(process.env.GITHUB_OUTPUT,'parts='+value.parts.length+'\n');
+        NODE
+    - name: Keep candidate transport part one and its exact binding
+      if: always() && steps.transport.outcome == 'success'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-part-one
+        compression-level: 0
+        if-no-files-found: error
+        path: |
+          ${{ runner.temp }}/application-transport/transport-manifest.json
+          ${{ runner.temp }}/application-transport/*.0001.part
+    - name: Keep candidate transport part two
+      if: always() && steps.transport.outcome == 'success' && steps.transport.outputs.parts == '2'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-part-two
+        compression-level: 0
+        if-no-files-found: error
+        path: ${{ runner.temp }}/application-transport/*.0002.part
+    - name: Preserve transport outcome separately from product verification
+      if: always() && steps.assembly.outcome == 'success'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-integrated-application-transport-receipt
+        if-no-files-found: error
+        path: ${{ runner.temp }}/application-transport/*.json

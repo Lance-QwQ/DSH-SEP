@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "entry": "dsh-sep-bundle/controlled-installation",
+  "runtime": "dsh-sep-bundle/settings-runtime",
+  "hostVersion": "0.2.1-alpha.1",
+  "activation": "exact root review plan; existing controlled storage and ledger only",
+  "settings": [
+    "memorySettings",
+    "budgetSettings"
+  ],
+  "nativeUi": "unchanged graph-bound ui-settings-memory factory and Connection routes",
+  "capture": {
+    "accepted": "boolean",
+    "default": false,
+    "effective": "enabled only by explicit cold business.capture=true plus configured per-project switch; shared Profile model/budget guards apply",
+    "verification": "synthetic same-ledger extraction and failure limits; no paid model quality certification"
+  },
+  "close": "bounded receipt; retain resources until actual settlement; fiber disposal joins settlement",
+  "completeProfileStatus": "blocked",
+  "defaultBundleAdmission": "pending",
+  "notIncluded": [
+    "private adoption",
+    "hot provider retirement",
+    "persistent full host launcher configuration",
+    "all real paid model/backend/MCP/provider behavior",
+    "complete Linux/macOS protected Profile and desktop certification",
+    "public HTTPS Git/auth/proxy distribution certification",
+    "native Electron menu/IPC whole-application exit integration"
+  ],
+  "status": "pass",
+  "fixedTestDefinitions": 31,
+  "controlledRootChecks": 17,
+  "frontendBrowserChecks": 1,
+  "mountFailure": "UI assembly failure with incomplete cleanup returns a mounted, blocked recovery control within shutdownMs; never ready/active. Successful cleanup still rejects the original mount error. Trusted caller must inspect status, repair the cause, retry close, await whenClosed and dispose before a fresh mount.",
+  "hostOwnership": "Dedicated controlled project host: close cancels every host Agent whose cwd is the selected projectRoot or a descendant, including agents not created by this composition. Do not mount in a shared project host without accepting that boundary.",
+  "toolSettlement": "Requires fixed native Agent-loop/Tools scheduler final tools/result publication after tools/pre-execute, including cancellation/failure. A missing final event retains the pending token and lease; no forced release or whole-application shutdown deadline.",
+  "authentication": "Generic controlled-installation SettingsUi relies on an authenticated Connection carrier. Explicit native-settings-installation fixture verifies signed cookie authority and Host/Origin fences; this does not certify every desktop carrier.",
+  "mountFailureChecks": 5,
+  "initializationFailure": "Root-owned control is published before asynchronous initialization. Trusted startup supervision may use ctx.get(name,false) for a LOADING Cordis provider; business discovery stays strict. Incomplete rollback returns blocked, retains ownership, and supports close retry. No late ready/publication after close; whenClosed means actual release.",
+  "lifecycleOwner": "One root fiber generation, not the reused Loader Entry or a recreated inner fiber. Dependency refresh cannot reopen a closed root; explicit dispose and a fresh root fiber may mount again.",
+  "initializationChecks": 7,
+  "loaderOwnershipCharacterizations": 1,
+  "historyExpansion": {
+    "default": false,
+    "enabledBy": "business.pluginGroup=true",
+    "scope": "explicit current direct user request; same registered project and same session; current revision/provenance and independent P2 deletion authority; maximum four calls; no automatic L4 search"
+  },
+  "paidMedia": {
+    "default": false,
+    "enabledBy": "business.vision={enabled:true,allowUpload:true}",
+    "scope": "verified native image model capability and request pricing; native attachments in independent governed domain; existing Profile ledger; synthetic evidence only"
+  },
+  "localMedia": "business.media defaults false; bounded UTF-8/digital PDF/DOCX extraction without a model call; audio/video not certified",
+  "verificationScope": "fixedTestDefinitions and named counts below are historical baseline definition counts, not a new bundle24 total. Current evidence: docs/BUNDLE-REVIEW-REPAIR.json.",
+  "shutdownBridge": "application-shutdown explicitly accepts a trusted dedicated host and official controller. Local synthetic application cases are verified separately; complete desktop quit wiring remains unverified.",
+  "failureDiagnostics": "Trusted control status retains bounded code/errorType for initializationCause/mountCause, separately from cleanup code. No arbitrary message, stack, path or body. Blocked controls retain owners and permit explicit close retries; whenClosed means actual release.",
+  "consumerCleanup": "Evaluation blocked-stop cannot skip independent memory/click/context cleanup. Successfully released children are not repeated; unfinished stop/dispose/layer close is retried. Evaluation fiber and root lease remain until its shutdown is confirmed. No forced backend kill is provided.",
+  "references": [
+    "docs/BUNDLE-REMAINING-CONSUMERS.md",
+    "docs/BUNDLE-REVIEW-REPAIR.md",
+    "tools/bundle-install/tests/APPLICATION-SHUTDOWN-REPRODUCTION.md"
+  ]
+}

@@ -1,0 +1,95 @@
+name: SEP Alpha.2 macOS native foundation
+on:
+  push:
+    branches: ['codex/sep-alpha2-macos-20261014']
+    paths: ['tools/alpha2-macos/**', '.github/workflows/sep-alpha2-macos.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-foundation:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Portable identity contracts
+        run: node --test --test-reporter=tap tools/alpha2-macos/identity-contract.test.mjs
+      - name: Failed synthetic command retains diagnostic
+        run: |
+          export SEP_MACOS_DIAGNOSTIC_TEST_ROOT="$(cd "$RUNNER_TEMP" && pwd -P)/sep-diagnostic-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          node --test --test-reporter=tap tools/alpha2-macos/command-log.test.mjs
+      - name: Three native APFS and owner rounds
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-alpha2-macos-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          printf 'SEP_MACOS_OUTPUT=%s\n' "$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/run-native.mjs "$root"
+      - name: Preserve synthetic receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-native-foundation
+          path: |
+            ${{ env.SEP_MACOS_OUTPUT }}/RESULT.json
+            ${{ env.SEP_MACOS_OUTPUT }}/round-*/RESULT.json
+            ${{ env.SEP_MACOS_OUTPUT }}/round-*/worker.*.log
+          if-no-files-found: error
+          retention-days: 14
+  budget-native:
+    needs: native-foundation
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Exact synthetic accounting dependency
+        run: npm ci --prefix tools/alpha2-macos --ignore-scripts --no-audit --no-fund --cache "$RUNNER_TEMP/npm-sep-macos"
+      - name: Three native accounting rounds
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-macos-budget-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          printf 'SEP_MACOS_BUDGET_OUTPUT=%s\n' "$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/run-budget-native.mjs "$root"
+      - name: Preserve budget receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-native-budget
+          path: ${{ env.SEP_MACOS_BUDGET_OUTPUT }}/RESULT.json
+          if-no-files-found: error
+          retention-days: 14
+  sandbox-feasibility:
+    needs: native-foundation
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Actual App Sandbox control and three signed rounds
+        run: |
+          root="$(cd "$RUNNER_TEMP" && pwd -P)/sep-macos-sandbox-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          printf 'SEP_MACOS_SANDBOX_OUTPUT=%s\n' "$root" >> "$GITHUB_ENV"
+          node tools/alpha2-macos/run-sandbox-prototype.mjs "$root"
+      - name: Preserve sandbox receipts only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sep-alpha2-macos-sandbox-feasibility
+          path: |
+            ${{ env.SEP_MACOS_SANDBOX_OUTPUT }}/RESULT.json
+            ${{ env.SEP_MACOS_SANDBOX_OUTPUT }}/round-*.json
+            ${{ env.SEP_MACOS_SANDBOX_OUTPUT }}/control.json
+            ${{ env.SEP_MACOS_SANDBOX_OUTPUT }}/*.log
+          if-no-files-found: error
+          retention-days: 14

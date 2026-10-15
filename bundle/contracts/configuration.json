@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "stage": "portable-configuration-intent",
+  "businessActivationAllowed": false,
+  "configurationEntry": "./bundle/lib/configuration.js",
+  "budgetReviewEntry": "./bundle/lib/configuration-budget.js",
+  "template": "./bundle/config/default.json",
+  "jsonSchema": "./bundle/config/schema.json",
+  "implemented": {
+    "validation": "strict, no private roots/project IDs/credential strings/reset fields",
+    "ledgerReview": "pure supplied-byte validation and accounting; no file writes or implicit creation/migration",
+    "compaction": "inherit-native intent only; original engine/config unchanged"
+  },
+  "plannedHostBindings": {
+    "projects": "registered recovery authorities, retain memoryKey and scope",
+    "storage": "governed storageDomain/control root",
+    "budget": "governed canonical ledger path, preserve observed entries/reservations/revisions",
+    "credentials": "host-managed references only",
+    "externalRuntimes": "explicit provider/launcher configuration; no automatic start"
+  },
+  "hostBindingStatus": "not_run",
+  "preservation": [
+    "existing data domains and archive",
+    "project identity and lifecycle timestamps",
+    "budget entries, unknown reservations, reconciliations, initialSpent and per-session overrides",
+    "user plugins, settings and credentials"
+  ],
+  "missingOrCorruptLedger": "block existing-budget review; never silently initialize a fresh balance",
+  "policyChanges": "supplied defaults are intent only; existing persisted policy wins. Session changes must use revision-checked human settings. Shared/round policy requires explicit host handling.",
+  "legacyLedger": "review original version only; controlled migration belongs to subsequent host integration",
+  "nativeSettingsIntegration": "not_run"
+}

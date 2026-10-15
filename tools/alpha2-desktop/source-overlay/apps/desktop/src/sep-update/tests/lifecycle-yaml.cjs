@@ -1,0 +1,1 @@
+module.exports = new Proxy({}, {get(){throw Error("UNEXPECTED_YAML_IN_LIFECYCLE_TEST")}});

@@ -1,0 +1,57 @@
+native-project-workflow-candidate:
+  runs-on: macos-15
+  timeout-minutes: 12
+  permissions:
+    contents: read
+  steps:
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        persist-credentials: false
+        fetch-depth: 1
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: '24.21.0'
+    - name: Verify fixed source and build native helper
+      shell: bash
+      run: |
+        set -euo pipefail
+        root="$(cd "$RUNNER_TEMP" && pwd -P)/project-workflow-native"
+        mkdir "$root"
+        echo "SEP_MAC_WORKFLOW_OUTPUT=$root" >> "$GITHUB_ENV"
+        node tools/alpha2-macos/project-workflow/verify-inputs.mjs > "$root/SOURCE-VERIFIED.json"
+        xcrun clang -std=c11 -O2 -Wall -Wextra -Werror -arch arm64 tools/alpha2-macos/apfs-tree/native-tree.c -o "$root/native-tree"
+        echo "SEP_MAC_TREE_HELPER=$root/native-tree" >> "$GITHUB_ENV"
+        echo "SEP_MAC_TREE_HELPER_SHA256=$(shasum -a 256 "$root/native-tree" | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
+        echo "SEP_MAC_WORKFLOW_TEST_ROOT=$root/fixtures" >> "$GITHUB_ENV"
+        echo "SEP_MAC_WORKFLOW_UNIT_ROOT=$root/unit-fixtures" >> "$GITHUB_ENV"
+        sw_vers > "$root/system.txt"
+        uname -a >> "$root/system.txt"
+        node --version >> "$root/system.txt"
+    - name: Execute supplemental preview, origin and control cases (9+2+5)
+      shell: bash
+      run: |
+        set +e
+        node --test --test-reporter=tap --test-concurrency=1 --test-timeout=30000 tools/alpha2-macos/project-workflow/preview.test.mjs tools/alpha2-macos/project-workflow/derive-sources.test.mjs tools/alpha2-macos/project-workflow/control-boundaries.test.mjs > "$SEP_MAC_WORKFLOW_OUTPUT/supplemental.tap" 2>&1
+        code=$?
+        printf '%s\n' "$code" > "$SEP_MAC_WORKFLOW_OUTPUT/SUPPLEMENTAL-EXIT-CODE.txt"
+        exit "$code"
+    - name: Execute unchanged 17 native workflow cases
+      shell: bash
+      run: |
+        set +e
+        node --test --test-reporter=tap --test-concurrency=1 --test-timeout=30000 tools/alpha2-macos/project-workflow/native-workflow.test.mjs > "$SEP_MAC_WORKFLOW_OUTPUT/native.tap" 2>&1
+        code=$?
+        printf '%s\n' "$code" > "$SEP_MAC_WORKFLOW_OUTPUT/EXIT-CODE.txt"
+        exit "$code"
+    - name: Preserve scoped evidence including any failed cases
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: sep-macos-project-workflow-native-candidate
+        if-no-files-found: error
+        path: |
+          ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.json
+          ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.txt
+          ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/*.tap
+          ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/PREFLIGHT.json
+          ${{ env.SEP_MAC_WORKFLOW_OUTPUT }}/fixtures/CLEANUP.jsonl

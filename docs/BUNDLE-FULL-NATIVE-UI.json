@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "stage": 4,
+  "status": "pass",
+  "candidate": "0.2.1-beta.3-bundle.22",
+  "targetHost": "0.2.1-alpha.1",
+  "artifact": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-remaining-consumers-r1\\artifacts\\consumer-sealed-r1\\dsh-sep-bundle-0.2.1-beta.3-bundle.22.tgz",
+  "artifactSha256": "fd266840007d04b5b56f0e6ac4f4ce3d96e8c80cecd278fd4be4e8368ada85ed",
+  "packedFilesCompared": 467,
+  "scope": "controlled Windows full native UI composition with selected workspace/session/chat/settings and real HMR withdrawal; not all optional domains, native Electron tray or arbitrary providers",
+  "tests": {
+    "definitions": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "log": "D:\\AIData\\ProjectWork\\DSH\\bundle-install-20261008\\phase4-full-native-ui-r1\\full-native-live-r6.log",
+    "sha256": "adf7ca9a011dc11aff994e49d615aa4004da45e6b923568169f70f3f9f41cd57"
+  },
+  "inputs": [
+    {
+      "path": "tools\\bundle-install\\tests\\full-browser.test.mjs",
+      "sha256": "b6541e618aa3e151d3c246d5d71e314d22ecb0bfcde43b420ea5ab06aea51f02"
+    },
+    {
+      "path": "tools\\bundle-install\\tests\\full-browser-fixture.mjs",
+      "sha256": "29e7ad34644f29b3b6a519064025ff46c4d0f9a08a5249ce22bfc08df450afbd"
+    },
+    {
+      "path": "tools\\bundle-install\\tests\\full-browser-driver.mjs",
+      "sha256": "96c6353a3e7695d41a192574911ecba71acc7ea7b8e3496c9858e4d4e7901e80"
+    },
+    {
+      "path": "tools\\bundle-install\\tests\\full-browser-seed-probe.mjs",
+      "sha256": "f7c5ac2f1170a9e5df66530d65497ddcc69dfc599fefcabcf39cfef7a1e3d729"
+    }
+  ],
+  "inputBinding": "post-run exact package/source/install audit; no package or test changes during successful run",
+  "fixtureCorrections": [
+    "wait for native session catalog ready before first/reloaded openSession",
+    "blank native sessions intentionally display New Session until first prompt",
+    "synthetic adapter defaultMaxTokens=64 models native adapter-owned output default; P1 limit unchanged"
+  ],
+  "historicalFailedLogs": [
+    "full-native-r1.log",
+    "full-native-live-r1.log",
+    "full-native-live-r2.log",
+    "full-native-live-r3.log",
+    "full-native-live-r4.log",
+    "full-native-live-r5.log"
+  ],
+  "historicalCleanup": "failed browser fixtures used their finally cleanup; do not count these as normal Browser.close proof",
+  "visualReview": "native budget and native chat screenshots inspected; budget screenshot still includes saved/read-back status text; persistence separately confirmed after reload",
+  "remaining": [
+    "GUI repository install/enable/restart/upgrade/cancel/disable/uninstall",
+    "three-platform and CI verification",
+    "finite historical close anomaly disposition",
+    "final candidate checkpoint"
+  ],
+  "boundary": "no daily deployment or GitHub push; stop after step 8"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "actual packaged Mac missing-controlled-connection refusal",
+  "asarSha256": "e7b5f7899e409a587b0cb931d6d34658626ee6906a9cd77fde35e9484a5c6259",
+  "hostStarted": false,
+  "cleanup": [
+    {
+      "path": "test-owned process group SIGKILL",
+      "productShutdownEvidence": false
+    }
+  ],
+  "fullSepCertification": "not_run",
+  "probePhase": "observed",
+  "refusalCode": "SEP_MAC_CONTROLLED_ENTRY_REQUIRED",
+  "observation": "passive exception monitor/emission receipt",
+  "exit": {
+    "code": null,
+    "signal": "SIGKILL"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "baseRuntimeCount": 76,
+  "extraRuntimeCount": 8,
+  "totalRuntimeCount": 84,
+  "businessEntry": "Resources/product/runtime/desktop/project-workflow-product/pending-startup/standalone.mjs",
+  "files": [
+    {
+      "source": "desktop/project-workflow-product/pending-startup/profile.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/profile.mjs",
+      "sha256": "b0ea9db35cabead3d75b7945274fceafd441855ceb54ff80cce358a86606660d",
+      "bytes": 1126
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/profile-plugin.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/profile-plugin.mjs",
+      "sha256": "87fb1231fde20d822cee518cbcbdca4d9d1c0b47420004e2a1cbf0ab69ae8374",
+      "bytes": 606
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/snapshot-scope.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/snapshot-scope.mjs",
+      "sha256": "0bf988793f35f0b0e3233ecf14bb73b36d99488ccec1f1a7aa3100a99e0516ed",
+      "bytes": 2321
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/consumers.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/consumers.mjs",
+      "sha256": "8e90a5958916e0f9c810470b318b7f0bceb98804d8e9903ffee944d28e19bbdc",
+      "bytes": 2941
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
+      "sha256": "46a759af30cb282e12c7c751f41ba7cce49f4ce88517f3fcab2ae5719f6c48fb",
+      "bytes": 3528
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/runtime.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/runtime.mjs",
+      "sha256": "463ee1a67b1ed44cfc0b8872dd2f9a108354cd236d3b1ad0d4d5015a1875d06b",
+      "bytes": 373
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/profile-layout.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/profile-layout.mjs",
+      "sha256": "c511fb5d2acb152d06524b7684d71c042baf42c56bcd2680520d09df0eb7872a",
+      "bytes": 2639
+    },
+    {
+      "source": "desktop/project-workflow-product/pending-startup/standalone.mjs",
+      "target": "desktop/project-workflow-product/pending-startup/standalone.mjs",
+      "sha256": "81bb84d4ea395059d449e28531fcfe7ac0a53e07b202a153d90bc4d59fc760a4",
+      "bytes": 870
+    }
+  ],
+  "verificationScope": "current-source-byte-binding-only; not native acceptance",
+  "nativeVerification": "not_run",
+  "historicalManifest": {
+    "path": "package-inputs-r73.json",
+    "sha256": "57f37a985f925a5940106a51ee2aa46dcd0a3599379735a89c23d3aa1e9f3a5f",
+    "sourceCommit": "a9b06f135a8a3529921e6fa6e04d6e66bc4ff904"
+  }
+}

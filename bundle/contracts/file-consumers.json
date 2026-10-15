@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "scope": "Explicit native text file-tool Profile fragment only, Windows x64 local NTFS, pinned official published host components. Not a complete user Profile or full SEP activation.",
+  "targetHost": "0.2.1-alpha.1",
+  "status": "pass",
+  "businessActivationAllowed": false,
+  "completeProfileStatus": "blocked",
+  "entry": "dsh-sep-bundle/protected-file-tools",
+  "config": {
+    "files": "Same explicit registered project/cwd and bounded recovery settings as file-protection.",
+    "tools": "Official tool-fs Config; native defaults retained."
+  },
+  "requires": [
+    "tools",
+    "systemPrompt",
+    "recoveryHost",
+    "sandboxPolicy"
+  ],
+  "composes": [
+    "owned guarded file provider",
+    "official fs-observation-policy",
+    "official tool-fs"
+  ],
+  "modelToolsVerified": [
+    "read",
+    "write",
+    "edit"
+  ],
+  "notVerified": [
+    "conditional read_image and attachments",
+    "other file consumers/search/tool-str-replace-editor",
+    "controlled replacement of existing full user Profile",
+    "full Agent/application shutdown deadline",
+    "private roots and GUI"
+  ],
+  "onExistingProvider": "SEP_FS_PROVIDER_CONFLICT; no replacement",
+  "onToolCollision": "SEP_FS_TOOL_CONFLICT; no replacement",
+  "onMissingSandbox": "SEP_FS_SANDBOX_REQUIRED; no mutation admission",
+  "onObservationPolicyUnload": "undefined intent refused as FS_NOT_OBSERVED; no unconditional fallback",
+  "scopeRestriction": "Sandbox session mode and native denial markers retained; even danger-full-access is confined to the one registered protected root. Approval is owned by the native host. Ordinary Shell is unchanged.",
+  "rollback": "Failed child activation disposes only this component children in reverse order; native sandbox and user services retained.",
+  "postCommitCapacity": "Successful durable mutation remains success; receipt may be omitted at capacity, and later guarded modification is refused."
+}

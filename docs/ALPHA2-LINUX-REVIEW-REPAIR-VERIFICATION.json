@@ -1,0 +1,5231 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "isolated Alpha.2 Linux review repairs; no complete public certification",
+  "sourceBase": "913336544a31521c20d178e4e1073ea838de860c",
+  "buildId": "alpha2-linux-closeout.4",
+  "counts": {
+    "previous": 189,
+    "added": 11,
+    "total": 200,
+    "repeatedBootsNotDefinitions": true
+  },
+  "final": {
+    "tests": 200,
+    "pass": 200,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "runtime": [
+    {
+      "name": "project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148"
+    },
+    {
+      "name": "linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db"
+    },
+    {
+      "name": "linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138"
+    },
+    {
+      "name": "linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811"
+    },
+    {
+      "name": "linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de"
+    },
+    {
+      "name": "linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1"
+    },
+    {
+      "name": "linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42"
+    },
+    {
+      "name": "linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6"
+    },
+    {
+      "name": "host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174"
+    },
+    {
+      "name": "bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17"
+    },
+    {
+      "name": "linux-profile-plugin.mjs",
+      "sha256": "7e2f5ad98f6e08619b96cbad5cd6174aae55cf04b6e643030d6783597967ac85"
+    },
+    {
+      "name": "managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4"
+    },
+    {
+      "name": "linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3"
+    },
+    {
+      "name": "linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039"
+    },
+    {
+      "name": "linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977"
+    },
+    {
+      "name": "mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c"
+    },
+    {
+      "name": "linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079"
+    },
+    {
+      "name": "linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f"
+    },
+    {
+      "name": "linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828"
+    },
+    {
+      "name": "linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06"
+    },
+    {
+      "name": "document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389"
+    },
+    {
+      "name": "linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a"
+    },
+    {
+      "name": "linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad"
+    },
+    {
+      "name": "context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f"
+    },
+    {
+      "name": "linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246"
+    },
+    {
+      "name": "linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284"
+    },
+    {
+      "name": "linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428"
+    },
+    {
+      "name": "linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23"
+    },
+    {
+      "name": "linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693"
+    },
+    {
+      "name": "linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d"
+    },
+    {
+      "name": "linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8"
+    },
+    {
+      "name": "linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511"
+    },
+    {
+      "name": "linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1"
+    },
+    {
+      "name": "linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7"
+    },
+    {
+      "name": "linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9"
+    }
+  ],
+  "package": {
+    "manifestSha256": "6649193c52d6a52e0cdace52a3170603ac6856f8ca4b74c66472814e8fe9938c",
+    "entries": 52182,
+    "runtimeFiles": 35
+  },
+  "contextDerivation": {
+    "source": "bundle/host/context-preparation/index.mjs",
+    "sourceSha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+    "old": "session.header.cwd",
+    "replacement": "ctx.get('workingDirectory').get(session)",
+    "occurrences": 3,
+    "resultSha256": "32364edece8f70a972d784c051b6da256c2ab3cb074232be078fec551928a1de"
+  },
+  "installation": {
+    "status": "pass",
+    "scope": "actual independent payload install and two native host boots; no Electron or paid API claims",
+    "installed": {
+      "status": "pass",
+      "program": "/opt/dsh-sep-cross-platform/alpha2-portable-review-installed-r8/program",
+      "dataRoot": "/opt/dsh-sep-cross-platform/alpha2-portable-review-installed-r8/data",
+      "planHash": "681ec333b6fae218d397dd2b3c13da9c4d1ddd31f5175ab09e20f8226fad9a05"
+    },
+    "results": [
+      {
+        "round": 1,
+        "status": "pass",
+        "hostPid": 37,
+        "readyMs": 24040,
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "duplicateExit": 73,
+        "ledgerPreserved": true,
+        "oldConnection": "not applicable"
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "hostPid": 68,
+        "readyMs": 25315,
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "duplicateExit": 73,
+        "ledgerPreserved": true,
+        "oldConnection": "refused"
+      }
+    ],
+    "hostStderrBytes": 0,
+    "startupWarningsAbsent": true
+  },
+  "gui": {
+    "status": "pass",
+    "scope": "installed default Electron main, private authenticated Xorg, native window close, two cold boots; physical desktop/tray not certified",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "pass",
+        "window": {
+          "status": "pass",
+          "action": "capture",
+          "windows": [
+            {
+              "id": 2097157,
+              "title": "DeepSeek Harness",
+              "pid": 81,
+              "width": 600,
+              "height": 727,
+              "distinctColors": 1599
+            }
+          ]
+        },
+        "hostPid": 69,
+        "electronPid": 81,
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "closed": {
+          "status": "pass",
+          "phase": "closed",
+          "hostExit": {
+            "code": 0,
+            "signal": null
+          },
+          "electronExit": {
+            "code": 0,
+            "signal": null
+          },
+          "receipt": {
+            "phase": "closed",
+            "status": "pass",
+            "pending": 0,
+            "consumers": {
+              "closed": true,
+              "capture": false
+            },
+            "p1": {
+              "state": "ready",
+              "budgetProblem": null,
+              "maxConcurrent": 2,
+              "maxDepth": 1,
+              "maxReworks": 2,
+              "readOnlyChildren": true,
+              "preworkRequired": false,
+              "active": 0,
+              "taskLimitCny": 5,
+              "cumulativeLimitCny": 100,
+              "budgetBasis": "local-usage-upper-bound-not-provider-invoice"
+            },
+            "compaction": {
+              "phase": "restored",
+              "closed": true,
+              "busy": false,
+              "businessEnabled": false,
+              "completeProfileStatus": "blocked",
+              "wholeApplicationDeadlineVerified": false
+            },
+            "documents": "governed-managed-copies; imported-source-retained",
+            "context": "disabled",
+            "vision": "explicit-upload; native-attachment-domain",
+            "evaluation": "disabled",
+            "computerClick": "disabled",
+            "fullLinuxCertification": "blocked",
+            "unavailable": [
+              "original-source-deletion",
+              "automatic-installation"
+            ]
+          }
+        },
+        "ledgerPreserved": true
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "window": {
+          "status": "pass",
+          "action": "capture",
+          "windows": [
+            {
+              "id": 2097157,
+              "title": "DeepSeek Harness",
+              "pid": 268,
+              "width": 600,
+              "height": 727,
+              "distinctColors": 1599
+            }
+          ]
+        },
+        "hostPid": 256,
+        "electronPid": 268,
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "closed": {
+          "status": "pass",
+          "phase": "closed",
+          "hostExit": {
+            "code": 0,
+            "signal": null
+          },
+          "electronExit": {
+            "code": 0,
+            "signal": null
+          },
+          "receipt": {
+            "phase": "closed",
+            "status": "pass",
+            "pending": 0,
+            "consumers": {
+              "closed": true,
+              "capture": false
+            },
+            "p1": {
+              "state": "ready",
+              "budgetProblem": null,
+              "maxConcurrent": 2,
+              "maxDepth": 1,
+              "maxReworks": 2,
+              "readOnlyChildren": true,
+              "preworkRequired": false,
+              "active": 0,
+              "taskLimitCny": 5,
+              "cumulativeLimitCny": 100,
+              "budgetBasis": "local-usage-upper-bound-not-provider-invoice"
+            },
+            "compaction": {
+              "phase": "restored",
+              "closed": true,
+              "busy": false,
+              "businessEnabled": false,
+              "completeProfileStatus": "blocked",
+              "wholeApplicationDeadlineVerified": false
+            },
+            "documents": "governed-managed-copies; imported-source-retained",
+            "context": "disabled",
+            "vision": "explicit-upload; native-attachment-domain",
+            "evaluation": "disabled",
+            "computerClick": "disabled",
+            "fullLinuxCertification": "blocked",
+            "unavailable": [
+              "original-source-deletion",
+              "automatic-installation"
+            ]
+          }
+        },
+        "ledgerPreserved": true
+      }
+    ]
+  },
+  "signals": {
+    "status": "pass",
+    "rounds": [
+      {
+        "round": 1,
+        "electron": {
+          "pid": 48,
+          "birth": "20433"
+        },
+        "electronLockFds": [],
+        "launcherLockFds": [
+          "3"
+        ],
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "electronAfter": {
+          "state": "absent"
+        },
+        "status": "pass",
+        "cleanup": []
+      },
+      {
+        "round": 2,
+        "electron": {
+          "pid": 190,
+          "birth": "23301"
+        },
+        "electronLockFds": [],
+        "launcherLockFds": [
+          "3"
+        ],
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "electronAfter": {
+          "state": "absent"
+        },
+        "status": "pass",
+        "cleanup": []
+      }
+    ]
+  },
+  "saved": [
+    {
+      "path": "final.tap",
+      "sha256": "95a8bdc6a59d792499c83a4b187826f9e29a9e1b4cd6598af305eb81f44b90f4",
+      "bytes": 49314
+    },
+    {
+      "path": "runtime-source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "runtime-source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "runtime-source/linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138",
+      "bytes": 6935
+    },
+    {
+      "path": "runtime-source/linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811",
+      "bytes": 1629
+    },
+    {
+      "path": "runtime-source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "runtime-source/linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1",
+      "bytes": 1419
+    },
+    {
+      "path": "runtime-source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "runtime-source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "runtime-source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "runtime-source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "runtime-source/linux-profile-plugin.mjs",
+      "sha256": "7e2f5ad98f6e08619b96cbad5cd6174aae55cf04b6e643030d6783597967ac85",
+      "bytes": 10164
+    },
+    {
+      "path": "runtime-source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "runtime-source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "runtime-source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "runtime-source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "runtime-source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "runtime-source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "runtime-source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "runtime-source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "runtime-source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "runtime-source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "runtime-source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "runtime-source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "runtime-source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "runtime-source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "runtime-source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "runtime-source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "runtime-source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "runtime-source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "runtime-source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "runtime-source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "runtime-source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "runtime-source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "runtime-source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "runtime-source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "test-source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "test-source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "test-source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "test-source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "test-source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "test-source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "test-source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "test-source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "test-source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "test-source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "test-source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "test-source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "test-source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "test-source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "test-source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "test-source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "test-source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "test-source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "test-source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "test-source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "test-source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "test-source/linux-profile.test.mjs",
+      "sha256": "daae3db708900d0ff75d6641a8afcae1a61fd180aa1ed41682822bb49a7efac8",
+      "bytes": 13794
+    },
+    {
+      "path": "test-source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "test-source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "test-source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "test-source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "PACKAGE.json",
+      "sha256": "d72142a1e54eebd940b32c1f6d0fb0a3493e6bba36a87b53bc7602b185af6c17",
+      "bytes": 1284
+    },
+    {
+      "path": "package/PAYLOAD-MANIFEST.json",
+      "sha256": "6649193c52d6a52e0cdace52a3170603ac6856f8ca4b74c66472814e8fe9938c",
+      "bytes": 12230383
+    },
+    {
+      "path": "package/BUILD.json",
+      "sha256": "b00469d90d8b88413b1a810771b22135999c016a6efb2252a1ef9a16444d0bb4",
+      "bytes": 316
+    },
+    {
+      "path": "package/README.md",
+      "sha256": "10b9bd320e0dbcc2ca36f355235616346964783454c7b9d440125ca88de10a17",
+      "bytes": 4971
+    },
+    {
+      "path": "review-inputs/tracked-context.mjs",
+      "sha256": "110c74099985b81caf70a285ecd9662a8f7ae0cf8902437ceb131fcbb4ceff29",
+      "bytes": 7016
+    },
+    {
+      "path": "FROZEN-INPUTS.json",
+      "sha256": "57db4e1d31d9365836f98b91de32dad7ca8b922e552dca166987f424e2bd4085",
+      "bytes": 85175
+    },
+    {
+      "path": "FROZEN-DESKTOP-INPUTS.json",
+      "sha256": "180ea6f4faa2eeef4c5494a6e70ed4e4f45beaef7e433780a487284789180279",
+      "bytes": 18894
+    },
+    {
+      "path": "installed/RESULT.json",
+      "sha256": "230d0d922c86651e8e4fc58a259fe639df015acc36144d68acd5a338bba0355a",
+      "bytes": 1034
+    },
+    {
+      "path": "installed/source.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "installed/round-1.stdout.log",
+      "sha256": "64ed954ca5982e6c8d37d79124d1bfc147f1ca3bb0cd8aec6c9ec4c416730439",
+      "bytes": 1150
+    },
+    {
+      "path": "installed/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "installed/round-2.stdout.log",
+      "sha256": "a4ef52363b6ae92e321b46715cf40681fd90a0139fe68f501f2a68836896dc78",
+      "bytes": 1150
+    },
+    {
+      "path": "installed/round-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "gui/RESULT.json",
+      "sha256": "6bae58c37c3b326f87c8cf44be1464cc3a25569f273f1bacccb51d78adf314ca",
+      "bytes": 4334
+    },
+    {
+      "path": "gui/XSERVER-RESULT.json",
+      "sha256": "b20edc5dfe70d24afbb0f3d4982060b8432090c57c02476e0be822cd75a2000b",
+      "bytes": 127
+    },
+    {
+      "path": "gui/round-1.electron.stderr.log",
+      "sha256": "ae2b20e3c548fcbccf403eb92ff33200865539f681e532d44f61a2683a90a99d",
+      "bytes": 3286
+    },
+    {
+      "path": "gui/round-1.observer.json",
+      "sha256": "0a3a3f06f675499a57f5ff4732812f1213cbe5f14df41818ffea6a236b6a6b00",
+      "bytes": 455
+    },
+    {
+      "path": "gui/round-1.png",
+      "sha256": "30c57e20caf43c3a4b78568c46175aa6043a28d8967ecdadad96145b159c61c6",
+      "bytes": 18662
+    },
+    {
+      "path": "gui/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "gui/round-1.stdout.log",
+      "sha256": "8cefb8744f61235ef0556d1af92c3492ffc819a53872462f49bf65bd57dee0c5",
+      "bytes": 1190
+    },
+    {
+      "path": "gui/round-2.electron.stderr.log",
+      "sha256": "d9cb97d6a87e3dbebb7c97ffea1bee0064efd3f9d1d365adfcf0307d2000bbf0",
+      "bytes": 6591
+    },
+    {
+      "path": "gui/round-2.observer.json",
+      "sha256": "593ada3bed4b9d6c753a77331645f222f87a6b784c09c7dd0cf168a2d25115dd",
+      "bytes": 458
+    },
+    {
+      "path": "gui/round-2.png",
+      "sha256": "30c57e20caf43c3a4b78568c46175aa6043a28d8967ecdadad96145b159c61c6",
+      "bytes": 18662
+    },
+    {
+      "path": "gui/round-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "gui/round-2.stdout.log",
+      "sha256": "21e20879f0ffa20c79ea6c6f6c1f0815efa4379571e8c9ff46434e51b8d1dfc2",
+      "bytes": 1191
+    },
+    {
+      "path": "signal/RESULT.json",
+      "sha256": "91527360edff6214bc696b8e000cac2689a389462cd27caeef767219c094f941",
+      "bytes": 746
+    },
+    {
+      "path": "signal/XSERVER-RESULT.json",
+      "sha256": "b20edc5dfe70d24afbb0f3d4982060b8432090c57c02476e0be822cd75a2000b",
+      "bytes": 127
+    },
+    {
+      "path": "signal/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "signal/round-1.stdout.log",
+      "sha256": "18102dd758dd0c1c59f7050593510c0f6895fe8057ca42d984764e675f640f6c",
+      "bytes": 1277
+    },
+    {
+      "path": "signal/round-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "signal/round-2.stdout.log",
+      "sha256": "fdcb04ff35c001927087e078c8e448d55ece486450dc9b1a43cb4ea9218d2447",
+      "bytes": 1278
+    },
+    {
+      "path": "desktop-source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "desktop-source/exercise-signal-restart.mjs",
+      "sha256": "a7d99b5f6546e51aa5ba5d22c056423afe482e106a4584558a166a8bcd0a881a",
+      "bytes": 3782
+    },
+    {
+      "path": "desktop-source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "desktop-source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/red-r1.tap",
+      "sha256": "4ca6b46aea107b791847cb69981815465a5d06913798b93528c709e0e6f8efe5",
+      "bytes": 4363
+    },
+    {
+      "path": "history/red-r1/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/red-r1/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/red-r1/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/red-r1/source/build-linux-payload.mjs",
+      "sha256": "030001184abaa04e254118e88bb0b02826f242251e97b0cbaea8b27d91d7f716",
+      "bytes": 5993
+    },
+    {
+      "path": "history/red-r1/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/red-r1/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/red-r1/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/red-r1/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/red-r1/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/red-r1/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/red-r1/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/red-r1/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/red-r1/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/red-r1/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/red-r1/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/red-r1/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/red-r1/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/red-r1/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/red-r1/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/red-r1/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/red-r1/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/red-r1/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/red-r1/source/export-continuation-file.mjs",
+      "sha256": "429dcf6328cec1f485e2efddaa894658bcc112db0f2cb4e52cfea8fc92e39eaf",
+      "bytes": 618
+    },
+    {
+      "path": "history/red-r1/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/red-r1/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/red-r1/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/red-r1/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/red-r1/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/red-r1/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/red-r1/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/red-r1/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/red-r1/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/red-r1/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/red-r1/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/red-r1/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/red-r1/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/red-r1/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/red-r1/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/red-r1/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/red-r1/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/red-r1/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/red-r1/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/red-r1/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/red-r1/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/red-r1/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/red-r1/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/red-r1/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/red-r1/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/red-r1/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/red-r1/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/red-r1/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/red-r1/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/red-r1/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/red-r1/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/red-r1/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/red-r1/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/red-r1/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/red-r1/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/red-r1/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/red-r1/source/linux-context-preparation.mjs",
+      "sha256": "b078bbda0995b30ed9d48ae05b30130bde1bd15bfa9796e9db126e6ce037d8f6",
+      "bytes": 2470
+    },
+    {
+      "path": "history/red-r1/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/red-r1/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/red-r1/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/red-r1/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/red-r1/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/red-r1/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/red-r1/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/red-r1/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/red-r1/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/red-r1/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/red-r1/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/red-r1/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/red-r1/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/red-r1/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/red-r1/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/red-r1/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/red-r1/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/red-r1/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/red-r1/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/red-r1/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/red-r1/source/linux-launch-lock.py",
+      "sha256": "c47cfe514754673473d38d189df7d1d7587b78f8f9310c809da2b5b41cff3339",
+      "bytes": 1062
+    },
+    {
+      "path": "history/red-r1/source/linux-launch.mjs",
+      "sha256": "547855289ed61656d14b22971f26c01754b3c66443ebd8f22adad3f8c6ce262a",
+      "bytes": 6447
+    },
+    {
+      "path": "history/red-r1/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/red-r1/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/red-r1/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/red-r1/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/red-r1/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/red-r1/source/linux-profile-plugin.mjs",
+      "sha256": "ab1b792738286b9b5f08a405566c532ba49ab73c7361fbce0083746ae6185ea6",
+      "bytes": 9980
+    },
+    {
+      "path": "history/red-r1/source/linux-profile.test.mjs",
+      "sha256": "20179684f7f23f0fbc0b5cb36950f4bf959558ae0776bf96be1fa7d3b6193e88",
+      "bytes": 12764
+    },
+    {
+      "path": "history/red-r1/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/red-r1/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/red-r1/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/red-r1/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/red-r1/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/red-r1/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/red-r1/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/red-r1/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/red-r1/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/red-r1/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/red-r1/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/red-r1/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/red-r1/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/red-r1/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/red-r1/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/red-r1/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/red-r1/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/red-r1/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/red-r1/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/red-r1/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/red-r1/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/red-r1/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/red-r1/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/red-r1/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/red-r1/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/red-r1/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/red-r1/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/red-r1/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/red-r1/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/red-r1/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/red-r1/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/red-r1/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/red-r1/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/red-r1/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/red-r1/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/red-r1/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/red-r1/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/red-r1/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/red-r1/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/red-r1/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/red-r1/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/red-r1/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/red-r1/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/origin-export-green-r2.tap",
+      "sha256": "d145ccd4b0e43c53cb59bd257a8615e5bcf29f9ca152e731e6bf84277b8aeea8",
+      "bytes": 1051
+    },
+    {
+      "path": "history/origin-export-green-r2/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/origin-export-green-r2/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/origin-export-green-r2/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/origin-export-green-r2/source/build-linux-payload.mjs",
+      "sha256": "030001184abaa04e254118e88bb0b02826f242251e97b0cbaea8b27d91d7f716",
+      "bytes": 5993
+    },
+    {
+      "path": "history/origin-export-green-r2/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/origin-export-green-r2/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/origin-export-green-r2/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/origin-export-green-r2/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/origin-export-green-r2/source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "history/origin-export-green-r2/source/continuation-export-paths.mjs",
+      "sha256": "88cb82fcffcab77193e42a8d805a662d85a50c9350eaea98acbf21b1f9f55695",
+      "bytes": 924
+    },
+    {
+      "path": "history/origin-export-green-r2/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/origin-export-green-r2/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/origin-export-green-r2/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/origin-export-green-r2/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/origin-export-green-r2/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/origin-export-green-r2/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-continuation-file.mjs",
+      "sha256": "5f5bbf3b7e024bdd69c7abd6d79475c6647c037fdf41878b30aafed650c93643",
+      "bytes": 736
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/origin-export-green-r2/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/origin-export-green-r2/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/origin-export-green-r2/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/origin-export-green-r2/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/origin-export-green-r2/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/origin-export-green-r2/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/origin-export-green-r2/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-launch-lock.py",
+      "sha256": "c47cfe514754673473d38d189df7d1d7587b78f8f9310c809da2b5b41cff3339",
+      "bytes": 1062
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-launch.mjs",
+      "sha256": "547855289ed61656d14b22971f26c01754b3c66443ebd8f22adad3f8c6ce262a",
+      "bytes": 6447
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-profile-plugin.mjs",
+      "sha256": "ab1b792738286b9b5f08a405566c532ba49ab73c7361fbce0083746ae6185ea6",
+      "bytes": 9980
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-profile.test.mjs",
+      "sha256": "20179684f7f23f0fbc0b5cb36950f4bf959558ae0776bf96be1fa7d3b6193e88",
+      "bytes": 12764
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/origin-export-green-r2/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/origin-export-green-r2/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/origin-export-green-r2/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/origin-export-green-r2/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/origin-export-green-r2/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/origin-export-green-r2/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/origin-export-green-r2/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/origin-export-green-r2/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/origin-export-green-r2/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/origin-export-green-r2/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/origin-export-green-r2/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/origin-export-green-r2/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/origin-export-green-r2/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/origin-export-green-r2/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/origin-export-green-r2/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/origin-export-green-r2/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/origin-export-green-r2/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/origin-export-green-r2/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/origin-export-green-r2/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/origin-export-green-r2/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/origin-export-green-r2/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/origin-export-green-r2/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/origin-export-green-r2/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/lifecycle-red-r3.tap",
+      "sha256": "d2aef9d8f6fe409602cd8045993d66700f4b15f74421ebf2b62ba9b64bc2a839",
+      "bytes": 7718
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/build-linux-payload.mjs",
+      "sha256": "030001184abaa04e254118e88bb0b02826f242251e97b0cbaea8b27d91d7f716",
+      "bytes": 5993
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/continuation-export-paths.mjs",
+      "sha256": "88cb82fcffcab77193e42a8d805a662d85a50c9350eaea98acbf21b1f9f55695",
+      "bytes": 924
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-continuation-file.mjs",
+      "sha256": "5f5bbf3b7e024bdd69c7abd6d79475c6647c037fdf41878b30aafed650c93643",
+      "bytes": 736
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-launch-lock.py",
+      "sha256": "c47cfe514754673473d38d189df7d1d7587b78f8f9310c809da2b5b41cff3339",
+      "bytes": 1062
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-launch.mjs",
+      "sha256": "547855289ed61656d14b22971f26c01754b3c66443ebd8f22adad3f8c6ce262a",
+      "bytes": 6447
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-profile-plugin.mjs",
+      "sha256": "ab1b792738286b9b5f08a405566c532ba49ab73c7361fbce0083746ae6185ea6",
+      "bytes": 9980
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-profile.test.mjs",
+      "sha256": "20179684f7f23f0fbc0b5cb36950f4bf959558ae0776bf96be1fa7d3b6193e88",
+      "bytes": 12764
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/lifecycle-red-r3/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/lifecycle-green-r4.tap",
+      "sha256": "1df29231e612c37fab9f93713b99cb767dde93e4bc0be03b382aaed2eb72c349",
+      "bytes": 1486
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/build-linux-payload.mjs",
+      "sha256": "030001184abaa04e254118e88bb0b02826f242251e97b0cbaea8b27d91d7f716",
+      "bytes": 5993
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/continuation-export-paths.mjs",
+      "sha256": "88cb82fcffcab77193e42a8d805a662d85a50c9350eaea98acbf21b1f9f55695",
+      "bytes": 924
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-continuation-file.mjs",
+      "sha256": "5f5bbf3b7e024bdd69c7abd6d79475c6647c037fdf41878b30aafed650c93643",
+      "bytes": 736
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811",
+      "bytes": 1629
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1",
+      "bytes": 1419
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138",
+      "bytes": 6935
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-profile-plugin.mjs",
+      "sha256": "ab1b792738286b9b5f08a405566c532ba49ab73c7361fbce0083746ae6185ea6",
+      "bytes": 9980
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-profile.test.mjs",
+      "sha256": "20179684f7f23f0fbc0b5cb36950f4bf959558ae0776bf96be1fa7d3b6193e88",
+      "bytes": 12764
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/lifecycle-green-r4/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/create-red-r5.tap",
+      "sha256": "9c52ca78e1f72b5dfe46a09d0b987aa818cdfa9365294165ab27ee5ca0124ff7",
+      "bytes": 3854
+    },
+    {
+      "path": "history/create-red-r5/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/create-red-r5/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/create-red-r5/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/create-red-r5/source/build-linux-payload.mjs",
+      "sha256": "030001184abaa04e254118e88bb0b02826f242251e97b0cbaea8b27d91d7f716",
+      "bytes": 5993
+    },
+    {
+      "path": "history/create-red-r5/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/create-red-r5/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/create-red-r5/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/create-red-r5/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/create-red-r5/source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "history/create-red-r5/source/continuation-export-paths.mjs",
+      "sha256": "88cb82fcffcab77193e42a8d805a662d85a50c9350eaea98acbf21b1f9f55695",
+      "bytes": 924
+    },
+    {
+      "path": "history/create-red-r5/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/create-red-r5/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/create-red-r5/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/create-red-r5/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/create-red-r5/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/create-red-r5/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/create-red-r5/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/create-red-r5/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/create-red-r5/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/create-red-r5/source/export-continuation-file.mjs",
+      "sha256": "5f5bbf3b7e024bdd69c7abd6d79475c6647c037fdf41878b30aafed650c93643",
+      "bytes": 736
+    },
+    {
+      "path": "history/create-red-r5/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/create-red-r5/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/create-red-r5/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/create-red-r5/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/create-red-r5/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/create-red-r5/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/create-red-r5/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/create-red-r5/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/create-red-r5/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/create-red-r5/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/create-red-r5/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/create-red-r5/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/create-red-r5/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/create-red-r5/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/create-red-r5/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/create-red-r5/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/create-red-r5/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/create-red-r5/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/create-red-r5/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/create-red-r5/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/create-red-r5/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/create-red-r5/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/create-red-r5/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/create-red-r5/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/create-red-r5/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/create-red-r5/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/create-red-r5/source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "history/create-red-r5/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/create-red-r5/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/create-red-r5/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/create-red-r5/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/create-red-r5/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/create-red-r5/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/create-red-r5/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/create-red-r5/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/create-red-r5/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/create-red-r5/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/create-red-r5/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/create-red-r5/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/create-red-r5/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/create-red-r5/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/create-red-r5/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/create-red-r5/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/create-red-r5/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/create-red-r5/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/create-red-r5/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/create-red-r5/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/create-red-r5/source/linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811",
+      "bytes": 1629
+    },
+    {
+      "path": "history/create-red-r5/source/linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1",
+      "bytes": 1419
+    },
+    {
+      "path": "history/create-red-r5/source/linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138",
+      "bytes": 6935
+    },
+    {
+      "path": "history/create-red-r5/source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "history/create-red-r5/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/create-red-r5/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/create-red-r5/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/create-red-r5/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/create-red-r5/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/create-red-r5/source/linux-profile-plugin.mjs",
+      "sha256": "ab1b792738286b9b5f08a405566c532ba49ab73c7361fbce0083746ae6185ea6",
+      "bytes": 9980
+    },
+    {
+      "path": "history/create-red-r5/source/linux-profile.test.mjs",
+      "sha256": "daae3db708900d0ff75d6641a8afcae1a61fd180aa1ed41682822bb49a7efac8",
+      "bytes": 13794
+    },
+    {
+      "path": "history/create-red-r5/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/create-red-r5/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/create-red-r5/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/create-red-r5/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/create-red-r5/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/create-red-r5/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/create-red-r5/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/create-red-r5/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/create-red-r5/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/create-red-r5/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/create-red-r5/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/create-red-r5/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/create-red-r5/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/create-red-r5/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/create-red-r5/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/create-red-r5/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/create-red-r5/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/create-red-r5/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/create-red-r5/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/create-red-r5/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/create-red-r5/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/create-red-r5/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/create-red-r5/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/create-red-r5/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/create-red-r5/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/create-red-r5/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/create-red-r5/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/create-red-r5/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/create-red-r5/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/create-red-r5/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/create-red-r5/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/create-red-r5/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/create-red-r5/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/create-red-r5/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/create-red-r5/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/create-red-r5/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/create-red-r5/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/create-red-r5/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/create-red-r5/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/create-red-r5/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/create-green-r6.tap",
+      "sha256": "07c67b6b059dc038577674b5b407fcc1b244a530e368400fb596e6a754265a3d",
+      "bytes": 3071
+    },
+    {
+      "path": "history/create-green-r6/source/attachment-fixture.mjs",
+      "sha256": "c888924ab676f7634c926920fdc181fbf9796942c122e4615bdb7a47e6a73098",
+      "bytes": 317
+    },
+    {
+      "path": "history/create-green-r6/source/attachment-recovery.test.mjs",
+      "sha256": "9f8d27a8029ac45a6aa6cf3829035869d88fa61162912c927544aee717988f6f",
+      "bytes": 6512
+    },
+    {
+      "path": "history/create-green-r6/source/attachment-worker.mjs",
+      "sha256": "3802fa87ba32b86a87fd897c33acebaf09c04babeec31d26bc2836ba405a885d",
+      "bytes": 510
+    },
+    {
+      "path": "history/create-green-r6/source/build-linux-payload.mjs",
+      "sha256": "d96586092a3a168100d669f7ac4e4080de6886827cbb56051fa5731c878caad5",
+      "bytes": 6043
+    },
+    {
+      "path": "history/create-green-r6/source/bundle-modules.mjs",
+      "sha256": "d64b4b1c6a28e55522198bfe9da6d90efc285e7eed4a986f5bbe368746870a17",
+      "bytes": 381
+    },
+    {
+      "path": "history/create-green-r6/source/cleanup-cli.mjs",
+      "sha256": "7a47124f520fd04e0e009699ef35eca8eb68df33733369f01e1d42bc6e351598",
+      "bytes": 875
+    },
+    {
+      "path": "history/create-green-r6/source/cleanup-closeout-history.py",
+      "sha256": "6b906532604f4680146b9a96497c453bff5119ee431212073526f424790094bc",
+      "bytes": 1523
+    },
+    {
+      "path": "history/create-green-r6/source/cleanup-recovery.test.mjs",
+      "sha256": "d6b796f0f9abdb44955dcd9733c863c006d4eb7d07551ae9daad7a75a2fa0108",
+      "bytes": 7573
+    },
+    {
+      "path": "history/create-green-r6/source/context-origin.mjs",
+      "sha256": "7ae1fae7a0afad94a4466a428902b06a748a2d8ac39ef3a2b491e88131a96a9f",
+      "bytes": 1041
+    },
+    {
+      "path": "history/create-green-r6/source/continuation-export-paths.mjs",
+      "sha256": "88cb82fcffcab77193e42a8d805a662d85a50c9350eaea98acbf21b1f9f55695",
+      "bytes": 924
+    },
+    {
+      "path": "history/create-green-r6/source/continuation-export.test.mjs",
+      "sha256": "30cfed5ff1321aebf83a68accee02a4e7adcfa1fd1309972fb0c86bab578c586",
+      "bytes": 1270
+    },
+    {
+      "path": "history/create-green-r6/source/desktop-continuation.test.mjs",
+      "sha256": "3f352d993c050d9cd9de4cb154f849262990c4513c922fd716ebb42c27c71c1c",
+      "bytes": 2231
+    },
+    {
+      "path": "history/create-green-r6/source/document-copies.mjs",
+      "sha256": "d21aeb6c6e3a106c64aade32cf47a2a13a816f66b7e4a91dcc5948bc99520389",
+      "bytes": 9181
+    },
+    {
+      "path": "history/create-green-r6/source/document-transactions.test.mjs",
+      "sha256": "917f3df1e1a33db5455d62dcb6b6e1afa9156a8577d47d1dcffe47736dc68308",
+      "bytes": 6341
+    },
+    {
+      "path": "history/create-green-r6/source/document-worker.mjs",
+      "sha256": "48e0e80196bf35d6b7bdd18f1af3a8ad431191c3f719746798c7c2094fcc9d20",
+      "bytes": 355
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-context-desktop.mjs",
+      "sha256": "5c22aeecda51eb6c264d0c92290ee639a981e5d5b13ab5098b43d7158f8e3eff",
+      "bytes": 158
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-desktop-continuation.mjs",
+      "sha256": "66caf8bfe04d3abe12ede46eb188fe36b13b9c0327bbe822696fdc9ae15e5f99",
+      "bytes": 128
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-installed-desktop.mjs",
+      "sha256": "48d6adf8d261508669e9a64df9c0a5a68fad70c197c4ef69605ded820838b8ab",
+      "bytes": 4743
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-installed-linux.mjs",
+      "sha256": "75e2c220a29da0defd7fe91b74b861d7edd2bb84181cffbcab8c818f49cef735",
+      "bytes": 4491
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-native-click.mjs",
+      "sha256": "2588ce13d14ebbe2cf801d9f9127ccc3aaf39b152958f16f5853e3b182097968",
+      "bytes": 6585
+    },
+    {
+      "path": "history/create-green-r6/source/exercise-signal-restart.mjs",
+      "sha256": "0a2ae07649ff67b1189350d88cd8063dcef9067729ebb260a2ba2812d2bedf03",
+      "bytes": 3440
+    },
+    {
+      "path": "history/create-green-r6/source/export-attachment-ui.mjs",
+      "sha256": "f8cb7ffdb3e572d955e3f897cf97712da230b35d6f0845200678e4ac1e47ff59",
+      "bytes": 1185
+    },
+    {
+      "path": "history/create-green-r6/source/export-closeout.mjs",
+      "sha256": "02d0ec32b6ff85f5c8ec99f52a0732de52273641ec7c17c96874827658f297c3",
+      "bytes": 3026
+    },
+    {
+      "path": "history/create-green-r6/source/export-context.mjs",
+      "sha256": "416d37dc41ff0bcfb2cb06a7e1a9083c6496bd5ab6e1c3c588c9925a1aa922f9",
+      "bytes": 1191
+    },
+    {
+      "path": "history/create-green-r6/source/export-continuation-file.mjs",
+      "sha256": "5f5bbf3b7e024bdd69c7abd6d79475c6647c037fdf41878b30aafed650c93643",
+      "bytes": 736
+    },
+    {
+      "path": "history/create-green-r6/source/export-desktop-continuation.mjs",
+      "sha256": "31b96b428007a67e46e6c44a9b565d6660ffdc1cc064043311b8f668ba01bfbd",
+      "bytes": 1217
+    },
+    {
+      "path": "history/create-green-r6/source/export-documents.mjs",
+      "sha256": "b97ff77ce331b1ea8e56b18d73c1ad18b5b45937f0015e383ab2cf8c814667ee",
+      "bytes": 1177
+    },
+    {
+      "path": "history/create-green-r6/source/export-file-attachments.mjs",
+      "sha256": "5f22be81e1c8eb323bb8516167da11f4bcea99d906254f36a2b3af263b5fb3ff",
+      "bytes": 1191
+    },
+    {
+      "path": "history/create-green-r6/source/export-linux-desktop.mjs",
+      "sha256": "4f4590d8daced2d233b41b4eb6baf89752f6d837f943072a62094856f7adf1bb",
+      "bytes": 1761
+    },
+    {
+      "path": "history/create-green-r6/source/export-profile.mjs",
+      "sha256": "31fd9b332bf0714976b9b5094e6028108c92e934600e40c8518d634bb86aa988",
+      "bytes": 1166
+    },
+    {
+      "path": "history/create-green-r6/source/export-sep.mjs",
+      "sha256": "23407d4a37b7fcefa976acb4416579243fbade5ea18480985dcdf02d58cb615b",
+      "bytes": 1200
+    },
+    {
+      "path": "history/create-green-r6/source/export-transactions.mjs",
+      "sha256": "9667935a38d99ce022b4c9a731ed887b2b7b7704f246fbf67de6e5fa64497317",
+      "bytes": 1158
+    },
+    {
+      "path": "history/create-green-r6/source/export-vision.mjs",
+      "sha256": "3383740d1e780ded249d6ba51c88f4854bc9eb309c7fbea4e46fb895030f9d88",
+      "bytes": 1171
+    },
+    {
+      "path": "history/create-green-r6/source/export.mjs",
+      "sha256": "1be994c698dc8cbb1c4aa98435ccc299396e4f058a648c382768dc2f0cd6030f",
+      "bytes": 1849
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-attachment-ui.mjs",
+      "sha256": "e2270cde6d3f2dec150bb9520154d2c12ee18b3c9885e6d621839598b374efbe",
+      "bytes": 9630
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-closeout.mjs",
+      "sha256": "9a6961ab53dbbdd266f9fde63e88f4e822c1f9877344761ccfb72d3a893af44c",
+      "bytes": 14302
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-context.mjs",
+      "sha256": "3c3927c235fb3c8fc47962517caf2fe04f9d06ea317837df722e34bba1329655",
+      "bytes": 9963
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-desktop-continuation.mjs",
+      "sha256": "1ac1eed93fc1f4a6a3bf8f462235e92034dcb503e044af7193d9fb76f3e08631",
+      "bytes": 11067
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-documents.mjs",
+      "sha256": "ac2f6c9d6ab869245c93f4bee5597a8653ca7460e8bab87a5e697ae99505a7b7",
+      "bytes": 8407
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-file-attachments.mjs",
+      "sha256": "c325cd972ec80a370b7f9c92542fb19f57ed730f2836afb3145cd636f2d521fb",
+      "bytes": 9553
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-linux.mjs",
+      "sha256": "c3a679c9efae0eef3f2ecbfaf17e44999436f39a8eee37062703b4b98d790ee3",
+      "bytes": 5459
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-profile.mjs",
+      "sha256": "71df0c13e18d28e6f6eb7607a861ba0a6eb1ca6bc99d600576e29ad9fa676737",
+      "bytes": 9238
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-sep.mjs",
+      "sha256": "fd5d4374b8bcb43405eb3330091cf4ea5b97c4f737ad20d819580b188dc9788c",
+      "bytes": 9869
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-transactions.mjs",
+      "sha256": "a689b93ee6091adc375aadce52f625a82b49b2f33c33be77e7532c5b185cc56c",
+      "bytes": 4269
+    },
+    {
+      "path": "history/create-green-r6/source/finalize-vision.mjs",
+      "sha256": "08262c56fad7fe3f407a5f07fdcbf531a4fa072aae9711aa0cc830784736a5b3",
+      "bytes": 10677
+    },
+    {
+      "path": "history/create-green-r6/source/finish-vision-sync.mjs",
+      "sha256": "4d4c910914a67a923950476d524127953facb52c202973efa86dc7442eabdc9a",
+      "bytes": 4065
+    },
+    {
+      "path": "history/create-green-r6/source/host-modules.mjs",
+      "sha256": "3576f3731456f035da3c8d8c32198ddf20e75f61000e7e2dea99fbd68fa58174",
+      "bytes": 720
+    },
+    {
+      "path": "history/create-green-r6/source/inputs.mjs",
+      "sha256": "313da8d917517c4354a76bc33590275290353b32f81af32e2387627dc802a9f5",
+      "bytes": 1038
+    },
+    {
+      "path": "history/create-green-r6/source/inputs.test.mjs",
+      "sha256": "2888860fba631e376f6138116b8d51590d7fc491661db37c1bb91f4610bc5e31",
+      "bytes": 1750
+    },
+    {
+      "path": "history/create-green-r6/source/isolation-transactions.test.mjs",
+      "sha256": "c331b56e24f4c551a7c1724cac3550df6267a80807b5118a56c3307ada21d31e",
+      "bytes": 2645
+    },
+    {
+      "path": "history/create-green-r6/source/isolation.test.mjs",
+      "sha256": "460dfa46e05a1dcabef76b406d6656efee29d7e787f7cb2f1397bfd1b9410617",
+      "bytes": 4786
+    },
+    {
+      "path": "history/create-green-r6/source/linux-atspi.py",
+      "sha256": "390eedefa6e6ca8a1c04d18f7595dc415c84b160ff89981c2f990daa282e1b23",
+      "bytes": 6900
+    },
+    {
+      "path": "history/create-green-r6/source/linux-attachment-cli.mjs",
+      "sha256": "f746bc10bb562a8dfd40a31e15570c60594e1e146b556dd65af08e48b23276d9",
+      "bytes": 1925
+    },
+    {
+      "path": "history/create-green-r6/source/linux-attachment-intake.test.mjs",
+      "sha256": "f5f414290d8e8da24cc3d5b4ec6c986d8948b02a70991730ecb5beeb5d13eced",
+      "bytes": 6146
+    },
+    {
+      "path": "history/create-green-r6/source/linux-attachment-maintenance.mjs",
+      "sha256": "96376ae9e8c471c7e6515599179c201668e33a80969fa6dd4517ca59613e7511",
+      "bytes": 3969
+    },
+    {
+      "path": "history/create-green-r6/source/linux-attachments.mjs",
+      "sha256": "186ea363d251f477e65ff4b8d8820f3aa7cc3f8f61e637f5fec52d6979e97693",
+      "bytes": 6966
+    },
+    {
+      "path": "history/create-green-r6/source/linux-attachments.test.mjs",
+      "sha256": "30941a5439f7d7831cc1f31b6c0101e0d4ea8af8444c289eca39f72e8afbdb0e",
+      "bytes": 5345
+    },
+    {
+      "path": "history/create-green-r6/source/linux-binary-media.test.mjs",
+      "sha256": "08b6bdb7ac5888b833d75abb43f0705b06edaff0d3a45341379dd90b255e1155",
+      "bytes": 3455
+    },
+    {
+      "path": "history/create-green-r6/source/linux-click.mjs",
+      "sha256": "6f3c3b2ce557492122740f8a92dffe1d3c7ef7ce5b88836f347fb7e110c39428",
+      "bytes": 7145
+    },
+    {
+      "path": "history/create-green-r6/source/linux-click.test.mjs",
+      "sha256": "3a489e6cc1bd3cb595bde52b9540fc29ef75813e93e1cfde528eeda377f77b53",
+      "bytes": 1725
+    },
+    {
+      "path": "history/create-green-r6/source/linux-consumers.mjs",
+      "sha256": "14ac4b7ccdad79432ab9b9df01bdf384c5dfd70c320e75807360a64c13b3074a",
+      "bytes": 3144
+    },
+    {
+      "path": "history/create-green-r6/source/linux-context-preparation.mjs",
+      "sha256": "a7a527dc48978e67982637c09c8db2c6cc1ecf426b1b298b35485be34e166bad",
+      "bytes": 2595
+    },
+    {
+      "path": "history/create-green-r6/source/linux-context.test.mjs",
+      "sha256": "acc01a27571c7d3d942bf5342c55200404097ccbed26ea232261c20592ffab82",
+      "bytes": 10431
+    },
+    {
+      "path": "history/create-green-r6/source/linux-continuation-host.mjs",
+      "sha256": "38903e594d9a4b2e2d82911276a22fd5ee584f84ca15dc8100e1aaf77f449375",
+      "bytes": 3914
+    },
+    {
+      "path": "history/create-green-r6/source/linux-desktop-contract.mjs",
+      "sha256": "7d1aff9e3e788eb74244f23e4384ddce409b64b9d42c07f31b4769c54c86f3de",
+      "bytes": 802
+    },
+    {
+      "path": "history/create-green-r6/source/linux-desktop-contract.test.mjs",
+      "sha256": "512ae9595b1dca1a8073c0850e124358dd0f762249d02e244af1891e151cc27a",
+      "bytes": 2639
+    },
+    {
+      "path": "history/create-green-r6/source/linux-desktop-fonts.mjs",
+      "sha256": "1517934fb08e5ec5d710749afff7ad9bc0738718813e9c1c37326b67d35e29af",
+      "bytes": 1948
+    },
+    {
+      "path": "history/create-green-r6/source/linux-desktop-host.mjs",
+      "sha256": "5390bb298de2d6d26525cd8506e46aa51f12511305e22aa0f829bcb0b1065bb2",
+      "bytes": 3530
+    },
+    {
+      "path": "history/create-green-r6/source/linux-document-worker.mjs",
+      "sha256": "5e02ea3751e2944f015b0310d46e7eb863e752c0b8e457a21c66eb3a002f1b06",
+      "bytes": 706
+    },
+    {
+      "path": "history/create-green-r6/source/linux-documents.mjs",
+      "sha256": "9473f202de216d0613a3a597fb8d04b73bb17aa8fe5be3cfed3fd961aa652828",
+      "bytes": 4610
+    },
+    {
+      "path": "history/create-green-r6/source/linux-documents.test.mjs",
+      "sha256": "766d4d878077f2c0a32818f95536b7ccbd95f91e1c786a89c198e0094e23b2f0",
+      "bytes": 6054
+    },
+    {
+      "path": "history/create-green-r6/source/linux-evaluation-paths.mjs",
+      "sha256": "306cff93aa3da50a90d8564b24ae7c4062766a10b00d89272725b442a551f284",
+      "bytes": 699
+    },
+    {
+      "path": "history/create-green-r6/source/linux-evaluation.mjs",
+      "sha256": "cb10a5f5a2f0308df1b70d3a28ae60d8c4fcf5c8be4a2c8be184ff12ee199246",
+      "bytes": 6580
+    },
+    {
+      "path": "history/create-green-r6/source/linux-evaluation.test.mjs",
+      "sha256": "53f5962d5840c83d0ac67ac55de78a66ce1529c4b2b287206c24f2dd4f3dd8d6",
+      "bytes": 4110
+    },
+    {
+      "path": "history/create-green-r6/source/linux-file-access.mjs",
+      "sha256": "f22ce049e1f2675d8a6d82306b387fcb164c58b656f4b847cf8527a42bb10cf8",
+      "bytes": 2550
+    },
+    {
+      "path": "history/create-green-r6/source/linux-file-attachments.test.mjs",
+      "sha256": "1cd7d8d67d4f2c3c8de51845995c9e9dee7c29046f7f954053d787e88d5b43d3",
+      "bytes": 14668
+    },
+    {
+      "path": "history/create-green-r6/source/linux-filesystem.mjs",
+      "sha256": "a4f128442ef9b47c9624e76ef8c7fb5bbe2e17438e2b9b579cab6fc625278977",
+      "bytes": 4641
+    },
+    {
+      "path": "history/create-green-r6/source/linux-image-preset.mjs",
+      "sha256": "915f25f6b6cba71eaacf2368f7291bb0c69c338411ae033693125645882f7ef7",
+      "bytes": 539
+    },
+    {
+      "path": "history/create-green-r6/source/linux-install.mjs",
+      "sha256": "245dd8af2729dc875a5d6bd0265738ae84e9377db8eb9d75344f47de312560db",
+      "bytes": 8443
+    },
+    {
+      "path": "history/create-green-r6/source/linux-install.test.mjs",
+      "sha256": "ef61f1b7ea3763e85039541208f8ffa95b55f05d9e7e24e0447b7319b61dfe8f",
+      "bytes": 4504
+    },
+    {
+      "path": "history/create-green-r6/source/linux-installed-window.py",
+      "sha256": "d46ad9f260c9ce7f59dafe4cf470bdb34015f84715b6a5f5cf75d1d8237c1ac1",
+      "bytes": 5314
+    },
+    {
+      "path": "history/create-green-r6/source/linux-isolation.mjs",
+      "sha256": "8d4244a052865c23b0c7f8a98cf989941e425afa1ac468b78d0c193ffe876bd3",
+      "bytes": 7008
+    },
+    {
+      "path": "history/create-green-r6/source/linux-launch-lifecycle.mjs",
+      "sha256": "ae621d6b09abb07290fa13ee2b779331fd159a6416dbada59fb8216287aa3811",
+      "bytes": 1629
+    },
+    {
+      "path": "history/create-green-r6/source/linux-launch-lock.py",
+      "sha256": "38bcfe1a24c4c03df63e7e8c92c1a3e4f85e00850de05602c87fb5296eab9fd1",
+      "bytes": 1419
+    },
+    {
+      "path": "history/create-green-r6/source/linux-launch.mjs",
+      "sha256": "2611808702243b1ad8a608ba8bb50a7a59b6bdd31832f2693e0b1e1e51740138",
+      "bytes": 6935
+    },
+    {
+      "path": "history/create-green-r6/source/linux-lifecycle-review.test.mjs",
+      "sha256": "0d411669192d85f2579ce225a71d3a13e9f6d9181516ed352e0ec6cd155e9d6b",
+      "bytes": 3294
+    },
+    {
+      "path": "history/create-green-r6/source/linux-native-file-store.mjs",
+      "sha256": "8ca071aaf87e800be7a5a75ac36aa23428ec2345edcf16dee8253c4c926c100d",
+      "bytes": 1660
+    },
+    {
+      "path": "history/create-green-r6/source/linux-origin-review.test.mjs",
+      "sha256": "de391078f22a91282ceed28236450b42ea6f06e0378294142a119e6ae6a1d65c",
+      "bytes": 1244
+    },
+    {
+      "path": "history/create-green-r6/source/linux-picker-driver.py",
+      "sha256": "5d8f877c7b6813bad71430bb40366a5ab63befccb62801d77bb21c6a9eaad599",
+      "bytes": 7428
+    },
+    {
+      "path": "history/create-green-r6/source/linux-probes.test.mjs",
+      "sha256": "7f27a80ed7fd1f0c87c612598fb524b79975c2af01a8a6437a2f26cb05474553",
+      "bytes": 6983
+    },
+    {
+      "path": "history/create-green-r6/source/linux-process-owner.mjs",
+      "sha256": "098a15ce1fd629cede79cb06aeac3d8d2663fd5371169843d380becf95837039",
+      "bytes": 3136
+    },
+    {
+      "path": "history/create-green-r6/source/linux-profile-plugin.mjs",
+      "sha256": "7e2f5ad98f6e08619b96cbad5cd6174aae55cf04b6e643030d6783597967ac85",
+      "bytes": 10164
+    },
+    {
+      "path": "history/create-green-r6/source/linux-profile.test.mjs",
+      "sha256": "daae3db708900d0ff75d6641a8afcae1a61fd180aa1ed41682822bb49a7efac8",
+      "bytes": 13794
+    },
+    {
+      "path": "history/create-green-r6/source/linux-sep-runtime.mjs",
+      "sha256": "f59c69e98b8cffbe96ca0eebf6b76cbaf44e555d7dcb739fd947672c4343c079",
+      "bytes": 13829
+    },
+    {
+      "path": "history/create-green-r6/source/linux-sep.test.mjs",
+      "sha256": "8158b72bf5fff9a3a38c45fb90729a6e5aa7ea17fac3198b1e87ea3927f9980f",
+      "bytes": 18123
+    },
+    {
+      "path": "history/create-green-r6/source/linux-snapshot-scope.mjs",
+      "sha256": "5d3bee26d090f6b65384efa2fe3b161a22fa03840ebba74ab0a2b3d53108a05f",
+      "bytes": 3554
+    },
+    {
+      "path": "history/create-green-r6/source/linux-standalone-host.mjs",
+      "sha256": "03c34b00586132722ed468dd1650990b27c1cd1d80bbd254c22e1aed4ad49af6",
+      "bytes": 2232
+    },
+    {
+      "path": "history/create-green-r6/source/linux-standalone-profile.mjs",
+      "sha256": "92a9d0f682a905d2b36b1ccd2f533fecaaf0c067429cd370380ef23bb3dded42",
+      "bytes": 4868
+    },
+    {
+      "path": "history/create-green-r6/source/linux-standalone.test.mjs",
+      "sha256": "438c7098822a04811c395b8c0aabcf92999967ddf1614ef707e22ff4e170df7f",
+      "bytes": 3884
+    },
+    {
+      "path": "history/create-green-r6/source/linux-vision-llm.mjs",
+      "sha256": "30cedbeca93d31fb103654f70cde416d6894bfef5318d8409c55a4e6d1d4f2a1",
+      "bytes": 365
+    },
+    {
+      "path": "history/create-green-r6/source/linux-vision.test.mjs",
+      "sha256": "5bd7b638e46c3008c8c56685b4e681f5177ecfde066b8c6b929a9b8be31580e7",
+      "bytes": 6844
+    },
+    {
+      "path": "history/create-green-r6/source/managed-project.mjs",
+      "sha256": "4dfda6e07ad0447a6392c95a7363484fb18f02c08438de39a210e412b559eaf4",
+      "bytes": 19569
+    },
+    {
+      "path": "history/create-green-r6/source/mcp-stdio-client.py",
+      "sha256": "42d0a7e65b8065acd57087d381d7acc0a74e812bb5e97ae1703b927c448f869c",
+      "bytes": 1664
+    },
+    {
+      "path": "history/create-green-r6/source/native-evaluation-exercise.mjs",
+      "sha256": "ed374c43e56f9a8b360d1b90a232bcc05dc89865a34a29e4eb030b32b1d88007",
+      "bytes": 3130
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-desktop-assets.py",
+      "sha256": "d6d2dd78631bd641e821903074711a31f6af47634baa89008a360e6b23002a3c",
+      "bytes": 1315
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-desktop-continuation.mjs",
+      "sha256": "3f97118c052870346131c26c6f5e3415678642c93d7c896b1f3bd216e0587f79",
+      "bytes": 80
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-attachment-ui-desktop.mjs",
+      "sha256": "0adf9cd35bfa7d492b477365ad761048cca2f307440364e3a9a1239ab55ec94e",
+      "bytes": 1104
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-context-desktop.mjs",
+      "sha256": "ae829809d84ed322a3561056cf3cefc47e65232d511b3569e3941064048d7946",
+      "bytes": 1249
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-continuation-desktop.mjs",
+      "sha256": "be240f536c826f4f532999ca62d8a358132f71e1cc324a21c345937ed0d07a9e",
+      "bytes": 1010
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-desktop.mjs",
+      "sha256": "97c5ed969d2d47b3cf7fdd4ef988456ae851da8099179e76d92ecd001b25e94d",
+      "bytes": 3092
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-file-ui-desktop.mjs",
+      "sha256": "2f271d1353eab17f0678ed4ce6494ea481416d3c519c4a1f3eeec9fba9c0b586",
+      "bytes": 659
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-sep-desktop.mjs",
+      "sha256": "d7788a0d99e93319bfc3cbf1ed493b914a9fa4745c2bfb07852cc071dacfdc38",
+      "bytes": 3027
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-linux-vision-desktop.mjs",
+      "sha256": "eb9abf32815a4319e1db3127ea2834edfbec5a23fbea41d5f3f37a2cfa8ddbe9",
+      "bytes": 1409
+    },
+    {
+      "path": "history/create-green-r6/source/prepare-native-evaluation.py",
+      "sha256": "ccfb51766efb6f027603bf248e25a2586ed7fc3eccc3d7479ba8c3445ac31bdf",
+      "bytes": 1742
+    },
+    {
+      "path": "history/create-green-r6/source/prepare.mjs",
+      "sha256": "8090058ffb17f399c12aace45ab28cd22e01c70bc868dbafba3f6989bf1b8a33",
+      "bytes": 4314
+    },
+    {
+      "path": "history/create-green-r6/source/preview-desktop.mjs",
+      "sha256": "228c976fa88512005f226c4035bb1403608a5f31cc75aaba5c2be90df60630be",
+      "bytes": 512
+    },
+    {
+      "path": "history/create-green-r6/source/private-xorg.mjs",
+      "sha256": "ef1f65a7a74867e29bcf56916fabfa6556b9588cf9b9b9bc1801f4e39cba1da5",
+      "bytes": 2249
+    },
+    {
+      "path": "history/create-green-r6/source/project-tree.mjs",
+      "sha256": "6bc79c036b4fd6e5994f03b1979f4f95da9699ffbb1a205b4232794d4287e148",
+      "bytes": 4480
+    },
+    {
+      "path": "history/create-green-r6/source/run-linux-desktop-continuation.mjs",
+      "sha256": "5cd75b8a60ff1e311f4d7a9dc8c171a6693ed95b628005dc733016b01f5f9aa0",
+      "bytes": 9925
+    },
+    {
+      "path": "history/create-green-r6/source/run-linux-desktop.mjs",
+      "sha256": "54bfbb5b47193c4e477b344800689928282d7ca1ba4950f29e1e5ae6ab1cbf0e",
+      "bytes": 9276
+    },
+    {
+      "path": "history/create-green-r6/source/run-native-evaluation.mjs",
+      "sha256": "8ad1746c3fa214115d5fbe24e1993db89e2ee402680cdae84e9090b7f3574ae9",
+      "bytes": 1959
+    },
+    {
+      "path": "history/create-green-r6/source/run-virtual-continuation.mjs",
+      "sha256": "3a736e9433102f6a84d1af5cba616b2ed88fe908b8119a1b752b17006d607361",
+      "bytes": 2552
+    },
+    {
+      "path": "history/create-green-r6/source/seal-attachment-ui.mjs",
+      "sha256": "dad91dc67152f189614892b3a69c6a75734a6bcadbf3d9d3bfa5a1943f2c760f",
+      "bytes": 6505
+    },
+    {
+      "path": "history/create-green-r6/source/seal-closeout.mjs",
+      "sha256": "1868d6c0801a93f479e330c9088b9b6840a6b1f611b9e279a9213284522c2700",
+      "bytes": 7052
+    },
+    {
+      "path": "history/create-green-r6/source/seal-context.mjs",
+      "sha256": "806c9391b0e800b054f4d3edcf34e65a7f9dc1465bb47c806d352600cbf6df5a",
+      "bytes": 7116
+    },
+    {
+      "path": "history/create-green-r6/source/seal-desktop-continuation.mjs",
+      "sha256": "11a43ddfacfca75364d77e9b37b2bb5f8465fe245ec3d666ac533e35ae827eb2",
+      "bytes": 6520
+    },
+    {
+      "path": "history/create-green-r6/source/seal-documents.mjs",
+      "sha256": "62204c0c1a69a53f099021ff3d71fbd1e4fb52d06231e82fb509221af295209f",
+      "bytes": 6236
+    },
+    {
+      "path": "history/create-green-r6/source/seal-file-attachments.mjs",
+      "sha256": "8796367961dc4af4decb2ac4295c5b1d25625e202fddff07f12d9400a1e7cf56",
+      "bytes": 6645
+    },
+    {
+      "path": "history/create-green-r6/source/seal-profile.mjs",
+      "sha256": "71a91852791f09021c4e701b307e6064c96be4832fd959770f2dfdce90e29b62",
+      "bytes": 6119
+    },
+    {
+      "path": "history/create-green-r6/source/seal-sep.mjs",
+      "sha256": "3f18cf8b6c6f8d8a0b04516dab94f47b4a615fd0f8e607dd6b9bd66aa73704df",
+      "bytes": 6586
+    },
+    {
+      "path": "history/create-green-r6/source/seal-transactions.mjs",
+      "sha256": "b4192117f59e8c5bee0527cc7ca90a83d86441b15b4373c4eba40e242c86dd29",
+      "bytes": 4017
+    },
+    {
+      "path": "history/create-green-r6/source/seal-vision.mjs",
+      "sha256": "5187fe966c41f3a2332748e554ba9125de608bb0797d9aafefe0f3345c8462d7",
+      "bytes": 6269
+    },
+    {
+      "path": "history/create-green-r6/source/sep-fixture.mjs",
+      "sha256": "fe0723a19f9ea37f1a817d28ddadb12283f8b2c0e9ebc2f9ae955a5f003a0525",
+      "bytes": 4341
+    },
+    {
+      "path": "history/create-green-r6/source/snapshot-bootstrap.py",
+      "sha256": "ca2f17d256630e9f3da1db4393493cd11092012a8883b7617706581ec6a16988",
+      "bytes": 2756
+    },
+    {
+      "path": "history/create-green-r6/source/transaction-fixtures.mjs",
+      "sha256": "f4d94301854a3993895aa3a876b14992bf5352062879a4a1b0da161a2add4584",
+      "bytes": 1994
+    },
+    {
+      "path": "history/create-green-r6/source/transaction-worker.mjs",
+      "sha256": "fa3c340c62a9b6f4aecd58478a5c80bee8d13c049b49afeae6007879a48ac923",
+      "bytes": 795
+    },
+    {
+      "path": "history/create-green-r6/source/transactions.test.mjs",
+      "sha256": "f0491f7936456482bb7b5f3bcc6dcd806e04cab04c9497ec0da7db3dfba1f8cf",
+      "bytes": 17373
+    },
+    {
+      "path": "history/create-green-r6/source/transfer-evaluation-fixture.mjs",
+      "sha256": "0cc937739c890efc0187dfa7607952584eeb1138ab055112a1c70d390279b6fd",
+      "bytes": 1484
+    },
+    {
+      "path": "history/create-green-r6/source/transfer.mjs",
+      "sha256": "9fbddd2aabf224118d0f590aaf3f6436a32933e2bb0480bae609a941b8aa0c9d",
+      "bytes": 827
+    },
+    {
+      "path": "history/create-green-r6/source/verify-linux-context-desktop.mjs",
+      "sha256": "9c579b6821d124115c785648e5b2498973ce11037338dee7fca12236687de997",
+      "bytes": 1576
+    },
+    {
+      "path": "history/create-green-r6/source/verify-linux-vision-desktop.mjs",
+      "sha256": "d7db0a2a2e05bede723754942dc6105ca92510c421a0cfcaa57523041ef555c0",
+      "bytes": 4737
+    },
+    {
+      "path": "history/create-green-r6/source/vision-fixture.mjs",
+      "sha256": "1ba6e2575931725dbccb6ea3eca3c126802b766252fe09a3f541fa9e7060ff30",
+      "bytes": 1505
+    },
+    {
+      "path": "history/signal-red/RESULT.json",
+      "sha256": "286fb92e96da1ab7ccd50acd4971847bcb7f4266a727bc5f35ec65e17a31b769",
+      "bytes": 459
+    },
+    {
+      "path": "history/signal-red/round-1.stdout.log",
+      "sha256": "0dc1183fff283a8835859d8c6c5900bef1283b6a962305b5b4dd9b2084b9bc3b",
+      "bytes": 1156
+    },
+    {
+      "path": "history/signal-red/round-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "history/signal-red/XSERVER-RESULT.json",
+      "sha256": "b20edc5dfe70d24afbb0f3d4982060b8432090c57c02476e0be822cd75a2000b",
+      "bytes": 127
+    }
+  ],
+  "resourceAudit": {
+    "status": "pass",
+    "remaining": [],
+    "unknown": [],
+    "scope": "recognized owned processes in dedicated RC distro/current UID",
+    "attribution": "Final normal GUI and signal cases closed their owners, outer harness stopped private Xorg. Old SIGTERM reproduction failed after 12 seconds and needed exact captured PID/birth SIGKILL cleanup; final zero residuals do not make that old run pass."
+  },
+  "notVerified": {
+    "completePublicLinuxCertification": "blocked",
+    "activeTaskQuitInspection": "not_run",
+    "publicAutomaticUpdate": "not_run",
+    "physicalDesktopWayland": "not_run",
+    "paidModel": "not_run",
+    "privateAdoption": "not_run",
+    "fullApplicationForcedFailureDeadline": "not_run",
+    "nativeEvaluationPositive": "not_run",
+    "sameHostFullEvaluation": "not_run",
+    "allPlugins": "not_run",
+    "macOS": "not_run"
+  },
+  "dailyChanged": false,
+  "published": false,
+  "artifact": {
+    "status": "pass",
+    "mode": "candidate",
+    "name": "DSH-SEP-Linux-x64-Alpha2-closeout.4.tar.gz",
+    "sha256": "3adcf96fd09aa217ab3b425551de985c04a006ede6ddab7434048594588a0c07",
+    "sourceRoot": "/opt/dsh-sep-cross-platform/alpha2-portable-closeout-package-review-r7-build"
+  },
+  "dailyActual": {
+    "launch.mjs": "da140dbad22fa4f6557d98f73e192e1135b29431dba08c0f9b13e4dd3977bf9f",
+    "deployment-rc2.json": "29e3d72617ecb35f97849eccca94d03395408be6dfa4ebef2dc350846f0f0175"
+  },
+  "exportBeforeAfter": {
+    "status": "pass",
+    "scope": "prior exact pre-I/O guard admits traversal; current lexical guard refuses both; no export I/O executed",
+    "priorSourceSha256": "429dcf6328cec1f485e2efddaa894658bcc112db0f2cb4e52cfea8fc92e39eaf",
+    "cases": 2
+  },
+  "retainedEvidence": {
+    "nativeClick": "previous 9 checks, source-bound; not re-executed this round",
+    "nativeEvaluation": "previous fixed public Flask negative 3 checks, unchanged source; no new official positive"
+  },
+  "remainingLowPriority": [
+    "document ENOENT classification",
+    "MCP half-second shutdown exception",
+    "historical seal and default-user scripts",
+    "old duplicate-start test lacks independent timeout"
+  ]
+}
