@@ -1,10 +1,10 @@
 // Native-only regression runner. No platform override, install, package or upload.
-import {mkdir,readFile,writeFile,realpath,lstat} from 'node:fs/promises';
+import {mkdir,readFile,writeFile,realpath,lstat,stat} from 'node:fs/promises';
 import {resolve,dirname,join,relative,isAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {verifyTap} from './runner-contract.mjs';
+import {verifyTap,parseDfVolume,verifyVolumeBinding} from './runner-contract.mjs';
 import {verifyWorkflowOrigin} from './workflow-origin.mjs';
 const fail=code=>{throw Object.assign(Error(code),{code});},sha=x=>createHash('sha256').update(x).digest('hex');
 if(process.platform!=='darwin'||process.arch!=='arm64'){console.log(JSON.stringify({status:'not_run',code:'NATIVE_MAC_REQUIRED',platform:process.platform,arch:process.arch}));process.exit(78);}
@@ -34,8 +34,11 @@ try{
  if(process.version!=='v24.21.0')fail('SEP_NATIVE_NODE_VERSION');
  result.inputs=await verifyInputs();await json('INPUTS-VERIFIED.json',result.inputs);result.workflowOrigin=await verifyWorkflowOrigin();
  result.os=(await run('system-version','/usr/bin/sw_vers',['-productVersion'])).stdout.trim();if(!/^15\./u.test(result.os))fail('SEP_NATIVE_OS_SCOPE');
- const disk=await run('disk-info','/usr/sbin/diskutil',['info','-plist',root]);
- const converted=await run('disk-info-json','/usr/bin/plutil',['-convert','json','-o','-','-'],{input:disk.stdout});const fs=JSON.parse(converted.stdout);result.filesystem={type:fs.FilesystemType??fs.FileSystemPersonality??null,mountPoint:fs.MountPoint??null};if(String(result.filesystem.type).toLowerCase()!=='apfs')fail('SEP_NATIVE_APFS_REQUIRED');
+ const mapped=await run('volume-df','/bin/df',['-P',root]),volume=parseDfVolume(mapped.stdout);
+ const disk=await run('disk-info','/usr/sbin/diskutil',['info','-plist',volume.device]);
+ const converted=await run('disk-info-json','/usr/bin/plutil',['-convert','json','-o','-','-'],{input:disk.stdout}),info=JSON.parse(converted.stdout);
+ const [rootStat,mountStat,mountReal]=await Promise.all([stat(root,{bigint:true}),stat(volume.mountPoint,{bigint:true}),realpath(volume.mountPoint)]);
+ result.filesystem=verifyVolumeBinding({df:volume,info,root,rootDev:rootStat.dev,mountDev:mountStat.dev,mountReal});
  const helper=join(root,'native-tree'),attachment=join(root,'native-attachments');
  await run('compile-tree','/usr/bin/xcrun',['clang','-std=c11','-O2','-Wall','-Wextra','-Werror','-arch','arm64',join(source,'apfs-tree/native-tree.c'),'-o',helper]);
  await run('compile-attachments','/usr/bin/xcrun',['clang','-std=c11','-O2','-Wall','-Wextra','-Werror','-arch','arm64',join(source,'media/native-attachments.c'),'-o',attachment]);

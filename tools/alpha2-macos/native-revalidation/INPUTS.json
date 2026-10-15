@@ -410,18 +410,18 @@
     },
     {
       "path": "native-revalidation/run-native.mjs",
-      "bytes": 8400,
-      "sha256": "2202a445259d4758b9a52165c7e7b89ae72882d6bd0435bc5a3b4acd1a12a4f8"
+      "bytes": 8612,
+      "sha256": "2dad1b08307b33d17b8c4c713babb41567df0a4d3e81a7a5abb0d3caebe1797e"
     },
     {
       "path": "native-revalidation/run-native.test.mjs",
-      "bytes": 1847,
-      "sha256": "99e2c9d143238956cbe43a190874d3b3c7c5fac5cf39f6688a2a043753733057"
+      "bytes": 4531,
+      "sha256": "42b14096d46746cfde00ca829a861b35769d70c3b248263c97ec441aaea0a9fb"
     },
     {
       "path": "native-revalidation/runner-contract.mjs",
-      "bytes": 556,
-      "sha256": "0b4d0e932bf6ff8962244d76506818e95986840efe4b59a53734d921b38d500d"
+      "bytes": 1916,
+      "sha256": "99b082df9075f059811b55114f9e8ec9b7edfe210d6883ee2970b932ad770a8a"
     },
     {
       "path": "native-revalidation/seal-inputs.mjs",

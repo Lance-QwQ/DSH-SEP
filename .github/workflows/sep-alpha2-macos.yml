@@ -60,6 +60,9 @@ jobs:
           path: |
             ${{ runner.temp }}/native-system.txt
             ${{ runner.temp }}/fixed-r44/RESULT.json
+            ${{ runner.temp }}/fixed-r44/PACKAGE-INVENTORY.json
+            ${{ runner.temp }}/asar-tool/*.json
+            ${{ runner.temp }}/asar-tool/*.log
             ${{ runner.temp }}/fixed-r44/*.log
             ${{ runner.temp }}/native-environment/*.json
             ${{ runner.temp }}/native-regression/*.json
