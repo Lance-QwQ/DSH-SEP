@@ -13,7 +13,9 @@ export function parseDfVolume(text){
 }
 export function verifyVolumeBinding({df,info,root,rootDev,mountDev,mountReal}){
  const type=info?.FilesystemType??info?.FileSystemPersonality;
- if(!df||info?.Error===true||typeof type!=='string'||type.toLowerCase()!=='apfs'||info?.Mounted!==true||info.DeviceNode!==df.device||info.MountPoint!==df.mountPoint||mountReal!==df.mountPoint||typeof root!=='string'||!root.startsWith('/')||typeof rootDev!=='bigint'||typeof mountDev!=='bigint'||rootDev!==mountDev)volumeFail('SEP_NATIVE_VOLUME_BINDING');
+ if(!df||info?.Error===true||typeof type!=='string'||type.toLowerCase()!=='apfs'||(Object.hasOwn(info??{},'Mounted')&&info.Mounted!==true)||info.DeviceNode!==df.device||info.MountPoint!==df.mountPoint||mountReal!==df.mountPoint||typeof root!=='string'||!root.startsWith('/')||typeof rootDev!=='bigint'||typeof mountDev!=='bigint'||rootDev!==mountDev)volumeFail('SEP_NATIVE_VOLUME_BINDING');
+ // Some real diskutil versions omit Mounted. The successful df mapping,
+ // real mount-point stat and equal st_dev establish volume membership.
  // APFS firmlinks can expose /Users on /System/Volumes/Data. st_dev binds
  // the actual volume without incorrectly requiring lexical path ancestry.
  return {type:'apfs',device:df.device,mountPoint:df.mountPoint,deviceId:rootDev.toString()};

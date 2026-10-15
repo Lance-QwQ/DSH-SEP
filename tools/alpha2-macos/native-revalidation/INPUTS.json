@@ -410,23 +410,28 @@
     },
     {
       "path": "native-revalidation/run-native.mjs",
-      "bytes": 8612,
-      "sha256": "2dad1b08307b33d17b8c4c713babb41567df0a4d3e81a7a5abb0d3caebe1797e"
+      "bytes": 8846,
+      "sha256": "35a3593dffeb49a3a2319a46f3b4149f3d3cb35681db2235a57cfb5755ad9dd8"
     },
     {
       "path": "native-revalidation/run-native.test.mjs",
-      "bytes": 4531,
-      "sha256": "42b14096d46746cfde00ca829a861b35769d70c3b248263c97ec441aaea0a9fb"
+      "bytes": 6296,
+      "sha256": "42f638890b969e564adf17576b21295c70ea54f08059798c006e5f50208baad7"
     },
     {
       "path": "native-revalidation/runner-contract.mjs",
-      "bytes": 1916,
-      "sha256": "99b082df9075f059811b55114f9e8ec9b7edfe210d6883ee2970b932ad770a8a"
+      "bytes": 2097,
+      "sha256": "5701cab486e02f1529137ccaa2c0cd12bfab816d49078f9d1114fcd6d8382cae"
     },
     {
       "path": "native-revalidation/seal-inputs.mjs",
       "bytes": 3932,
       "sha256": "d80bbe63bb83cc28a020a5ba3b1c44377e4587a5e4dab9a3f45ef411a4c727a6"
+    },
+    {
+      "path": "native-revalidation/volume-observation-r2.json",
+      "bytes": 2620,
+      "sha256": "3e95b28f47f7c135acc245a766ad9423e6a1c7323d76db8f601b8f398d116ae3"
     },
     {
       "path": "native-revalidation/workflow-fixture.mjs",

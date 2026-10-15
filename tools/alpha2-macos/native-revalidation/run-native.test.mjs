@@ -34,3 +34,15 @@ test('APFS admission rejects wrong device, mount, filesystem and stat identity',
 test('native runner queries discovered device and binds live stat.dev before helper compilation',async()=>{
  const {readFile}=await import('node:fs/promises'),source=await readFile(runner,'utf8');assert(source.includes("'/bin/df',['-P',root]"));assert(source.includes("['info','-plist',volume.device]"));assert(source.includes('rootDev:rootStat.dev'));assert(source.includes('mountDev:mountStat.dev'));assert(source.indexOf('verifyVolumeBinding({')<source.indexOf("await run('compile-tree'"));
 });
+test('actual CI diskutil without Mounted is admitted only with observed matching stat identities',async()=>{
+ const {readFile}=await import('node:fs/promises'),{createHash}=await import('node:crypto'),{parseDfVolume,verifyVolumeBinding}=await import('./runner-contract.mjs');
+ const fixed=JSON.parse(await readFile(new URL('./volume-observation-r2.json',import.meta.url))),sha=x=>createHash('sha256').update(x).digest('hex');assert.equal(sha(fixed.dfStdout),fixed.dfSha256);assert.equal(sha(fixed.diskutilJsonStdout),fixed.diskutilJsonSha256);
+ const info=JSON.parse(fixed.diskutilJsonStdout),df=parseDfVolume(fixed.dfStdout);assert.equal(Object.hasOwn(info,'Mounted'),false);
+ // Only df/diskutil bytes are captured from CI. These synthetic stat values
+ // exercise admission, and are never described as a live native observation.
+ const value={df,info,root:'/Users/runner/work/_temp/native-regression',rootDev:321n,mountDev:321n,mountReal:info.MountPoint};assert.equal(verifyVolumeBinding(value).device,info.DeviceNode);
+ assert.throws(()=>verifyVolumeBinding({...value,mountDev:322n}),{code:'SEP_NATIVE_VOLUME_BINDING'});assert.throws(()=>verifyVolumeBinding({...value,info:{...info,Mounted:false}}),{code:'SEP_NATIVE_VOLUME_BINDING'});
+});
+test('actual volume observations are recorded before admission may reject',async()=>{
+ const {readFile}=await import('node:fs/promises'),source=await readFile(runner,'utf8');const record=source.indexOf('result.volumeObserved=');assert(record>0&&record<source.indexOf('result.filesystem=verifyVolumeBinding('));for(const field of ['DeviceNode:info.DeviceNode','MountPoint:info.MountPoint','rootDev:rootStat.dev.toString()','mountDev:mountStat.dev.toString()','mountReal'])assert(source.slice(record).includes(field));
+});

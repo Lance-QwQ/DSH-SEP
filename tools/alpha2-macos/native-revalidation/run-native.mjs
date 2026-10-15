@@ -38,6 +38,7 @@ try{
  const disk=await run('disk-info','/usr/sbin/diskutil',['info','-plist',volume.device]);
  const converted=await run('disk-info-json','/usr/bin/plutil',['-convert','json','-o','-','-'],{input:disk.stdout}),info=JSON.parse(converted.stdout);
  const [rootStat,mountStat,mountReal]=await Promise.all([stat(root,{bigint:true}),stat(volume.mountPoint,{bigint:true}),realpath(volume.mountPoint)]);
+ result.volumeObserved={df:volume,DeviceNode:info.DeviceNode??null,MountPoint:info.MountPoint??null,Mounted:Object.hasOwn(info,'Mounted')?info.Mounted:null,rootDev:rootStat.dev.toString(),mountDev:mountStat.dev.toString(),mountReal};
  result.filesystem=verifyVolumeBinding({df:volume,info,root,rootDev:rootStat.dev,mountDev:mountStat.dev,mountReal});
  const helper=join(root,'native-tree'),attachment=join(root,'native-attachments');
  await run('compile-tree','/usr/bin/xcrun',['clang','-std=c11','-O2','-Wall','-Wextra','-Werror','-arch','arm64',join(source,'apfs-tree/native-tree.c'),'-o',helper]);
