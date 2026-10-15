@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "source": "installer-ui/integration-r79/run-full.mjs",
+  "sourceSha256": "251155a12d3585191266dfa92853067d5b341e84b4dd92af19da36770ff2c1a3",
+  "result": "native-revalidation/installer-run-full.mjs",
+  "resultSha256": "4b80f1c2a2bc3c37f1c3f32d5990ffca5b57707179b65522c128544fe76e59a0",
+  "transforms": [
+    {
+      "before": "from '../../package/package-inventory.mjs'",
+      "after": "from '../package/package-inventory.mjs'",
+      "count": 1,
+      "inputSha256": "251155a12d3585191266dfa92853067d5b341e84b4dd92af19da36770ff2c1a3",
+      "resultSha256": "4e2b3a2ef092953df0a56443147f9844c1a6a5080d5b8be326b0b3c5f43fb7fc"
+    },
+    {
+      "before": "from '../bundle-config.mjs'",
+      "after": "from '../installer-ui/bundle-config.mjs'",
+      "count": 1,
+      "inputSha256": "4e2b3a2ef092953df0a56443147f9844c1a6a5080d5b8be326b0b3c5f43fb7fc",
+      "resultSha256": "d693f16b63a284de9d337c26cf0e4af174ace6650c30ab954881cb377aa772cd"
+    },
+    {
+      "before": "from '../../installer-entry/candidate.mjs'",
+      "after": "from '../installer-entry/candidate.mjs';\nimport {payloadPins,installerPins} from './installer-binding.mjs';\nimport {verifyInstallerSources} from './installer-source-binding.mjs'",
+      "count": 1,
+      "inputSha256": "d693f16b63a284de9d337c26cf0e4af174ace6650c30ab954881cb377aa772cd",
+      "resultSha256": "c60879635fdd20b5c45dad0a401d489c30850a432e23ca1ebb462553ace287e5"
+    },
+    {
+      "before": "const programSha='e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834';\nconst bootstrapSha='ff97b34568f4cdf3d380191256b5523f1f27049b7e0c3a9afba16060da9fbc2b';\nconst payloadTree='eadad5720380302d460bea68f77d9cdfdf5dc4f7b7f77dd9cf0d10df3f7713a1';\nconst payloadArchive='20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107';",
+      "after": "const fixedPayload=await payloadPins(),fixedInstaller=await installerPins();\nconst programSha=fixedPayload.programSha256,bootstrapSha=fixedPayload.bootstrapSha256,payloadTree=fixedPayload.treeSha256,payloadArchive=fixedPayload.archiveSha256;",
+      "count": 1,
+      "inputSha256": "c60879635fdd20b5c45dad0a401d489c30850a432e23ca1ebb462553ace287e5",
+      "resultSha256": "b6c7188a1ae9e2c2f268cf214d58e9154578e93a75e23da26e5b62522322f7cd"
+    },
+    {
+      "before": "join(own,'../..')",
+      "after": "join(own,'..')",
+      "count": 1,
+      "inputSha256": "b6c7188a1ae9e2c2f268cf214d58e9154578e93a75e23da26e5b62522322f7cd",
+      "resultSha256": "2c6f8e8ecdfd0e2b38453c2e2d4f42e60506be1ad82e49310cfc6aefc75cf5ac"
+    },
+    {
+      "before": "then fixed r74 installed first boot/restart",
+      "after": "then fixed reviewed native-revalidation installed first boot/restart",
+      "count": 1,
+      "inputSha256": "2c6f8e8ecdfd0e2b38453c2e2d4f42e60506be1ad82e49310cfc6aefc75cf5ac",
+      "resultSha256": "5f357c9019e0173eb1fd138b20879c7abb08e517833e078ef7d941cb6182cfa5"
+    },
+    {
+      "before": "const test=await capture(join(own,'test-main.m')",
+      "after": "const test=await capture(join(own,'installer-test-main.m')",
+      "count": 1,
+      "inputSha256": "5f357c9019e0173eb1fd138b20879c7abb08e517833e078ef7d941cb6182cfa5",
+      "resultSha256": "5c31d6859f6e107681eae20df2be8f2fe79673f46cecf7d2c72bfa2010c225e5"
+    },
+    {
+      "before": "digest(join(own,'test-main.m'))",
+      "after": "digest(join(own,'installer-test-main.m'))",
+      "count": 1,
+      "inputSha256": "5c31d6859f6e107681eae20df2be8f2fe79673f46cecf7d2c72bfa2010c225e5",
+      "resultSha256": "0f9c0acc0e2a678306b92f54ad2315afb82fbb6c56def00aa47f3eb9c35c6192"
+    },
+    {
+      "before": "join(own,'installed-startup.mjs'),origin=JSON.parse(await readFile(join(own,'installed-startup.origin.json')",
+      "after": "join(own,'installer-installed-startup.mjs'),origin=JSON.parse(await readFile(join(own,'installer-installed-startup.origin.json')",
+      "count": 1,
+      "inputSha256": "0f9c0acc0e2a678306b92f54ad2315afb82fbb6c56def00aa47f3eb9c35c6192",
+      "resultSha256": "9141f0af1f96de42133212fd2113e0b28c77420f9132f9ab781ac0c3472d82d7"
+    },
+    {
+      "before": "'installed-r74-product-first-boot-and-restart'",
+      "after": "'installed-fixed-current-product-first-boot-and-restart'",
+      "count": 1,
+      "inputSha256": "9141f0af1f96de42133212fd2113e0b28c77420f9132f9ab781ac0c3472d82d7",
+      "resultSha256": "911518c12e16c00169cdd9f499cbff71b6fd80712e6ffe66bec1578170b0fbfb"
+    },
+    {
+      "before": "try{\n assert.match(restoreSha",
+      "after": "try{\n result.currentSources=await verifyInstallerSources(sourceRoot);\n assert.match(restoreSha",
+      "count": 1,
+      "inputSha256": "911518c12e16c00169cdd9f499cbff71b6fd80712e6ffe66bec1578170b0fbfb",
+      "resultSha256": "5b6f12d4a168e689a605d21e717295069a311f774a2d6f72dcefd192cdfa7923"
+    },
+    {
+      "before": "assert.equal(restored.source.commit,'e2cdf833051e9ff0b451d0885549f38690220acd');",
+      "after": "assert.deepEqual(restored.source,fixedInstaller);assert.equal(restored.sourceAssemblySha256,fixedInstaller.assemblySha256);assert.equal(restored.manifestSha256,fixedInstaller.manifestSha256);assert.equal(restored.treeSha256,fixedInstaller.treeSha256);",
+      "count": 1,
+      "inputSha256": "5b6f12d4a168e689a605d21e717295069a311f774a2d6f72dcefd192cdfa7923",
+      "resultSha256": "33579cc3c7209eee7c657541456a77f49c1da5a867555161ea81a5374fbcc1f8"
+    },
+    {
+      "before": "originalInventory=JSON.parse(await readFile(join(base,'PACKAGE-INVENTORY.json'),'utf8'));",
+      "after": "const inventoryBytes=await readFile(join(base,'PACKAGE-INVENTORY.json'));assert.equal(inventoryBytes.length,fixedInstaller.inventoryBytes);assert.equal(sha(inventoryBytes),fixedInstaller.inventorySha256);originalInventory=JSON.parse(inventoryBytes);",
+      "count": 1,
+      "inputSha256": "33579cc3c7209eee7c657541456a77f49c1da5a867555161ea81a5374fbcc1f8",
+      "resultSha256": "56ec1d5a67d5533cf2ffeb60b2e16e16866bc9379042c786117b122ddf4c9f24"
+    },
+    {
+      "before": "assert.equal(config.receipt.inventory.entries.length,29374);assert.equal(config.receipt.inventory.totalBytes,1794083023);",
+      "after": "assert.equal(config.receipt.inventory.entries.length,fixedPayload.entries);assert.equal(config.receipt.inventory.totalBytes,fixedPayload.totalBytes);",
+      "count": 1,
+      "inputSha256": "56ec1d5a67d5533cf2ffeb60b2e16e16866bc9379042c786117b122ddf4c9f24",
+      "resultSha256": "1a041f0999d9534e5071e23c102fb2523c6cce2b4fb85be304080f64fe257f66"
+    },
+    {
+      "before": "join(own,'main-result.test.mjs')",
+      "after": "join(own,'installer-main-result.test.mjs')",
+      "count": 1,
+      "inputSha256": "1a041f0999d9534e5071e23c102fb2523c6cce2b4fb85be304080f64fe257f66",
+      "resultSha256": "86674a6303e84a20517c0a369a9a990e3d8201da52bd01c83490dc26ae8318df"
+    },
+    {
+      "before": "['run-full.mjs','test-main.m','installer-observer.m','main-result.test.mjs','installed-startup.mjs','installed-startup.origin.json']",
+      "after": "['installer-run-full.mjs','installer-test-main.m','installer-observer.m','installer-main-result.test.mjs','installer-installed-startup.mjs','installer-installed-startup.origin.json','installer-pins.json','installer-sources.json']",
+      "count": 1,
+      "inputSha256": "86674a6303e84a20517c0a369a9a990e3d8201da52bd01c83490dc26ae8318df",
+      "resultSha256": "56af7cbc72ea6fd7754c394773656959c8ea5e1f3ab7a98138bb2807ccd89655"
+    },
+    {
+      "before": "path:'installer-ui/integration-r79/'+path",
+      "after": "path:'native-revalidation/'+path",
+      "count": 1,
+      "inputSha256": "56af7cbc72ea6fd7754c394773656959c8ea5e1f3ab7a98138bb2807ccd89655",
+      "resultSha256": "4b80f1c2a2bc3c37f1c3f32d5990ffca5b57707179b65522c128544fe76e59a0"
+    }
+  ],
+  "scope": "New fixed-pinned successor operator only; original files remain unchanged; native verification not_run"
+}

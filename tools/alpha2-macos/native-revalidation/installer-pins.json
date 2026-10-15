@@ -1,0 +1,460 @@
+{
+  "schema": 1,
+  "scope": "Independent native revalidation; payload pins require first CI review, installer pins require second CI review",
+  "baseline": "0e721a72784e595f0f56e08d41eb6757ccec3877",
+  "payload": {
+    "status": "ready",
+    "commit": "f108e0374dce4a2d5db44a46e37cb6491447a1bd",
+    "artifact": "DSH-SEP-macOS-Alpha2-project-preview.zip",
+    "assemblySha256": "63af6b0c602a34d4dba02e41666e8966ba10fc30c6ae07fea01165631a45ba05",
+    "assemblyBytes": 29896,
+    "archiveSha256": "c69e9f8c4a84d9d7eb02aee38449a711c6979ca7576c102d3ca2dc57e6ee29b9",
+    "archiveBytes": 647533206,
+    "inventorySha256": "04c8dd48ae4cc430d3c3e6fcfc8fe41ef45d51b27cd2dbbfb2023b82d29202a3",
+    "inventoryBytes": 8860625,
+    "treeSha256": "89af51201cae9e164e473dd350d07a8532c04d9d60aed0f69d512d8238022039",
+    "programSha256": "e3d13eb3ce1dcc45e3afdb755682d3c56db25d47c7811159860cbb298c026834",
+    "bootstrapSha256": "62efb01e55494040d7c58d4e14ac58b77be606941b0aaebfd2687bd3d911bab3",
+    "entries": 29374,
+    "totalBytes": 1794085100,
+    "runtime": [
+      {
+        "path": "apfs-tree/project-tree.mjs",
+        "source": "apfs-tree/project-tree.mjs",
+        "sha256": "bc56d55d93cd9bcb67beb544153a49f012aa453ba4fc35d2e9caa1fed5f0d6cd"
+      },
+      {
+        "path": "transactions/mac-managed-project.mjs",
+        "source": "transactions/mac-managed-project.mjs",
+        "sha256": "9b4134b17587dc8623b9e6bc315f0882226e4f1a2334cad8972ab21810f8666b"
+      },
+      {
+        "path": "transactions/transaction-store.mjs",
+        "source": "transactions/transaction-store.mjs",
+        "sha256": "a98d2ecbc7148815959d97a4b4c20085dbc3a46bb377f9ed830cec0faae90ea8"
+      },
+      {
+        "path": "transactions/document-copies.mjs",
+        "source": "transactions/document-copies.mjs",
+        "sha256": "f7e720012437f105131b16936bb2b169a1a82f9c462b3abec512693b4c2a2337"
+      },
+      {
+        "path": "lifecycle/managed-project-lifecycle.mjs",
+        "source": "lifecycle/managed-project-lifecycle.mjs",
+        "sha256": "480368fdca5cc301a38fb3f8bd894d7b84c94c1248cfbd1f62cb13a77d22c844"
+      },
+      {
+        "path": "profile/controlled-files.mjs",
+        "source": "profile/controlled-files.mjs",
+        "sha256": "0d2fc521ab44e8a6644c85ebc7254c351ca093cd028f6fcdfff6512a67284771"
+      },
+      {
+        "path": "captured/owner-lease.mjs",
+        "source": "captured/owner-lease.mjs",
+        "sha256": "33071ae2632f2cdfe113267757412de089ebe065699bf93ed1aa291af9fbbb4a"
+      },
+      {
+        "path": "captured/owner-posix.mjs",
+        "source": "captured/owner-posix.mjs",
+        "sha256": "bb4d6a89d85fbcf10e4b3e72c0e81e13dfbbd39068a0506f486edcadb38353c3"
+      },
+      {
+        "path": "business/standalone.mjs",
+        "source": "business/standalone.mjs",
+        "sha256": "e4ad150db13d7cf173826923f2d047c61c8762ff959b403eeee73fe01e7911c6"
+      },
+      {
+        "path": "business/profile-layout.mjs",
+        "source": "business/profile-layout.mjs",
+        "sha256": "5513a06989b5dfcc4b4429b796be65efe1cab8fa78dab68bc7c9759194690576"
+      },
+      {
+        "path": "business/runtime.mjs",
+        "source": "business/runtime.mjs",
+        "sha256": "8148341384289ea23050112e70355dd26a52741c45ce7b715d3699ccbbf09409"
+      },
+      {
+        "path": "business/profile-plugin.mjs",
+        "source": "business/profile-plugin.mjs",
+        "sha256": "ca30b19aae277b4c6df650723002bc27558d78c266526a1c8445073c045937fc"
+      },
+      {
+        "path": "business/readonly-files.mjs",
+        "source": "business/readonly-files.mjs",
+        "sha256": "43ec22c1e9c1304075b942a87bfd14a0ca02f189590ad2b3ed98f1223152cc19"
+      },
+      {
+        "path": "business/host-modules.mjs",
+        "source": "business/host-modules.mjs",
+        "sha256": "a982f1b06f61070cbd54e3ba708540b2fb640f9089697bd7981fde446c4a79c7"
+      },
+      {
+        "path": "business/bundle-modules.mjs",
+        "source": "business/bundle-modules.mjs",
+        "sha256": "056bd1bc221521451960e91444dcebd6dc7aab3a19d9cc4fbab5f66273f087a7"
+      },
+      {
+        "path": "business/bounded-read.mjs",
+        "source": "business/bounded-read.mjs",
+        "sha256": "9d471a3c66256e5b4ea18495942fdee1e162590fce22e22a4eb8bcef7bd9191e"
+      },
+      {
+        "path": "business/capture-runtime.mjs",
+        "source": "business/capture-runtime.mjs",
+        "sha256": "46853fae12052e68d419f5f1f40208c9ed4707699f34b07f5cd6a09c3944d411"
+      },
+      {
+        "path": "business/consumers.mjs",
+        "source": "business/consumers.mjs",
+        "sha256": "f45f3f7185fea0cef77de34730e2a4ac5e0b72073002f3731a09c7fa87de57db"
+      },
+      {
+        "path": "business/documents.mjs",
+        "source": "business/documents.mjs",
+        "sha256": "1db0b71d3034db12d333e7913bfbb87b1e3445241b42993827417a3787020ece"
+      },
+      {
+        "path": "business/snapshot-scope.mjs",
+        "source": "business/snapshot-scope.mjs",
+        "sha256": "075df32ed73c9f0a8ca050e11e009464b1114b9e7b7be1088c29cad93635866f"
+      },
+      {
+        "path": "desktop/managed-broker/launch-full.mjs",
+        "source": "desktop/managed-broker/launch-full.mjs",
+        "sha256": "13f021e4b19282028df9ff56475e69ce995f82c677964effc3d66f9fea8e6a7c"
+      },
+      {
+        "path": "desktop/managed-broker/program-manifest.mjs",
+        "source": "desktop/managed-broker/program-manifest.mjs",
+        "sha256": "43abb6048918236c13b8a95cb7e46764be3ffc2d9eb46e49089bf78916a04071"
+      },
+      {
+        "path": "desktop/managed-broker/launch-state.mjs",
+        "source": "desktop/managed-broker/launch-state.mjs",
+        "sha256": "ef85d71769efba6618bb9dab670a369ed329732adf09f9aec25d7dd7c7b0ec07"
+      },
+      {
+        "path": "desktop/managed-broker/desktop-rpc.mjs",
+        "source": "desktop/managed-broker/desktop-rpc.mjs",
+        "sha256": "f715cd525a386bf5bb64baa8f282a1cf0fc6f77b82f424358ae3d1d8c28033dc"
+      },
+      {
+        "path": "desktop/managed-broker/host-owner.mjs",
+        "source": "desktop/managed-broker/host-owner.mjs",
+        "sha256": "23867edb41764a152922d7898e9bcb92b741bcdd6f2ac1b45e4fd9210588b21f"
+      },
+      {
+        "path": "desktop/managed-broker/business-host.mjs",
+        "source": "desktop/managed-broker/business-host.mjs",
+        "sha256": "a1712ce685020656e3994a4af9ea4e2f59eb0d7546032a9b58643e8d482345e5"
+      },
+      {
+        "path": "settings-ui/adapter.mjs",
+        "source": "settings-ui/adapter.mjs",
+        "sha256": "ca62e647c502d5885f35cd60e5c46bc58dd6af59edf2524849d08bd43afc8d6f"
+      },
+      {
+        "path": "settings-ui/required.mjs",
+        "source": "settings-ui/required.mjs",
+        "sha256": "6276f1f14881630f85cc197e4a413b6d2ef7298fd5e4631285ea8b322f8c0fbc"
+      },
+      {
+        "path": "settings-ui/transport.mjs",
+        "source": "settings-ui/transport.mjs",
+        "sha256": "89779b6ff9136d096da441d34fbb2b6d42d3d0ae6ad91b3556d68e8d70f4ce01"
+      },
+      {
+        "path": "media/attachment-tree.mjs",
+        "source": "media/attachment-tree.mjs",
+        "sha256": "1f8d3e4eb9e99e192decf53d2b25589a62926e7568d23e2a831260db8ef910e0"
+      },
+      {
+        "path": "media/attachment-io.mjs",
+        "source": "media/attachment-io.mjs",
+        "sha256": "c22a98dfe1cff82a1174f98cb1e6af06c898e79dfc2260626627019f2c763d39"
+      },
+      {
+        "path": "media-business/after-attachments-llm.mjs",
+        "source": "media-business/after-attachments-llm.mjs",
+        "sha256": "c619cd3d4d0baf883f2581e3eb57d8f07c252a3109298491338acd06d6a6d11d"
+      },
+      {
+        "path": "media-business/attachment-maintenance.mjs",
+        "source": "media-business/attachment-maintenance.mjs",
+        "sha256": "443470c7c750db5b908b3c781a072cc29a5855ccac2feb79815ea19495b283e3"
+      },
+      {
+        "path": "media-business/cold-attachments.mjs",
+        "source": "media-business/cold-attachments.mjs",
+        "sha256": "57386a8606c286e794d1ed1869722e3514aeaf46087da208dc68e8e19ec27b96"
+      },
+      {
+        "path": "media-business/profile-layout.mjs",
+        "source": "media-business/profile-layout.mjs",
+        "sha256": "945f25189729503a41b5fcbc66612f6a04fbd03b547a351d995c83040e17a09e"
+      },
+      {
+        "path": "media-business/runtime.mjs",
+        "source": "media-business/runtime.mjs",
+        "sha256": "1326e33aac1a98fe851ff83c4cbb8c38d698b0bfc8cb521ddccfa4aabbec0e10"
+      },
+      {
+        "path": "media-business/standalone.mjs",
+        "source": "media-business/standalone.mjs",
+        "sha256": "97416ab8bbaa94e5e44a92a9c8efef411cc1dbd4e4e57026de855034efe2fb58"
+      },
+      {
+        "path": "document-business/derive.mjs",
+        "source": "document-business/derive.mjs",
+        "sha256": "2a87607da41bd9d641f7ab43f676128ca3ba71986ec051cfdec28c9e4f22235a"
+      },
+      {
+        "path": "document-business/parsed-tools.mjs",
+        "source": "document-business/parsed-tools.mjs",
+        "sha256": "0d22f479c7bf38b077c1243db4103e5aee31fc5a3f642f86a1a8908f7e0f6e79"
+      },
+      {
+        "path": "document-business/context.mjs",
+        "source": "document-business/context.mjs",
+        "sha256": "88dcd11f253be84c99b0c03a0a5be7c328fffb83ff1d95671f50862a4c32e1e1"
+      },
+      {
+        "path": "document-business/consumers.mjs",
+        "source": "document-business/consumers.mjs",
+        "sha256": "3fc97fc34ce3ae75a7bffaa5fe1e03f43d660ec27080d9dd05a7b8ad19292817"
+      },
+      {
+        "path": "document-business/runtime-source.mjs",
+        "source": "document-business/runtime-source.mjs",
+        "sha256": "ca4bf40a9cdb395eff7e376d19b1532aa8e23d0b320c8e4d6181db339c8c5394"
+      },
+      {
+        "path": "document-business/runtime.mjs",
+        "source": "document-business/runtime.mjs",
+        "sha256": "12086629b5977d2ec2cb1736c195fb0d738fe8ae1fc18ded6b1f3f6041b1a46b"
+      },
+      {
+        "path": "document-business/profile-layout.mjs",
+        "source": "document-business/profile-layout.mjs",
+        "sha256": "4820b2258bfe18e1b1ef3e832bfee1db615fe415567fd8070e15804b8a33d840"
+      },
+      {
+        "path": "document-business/standalone.mjs",
+        "source": "document-business/standalone.mjs",
+        "sha256": "68cd07112d4dfec586ced12818f358ee35feed119a3c3050193ae64b247b698a"
+      },
+      {
+        "path": "document-business/startup-cleanup.mjs",
+        "source": "document-business/startup-cleanup.mjs",
+        "sha256": "822e57ff30354ebb07cb95146076849f6bee4bfecf11545c381849e4fa49e2c9"
+      },
+      {
+        "path": "parser-integration/runtime.mjs",
+        "source": "parser-integration/runtime.mjs",
+        "sha256": "147466c681cdd71c52edf8db2a55f9e4b97384059e904338432477c0bec37d1b"
+      },
+      {
+        "path": "parser-integration/services.mjs",
+        "source": "parser-integration/services.mjs",
+        "sha256": "d6f908e76294b8498569a4e0e19de979e0107e9a90b7a464e3cfc0a48ea6e27f"
+      },
+      {
+        "path": "parser-integration/lifecycle.mjs",
+        "source": "parser-integration/lifecycle.mjs",
+        "sha256": "d50684b57044df3e2fb73944b5aba7b88686ada8f2445068a914006cea86459b"
+      },
+      {
+        "path": "parser/trusted-parser.mjs",
+        "source": "parser/trusted-parser.mjs",
+        "sha256": "439819a9bc35110de81db923fe767ea46e78cfb42d5c3ed62d49556e3bc253d8"
+      },
+      {
+        "path": "parser/parser-worker.mjs",
+        "source": "parser/parser-worker.mjs",
+        "sha256": "bfb5cdaffcf38d165baf8335f249da3beb597c15da87062a5ac5859af89c98ea"
+      },
+      {
+        "path": "parser/parser-contract.mjs",
+        "source": "parser/parser-contract.mjs",
+        "sha256": "f6e7c91ba71d2035991f3fb2a3475abcfb46c249c142097dd00eca797090ffd3"
+      },
+      {
+        "path": "bootstrap/controller.mjs",
+        "source": "desktop/project-workflow-product/controller.mjs",
+        "sha256": "158dc2d62a868d68c86676141bda294deae35143bf0dab91897e1001e6847361"
+      },
+      {
+        "path": "desktop/product-control/controller-bridge.mjs",
+        "source": "desktop/product-control/controller-bridge.mjs",
+        "sha256": "79b5f6c10ba60da835917ce1b8155ed24c89829675fcee8e74705dac370fb7ac"
+      },
+      {
+        "path": "desktop/product-control/controller-paths.mjs",
+        "source": "desktop/product-control/controller-paths.mjs",
+        "sha256": "2b2ea9061ae3025b5653b1665a5cf35d22f4ec0cd1bbdf9297f7f1426cb58644"
+      },
+      {
+        "path": "desktop/product-control/launch-control.mjs",
+        "source": "desktop/product-control/launch-control.mjs",
+        "sha256": "d77fdb3e8e41a5baac8e6b5c7b647946b98b2ff36002ff30f1652bb1d4b84c59"
+      },
+      {
+        "path": "desktop/product-control/owned-observer.mjs",
+        "source": "desktop/product-control/owned-observer.mjs",
+        "sha256": "70f6c2166476d596782bb69d37caa8fa3b9514095f2494000d49124e1b78cb55"
+      },
+      {
+        "path": "desktop/product-control/transport.cjs",
+        "source": "desktop/product-control/transport.cjs",
+        "sha256": "61413a5b2893b6f305fb570accbe2fbd384b6b657d4aca3c7e18cf37fc7eb436"
+      },
+      {
+        "path": "desktop/project-workflow-product/business-host.mjs",
+        "source": "desktop/project-workflow-product/business-host.mjs",
+        "sha256": "468e1b11566aa768e1d276165e81eb463a746d9cc9b1417851032f202593dfcb"
+      },
+      {
+        "path": "desktop/project-workflow-product/host-owner.mjs",
+        "source": "desktop/project-workflow-product/host-owner.mjs",
+        "sha256": "be0c70a7ab724e5644c03b3bd68ca583a45410281bfee2205ea9aef8bd1b6af8"
+      },
+      {
+        "path": "desktop/project-workflow-product/launch-full.mjs",
+        "source": "desktop/project-workflow-product/launch-full.mjs",
+        "sha256": "db19d7fbfab97eee6fcd0ed4f0ccd7cda560d158995a75be8708d55d6e401069"
+      },
+      {
+        "path": "desktop/project-workflow-product/overlay.mjs",
+        "source": "desktop/project-workflow-product/overlay.mjs",
+        "sha256": "c5451e02fdbbbc3ae288314c1f3bb1f9c0c4689ad06641f13f5f7e1f7430b594"
+      },
+      {
+        "path": "desktop/project-workflow-product/profile-layout.mjs",
+        "source": "desktop/project-workflow-product/profile-layout.mjs",
+        "sha256": "1de544f372f2540d6681999610678146aa6b4b16dd1a984d9f56de5a79d2d4f5"
+      },
+      {
+        "path": "desktop/project-workflow-product/profile-plugin.mjs",
+        "source": "desktop/project-workflow-product/profile-plugin.mjs",
+        "sha256": "a7f47769954390635eee0fa486afb054904562b120ebaa5ba805dacec5d59c49"
+      },
+      {
+        "path": "desktop/project-workflow-product/relay.mjs",
+        "source": "desktop/project-workflow-product/relay.mjs",
+        "sha256": "cae4901893c83a1aa03a7526d4d479bd165453790f900209a89491e716142db0"
+      },
+      {
+        "path": "desktop/project-workflow-product/standalone.mjs",
+        "source": "desktop/project-workflow-product/standalone.mjs",
+        "sha256": "d20e356c0a475c4acf1a5ec7f138bc21b36de4deea704e270d042c0b1b1e0128"
+      },
+      {
+        "path": "desktop/project-workflow-ui/host.mjs",
+        "source": "desktop/project-workflow-ui/host.mjs",
+        "sha256": "d8e7b907eb8ff7fb34a04edc84ea7d4f12441260ba4f5d9954212313f7639a48"
+      },
+      {
+        "path": "desktop/project-workflow-ui/rules.mjs",
+        "source": "desktop/project-workflow-ui/rules.mjs",
+        "sha256": "83dc0f51585f6871259bf42cc97b24cd06d8c038c107a16d47768a621acb5b6a"
+      },
+      {
+        "path": "desktop/project-workflow-ui/transport.mjs",
+        "source": "desktop/project-workflow-ui/transport.mjs",
+        "sha256": "65134282e54d2c7b70b98565a55615023740660ec9cb6b1bb5ae9658f2e7a7cb"
+      },
+      {
+        "path": "project-workflow/workflow-adapter.mjs",
+        "source": "project-workflow/workflow-adapter.mjs",
+        "sha256": "4f7b610726daaad27012c56b4ab4ebe121a0f1fe145c2b847c059b4156014a75"
+      },
+      {
+        "path": "project-workflow/project-factory.mjs",
+        "source": "project-workflow/project-factory.mjs",
+        "sha256": "7bf3b64b377109db6b63bc270c6c367612566310efee8259e6469389f14ac070"
+      },
+      {
+        "path": "project-workflow/derive-sources.mjs",
+        "source": "project-workflow/derive-sources.mjs",
+        "sha256": "9679fd6870a8f4955a7e3d209b249900b7db297b2dceaf0ccdd459dd5ddec269"
+      },
+      {
+        "path": "project-workflow/derived-transaction-store.mjs",
+        "source": "project-workflow/derived-transaction-store.mjs",
+        "sha256": "63b264fda7e7c92a05f1c92697e359a878a4f1495a112845247cce361cc25f90"
+      },
+      {
+        "path": "project-workflow/derived-lifecycle.mjs",
+        "source": "project-workflow/derived-lifecycle.mjs",
+        "sha256": "4705776b87cf49be55a8d6d77a7a2fdbc55b49c44d3e554a42627ab17628ecd3"
+      },
+      {
+        "path": "project-workflow/preview.mjs",
+        "source": "project-workflow/preview.mjs",
+        "sha256": "a181771ac520dd2c75ff4210dc02015a8b25d2bb00e75c57a7182275f3a524bc"
+      },
+      {
+        "path": "project-workflow/READONLY-ORIGIN.json",
+        "source": "project-workflow/READONLY-ORIGIN.json",
+        "sha256": "5409118d96a7c993de1f321c49ca90ae955909000af9917a8edc9e0db61baf93"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/profile.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/profile.mjs",
+        "sha256": "b0ea9db35cabead3d75b7945274fceafd441855ceb54ff80cce358a86606660d"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/profile-plugin.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/profile-plugin.mjs",
+        "sha256": "87fb1231fde20d822cee518cbcbdca4d9d1c0b47420004e2a1cbf0ab69ae8374"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/snapshot-scope.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/snapshot-scope.mjs",
+        "sha256": "0bf988793f35f0b0e3233ecf14bb73b36d99488ccec1f1a7aa3100a99e0516ed"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/consumers.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/consumers.mjs",
+        "sha256": "8e90a5958916e0f9c810470b318b7f0bceb98804d8e9903ffee944d28e19bbdc"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/runtime-source.mjs",
+        "sha256": "46a759af30cb282e12c7c751f41ba7cce49f4ce88517f3fcab2ae5719f6c48fb"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/runtime.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/runtime.mjs",
+        "sha256": "463ee1a67b1ed44cfc0b8872dd2f9a108354cd236d3b1ad0d4d5015a1875d06b"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/profile-layout.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/profile-layout.mjs",
+        "sha256": "c511fb5d2acb152d06524b7684d71c042baf42c56bcd2680520d09df0eb7872a"
+      },
+      {
+        "path": "desktop/project-workflow-product/pending-startup/standalone.mjs",
+        "source": "desktop/project-workflow-product/pending-startup/standalone.mjs",
+        "sha256": "81bb84d4ea395059d449e28531fcfe7ac0a53e07b202a153d90bc4d59fc760a4"
+      }
+    ],
+    "sourceTreeSha256": "0edf9ee5fa70dee665a7f79d08ce6f76cc466b7dd6e3d65a0cb0b41ef7a5a485",
+    "verification": [
+      {
+        "name": "APP-BUILD-REVALIDATION.json",
+        "bytes": 1442,
+        "sha256": "73b617e4d8b369778e56104961f25ce706b79b99da6841cdb5048c80620c8b02"
+      },
+      {
+        "name": "APP-POST-VERIFICATION.json",
+        "bytes": 3923,
+        "sha256": "b4be08fb40915379501f8ba19850cc06e2447d6c2868dcfefcbd1942077e8084"
+      }
+    ]
+  },
+  "installer": {
+    "status": "pending"
+  },
+  "nativeAcceptance": "not_run"
+}

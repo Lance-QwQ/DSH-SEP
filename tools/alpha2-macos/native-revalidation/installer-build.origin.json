@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "source": "package/successor-r74/assemble-installer-application.mjs",
+  "sourceSha256": "a3728e50377e7cc8aa22ffa2c5ed7ea13d4d5d3c77bb5c9a521e5a09fc8951c9",
+  "result": "native-revalidation/installer-build.mjs",
+  "resultSha256": "802bcfeeda0ed56dc2c4a5cadea5150af77d46caecdb4bd29988c1338e549d47",
+  "transforms": [
+    {
+      "before": "from './candidate-binding.mjs'",
+      "after": "from './installer-binding.mjs'",
+      "count": 1,
+      "inputSha256": "a3728e50377e7cc8aa22ffa2c5ed7ea13d4d5d3c77bb5c9a521e5a09fc8951c9",
+      "resultSha256": "c49cb13847e10dc1fc4a4608368632426e78728caaa7e216fbc3e555e838025d"
+    },
+    {
+      "before": "from '../../installer-ui/resources/assemble-resources.mjs'",
+      "after": "from '../installer-ui/resources/assemble-resources.mjs'",
+      "count": 1,
+      "inputSha256": "c49cb13847e10dc1fc4a4608368632426e78728caaa7e216fbc3e555e838025d",
+      "resultSha256": "8497bae976500c27f9b0aac03069770de87d3c274c731710f0f064cf54297392"
+    },
+    {
+      "before": "from '../../installer-ui/bundle-config.mjs'",
+      "after": "from '../installer-ui/bundle-config.mjs'",
+      "count": 1,
+      "inputSha256": "8497bae976500c27f9b0aac03069770de87d3c274c731710f0f064cf54297392",
+      "resultSha256": "965cdf61984cb59842d1fd0a3d689cca3ca6137275168084212722d9f565cd24"
+    },
+    {
+      "before": "from '../../installer-entry/candidate.mjs'",
+      "after": "from '../installer-entry/candidate.mjs'",
+      "count": 1,
+      "inputSha256": "965cdf61984cb59842d1fd0a3d689cca3ca6137275168084212722d9f565cd24",
+      "resultSha256": "cff443fc6b354ac3b92cc8f9a214ccc56aca32d85b06c74bc7346a5234c32b7e"
+    },
+    {
+      "before": "from '../package-inventory.mjs'",
+      "after": "from '../package/package-inventory.mjs'",
+      "count": 1,
+      "inputSha256": "cff443fc6b354ac3b92cc8f9a214ccc56aca32d85b06c74bc7346a5234c32b7e",
+      "resultSha256": "2cefe06ed7f36a1ceec7d753ac3e8e3cbdf60476bd9e719a845bb1b10f1c0574"
+    },
+    {
+      "before": "from '../prepare-installer-signing.mjs'",
+      "after": "from '../package/prepare-installer-signing.mjs';\nimport {verifyInstallerSources} from './installer-source-binding.mjs'",
+      "count": 1,
+      "inputSha256": "2cefe06ed7f36a1ceec7d753ac3e8e3cbdf60476bd9e719a845bb1b10f1c0574",
+      "resultSha256": "101efe35cc94585368db4b755828fe1abb8ae046cc5b5e905f9f2d01fb25c48a"
+    },
+    {
+      "before": "new URL('../../',import.meta.url)",
+      "after": "new URL('../',import.meta.url)",
+      "count": 1,
+      "inputSha256": "101efe35cc94585368db4b755828fe1abb8ae046cc5b5e905f9f2d01fb25c48a",
+      "resultSha256": "a61c5756dcfa508e166a0e4948834d21ce1e3704f95e98d5cbb94a5b3527295d"
+    },
+    {
+      "before": "scope:'Successor installer with exact r74 payload: build, ad-hoc signature, archive and restore only; no UI certification'",
+      "after": "scope:'Reviewed native-revalidation payload: build, ad-hoc signature, archive and restore only; no UI certification'",
+      "count": 1,
+      "inputSha256": "a61c5756dcfa508e166a0e4948834d21ce1e3704f95e98d5cbb94a5b3527295d",
+      "resultSha256": "5637794187943674393751534c048fe614d73dcfdbea11cbb8b333494ea8f32b"
+    },
+    {
+      "before": "try{\n const pinPath=",
+      "after": "try{\n result.currentSources=await verifyInstallerSources(sourceRoot);\n const pinPath=",
+      "count": 1,
+      "inputSha256": "5637794187943674393751534c048fe614d73dcfdbea11cbb8b333494ea8f32b",
+      "resultSha256": "ce54656bc84fc97141d97cadab951b114fe186bfdf9901ed26e4076ddfb4cab9"
+    },
+    {
+      "before": "payloadUnchanged:true,nativeSourceUnchanged:true",
+      "after": "payloadUnchanged:true,nativeSourceUnchanged:true,currentSourcesAfter:await verifyInstallerSources(sourceRoot)",
+      "count": 1,
+      "inputSha256": "ce54656bc84fc97141d97cadab951b114fe186bfdf9901ed26e4076ddfb4cab9",
+      "resultSha256": "802bcfeeda0ed56dc2c4a5cadea5150af77d46caecdb4bd29988c1338e549d47"
+    }
+  ],
+  "scope": "New fixed-pinned successor operator only; original files remain unchanged; native verification not_run"
+}

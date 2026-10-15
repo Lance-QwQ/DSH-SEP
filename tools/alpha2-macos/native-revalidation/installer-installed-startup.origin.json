@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "source": "installer-ui/integration-r79/installed-startup.mjs",
+  "sourceSha256": "be5fa6fb1271f7b64686a1d5cee4c91c8e7203a8cfd40720e6112d28c445bfe1",
+  "result": "native-revalidation/installer-installed-startup.mjs",
+  "resultSha256": "ab0f8d2c5f1fda7023e563caf9203951bdfd538aae7d1431559f411caeb8790e",
+  "transforms": [
+    {
+      "before": "from'../../package/package-inventory.mjs'",
+      "after": "from'../package/package-inventory.mjs'",
+      "count": 1,
+      "inputSha256": "be5fa6fb1271f7b64686a1d5cee4c91c8e7203a8cfd40720e6112d28c445bfe1",
+      "resultSha256": "c9bf7e5891b0187f8a496b15fd37798dbd7e0fc110a7433a71ad8e6c0d3f523a"
+    },
+    {
+      "before": "from'../../package/installed-profile-binding.mjs'",
+      "after": "from'../package/installed-profile-binding.mjs';\nimport{payloadPins}from'./installer-binding.mjs';const fixedPayload=await payloadPins()",
+      "count": 1,
+      "inputSha256": "c9bf7e5891b0187f8a496b15fd37798dbd7e0fc110a7433a71ad8e6c0d3f523a",
+      "resultSha256": "3df8da0070de5e5fad065a87edef5daf4d523462a566da4543c4bde430eaaf84"
+    },
+    {
+      "before": "assembly.source.archiveSha256,'20dd042cdf53752e0ce4f6c93ae919bf895c844f0772cdf9f5b881b29b654107'",
+      "after": "assembly.source.archiveSha256,fixedPayload.archiveSha256",
+      "count": 1,
+      "inputSha256": "3df8da0070de5e5fad065a87edef5daf4d523462a566da4543c4bde430eaaf84",
+      "resultSha256": "5ba6b23c02000261e2e0ae3aa91a2b734cb656c3504d6626e29b9596f6bc1ce2"
+    },
+    {
+      "before": "new URL('../../package/application-observer.m'",
+      "after": "new URL('../package/application-observer.m'",
+      "count": 1,
+      "inputSha256": "5ba6b23c02000261e2e0ae3aa91a2b734cb656c3504d6626e29b9596f6bc1ce2",
+      "resultSha256": "ab0f8d2c5f1fda7023e563caf9203951bdfd538aae7d1431559f411caeb8790e"
+    }
+  ],
+  "scope": "New fixed-pinned successor operator only; original files remain unchanged; native verification not_run"
+}
