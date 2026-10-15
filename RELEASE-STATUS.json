@@ -5,13 +5,15 @@
   "hostVersion": "0.2.1-alpha.2",
   "releaseTag": "v0.2.1-beta.3",
   "releaseUrl": "https://github.com/Lance-QwQ/DSH-SEP/releases/tag/v0.2.1-beta.3",
-  "state": "prepared-for-publication",
+  "state": "published-cross-platform-beta",
   "prerelease": true,
-  "published": false,
+  "published": true,
   "dailyDeploymentPerformed": false,
   "scope": "Windows x64 Beta; Linux x64 and macOS ARM64 isolated previews; see platform docs",
   "originalSourceCommit": "ac69bda3ca63a3bed44780b7804cf090156514de",
   "assetBindings": "release/v0.2.1-beta.3/ASSET-BINDINGS.json",
   "publicationReceipt": "release/v0.2.1-beta.3/PUBLICATION.json",
-  "receiptNote": "Publication receipt is added to main after server verification; this tag records prepublication preparation."
+  "receiptNote": "Public release and all nine anonymous download endpoints verified. The frozen tag retains the preparation snapshot; this main-branch record records the subsequent publication.",
+  "publishedAt": "2026-10-15T13:13:26Z",
+  "sourceCommit": "3c02a2310775da118387fb35f54f05a5cf6caa13"
 }

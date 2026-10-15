@@ -18,5 +18,5 @@
     "release/v0.2.1-beta.3/macOS.md"
   ],
   "publicationReceipt": "release/v0.2.1-beta.3/PUBLICATION.json",
-  "publicationNote": "Final remote release/download verification receipt is added on main after publication; not yet included in this prepared tag."
+  "publicationNote": "Published as a Beta prerelease. See the receipt for server SHA-256/size checks and anonymous HEAD verification; full re-download and automatic-update end-to-end validation are not claimed."
 }
