@@ -1,3 +1,9 @@
+> **历史文档 · Beta.1 Windows**
+>
+> 以下正文保留成文时的版本、功能及发布状态；“当前”“尚未发布”“本次不发布”等表述不代表最新状态。当前统一分发版为 **SEP 0.2.1-beta.3 / DSH 0.2.1-alpha.2**，提供 Windows 包及限定范围的 Linux／macOS 预览包。
+>
+> 安装、升级方式和平台支持范围请以 [当前项目首页](../README.md)、[Beta.3 发布与安装说明](../release/v0.2.1-beta.3/RELEASE-NOTES.md)及 [文档总索引](DOCS_INDEX.md)为准，不直接套用下文的旧版命令或跨平台外推。
+
 # DSH SEP 0.2.1-beta.1 · Windows x64 Beta
 
 **DEEPSEEK HARNESS SYSTEM ENHANCEMENT PACKAGE（DSH 系统增强套件）**

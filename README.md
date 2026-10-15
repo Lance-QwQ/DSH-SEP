@@ -29,6 +29,8 @@ Linux 与 macOS 的**完整公开认证仍为 blocked**，按限定环境预览�
 
 ## 文档、源码与验证
 
+[文档总索引](docs/DOCS_INDEX.md) · [本次公开发布核验回执](release/v0.2.1-beta.3/PUBLICATION.json)
+
 [本版发布说明](release/v0.2.1-beta.3/RELEASE-NOTES.md) · [Windows](release/v0.2.1-beta.3/Windows.md) · [Linux](release/v0.2.1-beta.3/Linux.md) · [macOS](release/v0.2.1-beta.3/macOS.md) · [升级边界](release/v0.2.1-beta.3/UPGRADING.md) · [许可与对应源码](release/v0.2.1-beta.3/THIRD-PARTY.md)
 
 当前源码为经过脱敏导出的统一快照；来源与变换清单说明原始审查提交、原字节保留项和维护脚本路径模板。它不包含私人 Git 历史、未跟踪文件或日常运行库。完整源码下载及所有资产摘要见 Release；本次没有切换维护者的 Windows 日常实例。

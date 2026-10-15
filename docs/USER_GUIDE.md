@@ -1,3 +1,9 @@
+> **历史文档 · Beta.1／Beta.2 Windows**
+>
+> 以下正文保留成文时的版本、功能及发布状态；“当前”“尚未发布”“本次不发布”等表述不代表最新状态。当前统一分发版为 **SEP 0.2.1-beta.3 / DSH 0.2.1-alpha.2**，提供 Windows 包及限定范围的 Linux／macOS 预览包。
+>
+> 安装、升级方式和平台支持范围请以 [当前项目首页](../README.md)、[Beta.3 发布与安装说明](../release/v0.2.1-beta.3/RELEASE-NOTES.md)及 [文档总索引](DOCS_INDEX.md)为准，不直接套用下文的旧版命令或跨平台外推。
+
 # 0.2.1-beta.2 当前状态
 
 本次 Windows x64 Beta 新增[更新过滤设置](UPDATE_FILTER.md)及[固定版本离线升级桥](OFFLINE-UPGRADE-BETA2.md)。DSH保持0.2.0-rc.2；日常已切换，公开状态以Release页面为准。[当前验证](VERIFICATION.md)。以下原Beta.1版本数值、封包及发布状态是历史记录；通用功能与限制仍适用。
