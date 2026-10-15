@@ -110,5 +110,63 @@
     }
   ],
   "runtimeCodeModified": false,
-  "archivesModified": false
+  "archivesModified": false,
+  "publicationFinalDocumentationChanges": [
+    {
+      "path": "LICENSING.md",
+      "beforeSha256": "79dc2e893c2275d0c705fbc936673d4d97395e46a76608fa20b85c9bb0ecb6ec",
+      "sha256": "49e868383ba616d395dee4e314f26d45848e69c74c93a2ab0c9eefbf056a3e5c",
+      "bytes": 466,
+      "reason": "Point current licensing to the actual cross-platform assets."
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "beforeSha256": "f336c241abb8e269991ac3859c316975910890c9b09fa70b7ba84a810f290ce3",
+      "sha256": "414efac7a6ad3695d213af49478d1e100651c35bd39ab9b9e880a70eeb760b44",
+      "bytes": 706,
+      "reason": "Distinguish current notices from historical Windows component inventories."
+    },
+    {
+      "path": "docs/LICENSING.md",
+      "beforeSha256": "9d41030b55c14d77a5f3a03f16b72a50fb367c3487ab419ff3b11cd75249564f",
+      "sha256": "66268f7578b2adcbcd990111443a4fd0fa8cf12e04b9c93257904e7f64827fed",
+      "bytes": 3061,
+      "reason": "Mark old version-specific license inventories as historical."
+    },
+    {
+      "path": "docs/THIRD_PARTY_NOTICES.md",
+      "beforeSha256": "27b91de0cf052bb06c6a48d24bf462bf37fdf5096b9427bbb188243544d8cb30",
+      "sha256": "a73cc7d4e5a7abc526fc72ad9bcefe5df9da3c7c2bebd5761b36d600e8a971f5",
+      "bytes": 3417,
+      "reason": "Mark old version-specific license inventories as historical."
+    },
+    {
+      "path": "VERIFICATION-RESULT.json",
+      "beforeSha256": "6ba2a5e2e4ff097904b68b3171ca5d8b94ca135bd2baf347fa84a7a1acdbf697",
+      "sha256": "da7e99aab22225599be82ae0a71fd72388cce451fd45dd0858eafe162ef035db",
+      "bytes": 978,
+      "reason": "Replace root historical Beta.2 verification with accurately scoped Beta.3 assembly status."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/MAC-PUBLICATION-PRIVACY.json",
+      "beforeSha256": null,
+      "sha256": "b39a9c0b188c4856ff367c3c42daba0d8b008bb45ca40af976f1bf29e10c8cdb",
+      "bytes": 53240,
+      "reason": "Publish the bounded privacy or actual Windows Full/Only dependency correspondence check."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/WINDOWS-ONLY-SHARP-COVERAGE.json",
+      "beforeSha256": null,
+      "sha256": "17359ed7254acbecc733e995f651612d3c0c42b2638bac43236a77181752b421",
+      "bytes": 3177,
+      "reason": "Publish the bounded privacy or actual Windows Full/Only dependency correspondence check."
+    },
+    {
+      "path": "release/v0.2.1-beta.3/THIRD-PARTY.md",
+      "beforeSha256": "5fb51fff98b0935d1652c3229e86ce7977c46efef460fe40c9b1f8b24fbb2c34",
+      "sha256": "0383e33f030824f1cb6f644d687719b9f867fb17bfdb0742218d3031915c5b07",
+      "bytes": 4677,
+      "reason": "Clarify three platform binary sets versus four installers and bind Only directly."
+    }
+  ]
 }

@@ -6,14 +6,14 @@
 
 附件 SHA-256：`237d0644ab6280a6771dc79addd579a95050cb74321c7e5021829069c5cc896b`，字节数：251343178.
 
-以下为附件说明原文。其 Windows 版本证据直接核对 Full 包，Only 沿用同一运行支持；附件不声称覆盖整个产品所有第三方源码，更不声称第三方二进制已重建。
+以下为附件说明原文。其 Windows 版本证据直接核对 Full 包；另有 Full/Only 的 sharp 组件全部 8 文件逐字节一致记录（含 DLL 与原生模块）；附件不声称覆盖整个产品所有第三方源码，更不声称第三方二进制已重建。
 
 ---
 
 # DSH SEP third-party sources and licenses
 
 This companion archive preserves upstream source, notices, and license text for the
-sharp/libvips libraries bundled in the three identified DSH SEP release assets.
+sharp/libvips libraries bundled in the three identified DSH SEP platform binary sets.
 It does not change, re-sign, or rebuild any application or installer.
 DSH SEP's own MIT license does not replace the licenses of bundled dependencies.
 

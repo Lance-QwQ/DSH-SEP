@@ -1,3 +1,5 @@
 # Licensing
 
-SEP-original scope is MIT. DSH and third-party components retain their own terms. See [release licensing](docs/LICENSING.md), [component notices](docs/THIRD_PARTY_NOTICES.md) and [exact license inventory](docs/licenses/index.json).
+DSH SEP original code is MIT. DSH and bundled third-party components retain their own licenses. The entire installer is not relicensed as MIT.
+
+For the current cross-platform Beta.3, see [third-party licenses and source materials](release/v0.2.1-beta.3/THIRD-PARTY.md). Preserve the component notices and accompanying source materials when redistributing. Older [licensing notes](docs/LICENSING.md) remain historical evidence for their stated versions.

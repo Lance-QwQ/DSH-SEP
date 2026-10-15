@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "all installed @img/sharp-win32-x64 files in actual Windows Full and Only ZIPs",
+  "full": {
+    "name": "DSH-SEP-Full-Windows-x64-Alpha2-windows-package.2.zip",
+    "bytes": 510886228,
+    "sha256": "bdc09894307cbd53c8f120c454e3a80d5ee687341ff8de15d9079a15fbc64b04"
+  },
+  "only": {
+    "name": "DSH-SEP-Only-Windows-x64-Alpha2-windows-package.2.zip",
+    "bytes": 420827999,
+    "sha256": "a1db5cb400a04d8b76536604de63cb018d14272b6d39e858da9d61755556ff79"
+  },
+  "package": "@img/sharp-win32-x64",
+  "version": "0.35.5",
+  "license": "Apache-2.0 AND LGPL-3.0-or-later",
+  "vipsVersion": "8.18.7",
+  "fileCount": 8,
+  "allFilesByteIdentical": true,
+  "files": [
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/LICENSE",
+      "bytes": 10464,
+      "sha256": "dc1f5d2d43c5531dfe0acaf4e950ea5dbe3e61e1850cf0e983bda7efc10d6693",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/README.md",
+      "bytes": 4913,
+      "sha256": "3d083ada5ebafe1e6c227daa7b061d4254b61df4a3901c359ffdeac817ce5866",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/index.cjs",
+      "bytes": 62,
+      "sha256": "6ecbd583f45e914233410fe83a614e4f5ff1a6875a7eb828b03b7258e8ba6944",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/lib/libvips-42.dll",
+      "bytes": 19018240,
+      "sha256": "06dab07cc386748513337a31672b1d5269fbc770a14ff403080575665bf0813f",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/lib/libvips-cpp-8.18.7.dll",
+      "bytes": 333312,
+      "sha256": "25001dbd05305a0a29119ab49933622c70b4a20ea12ef1d5d20ca40181db53bf",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/lib/sharp-win32-x64-0.35.5.node",
+      "bytes": 443904,
+      "sha256": "971048779f9c8598df14641dfc03c625885c93f473a788e65ca2deb50d0b083e",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/package.json",
+      "bytes": 888,
+      "sha256": "697b3d89590e3b988b51764bd22dfd6f4a1b35cd4eb12c664eca7987e8ee6115",
+      "byteIdentical": true
+    },
+    {
+      "member": "payload/node_modules/@img/sharp-win32-x64/versions.json",
+      "bytes": 596,
+      "sha256": "e2611d5d854815a8b33c8a3d2ec649511a9596ccf16844e8eae7cf81e79881c4",
+      "byteIdentical": true
+    }
+  ],
+  "sourceAttachment": {
+    "name": "THIRD-PARTY-SOURCES.zip",
+    "bytes": 251343178,
+    "sha256": "237d0644ab6280a6771dc79addd579a95050cb74321c7e5021829069c5cc896b"
+  },
+  "sourceManifestSha256": "c6cf0371a1554382f844006084f481c5f27055668cdbfdba2969c32ad5249a0f",
+  "sourceAttachmentCoverage": "same package files and versions as the Full asset already bound by SOURCE-MANIFEST; this record extends that direct byte evidence to Only without modifying either archive",
+  "archivesModified": false,
+  "scannerSha256": "62fde7c88bfd8677f8256ecb79e8b784ca960beb7ec46140e6e96f4cbbaadcd6"
+}

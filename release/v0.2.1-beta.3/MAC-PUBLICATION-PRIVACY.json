@@ -1,0 +1,903 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "scope": "read-only targeted patterns across each outer ZIP non-directory member, including direct dependency, binary, ASAR and AppleDouble bytes",
+  "archive": {
+    "name": "DSH-SEP-macOS-Alpha2-installer-preview.zip",
+    "bytes": 692802401,
+    "sha256": "021f240986db15064182e6f3f0e002753b435093a4eb1876a4ea4fb018243db7"
+  },
+  "scannerSha256": "cb94ecca1f467b84b02cdb384b7b1425884dd695618d3b244cb377b121548cfc",
+  "zipMembers": 29415,
+  "nonDirectoryMembers": 25167,
+  "decompressedBytesRead": 1936166960,
+  "elapsedSeconds": 24.653,
+  "filenameCategories": [
+    "environment files",
+    "git metadata",
+    "SSH private key names",
+    "session JSONL",
+    "budget ledger JSON",
+    "credential filenames",
+    "DS_Store"
+  ],
+  "filenameCandidateHits": 35,
+  "filenameFalsePositives": [
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/core/credentials.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 13646,
+      "sha256": "328c22730dddb3750dc7eb47656dfaeeefc5da026fd0254318a2be081937e7de"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/core/credentials.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 11327,
+      "sha256": "594fdd3a0b1b78447885b3b7e1e5576ba29cd237076a31c85caa4ea08d63d5e7"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/resources/beta/vaults/credentials.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 7092,
+      "sha256": "2b90f876143b74c284b712fc03aba938ea41178c4aa4e59c6888b8c6dec40904"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/resources/beta/vaults/credentials.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 6745,
+      "sha256": "5596f589a7291a5a4557ebfe77977ff3284551232285490bf084d72222d3be18"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 597,
+      "sha256": "d29f18dc7399b4de662ef695dbf250654c2ae9bc5ba1da1bdf30e00129cce5cf"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 177,
+      "sha256": "8d4b4a5860adf2156cb01ce31dfe2cd6568ec78b3853ef1fe68d7ff82f05894a"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/identity-token.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 1118,
+      "sha256": "d1d433dd7ca51d7b9e423e41debf8a14da1200f82bb302ec5b53f9ec965427b8"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/types.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 11051,
+      "sha256": "8e3f0c3c6212551f3ff9ce4140fa5dfab7b42552a203462a97de47808664b4ef"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/user-oauth.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4765,
+      "sha256": "749608265e11f7b9ececc0254631fd347e53e0f007301564db348e9c6df93950"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/types.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 8927,
+      "sha256": "611b406723f6c5965b1ec832c7aff49850cac8f6b3bf0c0eb2b8711f52772394"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/user-oauth.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 6268,
+      "sha256": "561f370f0da02afaff1c3df278a44724a7a8bfcd1d0099fdceeed41ef15f7999"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/token-cache.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4164,
+      "sha256": "0fc4caef05b3e656188c2991dde2de560ababdd868d91c75e8c2364d5176191c"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/oidc-federation.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4292,
+      "sha256": "7ee614afc053ec3c064bfcb9df51ae40a1c05ddb2a5b06c6c73bc4ff1b95be9e"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/credential-chain.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 10188,
+      "sha256": "b5b0c7d941d60ccff60b96032f93c9a8f0048ac3352c4179c512550ba73b0d33"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/identity-token.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 2720,
+      "sha256": "6ede42bdd805be74b430f171c31c79b878b77720a46becf2db26e865e6637d7a"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/token-cache.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4241,
+      "sha256": "421abee68acb5b16b9d466c54f3278aceff1b15a26298ac1a9e99c2a28c4764b"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/credential-chain.js",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 11842,
+      "sha256": "2ec7a2d315012ca0dca8db5f1ae028d985a7be881daecee8daae5ccda3557dc3"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/lib/credentials/oidc-federation.mjs",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4185,
+      "sha256": "076aedf8993c689ea2898b75f15518b6ff2ee79012420dc6281b45b0cf114146"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/core/credentials.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 13389,
+      "sha256": "021aa373947bb176869ada89337f8d57b02b2ccf9436ecadc035310e1b8d0be6"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/resources/beta/vaults/credentials.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 31595,
+      "sha256": "88b970841e873c8b3e52e7e378a4d7841472dba1790bd3c329d4a755c3b8a920"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 258,
+      "sha256": "ebc800340dcfe46da94cb580e54a847e0fd7902d507f877f5742cc2c9cbb33b8"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/oidc-federation.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 5313,
+      "sha256": "287232a2cc19ff9ea7c290c4ea61da37f343b4f566cdc143a6cedd92d06be7fa"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/user-oauth.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4945,
+      "sha256": "277b2d091351cde0845b4682d0df5b25b268e3de963991442bfb82d81ba93b8b"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/identity-token.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 1110,
+      "sha256": "1a8638b780ea4d2c69fb1318aae4d614aca78d76e7076b192dbc2785c46c5728"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/token-cache.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4226,
+      "sha256": "2e985548d4484df50f1bc4cbb1976ab668bdc974ff4b1a75b8bb1c0cbbf6574a"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/credential-chain.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 11090,
+      "sha256": "2bf681831574b187d070c503145e203364f87ef2c342943674c569b62bb0ddc3"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@anthropic-ai/sdk/src/lib/credentials/types.ts",
+      "component": "@anthropic-ai/sdk",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 10333,
+      "sha256": "3c87338ff9f83cb56413a7fb125db5a2dd8e1b95c05cf92f82f33d6baf3ca277"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@aws-sdk/types/dist-es/credentials.js",
+      "component": "@aws-sdk/types",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 11,
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/google-auth-library/build/src/auth/credentials.js",
+      "component": "google-auth-library",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 704,
+      "sha256": "7fce808925265ca57b02e468afed64a14f7d33d013f88053d4d279adf312ba69"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-api-settings-controller/lib/types/credentials.js",
+      "component": "@deepseek-ai/dsh-api-settings-controller",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 9873,
+      "sha256": "3a65e72ebd1e8ae8e1d6dc5cc4039822231f1924139e60f7162482fe4a66a945"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/openai/resources/beta/agents/vaults/credentials.js",
+      "component": "openai",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4701,
+      "sha256": "1f1bf00737c2d2c8f76b2b93a0900b9fbbd62a0a1843df2e9934bf15a4ca0831"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/openai/resources/beta/agents/vaults/credentials.mjs",
+      "component": "openai",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 4408,
+      "sha256": "21a03feeddb12173e9b49b4e5138d524345deee5287bbc272e1d920f50c2d6dc"
+    },
+    {
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/openai/src/resources/beta/agents/vaults/credentials.ts",
+      "component": "openai",
+      "classification": "dependency source-code module or source directory, not stored credential data",
+      "bytes": 19292,
+      "sha256": "53f00b780e2c92c607fae93e1581200446e002b24d2e6f2855d780fcee3caa3d"
+    }
+  ],
+  "sensitiveFilenameHits": 0,
+  "knownPrivateMarkerCategories": [
+    "known-local-home-path",
+    "known-messaging-identity",
+    "known-private-network-address",
+    "known-local-account-prefix",
+    "known-private-workspace-label"
+  ],
+  "knownPrivateMarkerEncodings": [
+    "ascii",
+    "utf-16le",
+    "utf-16be"
+  ],
+  "knownPrivateMarkerHits": 0,
+  "providerKeyShapeHits": 3,
+  "githubTokenShapeHits": 0,
+  "rawPatternHits": 60,
+  "triagedFalsePositives": 60,
+  "completePrivateKeyPemBlocks": 0,
+  "hits": [
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/jose/dist/webapi/key/import.js",
+      "offset": 945,
+      "matchSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "classification": "false_positive",
+      "reason": "PEM parser string literal, no complete private-key PEM block"
+    },
+    {
+      "category": "provider-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@img/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib",
+      "offset": 14101316,
+      "matchSha256": "35d49cfca64b77c69aa042cfbf4f6d5af9c1b84117a6c2fbdc95002df474f5f6",
+      "literalContextVerified": true,
+      "classification": "false_positive",
+      "reason": "substring in concatenated HTML attribute names or locale-name constants; exact surrounding literal rechecked"
+    },
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@img/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib",
+      "offset": 15177152,
+      "matchSha256": "dec643eed02d96980d7003df682d77b28a23f90a6d2a0961886c8953c2e8cb4e",
+      "classification": "false_positive",
+      "reason": "NUL-separated crypto parser/error string constant, no complete private-key PEM block"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5121965,
+      "matchSha256": "e591345b285bef53a11647735413935b669e939fd36ae11de2a4bb67503ff7ef",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5164861,
+      "matchSha256": "fc2c02b720368887833ed7d894b26b7f6e3be2c06a0d6e6394262d7d6118600d",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5166693,
+      "matchSha256": "fd813dbebc06b8ab66306071b9f74ef6388ada978576006aa2da784ee77224b1",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5180613,
+      "matchSha256": "4be8ec4f03ed7ada9807bb6b4a0db232b5a15422180dcc2a222a02a8c923f7b4",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5252720,
+      "matchSha256": "2f62daeed75105659c1f495627ec75a3b9ae1eeafb8473571e861fb4ae103f1e",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/dsh-client-ui-sidebar-documentpreview/lib/client.pdf.js",
+      "offset": 5384369,
+      "matchSha256": "b712dcc3ebb6d334dcdf8d728c6ec18d7630287f14f1d5fdce08cdb36be65cf6",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/host/node_modules/@deepseek-ai/libreoffice-kit-darwin-arm64/bin/libreoffice-kit",
+      "offset": 118652915,
+      "matchSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "classification": "false_positive",
+      "reason": "NUL-separated key/certificate format markers, no complete private-key PEM block"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/python/lib/python3.12/site-packages/PIL/ImageFont.py",
+      "offset": 59084,
+      "matchSha256": "57a26f03da1274be9ce14c3b04dd685a62f78c9424d2e34addf2d925f55b86fe",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 80978054,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 80978870,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 80979418,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 81453590,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 81454906,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 81532567,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 81535443,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 81874086,
+      "matchSha256": "c79f2b6d981f9a278180aa00f7e4892503d17b576796d6475ccff4f1559cde64",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Resources/product/payload/parser-runtime/tool-runtime/node",
+      "offset": 82320997,
+      "matchSha256": "f8b8d280b76605ca51415f90ead45b9f2e7d1f60613a62258bc81d9fd3410e20",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43325177,
+      "matchSha256": "e591345b285bef53a11647735413935b669e939fd36ae11de2a4bb67503ff7ef",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43368073,
+      "matchSha256": "fc2c02b720368887833ed7d894b26b7f6e3be2c06a0d6e6394262d7d6118600d",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43369905,
+      "matchSha256": "fd813dbebc06b8ab66306071b9f74ef6388ada978576006aa2da784ee77224b1",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43383825,
+      "matchSha256": "4be8ec4f03ed7ada9807bb6b4a0db232b5a15422180dcc2a222a02a8c923f7b4",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43455932,
+      "matchSha256": "2f62daeed75105659c1f495627ec75a3b9ae1eeafb8473571e861fb4ae103f1e",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 43587581,
+      "matchSha256": "b712dcc3ebb6d334dcdf8d728c6ec18d7630287f14f1d5fdce08cdb36be65cf6",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar",
+      "offset": 118601095,
+      "matchSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "classification": "false_positive",
+      "reason": "PEM parser string literal, no complete private-key PEM block"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/python/lib/python3.12/site-packages/PIL/ImageFont.py",
+      "offset": 59084,
+      "matchSha256": "57a26f03da1274be9ce14c3b04dd685a62f78c9424d2e34addf2d925f55b86fe",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/pnpm/dist/pnpm.mjs",
+      "offset": 11493474,
+      "matchSha256": "6827670248555064119e23cbc81a5592f89044dda47e87633da0435544e6dbf5",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 80978054,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 80978870,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 80979418,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 81453590,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 81454906,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 81532567,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 81535443,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 81874086,
+      "matchSha256": "c79f2b6d981f9a278180aa00f7e4892503d17b576796d6475ccff4f1559cde64",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/runtime/primary-runtime/dependencies/node/bin/node",
+      "offset": 82320997,
+      "matchSha256": "f8b8d280b76605ca51415f90ead45b9f2e7d1f60613a62258bc81d9fd3410e20",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "provider-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar.unpacked/dsh/node_modules/@img/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib",
+      "offset": 14101316,
+      "matchSha256": "35d49cfca64b77c69aa042cfbf4f6d5af9c1b84117a6c2fbdc95002df474f5f6",
+      "literalContextVerified": true,
+      "classification": "false_positive",
+      "reason": "substring in concatenated HTML attribute names or locale-name constants; exact surrounding literal rechecked"
+    },
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar.unpacked/dsh/node_modules/@img/sharp-libvips-darwin-arm64/lib/libvips-cpp.8.18.7.dylib",
+      "offset": 15177152,
+      "matchSha256": "dec643eed02d96980d7003df682d77b28a23f90a6d2a0961886c8953c2e8cb4e",
+      "classification": "false_positive",
+      "reason": "NUL-separated crypto parser/error string constant, no complete private-key PEM block"
+    },
+    {
+      "category": "private-key-pem-header",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Resources/app.asar.unpacked/dsh/node_modules/@deepseek-ai/libreoffice-kit-darwin-arm64/bin/libreoffice-kit",
+      "offset": 118652915,
+      "matchSha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "classification": "false_positive",
+      "reason": "NUL-separated key/certificate format markers, no complete private-key PEM block"
+    },
+    {
+      "category": "provider-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 172607914,
+      "matchSha256": "f4e6f08a511f31bf6758cb6059044c98cc64f9b8c81bd5272752a76817982ccc",
+      "literalContextVerified": true,
+      "classification": "false_positive",
+      "reason": "substring in concatenated HTML attribute names or locale-name constants; exact surrounding literal rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 174594708,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 174595524,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 174596072,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175070244,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175071560,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175149221,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175152097,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175490740,
+      "matchSha256": "c79f2b6d981f9a278180aa00f7e4892503d17b576796d6475ccff4f1559cde64",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/payload/DSH SEP.app/Contents/Helpers/DSH SEP Desktop.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+      "offset": 175937651,
+      "matchSha256": "f8b8d280b76605ca51415f90ead45b9f2e7d1f60613a62258bc81d9fd3410e20",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 80978054,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 80978870,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 80979418,
+      "matchSha256": "b815da9bd749f313471ad91a3d3408d8f096da9788dfd9ae0893fb8b6ed232ce",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 81453590,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 81454906,
+      "matchSha256": "cce0417d4b91246b25d99466f695eeeb6f1185412cecce750ae86c1ddd6e50a4",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 81532567,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 81535443,
+      "matchSha256": "dd1062592008b469ab470e086133641f1561c58d0a394f5db052d1fd549cf381",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 81874086,
+      "matchSha256": "c79f2b6d981f9a278180aa00f7e4892503d17b576796d6475ccff4f1559cde64",
+      "prefixFamily": "AKIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    },
+    {
+      "category": "aws-access-key-shape",
+      "member": "DSH SEP Installer.app/Contents/Resources/node/node",
+      "offset": 82320997,
+      "matchSha256": "f8b8d280b76605ca51415f90ead45b9f2e7d1f60613a62258bc81d9fd3410e20",
+      "prefixFamily": "ASIA",
+      "base64SurroundingsVerified": true,
+      "classification": "false_positive",
+      "reason": "directly reviewed embedded base64 WebAssembly or font data; adjacent base64 context independently rechecked"
+    }
+  ],
+  "archiveUnchanged": true,
+  "comprehensivePrivacyAudit": false,
+  "noPrivateDataGuarantee": false,
+  "historicalAttempt": {
+    "status": "blocked",
+    "scannerSha256": "62fde7c88bfd8677f8256ecb79e8b784ca960beb7ec46140e6e96f4cbbaadcd6",
+    "reason": "unclassified broad credentials filename pattern also matched dependency source-code modules and directories; these names were directly inspected and explicitly classified before rerunning; installation bytes were unchanged"
+  },
+  "limitations": [
+    "does not recursively decompress compressed content nested inside ZIP members",
+    "does not recognize every possible secret or personal-data format",
+    "known private marker set is bounded; marker values and matching content are intentionally omitted",
+    "false-positive reasons combine this repeated scan with prior direct byte inspection; no program content was executed"
+  ],
+  "earlierEightTriagedMatches": {
+    "matchedOccurrences": 8,
+    "selection": "six PEM format-marker literals plus two occurrences of the previously reviewed embedded-data match digest b712dcc3ebb6d334dcdf8d728c6ec18d7630287f14f1d5fdce08cdb36be65cf6",
+    "allIncludedInCurrentHits": true,
+    "scopeCorrection": "the earlier ad hoc scan did not retain its exact scanner definition; its eight-match report is not a complete count under the broader patterns recorded here and is superseded by this reproducible current scan"
+  },
+  "historicalBroaderPatternAttempt": {
+    "status": "blocked",
+    "scannerSha256": "aa024a4b340bcb35fbf01ac975965f691f1093192ecf5871299d58f268a3612f",
+    "reason": "broader ASIA/provider patterns produced 60 occurrences rather than the old eight-match subset; all newly reported occurrences were individually inspected with redacted context and classified before final rerun"
+  }
+}

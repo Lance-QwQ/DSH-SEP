@@ -1,3 +1,5 @@
+> 历史版本说明：以下组件版本与清单描述原 Windows 发布时点。当前三平台 Beta.3 请见 [本版许可与来源](../release/v0.2.1-beta.3/THIRD-PARTY.md)。原文保留，未改写旧证据。
+
 # 许可说明
 
 [导航](DOCS_INDEX.md) · [第三方声明](THIRD_PARTY_NOTICES.md)

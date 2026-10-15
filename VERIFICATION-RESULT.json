@@ -1,18 +1,22 @@
 {
-  "schema": 1,
+  "schema": 2,
   "status": "pass",
-  "sepVersion": "0.2.1-beta.2",
-  "hostVersion": "0.2.0-rc.2",
-  "programGraphHash": "96fbacddd11ac56871f1909e1a9f00ccd3669a5a365e8d7061cb8f5cd7ac7143",
-  "programFiles": 44986,
-  "componentPackages": 678,
-  "scope": "Content and local confirmed daily deployment; final archives and distribution require external attestation. Counts overlap.",
-  "contentInstallChecks": 55,
-  "bridgePublicUpgradeChecks": 17,
-  "p2RegressionChecks": 27,
-  "dailyApplyChecks": 11,
-  "dailyNativeChecks": 39,
-  "dailyNativeCycles": 2,
-  "modelRequests": 0,
-  "verificationDocument": "VERIFICATION.md"
+  "distributionVersion": "0.2.1-beta.3",
+  "hostVersion": "0.2.1-alpha.2",
+  "scope": "Publication assembly and source export. This does not promote incomplete platform certification to pass.",
+  "runtimeCodeModifiedForPublication": false,
+  "sealedInstallerCount": 4,
+  "sealedInstallerHashes": "release/v0.2.1-beta.3/ASSET-BINDINGS.json",
+  "linuxFullPublicCertification": "blocked",
+  "macOSFullPublicCertification": "blocked",
+  "privateDailyDeploymentPerformed": false,
+  "sourceExportResult": "PUBLIC-SOURCE-SCAN.json",
+  "sourceTransformations": "TRANSFORMS.json",
+  "currentPlatformDocuments": [
+    "release/v0.2.1-beta.3/Windows.md",
+    "release/v0.2.1-beta.3/Linux.md",
+    "release/v0.2.1-beta.3/macOS.md"
+  ],
+  "publicationReceipt": "release/v0.2.1-beta.3/PUBLICATION.json",
+  "publicationNote": "Final remote release/download verification receipt is added on main after publication; not yet included in this prepared tag."
 }
